@@ -10,7 +10,7 @@ export const HOMESTAYS: HomestayExperience[] = [
     description: 'Perched high on a terraced slope with straight-on views of Annapurna South and Hiunchuli, this traditional slate-roof homestead welcomes travelers into the heart of Gurung hospitality.',
     quote: 'We do not receive visitors as clients; when you sit by our wood fire and eat our rice, you are family.',
     image: {
-      src: '/images/homestays/village-meal.jpg',
+      src: '/explore-with-sakar/images/homestays/village-meal.jpg',
       alt: 'Family and guests sharing a hot home-cooked meal around wooden table',
       caption: 'Gathering around the family kitchen in Ghandruk.',
     },
@@ -37,7 +37,7 @@ export const HOMESTAYS: HomestayExperience[] = [
     description: 'A traditional timber and fieldstone home with Tibetan Buddhist motifs. The family weaves sheep-wool rugs, keeps apple orchards, and maintains the ancient village prayer wheel.',
     quote: 'The mountain silence heals whatever heaviness you brought from the city.',
     image: {
-      src: '/images/homestays/stone-village-house.jpg',
+      src: '/explore-with-sakar/images/homestays/stone-village-house.jpg',
       alt: 'Traditional stone house in Briddhim village with slate roof',
       caption: 'Stone and timber homestay in the high Tamang hills.',
     },
@@ -67,7 +67,7 @@ export const TESTIMONIALS: Testimonial[] = [
     date: 'October 2025',
     highlight: 'Sakar made Nepal feel like home from our very first hour.',
     quote: 'We wanted an authentic journey away from mass tour buses, and Sakar delivered something truly life-changing. Staying in Ghandruk with his extended community, laughing with the grandmothers over woodfire tea, and walking peaceful trails with zero crowds was the highlight of our decade of traveling.',
-    avatar: '/images/sakar/sakar-portrait.jpg',
+    avatar: '/explore-with-sakar/images/sakar/sakar-portrait.jpg',
   },
   {
     id: 't-2',
@@ -78,7 +78,7 @@ export const TESTIMONIALS: Testimonial[] = [
     date: 'November 2025',
     highlight: 'The depth of Sakar’s cultural knowledge and quiet integrity is extraordinary.',
     quote: 'As someone who has traveled across Asia for thirty years, I have rarely met a guide who combines such humility, deep philosophical understanding, and meticulous care. Sakar is not just a guide; he is a bridge into the spiritual heart of Nepal.',
-    avatar: '/images/sakar/sakar-portrait.jpg',
+    avatar: '/explore-with-sakar/images/sakar/sakar-portrait.jpg',
   },
   {
     id: 't-3',
@@ -89,6 +89,6 @@ export const TESTIMONIALS: Testimonial[] = [
     date: 'December 2025',
     highlight: 'Pure human warmth, incredible food, and breathtaking vistas.',
     quote: 'Every single meal, every suspension bridge, and every hidden alleyway in Patan had a story that Sakar brought to life. You can feel how much the local communities love and respect him everywhere you go. We cannot recommend Explore With Sakar enough.',
-    avatar: '/images/sakar/sakar-portrait.jpg',
+    avatar: '/explore-with-sakar/images/sakar/sakar-portrait.jpg',
   },
 ];

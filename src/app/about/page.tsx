@@ -40,7 +40,7 @@ export default function AboutPage() {
           <div className="md:col-span-5 flex justify-center sticky top-24">
             <div className="relative aspect-[4/5] w-full max-w-sm rounded-3xl overflow-hidden shadow-editorial bg-himalaya-900 border border-parchment-300">
               <Image
-                src="/images/sakar/sakar-portrait.jpg"
+                src="/explore-with-sakar/images/sakar/sakar-portrait.jpg"
                 alt="Sakar portrait"
                 fill
                 priority

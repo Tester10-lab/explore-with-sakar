@@ -15,14 +15,14 @@ export const EXPERIENCES: Experience[] = [
     season: 'Year Round (Best Oct - May)',
     featured: true,
     heroImage: {
-      src: '/images/heritage/newari-architecture.jpg',
+      src: '/explore-with-sakar/images/heritage/newari-architecture.jpg',
       alt: 'Ancient Newari wood carving on historical pagoda temple',
       caption: 'Intricate Newari woodcraft dating back to the Malla era.',
     },
     galleryImages: [
-      { src: '/images/heritage/temple-courtyard.jpg', alt: 'Devotees spinning prayer wheels' },
-      { src: '/images/heritage/ancient-alleyways.jpg', alt: 'Narrow ancient brick alleyways' },
-      { src: '/images/heritage/durbar-square.jpg', alt: 'Kathmandu Durbar Square pagodas' },
+      { src: '/explore-with-sakar/images/heritage/temple-courtyard.jpg', alt: 'Devotees spinning prayer wheels' },
+      { src: '/explore-with-sakar/images/heritage/ancient-alleyways.jpg', alt: 'Narrow ancient brick alleyways' },
+      { src: '/explore-with-sakar/images/heritage/durbar-square.jpg', alt: 'Kathmandu Durbar Square pagodas' },
     ],
     shortDescription: 'An intimate journey through the UNESCO World Heritage living monuments, secret monastic courtyards (Bahals), and traditional artisan workshops guided by local heritage insights.',
     fullDescription: [
@@ -59,14 +59,14 @@ export const EXPERIENCES: Experience[] = [
     season: 'Year Round',
     featured: true,
     heroImage: {
-      src: '/images/spiritual/buddhist-stupa.jpg',
+      src: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
       alt: 'Swayambhunath Stupa with colorful prayer flags in morning light',
       caption: 'Sacred stupa surrounded by fluttering mantras of compassion.',
     },
     galleryImages: [
-      { src: '/images/spiritual/monastery-interior.jpg', alt: 'Monastery prayer hall with butter lamps' },
-      { src: '/images/spiritual/meditation-session.jpg', alt: 'Tibetan singing bowl sound therapy' },
-      { src: '/images/mountains/sunrise-himalayas.jpg', alt: 'Sunrise over mountains' },
+      { src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg', alt: 'Monastery prayer hall with butter lamps' },
+      { src: '/explore-with-sakar/images/spiritual/meditation-session.jpg', alt: 'Tibetan singing bowl sound therapy' },
+      { src: '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg', alt: 'Sunrise over mountains' },
     ],
     shortDescription: 'A deeply restorative journey combining authentic sound healing sessions, guided meditation with Buddhist practitioners, sacred cave visits, and tranquil Himalayan mountain solitude.',
     fullDescription: [
@@ -103,14 +103,14 @@ export const EXPERIENCES: Experience[] = [
     season: 'Sep - June',
     featured: true,
     heroImage: {
-      src: '/images/homestays/village-meal.jpg',
+      src: '/explore-with-sakar/images/homestays/village-meal.jpg',
       alt: 'Local Nepali host family sharing home-cooked meal by wooden hearth',
       caption: 'Unforgettable moments of warmth and genuine hospitality around the hearth.',
     },
     galleryImages: [
-      { src: '/images/homestays/stone-village-house.jpg', alt: 'Traditional stone village house' },
-      { src: '/images/homestays/morning-tea-homestay.jpg', alt: 'Balcony tea in mountain village' },
-      { src: '/images/homestays/organic-farming.jpg', alt: 'Organic terraced fields' },
+      { src: '/explore-with-sakar/images/homestays/stone-village-house.jpg', alt: 'Traditional stone village house' },
+      { src: '/explore-with-sakar/images/homestays/morning-tea-homestay.jpg', alt: 'Balcony tea in mountain village' },
+      { src: '/explore-with-sakar/images/homestays/organic-farming.jpg', alt: 'Organic terraced fields' },
     ],
     shortDescription: 'Step beyond hotels to live under the slate roofs of traditional stone homes. Share meals, learn ancestral recipes, walk terraced fields, and forge meaningful lifelong human connections.',
     fullDescription: [
@@ -147,14 +147,14 @@ export const EXPERIENCES: Experience[] = [
     season: 'Sep - Dec & Feb - May',
     featured: true,
     heroImage: {
-      src: '/images/trails/suspension-bridge.jpg',
+      src: '/explore-with-sakar/images/trails/suspension-bridge.jpg',
       alt: 'Long suspension bridge crossing emerald river gorge with prayer flags',
       caption: 'Walking across peaceful Himalayan river valleys.',
     },
     galleryImages: [
-      { src: '/images/trails/mountain-pass.jpg', alt: 'Trekker on high mountain pass' },
-      { src: '/images/mountains/alpine-valley.jpg', alt: 'Scenic alpine valley' },
-      { src: '/images/trails/rhododendron-forest.jpg', alt: 'Lush rhododendron forest' },
+      { src: '/explore-with-sakar/images/trails/mountain-pass.jpg', alt: 'Trekker on high mountain pass' },
+      { src: '/explore-with-sakar/images/mountains/alpine-valley.jpg', alt: 'Scenic alpine valley' },
+      { src: '/explore-with-sakar/images/trails/rhododendron-forest.jpg', alt: 'Lush rhododendron forest' },
     ],
     shortDescription: 'A slow-paced, deeply immersive trekking journey along peaceful community trails, avoiding crowded commercial trekking highways for pristine nature and authentic mountain villages.',
     fullDescription: [
@@ -191,14 +191,14 @@ export const EXPERIENCES: Experience[] = [
     season: 'Mar - Nov',
     featured: false,
     heroImage: {
-      src: '/images/trails/sacred-mountain-lake.jpg',
+      src: '/explore-with-sakar/images/trails/sacred-mountain-lake.jpg',
       alt: 'Pristine mountain lake and sacred Mustang peaks in distance',
       caption: 'The dramatic landscapes of the sacred Muktinath valley.',
     },
     galleryImages: [
-      { src: '/images/mountains/mountain-ridge.jpg', alt: 'Dramatic arid mountain ridges' },
-      { src: '/images/spiritual/buddhist-stupa.jpg', alt: 'Ancient chorten in Mustang' },
-      { src: '/images/heritage/sacred-shrine.jpg', alt: 'Sacred temple in Muktinath' },
+      { src: '/explore-with-sakar/images/mountains/mountain-ridge.jpg', alt: 'Dramatic arid mountain ridges' },
+      { src: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg', alt: 'Ancient chorten in Mustang' },
+      { src: '/explore-with-sakar/images/heritage/sacred-shrine.jpg', alt: 'Sacred temple in Muktinath' },
     ],
     shortDescription: 'A pilgrimage of liberation across the dramatic arid gorge of the Kali Gandaki, visiting ancient Bon-Buddhist villages, apple orchards of Marpha, and the sacred 108 fountains of Muktinath.',
     fullDescription: [
@@ -235,14 +235,14 @@ export const EXPERIENCES: Experience[] = [
     season: 'Oct - Apr',
     featured: false,
     heroImage: {
-      src: '/images/trails/river-gorge.jpg',
+      src: '/explore-with-sakar/images/trails/river-gorge.jpg',
       alt: 'Tranquil river flowing through green jungle valley',
       caption: 'Peaceful river safaris in Nepal’s lush sub-tropical lowlands.',
     },
     galleryImages: [
-      { src: '/images/homestays/village-storyteller.jpg', alt: 'Indigenous Tharu elder' },
-      { src: '/images/homestays/village-meal.jpg', alt: 'Fresh river fish and Tharu culinary feast' },
-      { src: '/images/trails/river-gorge.jpg', alt: 'River canoeing in Chitwan' },
+      { src: '/explore-with-sakar/images/homestays/village-storyteller.jpg', alt: 'Indigenous Tharu elder' },
+      { src: '/explore-with-sakar/images/homestays/village-meal.jpg', alt: 'Fresh river fish and Tharu culinary feast' },
+      { src: '/explore-with-sakar/images/trails/river-gorge.jpg', alt: 'River canoeing in Chitwan' },
     ],
     shortDescription: 'Explore the verdant sub-tropical Terai jungles of Nepal. Canoe along serene rivers to spot endangered rhinos, gharial crocodiles, and exotic birds while living alongside indigenous Tharu forest stewards.',
     fullDescription: [

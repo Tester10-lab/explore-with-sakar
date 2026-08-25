@@ -18,7 +18,7 @@ export default function AboutSakarSection() {
                 <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-terracotta/20 to-saffron/20 blur-md" />
                 <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-himalaya-900 shadow-2xl border border-parchment-300">
                   <Image
-                    src="/images/sakar/sakar-portrait.jpg"
+                    src="/explore-with-sakar/images/sakar/sakar-portrait.jpg"
                     alt="Sakar — Host and Founder of Explore With Sakar"
                     fill
                     sizes="(max-width: 1024px) 100vw, 400px"

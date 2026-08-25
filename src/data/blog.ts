@@ -41,7 +41,7 @@ export const BLOG_CATEGORIES: { id: BlogCategory; label: string; description: st
 export const SAKAR_AUTHOR = {
   name: 'Sakar',
   role: 'Responsible Tour Director & Cultural Guide',
-  avatar: '/images/sakar/sakar-portrait.jpg',
+  avatar: '/explore-with-sakar/images/sakar/sakar-portrait.jpg',
   bio: 'Born in Nepal with deep roots in Himalayan heritage and community-based hospitality. As Responsible Tour Director, Sakar guides curious international travelers beyond mass tourism, facilitating authentic human connections, spiritual stillness, and sustainable village livelihoods.',
 };
 
@@ -56,7 +56,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: 'August 18, 2026',
     readingTime: '6 min read',
     featuredImage: {
-      src: '/images/mountains/sunrise-himalayas.jpg',
+      src: '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg',
       alt: 'Morning sunlight breaking across the snow peaks in Nepal',
       caption: 'Dawn over the Annapurna range before the village awakens.',
     },
@@ -88,12 +88,12 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         type: 'twoImages',
         left: {
-          src: '/images/homestays/morning-tea-homestay.jpg',
+          src: '/explore-with-sakar/images/homestays/morning-tea-homestay.jpg',
           alt: 'Morning tea served on a wooden terrace overlooking mountain slopes',
           caption: 'Freshly brewed ginger tea on the veranda.',
         },
         right: {
-          src: '/images/homestays/stone-village-house.jpg',
+          src: '/explore-with-sakar/images/homestays/stone-village-house.jpg',
           alt: 'Traditional stone farmhouse with slate roof in morning light',
           caption: 'The quiet courtyard at 6:00 AM.',
         },
@@ -106,7 +106,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         type: 'storyImageText',
         image: {
-          src: '/images/homestays/village-storyteller.jpg',
+          src: '/explore-with-sakar/images/homestays/village-storyteller.jpg',
           alt: 'Village elder sharing stories in traditional Nepali clothing',
           caption: 'Aama and her family have called this ridge home for generations.',
         },
@@ -149,7 +149,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: 'August 14, 2026',
     readingTime: '7 min read',
     featuredImage: {
-      src: '/images/spiritual/monastery-interior.jpg',
+      src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg',
       alt: 'Monastery prayer hall glowing with golden butter lamps and sacred thangkas',
       caption: 'Hundred butter lamps flickering inside a sacred Tibetan Buddhist gompa.',
     },
@@ -180,12 +180,12 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         type: 'twoImages',
         left: {
-          src: '/images/spiritual/buddhist-stupa.jpg',
+          src: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
           alt: 'Swayambhunath stupa with eyes of compassion and colorful prayer flags',
           caption: 'The all-seeing eyes of compassion watching over the valley.',
         },
         right: {
-          src: '/images/spiritual/meditation-session.jpg',
+          src: '/explore-with-sakar/images/spiritual/meditation-session.jpg',
           alt: 'Singing bowl sound therapy and meditation setting',
           caption: 'Seven-metal singing bowls used in sound healing.',
         },
@@ -227,7 +227,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: 'August 10, 2026',
     readingTime: '5 min read',
     featuredImage: {
-      src: '/images/homestays/village-meal.jpg',
+      src: '/explore-with-sakar/images/homestays/village-meal.jpg',
       alt: 'A Nepali host family serving freshly prepared local meal around wooden hearth',
       caption: 'Gathering around the family kitchen table in a remote foothill village.',
     },
@@ -258,12 +258,12 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         type: 'twoImages',
         left: {
-          src: '/images/homestays/organic-farming.jpg',
+          src: '/explore-with-sakar/images/homestays/organic-farming.jpg',
           alt: 'Lush green terraced hillsides farmed organically by village families',
           caption: 'Fresh produce harvested 30 feet from the kitchen door.',
         },
         right: {
-          src: '/images/homestays/artisan-craftsman.jpg',
+          src: '/explore-with-sakar/images/homestays/artisan-craftsman.jpg',
           alt: 'Local woodcarver working in his village workshop',
           caption: 'Supporting local village artisans directly.',
         },
@@ -301,7 +301,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: 'August 06, 2026',
     readingTime: '6 min read',
     featuredImage: {
-      src: '/images/homestays/stone-village-house.jpg',
+      src: '/explore-with-sakar/images/homestays/stone-village-house.jpg',
       alt: 'Traditional stone farmhouse with wooden balconies and mountain background',
       caption: 'A traditional Newari and Gurung stone home in the middle hills.',
     },
@@ -324,7 +324,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         type: 'storyImageText',
         image: {
-          src: '/images/homestays/village-meal.jpg',
+          src: '/explore-with-sakar/images/homestays/village-meal.jpg',
           alt: 'Family and travelers enjoying meal together',
           caption: 'Every meal is offered with boundless refills and genuine joy.',
         },
@@ -358,7 +358,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: 'July 29, 2026',
     readingTime: '5 min read',
     featuredImage: {
-      src: '/images/heritage/ancient-alleyways.jpg',
+      src: '/explore-with-sakar/images/heritage/ancient-alleyways.jpg',
       alt: 'Ancient narrow brick alleyway leading to a sunlit historic courtyard',
       caption: 'A secluded bahal (courtyard) in Patan, shaded from modern traffic.',
     },
@@ -381,12 +381,12 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         type: 'twoImages',
         left: {
-          src: '/images/heritage/newari-architecture.jpg',
+          src: '/explore-with-sakar/images/heritage/newari-architecture.jpg',
           alt: 'Carved wooden peacock window and traditional struts',
           caption: 'Hand-carved wooden windows dating back over 400 years.',
         },
         right: {
-          src: '/images/heritage/temple-courtyard.jpg',
+          src: '/explore-with-sakar/images/heritage/temple-courtyard.jpg',
           alt: 'Devotees and brass prayer wheels in historic temple',
           caption: 'A living shrine where neighbours offer morning flowers.',
         },
@@ -419,7 +419,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: 'July 22, 2026',
     readingTime: '7 min read',
     featuredImage: {
-      src: '/images/mountains/alpine-valley.jpg',
+      src: '/explore-with-sakar/images/mountains/alpine-valley.jpg',
       alt: 'Quiet trail through pristine alpine valley with mountain stream',
       caption: 'Walking through undisturbed wilderness in the Langtang and Helambu ridges.',
     },
@@ -450,12 +450,12 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         type: 'twoImages',
         left: {
-          src: '/images/trails/rhododendron-forest.jpg',
+          src: '/explore-with-sakar/images/trails/rhododendron-forest.jpg',
           alt: 'Sunlight filtering through mossy rhododendron trees',
           caption: 'Ancient forests alive with birdsong and mountain mist.',
         },
         right: {
-          src: '/images/trails/suspension-bridge.jpg',
+          src: '/explore-with-sakar/images/trails/suspension-bridge.jpg',
           alt: 'Long suspension bridge spanning turquoise river canyon',
           caption: 'Quiet suspension crossings over pristine glacial rivers.',
         },
@@ -488,7 +488,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: 'July 15, 2026',
     readingTime: '6 min read',
     featuredImage: {
-      src: '/images/spiritual/buddhist-stupa.jpg',
+      src: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
       alt: 'Buddhist stupa with prayer flags fluttering in mountain breeze',
       caption: 'The sacred stupa of Swayambhunath and Boudhanath.',
     },

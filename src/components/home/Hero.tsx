@@ -19,7 +19,7 @@ export default function Hero() {
       {/* Background Himalayan Imagery with cinematic treatment */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/mountains/sunrise-himalayas.jpg"
+          src="/explore-with-sakar/images/mountains/sunrise-himalayas.jpg"
           alt="First morning light illuminating the snowcapped peaks of the Nepal Himalayas"
           fill
           priority
@@ -121,7 +121,7 @@ export default function Hero() {
               {/* Host Portrait */}
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-himalaya-900">
                 <Image
-                  src="/images/sakar/sakar-portrait.jpg"
+                  src="/explore-with-sakar/images/sakar/sakar-portrait.jpg"
                   alt="Sakar — Founder & Cultural Guide of Explore With Sakar"
                   fill
                   sizes="(max-width: 1024px) 300px, 400px"

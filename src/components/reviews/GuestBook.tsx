@@ -52,7 +52,7 @@ export default function GuestBook() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const pages = Array.from({ length: 20 }, (_, i) => `/images/reviews/review-${i + 1}.jpg`);
+  const pages = Array.from({ length: 20 }, (_, i) => `/explore-with-sakar/images/reviews/review-${i + 1}.jpg`);
 
   return (
     <div className="flex justify-center items-center w-full py-12 relative z-10">

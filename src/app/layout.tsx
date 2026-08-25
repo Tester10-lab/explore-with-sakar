@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     description: 'Discover Nepal through culture, spirituality, adventure & meaningful human connections with local host Sakar.',
     images: [
       {
-        url: '/images/mountains/sunrise-himalayas.jpg',
+        url: '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg',
         width: 1600,
         height: 1200,
         alt: 'Explore With Sakar — Authentic Himalayan Travel',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Explore With Sakar — Meaningful Nepal Journeys',
     description: 'Travel beyond ordinary tourism in Nepal. Village homestays, living heritage, and spiritual connection.',
-    images: ['/images/mountains/sunrise-himalayas.jpg'],
+    images: ['/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'],
   },
 };
 
