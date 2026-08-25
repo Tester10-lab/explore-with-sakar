@@ -36,9 +36,9 @@ yarn-error.log*
 next-env.d.ts
 
 # User's large files
-*.jpeg
-*.jpg
-*.png
-*.zip
-Review/
-personal blog/
+/*.jpeg
+/*.jpg
+/*.png
+/*.zip
+/Review/
+/personal blog/
