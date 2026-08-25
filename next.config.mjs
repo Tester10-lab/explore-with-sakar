@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  output: 'export',
+  basePath: '/explore-with-sakar',
   images: {
-    formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
   },
 };
 
