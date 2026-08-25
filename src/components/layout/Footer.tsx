@@ -58,13 +58,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-white/10">
           {/* Brand & Host Column */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 rounded-full bg-terracotta flex items-center justify-center text-white">
-                <Compass className="w-5 h-5 text-saffron-light" />
-              </div>
-              <span className="font-editorial-serif text-xl font-bold text-white tracking-tight">
-                Explore With Sakar
-              </span>
+            <Link href="/" className="flex items-center group">
+              <img 
+                src="/explore-with-sakar/images/logo.png" 
+                alt="Explore With Sakar Logo" 
+                className="h-20 w-auto object-contain transition-transform group-hover:scale-105"
+              />
             </Link>
             <p className="text-xs sm:text-sm text-parchment-300 font-light leading-relaxed max-w-sm">
               Meaningful Nepal travel experiences beyond ordinary tourism. We curate intimate human connections, village homestays, living Buddhist & Hindu heritage, and responsible slow travel.

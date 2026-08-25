@@ -35,18 +35,12 @@ export default function MobileNav({ isOpen, onClose, navStructure }: MobileNavPr
       <div className="fixed inset-y-0 right-0 max-w-sm w-full bg-parchment-100 shadow-2xl border-l border-parchment-300 flex flex-col z-50 overflow-y-auto animate-in slide-in-from-right duration-300">
         {/* Drawer Header */}
         <div className="p-4 border-b border-parchment-300 flex items-center justify-between bg-parchment-200">
-          <div className="flex items-center space-x-2.5">
-            <div className="w-8 h-8 rounded-full bg-terracotta flex items-center justify-center text-white">
-              <Compass className="w-4 h-4 text-saffron-light" />
-            </div>
-            <div>
-              <span className="font-editorial-serif font-bold text-himalaya-950 text-sm block">
-                Explore With Sakar
-              </span>
-              <span className="text-[10px] text-himalaya-600 font-sans block -mt-0.5">
-                Responsible Tour Director
-              </span>
-            </div>
+          <div className="flex items-center">
+            <img 
+              src="/explore-with-sakar/images/logo.png" 
+              alt="Explore With Sakar Logo" 
+              className="h-10 w-auto object-contain"
+            />
           </div>
           <button
             onClick={onClose}

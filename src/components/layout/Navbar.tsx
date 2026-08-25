@@ -423,19 +423,13 @@ export default function Navbar() {
           {/* Logo & Brand */}
           <Link
             href="/"
-            className="flex items-center space-x-2.5 group focus:outline-none focus:ring-2 focus:ring-terracotta/40 rounded-md p-1 shrink-0"
+            className="flex items-center group focus:outline-none focus:ring-2 focus:ring-terracotta/40 rounded-md p-1 shrink-0"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-terracotta to-terracotta-dark flex items-center justify-center text-white shadow-warm group-hover:rotate-6 transition-transform">
-              <Compass className="w-5 h-5 text-saffron-light" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-editorial-serif text-base sm:text-lg lg:text-xl font-bold tracking-tight text-himalaya-950 group-hover:text-terracotta transition-colors">
-                Explore With Sakar
-              </span>
-              <span className="text-[9px] sm:text-[10px] tracking-wider text-himalaya-700 uppercase font-sans -mt-0.5">
-                Responsible Tour Director • Nepal
-              </span>
-            </div>
+            <img 
+              src="/explore-with-sakar/images/logo.png" 
+              alt="Explore With Sakar Logo" 
+              className="h-12 sm:h-16 w-auto object-contain transition-transform group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
