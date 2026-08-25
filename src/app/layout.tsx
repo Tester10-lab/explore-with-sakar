@@ -3,6 +3,7 @@ import { Cinzel, Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import FloatingWhatsApp from '@/components/layout/FloatingWhatsApp';
 
 const cinzel = Cinzel({
   subsets: ['latin'],
@@ -110,6 +111,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
+        <FloatingWhatsApp />
       </body>
     </html>
   );
