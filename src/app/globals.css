@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 251, 248, 242; /* #FBF8F2 */
+    --surface: 243, 236, 224; /* #F3ECE0 */
+    --surface-light: 252, 250, 246; /* #FCFAF6 */
+    --foreground: 25, 32, 38; /* #192026 */
+    --muted: 100, 116, 139; /* #64748B */
+    --terracotta: 193, 73, 54; /* #C14936 */
+    --saffron: 229, 159, 56; /* #E59F38 */
+    --moss: 59, 89, 71; /* #3B5947 */
+    --border: 227, 211, 196; /* #E3D3C4 */
+  }
+
+  * {
+    border-color: rgba(227, 211, 196, 0.6);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #FBF8F2;
+    color: #192026;
+    font-family: var(--font-sans), 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  body {
+    background-color: #FBF8F2;
+    color: #192026;
+    overflow-x: hidden;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: rgba(193, 73, 54, 0.2);
+    color: #9E3423;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif), 'Cinzel', 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.01em;
+    color: #192026;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F3ECE0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4BFA9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C14936;
+}
+
+/* Subtle Nepal Paper Texture Backgrounds */
+.bg-parchment-pattern {
+  background-color: #FBF8F2;
+  background-image: radial-gradient(#E3D3C4 0.75px, transparent 0.75px), radial-gradient(#E3D3C4 0.75px, #FBF8F2 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+.editorial-container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .editorial-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .editorial-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* Typography styles */
+.font-display-serif {
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+}
+
+.font-editorial-serif {
+  font-family: var(--font-serif), 'Cinzel', Georgia, serif;
+}
+
+/* Glassmorphism on warm surfaces */
+.glass-nav {
+  background-color: rgba(251, 248, 242, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(227, 211, 196, 0.7);
+}
+
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(227, 211, 196, 0.6);
+}
+
+.glass-card-dark {
+  background-color: rgba(25, 32, 38, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom horizontal snap scroll container */
+.horizontal-snap {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.horizontal-snap::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.snap-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
