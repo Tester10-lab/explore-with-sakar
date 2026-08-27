@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Sparkles, ArrowRight, Sun, Volume2, Wind, Shield } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Lightbox from '@/components/gallery/Lightbox';
 import { GalleryPhoto } from '@/types';
 
@@ -50,121 +51,139 @@ export default function SpiritualWellness() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
-    <section id="spiritual" className="py-24 sm:py-32 bg-himalaya-950 text-white relative overflow-hidden">
-      {/* Gentle ambient glows */}
-      <div className="absolute top-1/4 left-0 w-80 h-80 bg-saffron/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-terracotta/10 rounded-full blur-3xl pointer-events-none" />
-
+    <section id="spiritual" className="py-24 sm:py-32 bg-himalaya-900 film-grain text-white relative">
       <div className="editorial-container relative z-10">
+        
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/10 text-saffron-light text-xs font-semibold uppercase tracking-wider mb-4 border border-white/15">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Sacred Sanctuaries & Inner Calm</span>
-          </div>
-          <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
-            Stillness in the Shadow <br className="hidden sm:inline" />
-            <span className="italic font-display-serif font-normal text-saffron-light">
-              of the Himalayas
+        <div className="text-center max-w-3xl mx-auto mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="text-xs font-bold tracking-widest uppercase text-saffron-light mb-4 block">
+              Sacred Sanctuaries
             </span>
-          </h2>
-          <p className="text-sm sm:text-base text-parchment-300 font-light mt-4 leading-relaxed">
-            For thousands of years, these high valleys have served as a haven for mindfulness, sound meditation, and contemplation. We guide you into peaceful spaces with humility, quiet presence, and cultural respect.
-          </p>
+            <h2 className="font-editorial-serif text-editorial-title font-light tracking-tight leading-[1.1] mb-6">
+              Stillness in the Shadow <br className="hidden sm:inline" />
+              <span className="italic font-display-serif text-parchment-300">
+                of the Himalayas
+              </span>
+            </h2>
+            <p className="text-parchment-200 text-sm font-light max-w-xl mx-auto">
+              For thousands of years, these high valleys have served as a haven for mindfulness, sound meditation, and contemplation. We guide you into peaceful spaces with humility, quiet presence, and cultural respect.
+            </p>
+          </motion.div>
         </div>
 
         {/* 3 Visual Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-24">
           {/* Card 1 */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => setLightboxIndex(0)}
-            className="group rounded-2xl overflow-hidden glass-card-dark border border-white/15 p-4 cursor-pointer hover:border-saffron/40 transition-all transform hover:-translate-y-1"
+            className="group cursor-pointer flex flex-col"
           >
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-himalaya-900">
+            <div className="relative aspect-[3/4] overflow-hidden mb-6 bg-himalaya-950">
               <Image
                 src={SPIRITUAL_PHOTOS[0].image}
                 alt={SPIRITUAL_PHOTOS[0].alt}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-himalaya-950/20 group-hover:bg-transparent transition-colors duration-500" />
             </div>
-            <div className="space-y-2">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-saffron-light">
+            <div className="space-y-3 flex-1">
+              <span className="text-xs uppercase font-medium tracking-widest text-saffron-light">
                 Sacred Stupas
               </span>
-              <h3 className="font-editorial-serif text-lg font-bold text-white">
+              <h3 className="font-editorial-serif text-2xl font-light text-white group-hover:text-parchment-200 transition-colors">
                 Dawn Kora & Prayer Wheels
               </h3>
-              <p className="text-xs text-parchment-300 font-light leading-relaxed">
+              <p className="text-sm text-parchment-300 font-light leading-relaxed">
                 Join local devotees circumambulating ancient stupas at sunrise, listening to soft mantras carried on the morning breeze.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Card 2 */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => setLightboxIndex(1)}
-            className="group rounded-2xl overflow-hidden glass-card-dark border border-white/15 p-4 cursor-pointer hover:border-saffron/40 transition-all transform hover:-translate-y-1"
+            className="group cursor-pointer flex flex-col pt-12"
           >
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-himalaya-900">
+            <div className="relative aspect-[3/4] overflow-hidden mb-6 bg-himalaya-950">
               <Image
                 src={SPIRITUAL_PHOTOS[1].image}
                 alt={SPIRITUAL_PHOTOS[1].alt}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"
               />
+               <div className="absolute inset-0 bg-himalaya-950/20 group-hover:bg-transparent transition-colors duration-500" />
             </div>
-            <div className="space-y-2">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-saffron-light">
+            <div className="space-y-3 flex-1">
+              <span className="text-xs uppercase font-medium tracking-widest text-saffron-light">
                 Monastic Life
               </span>
-              <h3 className="font-editorial-serif text-lg font-bold text-white">
+              <h3 className="font-editorial-serif text-2xl font-light text-white group-hover:text-parchment-200 transition-colors">
                 Monastery Puja & Butter Lamps
               </h3>
-              <p className="text-xs text-parchment-300 font-light leading-relaxed">
+              <p className="text-sm text-parchment-300 font-light leading-relaxed">
                 Sit in the quiet gallery of cliffside gompas during morning chant sessions, enveloped in the aroma of juniper and clarified butter.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Card 3 */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => setLightboxIndex(2)}
-            className="group rounded-2xl overflow-hidden glass-card-dark border border-white/15 p-4 cursor-pointer hover:border-saffron/40 transition-all transform hover:-translate-y-1"
+            className="group cursor-pointer flex flex-col"
           >
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-himalaya-900">
+            <div className="relative aspect-[3/4] overflow-hidden mb-6 bg-himalaya-950">
               <Image
                 src={SPIRITUAL_PHOTOS[2].image}
                 alt={SPIRITUAL_PHOTOS[2].alt}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"
               />
+               <div className="absolute inset-0 bg-himalaya-950/20 group-hover:bg-transparent transition-colors duration-500" />
             </div>
-            <div className="space-y-2">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-saffron-light">
+            <div className="space-y-3 flex-1">
+              <span className="text-xs uppercase font-medium tracking-widest text-saffron-light">
                 Sound Healing
               </span>
-              <h3 className="font-editorial-serif text-lg font-bold text-white">
+              <h3 className="font-editorial-serif text-2xl font-light text-white group-hover:text-parchment-200 transition-colors">
                 Tibetan Singing Bowl Therapy
               </h3>
-              <p className="text-xs text-parchment-300 font-light leading-relaxed">
+              <p className="text-sm text-parchment-300 font-light leading-relaxed">
                 Experience restorative sound immersion with 7-metal hand-hammered bowls, scientifically balancing the nervous system.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom CTA */}
         <div className="text-center">
           <Link
             href="/experiences/spiritual-immersion-singing-bowls"
-            className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl bg-saffron hover:bg-saffron-dark text-himalaya-950 font-bold text-sm shadow-warm transition-all"
+            className="inline-flex items-center justify-center px-0 py-2 border-b border-white/30 text-xs tracking-widest uppercase font-medium text-white hover:text-saffron-light hover:border-saffron-light transition-all"
           >
             <span>Discover Spiritual & Sound Journeys</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 ml-3" />
           </Link>
         </div>
       </div>

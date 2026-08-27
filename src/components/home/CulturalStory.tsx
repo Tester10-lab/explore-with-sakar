@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Sparkles, ArrowRight, MapPin, Maximize2 } from 'lucide-react';
+import { ArrowRight, Maximize2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Lightbox from '@/components/gallery/Lightbox';
 import { GalleryPhoto } from '@/types';
 
@@ -44,120 +45,96 @@ const CULTURAL_PHOTOS: GalleryPhoto[] = [
     orientation: 'landscape',
     caption: 'Step through low wooden archways into tranquil residential courtyards.',
   },
-  {
-    id: 'cult-4',
-    title: 'Historical Pagoda Shrines of Durbar Square',
-    nepaliTitle: 'दरबार क्षेत्र',
-    category: 'heritage',
-    categoryLabel: 'Living Heritage',
-    location: 'Kathmandu Durbar Square',
-    image: '/explore-with-sakar/images/heritage/durbar-square.jpg',
-    alt: 'Terracotta brick temples and historical stone shrines',
-    orientation: 'landscape',
-    caption: 'UNESCO living heritage where daily rituals and vibrant street life converge.',
-  },
 ];
 
 export default function CulturalStory() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
-    <section id="cultural" className="py-20 sm:py-28 bg-parchment-100 relative">
+    <section id="cultural" className="py-32 bg-himalaya-950 film-grain text-white relative">
       <div className="editorial-container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          {/* Narrative Column */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-saffron/15 text-saffron-dark text-xs font-semibold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Living Traditions</span>
-            </div>
-
-            <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-              Living Heritage, <br />
-              <span className="italic font-display-serif font-normal text-terracotta">
-                Sacred Rhythms & Feasts
-              </span>
-            </h2>
-
-            <p className="text-sm sm:text-base text-himalaya-700 font-light leading-relaxed">
-              Nepal’s cultural heritage is not confined to glass cases in museums; it is an active, vibrant way of being. In the ancient medieval towns of Kathmandu, Patan, and Bhaktapur, eighth-century stone shrines receive fresh marigold petals every sunrise.
-            </p>
-
-            <p className="text-sm sm:text-base text-himalaya-700 font-light leading-relaxed">
-              Guided by Sakar, you will step beyond the usual tourist selfie spots into private artisan workshops, taste authentic multi-course Newari banquets (Samay Baji), and understand the sacred mythology behind every festival mask, bronze bell, and carved wooden window.
-            </p>
-
-            <div className="pt-2">
-              <Link
-                href="/experiences/kathmandu-heritage-living-culture"
-                className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl bg-terracotta hover:bg-terracotta-dark text-white text-sm font-bold shadow-warm transition-all"
-              >
-                <span>Explore Heritage Journeys</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Photo Mosaic Column */}
-          <div className="lg:col-span-7">
-            <div className="grid grid-cols-2 gap-4">
-              {/* Top Tall Image */}
-              <div
-                onClick={() => setLightboxIndex(0)}
-                className="row-span-2 relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer group shadow-editorial bg-sand"
-              >
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+          
+          {/* Left Asymmetrical Collage */}
+          <div className="lg:col-span-7 relative min-h-[600px] order-2 lg:order-1">
+            {/* Main Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute right-0 top-0 w-[70%] z-10 cursor-pointer shadow-editorial"
+              onClick={() => setLightboxIndex(0)}
+            >
+              <div className="relative aspect-[3/4] bg-himalaya-900 border border-white/10">
                 <Image
                   src={CULTURAL_PHOTOS[0].image}
                   alt={CULTURAL_PHOTOS[0].alt}
                   fill
-                  sizes="(max-width: 1024px) 50vw, 30vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white">
-                  <span className="text-[10px] uppercase tracking-wider font-bold text-saffron-light">
-                    Malla Architecture
-                  </span>
-                  <h4 className="font-editorial-serif text-sm font-bold">
-                    {CULTURAL_PHOTOS[0].title}
-                  </h4>
-                </div>
               </div>
+            </motion.div>
 
-              {/* Top Right Landscape */}
-              <div
-                onClick={() => setLightboxIndex(1)}
-                className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer group shadow-subtle bg-sand"
-              >
-                <Image
-                  src={CULTURAL_PHOTOS[1].image}
-                  alt={CULTURAL_PHOTOS[1].alt}
-                  fill
-                  sizes="(max-width: 1024px) 50vw, 30vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-himalaya-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                  <Maximize2 className="w-5 h-5" />
+            {/* Overlapping Landscape */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute left-0 bottom-12 w-[60%] z-20 cursor-pointer shadow-2xl"
+              onClick={() => setLightboxIndex(1)}
+            >
+               <div className="relative aspect-[4/3] bg-himalaya-900 border border-white/10">
+                  <Image
+                    src={CULTURAL_PHOTOS[1].image}
+                    alt={CULTURAL_PHOTOS[1].alt}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-              </div>
-
-              {/* Bottom Right Landscape */}
-              <div
-                onClick={() => setLightboxIndex(2)}
-                className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer group shadow-subtle bg-sand"
-              >
-                <Image
-                  src={CULTURAL_PHOTOS[2].image}
-                  alt={CULTURAL_PHOTOS[2].alt}
-                  fill
-                  sizes="(max-width: 1024px) 50vw, 30vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-himalaya-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                  <Maximize2 className="w-5 h-5" />
-                </div>
-              </div>
-            </div>
+            </motion.div>
           </div>
+
+          {/* Right Narrative */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-12 order-1 lg:order-2"
+          >
+            <div>
+              <span className="text-xs font-bold tracking-widest uppercase text-terracotta mb-4 block">
+                Living Traditions
+              </span>
+              <h2 className="font-editorial-serif text-editorial-title font-light tracking-tight leading-[1.1]">
+                Living Heritage, <br />
+                <span className="italic font-display-serif text-parchment-300">
+                  Sacred Rhythms & Feasts
+                </span>
+              </h2>
+            </div>
+            
+            <div className="space-y-6 text-sm text-parchment-200 font-light leading-relaxed max-w-md">
+              <p>
+                Nepal’s cultural heritage is not confined to glass cases in museums; it is an active, vibrant way of being. In the ancient medieval towns of Kathmandu, Patan, and Bhaktapur, eighth-century stone shrines receive fresh marigold petals every sunrise.
+              </p>
+              <p>
+                Guided by Sakar, you will step beyond the usual tourist selfie spots into private artisan workshops, taste authentic multi-course Newari banquets (Samay Baji), and understand the sacred mythology behind every festival mask, bronze bell, and carved wooden window.
+              </p>
+            </div>
+
+            <Link
+              href="/experiences/kathmandu-heritage-living-culture"
+              className="inline-flex items-center justify-center px-0 py-2 border-b border-white/30 text-xs tracking-widest uppercase font-medium text-white hover:text-terracotta hover:border-terracotta transition-all"
+            >
+              <span>Explore Heritage Journeys</span>
+              <ArrowRight className="w-4 h-4 ml-3" />
+            </Link>
+          </motion.div>
+
         </div>
       </div>
 

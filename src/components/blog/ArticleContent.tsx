@@ -94,8 +94,9 @@ export default function ArticleContent({ post }: ArticleContentProps) {
           {post.content.map((block, index) => {
             switch (block.type) {
               case 'paragraph':
+                const isFirstParagraph = index === 0 || post.content.findIndex(b => b.type === 'paragraph') === index;
                 return (
-                  <p key={index} className="text-himalaya-800 leading-[1.8]">
+                  <p key={index} className={`text-himalaya-800 leading-[1.9] ${isFirstParagraph ? 'first-letter:font-editorial-serif first-letter:text-6xl first-letter:font-bold first-letter:float-left first-letter:mr-4 first-letter:mt-2 first-letter:text-terracotta' : ''}`}>
                     {block.content}
                   </p>
                 );
@@ -105,7 +106,7 @@ export default function ArticleContent({ post }: ArticleContentProps) {
                   return (
                     <h2
                       key={index}
-                      className="font-editorial-serif text-2xl sm:text-3xl font-bold text-himalaya-950 tracking-tight mt-10 pt-4 pb-2 border-b border-parchment-300"
+                      className="font-editorial-serif text-3xl sm:text-4xl font-bold text-himalaya-950 tracking-tight mt-16 pt-4 pb-4 border-b border-parchment-300"
                     >
                       {block.content}
                     </h2>
@@ -114,7 +115,7 @@ export default function ArticleContent({ post }: ArticleContentProps) {
                 return (
                   <h3
                     key={index}
-                    className="font-editorial-serif text-xl sm:text-2xl font-bold text-himalaya-950 mt-6"
+                    className="font-editorial-serif text-2xl sm:text-3xl font-bold text-himalaya-950 mt-10"
                   >
                     {block.content}
                   </h3>
@@ -124,13 +125,18 @@ export default function ArticleContent({ post }: ArticleContentProps) {
                 return (
                   <blockquote
                     key={index}
-                    className="my-8 p-6 sm:p-8 rounded-2xl bg-sand border-l-4 border-terracotta shadow-subtle space-y-2"
+                    className="my-12 p-8 sm:p-12 rounded-3xl bg-white border border-parchment-300 shadow-editorial relative overflow-hidden"
                   >
-                    <p className="font-display-serif italic text-lg sm:text-xl text-himalaya-950 font-normal leading-relaxed">
+                    <div className="absolute top-0 right-0 p-8 opacity-5 text-himalaya-900 pointer-events-none">
+                      <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                      </svg>
+                    </div>
+                    <p className="font-display-serif italic text-2xl sm:text-3xl text-himalaya-950 font-normal leading-snug relative z-10 text-center max-w-2xl mx-auto">
                       &ldquo;{block.content}&rdquo;
                     </p>
                     {block.attribution && (
-                      <cite className="text-xs uppercase tracking-wider font-bold text-terracotta block not-italic">
+                      <cite className="text-xs uppercase tracking-widest font-bold text-terracotta block not-italic mt-6 text-center relative z-10">
                         — {block.attribution}
                       </cite>
                     )}

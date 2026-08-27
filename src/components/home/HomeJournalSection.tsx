@@ -4,12 +4,13 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BLOG_POSTS } from '@/data/blog';
-import { Sparkles, ArrowRight, BookOpen, Clock, Calendar } from 'lucide-react';
+import { ArrowRight, Clock, Calendar } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
 
 const GuestBook = dynamic(() => import('@/components/reviews/GuestBook'), { 
   ssr: false,
-  loading: () => <div className="h-[600px] w-full flex items-center justify-center bg-sand rounded-3xl animate-pulse text-himalaya-500 font-editorial-serif text-lg">Opening Journal...</div>
+  loading: () => <div className="h-[600px] w-full flex items-center justify-center bg-sand animate-pulse text-himalaya-500 font-editorial-serif text-lg">Opening Journal...</div>
 });
 
 export default function HomeJournalSection() {
@@ -17,162 +18,147 @@ export default function HomeJournalSection() {
   const supportingPosts = BLOG_POSTS.slice(1, 3);
 
   return (
-    <section id="journal" className="py-20 sm:py-28 bg-parchment-200/80 border-t border-parchment-300 relative">
+    <section id="journal" className="py-24 sm:py-32 bg-parchment-100 relative">
       <div className="editorial-container">
+        
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-terracotta/10 text-terracotta text-xs font-semibold uppercase tracking-wider mb-3">
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>Sakar&apos;s Personal Journal</span>
-            </div>
-            <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-              From Sakar&apos;s Journal
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-2xl"
+          >
+            <span className="text-xs uppercase font-bold tracking-widest text-terracotta mb-4 block">
+              Sakar&apos;s Personal Journal
+            </span>
+            <h2 className="font-editorial-serif text-editorial-title font-light text-himalaya-950 tracking-tight leading-[1.1]">
+              From the <span className="italic text-himalaya-700">Journal.</span>
             </h2>
-            <p className="text-sm sm:text-base text-himalaya-700 font-light mt-2 font-display-serif italic">
+          </motion.div>
+          
+          <motion.div
+             initial={{ opacity: 0, x: 20 }}
+             whileInView={{ opacity: 1, x: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="text-sm sm:text-base text-himalaya-700 font-light max-w-sm mb-4">
               Stories, reflections and quiet discoveries from the roads, villages, temples and mountains of Nepal.
             </p>
-          </div>
-
-          <Link
-            href="/blog"
-            className="inline-flex items-center space-x-2 text-sm font-bold text-terracotta hover:text-terracotta-dark transition-colors group"
-          >
-            <span>Explore All Stories</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+            <Link
+              href="/blog"
+              className="inline-flex items-center justify-center px-0 py-2 border-b border-himalaya-900 text-xs tracking-widest uppercase font-medium text-himalaya-950 hover:text-terracotta hover:border-terracotta transition-all"
+            >
+              <span>Explore All Stories</span>
+              <ArrowRight className="w-4 h-4 ml-3" />
+            </Link>
+          </motion.div>
         </div>
 
         {/* 1 Large Dominant Feature Story + 2 Supporting Stories */}
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          
           {/* Main Large Feature Article */}
-          <div className="group rounded-3xl overflow-hidden bg-sand border border-parchment-300 shadow-editorial hover:shadow-floating transition-all duration-300">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
-              {/* Feature Image */}
-              <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-himalaya-900">
+          <motion.div 
+             initial={{ opacity: 0, y: 30 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+             className="lg:col-span-8 group"
+          >
+            <Link href={`/blog/${featuredPost.slug}`} className="block">
+              <div className="relative aspect-[16/10] overflow-hidden bg-himalaya-100 mb-8">
                 <Image
                   src={featuredPost.featuredImage.src}
                   alt={featuredPost.featuredImage.alt}
                   fill
                   priority
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"
                 />
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-himalaya-950/80 backdrop-blur-md text-saffron-light text-xs uppercase font-bold tracking-wider">
-                  {featuredPost.category}
-                </div>
               </div>
 
-              {/* Feature Content Narrative */}
-              <div className="lg:col-span-5 p-6 sm:p-10 space-y-4 flex flex-col justify-between">
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3 text-xs text-himalaya-600 font-light">
-                    <span className="flex items-center">
-                      <Calendar className="w-3.5 h-3.5 mr-1 text-terracotta-light" />
-                      {featuredPost.publishedAt}
-                    </span>
-                    <span>•</span>
-                    <span className="flex items-center">
-                      <Clock className="w-3.5 h-3.5 mr-1 text-terracotta-light" />
-                      {featuredPost.readingTime}
-                    </span>
-                  </div>
-
-                  <h3 className="font-editorial-serif text-2xl sm:text-3xl font-bold text-himalaya-950 group-hover:text-terracotta transition-colors leading-tight">
-                    <Link href={`/blog/${featuredPost.slug}`}>
-                      {featuredPost.title}
-                    </Link>
-                  </h3>
-
-                  <p className="text-sm text-himalaya-700 font-light leading-relaxed">
-                    {featuredPost.excerpt}
-                  </p>
+              <div className="space-y-4 max-w-2xl">
+                <div className="flex items-center space-x-4 text-xs tracking-widest uppercase text-terracotta font-medium">
+                  <span>{featuredPost.category}</span>
+                  <span className="text-himalaya-300">|</span>
+                  <span className="flex items-center text-himalaya-500">
+                    <Clock className="w-3.5 h-3.5 mr-1.5" />
+                    {featuredPost.readingTime}
+                  </span>
                 </div>
 
-                <div className="pt-4 border-t border-parchment-300">
-                  <Link
-                    href={`/blog/${featuredPost.slug}`}
-                    className="inline-flex items-center text-sm font-bold text-terracotta group-hover:text-terracotta-dark transition-colors"
-                  >
-                    <span>Read Complete Story</span>
-                    <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
+                <h3 className="font-editorial-serif text-3xl sm:text-4xl font-light text-himalaya-950 group-hover:text-terracotta transition-colors leading-[1.2]">
+                  {featuredPost.title}
+                </h3>
+
+                <p className="text-sm text-himalaya-700 font-light leading-relaxed">
+                  {featuredPost.excerpt}
+                </p>
               </div>
-            </div>
-          </div>
+            </Link>
+          </motion.div>
 
           {/* 2 Supporting Stories */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {supportingPosts.map((post) => (
-              <div
+          <div className="lg:col-span-4 flex flex-col gap-12">
+            {supportingPosts.map((post, i) => (
+              <motion.div
                 key={post.slug}
-                className="group rounded-2xl overflow-hidden bg-sand border border-parchment-300 shadow-subtle hover:shadow-editorial transition-all p-5 flex flex-col sm:flex-row gap-5"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 + (i * 0.1), ease: [0.16, 1, 0.3, 1] }}
+                className="group flex flex-col"
               >
-                <div className="relative w-full sm:w-48 aspect-[4/3] rounded-xl overflow-hidden bg-himalaya-900 shrink-0">
-                  <Image
-                    src={post.featuredImage.src}
-                    alt={post.featuredImage.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 200px"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
+                <Link href={`/blog/${post.slug}`} className="block">
+                  <div className="relative w-full aspect-[4/3] overflow-hidden bg-himalaya-100 mb-6">
+                    <Image
+                      src={post.featuredImage.src}
+                      alt={post.featuredImage.alt}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"
+                    />
+                  </div>
 
-                <div className="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-terracotta">
+                  <div className="space-y-3">
+                    <span className="text-xs uppercase font-medium tracking-widest text-terracotta">
                       {post.category}
                     </span>
-                    <h4 className="font-editorial-serif text-base sm:text-lg font-bold text-himalaya-950 group-hover:text-terracotta transition-colors mt-0.5 leading-snug">
-                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                    <h4 className="font-editorial-serif text-2xl font-light text-himalaya-950 group-hover:text-terracotta transition-colors leading-[1.2]">
+                      {post.title}
                     </h4>
-                    <p className="text-xs text-himalaya-600 font-light mt-1 line-clamp-2">
+                    <p className="text-sm text-himalaya-600 font-light line-clamp-2">
                       {post.excerpt}
                     </p>
                   </div>
-
-                  <div className="flex items-center justify-between pt-2 border-t border-parchment-300/80 text-xs">
-                    <span className="text-himalaya-500 text-[11px]">{post.readingTime}</span>
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="font-bold text-terracotta flex items-center group-hover:translate-x-0.5 transition-transform"
-                    >
-                      <span>Read</span>
-                      <ArrowRight className="w-3 h-3 ml-1" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Center CTA Button */}
-        <div className="text-center mt-12 mb-20">
-          <Link
-            href="/blog"
-            className="inline-flex items-center space-x-2 px-8 py-4 rounded-xl bg-terracotta hover:bg-terracotta-dark text-white font-bold text-sm shadow-warm transition-all transform hover:-translate-y-0.5"
-          >
-            <BookOpen className="w-4 h-4" />
-            <span>Explore All Journal Stories & Reflections</span>
-            <ArrowRight className="w-4 h-4 ml-1" />
-          </Link>
-        </div>
-
         {/* Interactive Guest Book */}
-        <div className="mt-20 border-t border-parchment-300 pt-20">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-himalaya-900 text-parchment-200 text-xs font-semibold uppercase tracking-wider mb-4">
-              <span>Traveler Memories</span>
-            </div>
-            <h3 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-              Sakar's Handwritten Guest Journal
+        <div className="mt-32 border-t border-himalaya-200 pt-32">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <span className="text-xs font-bold tracking-widest uppercase text-terracotta mb-4 block">
+              Traveler Memories
+            </span>
+            <h3 className="font-editorial-serif text-editorial-title font-light text-himalaya-950 tracking-tight leading-[1.1] mb-6">
+              Sakar's Handwritten <span className="italic text-himalaya-700">Guest Journal</span>
             </h3>
-            <p className="text-sm sm:text-base text-himalaya-700 font-light mt-4 font-display-serif italic">
+            <p className="text-himalaya-700 text-sm font-light max-w-lg mx-auto">
               Flip through the pages of our physical guestbook, filled with handwritten stories, drawings, and gratitude from travelers across the world.
             </p>
-          </div>
+          </motion.div>
           <GuestBook />
         </div>
       </div>

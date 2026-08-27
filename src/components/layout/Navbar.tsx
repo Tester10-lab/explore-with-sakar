@@ -18,6 +18,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import MobileNav from './MobileNav';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export interface NavChildItem {
   title: string;
@@ -412,23 +413,26 @@ export default function Navbar() {
       </div>
 
       {/* Main Sticky Navbar */}
-      <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed w-full top-0 z-40 transition-all duration-500 ${
           isScrolled
-            ? 'glass-nav shadow-editorial py-2.5'
-            : 'bg-parchment-100/95 backdrop-blur-md py-3.5 border-b border-parchment-300'
+            ? 'bg-parchment-50/95 backdrop-blur-md shadow-sm py-3 border-b border-parchment-300/30'
+            : 'bg-transparent py-5'
         }`}
       >
         <div className="editorial-container flex items-center justify-between">
           {/* Logo & Brand */}
           <Link
             href="/"
-            className="flex items-center group focus:outline-none focus:ring-2 focus:ring-terracotta/40 rounded-md p-1 shrink-0"
+            className="flex items-center group focus:outline-none focus:ring-2 focus:ring-himalaya-900 rounded-md p-1 shrink-0"
           >
             <img 
               src="/explore-with-sakar/images/logo.png" 
               alt="Explore With Sakar Logo" 
-              className="h-12 sm:h-16 w-auto object-contain transition-transform group-hover:scale-105"
+              className={`w-auto object-contain transition-all duration-500 ${isScrolled ? 'h-10 sm:h-12' : 'h-12 sm:h-16'}`}
             />
           </Link>
 
@@ -444,10 +448,10 @@ export default function Navbar() {
                   <Link
                     key={item.label}
                     href={item.href || '/'}
-                    className={`px-2.5 py-1.5 rounded-md text-xs font-medium transition-all ${
+                    className={`px-3 py-2 rounded-md text-xs tracking-widest uppercase font-medium transition-all ${
                       isActive
-                        ? 'text-terracotta font-semibold bg-terracotta/10'
-                        : 'text-himalaya-900 hover:text-terracotta hover:bg-sand/60'
+                        ? 'text-himalaya-900 font-semibold'
+                        : 'text-himalaya-700 hover:text-himalaya-900'
                     }`}
                   >
                     {item.label}
@@ -465,98 +469,103 @@ export default function Navbar() {
                   <button
                     onClick={() => setActiveDropdown(isOpen ? null : item.label)}
                     aria-expanded={isOpen}
-                    className={`flex items-center space-x-1 px-2.5 py-1.5 rounded-md text-xs font-medium transition-all ${
+                    className={`flex items-center space-x-1 px-3 py-2 rounded-md text-xs tracking-widest uppercase font-medium transition-all ${
                       isOpen
-                        ? 'text-terracotta bg-sand'
-                        : 'text-himalaya-900 hover:text-terracotta hover:bg-sand/60'
+                        ? 'text-himalaya-900'
+                        : 'text-himalaya-700 hover:text-himalaya-900'
                     }`}
                   >
                     <span>{item.label}</span>
                     <ChevronDown
-                      className={`w-3 h-3 transition-transform duration-200 ${
-                        isOpen ? 'rotate-180 text-terracotta' : 'text-himalaya-700'
+                      className={`w-3 h-3 transition-transform duration-300 ${
+                        isOpen ? 'rotate-180 text-himalaya-900' : 'text-himalaya-500'
                       }`}
                     />
                   </button>
 
                   {/* Mega Dropdown Panel */}
-                  {isOpen && item.children && (
-                    <div
-                      className={`absolute left-0 mt-1 rounded-2xl bg-parchment-50 border border-parchment-300 shadow-floating p-4 z-50 animate-in fade-in slide-in-from-top-2 duration-200 ${
-                        item.columns === 2 ? 'w-[580px]' : 'w-80'
-                      }`}
-                    >
-                      {item.subtitle && (
-                        <div className="text-[11px] font-display-serif italic text-terracotta px-2 pb-2 mb-2 border-b border-parchment-300">
-                          {item.subtitle}
-                        </div>
-                      )}
-                      <div
-                        className={
-                          item.columns === 2 ? 'grid grid-cols-2 gap-1.5' : 'grid gap-1'
-                        }
+                  <AnimatePresence>
+                    {isOpen && item.children && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className={`absolute left-0 mt-4 rounded-xl bg-parchment-50 border border-parchment-300 shadow-floating p-6 z-50 ${
+                          item.columns === 2 ? 'w-[600px]' : 'w-80'
+                        }`}
                       >
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.title}
-                            href={child.href}
-                            onClick={() => setActiveDropdown(null)}
-                            className="group p-2 rounded-lg hover:bg-sand transition-all flex flex-col text-left"
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="text-xs font-semibold text-himalaya-950 group-hover:text-terracotta transition-colors">
-                                {child.title}
-                              </span>
-                              {child.badge && (
-                                <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-terracotta/15 text-terracotta">
-                                  {child.badge}
+                        {item.subtitle && (
+                          <div className="text-[11px] font-display-serif italic text-himalaya-600 px-2 pb-4 mb-4 border-b border-parchment-300/50">
+                            {item.subtitle}
+                          </div>
+                        )}
+                        <div
+                          className={
+                            item.columns === 2 ? 'grid grid-cols-2 gap-4' : 'grid gap-3'
+                          }
+                        >
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.title}
+                              href={child.href}
+                              onClick={() => setActiveDropdown(null)}
+                              className="group p-3 rounded-lg hover:bg-parchment-100 transition-all flex flex-col text-left border border-transparent hover:border-parchment-300/30"
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="text-sm font-editorial-serif font-bold text-himalaya-950 group-hover:text-terracotta transition-colors">
+                                  {child.title}
                                 </span>
+                                {child.badge && (
+                                  <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded border border-terracotta/30 text-terracotta">
+                                    {child.badge}
+                                  </span>
+                                )}
+                              </div>
+                              {child.description && (
+                                <p className="text-xs text-himalaya-600 font-light mt-1.5 line-clamp-2">
+                                  {child.description}
+                                </p>
                               )}
-                            </div>
-                            {child.description && (
-                              <p className="text-[11px] text-himalaya-600 font-light mt-0.5 line-clamp-1">
-                                {child.description}
-                              </p>
-                            )}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}
           </nav>
 
           {/* Desktop Right Action CTA */}
-          <div className="hidden lg:flex items-center space-x-2.5">
+          <div className="hidden lg:flex items-center space-x-4">
             <Link
               href="/#booking"
-              className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-xs font-bold tracking-wide bg-terracotta hover:bg-terracotta-dark text-white shadow-warm hover:shadow-editorial transition-all transform hover:-translate-y-0.5 active:translate-y-0 shrink-0"
+              className="inline-flex items-center justify-center px-6 py-2.5 rounded-none border-b border-himalaya-900 text-xs tracking-widest uppercase font-medium hover:bg-himalaya-900 hover:text-white transition-all shrink-0"
             >
-              <span>Contact / Book</span>
-              <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+              Plan A Journey
             </Link>
           </div>
 
           {/* Mobile Hamburger Button */}
-          <div className="flex items-center xl:hidden space-x-2">
+          <div className="flex items-center xl:hidden space-x-3">
             <Link
               href="/#booking"
-              className="px-3 py-1.5 rounded-md text-xs font-semibold bg-terracotta text-white shadow-sm"
+              className="text-xs font-medium uppercase tracking-widest border-b border-himalaya-900"
             >
               Book
             </Link>
             <button
               onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-              className="p-2 rounded-lg text-himalaya-900 hover:bg-sand transition-colors focus:outline-none focus:ring-2 focus:ring-terracotta/40"
+              className="p-2 text-himalaya-900 hover:text-terracotta transition-colors focus:outline-none"
               aria-label="Toggle Menu"
             >
               {isMobileNavOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile Navigation Drawer */}
       <MobileNav

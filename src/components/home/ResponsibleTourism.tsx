@@ -1,109 +1,127 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { Sparkles, Leaf, Users, Shield, HeartHandshake, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function ResponsibleTourism() {
   return (
-    <section id="responsible" className="py-20 sm:py-28 bg-sand/60 border-t border-parchment-300 relative">
+    <section id="responsible" className="py-24 sm:py-32 bg-himalaya-900 film-grain text-white relative">
       <div className="editorial-container">
+        
         {/* Section Header */}
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-moss/10 text-moss-dark text-xs font-semibold uppercase tracking-wider mb-3">
-            <Leaf className="w-3.5 h-3.5 text-moss" />
-            <span>Ethical & Community-Based Travel</span>
-          </div>
-          <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-            Travel Should Leave a <br />
-            <span className="italic font-display-serif font-normal text-moss-dark">
-              Positive Footprint
+        <div className="max-w-3xl mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="text-xs font-bold tracking-widest uppercase text-moss-light mb-4 block">
+              Ethical & Community-Based Travel
             </span>
-          </h2>
-          <p className="text-sm sm:text-base text-himalaya-700 font-light mt-3 leading-relaxed">
-            We believe that true travel is not extractive. Every journey with Sakar directly enriches the village households, traditional artisans, and pristine mountain environments that welcome us.
-          </p>
+            <h2 className="font-editorial-serif text-editorial-title font-light tracking-tight leading-[1.1] mb-6">
+              Travel Should Leave a <br />
+              <span className="italic font-display-serif text-parchment-300">
+                Positive Footprint.
+              </span>
+            </h2>
+            <p className="text-parchment-200 text-sm font-light max-w-xl">
+              We believe that true travel is not extractive. Every journey with Sakar directly enriches the village households, traditional artisans, and pristine mountain environments that welcome us.
+            </p>
+          </motion.div>
         </div>
 
         {/* 4 Core Pillars of Responsibility */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <div className="p-6 rounded-2xl bg-parchment-50 border border-parchment-300 shadow-subtle flex flex-col justify-between space-y-4">
-            <div className="w-10 h-10 rounded-xl bg-moss/15 text-moss-dark flex items-center justify-center">
-              <Users className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="font-editorial-serif text-base font-bold text-himalaya-950">
-                100% Direct Village Economy
-              </h3>
-              <p className="text-xs text-himalaya-700 font-light mt-1 leading-relaxed">
-                Homestay payments, porter fees, and food supplies are paid directly to local families without middleman cuts.
-              </p>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-32">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col space-y-4 border-t border-white/20 pt-6"
+          >
+            <h3 className="font-editorial-serif text-xl font-light text-white">
+              100% Direct Village Economy
+            </h3>
+            <p className="text-sm text-parchment-300 font-light leading-relaxed">
+              Homestay payments, porter fees, and food supplies are paid directly to local families without middleman cuts.
+            </p>
+          </motion.div>
 
-          <div className="p-6 rounded-2xl bg-parchment-50 border border-parchment-300 shadow-subtle flex flex-col justify-between space-y-4">
-            <div className="w-10 h-10 rounded-xl bg-terracotta/15 text-terracotta flex items-center justify-center">
-              <HeartHandshake className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="font-editorial-serif text-base font-bold text-himalaya-950">
-                Preserving Living Crafts
-              </h3>
-              <p className="text-xs text-himalaya-700 font-light mt-1 leading-relaxed">
-                We support multi-generational Newari woodcarvers, bronze casters, and thangka painters through direct patronage.
-              </p>
-            </div>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col space-y-4 border-t border-white/20 pt-6"
+          >
+            <h3 className="font-editorial-serif text-xl font-light text-white">
+              Preserving Living Crafts
+            </h3>
+            <p className="text-sm text-parchment-300 font-light leading-relaxed">
+              We support multi-generational Newari woodcarvers, bronze casters, and thangka painters through direct patronage.
+            </p>
+          </motion.div>
 
-          <div className="p-6 rounded-2xl bg-parchment-50 border border-parchment-300 shadow-subtle flex flex-col justify-between space-y-4">
-            <div className="w-10 h-10 rounded-xl bg-saffron/15 text-saffron-dark flex items-center justify-center">
-              <Shield className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="font-editorial-serif text-base font-bold text-himalaya-950">
-                Fair Wages & Safe Guiding
-              </h3>
-              <p className="text-xs text-himalaya-700 font-light mt-1 leading-relaxed">
-                Our mountain crew, assistant guides, and porters receive ethical pay, full mountain insurance, and proper gear.
-              </p>
-            </div>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col space-y-4 border-t border-white/20 pt-6"
+          >
+            <h3 className="font-editorial-serif text-xl font-light text-white">
+              Fair Wages & Safe Guiding
+            </h3>
+            <p className="text-sm text-parchment-300 font-light leading-relaxed">
+              Our mountain crew, assistant guides, and porters receive ethical pay, full mountain insurance, and proper gear.
+            </p>
+          </motion.div>
 
-          <div className="p-6 rounded-2xl bg-parchment-50 border border-parchment-300 shadow-subtle flex flex-col justify-between space-y-4">
-            <div className="w-10 h-10 rounded-xl bg-emerald-900/15 text-emerald-800 flex items-center justify-center">
-              <Leaf className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="font-editorial-serif text-base font-bold text-himalaya-950">
-                Leave No Trace Ethics
-              </h3>
-              <p className="text-xs text-himalaya-700 font-light mt-1 leading-relaxed">
-                We eliminate single-use plastics on trail, encourage filtered water, and pack out all waste from high alpine routes.
-              </p>
-            </div>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col space-y-4 border-t border-white/20 pt-6"
+          >
+            <h3 className="font-editorial-serif text-xl font-light text-white">
+              Leave No Trace Ethics
+            </h3>
+            <p className="text-sm text-parchment-300 font-light leading-relaxed">
+              We eliminate single-use plastics on trail, encourage filtered water, and pack out all waste from high alpine routes.
+            </p>
+          </motion.div>
         </div>
 
         {/* Highlight Quote Block */}
-        <div className="p-8 rounded-2xl bg-parchment-50 border-l-4 border-moss flex flex-col sm:flex-row items-center justify-between gap-6 shadow-subtle">
-          <div className="max-w-xl">
-            <h4 className="font-editorial-serif text-lg font-bold text-himalaya-950">
+        <motion.div 
+           initial={{ opacity: 0, scale: 0.95 }}
+           whileInView={{ opacity: 1, scale: 1 }}
+           viewport={{ once: true }}
+           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+           className="border border-white/20 p-12 flex flex-col md:flex-row items-center justify-between gap-12"
+        >
+          <div className="max-w-2xl">
+            <h4 className="font-editorial-serif text-2xl font-light text-white mb-4 leading-relaxed">
               &ldquo;When a foreign guest walks into our village, we do not want them to leave footprints of waste; we want them to leave warmth and take home friendship.&rdquo;
             </h4>
-            <p className="text-xs text-himalaya-600 font-light mt-1">
-              — Aama Pema, Village Host Elder, Tamang Heritage Region
+            <p className="text-sm text-parchment-400 font-light uppercase tracking-widest">
+              — Aama Pema, Village Host Elder
             </p>
           </div>
 
           <Link
             href="/experiences/village-homestay-community-immersion"
-            className="inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-moss hover:bg-moss-dark text-white text-xs font-bold shrink-0 transition-colors"
+            className="inline-flex items-center justify-center px-0 py-2 border-b border-white/30 text-xs tracking-widest uppercase font-medium text-white hover:text-moss-light hover:border-moss-light transition-all shrink-0"
           >
             <span>Learn About Community Impact</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-4 h-4 ml-3" />
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

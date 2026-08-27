@@ -1,65 +1,73 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { TESTIMONIALS } from '@/data/homestays';
-import { Sparkles, Quote, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-20 sm:py-28 bg-parchment-100 relative">
+    <section id="testimonials" className="py-24 sm:py-32 bg-white relative">
       <div className="editorial-container">
+        
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-terracotta/10 text-terracotta text-xs font-semibold uppercase tracking-wider mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Traveler Experiences</span>
-          </div>
-          <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-            Voices From Fellow Travelers
-          </h2>
-          <p className="text-sm sm:text-base text-himalaya-700 font-light mt-3">
-            Memories of quiet mornings, heartfelt homestay laughter, and transformational journeys shared with Sakar.
-          </p>
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="text-xs font-bold tracking-widest uppercase text-terracotta mb-4 block">
+              Traveler Experiences
+            </span>
+            <h2 className="font-editorial-serif text-editorial-title font-light text-himalaya-950 tracking-tight leading-[1.1] mb-6">
+              Voices From <span className="italic text-himalaya-700">Fellow Travelers</span>
+            </h2>
+            <p className="text-himalaya-700 text-sm font-light max-w-lg mx-auto">
+              Memories of quiet mornings, heartfelt homestay laughter, and transformational journeys shared with Sakar.
+            </p>
+          </motion.div>
         </div>
 
         {/* Testimonials 3-Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {TESTIMONIALS.map((t) => (
-            <div
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+          {TESTIMONIALS.map((t, i) => (
+            <motion.div
               key={t.id}
-              className="rounded-2xl bg-sand border border-parchment-300 p-6 sm:p-8 shadow-subtle hover:shadow-editorial transition-all flex flex-col justify-between space-y-6"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col space-y-8"
             >
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {/* 5 Stars */}
-                <div className="flex items-center space-x-1 text-saffron">
+                <div className="flex items-center space-x-1 text-terracotta">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-current" />
                   ))}
                 </div>
 
-                <h4 className="font-editorial-serif text-base font-bold text-himalaya-950 leading-snug">
+                <h4 className="font-editorial-serif text-2xl font-light text-himalaya-950 leading-snug">
                   &ldquo;{t.highlight}&rdquo;
                 </h4>
 
-                <p className="text-xs sm:text-sm text-himalaya-700 font-light leading-relaxed italic">
+                <p className="text-sm text-himalaya-700 font-light leading-relaxed italic">
                   &ldquo;{t.quote}&rdquo;
                 </p>
               </div>
 
               {/* Author Info */}
-              <div className="pt-4 border-t border-parchment-300 flex items-center justify-between">
-                <div>
-                  <h5 className="font-bold text-sm text-himalaya-950">
-                    {t.author}
-                  </h5>
-                  <p className="text-xs text-himalaya-600 font-light">
-                    {t.country} {t.countryFlag} • {t.journey}
-                  </p>
-                </div>
-                <span className="text-[10px] text-himalaya-500">{t.date}</span>
+              <div className="pt-6 border-t border-himalaya-200">
+                <h5 className="font-bold text-sm text-himalaya-950 uppercase tracking-widest mb-1">
+                  {t.author}
+                </h5>
+                <p className="text-xs text-himalaya-600 font-light">
+                  {t.country} {t.countryFlag} • {t.journey}
+                </p>
               </div>
-            </div>
+            </motion.div>
           ))}
       </div>
       </div>
