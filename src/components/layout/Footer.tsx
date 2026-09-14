@@ -212,6 +212,10 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-terracotta transition-colors">
               Terms of Service & Booking Conditions
             </Link>
+            <span>•</span>
+            <Link href="/admin" className="hover:text-terracotta transition-colors opacity-75 hover:opacity-100">
+              Admin Portal
+            </Link>
           </div>
         </div>
       </div>
