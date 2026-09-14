@@ -133,26 +133,26 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
       )}
 
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-40 w-64 bg-himalaya-950 border-r border-himalaya-850 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-0 left-0 bottom-0 z-40 w-64 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 shadow-sm ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Top Branding & Navigation with Scroll Container */}
-        <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-himalaya-800">
-          <div className="p-6 border-b border-himalaya-850 sticky top-0 bg-himalaya-950/95 backdrop-blur-sm z-10">
+        <div className="flex-1 overflow-y-auto">
+          <div className="p-5 border-b border-slate-200 sticky top-0 bg-white/95 backdrop-blur-sm z-10">
             <Link
               href="/admin"
               className="flex items-center gap-3 group"
               onClick={onClose}
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-terracotta to-terracotta-dark flex items-center justify-center text-white shadow-warm">
-                <Sparkles className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white shadow-sm group-hover:bg-terracotta transition-colors">
+                <Sparkles className="w-5 h-5 text-amber-400" />
               </div>
               <div>
-                <h1 className="font-editorial-serif text-lg font-bold text-parchment-100 tracking-tight leading-none group-hover:text-terracotta-light transition-colors">
+                <h1 className="font-editorial-serif text-lg font-bold text-slate-900 tracking-tight leading-none">
                   Sakar CMS
                 </h1>
-                <p className="text-[10px] uppercase font-mono tracking-widest text-himalaya-400 mt-1">
+                <p className="text-[10px] uppercase font-mono tracking-widest text-slate-400 mt-1">
                   Admin Portal
                 </p>
               </div>
@@ -160,7 +160,7 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
           </div>
 
           {/* Navigation Links */}
-          <nav className="p-4 space-y-1">
+          <nav className="p-3 space-y-1">
             {NAV_ITEMS.map((item) => {
               const isActive =
                 item.href === '/admin'
@@ -176,14 +176,14 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
                   onClick={onClose}
                   className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium transition-all group ${
                     isActive
-                      ? 'bg-terracotta text-white font-semibold shadow-subtle'
-                      : 'text-parchment-300 hover:text-white hover:bg-himalaya-900'
+                      ? 'bg-slate-900 text-white font-semibold shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <Icon
                       className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                        isActive ? 'text-white' : 'text-himalaya-400 group-hover:text-parchment-200'
+                        isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-700'
                       }`}
                     />
                     <span className="truncate">{item.label}</span>
@@ -191,11 +191,11 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
 
                   <div className="flex items-center gap-1.5 shrink-0">
                     {item.badge !== null && (
-                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-saffron text-himalaya-950 animate-pulse">
+                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900">
                         {item.badge}
                       </span>
                     )}
-                    {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-80" />}
+                    {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
                   </div>
                 </Link>
               );
@@ -204,15 +204,15 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
         </div>
 
         {/* Bottom Actions */}
-        <div className="p-4 border-t border-himalaya-850 space-y-2">
+        <div className="p-3 border-t border-slate-200 space-y-1.5 bg-slate-50/50">
           {/* Public site shortcut */}
           <Link
             href="/"
             target="_blank"
-            className="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-medium text-parchment-300 hover:text-white hover:bg-himalaya-900 transition-all border border-himalaya-800"
+            className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-white transition-all border border-slate-200"
           >
             <span className="flex items-center gap-2">
-              <ExternalLink className="w-3.5 h-3.5 text-emerald-400" />
+              <ExternalLink className="w-3.5 h-3.5 text-emerald-600" />
               <span>View Public Site</span>
             </span>
           </Link>
@@ -220,9 +220,9 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
           {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 border border-transparent hover:border-rose-900/50 transition-all text-left"
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-rose-600 hover:text-rose-700 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all text-left"
           >
-            <LogOut className="w-3.5 h-3.5 text-rose-400" />
+            <LogOut className="w-3.5 h-3.5 text-rose-500" />
             <span>Logout Session</span>
           </button>
         </div>

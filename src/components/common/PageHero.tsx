@@ -51,7 +51,7 @@ export default function PageHero({
           />
           <div className="absolute inset-0 bg-himalaya-950/60 backdrop-blur-[1px]" />
           <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950 via-himalaya-950/40 to-transparent" />
-          <div className="absolute inset-0 opacity-20 film-grain" />
+          <div className="absolute inset-0 opacity-20 film-grain pointer-events-none" />
         </div>
       )}
 

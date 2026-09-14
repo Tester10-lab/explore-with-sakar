@@ -356,15 +356,15 @@ export default function Navbar() {
               href={`https://wa.me/${settings.contact?.whatsappNumber || '9779840482692'}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-emerald-50 text-emerald-700"
+              className="p-2.5 rounded-xl bg-emerald-50 text-emerald-700 min-w-[44px] min-h-[44px] flex items-center justify-center active:scale-95 transition-transform touch-manipulation"
               title="WhatsApp"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-5 h-5" />
             </a>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-xl bg-parchment-200 text-himalaya-900 hover:text-terracotta focus:outline-none"
+              className="p-2.5 rounded-xl bg-parchment-200 text-himalaya-900 hover:text-terracotta focus:outline-none min-w-[44px] min-h-[44px] flex items-center justify-center active:scale-95 transition-transform touch-manipulation"
               aria-label="Toggle navigation menu"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

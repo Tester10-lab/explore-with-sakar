@@ -14,7 +14,7 @@ interface ExperienceCardProps {
 
 export default function ExperienceCard({ experience, compact = false }: ExperienceCardProps) {
   return (
-    <div className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-parchment-300 shadow-subtle hover:shadow-editorial transition-all duration-300 hover:-translate-y-1">
+    <div className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-parchment-300 shadow-subtle hover:shadow-editorial transition-all duration-300 hover:-translate-y-1 active:scale-[0.99] touch-manipulation">
       {/* Hero Image */}
       <Link
         href={`/experiences/${experience.slug}`}

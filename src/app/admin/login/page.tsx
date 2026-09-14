@@ -44,25 +44,25 @@ function LoginForm() {
   };
 
   return (
-    <div className="bg-himalaya-900/90 border border-himalaya-800 rounded-2xl p-6 sm:p-8 shadow-floating backdrop-blur-md">
-      <div className="flex items-center gap-2 pb-4 mb-6 border-b border-himalaya-800 text-xs font-semibold uppercase tracking-wider text-saffron-light">
-        <ShieldCheck className="w-4 h-4 text-terracotta-light" />
+    <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+      <div className="flex items-center gap-2 pb-4 mb-6 border-b border-slate-100 text-xs font-semibold uppercase tracking-wider text-slate-600">
+        <ShieldCheck className="w-4 h-4 text-terracotta" />
         <span>Authorized Access Only</span>
       </div>
 
       {error && (
-        <div className="mb-6 p-3.5 rounded-xl bg-rose-950/60 border border-rose-800/80 text-rose-200 text-xs leading-relaxed animate-fade-in">
+        <div className="mb-6 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs leading-relaxed animate-fade-in font-medium">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-parchment-300 mb-1.5">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
             Username
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-himalaya-400">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
               <User className="w-4 h-4" />
             </div>
             <input
@@ -71,17 +71,17 @@ function LoginForm() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="admin"
-              className="w-full bg-himalaya-950 border border-himalaya-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-parchment-100 placeholder-himalaya-500 focus:outline-none focus:border-terracotta focus:ring-1 focus:ring-terracotta transition-all"
+              className="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-terracotta focus:ring-1 focus:ring-terracotta transition-all shadow-sm"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-parchment-300 mb-1.5">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
             Password
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-himalaya-400">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
               <Lock className="w-4 h-4" />
             </div>
             <input
@@ -90,12 +90,12 @@ function LoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="w-full bg-himalaya-950 border border-himalaya-700 rounded-xl pl-10 pr-10 py-2.5 text-sm text-parchment-100 placeholder-himalaya-500 focus:outline-none focus:border-terracotta focus:ring-1 focus:ring-terracotta transition-all"
+              className="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-10 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-terracotta focus:ring-1 focus:ring-terracotta transition-all shadow-sm"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-himalaya-400 hover:text-parchment-200 transition-colors"
+              className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -106,7 +106,7 @@ function LoginForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-terracotta to-terracotta-dark hover:from-terracotta-light hover:to-terracotta text-white text-xs font-bold uppercase tracking-wider shadow-warm transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
+            className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
           >
             {isLoading ? (
               <>
@@ -128,35 +128,34 @@ function LoginForm() {
 
 export default function AdminLoginPage() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 bg-himalaya-950 relative overflow-hidden film-grain">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-terracotta/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-saffron-dark/5 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 bg-slate-50 relative overflow-hidden">
+      {/* Background subtle tint */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-terracotta/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-md w-full relative z-10">
         {/* Logo and Header */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-block mb-4 group">
-            <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-terracotta to-terracotta-dark flex items-center justify-center text-white shadow-warm group-hover:scale-105 transition-transform duration-300">
-              <Sparkles className="w-7 h-7" />
+            <div className="w-14 h-14 mx-auto rounded-2xl bg-slate-900 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform duration-300">
+              <Sparkles className="w-7 h-7 text-saffron" />
             </div>
           </Link>
-          <h1 className="font-editorial-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
+          <h1 className="font-editorial-serif text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
             Explore With Sakar
           </h1>
-          <p className="text-xs uppercase tracking-widest text-parchment-400 font-mono mt-2">
+          <p className="text-xs uppercase tracking-widest text-slate-500 font-mono mt-2">
             Secure Admin Management Portal
           </p>
         </div>
 
         {/* Login Card inside Suspense */}
-        <Suspense fallback={<div className="p-8 text-center text-parchment-400">Loading portal...</div>}>
+        <Suspense fallback={<div className="p-8 text-center text-slate-400">Loading portal...</div>}>
           <LoginForm />
         </Suspense>
 
         {/* Footer info */}
-        <div className="mt-8 text-center text-xs text-himalaya-400">
-          <Link href="/" className="hover:text-parchment-200 transition-colors underline">
+        <div className="mt-8 text-center text-xs text-slate-500">
+          <Link href="/" className="hover:text-slate-800 transition-colors underline">
             ← Return to public website
           </Link>
         </div>

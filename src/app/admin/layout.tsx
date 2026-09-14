@@ -12,14 +12,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (isLoginPage) {
     return (
-      <div className="min-h-screen bg-himalaya-950 text-parchment-100 font-sans antialiased selection:bg-terracotta selection:text-white">
+      <div className="admin-clean-theme min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-terracotta/20 selection:text-terracotta">
         {children}
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-himalaya-950 text-parchment-100 font-sans antialiased selection:bg-terracotta selection:text-white flex">
+    <div className="admin-clean-theme min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-terracotta/20 selection:text-terracotta flex">
       <AdminSidebar
         isOpen={isMobileSidebarOpen}
         onClose={() => setIsMobileSidebarOpen(false)}

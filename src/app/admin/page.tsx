@@ -126,13 +126,13 @@ export default function AdminDashboardPage() {
 
       <div className="px-4 sm:px-8 space-y-8 max-w-7xl mx-auto">
         {/* Quick Action Bar */}
-        <div className="bg-himalaya-900/80 border border-himalaya-800 rounded-2xl p-4 sm:p-6 shadow-floating">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h3 className="font-editorial-serif text-lg font-bold text-white">
+              <h3 className="font-editorial-serif text-lg font-bold text-slate-900">
                 Quick CMS Actions
               </h3>
-              <p className="text-xs text-parchment-400 font-light mt-0.5">
+              <p className="text-xs text-slate-500 font-light mt-0.5">
                 Direct shortcuts to incoming leads, homepage configuration, and travel offerings
               </p>
             </div>
@@ -140,7 +140,7 @@ export default function AdminDashboardPage() {
             <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
               <Link
                 href="/admin/inquiries"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-terracotta hover:bg-terracotta-light text-white text-xs font-semibold shadow-warm transition-all"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-terracotta hover:bg-terracotta-dark text-white text-xs font-semibold shadow-sm transition-all"
               >
                 <Inbox className="w-3.5 h-3.5" />
                 <span>Inquiries</span>
@@ -152,30 +152,30 @@ export default function AdminDashboardPage() {
               </Link>
               <Link
                 href="/admin/homepage"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-himalaya-800 hover:bg-himalaya-700 text-parchment-100 text-xs font-semibold border border-himalaya-700 transition-all"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
               >
-                <Globe className="w-3.5 h-3.5 text-saffron-light" />
+                <Globe className="w-3.5 h-3.5 text-amber-600" />
                 <span>Homepage CMS</span>
               </Link>
               <Link
                 href="/admin/services"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-himalaya-800 hover:bg-himalaya-700 text-parchment-100 text-xs font-semibold border border-himalaya-700 transition-all"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
               >
-                <Layers className="w-3.5 h-3.5 text-emerald-400" />
+                <Layers className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Travel Pillars</span>
               </Link>
               <Link
                 href="/admin/packages"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-himalaya-800 hover:bg-himalaya-700 text-parchment-100 text-xs font-semibold border border-himalaya-700 transition-all"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
               >
-                <PackageIcon className="w-3.5 h-3.5 text-parchment-300" />
+                <PackageIcon className="w-3.5 h-3.5 text-slate-600" />
                 <span>Packages</span>
               </Link>
               <Link
                 href="/admin/blogs/new"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-himalaya-800 hover:bg-himalaya-700 text-parchment-100 text-xs font-semibold border border-himalaya-700 transition-all"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
               >
-                <FileText className="w-3.5 h-3.5 text-saffron-light" />
+                <FileText className="w-3.5 h-3.5 text-amber-600" />
                 <span>Write Blog</span>
               </Link>
             </div>
@@ -187,143 +187,143 @@ export default function AdminDashboardPage() {
           {/* Card 1: Inquiries */}
           <Link
             href="/admin/inquiries"
-            className="group bg-himalaya-900 border border-himalaya-800 hover:border-saffron/50 rounded-2xl p-4 shadow-subtle hover:shadow-floating transition-all"
+            className="group bg-white border border-slate-200 hover:border-amber-400/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-parchment-400 font-mono">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
                 Inquiries
               </span>
-              <div className="w-8 h-8 rounded-xl bg-saffron/15 text-saffron flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Inbox className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-2xl font-bold font-editorial-serif text-white mb-1">
+            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
               {isLoading ? '...' : inquiries.length}
             </div>
-            <div className="text-[11px] text-parchment-400">
-              <span className="text-saffron font-bold">{unreadInquiries.length} Awaiting Reply</span>
+            <div className="text-[11px] text-slate-500">
+              <span className="text-amber-600 font-bold">{unreadInquiries.length} Awaiting Reply</span>
             </div>
           </Link>
 
           {/* Card 2: Services / Pillars */}
           <Link
             href="/admin/services"
-            className="group bg-himalaya-900 border border-himalaya-800 hover:border-emerald-500/50 rounded-2xl p-4 shadow-subtle hover:shadow-floating transition-all"
+            className="group bg-white border border-slate-200 hover:border-emerald-500/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-parchment-400 font-mono">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
                 Pillars
               </span>
-              <div className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Layers className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-2xl font-bold font-editorial-serif text-white mb-1">
+            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
               {isLoading ? '...' : services.length}
             </div>
-            <div className="text-[11px] text-parchment-400">
-              <span className="text-emerald-400 font-semibold">{services.length} Live Pillars</span>
+            <div className="text-[11px] text-slate-500">
+              <span className="text-emerald-600 font-semibold">{services.length} Live Pillars</span>
             </div>
           </Link>
 
           {/* Card 3: Packages */}
           <Link
             href="/admin/packages"
-            className="group bg-himalaya-900 border border-himalaya-800 hover:border-terracotta/50 rounded-2xl p-4 shadow-subtle hover:shadow-floating transition-all"
+            className="group bg-white border border-slate-200 hover:border-terracotta/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-parchment-400 font-mono">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
                 Packages
               </span>
-              <div className="w-8 h-8 rounded-xl bg-terracotta/10 text-terracotta flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-rose-50 text-terracotta flex items-center justify-center group-hover:scale-110 transition-transform">
                 <PackageIcon className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-2xl font-bold font-editorial-serif text-white mb-1">
+            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
               {isLoading ? '...' : packages.length}
             </div>
-            <div className="text-[11px] text-parchment-400">
-              <span className="text-emerald-400 font-semibold">{publishedPackages.length} Published</span>
+            <div className="text-[11px] text-slate-500">
+              <span className="text-emerald-600 font-semibold">{publishedPackages.length} Published</span>
             </div>
           </Link>
 
           {/* Card 4: Itineraries */}
           <Link
             href="/admin/experiences"
-            className="group bg-himalaya-900 border border-himalaya-800 hover:border-saffron-light/50 rounded-2xl p-4 shadow-subtle hover:shadow-floating transition-all"
+            className="group bg-white border border-slate-200 hover:border-amber-400/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-parchment-400 font-mono">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
                 Itineraries
               </span>
-              <div className="w-8 h-8 rounded-xl bg-saffron/10 text-saffron-light flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Compass className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-2xl font-bold font-editorial-serif text-white mb-1">
+            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
               {isLoading ? '...' : experiences.length}
             </div>
-            <div className="text-[11px] text-parchment-400">
-              <span className="text-emerald-400 font-semibold">{publishedExperiences.length} Live</span>
+            <div className="text-[11px] text-slate-500">
+              <span className="text-emerald-600 font-semibold">{publishedExperiences.length} Live</span>
             </div>
           </Link>
 
           {/* Card 5: Blogs */}
           <Link
             href="/admin/blogs"
-            className="group bg-himalaya-900 border border-himalaya-800 hover:border-terracotta/50 rounded-2xl p-4 shadow-subtle hover:shadow-floating transition-all"
+            className="group bg-white border border-slate-200 hover:border-terracotta/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-parchment-400 font-mono">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
                 Blogs
               </span>
-              <div className="w-8 h-8 rounded-xl bg-terracotta/10 text-terracotta flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-rose-50 text-terracotta flex items-center justify-center group-hover:scale-110 transition-transform">
                 <FileText className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-2xl font-bold font-editorial-serif text-white mb-1">
+            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
               {isLoading ? '...' : blogs.length}
             </div>
-            <div className="text-[11px] text-parchment-400">
-              <span className="text-emerald-400 font-semibold">{publishedBlogs.length} Stories</span>
+            <div className="text-[11px] text-slate-500">
+              <span className="text-emerald-600 font-semibold">{publishedBlogs.length} Stories</span>
             </div>
           </Link>
 
           {/* Card 6: Reviews */}
           <Link
             href="/admin/reviews"
-            className="group bg-himalaya-900 border border-himalaya-800 hover:border-amber-400/50 rounded-2xl p-4 shadow-subtle hover:shadow-floating transition-all"
+            className="group bg-white border border-slate-200 hover:border-amber-400/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-parchment-400 font-mono">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
                 Reviews
               </span>
-              <div className="w-8 h-8 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Star className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-2xl font-bold font-editorial-serif text-white mb-1">
+            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
               {isLoading ? '...' : reviews.length}
             </div>
-            <div className="text-[11px] text-parchment-400">
-              <span className="text-emerald-400 font-semibold">{visibleReviews.length} Approved</span>
+            <div className="text-[11px] text-slate-500">
+              <span className="text-emerald-600 font-semibold">{visibleReviews.length} Approved</span>
             </div>
           </Link>
         </div>
 
         {/* Recent Inquiries Widget */}
-        <div className="bg-himalaya-900 border border-himalaya-800 rounded-2xl p-6 shadow-subtle space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-himalaya-800">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
             <div className="flex items-center gap-2">
-              <Inbox className="w-5 h-5 text-terracotta-light" />
-              <h3 className="font-editorial-serif text-lg font-bold text-white">
+              <Inbox className="w-5 h-5 text-terracotta" />
+              <h3 className="font-editorial-serif text-lg font-bold text-slate-900">
                 Latest Traveler Inquiries
               </h3>
             </div>
 
             <Link
               href="/admin/inquiries"
-              className="text-xs font-semibold text-terracotta-light hover:text-terracotta flex items-center gap-1 transition-colors"
+              className="text-xs font-semibold text-terracotta hover:text-terracotta-dark flex items-center gap-1 transition-colors"
             >
               <span>View All Inquiries</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -331,35 +331,35 @@ export default function AdminDashboardPage() {
           </div>
 
           {inquiries.length === 0 ? (
-            <p className="text-xs text-himalaya-400 italic py-4 text-center">
+            <p className="text-xs text-slate-400 italic py-4 text-center">
               No inquiries received yet. Booking inquiries will appear here as travelers submit the contact forms.
             </p>
           ) : (
-            <div className="divide-y divide-himalaya-850">
+            <div className="divide-y divide-slate-100">
               {inquiries.slice(0, 4).map((inq) => (
                 <div
                   key={inq.id}
                   className="py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
                 >
                   <div className="min-w-0">
-                    <div className="flex items-center gap-2 font-bold text-parchment-100">
+                    <div className="flex items-center gap-2 font-bold text-slate-800">
                       <span>{inq.fullName}</span>
                       {inq.country && (
-                        <span className="text-himalaya-500 font-normal">({inq.country})</span>
+                        <span className="text-slate-400 font-normal">({inq.country})</span>
                       )}
                       <span
-                        className={`px-2 py-0.2 rounded-full text-[10px] uppercase font-bold ${
+                        className={`px-2 py-0.5 rounded-full text-[10px] uppercase font-bold ${
                           inq.status === 'unread'
-                            ? 'bg-saffron/20 text-saffron'
+                            ? 'bg-amber-100 text-amber-800'
                             : inq.status === 'replied'
-                            ? 'bg-emerald-950/60 text-emerald-400'
-                            : 'bg-himalaya-800 text-himalaya-400'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : 'bg-slate-100 text-slate-600'
                         }`}
                       >
                         {inq.status}
                       </span>
                     </div>
-                    <p className="text-himalaya-400 line-clamp-1 mt-0.5">
+                    <p className="text-slate-500 line-clamp-1 mt-0.5">
                       {inq.message || inq.travelStyle || 'Interested in Nepal consultation'}
                     </p>
                   </div>
@@ -370,7 +370,7 @@ export default function AdminDashboardPage() {
                         href={`https://wa.me/${inq.whatsapp.replace(/[^0-9]/g, '')}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-2.5 py-1 rounded-lg bg-emerald-950/80 hover:bg-emerald-800 text-emerald-300 text-[11px] font-semibold border border-emerald-800/60 flex items-center gap-1"
+                        className="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-[11px] font-semibold border border-emerald-200 flex items-center gap-1"
                       >
                         <Phone className="w-3 h-3" />
                         <span>WhatsApp</span>
@@ -378,7 +378,7 @@ export default function AdminDashboardPage() {
                     )}
                     <Link
                       href="/admin/inquiries"
-                      className="px-2.5 py-1 rounded-lg bg-himalaya-800 hover:bg-himalaya-700 text-parchment-200 text-[11px] font-semibold"
+                      className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold"
                     >
                       View Details
                     </Link>
@@ -392,20 +392,20 @@ export default function AdminDashboardPage() {
         {/* 2-Column Section: Recent Blogs & Photos Preview */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Left Column: Recent Blogs */}
-          <div className="lg:col-span-7 bg-himalaya-900 border border-himalaya-800 rounded-2xl p-6 shadow-subtle space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-himalaya-800">
+          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
               <div>
-                <h3 className="font-editorial-serif text-lg font-bold text-white">
+                <h3 className="font-editorial-serif text-lg font-bold text-slate-900">
                   Recent Blog Articles
                 </h3>
-                <p className="text-xs text-parchment-400 font-light mt-0.5">
+                <p className="text-xs text-slate-500 font-light mt-0.5">
                   Latest stories published or drafted
                 </p>
               </div>
 
               <Link
                 href="/admin/blogs"
-                className="text-xs font-semibold text-terracotta-light hover:text-terracotta flex items-center gap-1 transition-colors"
+                className="text-xs font-semibold text-terracotta hover:text-terracotta-dark flex items-center gap-1 transition-colors"
               >
                 <span>View All</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -416,22 +416,22 @@ export default function AdminDashboardPage() {
               {blogs.slice(0, 5).map((blog) => (
                 <div
                   key={blog.id}
-                  className="p-3.5 rounded-xl bg-himalaya-950/60 border border-himalaya-800/80 hover:border-himalaya-700 transition-all flex items-center justify-between gap-4"
+                  className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-all flex items-center justify-between gap-4"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-12 h-12 rounded-lg overflow-hidden bg-himalaya-800 shrink-0 relative">
+                    <div className="w-12 h-12 rounded-lg overflow-hidden bg-slate-200 shrink-0 relative">
                       <img
-                        src={blog.featuredImage?.src || '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'}
+                        src={blog.featuredImage?.src || '/images/mountains/sunrise-himalayas.jpg'}
                         alt={blog.title}
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="min-w-0">
-                      <h4 className="text-sm font-semibold text-parchment-100 truncate">
+                      <h4 className="text-sm font-semibold text-slate-900 truncate">
                         {blog.title}
                       </h4>
-                      <div className="flex items-center gap-2 text-[11px] text-himalaya-400 mt-0.5">
-                        <span className="text-terracotta-light font-medium">{blog.category}</span>
+                      <div className="flex items-center gap-2 text-[11px] text-slate-500 mt-0.5">
+                        <span className="text-terracotta font-medium">{blog.category}</span>
                         <span>•</span>
                         <span>{blog.publishedAt}</span>
                       </div>
@@ -442,15 +442,15 @@ export default function AdminDashboardPage() {
                     <span
                       className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                         blog.status === 'published'
-                          ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
-                          : 'bg-amber-950 text-amber-300 border border-amber-800'
+                          ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                          : 'bg-amber-100 text-amber-800 border border-amber-200'
                       }`}
                     >
                       {blog.status}
                     </span>
                     <Link
                       href={`/admin/blogs/${blog.slug}`}
-                      className="px-2.5 py-1 bg-himalaya-800 hover:bg-himalaya-700 text-parchment-200 rounded-lg text-xs font-semibold transition-colors"
+                      className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors"
                     >
                       Edit
                     </Link>
@@ -463,14 +463,14 @@ export default function AdminDashboardPage() {
           {/* Right Column: Recent Photos & Active Reviews */}
           <div className="lg:col-span-5 space-y-6">
             {/* Photos Preview */}
-            <div className="bg-himalaya-900 border border-himalaya-800 rounded-2xl p-6 shadow-subtle space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-himalaya-800">
-                <h3 className="font-editorial-serif text-lg font-bold text-white">
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 className="font-editorial-serif text-lg font-bold text-slate-900">
                   Gallery Highlights
                 </h3>
                 <Link
                   href="/admin/photos"
-                  className="text-xs font-semibold text-terracotta-light hover:text-terracotta flex items-center gap-1 transition-colors"
+                  className="text-xs font-semibold text-terracotta hover:text-terracotta-dark flex items-center gap-1 transition-colors"
                 >
                   <span>Manage</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -481,7 +481,7 @@ export default function AdminDashboardPage() {
                 {photos.slice(0, 6).map((photo) => (
                   <div
                     key={photo.id}
-                    className="relative aspect-square rounded-lg overflow-hidden bg-himalaya-950 group"
+                    className="relative aspect-square rounded-lg overflow-hidden bg-slate-100 group"
                   >
                     <img
                       src={photo.image}
@@ -489,7 +489,7 @@ export default function AdminDashboardPage() {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     {photo.featured && (
-                      <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-saffron-light shadow-sm" />
+                      <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-500 shadow-sm" />
                     )}
                   </div>
                 ))}
@@ -497,14 +497,14 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Recent Reviews Preview */}
-            <div className="bg-himalaya-900 border border-himalaya-800 rounded-2xl p-6 shadow-subtle space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-himalaya-800">
-                <h3 className="font-editorial-serif text-lg font-bold text-white">
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 className="font-editorial-serif text-lg font-bold text-slate-900">
                   Customer Reviews
                 </h3>
                 <Link
                   href="/admin/reviews"
-                  className="text-xs font-semibold text-terracotta-light hover:text-terracotta flex items-center gap-1 transition-colors"
+                  className="text-xs font-semibold text-terracotta hover:text-terracotta-dark flex items-center gap-1 transition-colors"
                 >
                   <span>All ({reviews.length})</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -515,19 +515,19 @@ export default function AdminDashboardPage() {
                 {reviews.slice(0, 2).map((review) => (
                   <div
                     key={review.id}
-                    className="p-3 rounded-xl bg-himalaya-950/60 border border-himalaya-800/80 text-xs space-y-1.5"
+                    className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs space-y-1.5"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-parchment-100">
+                      <span className="font-bold text-slate-800">
                         {review.author} {review.countryFlag}
                       </span>
-                      <div className="flex text-amber-400">
+                      <div className="flex text-amber-500">
                         {[...Array(review.rating || 5)].map((_, i) => (
                           <Star key={i} className="w-3 h-3 fill-current" />
                         ))}
                       </div>
                     </div>
-                    <p className="text-parchment-300 italic line-clamp-2">
+                    <p className="text-slate-600 italic line-clamp-2">
                       &ldquo;{review.highlight || review.quote}&rdquo;
                     </p>
                   </div>

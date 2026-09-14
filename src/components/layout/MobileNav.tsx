@@ -64,11 +64,11 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="relative w-full max-w-sm bg-parchment-100 h-full shadow-floating flex flex-col justify-between overflow-y-auto border-l border-parchment-300"
+            className="relative w-full max-w-sm bg-parchment-100 h-full shadow-floating flex flex-col justify-between overflow-y-auto border-l border-parchment-300 touch-pan-y"
           >
             {/* Top Bar */}
             <div className="p-5 flex items-center justify-between border-b border-parchment-300 bg-white">
-              <Link href="/" onClick={onClose} className="inline-block">
+              <Link href="/" onClick={onClose} className="inline-block touch-manipulation">
                 <img
                   src={settings.branding?.logoUrl || '/explore-with-sakar/images/logo.png'}
                   alt={settings.branding?.siteName || 'Explore With Sakar'}
@@ -77,7 +77,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
               </Link>
               <button
                 onClick={onClose}
-                className="p-2 rounded-xl bg-parchment-100 text-himalaya-800 hover:text-terracotta"
+                className="p-2.5 rounded-xl bg-parchment-100 text-himalaya-800 hover:text-terracotta min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation active:scale-95 transition-transform"
                 aria-label="Close navigation menu"
               >
                 <X className="w-5 h-5" />

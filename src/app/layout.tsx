@@ -1,8 +1,16 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Cinzel, Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import PublicLayoutWrapper from '@/components/layout/PublicLayoutWrapper';
 import { SettingsProvider } from '@/context/SettingsContext';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#FBF8F2',
+};
 
 const cinzel = Cinzel({
   subsets: ['latin'],
