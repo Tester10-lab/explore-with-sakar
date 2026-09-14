@@ -342,14 +342,15 @@ export default function AdminReviewsPage() {
 
       <div className="px-4 sm:px-8 space-y-6 max-w-7xl mx-auto">
         {/* Tab Switcher */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-himalaya-800 pb-4">
-          <div className="flex items-center gap-2 sm:gap-3 bg-himalaya-900/90 p-1.5 rounded-2xl border border-himalaya-800">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+          <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
             <button
+              type="button"
               onClick={() => setActiveTab('handwritten')}
               className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 ${
                 activeTab === 'handwritten'
-                  ? 'bg-terracotta text-white shadow-warm'
-                  : 'text-parchment-400 hover:text-white hover:bg-himalaya-850'
+                  ? 'bg-slate-900 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
               }`}
             >
               <BookOpen className="w-4 h-4" />
@@ -357,11 +358,12 @@ export default function AdminReviewsPage() {
             </button>
 
             <button
+              type="button"
               onClick={() => setActiveTab('testimonials')}
               className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 ${
                 activeTab === 'testimonials'
-                  ? 'bg-terracotta text-white shadow-warm'
-                  : 'text-parchment-400 hover:text-white hover:bg-himalaya-850'
+                  ? 'bg-slate-900 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
               }`}
             >
               <Quote className="w-4 h-4" />
@@ -373,7 +375,7 @@ export default function AdminReviewsPage() {
             href="/reviews#handwritten-journal"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-parchment-300 hover:text-saffron transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-terracotta transition-colors"
           >
             <span>View Public Guestbook</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -384,26 +386,26 @@ export default function AdminReviewsPage() {
         {activeTab === 'handwritten' && (
           <div className="space-y-6">
             {/* Info Banner */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-sand/10 border border-sand/20 text-xs sm:text-sm text-parchment-300 leading-relaxed flex items-start gap-3">
-              <Sparkles className="w-5 h-5 text-saffron shrink-0 mt-0.5" />
+            <div className="p-4 sm:p-5 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs sm:text-sm text-slate-700 leading-relaxed flex items-start gap-3">
+              <Sparkles className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
               <div>
-                <strong className="text-white">Handwritten Guestbook Configuration:</strong>
-                <p className="mt-1 text-parchment-300 font-light">
+                <strong className="text-slate-900 font-bold">Handwritten Guestbook Configuration:</strong>
+                <p className="mt-1 text-slate-600 font-light">
                   Upload photos/scans of physical pages from Sakar's leatherbound guest journal.
-                  The <strong className="text-parchment-100 underline">Guest Name</strong> entered below is displayed in <strong className="text-terracotta font-bold">bold</strong> directly above the handwritten review in the interactive 3D flipbook at <code className="bg-himalaya-950 px-2 py-0.5 rounded text-saffron text-xs">/reviews#handwritten-journal</code>.
+                  The <strong className="text-slate-900 underline font-semibold">Guest Name</strong> entered below is displayed in <strong className="text-terracotta font-bold">bold</strong> directly above the handwritten review in the guestbook at <code className="bg-white border border-slate-200 px-2 py-0.5 rounded text-amber-700 text-xs font-mono">/reviews#handwritten-journal</code>.
                 </p>
               </div>
             </div>
 
             {/* Handwritten Pages Grid / List */}
-            <div className="bg-himalaya-900 border border-himalaya-800 rounded-2xl overflow-hidden shadow-floating">
+            <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
               {isLoadingHandwritten ? (
-                <div className="py-20 text-center text-sm text-parchment-400 font-light">
+                <div className="py-20 text-center text-sm text-slate-500 font-light">
                   Loading handwritten journal pages...
                 </div>
               ) : handwrittenPages.length === 0 ? (
                 <div className="py-16 text-center space-y-3">
-                  <p className="text-parchment-300 text-sm">No handwritten review pages found.</p>
+                  <p className="text-slate-600 text-sm">No handwritten review pages found.</p>
                   <button
                     onClick={() => {
                       setIsNewPage(true);
@@ -540,14 +542,14 @@ export default function AdminReviewsPage() {
 
         {/* Tab 2: Digital Testimonials List */}
         {activeTab === 'testimonials' && (
-          <div className="bg-himalaya-900 border border-himalaya-800 rounded-2xl overflow-hidden shadow-floating">
+          <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
             {isLoading ? (
-              <div className="py-20 text-center text-sm text-parchment-400 font-light">
+              <div className="py-20 text-center text-sm text-slate-500 font-light">
                 Loading reviews...
               </div>
             ) : reviews.length === 0 ? (
               <div className="py-16 text-center space-y-3">
-                <p className="text-parchment-300 text-sm">No reviews found.</p>
+                <p className="text-slate-600 text-sm">No reviews found.</p>
                 <button
                   onClick={() => {
                     setIsNewReview(true);
@@ -560,32 +562,32 @@ export default function AdminReviewsPage() {
                       highlight: 'Wonderful experience',
                       quote: '',
                       rating: 5,
-                      avatar: '/explore-with-sakar/images/sakar/sakar-portrait.jpg',
+                      avatar: '/images/sakar/sakar-portrait.jpg',
                       isVisible: true,
                     });
                   }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-terracotta text-white rounded-xl text-xs font-semibold"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-terracotta hover:bg-terracotta-dark text-white rounded-xl text-xs font-semibold shadow-sm"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Add first review</span>
                 </button>
               </div>
             ) : (
-              <div className="divide-y divide-himalaya-800">
+              <div className="divide-y divide-slate-100">
                 {reviews.map((review, index) => (
                   <div
                     key={review.id}
-                    className="p-5 hover:bg-himalaya-850/50 transition-colors flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+                    className="p-5 hover:bg-slate-50 transition-colors flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
                   >
                     {/* Left: Reorder + Avatar + Content */}
                     <div className="flex items-start sm:items-center gap-4 min-w-0">
                       {/* Order handles */}
-                      <div className="flex flex-col items-center gap-1 text-himalaya-400">
+                      <div className="flex flex-col items-center gap-1 text-slate-400">
                         <button
                           type="button"
                           onClick={() => moveOrder(index, 'up')}
                           disabled={index === 0}
-                          className="p-1 rounded hover:text-white disabled:opacity-20"
+                          className="p-1 rounded hover:text-slate-800 disabled:opacity-20"
                           title="Move Up"
                         >
                           <MoveUp className="w-3.5 h-3.5" />
@@ -595,7 +597,7 @@ export default function AdminReviewsPage() {
                           type="button"
                           onClick={() => moveOrder(index, 'down')}
                           disabled={index === reviews.length - 1}
-                          className="p-1 rounded hover:text-white disabled:opacity-20"
+                          className="p-1 rounded hover:text-slate-800 disabled:opacity-20"
                           title="Move Down"
                         >
                           <MoveDown className="w-3.5 h-3.5" />
@@ -603,9 +605,9 @@ export default function AdminReviewsPage() {
                       </div>
 
                       {/* Avatar */}
-                      <div className="w-14 h-14 rounded-full overflow-hidden bg-himalaya-950 shrink-0 border-2 border-terracotta/40 relative">
+                      <div className="w-14 h-14 rounded-full overflow-hidden bg-slate-100 shrink-0 border-2 border-terracotta/40 relative">
                         <img
-                          src={review.avatar || '/explore-with-sakar/images/sakar/sakar-portrait.jpg'}
+                          src={review.avatar || '/images/sakar/sakar-portrait.jpg'}
                           alt={review.author}
                           className="w-full h-full object-cover"
                         />
@@ -614,23 +616,23 @@ export default function AdminReviewsPage() {
                       {/* Details */}
                       <div className="min-w-0 space-y-1">
                         <div className="flex flex-wrap items-center gap-2">
-                          <div className="flex text-amber-400">
+                          <div className="flex text-amber-500">
                             {[...Array(review.rating || 5)].map((_, i) => (
                               <Star key={i} className="w-3 h-3 fill-current" />
                             ))}
                           </div>
-                          <span className="text-[11px] font-bold text-parchment-100">
+                          <span className="text-[12px] font-bold text-slate-900">
                             {review.author} {review.countryFlag}
                           </span>
-                          <span className="text-[11px] text-himalaya-400">({review.country})</span>
-                          <span className="text-[10px] text-himalaya-500 font-mono">• {review.date}</span>
+                          <span className="text-[11px] text-slate-500">({review.country})</span>
+                          <span className="text-[10px] text-slate-400 font-mono">• {review.date}</span>
                         </div>
 
-                        <h4 className="text-sm font-editorial-serif font-bold text-parchment-200">
+                        <h4 className="text-sm font-editorial-serif font-bold text-slate-900">
                           &ldquo;{review.highlight}&rdquo;
                         </h4>
 
-                        <p className="text-xs text-himalaya-400 font-light truncate max-w-xl">
+                        <p className="text-xs text-slate-600 font-light truncate max-w-xl">
                           {review.quote}
                         </p>
                       </div>

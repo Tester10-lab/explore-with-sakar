@@ -213,7 +213,7 @@
   color: #0f172a !important;
 }
 
-/* Admin Card Containers */
+/* Card Containers & Overlays */
 .admin-clean-theme .bg-himalaya-900,
 .admin-clean-theme [class*="bg-himalaya-900/"] {
   background-color: #ffffff !important;
@@ -221,27 +221,31 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Admin Subcards, wells, nested item containers */
+/* Subcards, wells, nested item containers, modal dialogs */
 .admin-clean-theme .bg-himalaya-950,
 .admin-clean-theme [class*="bg-himalaya-950/"] {
-  background-color: #f8fafc !important;
+  background-color: #ffffff !important;
   border-color: #e2e8f0 !important;
 }
 
-/* Admin Secondary Buttons & Filter Pills */
+/* Secondary Buttons & Filter Pills */
 .admin-clean-theme .bg-himalaya-800,
-.admin-clean-theme [class*="bg-himalaya-800/"] {
+.admin-clean-theme .bg-himalaya-850,
+.admin-clean-theme [class*="bg-himalaya-800/"],
+.admin-clean-theme [class*="bg-himalaya-850/"] {
   background-color: #f1f5f9 !important;
   border-color: #e2e8f0 !important;
   color: #334155 !important;
 }
 .admin-clean-theme .bg-himalaya-800:hover,
-.admin-clean-theme [class*="bg-himalaya-800/"]:hover {
+.admin-clean-theme .bg-himalaya-850:hover,
+.admin-clean-theme [class*="bg-himalaya-800/"]:hover,
+.admin-clean-theme [class*="bg-himalaya-850/"]:hover {
   background-color: #e2e8f0 !important;
   color: #0f172a !important;
 }
 
-/* Admin Borders & Dividers */
+/* Borders & Dividers */
 .admin-clean-theme .border-himalaya-800,
 .admin-clean-theme .border-himalaya-700,
 .admin-clean-theme .border-himalaya-850,
@@ -251,15 +255,18 @@
   border-color: #e2e8f0 !important;
 }
 
-/* High Contrast Admin Typography */
-.admin-clean-theme .text-white,
+/* High-Contrast Headings & Main Text */
 .admin-clean-theme h1,
 .admin-clean-theme h2,
 .admin-clean-theme h3,
-.admin-clean-theme h4 {
+.admin-clean-theme h4,
+.admin-clean-theme h5,
+.admin-clean-theme h6,
+.admin-clean-theme strong {
   color: #0f172a !important;
 }
 
+/* Fix light parchment text that was invisible on white cards */
 .admin-clean-theme .text-parchment-100,
 .admin-clean-theme .text-parchment-200 {
   color: #1e293b !important;
@@ -275,7 +282,12 @@
   color: #64748b !important;
 }
 
-/* Admin Form Inputs, Textareas, and Dropdowns */
+.admin-clean-theme .text-himalaya-600,
+.admin-clean-theme .text-himalaya-700 {
+  color: #334155 !important;
+}
+
+/* Form Inputs, Textareas, and Dropdowns */
 .admin-clean-theme input:not([type="checkbox"]):not([type="radio"]),
 .admin-clean-theme textarea,
 .admin-clean-theme select {
@@ -298,15 +310,55 @@
   color: #94a3b8 !important;
 }
 
-/* Keep Brand Badges and Action Buttons Crisp & Legible */
-.admin-clean-theme .bg-terracotta {
-  background-color: #c14936 !important;
+/* Admin Labels */
+.admin-clean-theme label {
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+
+/* CRITICAL: Ensure all dark buttons, action buttons & active tabs ALWAYS have crisp white text */
+.admin-clean-theme .bg-slate-900,
+.admin-clean-theme .bg-slate-900 *,
+.admin-clean-theme .bg-slate-800,
+.admin-clean-theme .bg-slate-800 *,
+.admin-clean-theme .bg-terracotta,
+.admin-clean-theme .bg-terracotta *,
+.admin-clean-theme .bg-terracotta-dark,
+.admin-clean-theme .bg-terracotta-dark *,
+.admin-clean-theme .bg-emerald-600,
+.admin-clean-theme .bg-emerald-600 *,
+.admin-clean-theme .bg-rose-600,
+.admin-clean-theme .bg-rose-600 *,
+.admin-clean-theme [class*="bg-terracotta"] *,
+.admin-clean-theme [class*="bg-slate-900"] * {
   color: #ffffff !important;
 }
-.admin-clean-theme .bg-terracotta:hover {
-  background-color: #a83827 !important;
-  color: #ffffff !important;
+
+/* When .text-white is on an element with NO dark background, map it to dark slate for readability */
+.admin-clean-theme div:not([class*="bg-slate-900"]):not([class*="bg-terracotta"]):not([class*="bg-emerald"]):not([class*="bg-rose"]) > .text-white:not(button):not(a):not([class*="bg-"]) {
+  color: #0f172a !important;
 }
+
+/* Status Badges on Light Background */
+.admin-clean-theme [class*="bg-emerald-950"],
+.admin-clean-theme [class*="bg-emerald-900/"] {
+  background-color: #ecfdf5 !important;
+  color: #065f46 !important;
+  border-color: #a7f3d0 !important;
+}
+.admin-clean-theme [class*="bg-amber-950"],
+.admin-clean-theme [class*="bg-saffron/20"] {
+  background-color: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fde68a !important;
+}
+.admin-clean-theme [class*="bg-rose-950"] {
+  background-color: #fff1f2 !important;
+  color: #9f1239 !important;
+  border-color: #fecdd3 !important;
+}
+
+/* Subtle highlights */
 .admin-clean-theme .text-terracotta-light {
   color: #c14936 !important;
 }
@@ -316,4 +368,12 @@
 .admin-clean-theme .text-saffron {
   color: #d97706 !important;
 }
+
+/* Code wells */
+.admin-clean-theme code {
+  background-color: #f1f5f9 !important;
+  color: #b45309 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
 

@@ -7,8 +7,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/explore-with-sakar/images/:path*',
-        destination: '/images/:path*',
+        source: '/explore-with-sakar/:path*',
+        destination: '/:path*',
       },
     ];
   },

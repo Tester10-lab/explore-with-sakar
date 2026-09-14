@@ -18,6 +18,7 @@ import {
   ChevronRight,
   Package as PackageIcon,
   Compass,
+  X,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -133,13 +134,13 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
       )}
 
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-40 w-64 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 shadow-sm ${
+        className={`fixed top-0 left-0 bottom-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 shadow-lg lg:shadow-sm ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Top Branding & Navigation with Scroll Container */}
         <div className="flex-1 overflow-y-auto">
-          <div className="p-5 border-b border-slate-200 sticky top-0 bg-white/95 backdrop-blur-sm z-10">
+          <div className="p-4 sm:p-5 border-b border-slate-200 sticky top-0 bg-white/95 backdrop-blur-sm z-10 flex items-center justify-between">
             <Link
               href="/admin"
               className="flex items-center gap-3 group"
@@ -157,6 +158,16 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
                 </p>
               </div>
             </Link>
+
+            {/* Close button on mobile */}
+            <button
+              type="button"
+              onClick={onClose}
+              className="lg:hidden p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 active:scale-95 transition-all min-w-[40px] min-h-[40px] flex items-center justify-center touch-manipulation"
+              aria-label="Close sidebar"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
 
           {/* Navigation Links */}
