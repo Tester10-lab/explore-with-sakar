@@ -1,8 +1,12 @@
+'use client';
+
 import React from 'react';
+import { useSettings } from '@/context/SettingsContext';
 
 export default function FloatingWhatsApp() {
-  const phoneNumber = "9779840482692";
-  const message = "Hello Sakar, I would like to know more about your experiences.";
+  const { settings } = useSettings();
+  const phoneNumber = settings.contact?.whatsappNumber || "9779840482692";
+  const message = settings.contact?.whatsappDefaultMessage || "Hello Sakar, I would like to know more about your experiences.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (

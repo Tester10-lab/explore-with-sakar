@@ -1,164 +1,179 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Sparkles,
   MapPin,
   Heart,
   Globe,
   Leaf,
-  Check
+  Check,
+  ArrowRight,
+  ShieldCheck,
+  Users,
 } from 'lucide-react';
-import InquiryForm from '@/components/booking/InquiryForm';
+import PageHero from '@/components/common/PageHero';
+import SectionHeading from '@/components/common/SectionHeading';
+import CTASection from '@/components/common/CTASection';
+import TestimonialCard from '@/components/common/TestimonialCard';
+import { getLiveReviews } from '@/lib/cms';
 
 export const metadata: Metadata = {
-  title: 'About Sakar | Explore Nepal With Purpose',
-  description: 'Sakar’s journey into tourism began not as a business, but from a desire to share the real Nepal with the world. Discover authentic Nepalese culture and local life.',
+  title: 'About Sakar & Our Story | Explore With Sakar',
+  description: 'Meet Sakar, Responsible Tour Director in Nepal. Learn about his background in community development, local roots in Kathmandu, and philosophy of slow, meaningful travel.',
 };
 
 export default function AboutPage() {
+  const reviews = getLiveReviews().slice(0, 3);
   return (
-    <div className="min-h-screen bg-sand pb-0">
-      
-      {/* Cinematic Hero Header */}
-      <header className="relative w-full h-[70vh] min-h-[500px] flex items-end pb-16 sm:pb-24">
-        {/* Background Image */}
-        <div className="absolute inset-0 w-full h-full">
-          <Image
-            src="/explore-with-sakar/images/mountains/himalayan-peaks.jpg"
-            alt="Himalayan peaks and Nepal landscape"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-himalaya-950/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950 via-transparent to-transparent" />
-        </div>
+    <div className="min-h-screen bg-parchment-100">
+      {/* 1. Page Hero */}
+      <PageHero
+        badge="Meet Your Local Host"
+        nepaliTitle="हाम्रो कथा र साकर"
+        title="A Journey Rooted in Connection and Purpose"
+        subtitle="Travel beyond sightseeing. We connect conscious travelers with the living heritage, mountain communities, and untold stories of Nepal."
+        backgroundImage="/explore-with-sakar/images/mountains/himalayan-peaks.jpg"
+        breadcrumbs={[{ label: 'About Sakar' }]}
+      />
 
-        <div className="editorial-container relative z-10 w-full text-center space-y-6 text-white">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold uppercase tracking-widest mx-auto">
-            <Sparkles className="w-3.5 h-3.5 text-terracotta-light" />
-            <span>Meet Your Host</span>
-          </div>
-
-          <h1 className="font-editorial-serif text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight drop-shadow-lg">
-            About Sakar
-          </h1>
-
-          <p className="text-xl sm:text-3xl text-parchment-200 font-light font-display-serif italic max-w-2xl mx-auto drop-shadow-md">
-            &ldquo;Explore Nepal. Connect with its people. Discover your own reason to be here.&rdquo;
-          </p>
-        </div>
-      </header>
-
-      {/* Main Content Section */}
-      <div className="py-20 sm:py-32 bg-sand">
+      {/* 2. Personal Story & Background */}
+      <section className="py-20 sm:py-28 bg-white border-b border-parchment-300">
         <div className="editorial-container">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
-            
-            {/* Left: The Story */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
+            {/* Left Column: Narrative */}
             <div className="lg:col-span-7 space-y-8">
+              <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-terracotta/10 text-terracotta text-xs font-semibold uppercase tracking-wider">
+                <Heart className="w-3.5 h-3.5" />
+                <span>The Story of Sakar</span>
+              </span>
+
               <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 leading-tight">
-                A Journey Rooted in Connection and Purpose
+                Born in Kathmandu, Shaped by Nepal’s Communities
               </h2>
-              
-              <div className="prose prose-lg prose-himalaya max-w-none font-light leading-[1.9] text-himalaya-800">
-                <p className="first-letter:font-editorial-serif first-letter:text-7xl first-letter:font-bold first-letter:float-left first-letter:mr-4 first-letter:mt-2 first-letter:text-terracotta">
-                  Sakar’s journey into tourism began not as a business, but from a profound desire to share the real Nepal with the world. Born and raised amidst the chaotic charm and spiritual depth of Kathmandu, the mountains and ancient alleys have always been home.
-                </p>
-                
+
+              <div className="prose prose-lg text-himalaya-800 font-light leading-relaxed space-y-6">
                 <p>
-                  With a background in education, community development, and NGO work, Sakar has spent years working intimately with rural communities. Leading initiatives focused on children, health, women’s empowerment, education, and social development allowed Sakar to see Nepal beyond its famous mountains and monuments — through its people, traditions, struggles, and untold stories.
+                  Sakar’s journey into tourism began not as a commercial business, but from a profound desire to share the genuine soul of Nepal with the world. Born and raised amidst the sacred courtyards and ancient alleys of Kathmandu, the mountains and living shrines have always been his home.
                 </p>
 
-                <blockquote className="my-12 p-8 sm:p-10 rounded-3xl bg-white border border-parchment-300 shadow-editorial text-center relative overflow-hidden">
-                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-terracotta via-saffron to-terracotta" />
-                   <p className="font-display-serif italic text-2xl sm:text-3xl text-himalaya-950 font-normal leading-snug">
-                     "Tourism became a natural extension of that journey. I believe travel must be more than sightseeing. It should create genuine connection, learning, and meaningful contribution."
-                   </p>
+                <p>
+                  Before founding Explore With Sakar, he spent over a decade working directly in education, community health, and grassroots NGO initiatives with rural Himalayan villages. Leading programs focused on children’s welfare, women’s economic empowerment, and rural schools allowed him to see Nepal beyond postcards and monuments—through its real people, daily struggles, and rich oral traditions.
+                </p>
+
+                <blockquote className="my-8 p-8 rounded-3xl bg-sand/80 border-l-4 border-terracotta text-himalaya-950 italic font-display-serif text-xl sm:text-2xl leading-snug">
+                  &ldquo;Tourism became a natural extension of community work. I believe travel must be more than sightseeing. It should create genuine connection, reciprocal learning, and meaningful local contribution.&rdquo;
                 </blockquote>
 
                 <p>
-                  From the early dream of transforming a family home into a welcoming Nepali homestay to curating authentic, life-changing experiences for international travelers, Sakar’s philosophy has remained unwavering: bringing people closer to the heart of Nepal.
+                  Today, Sakar personally directs every journey. He acts as a trusted companion and cultural translator—opening doors to private family workshops, medieval monastic courtyards, and warm village hearths where foreign travelers rarely step.
                 </p>
               </div>
 
               {/* What Travelers Discover */}
-              <div className="mt-16 bg-white border border-parchment-300 p-8 sm:p-12 rounded-3xl shadow-editorial">
-                <h3 className="font-editorial-serif text-2xl font-bold text-himalaya-950 mb-8 flex items-center">
+              <div className="pt-8 border-t border-parchment-200">
+                <h3 className="font-editorial-serif text-2xl font-bold text-himalaya-950 mb-6 flex items-center">
                   <Globe className="w-6 h-6 text-terracotta mr-3" />
-                  What Travelers Discover
+                  What You Discover with Sakar
                 </h3>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
-                    "Authentic Nepalese culture and local life",
-                    "Himalayan adventures and quiet trekking trails",
-                    "Spiritual and restorative wellness experiences",
-                    "Heritage, architecture, and religious journeys",
-                    "Community-led and responsible tourism",
-                    "Opportunities for meaningful, direct contribution"
+                    'Authentic Nepalese culture & daily local life',
+                    'Quiet mountain trails away from commercial crowds',
+                    'Ancient Himalayan singing bowl sound sanctuary',
+                    'Living Newari heritage, woodcarving & bronze casting',
+                    'Direct economic benefit for rural host mothers',
+                    'Unrushed, flexible pacing tailored to your curiosity',
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-start space-x-3">
-                      <div className="w-6 h-6 rounded-full bg-parchment-100 border border-parchment-300 text-terracotta flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="w-5 h-5 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0 mt-0.5">
                         <Check className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-himalaya-800 font-light leading-relaxed">{item}</span>
+                      <span className="text-xs sm:text-sm text-himalaya-800 font-light leading-relaxed">
+                        {item}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
-
             </div>
 
-            {/* Right: Portrait & Vitals */}
-            <div className="lg:col-span-5 relative">
-              <div className="sticky top-32 space-y-10">
-                
-                {/* Polaroid Style Portrait */}
-                <div className="relative bg-white p-4 pb-16 sm:p-6 sm:pb-20 rounded-lg shadow-editorial border border-parchment-300 transform rotate-1">
-                  <div className="relative aspect-[4/5] w-full overflow-hidden rounded bg-himalaya-900 filter contrast-[1.05] sepia-[0.1]">
-                    <Image
-                      src="/explore-with-sakar/images/sakar/sakar-portrait.jpg"
-                      alt="Sakar portrait"
-                      fill
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 400px"
-                      className="object-cover object-top"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/40 to-transparent" />
+            {/* Right Column: Host Card & Core Values */}
+            <div className="lg:col-span-5 sticky top-28 space-y-8">
+              {/* Host Portrait Card */}
+              <div className="bg-sand p-6 sm:p-8 rounded-3xl border border-parchment-300 shadow-editorial space-y-6">
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-himalaya-900">
+                  <Image
+                    src="/explore-with-sakar/images/sakar/sakar-portrait.jpg"
+                    alt="Sakar — Responsible Tour Director"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 400px"
+                    className="object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/70 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4 text-white text-center">
+                    <p className="font-display-serif italic text-xl">Sakar</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-saffron-light">
+                      Responsible Tour Director & Founder
+                    </p>
                   </div>
-                  <div className="absolute bottom-6 left-0 w-full text-center">
-                    <p className="font-display-serif italic text-himalaya-900 text-xl">Sakar</p>
-                    <p className="text-[10px] uppercase font-bold tracking-widest text-himalaya-500 mt-1">Responsible Tour Director</p>
-                  </div>
-                  
-                  {/* Decorative tape */}
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-white/40 backdrop-blur-sm border border-white/20 rotate-[-2deg] shadow-sm"></div>
                 </div>
 
-                <div className="bg-himalaya-900 text-white p-8 sm:p-10 rounded-3xl shadow-editorial relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl pointer-events-none" />
-                  <h4 className="text-xs uppercase font-bold tracking-widest text-saffron-light mb-4 border-b border-white/20 pb-4">
-                    The Promise
-                  </h4>
-                  <p className="font-light text-parchment-200 leading-relaxed">
-                    As a Nepal Travel Expert and Responsible Tour Director, Sakar connects travelers with the places, people, traditions, and stories that make Nepal truly special. No mass tourism, no rushed itineraries. Just authentic exploration.
+                <div className="space-y-3 text-xs text-himalaya-700 font-light leading-relaxed">
+                  <div className="flex items-center space-x-2 text-himalaya-900 font-semibold">
+                    <MapPin className="w-4 h-4 text-terracotta" />
+                    <span>Based in Kathmandu, Nepal</span>
+                  </div>
+                  <p>
+                    Fluent in English and Nepali, with deep cultural relationships across the Kathmandu Valley, Annapurna foothills, and Langtang.
                   </p>
                 </div>
-                
+              </div>
+
+              {/* The Host Promise */}
+              <div className="bg-himalaya-950 text-white p-8 rounded-3xl shadow-editorial space-y-4">
+                <div className="flex items-center space-x-2 text-saffron-light text-xs font-bold uppercase tracking-widest">
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>The Host Promise</span>
+                </div>
+                <p className="text-sm font-light text-parchment-200 leading-relaxed">
+                  &ldquo;As your private host, I ensure no hurried itineraries, no mass-market tourist traps, and no middlemen. Just honest, deeply personal travel with genuine human care.&rdquo;
+                </p>
               </div>
             </div>
-
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="border-t border-parchment-300">
-        <InquiryForm />
-      </div>
+      {/* 3. Traveler Reflections on Sakar */}
+      <section className="py-20 sm:py-28 bg-sand border-b border-parchment-300">
+        <div className="editorial-container">
+          <SectionHeading
+            tag="Traveler Voices"
+            nepaliTag="यात्रीहरूको भनाइ"
+            title="What Travelers Say About Exploring With Sakar"
+            description="Read firsthand reflections from international guests who journeyed across Nepal with Sakar."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {reviews.map((t, idx) => (
+              <TestimonialCard key={t.id} testimonial={t} featured={idx === 0} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. CTA Section */}
+      <CTASection
+        title="Ready to Explore Nepal with Sakar?"
+        subtitle="Connect directly with Sakar to begin co-creating your personalized, unhurried journey."
+        primaryButtonText="Start a Conversation"
+        primaryButtonHref="/contact"
+        secondaryButtonText="Explore Our Services"
+        secondaryButtonHref="/services"
+      />
     </div>
   );
 }

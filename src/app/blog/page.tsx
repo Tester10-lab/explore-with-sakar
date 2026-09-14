@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { BLOG_POSTS } from '@/data/blog';
 import { BlogCategory } from '@/types';
 import JournalHero from '@/components/blog/JournalHero';
@@ -8,23 +8,54 @@ import BlogCategoryFilter from '@/components/blog/BlogCategoryFilter';
 import FeaturedStory from '@/components/blog/FeaturedStory';
 import BlogCard from '@/components/blog/BlogCard';
 import NewsletterSubscription from '@/components/blog/NewsletterSubscription';
+import { ExtendedBlogPost } from '@/types/cms';
 
 export default function BlogPage() {
+  const [blogs, setBlogs] = useState<ExtendedBlogPost[]>(
+    BLOG_POSTS.map((p, i) => ({
+      ...p,
+      id: `blog-${i + 1}-${p.slug}`,
+      status: p.isDraftSample ? 'draft' : 'published',
+      createdAt: new Date(p.publishedAt || Date.now()).toISOString(),
+      updatedAt: new Date().toISOString(),
+    }))
+  );
   const [activeCategory, setActiveCategory] = useState<BlogCategory | 'All'>('All');
+
+  useEffect(() => {
+    async function loadLiveBlogs() {
+      try {
+        const res = await fetch('/api/public/content');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.blogs && data.blogs.length > 0) {
+            setBlogs(data.blogs);
+          }
+        }
+      } catch (err) {
+        // Fallback in state
+      }
+    }
+    loadLiveBlogs();
+  }, []);
+
+  const publishedPosts = useMemo(() => {
+    return blogs.filter((b) => b.status === 'published');
+  }, [blogs]);
 
   // Category counts
   const counts = useMemo(() => {
-    const map: Record<string, number> = { total: BLOG_POSTS.length };
-    BLOG_POSTS.forEach((post) => {
+    const map: Record<string, number> = { total: publishedPosts.length };
+    publishedPosts.forEach((post) => {
       map[post.category] = (map[post.category] || 0) + 1;
     });
     return map;
-  }, []);
+  }, [publishedPosts]);
 
   const filteredPosts = useMemo(() => {
-    if (activeCategory === 'All') return BLOG_POSTS;
-    return BLOG_POSTS.filter((post) => post.category === activeCategory);
-  }, [activeCategory]);
+    if (activeCategory === 'All') return publishedPosts;
+    return publishedPosts.filter((post) => post.category === activeCategory);
+  }, [activeCategory, publishedPosts]);
 
   const featuredPost = filteredPosts[0];
   const gridPosts = filteredPosts.slice(1);

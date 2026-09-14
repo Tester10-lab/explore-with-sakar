@@ -1,11 +1,41 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { TESTIMONIALS } from '@/data/homestays';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ExtendedTestimonial } from '@/types/cms';
 
 export default function TestimonialsSection() {
+  const [reviews, setReviews] = useState<ExtendedTestimonial[]>(
+    TESTIMONIALS.map((t, i) => ({
+      ...t,
+      rating: 5,
+      status: 'approved',
+      isVisible: true,
+      order: i,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }))
+  );
+
+  useEffect(() => {
+    async function loadLiveReviews() {
+      try {
+        const res = await fetch('/api/public/content');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.reviews && data.reviews.length > 0) {
+            setReviews(data.reviews);
+          }
+        }
+      } catch (err) {
+        // Fallback already in state
+      }
+    }
+    loadLiveReviews();
+  }, []);
+
   return (
     <section id="testimonials" className="py-24 sm:py-32 bg-white relative">
       <div className="editorial-container">
@@ -30,9 +60,9 @@ export default function TestimonialsSection() {
           </motion.div>
         </div>
 
-        {/* Testimonials 3-Card Grid */}
+        {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
-          {TESTIMONIALS.map((t, i) => (
+          {reviews.slice(0, 6).map((t, i) => (
             <motion.div
               key={t.id}
               initial={{ opacity: 0, y: 30 }}
@@ -42,10 +72,10 @@ export default function TestimonialsSection() {
               className="flex flex-col space-y-8"
             >
               <div className="space-y-4">
-                {/* 5 Stars */}
+                {/* Stars */}
                 <div className="flex items-center space-x-1 text-terracotta">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                  {[...Array(t.rating || 5)].map((_, idx) => (
+                    <Star key={idx} className="w-3.5 h-3.5 fill-current" />
                   ))}
                 </div>
 
@@ -69,7 +99,7 @@ export default function TestimonialsSection() {
               </div>
             </motion.div>
           ))}
-      </div>
+        </div>
       </div>
     </section>
   );

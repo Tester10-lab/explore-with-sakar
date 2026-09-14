@@ -12,8 +12,11 @@ import {
   MessageCircle,
   Clock,
   MapPin,
+  Loader2,
+  AlertCircle,
 } from 'lucide-react';
 import { BookingInquiry } from '@/types';
+import { useSettings } from '@/context/SettingsContext';
 
 const INSPIRATION_OPTIONS = [
   { label: 'Adventure & Exploration', icon: '🏔️' },
@@ -42,7 +45,13 @@ const ACCOMMODATION_OPTIONS = [
   'Luxury Mountain Resorts',
 ];
 
-export default function InquiryForm() {
+interface InquiryFormProps {
+  defaultPackage?: string;
+  defaultExperience?: string;
+}
+
+export default function InquiryForm({ defaultPackage, defaultExperience }: InquiryFormProps = {}) {
+  const { settings } = useSettings();
   const [formData, setFormData] = useState<BookingInquiry>({
     fullName: '',
     email: '',
@@ -51,17 +60,18 @@ export default function InquiryForm() {
     travelDates: '',
     approximateDuration: DURATION_OPTIONS[1],
     travelersCount: '2 Travelers',
-    travelStyle: 'Slow & Meaningful Cultural Immersion',
+    travelStyle: defaultPackage ? `Package: ${defaultPackage}` : (defaultExperience ? `Experience: ${defaultExperience}` : 'Slow & Meaningful Cultural Immersion'),
     preferredInterests: [
       'Culture & Heritage Discovery',
       'Meaningful Connections & Community Experiences',
     ],
     homestayInterest: 'Yes, absolutely love homestays',
-    message: '',
+    message: defaultPackage ? `Hello Sakar, I am interested in inquiring about the "${defaultPackage}" package.` : (defaultExperience ? `Hello Sakar, I am interested in inquiring about "${defaultExperience}".` : ''),
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const toggleInterest = (interest: string) => {
     setFormData((prev) => {
@@ -80,15 +90,37 @@ export default function InquiryForm() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    if (isSubmitting) return;
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch('/api/public/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to send inquiry.');
+      }
+
       setIsSubmitted(true);
-    }, 700);
+    } catch (err: any) {
+      setErrorMessage(err?.message || 'Something went wrong submitting your inquiry. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const whatsappNumber = settings.contact?.whatsappNumber || '9779840482692';
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    `Namaste Sakar, I just submitted a journey inquiry for ${formData.fullName || 'a Nepal trip'}.`
+  )}`;
 
   return (
     <section id="booking" className="py-20 sm:py-28 bg-parchment-200/90 border-t border-parchment-300 relative">
@@ -113,6 +145,16 @@ export default function InquiryForm() {
 
           {/* Form Card */}
           <div className="rounded-3xl bg-sand border border-parchment-300 p-6 sm:p-10 lg:p-12 shadow-editorial">
+            {errorMessage && (
+              <div className="mb-6 p-4 rounded-xl bg-rose-100 border border-rose-300 text-rose-800 text-xs sm:text-sm flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-bold">Submission Notice</p>
+                  <p>{errorMessage}</p>
+                </div>
+              </div>
+            )}
+
             {isSubmitted ? (
               <div className="text-center py-12 space-y-6 animate-in fade-in zoom-in-95 duration-300">
                 <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto shadow-subtle">
@@ -133,9 +175,7 @@ export default function InquiryForm() {
 
                 <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
                   <a
-                    href={`https://wa.me/9779800000000?text=Namaste%20Sakar,%20I%20just%20submitted%20a%20journey%20inquiry%20for%20${encodeURIComponent(
-                      formData.fullName || 'a Nepal trip'
-                    )}.`}
+                    href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-warm transition-all"
@@ -343,7 +383,10 @@ export default function InquiryForm() {
                     className="w-full py-4 rounded-xl bg-terracotta hover:bg-terracotta-dark text-white font-bold text-sm sm:text-base shadow-warm hover:shadow-editorial transition-all flex items-center justify-center space-x-2 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50"
                   >
                     {isSubmitting ? (
-                      <span>Connecting with Sakar...</span>
+                      <span className="inline-flex items-center gap-2">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Connecting with Sakar...</span>
+                      </span>
                     ) : (
                       <>
                         <span>Start Planning My Journey</span>

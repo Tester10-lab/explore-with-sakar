@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { BLOG_POSTS, getPostBySlug, getRelatedPosts } from '@/data/blog';
+import { getLiveBlogs, getLiveBlogBySlug, getLiveRelatedBlogs } from '@/lib/cms';
 import ArticleHeader from '@/components/blog/ArticleHeader';
 import ArticleContent from '@/components/blog/ArticleContent';
 import AuthorBio from '@/components/blog/AuthorBio';
@@ -15,13 +15,14 @@ interface ArticlePageProps {
 }
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({
+  const blogs = getLiveBlogs(false);
+  return blogs.map((post) => ({
     slug: post.slug,
   }));
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
+  const post = getLiveBlogBySlug(params.slug, false);
   if (!post) {
     return {
       title: 'Story Not Found — Sakar’s Journal',
@@ -36,11 +37,11 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       description: post.excerpt,
       type: 'article',
       publishedTime: post.publishedAt,
-      authors: [post.author.name],
+      authors: [post.author?.name || 'Sakar'],
       images: [
         {
-          url: post.featuredImage.src,
-          alt: post.featuredImage.alt,
+          url: post.featuredImage?.src || '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg',
+          alt: post.featuredImage?.alt || post.title,
         },
       ],
     },
@@ -48,13 +49,13 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 }
 
 export default function ArticlePage({ params }: ArticlePageProps) {
-  const post = getPostBySlug(params.slug);
+  const post = getLiveBlogBySlug(params.slug, false);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getRelatedPosts(post.slug, 3);
+  const relatedPosts = getLiveRelatedBlogs(post.slug, 3);
 
   return (
     <article className="min-h-screen bg-parchment-100 pb-20">

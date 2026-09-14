@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { GALLERY_PHOTOS } from '@/data/gallery';
 import { GalleryPhoto } from '@/types';
 import { Maximize2, MapPin, Sparkles } from 'lucide-react';
 import Lightbox from './Lightbox';
+import { ExtendedGalleryPhoto } from '@/types/cms';
 
 const CATEGORY_TABS = [
   { id: 'all', label: 'All Photographs' },
@@ -17,13 +18,38 @@ const CATEGORY_TABS = [
 ];
 
 export default function PhotoGallery() {
+  const [photos, setPhotos] = useState<ExtendedGalleryPhoto[]>(
+    GALLERY_PHOTOS.map((p, i) => ({
+      ...p,
+      order: i,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }))
+  );
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    async function loadLivePhotos() {
+      try {
+        const res = await fetch('/api/public/content');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.photos && data.photos.length > 0) {
+            setPhotos(data.photos);
+          }
+        }
+      } catch (err) {
+        // Fallback already in state
+      }
+    }
+    loadLivePhotos();
+  }, []);
+
   const filteredPhotos =
     activeCategory === 'all'
-      ? GALLERY_PHOTOS
-      : GALLERY_PHOTOS.filter((photo) => photo.category === activeCategory);
+      ? photos
+      : photos.filter((photo) => photo.category === activeCategory);
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);

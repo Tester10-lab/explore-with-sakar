@@ -1,12 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BLOG_POSTS } from '@/data/blog';
 import { ArrowRight, Clock, Calendar } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
+import { ExtendedBlogPost } from '@/types/cms';
 
 const GuestBook = dynamic(() => import('@/components/reviews/GuestBook'), { 
   ssr: false,
@@ -14,8 +15,36 @@ const GuestBook = dynamic(() => import('@/components/reviews/GuestBook'), {
 });
 
 export default function HomeJournalSection() {
-  const featuredPost = BLOG_POSTS[0];
-  const supportingPosts = BLOG_POSTS.slice(1, 3);
+  const [blogs, setBlogs] = useState<ExtendedBlogPost[]>(
+    BLOG_POSTS.map((p, i) => ({
+      ...p,
+      id: `blog-${i + 1}-${p.slug}`,
+      status: p.isDraftSample ? 'draft' : 'published',
+      createdAt: new Date(p.publishedAt || Date.now()).toISOString(),
+      updatedAt: new Date().toISOString(),
+    }))
+  );
+
+  useEffect(() => {
+    async function loadLiveBlogs() {
+      try {
+        const res = await fetch('/api/public/content');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.blogs && data.blogs.length > 0) {
+            setBlogs(data.blogs);
+          }
+        }
+      } catch (err) {
+        // Fallback already in state
+      }
+    }
+    loadLiveBlogs();
+  }, []);
+
+  const publishedBlogs = blogs.filter((b) => b.status === 'published');
+  const featuredPost = publishedBlogs[0] || blogs[0];
+  const supportingPosts = publishedBlogs.slice(1, 3);
 
   return (
     <section id="journal" className="py-24 sm:py-32 bg-parchment-100 relative">

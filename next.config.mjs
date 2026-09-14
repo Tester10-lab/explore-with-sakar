@@ -1,10 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  output: 'export',
-  basePath: '/explore-with-sakar',
   images: {
     unoptimized: true,
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/explore-with-sakar/images/:path*',
+        destination: '/images/:path*',
+      },
+    ];
   },
 };
 

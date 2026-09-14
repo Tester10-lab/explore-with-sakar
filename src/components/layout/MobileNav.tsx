@@ -2,155 +2,294 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown, Phone, MapPin, ArrowRight, X, Compass, Mail, Sparkles } from 'lucide-react';
-import { NavItem } from './Navbar';
+import { usePathname } from 'next/navigation';
+import {
+  X,
+  ChevronDown,
+  Phone,
+  ArrowRight,
+  Sparkles,
+  MapPin,
+  Calendar,
+  Camera,
+  FileText,
+  HelpCircle,
+  BookOpen,
+  Home,
+  ShieldCheck,
+  Compass,
+  Mountain,
+  Heart,
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useSettings } from '@/context/SettingsContext';
 
 interface MobileNavProps {
   isOpen: boolean;
   onClose: () => void;
-  navStructure: NavItem[];
 }
 
-export default function MobileNav({ isOpen, onClose, navStructure }: MobileNavProps) {
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
+  const pathname = usePathname();
+  const { settings } = useSettings();
+  const [openSection, setOpenSection] = useState<string | null>('services');
 
-  if (!isOpen) return null;
+  const toggleSection = (section: string) => {
+    setOpenSection(openSection === section ? null : section);
+  };
 
-  const toggleSection = (label: string) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [label]: !prev[label],
-    }));
+  const isLinkActive = (href: string) => {
+    if (href === '/' && pathname === '/') return true;
+    if (href !== '/' && pathname.startsWith(href)) return true;
+    return false;
   };
 
   return (
-    <div className="fixed inset-0 z-50 xl:hidden">
-      {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-himalaya-950/60 backdrop-blur-sm transition-opacity"
-        onClick={onClose}
-      />
-
-      {/* Slide-over Menu Panel */}
-      <div className="fixed inset-y-0 right-0 max-w-sm w-full bg-parchment-100 shadow-2xl border-l border-parchment-300 flex flex-col z-50 overflow-y-auto animate-in slide-in-from-right duration-300">
-        {/* Drawer Header */}
-        <div className="p-4 border-b border-parchment-300 flex items-center justify-between bg-parchment-200">
-          <div className="flex items-center">
-            <img 
-              src="/explore-with-sakar/images/logo.png" 
-              alt="Explore With Sakar Logo" 
-              className="h-10 w-auto object-contain"
-            />
-          </div>
-          <button
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex justify-end">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="p-1.5 rounded-lg text-himalaya-700 hover:text-terracotta hover:bg-sand transition-colors"
-            aria-label="Close menu"
+            className="fixed inset-0 bg-himalaya-950/60 backdrop-blur-sm"
+          />
+
+          {/* Drawer content */}
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="relative w-full max-w-sm bg-parchment-100 h-full shadow-floating flex flex-col justify-between overflow-y-auto border-l border-parchment-300"
           >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
+            {/* Top Bar */}
+            <div className="p-5 flex items-center justify-between border-b border-parchment-300 bg-white">
+              <Link href="/" onClick={onClose} className="inline-block">
+                <img
+                  src={settings.branding?.logoUrl || '/explore-with-sakar/images/logo.png'}
+                  alt={settings.branding?.siteName || 'Explore With Sakar'}
+                  className="h-9 w-auto object-contain"
+                />
+              </Link>
+              <button
+                onClick={onClose}
+                className="p-2 rounded-xl bg-parchment-100 text-himalaya-800 hover:text-terracotta"
+                aria-label="Close navigation menu"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-        {/* Navigation Accordion Items */}
-        <div className="p-4 flex-1 space-y-1">
-          {navStructure.map((item) => {
-            const hasChildren = Boolean(item.children && item.children.length > 0);
-            const isExpanded = Boolean(expandedSections[item.label]);
-
-            if (!hasChildren) {
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href || '/'}
-                  onClick={onClose}
-                  className="flex items-center justify-between p-3 rounded-xl text-sm font-semibold text-himalaya-900 hover:bg-sand hover:text-terracotta transition-colors"
-                >
-                  <span>{item.label}</span>
-                  <ArrowRight className="w-4 h-4 text-himalaya-400" />
-                </Link>
-              );
-            }
-
-            return (
-              <div key={item.label} className="border-b border-parchment-300/60 pb-1">
+            {/* Nav Accordions */}
+            <div className="p-5 space-y-3 flex-1">
+              {/* 1. Services Group */}
+              <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden">
                 <button
-                  onClick={() => toggleSection(item.label)}
-                  className="w-full flex items-center justify-between p-3 rounded-xl text-sm font-semibold text-himalaya-900 hover:bg-sand transition-colors text-left"
+                  onClick={() => toggleSection('services')}
+                  className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold text-himalaya-950"
                 >
-                  <div>
-                    <span>{item.label}</span>
-                    {item.subtitle && (
-                      <span className="block text-[11px] text-terracotta font-normal font-display-serif italic">
-                        {item.subtitle}
-                      </span>
-                    )}
-                  </div>
+                  <span className="flex items-center space-x-2">
+                    <Compass className="w-4 h-4 text-terracotta" />
+                    <span>Our Services</span>
+                  </span>
                   <ChevronDown
-                    className={`w-4 h-4 text-himalaya-500 transition-transform duration-200 shrink-0 ${
-                      isExpanded ? 'rotate-180 text-terracotta' : ''
+                    className={`w-4 h-4 transition-transform ${
+                      openSection === 'services' ? 'rotate-180 text-terracotta' : ''
                     }`}
                   />
                 </button>
 
-                {isExpanded && item.children && (
-                  <div className="pl-3 pr-2 pb-2 space-y-1 animate-in fade-in duration-150">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.title}
-                        href={child.href}
-                        onClick={onClose}
-                        className="block p-2.5 rounded-lg hover:bg-sand text-left transition-colors"
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-semibold text-himalaya-950">
-                            {child.title}
-                          </span>
-                          {child.badge && (
-                            <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-terracotta/10 text-terracotta">
-                              {child.badge}
-                            </span>
-                          )}
-                        </div>
-                        {child.description && (
-                          <p className="text-[11px] text-himalaya-600 mt-0.5 line-clamp-1">
-                            {child.description}
-                          </p>
-                        )}
-                      </Link>
-                    ))}
+                {openSection === 'services' && (
+                  <div className="px-4 pb-4 pt-1 space-y-2 border-t border-parchment-200">
+                    <Link
+                      href="/services"
+                      onClick={onClose}
+                      className="block text-xs font-semibold uppercase tracking-wider text-terracotta py-1.5"
+                    >
+                      • Services Overview
+                    </Link>
+                    <Link
+                      href="/services/homestays"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5 pl-2"
+                    >
+                      Village Homestays
+                    </Link>
+                    <Link
+                      href="/services/culture"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5 pl-2"
+                    >
+                      Living Culture & Heritage
+                    </Link>
+                    <Link
+                      href="/services/spiritual-wellness"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5 pl-2"
+                    >
+                      Spiritual & Sound Sanctuary
+                    </Link>
+                    <Link
+                      href="/services/trekking"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5 pl-2"
+                    >
+                      Mountain Treks & Trails
+                    </Link>
+                    <Link
+                      href="/services/custom-journeys"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5 pl-2"
+                    >
+                      Custom Private Journeys
+                    </Link>
                   </div>
                 )}
               </div>
-            );
-          })}
+
+              {/* 2. Explore Group */}
+              <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden">
+                <button
+                  onClick={() => toggleSection('explore')}
+                  className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold text-himalaya-950"
+                >
+                  <span className="flex items-center space-x-2">
+                    <MapPin className="w-4 h-4 text-terracotta" />
+                    <span>Explore Nepal</span>
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      openSection === 'explore' ? 'rotate-180 text-terracotta' : ''
+                    }`}
+                  />
+                </button>
+
+                {openSection === 'explore' && (
+                  <div className="px-4 pb-4 pt-1 space-y-2 border-t border-parchment-200">
+                    <Link
+                      href="/destinations"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
+                    >
+                      All Curated Destinations
+                    </Link>
+                    <Link
+                      href="/experiences"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
+                    >
+                      Curated Experiences Catalog
+                    </Link>
+                    <Link
+                      href="/packages"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
+                    >
+                      Signature Packages & Pricing
+                    </Link>
+                    <Link
+                      href="/gallery"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
+                    >
+                      Visual Journey Gallery
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* 3. Travel Guide */}
+              <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden">
+                <button
+                  onClick={() => toggleSection('guide')}
+                  className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold text-himalaya-950"
+                >
+                  <span className="flex items-center space-x-2">
+                    <FileText className="w-4 h-4 text-terracotta" />
+                    <span>Travel Guide</span>
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      openSection === 'guide' ? 'rotate-180 text-terracotta' : ''
+                    }`}
+                  />
+                </button>
+
+                {openSection === 'guide' && (
+                  <div className="px-4 pb-4 pt-1 space-y-2 border-t border-parchment-200">
+                    <Link
+                      href="/resources"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
+                    >
+                      Travel Resources (Seasons, Visas, Packing)
+                    </Link>
+                    <Link
+                      href="/faq"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
+                    >
+                      Frequently Asked Questions
+                    </Link>
+                    <Link
+                      href="/blog"
+                      onClick={onClose}
+                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
+                    >
+                      Sakar’s Journal / Blog
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Direct Links */}
+              <Link
+                href="/about"
+                onClick={onClose}
+                className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold text-himalaya-950 hover:text-terracotta"
+              >
+                About Sakar
+              </Link>
+
+              <Link
+                href="/contact"
+                onClick={onClose}
+                className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold text-himalaya-950 hover:text-terracotta"
+              >
+                Contact Host
+              </Link>
+            </div>
+
+            {/* Bottom Actions */}
+            <div className="p-5 border-t border-parchment-300 bg-white space-y-3">
+              <a
+                href={`https://wa.me/${settings.contact?.whatsappNumber || '9779840482692'}?text=${encodeURIComponent(
+                  'Namaste Sakar, I would like to consult with you about planning a trip in Nepal.'
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider transition-colors"
+              >
+                <Phone className="w-4 h-4 mr-2" />
+                <span>Chat on WhatsApp</span>
+              </a>
+
+              <Link
+                href="/contact"
+                onClick={onClose}
+                className="w-full flex items-center justify-center py-3.5 rounded-xl bg-himalaya-950 hover:bg-terracotta text-white text-xs font-bold uppercase tracking-widest transition-colors"
+              >
+                <span>Plan Your Journey</span>
+                <ArrowRight className="w-4 h-4 ml-1.5" />
+              </Link>
+            </div>
+          </motion.div>
         </div>
-
-        {/* Drawer Bottom CTA & Contact */}
-        <div className="p-5 border-t border-parchment-300 bg-sand/60 space-y-3">
-          <Link
-            href="/#booking"
-            onClick={onClose}
-            className="w-full py-3 rounded-xl text-center text-sm font-bold bg-terracotta text-white shadow-warm hover:bg-terracotta-dark transition-colors flex items-center justify-center space-x-2"
-          >
-            <span>Plan / Book Your Experience</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-
-          <a
-            href="https://wa.me/9779800000000"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-2.5 rounded-xl text-center text-xs font-semibold border border-emerald-600/30 text-emerald-800 bg-emerald-50 hover:bg-emerald-100 transition-colors flex items-center justify-center space-x-2"
-          >
-            <Phone className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Chat on WhatsApp Directly</span>
-          </a>
-
-          <div className="text-[11px] text-himalaya-600 text-center pt-1 font-light">
-            Sakar • Responsible Tour Director • Nepal
-          </div>
-        </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 }

@@ -1,0 +1,80 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { createInquiry } from '@/lib/db';
+
+function sanitize(str: unknown): string {
+  if (typeof str !== 'string') return '';
+  return str.replace(/<[^>]*>?/gm, '').trim();
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+
+    const fullName = sanitize(body.fullName);
+    const email = sanitize(body.email);
+    const whatsapp = sanitize(body.whatsapp);
+    const country = sanitize(body.country);
+    const travelDates = sanitize(body.travelDates);
+    const approximateDuration = sanitize(body.approximateDuration);
+    const travelersCount = sanitize(body.travelersCount);
+    const travelStyle = sanitize(body.travelStyle);
+    const homestayInterest = sanitize(body.homestayInterest);
+    const message = sanitize(body.message);
+
+    const preferredInterests: string[] = Array.isArray(body.preferredInterests)
+      ? body.preferredInterests.map((item: unknown) => sanitize(item)).filter(Boolean)
+      : [];
+
+    // Validation
+    if (!fullName || fullName.length < 2) {
+      return NextResponse.json(
+        { error: 'Please enter your full name.' },
+        { status: 400 }
+      );
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Please enter a valid email address.' },
+        { status: 400 }
+      );
+    }
+
+    if (!message || message.length < 5) {
+      return NextResponse.json(
+        { error: 'Please provide a short message or description of your travel plans.' },
+        { status: 400 }
+      );
+    }
+
+    const newInquiry = createInquiry({
+      fullName,
+      email,
+      whatsapp: whatsapp || undefined,
+      country: country || undefined,
+      travelDates: travelDates || undefined,
+      approximateDuration: approximateDuration || undefined,
+      travelersCount: travelersCount || undefined,
+      travelStyle: travelStyle || undefined,
+      preferredInterests,
+      homestayInterest: homestayInterest || undefined,
+      message,
+    });
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Namaste! Your inquiry has been received. Sakar will contact you personally soon.',
+        inquiryId: newInquiry.id,
+      },
+      { status: 201 }
+    );
+  } catch (error: any) {
+    console.error('Inquiry submission error:', error);
+    return NextResponse.json(
+      { error: 'Something went wrong submitting your inquiry. Please try again or message Sakar directly on WhatsApp.' },
+      { status: 500 }
+    );
+  }
+}

@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { Cinzel, Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import FloatingWhatsApp from '@/components/layout/FloatingWhatsApp';
+import PublicLayoutWrapper from '@/components/layout/PublicLayoutWrapper';
+import { SettingsProvider } from '@/context/SettingsContext';
 
 const cinzel = Cinzel({
   subsets: ['latin'],
@@ -101,17 +100,16 @@ export default function RootLayout({
                 addressCountry: 'NP',
               },
               url: 'https://explorewithsakar.com',
-              telephone: '+977-9800000000',
+              telephone: '+977-9840482692',
               priceRange: '$$',
             }),
           }}
         />
       </head>
       <body className="bg-parchment-100 text-himalaya-900 antialiased selection:bg-terracotta/20 selection:text-terracotta-dark min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
-        <FloatingWhatsApp />
+        <SettingsProvider>
+          <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
+        </SettingsProvider>
       </body>
     </html>
   );
