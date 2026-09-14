@@ -15,12 +15,9 @@ interface PageProps {
 }
 
 const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
-  const isFirstImage = props.index === 0;
-  const isSidewaysImage = props.index === 1 && props.imageUrl.includes('review-2.jpg');
-
   return (
     <div
-      className="page bg-parchment-50 flex flex-col items-center justify-between overflow-hidden border-x border-parchment-300 relative h-full w-full"
+      className="page bg-parchment-50 flex flex-col items-center justify-between overflow-hidden border-x border-parchment-300 relative h-full w-full cursor-pointer select-none"
       ref={ref}
     >
       <div className="absolute inset-0 p-2 sm:p-4 lg:p-6 pb-8 flex flex-col">
@@ -44,13 +41,7 @@ const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
           <img
             src={props.imageUrl}
             alt={`${props.guestName} - Handwritten Review Page ${props.number}`}
-            className={
-              isFirstImage
-                ? "w-full h-full object-contain object-center mix-blend-multiply opacity-95"
-                : isSidewaysImage
-                ? "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-90 w-[150%] h-[150%] max-w-none object-contain object-center mix-blend-multiply opacity-95"
-                : "w-full h-full object-contain object-center mix-blend-multiply opacity-95"
-            }
+            className="w-full h-full object-contain object-center mix-blend-multiply opacity-95 transition-transform"
           />
         </div>
       </div>
@@ -184,6 +175,20 @@ export default function GuestBook({ initialPages }: GuestBookProps) {
       console.warn('Page flip prev error', e);
     }
   };
+
+  // Enable keyboard left/right arrow navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') {
+        handleNext();
+      } else if (e.key === 'ArrowLeft') {
+        handlePrev();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMobile, visiblePages.length]);
 
   return (
     <div className="flex flex-col justify-center items-center w-full py-6 sm:py-8 relative z-10">
