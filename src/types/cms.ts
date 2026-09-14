@@ -207,6 +207,7 @@ export interface WebsiteSettings {
     headlinePart2: string;
     headlineHighlight2: string;
     description: string;
+    descriptionColor?: string;
     ctaText: string;
     ctaLink: string;
     secondaryCtaText?: string;

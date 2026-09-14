@@ -14,6 +14,7 @@ import {
   Eye,
   Megaphone,
   TrendingUp,
+  Palette,
 } from 'lucide-react';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ImageUploader from '@/components/admin/ImageUploader';
@@ -286,9 +287,66 @@ export default function AdminHomepagePage() {
             </div>
 
             <div>
-              <label className="block text-himalaya-300 font-semibold mb-1">
-                Supporting Sub-Description
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="block text-himalaya-300 font-semibold text-xs uppercase tracking-wider">
+                  Supporting Paragraph Description
+                </label>
+                <div className="flex items-center gap-1.5">
+                  <Palette className="w-3 h-3 text-terracotta" />
+                  <span className="text-[10px] text-parchment-400 font-mono">Color:</span>
+                  {[
+                    { name: 'Default Sand', color: '#e5decf' },
+                    { name: 'Terracotta', color: '#c85a32' },
+                    { name: 'Saffron', color: '#d97706' },
+                    { name: 'Emerald', color: '#047857' },
+                    { name: 'White', color: '#ffffff' },
+                  ].map((s) => (
+                    <button
+                      key={s.color}
+                      type="button"
+                      onClick={() =>
+                        setSettings({
+                          ...settings,
+                          hero: { ...settings.hero, descriptionColor: s.color },
+                        })
+                      }
+                      className={`w-4 h-4 rounded-full border transition-transform ${
+                        settings.hero?.descriptionColor === s.color
+                          ? 'ring-2 ring-terracotta scale-110 border-white'
+                          : 'border-white/20 hover:scale-105'
+                      }`}
+                      style={{ backgroundColor: s.color }}
+                      title={s.name}
+                    />
+                  ))}
+                  <input
+                    type="color"
+                    value={settings.hero?.descriptionColor || '#e5decf'}
+                    onChange={(e) =>
+                      setSettings({
+                        ...settings,
+                        hero: { ...settings.hero, descriptionColor: e.target.value },
+                      })
+                    }
+                    className="w-4 h-4 rounded cursor-pointer bg-transparent border-0 p-0"
+                    title="Custom color"
+                  />
+                  {settings.hero?.descriptionColor && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setSettings({
+                          ...settings,
+                          hero: { ...settings.hero, descriptionColor: undefined },
+                        })
+                      }
+                      className="text-[10px] text-parchment-400 hover:text-white ml-1"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+              </div>
               <textarea
                 rows={3}
                 value={settings.hero?.description || ''}
@@ -298,8 +356,9 @@ export default function AdminHomepagePage() {
                     hero: { ...settings.hero, description: e.target.value },
                   })
                 }
+                style={{ color: settings.hero?.descriptionColor || undefined }}
                 placeholder="Welcome to Explore With Sakar..."
-                className="w-full px-3.5 py-2.5 bg-himalaya-950 border border-himalaya-800 rounded-xl text-parchment-100 focus:border-terracotta focus:outline-none"
+                className="w-full px-3.5 py-2.5 bg-himalaya-950 border border-himalaya-800 rounded-xl placeholder-himalaya-500 focus:border-terracotta focus:outline-none transition-colors"
               />
             </div>
 

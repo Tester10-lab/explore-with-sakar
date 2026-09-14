@@ -16,9 +16,11 @@ import {
   ExternalLink,
   X,
   Loader2,
+  Crop,
 } from 'lucide-react';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ImageUploader from '@/components/admin/ImageUploader';
+import ImageCropModal from '@/components/admin/ImageCropModal';
 import ConfirmationModal from '@/components/admin/ConfirmationModal';
 import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { ExtendedGalleryPhoto } from '@/types/cms';
@@ -51,6 +53,9 @@ export default function AdminPhotosPage() {
   const [deleteTarget, setDeleteTarget] = useState<ExtendedGalleryPhoto | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Direct Crop & Rotate modal state
+  const [cropPhotoTarget, setCropPhotoTarget] = useState<ExtendedGalleryPhoto | null>(null);
+
   // Copied URL state
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
@@ -77,6 +82,25 @@ export default function AdminPhotosPage() {
       showToast('error', 'Failed to fetch photos');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleSaveCroppedPhoto = async (newUrl: string) => {
+    if (!cropPhotoTarget) return;
+    try {
+      const updated = { ...cropPhotoTarget, image: newUrl };
+      const res = await fetch(`/api/admin/photos/${cropPhotoTarget.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updated),
+      });
+      if (!res.ok) throw new Error('Failed to update photo');
+      setPhotos((prev) => prev.map((p) => (p.id === cropPhotoTarget.id ? updated : p)));
+      showToast('success', 'Photo cropped, rotated & updated!');
+    } catch (err: any) {
+      showToast('error', err?.message || 'Error saving cropped photo');
+    } finally {
+      setCropPhotoTarget(null);
     }
   };
 
@@ -404,6 +428,15 @@ export default function AdminPhotosPage() {
                     <div className="flex items-center gap-1.5">
                       <button
                         type="button"
+                        onClick={() => setCropPhotoTarget(photo)}
+                        className="p-2 rounded-lg bg-terracotta text-white text-xs font-semibold shadow-floating hover:bg-terracotta-light transition-all"
+                        title="Crop & Rotate photo"
+                      >
+                        <Crop className="w-3.5 h-3.5" />
+                      </button>
+
+                      <button
+                        type="button"
                         onClick={() => {
                           setIsNewPhoto(false);
                           setEditingPhoto(photo);
@@ -639,6 +672,17 @@ export default function AdminPhotosPage() {
         onConfirm={handleDeletePhotoConfirm}
         onCancel={() => setDeleteTarget(null)}
       />
+
+      {/* Direct Crop & Rotate Modal for Gallery Photos */}
+      {cropPhotoTarget && (
+        <ImageCropModal
+          isOpen={Boolean(cropPhotoTarget)}
+          imageUrl={cropPhotoTarget.image}
+          aspectRatioPreset={cropPhotoTarget.orientation === 'portrait' ? 'portrait' : 'landscape'}
+          onClose={() => setCropPhotoTarget(null)}
+          onSave={handleSaveCroppedPhoto}
+        />
+      )}
     </div>
   );
 }

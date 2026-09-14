@@ -107,7 +107,12 @@ export default function Hero() {
               <span className="text-terracotta">{settings.hero?.headlineHighlight2 || 'Meaningful'}</span> Connection.
             </h1>
 
-            <p className="text-base sm:text-lg text-parchment-300 font-light leading-relaxed max-w-lg mb-8 drop-shadow-lg">
+            <p
+              style={settings.hero?.descriptionColor ? { color: settings.hero.descriptionColor } : undefined}
+              className={`text-base sm:text-lg font-light leading-relaxed max-w-lg mb-8 drop-shadow-lg ${
+                settings.hero?.descriptionColor ? '' : 'text-parchment-300'
+              }`}
+            >
               {settings.hero?.description ||
                 'Meaningful private travel experiences in Nepal with local host Sakar. Slow-paced exploration through living culture, village homestays, and quiet Himalayan sanctuaries.'}
             </p>

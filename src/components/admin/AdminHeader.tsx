@@ -3,7 +3,7 @@
 import React from 'react';
 import { Menu, Plus, Sparkles, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import { useAdminLayout } from '@/app/admin/layout';
+import { useAdminLayout } from '@/components/admin/AdminLayoutContext';
 
 interface AdminHeaderProps {
   onToggleMobileSidebar?: () => void;

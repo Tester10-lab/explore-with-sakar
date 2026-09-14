@@ -1,22 +1,9 @@
 'use client';
 
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import AdminSidebar from '@/components/admin/AdminSidebar';
-
-interface AdminContextType {
-  isMobileSidebarOpen: boolean;
-  toggleMobileSidebar: () => void;
-  closeMobileSidebar: () => void;
-}
-
-const AdminContext = createContext<AdminContextType>({
-  isMobileSidebarOpen: false,
-  toggleMobileSidebar: () => {},
-  closeMobileSidebar: () => {},
-});
-
-export const useAdminLayout = () => useContext(AdminContext);
+import { AdminContext } from '@/components/admin/AdminLayoutContext';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -56,4 +43,3 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     </AdminContext.Provider>
   );
 }
-

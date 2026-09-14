@@ -17,6 +17,7 @@ import {
   Loader2,
   Lock,
   Key,
+  Palette,
 } from 'lucide-react';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ImageUploader from '@/components/admin/ImageUploader';
@@ -572,9 +573,66 @@ export default function AdminSettingsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-parchment-300 mb-1">
-                    Hero Narrative Description
-                  </label>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-parchment-300">
+                      Hero Narrative Description
+                    </label>
+                    <div className="flex items-center gap-1.5">
+                      <Palette className="w-3 h-3 text-terracotta" />
+                      <span className="text-[10px] text-parchment-400 font-mono">Color:</span>
+                      {[
+                        { name: 'Default Sand', color: '#e5decf' },
+                        { name: 'Terracotta', color: '#c85a32' },
+                        { name: 'Saffron', color: '#d97706' },
+                        { name: 'Emerald', color: '#047857' },
+                        { name: 'White', color: '#ffffff' },
+                      ].map((s) => (
+                        <button
+                          key={s.color}
+                          type="button"
+                          onClick={() =>
+                            setSettings({
+                              ...settings,
+                              hero: { ...settings.hero, descriptionColor: s.color },
+                            })
+                          }
+                          className={`w-3.5 h-3.5 rounded-full border transition-transform ${
+                            settings.hero.descriptionColor === s.color
+                              ? 'ring-2 ring-terracotta scale-110 border-white'
+                              : 'border-white/20 hover:scale-105'
+                          }`}
+                          style={{ backgroundColor: s.color }}
+                          title={s.name}
+                        />
+                      ))}
+                      <input
+                        type="color"
+                        value={settings.hero.descriptionColor || '#e5decf'}
+                        onChange={(e) =>
+                          setSettings({
+                            ...settings,
+                            hero: { ...settings.hero, descriptionColor: e.target.value },
+                          })
+                        }
+                        className="w-3.5 h-3.5 rounded cursor-pointer bg-transparent border-0 p-0"
+                        title="Custom color"
+                      />
+                      {settings.hero.descriptionColor && (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setSettings({
+                              ...settings,
+                              hero: { ...settings.hero, descriptionColor: undefined },
+                            })
+                          }
+                          className="text-[10px] text-parchment-400 hover:text-white ml-1"
+                        >
+                          Reset
+                        </button>
+                      )}
+                    </div>
+                  </div>
                   <textarea
                     rows={3}
                     value={settings.hero.description}
@@ -584,7 +642,8 @@ export default function AdminSettingsPage() {
                         hero: { ...settings.hero, description: e.target.value },
                       })
                     }
-                    className="w-full bg-himalaya-950 border border-himalaya-700 rounded-xl p-3 text-xs text-parchment-100 focus:outline-none focus:border-terracotta leading-relaxed"
+                    style={{ color: settings.hero.descriptionColor || undefined }}
+                    className="w-full bg-himalaya-950 border border-himalaya-700 rounded-xl p-3 text-xs focus:outline-none focus:border-terracotta leading-relaxed transition-colors"
                   />
                 </div>
 

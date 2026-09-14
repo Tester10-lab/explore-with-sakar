@@ -107,7 +107,7 @@ export type BlogCategory =
   | "Practical Nepal";
 
 export type BlogBlock =
-  | { type: 'paragraph'; content: string }
+  | { type: 'paragraph'; content: string; textColor?: string }
   | { type: 'heading'; level: 2 | 3; content: string }
   | { type: 'quote'; content: string; attribution?: string }
   | { type: 'image'; image: ImageAsset; caption?: string; layout?: 'full' | 'standard' }

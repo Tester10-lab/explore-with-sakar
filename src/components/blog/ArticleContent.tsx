@@ -96,7 +96,11 @@ export default function ArticleContent({ post }: ArticleContentProps) {
               case 'paragraph':
                 const isFirstParagraph = index === 0 || post.content.findIndex(b => b.type === 'paragraph') === index;
                 return (
-                  <p key={index} className={`text-himalaya-800 leading-[1.9] ${isFirstParagraph ? 'first-letter:font-editorial-serif first-letter:text-6xl first-letter:font-bold first-letter:float-left first-letter:mr-4 first-letter:mt-2 first-letter:text-terracotta' : ''}`}>
+                  <p
+                    key={index}
+                    style={block.textColor ? { color: block.textColor } : undefined}
+                    className={`leading-[1.9] ${block.textColor ? '' : 'text-himalaya-800'} ${isFirstParagraph ? 'first-letter:font-editorial-serif first-letter:text-6xl first-letter:font-bold first-letter:float-left first-letter:mr-4 first-letter:mt-2 first-letter:text-terracotta' : ''}`}
+                  >
                     {block.content}
                   </p>
                 );

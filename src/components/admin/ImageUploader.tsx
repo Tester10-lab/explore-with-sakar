@@ -1,7 +1,17 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Upload, X, Image as ImageIcon, Loader2, Link as LinkIcon, Check } from 'lucide-react';
+import {
+  Upload,
+  X,
+  Image as ImageIcon,
+  Loader2,
+  Link as LinkIcon,
+  Check,
+  Crop,
+  RotateCw,
+} from 'lucide-react';
+import ImageCropModal from './ImageCropModal';
 
 interface ImageUploaderProps {
   value: string;
@@ -25,7 +35,12 @@ export default function ImageUploader({
   const [manualUrl, setManualUrl] = useState(value || '');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileUpload = async (file: File) => {
+  // Crop & Rotate modal state
+  const [isCropModalOpen, setIsCropModalOpen] = useState(false);
+  const [cropTargetUrl, setCropTargetUrl] = useState<string>('');
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
+
+  const handleDirectUpload = async (file: File) => {
     setError(null);
     setIsUploading(true);
 
@@ -50,7 +65,16 @@ export default function ImageUploader({
       setError(err?.message || 'Error uploading file');
     } finally {
       setIsUploading(false);
+      setPendingFile(null);
     }
+  };
+
+  const onFileSelected = (file: File) => {
+    setError(null);
+    setPendingFile(file);
+    const objectUrl = URL.createObjectURL(file);
+    setCropTargetUrl(objectUrl);
+    setIsCropModalOpen(true);
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -58,7 +82,7 @@ export default function ImageUploader({
     setIsDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0];
-      handleFileUpload(file);
+      onFileSelected(file);
     }
   };
 
@@ -66,6 +90,14 @@ export default function ImageUploader({
     if (manualUrl.trim()) {
       onChange(manualUrl.trim());
       setIsManualInput(false);
+    }
+  };
+
+  const openCropForCurrentValue = () => {
+    if (value) {
+      setPendingFile(null);
+      setCropTargetUrl(value);
+      setIsCropModalOpen(true);
     }
   };
 
@@ -116,7 +148,9 @@ export default function ImageUploader({
         </div>
       ) : value ? (
         <div className="relative group rounded-xl overflow-hidden border border-himalaya-700 bg-himalaya-900">
-          <div className={`relative w-full ${aspectClass} overflow-hidden bg-himalaya-950 flex items-center justify-center`}>
+          <div
+            className={`relative w-full ${aspectClass} overflow-hidden bg-himalaya-950 flex items-center justify-center`}
+          >
             <img
               src={value}
               alt="Preview"
@@ -124,7 +158,16 @@ export default function ImageUploader({
             />
           </div>
 
+          {/* Action Overlay: visible on hover on desktop, or accessible via buttons below */}
           <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 p-4">
+            <button
+              type="button"
+              onClick={openCropForCurrentValue}
+              className="px-3 py-1.5 bg-terracotta text-white rounded-md text-xs font-semibold shadow-floating hover:bg-terracotta-light transition-all flex items-center gap-1.5"
+            >
+              <Crop className="w-3.5 h-3.5" />
+              <span>Crop & Rotate</span>
+            </button>
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
@@ -140,6 +183,37 @@ export default function ImageUploader({
                 setManualUrl('');
               }}
               className="px-3 py-1.5 bg-rose-600 text-white rounded-md text-xs font-semibold shadow-floating hover:bg-rose-500 transition-all flex items-center gap-1.5"
+            >
+              <X className="w-3.5 h-3.5" />
+              <span>Remove</span>
+            </button>
+          </div>
+
+          {/* Mobile persistent action bar */}
+          <div className="flex sm:hidden items-center justify-between p-2 bg-himalaya-950/90 border-t border-himalaya-800 text-xs">
+            <button
+              type="button"
+              onClick={openCropForCurrentValue}
+              className="text-terracotta font-semibold flex items-center gap-1 px-2 py-1"
+            >
+              <Crop className="w-3.5 h-3.5" />
+              <span>Crop/Rotate</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="text-parchment-200 flex items-center gap-1 px-2 py-1"
+            >
+              <Upload className="w-3.5 h-3.5" />
+              <span>Replace</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                onChange('');
+                setManualUrl('');
+              }}
+              className="text-rose-400 flex items-center gap-1 px-2 py-1"
             >
               <X className="w-3.5 h-3.5" />
               <span>Remove</span>
@@ -176,6 +250,9 @@ export default function ImageUploader({
                   Click to upload or drag & drop
                 </p>
                 <p className="text-[11px] text-himalaya-400 mt-0.5">{helperText}</p>
+                <span className="inline-flex items-center gap-1 text-[10px] text-terracotta-light mt-1 font-mono">
+                  <Crop className="w-3 h-3" /> Includes Crop & Rotate Editor
+                </span>
               </div>
             </>
           )}
@@ -189,12 +266,39 @@ export default function ImageUploader({
         className="hidden"
         onChange={(e) => {
           if (e.target.files && e.target.files.length > 0) {
-            handleFileUpload(e.target.files[0]);
+            onFileSelected(e.target.files[0]);
           }
         }}
       />
 
       {error && <p className="text-[11px] text-rose-400 mt-1">{error}</p>}
+
+      {/* Interactive Crop & Rotate Modal */}
+      {isCropModalOpen && (
+        <ImageCropModal
+          isOpen={isCropModalOpen}
+          imageUrl={cropTargetUrl}
+          aspectRatioPreset={aspectRatio}
+          onClose={() => {
+            setIsCropModalOpen(false);
+            setPendingFile(null);
+          }}
+          onSkipCrop={
+            pendingFile
+              ? () => {
+                  setIsCropModalOpen(false);
+                  handleDirectUpload(pendingFile);
+                }
+              : undefined
+          }
+          onSave={(newUrl) => {
+            onChange(newUrl);
+            setManualUrl(newUrl);
+            setIsCropModalOpen(false);
+            setPendingFile(null);
+          }}
+        />
+      )}
     </div>
   );
 }
