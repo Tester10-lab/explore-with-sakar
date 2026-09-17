@@ -63,13 +63,21 @@ export function verifyToken(token: string): SessionPayload | null {
 }
 
 export async function getServerSession(): Promise<SessionPayload | null> {
-  const cookieStore = cookies();
-  const token = cookieStore.get(COOKIE_NAME)?.value;
-  if (!token) return null;
-  return verifyToken(token);
+  try {
+    const cookieStore = cookies();
+    const token = cookieStore.get(COOKIE_NAME)?.value;
+    if (!token) return null;
+    return verifyToken(token);
+  } catch {
+    return null;
+  }
 }
 
-export async function getAdminSession(): Promise<SessionPayload | null> {
+export async function getAdminSession(req?: NextRequest): Promise<SessionPayload | null> {
+  if (req) {
+    const session = getSessionFromRequest(req);
+    if (session) return session;
+  }
   return getServerSession();
 }
 

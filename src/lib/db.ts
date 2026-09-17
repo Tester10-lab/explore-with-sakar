@@ -240,6 +240,71 @@ function ensureDataDir(): void {
   }
 }
 
+function sanitizeAndMigrateStore(data: CMSDataStore): CMSDataStore {
+  const initial = getInitialStore();
+
+  // Safety verification & backward-compatible migrations for packages
+  if (!data.packages || !Array.isArray(data.packages) || data.packages.length === 0) {
+    data.packages = initial.packages;
+  } else {
+    data.packages = data.packages.map((pkg: any, idx: number) => ({
+      id: pkg.id || `pkg-${idx + 1}-${pkg.slug || 'package'}`,
+      name: pkg.name || pkg.title || 'Curated Nepal Package',
+      slug: pkg.slug || `package-${idx + 1}`,
+      summary: pkg.summary || pkg.overview || '',
+      price: pkg.price !== undefined ? Number(pkg.price) : undefined,
+      currency: pkg.currency || 'USD',
+      priceNote: pkg.priceNote || 'per person / private group',
+      duration: pkg.duration || '7 Days',
+      highlights: Array.isArray(pkg.highlights) ? pkg.highlights : [],
+      inclusions: Array.isArray(pkg.inclusions) ? pkg.inclusions : [],
+      exclusions: Array.isArray(pkg.exclusions) ? pkg.exclusions : [],
+      accommodationStyle: pkg.accommodationStyle || 'Boutique Heritage Lodgings',
+      heroImage: pkg.heroImage || pkg.image || {
+        src: '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg',
+        alt: pkg.name || pkg.title || 'Package hero',
+      },
+      gallery: Array.isArray(pkg.gallery) ? pkg.gallery : [],
+      featured: Boolean(pkg.featured),
+      status: pkg.status === 'draft' ? 'draft' : 'published',
+      createdAt: pkg.createdAt || new Date(2025, 0, 1 + idx).toISOString(),
+      updatedAt: pkg.updatedAt || new Date().toISOString(),
+    }));
+  }
+
+  if (!data.experiences || !Array.isArray(data.experiences) || data.experiences.length === 0) {
+    data.experiences = initial.experiences;
+  }
+  if (!data.services || !Array.isArray(data.services) || data.services.length === 0) {
+    data.services = initial.services;
+  }
+  if (!data.inquiries || !Array.isArray(data.inquiries)) {
+    data.inquiries = [];
+  }
+  if (!data.blogs || !Array.isArray(data.blogs) || data.blogs.length === 0) {
+    data.blogs = initial.blogs;
+  }
+  if (!data.photos || !Array.isArray(data.photos) || data.photos.length === 0) {
+    data.photos = initial.photos;
+  }
+  if (!data.reviews || !Array.isArray(data.reviews) || data.reviews.length === 0) {
+    data.reviews = initial.reviews;
+  }
+  if (!data.handwrittenReviews || !Array.isArray(data.handwrittenReviews) || data.handwrittenReviews.length === 0) {
+    data.handwrittenReviews = initial.handwrittenReviews;
+  }
+  if (!data.settings) {
+    data.settings = DEFAULT_SETTINGS;
+  } else if (!data.settings.stats || !Array.isArray(data.settings.stats) || data.settings.stats.length === 0) {
+    data.settings.stats = DEFAULT_STATS;
+  }
+  if (!data.admin) {
+    data.admin = initial.admin;
+  }
+
+  return data;
+}
+
 export function readStore(): CMSDataStore {
   if (memoryCache) {
     return memoryCache;
@@ -252,10 +317,11 @@ export function readStore(): CMSDataStore {
     if (isVercel && fs.existsSync(SEED_FILE)) {
       try {
         const seedContent = fs.readFileSync(SEED_FILE, 'utf-8');
-        fs.writeFileSync(DB_FILE, seedContent, 'utf-8');
         const data = JSON.parse(seedContent) as CMSDataStore;
-        memoryCache = data;
-        return data;
+        const sanitized = sanitizeAndMigrateStore(data);
+        fs.writeFileSync(DB_FILE, JSON.stringify(sanitized, null, 2), 'utf-8');
+        memoryCache = sanitized;
+        return sanitized;
       } catch (e) {
         console.error('Error copying seed store:', e);
       }
@@ -269,45 +335,9 @@ export function readStore(): CMSDataStore {
   try {
     const raw = fs.readFileSync(DB_FILE, 'utf-8');
     const data = JSON.parse(raw) as CMSDataStore;
-
-    // Safety verification & backward-compatible migrations
-    if (!data.packages || !Array.isArray(data.packages) || data.packages.length === 0) {
-      data.packages = getInitialStore().packages;
-    }
-    if (!data.experiences || !Array.isArray(data.experiences) || data.experiences.length === 0) {
-      data.experiences = getInitialStore().experiences;
-    }
-    if (!data.services || !Array.isArray(data.services) || data.services.length === 0) {
-      data.services = getInitialStore().services;
-    }
-    if (!data.inquiries || !Array.isArray(data.inquiries)) {
-      data.inquiries = [];
-    }
-    if (!data.blogs || !Array.isArray(data.blogs) || data.blogs.length === 0) {
-      data.blogs = getInitialStore().blogs;
-    }
-    if (!data.photos || !Array.isArray(data.photos) || data.photos.length === 0) {
-      data.photos = getInitialStore().photos;
-    }
-    if (!data.reviews || !Array.isArray(data.reviews) || data.reviews.length === 0) {
-      data.reviews = getInitialStore().reviews;
-    }
-    if (!data.handwrittenReviews || !Array.isArray(data.handwrittenReviews) || data.handwrittenReviews.length === 0) {
-      data.handwrittenReviews = getInitialStore().handwrittenReviews;
-    }
-    if (!data.settings) {
-      data.settings = DEFAULT_SETTINGS;
-    } else {
-      if (!data.settings.stats || !Array.isArray(data.settings.stats) || data.settings.stats.length === 0) {
-        data.settings.stats = DEFAULT_STATS;
-      }
-    }
-    if (!data.admin) {
-      data.admin = getInitialStore().admin;
-    }
-
-    memoryCache = data;
-    return data;
+    const sanitized = sanitizeAndMigrateStore(data);
+    memoryCache = sanitized;
+    return sanitized;
   } catch (error) {
     console.error('Error reading CMS database file, initializing with defaults:', error);
     const initial = getInitialStore();
@@ -335,11 +365,16 @@ export function writeStore(store: CMSDataStore): void {
 
 export function getAllPackages(includeDrafts = true): ExtendedPackage[] {
   const store = readStore();
-  let packages = store.packages || [];
+  let packages = store.packages;
+  if (!packages || !Array.isArray(packages) || packages.length === 0) {
+    packages = getInitialStore().packages;
+    store.packages = packages;
+    writeStore(store);
+  }
   if (!includeDrafts) {
     packages = packages.filter((p) => p.status === 'published');
   }
-  return packages.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  return [...packages].sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
 }
 
 export function getPackageBySlug(slug: string, includeDrafts = true): ExtendedPackage | null {

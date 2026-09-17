@@ -1,12 +1,14 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getServiceBySlug, updateService, deleteService } from '@/lib/db';
-import { getAdminSession } from '@/lib/auth';
+import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const session = getAdminSession();
+  const session = getSessionFromRequest(req) || await getAdminSession(req);
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -16,14 +18,14 @@ export async function GET(
     return NextResponse.json({ error: 'Service not found' }, { status: 404 });
   }
 
-  return NextResponse.json({ service });
+  return NextResponse.json({ success: true, service });
 }
 
 export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const session = getAdminSession();
+  const session = getSessionFromRequest(req) || await getAdminSession(req);
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -46,7 +48,7 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const session = getAdminSession();
+  const session = getSessionFromRequest(req) || await getAdminSession(req);
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

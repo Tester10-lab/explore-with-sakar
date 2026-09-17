@@ -60,6 +60,8 @@ export default function AdminPackagesPage() {
       if (res.ok) {
         const data = await res.json();
         setPackages(data.packages || []);
+      } else {
+        showToast('error', `Failed to load packages (Status: ${res.status})`);
       }
     } catch (err) {
       showToast('error', 'Failed to fetch packages');
@@ -125,7 +127,12 @@ export default function AdminPackagesPage() {
 
   const handleOpenEdit = (pkg: ExtendedPackage) => {
     setIsNewPkg(false);
-    setEditingPkg({ ...pkg });
+    setEditingPkg({
+      ...pkg,
+      name: pkg.name || (pkg as any).title || '',
+      summary: pkg.summary || (pkg as any).overview || '',
+      heroImage: pkg.heroImage || (pkg as any).image || { src: '', alt: '' },
+    });
     setHighlightsText((pkg.highlights || []).join('\n'));
     setInclusionsText((pkg.inclusions || []).join('\n'));
     setExclusionsText((pkg.exclusions || []).join('\n'));
@@ -304,10 +311,10 @@ export default function AdminPackagesPage() {
                 <div>
                   {/* Image Preview & Badges */}
                   <div className="relative h-44 w-full overflow-hidden bg-himalaya-950">
-                    {pkg.heroImage?.src ? (
+                    {pkg.heroImage?.src || (pkg as any).image?.src ? (
                       <img
-                        src={pkg.heroImage.src}
-                        alt={pkg.name}
+                        src={pkg.heroImage?.src || (pkg as any).image?.src}
+                        alt={pkg.name || (pkg as any).title || 'Nepal Package'}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
@@ -356,10 +363,10 @@ export default function AdminPackagesPage() {
                   <div className="p-5 space-y-3">
                     <div>
                       <h4 className="font-editorial-serif text-lg font-bold text-parchment-100 group-hover:text-terracotta-light transition-colors line-clamp-1">
-                        {pkg.name}
+                        {pkg.name || (pkg as any).title || 'Curated Package'}
                       </h4>
                       <p className="text-xs text-parchment-400 font-light line-clamp-2 mt-1">
-                        {pkg.summary}
+                        {pkg.summary || (pkg as any).overview || ''}
                       </p>
                     </div>
 

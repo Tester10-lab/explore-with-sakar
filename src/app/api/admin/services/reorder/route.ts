@@ -1,9 +1,11 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { reorderServices } from '@/lib/db';
-import { getAdminSession } from '@/lib/auth';
+import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
-  const session = getAdminSession();
+  const session = getSessionFromRequest(req) || await getAdminSession(req);
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

@@ -1,9 +1,11 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { updatePackage, deletePackage, getPackageBySlug } from '@/lib/db';
-import { getAdminSession } from '@/lib/auth';
+import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = getAdminSession();
+  const session = getSessionFromRequest(req) || await getAdminSession(req);
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -21,7 +23,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = getAdminSession();
+  const session = getSessionFromRequest(req) || await getAdminSession(req);
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

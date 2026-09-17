@@ -1,23 +1,25 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllExperiences, createExperience } from '@/lib/db';
-import { getAdminSession } from '@/lib/auth';
+import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
 
-export async function GET() {
-  const session = getAdminSession();
+export async function GET(req: NextRequest) {
+  const session = getSessionFromRequest(req) || await getAdminSession(req);
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
     const experiences = getAllExperiences(true);
-    return NextResponse.json({ experiences });
+    return NextResponse.json({ success: true, experiences });
   } catch (error: any) {
     return NextResponse.json({ error: 'Failed to fetch experiences' }, { status: 500 });
   }
 }
 
 export async function POST(req: NextRequest) {
-  const session = getAdminSession();
+  const session = getSessionFromRequest(req) || await getAdminSession(req);
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
