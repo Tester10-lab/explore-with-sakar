@@ -20,6 +20,7 @@ import {
   Compass,
   Mountain,
   Heart,
+  Star,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSettings } from '@/context/SettingsContext';
@@ -217,15 +218,65 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                 <ArrowRight className="w-4 h-4 text-terracotta" />
               </Link>
 
-              {/* 3. STORIES */}
-              <Link
-                href="/blog"
-                onClick={onClose}
-                className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-between shadow-xs"
-              >
-                <span>STORIES</span>
-                <ArrowRight className="w-4 h-4 text-terracotta" />
-              </Link>
+              {/* 3. STORIES Group */}
+              <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden shadow-xs">
+                <button
+                  onClick={() => toggleSection('stories')}
+                  className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950"
+                >
+                  <span className="flex items-center space-x-2">
+                    <BookOpen className="w-4 h-4 text-terracotta" />
+                    <span>STORIES</span>
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      openSection === 'stories' ? 'rotate-180 text-terracotta' : ''
+                    }`}
+                  />
+                </button>
+
+                {openSection === 'stories' && (
+                  <div className="px-4 pb-4 pt-1 space-y-3 border-t border-parchment-200 divide-y divide-parchment-100">
+                    <Link
+                      href="/blog"
+                      onClick={onClose}
+                      className="block group pt-2 first:pt-1 pb-1"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                          <BookOpen className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                          Sakar’s Journal & Blogs
+                        </span>
+                        <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                          Blogs
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                        Field notes, personal essays, and reflections on slow travel and heritage.
+                      </p>
+                    </Link>
+
+                    <Link
+                      href="/reviews"
+                      onClick={onClose}
+                      className="block group pt-2.5 pb-1"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                          <Star className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                          Traveler Reviews & Guestbook
+                        </span>
+                        <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                          Reviews
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                        Read guest reflections and flip through Sakar’s handwritten guestbook.
+                      </p>
+                    </Link>
+                  </div>
+                )}
+              </div>
 
               {/* 4. ABOUT SAKAR */}
               <Link

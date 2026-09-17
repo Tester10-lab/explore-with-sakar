@@ -99,7 +99,24 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
   },
   {
     label: 'STORIES',
-    href: '/blog',
+    subtitle: 'Perspectives & Reflections',
+    columns: 1,
+    children: [
+      {
+        title: 'Sakar’s Journal & Blogs',
+        description: 'Field notes, personal essays, and reflections on slow travel and heritage.',
+        href: '/blog',
+        badge: 'Essays',
+        icon: BookOpen,
+      },
+      {
+        title: 'Traveler Reviews & Guestbook',
+        description: 'Read guest reflections and flip through Sakar’s handwritten guestbook.',
+        href: '/reviews',
+        badge: 'Reviews',
+        icon: Star,
+      },
+    ],
   },
   {
     label: 'ABOUT SAKAR',
