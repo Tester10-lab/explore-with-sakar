@@ -4,35 +4,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   ArrowRight,
-  Sparkles,
-  Compass,
   Heart,
-  Home,
-  Mountain,
   Check,
-  Phone,
-  ShieldCheck,
-  Camera,
   BookOpen,
-  Star,
 } from 'lucide-react';
 import Hero from '@/components/home/Hero';
-import ExperienceFinder from '@/components/home/ExperienceFinder';
 import {
-  getLiveExperiences,
   getLiveBlogs,
-  getLiveReviews,
-  getLivePhotos,
   getLiveServices,
   getLiveSettings,
 } from '@/lib/cms';
-import ExperienceCard from '@/components/common/ExperienceCard';
 import ServiceCard from '@/components/common/ServiceCard';
-import TestimonialCard from '@/components/common/TestimonialCard';
 import BlogCard from '@/components/common/BlogCard';
 import SectionHeading from '@/components/common/SectionHeading';
 import InquiryForm from '@/components/booking/InquiryForm';
-import CTASection from '@/components/common/CTASection';
 
 export const metadata: Metadata = {
   title: 'Explore With Sakar — Authentic Nepal Travel & Cultural Experiences',
@@ -44,17 +29,9 @@ export default function HomePage() {
   const stats = settings.stats || [];
 
   const services = getLiveServices(false);
-  const experiences = getLiveExperiences(false);
-  const featuredExperiences = experiences.filter((e) => e.featured).slice(0, 3);
 
   const blogs = getLiveBlogs(false);
   const latestBlogs = blogs.slice(0, 3);
-
-  const reviews = getLiveReviews();
-  const featuredReviews = reviews.slice(0, 3);
-
-  const photos = getLivePhotos();
-  const featuredPhotos = photos.filter((p) => p.featured).slice(0, 6);
 
   return (
     <div className="flex flex-col min-h-screen bg-parchment-100">
@@ -86,17 +63,12 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* 2. Experience Finder (Interactive 7 Personas Navigator) */}
-      <section className="py-16 sm:py-24 bg-white border-b border-parchment-300">
-        <ExperienceFinder />
-      </section>
-
-      {/* 3. Core Travel Pillars (Live CMS) */}
-      <section className="py-20 sm:py-28 bg-parchment-100 border-b border-parchment-300">
+      {/* 2. Core Travel Pillars */}
+      <section className="py-20 sm:py-28 bg-white border-b border-parchment-300">
         <div className="editorial-container">
           <SectionHeading
             tag="Our Core Pillars"
-            nepaliTag="हाम्रा सेवाहरू"
+            nepaliTag="हाम्रा यात्राहरू"
             title="Meaningful Travel, Deeply Curated"
             description="We move away from hurried checklists and mass tourism. Explore our dedicated travel offerings, each crafted to forge genuine human connection."
           />
@@ -117,74 +89,17 @@ export default function HomePage() {
 
           <div className="text-center pt-4">
             <Link
-              href="/services"
+              href="/experiences"
               className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-himalaya-950 hover:bg-terracotta text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 shadow-subtle hover:shadow-warm"
             >
-              <span>Explore All Travel Offerings</span>
+              <span>Explore All Experiences</span>
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 4. Featured Signature Experiences */}
-      <section className="py-20 sm:py-28 bg-sand border-b border-parchment-300">
-        <div className="editorial-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-            <div className="max-w-2xl">
-              <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-terracotta/10 text-terracotta border border-terracotta/20 mb-3">
-                <Sparkles className="w-3 h-3" />
-                <span>Signature Journeys</span>
-              </span>
-              <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-                Curated Private Itineraries
-              </h2>
-              <p className="text-base text-himalaya-700 font-light mt-2">
-                Handcrafted journeys combining sacred heritage, gentle mountain walking, and warm hearthside hospitality.
-              </p>
-            </div>
-
-            <Link
-              href="/experiences"
-              className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-himalaya-900 hover:text-terracotta transition-colors group self-start md:self-end"
-            >
-              <span>View All Itineraries</span>
-              <ArrowRight className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {featuredExperiences.map((exp) => (
-              <ExperienceCard key={exp.id} experience={exp} />
-            ))}
-          </div>
-
-          {/* Quick highlight banner: Packages & Pricing */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-white border border-parchment-300 shadow-subtle flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 text-center md:text-left">
-              <span className="text-xs font-bold uppercase tracking-wider text-terracotta">
-                Transparent Planning
-              </span>
-              <h3 className="font-editorial-serif text-xl sm:text-2xl font-bold text-himalaya-950">
-                Looking for ready-to-book signature packages & pricing details?
-              </h3>
-              <p className="text-sm text-himalaya-600 font-light max-w-xl">
-                Review our comprehensive inclusions, accommodation standards, and bespoke custom quotation options.
-              </p>
-            </div>
-
-            <Link
-              href="/packages"
-              className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-parchment-200 hover:bg-himalaya-950 text-himalaya-900 hover:text-white font-semibold text-xs tracking-wider uppercase transition-colors shrink-0"
-            >
-              <ShieldCheck className="w-4 h-4 mr-2 text-terracotta" />
-              <span>View Packages & Pricing</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Meet Sakar: Personal Introduction */}
+      {/* 3. Meet Sakar: Personal Introduction */}
       <section className="py-20 sm:py-28 bg-parchment-100 border-b border-parchment-300">
         <div className="editorial-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -267,7 +182,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. From Sakar's Journal (Blog Teaser) */}
+      {/* 4. From Sakar's Journal (Blog Teaser) */}
       <section className="py-20 sm:py-28 bg-sand border-b border-parchment-300">
         <div className="editorial-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
@@ -304,140 +219,14 @@ export default function HomePage() {
               href="/blog"
               className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white hover:bg-himalaya-950 text-himalaya-900 hover:text-white border border-parchment-300 font-semibold text-xs tracking-widest uppercase transition-all duration-300 shadow-subtle"
             >
-              <span>Read More Journal Entries</span>
+              <span>Read More Stories</span>
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 7. Visual Journey (Editorial Photo Grid Preview) */}
-      <section className="py-20 sm:py-28 bg-parchment-100 border-b border-parchment-300">
-        <div className="editorial-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-            <div className="max-w-2xl">
-              <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-terracotta/10 text-terracotta border border-terracotta/20 mb-3">
-                <Camera className="w-3 h-3" />
-                <span>Nepal Through The Lens</span>
-              </span>
-              <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-                Visual Journey Portfolio
-              </h2>
-              <p className="text-base text-himalaya-700 font-light mt-2">
-                Moments of mountain serenity, sacred monastery dawns, and warm hearthside laughter captured across our journeys.
-              </p>
-            </div>
-
-            <Link
-              href="/gallery"
-              className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-himalaya-900 hover:text-terracotta transition-colors group self-start md:self-end"
-            >
-              <span>Explore Full Gallery</span>
-              <ArrowRight className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {featuredPhotos.map((photo) => (
-              <Link
-                key={photo.id}
-                href="/gallery"
-                className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-himalaya-900 border border-parchment-300 shadow-subtle hover:shadow-floating transition-all duration-300"
-              >
-                <Image
-                  src={photo.image}
-                  alt={photo.alt || photo.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
-
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-himalaya-950">
-                  {photo.categoryLabel}
-                </div>
-
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h4 className="font-editorial-serif text-sm sm:text-base font-bold leading-tight">
-                    {photo.title}
-                  </h4>
-                  <p className="text-xs text-parchment-300 font-light truncate mt-0.5">
-                    {photo.location}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Link
-              href="/gallery"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-himalaya-950 hover:bg-terracotta text-white font-semibold text-xs tracking-widest uppercase transition-colors"
-            >
-              <span>View Full Visual Portfolio ({photos.length}+ Stories)</span>
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. Testimonials & Traveler Reflections (Live CMS with Read All Reviews CTA) */}
-      <section className="py-20 sm:py-28 bg-sand border-b border-parchment-300">
-        <div className="editorial-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-            <div className="max-w-2xl">
-              <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-terracotta/10 text-terracotta border border-terracotta/20 mb-3">
-                <Star className="w-3 h-3 fill-terracotta" />
-                <span>Traveler Reflections</span>
-              </span>
-              <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-                Voices from Past Journeys
-              </h2>
-              <p className="text-base text-himalaya-700 font-light mt-2">
-                Genuine reflections from conscious travelers who sought an authentic, slow-paced exploration of Nepal with Sakar.
-              </p>
-            </div>
-
-            <Link
-              href="/reviews"
-              className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-himalaya-900 hover:text-terracotta transition-colors group self-start md:self-end"
-            >
-              <span>Read All Reviews</span>
-              <ArrowRight className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {featuredReviews.map((t, idx) => (
-              <TestimonialCard
-                key={t.id}
-                testimonial={t}
-                featured={idx === 1}
-              />
-            ))}
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/reviews#handwritten-journal"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl bg-terracotta hover:bg-terracotta-dark text-white font-semibold text-xs tracking-widest uppercase transition-all shadow-subtle hover:shadow-warm"
-            >
-              <BookOpen className="w-4 h-4 mr-2" />
-              <span>Flip Through Handwritten Journal</span>
-            </Link>
-
-            <Link
-              href="/reviews"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white hover:bg-himalaya-950 text-himalaya-900 hover:text-white border border-parchment-300 font-semibold text-xs tracking-widest uppercase transition-all shadow-subtle"
-            >
-              <span>View All Guest Reviews ({reviews.length})</span>
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. Final Consultation & Inquiry Form */}
+      {/* 5. Final Consultation & Inquiry Form */}
       <section id="inquiry" className="border-t border-parchment-300">
         <InquiryForm />
       </section>
