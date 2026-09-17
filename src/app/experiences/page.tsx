@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -13,18 +14,36 @@ import { ExtendedExperience } from '@/types/cms';
 
 const CATEGORIES: { key: ExperienceCategory | 'all'; label: string }[] = [
   { key: 'all', label: 'All Journeys' },
+  { key: 'adventure', label: 'Go Beyond the Map' },
+  { key: 'spiritual', label: 'Go Within' },
+  { key: 'homestay', label: 'Feel Closer' },
+  { key: 'responsible', label: 'Leave a Mark' },
   { key: 'heritage', label: 'Living Heritage' },
-  { key: 'spiritual', label: 'Spiritual & Wellness' },
-  { key: 'homestay', label: 'Village Homestays' },
-  { key: 'adventure', label: 'Hidden Trails' },
-  { key: 'responsible', label: 'Responsible Wildlife' },
 ];
 
-export default function ExperiencesPage() {
+function ExperiencesContent() {
+  const searchParams = useSearchParams();
   const [experiences, setExperiences] = useState<any[]>(EXPERIENCES);
   const [activeCategory, setActiveCategory] = useState<ExperienceCategory | 'all'>('all');
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const categoryParam = searchParams.get('category') || searchParams.get('pillar');
+    if (categoryParam) {
+      if (categoryParam === 'responsible' || categoryParam === 'leave-a-mark') {
+        setActiveCategory('responsible');
+      } else if (categoryParam === 'spiritual' || categoryParam === 'within') {
+        setActiveCategory('spiritual');
+      } else if (categoryParam === 'homestay' || categoryParam === 'feel-closer') {
+        setActiveCategory('homestay');
+      } else if (categoryParam === 'adventure' || categoryParam === 'beyond-the-map') {
+        setActiveCategory('adventure');
+      } else if (categoryParam === 'heritage') {
+        setActiveCategory('heritage');
+      }
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
     async function loadLiveExperiences() {
       try {
         const res = await fetch('/api/public/content');
@@ -115,5 +134,19 @@ export default function ExperiencesPage() {
         secondaryButtonHref="/packages"
       />
     </div>
+  );
+}
+
+export default function ExperiencesPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-parchment-100 flex items-center justify-center">
+          <p className="font-editorial-serif text-terracotta">Loading experiences...</p>
+        </div>
+      }
+    >
+      <ExperiencesContent />
+    </Suspense>
   );
 }

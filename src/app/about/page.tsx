@@ -171,8 +171,8 @@ export default function AboutPage() {
         subtitle="Connect directly with Sakar to begin co-creating your personalized, unhurried journey."
         primaryButtonText="Start a Conversation"
         primaryButtonHref="/contact"
-        secondaryButtonText="Explore Our Services"
-        secondaryButtonHref="/services"
+        secondaryButtonText="Explore Experiences"
+        secondaryButtonHref="/experiences"
       />
     </div>
   );

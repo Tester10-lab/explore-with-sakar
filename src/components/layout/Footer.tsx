@@ -85,30 +85,30 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 1: Services */}
+          {/* Column 1: Experiences */}
           <div className="space-y-4">
             <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
-              Services
+              Experiences
             </h4>
             <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
               <li>
-                <Link href="/services/homestays" className="hover:text-terracotta transition-colors">
-                  Village Homestays
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/culture" className="hover:text-terracotta transition-colors">
-                  Living Culture & Heritage
+                <Link href="/services/trekking" className="hover:text-terracotta transition-colors">
+                  Go Beyond the Map
                 </Link>
               </li>
               <li>
                 <Link href="/services/spiritual-wellness" className="hover:text-terracotta transition-colors">
-                  Spiritual & Sound Healing
+                  Go Within
                 </Link>
               </li>
               <li>
-                <Link href="/services/trekking" className="hover:text-terracotta transition-colors">
-                  Mountain Treks & Trails
+                <Link href="/services/homestays" className="hover:text-terracotta transition-colors">
+                  Feel Closer
+                </Link>
+              </li>
+              <li>
+                <Link href="/experiences?category=responsible" className="hover:text-terracotta transition-colors">
+                  Leave a Mark
                 </Link>
               </li>
               <li>
@@ -117,8 +117,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="font-medium text-terracotta hover:underline pt-1 inline-block">
-                  All Services Hub →
+                <Link href="/experiences" className="font-medium text-terracotta hover:underline pt-1 inline-block">
+                  All Experiences Hub →
                 </Link>
               </li>
             </ul>

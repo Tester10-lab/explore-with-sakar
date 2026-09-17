@@ -46,54 +46,56 @@ export interface NavItem {
 
 export const MAIN_NAV_STRUCTURE: NavItem[] = [
   {
-    label: 'Services',
-    subtitle: 'Our 5 Core Travel Pillars',
+    label: 'Experiences',
+    subtitle: 'Our Four Pillars of Travel',
     columns: 2,
     children: [
       {
-        title: 'Village Homestays',
-        description: 'Stay with Gurung & Tamang families around living woodfire hearths.',
-        href: '/services/homestays',
-        badge: 'Signature',
-        icon: Home,
-      },
-      {
-        title: 'Living Culture & Heritage',
-        description: 'Hidden bahals, master woodcarvers, bronze smiths & sacred feasts.',
-        href: '/services/culture',
-        badge: 'Popular',
-        icon: Sparkles,
-      },
-      {
-        title: 'Spiritual & Wellness',
-        description: '7-metal singing bowls, dawn monastery pujas & sacred caves.',
-        href: '/services/spiritual-wellness',
-        icon: Heart,
-      },
-      {
-        title: 'Mountain Treks & Trails',
-        description: 'Slow uncrowded walking routes with fair porter welfare.',
+        title: 'Go Beyond the Map',
+        description: 'Guided exploration, hidden communities, sacred places, trails, local stories.',
         href: '/services/trekking',
-        icon: Mountain,
-      },
-      {
-        title: 'Custom Private Journeys',
-        description: 'Tailor-made itineraries for solo travelers, couples & families.',
-        href: '/services/custom-journeys',
-        badge: 'Bespoke',
+        badge: 'Exploration',
         icon: Compass,
       },
       {
-        title: 'Explore All Services',
-        description: 'Overview of our slow travel philosophy and host principles.',
-        href: '/services',
-        icon: Layers,
+        title: 'Go Within',
+        description: 'Spiritual journeys, Himalayan practices, meditation, sacred traditions, sound experiences.',
+        href: '/services/spiritual-wellness',
+        badge: 'Spiritual',
+        icon: Sparkles,
+      },
+      {
+        title: 'Feel Closer',
+        description: 'Homestays, local families, food, traditional skills, cultural immersion.',
+        href: '/services/homestays',
+        badge: 'Immersion',
+        icon: Home,
+      },
+      {
+        title: 'Leave a Mark',
+        description: 'Community projects, school programs, environmental activities, volunteering and meaningful events.',
+        href: '/experiences?category=responsible',
+        badge: 'Impact',
+        icon: Heart,
+      },
+      {
+        title: 'All Curated Experiences',
+        description: 'Browse complete day-by-day itineraries, sacred journeys & departures.',
+        href: '/experiences',
+        icon: Calendar,
+      },
+      {
+        title: 'Custom Private Journeys',
+        description: 'Tailor-made itineraries for solo travelers, couples & families with Sakar.',
+        href: '/services/custom-journeys',
+        badge: 'Bespoke',
+        icon: ShieldCheck,
       },
     ],
   },
   {
     label: 'Explore',
-    subtitle: 'Destinations, Itineraries & Visuals',
+    subtitle: 'Destinations, Packages & Visuals',
     columns: 2,
     children: [
       {
@@ -101,12 +103,6 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
         description: 'Kathmandu, Pokhara, Mustang, Langtang, Chitwan & Bandipur.',
         href: '/destinations',
         icon: MapPin,
-      },
-      {
-        title: 'Curated Experiences',
-        description: 'Browse complete day-by-day itineraries and journeys.',
-        href: '/experiences',
-        icon: Calendar,
       },
       {
         title: 'Signature Packages',
