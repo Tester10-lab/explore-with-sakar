@@ -151,8 +151,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/events" className="hover:text-terracotta transition-colors">
+                  Events & Festivals
+                </Link>
+              </li>
+              <li>
                 <Link href="/blog" className="hover:text-terracotta transition-colors">
-                  Sakar’s Journal
+                  Stories & Field Notes
                 </Link>
               </li>
             </ul>

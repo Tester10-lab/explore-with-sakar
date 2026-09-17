@@ -46,7 +46,7 @@ export interface NavItem {
 
 export const MAIN_NAV_STRUCTURE: NavItem[] = [
   {
-    label: 'Experiences',
+    label: 'EXPERIENCES',
     subtitle: 'Our Four Pillars of Travel',
     columns: 2,
     children: [
@@ -94,70 +94,16 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
     ],
   },
   {
-    label: 'Explore',
-    subtitle: 'Destinations, Packages & Visuals',
-    columns: 2,
-    children: [
-      {
-        title: 'Curated Destinations',
-        description: 'Kathmandu, Pokhara, Mustang, Langtang, Chitwan & Bandipur.',
-        href: '/destinations',
-        icon: MapPin,
-      },
-      {
-        title: 'Signature Packages',
-        description: 'Transparent travel packages, inclusions & custom quote options.',
-        href: '/packages',
-        badge: 'Transparent',
-        icon: ShieldCheck,
-      },
-      {
-        title: 'Visual Journey Gallery',
-        description: 'Editorial photo stories and scenes from past traveler journeys.',
-        href: '/gallery',
-        icon: Camera,
-      },
-      {
-        title: 'Reviews & Handwritten Journal',
-        description: 'Read guest reflections and flip through Sakar’s handwritten guestbook.',
-        href: '/reviews',
-        badge: 'Handwritten',
-        icon: Star,
-      },
-    ],
+    label: 'EVENTS',
+    href: '/events',
   },
   {
-    label: 'Travel Guide',
-    subtitle: 'Essential Nepal Advice',
-    columns: 1,
-    children: [
-      {
-        title: 'Travel Resources & Guides',
-        description: 'Seasons, visas, packing checklist, altitude & etiquette.',
-        href: '/resources',
-        icon: FileText,
-      },
-      {
-        title: 'Frequently Asked Questions',
-        description: 'Clear answers on homestays, fitness, booking & safety.',
-        href: '/faq',
-        icon: HelpCircle,
-      },
-      {
-        title: 'Sakar’s Journal / Blog',
-        description: 'Personal essays, field notes, and reflections on slow travel.',
-        href: '/blog',
-        icon: BookOpen,
-      },
-    ],
+    label: 'STORIES',
+    href: '/blog',
   },
   {
-    label: 'About',
+    label: 'ABOUT SAKAR',
     href: '/about',
-  },
-  {
-    label: 'Contact',
-    href: '/contact',
   },
 ];
 

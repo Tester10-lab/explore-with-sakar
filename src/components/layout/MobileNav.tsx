@@ -207,116 +207,34 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                 )}
               </div>
 
-              {/* 2. Explore Group */}
-              <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden shadow-xs">
-                <button
-                  onClick={() => toggleSection('explore')}
-                  className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold text-himalaya-950"
-                >
-                  <span className="flex items-center space-x-2">
-                    <MapPin className="w-4 h-4 text-terracotta" />
-                    <span>Explore Nepal</span>
-                  </span>
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${
-                      openSection === 'explore' ? 'rotate-180 text-terracotta' : ''
-                    }`}
-                  />
-                </button>
+              {/* 2. EVENTS */}
+              <Link
+                href="/events"
+                onClick={onClose}
+                className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-between shadow-xs"
+              >
+                <span>EVENTS</span>
+                <ArrowRight className="w-4 h-4 text-terracotta" />
+              </Link>
 
-                {openSection === 'explore' && (
-                  <div className="px-4 pb-4 pt-1 space-y-2 border-t border-parchment-200">
-                    <Link
-                      href="/destinations"
-                      onClick={onClose}
-                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
-                    >
-                      Curated Destinations
-                    </Link>
-                    <Link
-                      href="/packages"
-                      onClick={onClose}
-                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
-                    >
-                      Signature Packages & Pricing
-                    </Link>
-                    <Link
-                      href="/gallery"
-                      onClick={onClose}
-                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
-                    >
-                      Visual Journey Gallery
-                    </Link>
-                    <Link
-                      href="/reviews"
-                      onClick={onClose}
-                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
-                    >
-                      Reviews & Guest Journal
-                    </Link>
-                  </div>
-                )}
-              </div>
+              {/* 3. STORIES */}
+              <Link
+                href="/blog"
+                onClick={onClose}
+                className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-between shadow-xs"
+              >
+                <span>STORIES</span>
+                <ArrowRight className="w-4 h-4 text-terracotta" />
+              </Link>
 
-              {/* 3. Travel Guide */}
-              <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden">
-                <button
-                  onClick={() => toggleSection('guide')}
-                  className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold text-himalaya-950"
-                >
-                  <span className="flex items-center space-x-2">
-                    <FileText className="w-4 h-4 text-terracotta" />
-                    <span>Travel Guide</span>
-                  </span>
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform ${
-                      openSection === 'guide' ? 'rotate-180 text-terracotta' : ''
-                    }`}
-                  />
-                </button>
-
-                {openSection === 'guide' && (
-                  <div className="px-4 pb-4 pt-1 space-y-2 border-t border-parchment-200">
-                    <Link
-                      href="/resources"
-                      onClick={onClose}
-                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
-                    >
-                      Travel Resources (Seasons, Visas, Packing)
-                    </Link>
-                    <Link
-                      href="/faq"
-                      onClick={onClose}
-                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
-                    >
-                      Frequently Asked Questions
-                    </Link>
-                    <Link
-                      href="/blog"
-                      onClick={onClose}
-                      className="block text-xs text-himalaya-800 hover:text-terracotta py-1.5"
-                    >
-                      Sakar’s Journal / Blog
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              {/* Direct Links */}
+              {/* 4. ABOUT SAKAR */}
               <Link
                 href="/about"
                 onClick={onClose}
-                className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold text-himalaya-950 hover:text-terracotta"
+                className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-between shadow-xs"
               >
-                About Sakar
-              </Link>
-
-              <Link
-                href="/contact"
-                onClick={onClose}
-                className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold text-himalaya-950 hover:text-terracotta"
-              >
-                Contact Host
+                <span>ABOUT SAKAR</span>
+                <ArrowRight className="w-4 h-4 text-terracotta" />
               </Link>
             </div>
 
