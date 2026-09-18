@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { getSessionFromRequest, getAdminSession } from '@/lib/auth';
-import { getAllBlogs, createBlog } from '@/lib/db';
+import { getAllBlogsAsync, createBlogAsync } from '@/lib/db';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req) || await getAdminSession(req);
@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const blogs = getAllBlogs(true);
+  const blogs = await getAllBlogsAsync(true);
   return NextResponse.json({ success: true, blogs });
 }
 
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       .replace(/[^a-z0-9-]/g, '-')
       .replace(/-+/g, '-');
 
-    const newBlog = createBlog({
+    const newBlog = await createBlogAsync({
       slug: cleanSlug,
       title: body.title.trim(),
       subtitle: body.subtitle || '',

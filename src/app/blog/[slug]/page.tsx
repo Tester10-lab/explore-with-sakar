@@ -5,7 +5,7 @@ export const revalidate = 0;
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getLiveBlogs, getLiveBlogBySlug, getLiveRelatedBlogs } from '@/lib/cms';
+import { getLiveBlogs, getLiveBlogBySlug, getLiveBlogBySlugAsync, getLiveRelatedBlogs } from '@/lib/cms';
 import ArticleHeader from '@/components/blog/ArticleHeader';
 import ArticleContent from '@/components/blog/ArticleContent';
 import AuthorBio from '@/components/blog/AuthorBio';
@@ -19,7 +19,7 @@ interface ArticlePageProps {
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  const post = getLiveBlogBySlug(params.slug, false);
+  const post = await getLiveBlogBySlugAsync(params.slug, false);
   if (!post) {
     return {
       title: 'Story Not Found — Sakar’s Journal',
@@ -45,8 +45,8 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   };
 }
 
-export default function ArticlePage({ params }: ArticlePageProps) {
-  const post = getLiveBlogBySlug(params.slug, false);
+export default async function ArticlePage({ params }: ArticlePageProps) {
+  const post = await getLiveBlogBySlugAsync(params.slug, false);
 
   if (!post) {
     notFound();

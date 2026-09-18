@@ -1,6 +1,8 @@
 import {
   getAllBlogs,
+  getAllBlogsAsync,
   getBlogBySlug,
+  getBlogBySlugAsync,
   getAllPhotos,
   getAllReviews,
   getSettings,
@@ -14,6 +16,7 @@ import {
   getInquiryById,
   getAllHandwrittenReviews,
   getHandwrittenReviewById,
+  readStoreAsync,
 } from './db';
 import { BLOG_POSTS, getPostBySlug as getStaticPostBySlug, getRelatedPosts as getStaticRelatedPosts } from '@/data/blog';
 import { GALLERY_PHOTOS } from '@/data/gallery';
@@ -245,6 +248,36 @@ export function getLiveBlogBySlug(slug: string, includeDrafts = false): Extended
     createdAt: new Date(staticPost.publishedAt || Date.now()).toISOString(),
     updatedAt: new Date().toISOString(),
   };
+}
+
+/**
+ * Fetch all published blogs with MongoDB async support and fallback
+ */
+export async function getLiveBlogsAsync(includeDrafts = false): Promise<ExtendedBlogPost[]> {
+  try {
+    const blogs = await getAllBlogsAsync(includeDrafts);
+    if (blogs && blogs.length > 0) {
+      return blogs;
+    }
+  } catch (err) {
+    console.warn('Fallback to static blogs due to CMS store read error:', err);
+  }
+
+  return getLiveBlogs(includeDrafts);
+}
+
+/**
+ * Fetch a single blog post by slug with MongoDB async support and fallback
+ */
+export async function getLiveBlogBySlugAsync(slug: string, includeDrafts = false): Promise<ExtendedBlogPost | null> {
+  try {
+    const blog = await getBlogBySlugAsync(slug, includeDrafts);
+    if (blog) return blog;
+  } catch (err) {
+    console.warn('Fallback to static blog by slug due to CMS error:', err);
+  }
+
+  return getLiveBlogBySlug(slug, includeDrafts);
 }
 
 /**

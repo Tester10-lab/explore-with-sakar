@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 import { NextResponse } from 'next/server';
+import { readStoreAsync } from '@/lib/db';
 import {
   getLivePackages,
   getLiveExperiences,
@@ -15,6 +16,9 @@ import {
 
 export async function GET() {
   try {
+    // Ensure fresh data from MongoDB
+    await readStoreAsync();
+
     const packages = getLivePackages(false);
     const experiences = getLiveExperiences(false);
     const services = getLiveServices(false);
@@ -38,7 +42,7 @@ export async function GET() {
       },
       {
         headers: {
-          'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
         },
       }
     );

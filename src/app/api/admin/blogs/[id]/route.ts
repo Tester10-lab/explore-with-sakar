@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { getSessionFromRequest, getAdminSession } from '@/lib/auth';
-import { getBlogBySlug, updateBlog, deleteBlog } from '@/lib/db';
+import { getBlogBySlugAsync, updateBlogAsync, deleteBlogAsync } from '@/lib/db';
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const session = getSessionFromRequest(req) || await getAdminSession(req);
@@ -11,7 +11,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const blog = getBlogBySlug(params.id, true);
+  const blog = await getBlogBySlugAsync(params.id, true);
   if (!blog) {
     return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
   }
@@ -27,7 +27,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     }
 
     const body = await req.json();
-    const updated = updateBlog(params.id, body);
+    const updated = await updateBlogAsync(params.id, body);
 
     if (!updated) {
       return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
@@ -55,8 +55,8 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const blogToDelete = getBlogBySlug(params.id, true);
-    const success = deleteBlog(params.id);
+    const blogToDelete = await getBlogBySlugAsync(params.id, true);
+    const success = await deleteBlogAsync(params.id);
     if (!success) {
       return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
     }

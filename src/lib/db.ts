@@ -21,6 +21,7 @@ import { TRAVEL_PACKAGES } from '@/data/packages';
 import { EXPERIENCES } from '@/data/experiences';
 import { SERVICE_PILLARS } from '@/data/services';
 import { hashPassword } from './auth';
+import { getDb } from './mongodb';
 
 const isVercel = Boolean(process.env.VERCEL);
 const DATA_DIR = isVercel ? path.join('/tmp', 'data') : path.join(process.cwd(), 'data');
@@ -380,6 +381,55 @@ export function readStore(): CMSDataStore {
   }
 }
 
+export async function readStoreAsync(): Promise<CMSDataStore> {
+  try {
+    const db = await getDb();
+    if (db) {
+      const doc = await db.collection('cms_store').findOne({ _id: 'active_store' as any });
+      if (doc) {
+        const { _id, lastSyncedAt, ...storeData } = doc;
+        const sanitized = sanitizeAndMigrateStore(storeData as unknown as CMSDataStore);
+        memoryCache = sanitized;
+        try {
+          ensureDataDir();
+          fs.writeFileSync(DB_FILE, JSON.stringify(sanitized, null, 2), 'utf-8');
+        } catch {}
+        return sanitized;
+      }
+    }
+  } catch (err) {
+    console.warn('MongoDB readStoreAsync fallback:', err);
+  }
+  return readStore();
+}
+
+export async function writeStoreAsync(store: CMSDataStore): Promise<void> {
+  store.lastUpdated = new Date().toISOString();
+  memoryCache = store;
+
+  try {
+    ensureDataDir();
+    const tempFile = `${DB_FILE}.tmp.${Date.now()}`;
+    fs.writeFileSync(tempFile, JSON.stringify(store, null, 2), 'utf-8');
+    fs.renameSync(tempFile, DB_FILE);
+  } catch (err) {
+    console.error('Failed to write store to local disk:', err);
+  }
+
+  try {
+    const db = await getDb();
+    if (db) {
+      await db.collection('cms_store').updateOne(
+        { _id: 'active_store' as any },
+        { $set: { ...store, _id: 'active_store', lastSyncedAt: new Date().toISOString() } },
+        { upsert: true }
+      );
+    }
+  } catch (err) {
+    console.error('Failed to persist store to MongoDB Atlas:', err);
+  }
+}
+
 export function writeStore(store: CMSDataStore): void {
   store.lastUpdated = new Date().toISOString();
   memoryCache = store;
@@ -393,6 +443,11 @@ export function writeStore(store: CMSDataStore): void {
   } catch (err) {
     console.error('Failed to write store to disk, keeping in memory cache:', err);
   }
+
+  // Also trigger MongoDB write in background
+  writeStoreAsync(store).catch((err) => {
+    console.warn('Background MongoDB update warning:', err);
+  });
 }
 
 // ==================== PACKAGES OPERATIONS ====================
@@ -573,6 +628,68 @@ export function deleteBlog(id: string): boolean {
   );
   if (store.blogs.length !== initialLen) {
     writeStore(store);
+    return true;
+  }
+  return false;
+}
+
+export async function getAllBlogsAsync(includeDrafts = true): Promise<ExtendedBlogPost[]> {
+  const store = await readStoreAsync();
+  let blogs = store.blogs || [];
+  if (!includeDrafts) {
+    blogs = blogs.filter((b) => b.status === 'published');
+  }
+  return blogs.sort((a, b) => new Date(b.publishedAt || b.createdAt).getTime() - new Date(a.publishedAt || a.createdAt).getTime());
+}
+
+export async function getBlogBySlugAsync(slug: string, includeDrafts = true): Promise<ExtendedBlogPost | null> {
+  const blogs = await getAllBlogsAsync(includeDrafts);
+  const decoded = decodeURIComponent(slug).trim();
+  return blogs.find((b) => b.slug === slug || b.id === slug || b.slug === decoded || b.id === decoded) || null;
+}
+
+export async function createBlogAsync(blogData: Omit<ExtendedBlogPost, 'id' | 'createdAt' | 'updatedAt'>): Promise<ExtendedBlogPost> {
+  const store = await readStoreAsync();
+  const newBlog: ExtendedBlogPost = {
+    ...blogData,
+    id: `blog-${Date.now()}-${blogData.slug}`,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  store.blogs = [newBlog, ...(store.blogs || [])];
+  await writeStoreAsync(store);
+  return newBlog;
+}
+
+export async function updateBlogAsync(id: string, updates: Partial<ExtendedBlogPost>): Promise<ExtendedBlogPost | null> {
+  const store = await readStoreAsync();
+  const decoded = decodeURIComponent(id).trim();
+  const index = (store.blogs || []).findIndex(
+    (b) => b.id === id || b.slug === id || b.id === decoded || b.slug === decoded
+  );
+  if (index === -1) return null;
+
+  const updated: ExtendedBlogPost = {
+    ...store.blogs[index],
+    ...updates,
+    updatedAt: new Date().toISOString(),
+  };
+
+  store.blogs[index] = updated;
+  await writeStoreAsync(store);
+  return updated;
+}
+
+export async function deleteBlogAsync(id: string): Promise<boolean> {
+  const store = await readStoreAsync();
+  const decoded = decodeURIComponent(id).trim();
+  const initialLen = (store.blogs || []).length;
+  store.blogs = (store.blogs || []).filter(
+    (b) => b.id !== id && b.slug !== id && b.id !== decoded && b.slug !== decoded
+  );
+  if (store.blogs.length !== initialLen) {
+    await writeStoreAsync(store);
     return true;
   }
   return false;
