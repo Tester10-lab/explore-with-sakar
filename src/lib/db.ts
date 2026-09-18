@@ -312,19 +312,21 @@ export function readStore(): CMSDataStore {
 
   ensureDataDir();
 
+  let seedStore: CMSDataStore | null = null;
+  if (fs.existsSync(SEED_FILE)) {
+    try {
+      seedStore = JSON.parse(fs.readFileSync(SEED_FILE, 'utf-8'));
+    } catch (e) {
+      console.error('Error reading seed store:', e);
+    }
+  }
+
   if (!fs.existsSync(DB_FILE)) {
-    // If running on Vercel and seed file exists in repo, copy it
-    if (isVercel && fs.existsSync(SEED_FILE)) {
-      try {
-        const seedContent = fs.readFileSync(SEED_FILE, 'utf-8');
-        const data = JSON.parse(seedContent) as CMSDataStore;
-        const sanitized = sanitizeAndMigrateStore(data);
-        fs.writeFileSync(DB_FILE, JSON.stringify(sanitized, null, 2), 'utf-8');
-        memoryCache = sanitized;
-        return sanitized;
-      } catch (e) {
-        console.error('Error copying seed store:', e);
-      }
+    if (seedStore) {
+      const sanitized = sanitizeAndMigrateStore(seedStore);
+      fs.writeFileSync(DB_FILE, JSON.stringify(sanitized, null, 2), 'utf-8');
+      memoryCache = sanitized;
+      return sanitized;
     }
 
     const initial = getInitialStore();
@@ -335,6 +337,38 @@ export function readStore(): CMSDataStore {
   try {
     const raw = fs.readFileSync(DB_FILE, 'utf-8');
     const data = JSON.parse(raw) as CMSDataStore;
+
+    // Merge any items from SEED_FILE that were added to repository
+    if (seedStore) {
+      if (Array.isArray(seedStore.blogs)) {
+        if (!data.blogs) data.blogs = [];
+        const existingSlugs = new Set(data.blogs.map((b) => b.slug));
+        for (const sb of seedStore.blogs) {
+          if (!existingSlugs.has(sb.slug)) {
+            data.blogs.push(sb);
+          }
+        }
+      }
+      if (Array.isArray(seedStore.experiences)) {
+        if (!data.experiences) data.experiences = [];
+        const existingSlugs = new Set(data.experiences.map((e) => e.slug));
+        for (const se of seedStore.experiences) {
+          if (!existingSlugs.has(se.slug)) {
+            data.experiences.push(se);
+          }
+        }
+      }
+      if (Array.isArray(seedStore.services)) {
+        if (!data.services) data.services = [];
+        const existingSlugs = new Set(data.services.map((s) => s.slug));
+        for (const ss of seedStore.services) {
+          if (!existingSlugs.has(ss.slug)) {
+            data.services.push(ss);
+          }
+        }
+      }
+    }
+
     const sanitized = sanitizeAndMigrateStore(data);
     memoryCache = sanitized;
     return sanitized;
