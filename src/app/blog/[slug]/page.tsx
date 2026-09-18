@@ -1,4 +1,5 @@
 export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
 export const revalidate = 0;
 
 import React from 'react';
@@ -15,13 +16,6 @@ interface ArticlePageProps {
   params: {
     slug: string;
   };
-}
-
-export async function generateStaticParams() {
-  const blogs = getLiveBlogs(false);
-  return blogs.map((post) => ({
-    slug: post.slug,
-  }));
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
