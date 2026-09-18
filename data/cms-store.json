@@ -8,10 +8,10 @@
   "blogs": [
     {
       "slug": "test-by-diplon",
-      "title": "Diplon",
-      "subtitle": "the villian",
-      "excerpt": "test",
-      "category": "Living Culture",
+      "title": "Bound by a Thread: The Unspoken Soul-Bond of Eliza and Sakar",
+      "subtitle": "The Unspoken Soul-Bond of Eliza and Sakar",
+      "excerpt": "Some connections aren't written in grand gestures or elaborate promises; they are tied together by a single, unassuming thread.",
+      "category": "People & Places",
       "author": {
         "name": "Sakar",
         "role": "Responsible Tour Director & Founder",
@@ -22,7 +22,7 @@
       "readingTime": "5 min read",
       "featuredImage": {
         "src": "/explore-with-sakar/images/mountains/sunrise-himalayas.jpg",
-        "alt": "Diplon",
+        "alt": "Bound by a Thread: The Unspoken Soul-Bond of Eliza and Sakar",
         "caption": ""
       },
       "tags": [

@@ -108,7 +108,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   <div className="px-4 pb-4 pt-1 space-y-3 border-t border-parchment-200 divide-y divide-parchment-100">
                     {/* Pillar 1: Go Beyond the Map */}
                     <Link
-                      href="/services/trekking"
+                      href="/services/beyond-the-map"
                       onClick={onClose}
                       className="block group pt-2 first:pt-1 pb-1"
                     >

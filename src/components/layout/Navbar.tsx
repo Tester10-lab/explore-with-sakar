@@ -53,7 +53,7 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
       {
         title: 'Go Beyond the Map',
         description: 'Guided exploration, hidden communities, sacred places, trails, local stories.',
-        href: '/services/trekking',
+        href: '/services/beyond-the-map',
         badge: 'Exploration',
         icon: Compass,
       },

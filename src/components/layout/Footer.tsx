@@ -92,7 +92,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
               <li>
-                <Link href="/services/trekking" className="hover:text-terracotta transition-colors">
+                <Link href="/services/beyond-the-map" className="hover:text-terracotta transition-colors">
                   Go Beyond the Map
                 </Link>
               </li>

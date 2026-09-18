@@ -58,6 +58,7 @@ interface BlogEditorProps {
 export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorProps) {
   const router = useRouter();
 
+  const [currentBlog, setCurrentBlog] = useState(initialBlog);
   const [title, setTitle] = useState(initialBlog?.title || '');
   const [slug, setSlug] = useState(initialBlog?.slug || '');
   const [subtitle, setSubtitle] = useState(initialBlog?.subtitle || '');
@@ -234,7 +235,8 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
         content: blocks,
       };
 
-      const url = isNew ? '/api/admin/blogs' : `/api/admin/blogs/${initialBlog?.slug || slug}`;
+      const targetId = currentBlog?.id || initialBlog?.id || currentBlog?.slug || initialBlog?.slug || slug;
+      const url = isNew ? '/api/admin/blogs' : `/api/admin/blogs/${targetId}`;
       const method = isNew ? 'POST' : 'PUT';
 
       const res = await fetch(url, {
@@ -249,12 +251,25 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
         throw new Error(data.error || 'Failed to save blog post');
       }
 
+      if (data.blog) {
+        setCurrentBlog(data.blog);
+      }
+
       showToast('success', isNew ? 'Blog post created successfully!' : 'Blog post updated successfully!');
 
       if (isNew) {
         setTimeout(() => {
           router.push('/admin/blogs');
         }, 1200);
+      } else {
+        if (data.blog?.slug && data.blog.slug !== slug) {
+          setSlug(data.blog.slug);
+        }
+        if (data.blog?.slug && (initialBlog?.slug && initialBlog.slug !== data.blog.slug)) {
+          router.replace(`/admin/blogs/${data.blog.slug}`);
+        } else {
+          router.refresh();
+        }
       }
     } catch (err: any) {
       showToast('error', err?.message || 'Error saving post');
@@ -278,7 +293,7 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
           </Link>
           <div>
             <h1 className="font-editorial-serif text-2xl font-bold text-white leading-tight">
-              {isNew ? 'New Blog Article' : `Edit: ${initialBlog?.title}`}
+              {isNew ? 'New Blog Article' : `Edit: ${title.trim() || currentBlog?.title || 'Article'}`}
             </h1>
             <p className="text-xs text-parchment-400 font-mono mt-0.5">
               URL: /blog/{slug || 'your-slug-here'}
