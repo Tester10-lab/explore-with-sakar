@@ -58,7 +58,7 @@ export default function ServiceCard({ service, layout = 'grid' }: ServiceCardPro
 
               {/* Key Features list */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-parchment-200">
-                {service.keyFeatures.slice(0, 4).map((feat, idx) => (
+                {(service.keyFeatures || []).slice(0, 4).map((feat, idx) => (
                   <div key={idx} className="flex items-start space-x-2.5">
                     <div className="w-5 h-5 rounded-full bg-parchment-200 text-terracotta flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-3 h-3" />
@@ -133,7 +133,7 @@ export default function ServiceCard({ service, layout = 'grid' }: ServiceCardPro
           </p>
 
           <div className="space-y-2 pt-4 border-t border-parchment-200 mb-6">
-            {service.keyFeatures.slice(0, 2).map((feat, idx) => (
+            {(service.keyFeatures || []).slice(0, 2).map((feat, idx) => (
               <div key={idx} className="flex items-start space-x-2 text-xs text-himalaya-700">
                 <span className="text-terracotta leading-none mt-0.5">•</span>
                 <span className="font-medium text-himalaya-900">{feat.title}:</span>

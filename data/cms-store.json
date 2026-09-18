@@ -1737,6 +1737,254 @@
       "status": "published",
       "createdAt": "2026-09-13T18:12:32.785Z",
       "updatedAt": "2026-09-13T18:12:32.785Z"
+    },
+    {
+      "id": "exp-beyond-1",
+      "slug": "living-courtyards-kathmandu",
+      "title": "The Living Courtyards: Beyond the Temples of Kathmandu",
+      "subtitle": "Slipping into the hidden residential bahals where the true pulse of the city has beaten for centuries.",
+      "category": "adventure",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "1 - 2 Days",
+      "location": "Old Kathmandu (Ason & Indra Chowk)",
+      "elevation": "1,400 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/images/beyond-the-map/living-courtyards.jpg",
+        "alt": "Hidden Newari residential courtyard with ancient stupa and morning tea in Kathmandu"
+      },
+      "gallery": [
+        {
+          "src": "/images/beyond-the-map/living-courtyards.jpg",
+          "alt": "Living Courtyards"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/ancient-alleyways.jpg",
+          "alt": "Ancient alleyways of Ason"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/temple-courtyard.jpg",
+          "alt": "Sunlit temple courtyard"
+        }
+      ],
+      "shortDescription": "Most visitors stop at the grand facades of Kathmandu Durbar Square. We walk past them, slipping into the hidden bahals (residential courtyards) where the true pulse of the city has beaten for centuries.",
+      "fullDescription": [
+        "The \"Beyond the Map\" Promise: Most visitors stop at the grand facades of Kathmandu Durbar Square. We walk past them, slipping into the hidden bahals (residential courtyards) where the true pulse of the city has beaten for centuries.",
+        "This is a sensory journey through the labyrinth of old Kathmandu. We navigate the spice-scented alleys of Ason and Indra Chowk, stepping into secret courtyards to discover hidden stupas built by Silk Road merchants.",
+        "You will sit with locals over a glass of strong, sweet chiya, observe morning community rituals, and witness how ancient heritage is not just preserved in museums, but actively lived in every day by the Kathmandu Valley’s original inhabitants."
+      ],
+      "highlights": [
+        "Slipping into hidden residential bahals beyond commercial tourist routes",
+        "Navigating spice-scented alleys of Ason & Indra Chowk with Sakar",
+        "Morning community rituals and butter lamp offerings around ancient merchant stupas",
+        "Savoring sweet, spiced chiya with Newari elders in centuries-old courtyards",
+        "Witnessing heritage actively lived rather than curated behind museum glass"
+      ],
+      "sakarNote": "These courtyards are where I grew up exploring. When we leave the crowded market streets through a tiny low-ceilinged doorway, the noise completely vanishes, replaced by singing canaries and chanting grandmothers.",
+      "days": [
+        {
+          "dayNumber": 1,
+          "title": "Ason Alleys & Merchant Courtyards",
+          "description": "Early morning walk through spice bazaars, entering medieval residential bahals and hidden stupas."
+        },
+        {
+          "dayNumber": 2,
+          "title": "Chiya with Elders & Guthi Rituals",
+          "description": "Sit over steaming tea with courtyard locals, observing age-old community water and shrine rituals."
+        }
+      ],
+      "impactFootprint": "Direct patronization of historic courtyard teahouses, Guthi community preservation trusts, and local neighborhood vendors.",
+      "status": "published",
+      "createdAt": "2026-09-18T16:47:33.055Z",
+      "updatedAt": "2026-09-18T16:47:33.075Z"
+    },
+    {
+      "id": "exp-beyond-2",
+      "slug": "echoes-in-stone-patan-bhaktapur",
+      "title": "Echoes in Stone: The Untold Histories of Patan and Bhaktapur",
+      "subtitle": "Tracing medieval royal rivalries, intricate stone hitis, and mythologies carved into towering pagodas.",
+      "category": "adventure",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "1 - 2 Days",
+      "location": "Patan (Lalitpur) & Bhaktapur",
+      "elevation": "1,400 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/images/beyond-the-map/echoes-in-stone.jpg",
+        "alt": "Ancient stone makara water spout and medieval pagoda temples in Patan and Bhaktapur"
+      },
+      "gallery": [
+        {
+          "src": "/images/beyond-the-map/echoes-in-stone.jpg",
+          "alt": "Echoes in Stone"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/durbar-square.jpg",
+          "alt": "Durbar Square pagodas"
+        },
+        {
+          "src": "/images/beyond-the-map/sacred-geometry.jpg",
+          "alt": "Sacred pagoda architecture"
+        }
+      ],
+      "shortDescription": "History isn't just dates and dynasties; it is the rivalry, romance, and tragedy carved into the brick and timber of the Valley's greatest medieval kingdoms.",
+      "fullDescription": [
+        "The \"Beyond the Map\" Promise: History isn't just dates and dynasties; it is the rivalry, romance, and tragedy carved into the brick and timber of the Valley's greatest medieval kingdoms.",
+        "We bypass the standard historical summaries to explore the deep narratives of Patan (The City of Fine Arts) and Bhaktapur (The City of Devotees). You will trace the legendary rivalries between the Malla kings that fueled an architectural arms race.",
+        "We will walk the intricate networks of ancient stone water conduits (hitis), explore the shadowed corners where royal secrets were kept, and decode the subtle mythologies carved into the wooden struts of towering pagoda temples."
+      ],
+      "highlights": [
+        "Tracing the legendary Malla king rivalries that fueled the architectural arms race",
+        "Walking the subterranean hydraulic marvels of ancient stone water conduits (hitis)",
+        "Uncovering royal intrigue, forgotten romance, and palace tragedies in shadowed corners",
+        "Decoding the hidden esoteric mythologies carved into pagoda wooden roof struts",
+        "Contemplative sunset walking through the cobblestone alleys of Bhaktapur"
+      ],
+      "sakarNote": "Patan and Bhaktapur are twin masterpieces born from fierce competition. When you understand why a king built a pagoda three feet taller than his brother's, the stones begin to speak.",
+      "days": [
+        {
+          "dayNumber": 1,
+          "title": "Patan Fine Arts & Royal Conduits",
+          "description": "Explore ancient sunken stone hitis and secret courtyards of the royal Patan Palace."
+        },
+        {
+          "dayNumber": 2,
+          "title": "Bhaktapur Medieval Arms Race",
+          "description": "Trace the architectural duel between Malla rulers in Nyatapola and 55-Window Palace."
+        }
+      ],
+      "impactFootprint": "Support for heritage masonry preservation funds and local indigenous architectural conservancy programs.",
+      "status": "published",
+      "createdAt": "2026-09-18T16:47:33.076Z",
+      "updatedAt": "2026-09-18T16:47:33.076Z"
+    },
+    {
+      "id": "exp-beyond-3",
+      "slug": "artisans-path-heritage-deep-dive",
+      "title": "The Artisan’s Path: A Heritage Deep-Dive",
+      "subtitle": "Behind closed doors with master woodcarvers, lost-wax bronze casters, and sacred Thangka artists.",
+      "category": "adventure",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "1 - 2 Days",
+      "location": "Patan & Bhaktapur Guild Quarters",
+      "elevation": "1,400 m",
+      "groupSize": "Private / 1 - 4 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/images/beyond-the-map/artisan-path.jpg",
+        "alt": "Master Newari woodcarver crafting sacred deity statue in traditional workshop"
+      },
+      "gallery": [
+        {
+          "src": "/images/beyond-the-map/artisan-path.jpg",
+          "alt": "Master woodcarver atelier"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/newari-architecture.jpg",
+          "alt": "Intricate Newari woodcarving"
+        },
+        {
+          "src": "/images/beyond-the-map/living-courtyards.jpg",
+          "alt": "Living artisan courtyard"
+        }
+      ],
+      "shortDescription": "We don't just look at the art; we sit with the masters whose families have been creating it for generations.",
+      "fullDescription": [
+        "The \"Beyond the Map\" Promise: We don't just look at the art; we sit with the masters whose families have been creating it for generations.",
+        "This tour goes behind closed doors into the workshops of Patan and Bhaktapur. You will witness the hypnotic, meticulous process of Thangka painting, the intense heat of traditional lost-wax bronze casting, and the precise chiseling of Newari woodcarvers.",
+        "You will learn how these crafts are not merely decorative, but deeply spiritual acts of meditation. By the end of the day, a statue or a painting will no longer be a souvenir, but a sacred text you know how to read."
+      ],
+      "highlights": [
+        "Exclusive behind-closed-doors access to multi-generational family workshops",
+        "Observing the hypnotic sacred geometry and natural mineral grinding of Thangka painting",
+        "Witnessing the searing glow and precision of ancient lost-wax bronze foundry casting",
+        "Sitting beside master Newari woodcarvers transforming raw timber into deities",
+        "Learning to read sacred iconographic symbols and deity hand mudras as living scripture"
+      ],
+      "sakarNote": "For these masters, chiseling wood or grinding mineral lapis lazuli is not a commercial job; it is a sacred meditation practiced uninterrupted across seven generations.",
+      "days": [
+        {
+          "dayNumber": 1,
+          "title": "Lost-Wax Bronze Foundry",
+          "description": "Feel the heat of the kiln and watch ancient wax-sculpting techniques unchanged since the 10th century."
+        },
+        {
+          "dayNumber": 2,
+          "title": "Sacred Thangka Studio Session",
+          "description": "Observe master painters apply crushed gold leaf and lapis lazuli to meditative Buddhist mandalas."
+        }
+      ],
+      "impactFootprint": "Guaranteed ethical honorariums paid directly to master artisan families, keeping endangered traditional guilds economically viable.",
+      "status": "published",
+      "createdAt": "2026-09-18T16:47:33.076Z",
+      "updatedAt": "2026-09-18T16:47:33.076Z"
+    },
+    {
+      "id": "exp-beyond-4",
+      "slug": "sacred-geometry-architecture-valley",
+      "title": "Sacred Geometry: The Architecture and Spirit of the Valley",
+      "subtitle": "Decoding the living mandala blueprint, pagoda mathematics, and earthquake-resilient engineering.",
+      "category": "adventure",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "1 - 2 Days",
+      "location": "Kathmandu, Patan, Bhaktapur & Changu Narayan",
+      "elevation": "1,400 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/images/beyond-the-map/sacred-geometry.jpg",
+        "alt": "Symmetrical sacred pagoda temple complex aligned with cosmic mandala geometry"
+      },
+      "gallery": [
+        {
+          "src": "/images/beyond-the-map/sacred-geometry.jpg",
+          "alt": "Sacred pagoda geometry"
+        },
+        {
+          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
+          "alt": "Buddhist stupa mandala"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/sacred-shrine.jpg",
+          "alt": "Sacred stone shrine"
+        }
+      ],
+      "shortDescription": "The Kathmandu Valley was not built by accident. It was designed as a living, breathing mandala.",
+      "fullDescription": [
+        "The \"Beyond the Map\" Promise: The Kathmandu Valley was not built by accident. It was designed as a living, breathing mandala.",
+        "For the analytically and spiritually curious, this tour decodes the blueprint of the Valley. We explore how Hindu and Buddhist cosmologies dictated the placement of every temple, courtyard, and city gate.",
+        "You will learn the mathematics behind the multi-tiered pagodas, the spiritual engineering required to build shrines that withstand centuries of earthquakes, and how the physical layout of the cities was designed to guide the soul toward enlightenment."
+      ],
+      "highlights": [
+        "Decoding the ancient cosmic mandala grid underlying the three valley kingdoms",
+        "Unlocking the mathematics and proportions of multi-tiered pagoda architecture",
+        "Discovering the spiritual engineering and interlocking joints that survive major earthquakes",
+        "Understanding how urban gates, water springs, and shrines were mapped to celestial bodies",
+        "Experiencing how sacred spaces guide human consciousness toward stillness and clarity"
+      ],
+      "sakarNote": "When you stand at the center of the temple axis and see how the pagoda roof lines harmonize with the surrounding mountain ridges, you realize the ancient builders were true cosmic architects.",
+      "days": [
+        {
+          "dayNumber": 1,
+          "title": "The Mandala Blueprint",
+          "description": "Analyze the cosmological orientation of valley city gates and cardinal guardian shrines."
+        },
+        {
+          "dayNumber": 2,
+          "title": "Mathematics of the Multi-Tier Pagoda",
+          "description": "Decode proportional geometry and the physics of interlocking seismic wood joints."
+        }
+      ],
+      "impactFootprint": "Supports indigenous architectural preservation archives and youth apprenticeship in classical sacred engineering.",
+      "status": "published",
+      "createdAt": "2026-09-18T16:47:33.076Z",
+      "updatedAt": "2026-09-18T16:47:33.076Z"
     }
   ],
   "services": [
@@ -1872,8 +2120,8 @@
     {
       "id": "trekking",
       "slug": "trekking",
-      "title": "Mountain Treks & Hidden Trails",
-      "nepaliTitle": "शान्त हिमाली पदयात्रा",
+      "title": "Go Beyond the Map",
+      "nepaliTitle": "नक्साभन्दा परको यात्रा",
       "tagline": "Slow Walking, Uncrowded Ridge Trails, Rhododendron Forests & Alpine Serenity",
       "shortDescription": "Experience Nepal on foot without the crowds. Gentle unhurried treks through Langtang, Helambu, Annapurna foothills, and Mustang rainshadow canyons.",
       "fullPhilosophy": [
@@ -1954,6 +2202,44 @@
       "order": 4,
       "createdAt": "2026-09-13T18:12:32.811Z",
       "updatedAt": "2026-09-13T18:12:32.811Z"
+    },
+    {
+      "id": "srv-beyond-the-map",
+      "slug": "beyond-the-map",
+      "title": "Go Beyond the Map",
+      "nepaliTitle": "नक्साभन्दा परको यात्रा",
+      "tagline": "Living Courtyards, Medieval Stone Mysteries & Master Artisan Guilds",
+      "description": "Step past the grand facades into the secret residential bahals of old Kathmandu, untold histories of Patan and Bhaktapur, master artisan guilds, and the sacred geometry of the Valley.",
+      "shortDescription": "Step past the grand facades into the secret residential bahals of old Kathmandu, untold histories of Patan and Bhaktapur, master artisan guilds, and the sacred geometry of the Valley.",
+      "category": "Exploration",
+      "badge": "Signature Pillar",
+      "image": "/images/beyond-the-map/sacred-geometry.jpg",
+      "heroImage": {
+        "src": "/images/beyond-the-map/sacred-geometry.jpg",
+        "alt": "Sacred geometry pagoda architecture in Kathmandu Valley"
+      },
+      "status": "published",
+      "updatedAt": "2026-09-18T16:47:33.077Z",
+      "keyFeatures": [
+        {
+          "title": "Hidden Residential Bahals",
+          "description": "Slipping into secret residential courtyards of old Kathmandu beyond tourist facades."
+        },
+        {
+          "title": "Untold Medieval Histories",
+          "description": "Tracing royal rivalries, subterranean hitis, and stone secrets in Patan and Bhaktapur."
+        },
+        {
+          "title": "Master Artisan Guilds",
+          "description": "Behind-closed-doors ateliers with 7th-generation woodcarvers and lost-wax bronze casters."
+        },
+        {
+          "title": "Sacred Mandala Blueprint",
+          "description": "Decoding pagoda mathematics and cosmological alignments that survive major quakes."
+        }
+      ],
+      "quote": "When you step into a hidden bahal through a low doorway, the noise disappears, replaced by singing canaries and chanting elders.",
+      "quoteAuthor": "Sakar, Founder & Guide"
     }
   ],
   "inquiries": [
