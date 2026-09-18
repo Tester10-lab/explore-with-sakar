@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import React from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -11,8 +14,10 @@ import {
 import Hero from '@/components/home/Hero';
 import {
   getLiveBlogs,
+  getLiveBlogsAsync,
   getLiveServices,
   getLiveSettings,
+  getLiveSettingsAsync,
 } from '@/lib/cms';
 import ServiceCard from '@/components/common/ServiceCard';
 import BlogCard from '@/components/common/BlogCard';
@@ -24,13 +29,13 @@ export const metadata: Metadata = {
   description: 'Meaningful Nepal travel experiences beyond ordinary tourism. Guided by local host Sakar through living culture, village homestays, Himalayan spirituality, and responsible slow travel.',
 };
 
-export default function HomePage() {
-  const settings = getLiveSettings();
+export default async function HomePage() {
+  const settings = await getLiveSettingsAsync();
   const stats = settings.stats || [];
 
   const services = getLiveServices(false);
 
-  const blogs = getLiveBlogs(false);
+  const blogs = await getLiveBlogsAsync(false);
   const latestBlogs = blogs.slice(0, 3);
 
   return (

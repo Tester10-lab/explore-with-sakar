@@ -6,6 +6,7 @@ import {
   getAllPhotos,
   getAllReviews,
   getSettings,
+  getSettingsAsync,
   getAllPackages,
   getPackageBySlug,
   getAllExperiences,
@@ -345,6 +346,19 @@ export function getLiveReviews(): ExtendedTestimonial[] {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }));
+}
+
+/**
+ * Fetch website settings with MongoDB async support and fallback
+ */
+export async function getLiveSettingsAsync(): Promise<WebsiteSettings> {
+  try {
+    const s = await getSettingsAsync();
+    if (s) return s;
+  } catch (err) {
+    console.warn('MongoDB getLiveSettingsAsync fallback:', err);
+  }
+  return getLiveSettings();
 }
 
 /**

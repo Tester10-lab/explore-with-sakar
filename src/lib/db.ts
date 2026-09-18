@@ -913,6 +913,29 @@ export function updateSettings(updates: Partial<WebsiteSettings>): WebsiteSettin
   return store.settings;
 }
 
+export async function getSettingsAsync(): Promise<WebsiteSettings> {
+  const store = await readStoreAsync();
+  return store.settings || DEFAULT_SETTINGS;
+}
+
+export async function updateSettingsAsync(updates: Partial<WebsiteSettings>): Promise<WebsiteSettings> {
+  const store = await readStoreAsync();
+  store.settings = {
+    ...store.settings,
+    ...updates,
+    contact: { ...store.settings.contact, ...(updates.contact || {}) },
+    social: { ...store.settings.social, ...(updates.social || {}) },
+    branding: { ...store.settings.branding, ...(updates.branding || {}) },
+    hero: { ...store.settings.hero, ...(updates.hero || {}) },
+    stats: updates.stats || store.settings.stats,
+    announcement: { ...store.settings.announcement, ...(updates.announcement || {}) },
+    footer: { ...store.settings.footer, ...(updates.footer || {}) },
+  };
+
+  await writeStoreAsync(store);
+  return store.settings;
+}
+
 // ==================== SERVICES OPERATIONS ====================
 
 export function getAllServices(includeDrafts = true): ExtendedServicePillar[] {
