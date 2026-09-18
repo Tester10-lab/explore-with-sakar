@@ -95,22 +95,52 @@ export default function ArticleContent({ post }: ArticleContentProps) {
             switch (block.type) {
               case 'paragraph':
                 const isFirstParagraph = index === 0 || post.content.findIndex(b => b.type === 'paragraph') === index;
+                const fontFamilyClass =
+                  block.fontFamily === 'serif' ? 'font-editorial-serif' :
+                  block.fontFamily === 'sans' ? 'font-sans' :
+                  block.fontFamily === 'display' ? 'font-display-serif' :
+                  block.fontFamily === 'mono' ? 'font-mono' :
+                  post.fontFamily === 'sans' ? 'font-sans' :
+                  post.fontFamily === 'display' ? 'font-display-serif' :
+                  post.fontFamily === 'mono' ? 'font-mono' :
+                  post.fontFamily === 'serif' ? 'font-editorial-serif' : '';
+
+                const fontSizeClass =
+                  block.fontSize === 'sm' ? 'text-sm sm:text-base leading-relaxed' :
+                  block.fontSize === 'base' ? 'text-base sm:text-lg leading-[1.85]' :
+                  block.fontSize === 'lg' ? 'text-lg sm:text-xl leading-[1.95]' :
+                  block.fontSize === 'xl' ? 'text-xl sm:text-2xl leading-[2]' :
+                  post.fontSize === 'sm' ? 'text-sm sm:text-base leading-relaxed' :
+                  post.fontSize === 'lg' ? 'text-lg sm:text-xl leading-[1.95]' :
+                  post.fontSize === 'xl' ? 'text-xl sm:text-2xl leading-[2]' : 'text-base sm:text-lg leading-[1.9]';
+
+                const fontWeightClass =
+                  block.fontWeight === 'light' ? 'font-light' :
+                  block.fontWeight === 'normal' ? 'font-normal' :
+                  block.fontWeight === 'medium' ? 'font-medium' :
+                  block.fontWeight === 'bold' ? 'font-bold' : 'font-light';
+
                 return (
                   <p
                     key={index}
                     style={block.textColor ? { color: block.textColor } : undefined}
-                    className={`leading-[1.9] ${block.textColor ? '' : 'text-himalaya-800'} ${isFirstParagraph ? 'first-letter:font-editorial-serif first-letter:text-6xl first-letter:font-bold first-letter:float-left first-letter:mr-4 first-letter:mt-2 first-letter:text-terracotta' : ''}`}
+                    className={`${fontSizeClass} ${fontFamilyClass} ${fontWeightClass} ${block.textColor ? '' : 'text-himalaya-800'} ${isFirstParagraph ? 'first-letter:font-editorial-serif first-letter:text-6xl first-letter:font-bold first-letter:float-left first-letter:mr-4 first-letter:mt-2 first-letter:text-terracotta' : ''}`}
                   >
                     {block.content}
                   </p>
                 );
 
               case 'heading':
+                const headingFontClass =
+                  block.fontFamily === 'sans' ? 'font-sans' :
+                  block.fontFamily === 'display' ? 'font-display-serif' : 'font-editorial-serif';
+
                 if (block.level === 2) {
                   return (
                     <h2
                       key={index}
-                      className="font-editorial-serif text-3xl sm:text-4xl font-bold text-himalaya-950 tracking-tight mt-16 pt-4 pb-4 border-b border-parchment-300"
+                      style={block.textColor ? { color: block.textColor } : undefined}
+                      className={`${headingFontClass} text-3xl sm:text-4xl font-bold ${block.textColor ? '' : 'text-himalaya-950'} tracking-tight mt-16 pt-4 pb-4 border-b border-parchment-300`}
                     >
                       {block.content}
                     </h2>
@@ -119,7 +149,8 @@ export default function ArticleContent({ post }: ArticleContentProps) {
                 return (
                   <h3
                     key={index}
-                    className="font-editorial-serif text-2xl sm:text-3xl font-bold text-himalaya-950 mt-10"
+                    style={block.textColor ? { color: block.textColor } : undefined}
+                    className={`${headingFontClass} text-2xl sm:text-3xl font-bold ${block.textColor ? '' : 'text-himalaya-950'} mt-10`}
                   >
                     {block.content}
                   </h3>

@@ -107,8 +107,21 @@ export type BlogCategory =
   | "Practical Nepal";
 
 export type BlogBlock =
-  | { type: 'paragraph'; content: string; textColor?: string }
-  | { type: 'heading'; level: 2 | 3; content: string }
+  | {
+      type: 'paragraph';
+      content: string;
+      textColor?: string;
+      fontFamily?: 'serif' | 'sans' | 'display' | 'mono';
+      fontSize?: 'sm' | 'base' | 'lg' | 'xl';
+      fontWeight?: 'light' | 'normal' | 'medium' | 'bold';
+    }
+  | {
+      type: 'heading';
+      level: 2 | 3;
+      content: string;
+      fontFamily?: 'serif' | 'sans' | 'display';
+      textColor?: string;
+    }
   | { type: 'quote'; content: string; attribution?: string }
   | { type: 'image'; image: ImageAsset; caption?: string; layout?: 'full' | 'standard' }
   | { type: 'twoImages'; left: ImageAsset; right: ImageAsset; caption?: string }
@@ -122,6 +135,8 @@ export interface BlogPost {
   subtitle: string;
   excerpt: string;
   category: BlogCategory;
+  fontFamily?: 'serif' | 'sans' | 'display' | 'mono';
+  fontSize?: 'sm' | 'base' | 'lg' | 'xl';
   author: {
     name: string;
     role: string;

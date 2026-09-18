@@ -2,13 +2,11 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 import { NextResponse } from 'next/server';
-import { readStoreAsync } from '@/lib/db';
+import { readStoreAsync, getAllBlogsAsync, getAllPhotosAsync } from '@/lib/db';
 import {
   getLivePackages,
   getLiveExperiences,
   getLiveServices,
-  getLiveBlogs,
-  getLivePhotos,
   getLiveReviews,
   getLiveHandwrittenReviews,
   getLiveSettings,
@@ -22,8 +20,8 @@ export async function GET() {
     const packages = getLivePackages(false);
     const experiences = getLiveExperiences(false);
     const services = getLiveServices(false);
-    const blogs = getLiveBlogs(false);
-    const photos = getLivePhotos();
+    const blogs = await getAllBlogsAsync(false);
+    const photos = await getAllPhotosAsync();
     const reviews = getLiveReviews();
     const handwrittenReviews = getLiveHandwrittenReviews(false);
     const settings = getLiveSettings();

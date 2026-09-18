@@ -70,6 +70,12 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
   );
   const [readingTime, setReadingTime] = useState(initialBlog?.readingTime || '5 min read');
   const [tags, setTags] = useState((initialBlog?.tags || []).join(', '));
+  const [fontFamily, setFontFamily] = useState<'serif' | 'sans' | 'display' | 'mono'>(
+    initialBlog?.fontFamily || 'serif'
+  );
+  const [fontSize, setFontSize] = useState<'sm' | 'base' | 'lg' | 'xl'>(
+    initialBlog?.fontSize || 'base'
+  );
 
   // Author
   const [authorName, setAuthorName] = useState(initialBlog?.author?.name || 'Sakar');
@@ -232,6 +238,8 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
           description: ctaDescription.trim(),
           buttonText: ctaButtonText.trim(),
         },
+        fontFamily,
+        fontSize,
         content: blocks,
       };
 
@@ -517,6 +525,43 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
                 className="w-full bg-himalaya-950 border border-himalaya-700 rounded-xl px-4 py-2.5 text-sm text-parchment-100 placeholder-himalaya-500 focus:outline-none focus:border-terracotta"
               />
             </div>
+
+            {/* Global Article Typography Controls */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-himalaya-800">
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-parchment-300 mb-1.5 flex items-center gap-1.5">
+                  <Type className="w-3.5 h-3.5 text-terracotta" />
+                  Default Article Font
+                </label>
+                <select
+                  value={fontFamily}
+                  onChange={(e) => setFontFamily(e.target.value as any)}
+                  className="w-full bg-himalaya-950 border border-himalaya-700 rounded-xl px-3 py-2.5 text-xs text-parchment-100 focus:outline-none focus:border-terracotta"
+                >
+                  <option value="serif">Editorial Serif (Cormorant / Garamond)</option>
+                  <option value="sans">Clean Modern Sans (Inter / Outward)</option>
+                  <option value="display">Classic Display Serif (Playfair)</option>
+                  <option value="mono">Literary Monospace</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-parchment-300 mb-1.5 flex items-center gap-1.5">
+                  <Type className="w-3.5 h-3.5 text-terracotta" />
+                  Default Article Text Size
+                </label>
+                <select
+                  value={fontSize}
+                  onChange={(e) => setFontSize(e.target.value as any)}
+                  className="w-full bg-himalaya-950 border border-himalaya-700 rounded-xl px-3 py-2.5 text-xs text-parchment-100 focus:outline-none focus:border-terracotta"
+                >
+                  <option value="sm">Compact (14px)</option>
+                  <option value="base">Standard (16px)</option>
+                  <option value="lg">Editorial Large (18px)</option>
+                  <option value="xl">Lead Story (20px)</option>
+                </select>
+              </div>
+            </div>
           </div>
 
           {/* Block Builder Section */}
@@ -622,22 +667,77 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
                   {/* Render based on Block Type */}
                   {block.type === 'paragraph' && (
                     <div className="space-y-2">
-                      {/* Paragraph Text Color Toolbar */}
-                      <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 rounded-lg bg-himalaya-900 border border-himalaya-800">
+                      {/* Paragraph Font & Styling Toolbar */}
+                      <div className="flex flex-wrap items-center justify-between gap-2.5 px-3 py-2 rounded-lg bg-himalaya-900 border border-himalaya-800">
+                        {/* Font Controls */}
+                        <div className="flex items-center gap-2 flex-wrap text-xs">
+                          <div className="flex items-center gap-1.5">
+                            <Type className="w-3.5 h-3.5 text-terracotta" />
+                            <select
+                              value={block.fontFamily || ''}
+                              onChange={(e) =>
+                                updateBlockContent(index, {
+                                  fontFamily: (e.target.value || undefined) as any,
+                                })
+                              }
+                              className="bg-himalaya-950 border border-himalaya-700 rounded-md px-2 py-1 text-[11px] text-parchment-200 focus:outline-none focus:border-terracotta"
+                              title="Paragraph Font Style"
+                            >
+                              <option value="">Font: Default</option>
+                              <option value="serif">Editorial Serif</option>
+                              <option value="sans">Clean Sans</option>
+                              <option value="display">Display Serif</option>
+                              <option value="mono">Monospace</option>
+                            </select>
+                          </div>
+
+                          <select
+                            value={block.fontSize || ''}
+                            onChange={(e) =>
+                              updateBlockContent(index, {
+                                fontSize: (e.target.value || undefined) as any,
+                              })
+                            }
+                            className="bg-himalaya-950 border border-himalaya-700 rounded-md px-2 py-1 text-[11px] text-parchment-200 focus:outline-none focus:border-terracotta"
+                            title="Text Size"
+                          >
+                            <option value="">Size: Default</option>
+                            <option value="sm">Small (14px)</option>
+                            <option value="base">Standard (16px)</option>
+                            <option value="lg">Large (18px)</option>
+                            <option value="xl">Lead (20px)</option>
+                          </select>
+
+                          <select
+                            value={block.fontWeight || ''}
+                            onChange={(e) =>
+                              updateBlockContent(index, {
+                                fontWeight: (e.target.value || undefined) as any,
+                              })
+                            }
+                            className="bg-himalaya-950 border border-himalaya-700 rounded-md px-2 py-1 text-[11px] text-parchment-200 focus:outline-none focus:border-terracotta"
+                            title="Font Weight"
+                          >
+                            <option value="">Weight: Default</option>
+                            <option value="light">Light (300)</option>
+                            <option value="normal">Regular (400)</option>
+                            <option value="medium">Medium (500)</option>
+                            <option value="bold">Bold (700)</option>
+                          </select>
+                        </div>
+
+                        {/* Color Controls */}
                         <div className="flex items-center gap-2 flex-wrap">
-                          <Palette className="w-3.5 h-3.5 text-terracotta" />
-                          <span className="text-[11px] font-mono uppercase tracking-wider text-parchment-300">
-                            Text Color:
-                          </span>
+                          <Palette className="w-3.5 h-3.5 text-parchment-400" />
                           <div className="flex items-center gap-1.5 flex-wrap">
-                            {PARAGRAPH_COLOR_SWATCHES.map((swatch) => (
+                            {PARAGRAPH_COLOR_SWATCHES.slice(0, 6).map((swatch) => (
                               <button
                                 key={swatch.color}
                                 type="button"
                                 onClick={() =>
                                   updateBlockContent(index, { textColor: swatch.color })
                                 }
-                                className={`w-5 h-5 rounded-full border transition-all ${
+                                className={`w-4 h-4 rounded-full border transition-all ${
                                   block.textColor === swatch.color
                                     ? 'ring-2 ring-terracotta ring-offset-1 ring-offset-himalaya-950 scale-110 border-white'
                                     : 'border-white/20 hover:scale-110'
@@ -647,12 +747,9 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
                               />
                             ))}
                           </div>
-                        </div>
 
-                        <div className="flex items-center gap-2">
-                          {/* Custom Color Input */}
                           <label
-                            className="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-himalaya-800 hover:bg-himalaya-750 text-[11px] text-parchment-200 border border-himalaya-700 cursor-pointer transition-colors"
+                            className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-himalaya-800 hover:bg-himalaya-750 text-[10px] text-parchment-200 border border-himalaya-700 cursor-pointer transition-colors"
                             title="Pick custom color"
                           >
                             <input
@@ -661,10 +758,10 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
                               onChange={(e) =>
                                 updateBlockContent(index, { textColor: e.target.value })
                               }
-                              className="w-4 h-4 rounded cursor-pointer bg-transparent border-0 p-0"
+                              className="w-3.5 h-3.5 rounded cursor-pointer bg-transparent border-0 p-0"
                             />
-                            <span className="font-mono text-[10px]">
-                              {block.textColor ? block.textColor.toUpperCase() : 'Custom'}
+                            <span className="font-mono text-[9px]">
+                              {block.textColor ? block.textColor.toUpperCase() : 'Color'}
                             </span>
                           </label>
 
@@ -672,7 +769,7 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
                             <button
                               type="button"
                               onClick={() => updateBlockContent(index, { textColor: undefined })}
-                              className="px-2 py-1 rounded bg-himalaya-800 hover:bg-himalaya-750 text-[10px] text-parchment-400 hover:text-white transition-colors"
+                              className="px-1.5 py-0.5 rounded bg-himalaya-800 hover:bg-himalaya-750 text-[9px] text-parchment-400 hover:text-white transition-colors"
                               title="Reset to default theme color"
                             >
                               Reset
@@ -687,13 +784,23 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
                         onChange={(e) => updateBlockContent(index, { content: e.target.value })}
                         placeholder="Write paragraph narrative..."
                         style={{ color: block.textColor || undefined }}
-                        className="w-full bg-himalaya-900 border border-himalaya-750 rounded-lg p-3 text-sm placeholder-himalaya-500 focus:outline-none focus:border-terracotta leading-relaxed transition-colors"
+                        className={`w-full bg-himalaya-900 border border-himalaya-750 rounded-lg p-3 text-sm placeholder-himalaya-500 focus:outline-none focus:border-terracotta leading-relaxed transition-colors ${
+                          block.fontFamily === 'serif' ? 'font-editorial-serif' :
+                          block.fontFamily === 'sans' ? 'font-sans' :
+                          block.fontFamily === 'display' ? 'font-display-serif' :
+                          block.fontFamily === 'mono' ? 'font-mono' : ''
+                        } ${
+                          block.fontWeight === 'light' ? 'font-light' :
+                          block.fontWeight === 'normal' ? 'font-normal' :
+                          block.fontWeight === 'medium' ? 'font-medium' :
+                          block.fontWeight === 'bold' ? 'font-bold' : ''
+                        }`}
                       />
                     </div>
                   )}
 
                   {block.type === 'heading' && (
-                    <div className="flex gap-3">
+                    <div className="flex flex-wrap sm:flex-nowrap gap-2.5">
                       <select
                         value={block.level}
                         onChange={(e) =>
@@ -704,12 +811,23 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
                         <option value={2}>H2 Heading</option>
                         <option value={3}>H3 Heading</option>
                       </select>
+                      <select
+                        value={block.fontFamily || ''}
+                        onChange={(e) =>
+                          updateBlockContent(index, { fontFamily: (e.target.value || undefined) as any })
+                        }
+                        className="bg-himalaya-900 border border-himalaya-750 rounded-lg px-2.5 py-2 text-xs text-parchment-200"
+                      >
+                        <option value="">Editorial Serif</option>
+                        <option value="sans">Modern Sans</option>
+                        <option value="display">Display Serif</option>
+                      </select>
                       <input
                         type="text"
                         value={block.content}
                         onChange={(e) => updateBlockContent(index, { content: e.target.value })}
                         placeholder="Section Heading Title..."
-                        className="flex-1 bg-himalaya-900 border border-himalaya-750 rounded-lg px-3 py-2 text-sm font-bold text-parchment-100 focus:outline-none focus:border-terracotta"
+                        className="flex-1 min-w-[200px] bg-himalaya-900 border border-himalaya-750 rounded-lg px-3 py-2 text-sm font-bold text-parchment-100 focus:outline-none focus:border-terracotta"
                       />
                     </div>
                   )}
@@ -1035,11 +1153,35 @@ export default function BlogEditor({ initialBlog, isNew = false }: BlogEditorPro
           <div className="max-w-3xl mx-auto space-y-6">
             {blocks.map((block, idx) => {
               if (block.type === 'paragraph') {
+                const pFont =
+                  block.fontFamily === 'serif' ? 'font-editorial-serif' :
+                  block.fontFamily === 'sans' ? 'font-sans' :
+                  block.fontFamily === 'display' ? 'font-display-serif' :
+                  block.fontFamily === 'mono' ? 'font-mono' :
+                  fontFamily === 'sans' ? 'font-sans' :
+                  fontFamily === 'display' ? 'font-display-serif' :
+                  fontFamily === 'mono' ? 'font-mono' : 'font-editorial-serif';
+
+                const pSize =
+                  block.fontSize === 'sm' ? 'text-sm sm:text-base' :
+                  block.fontSize === 'base' ? 'text-base sm:text-lg' :
+                  block.fontSize === 'lg' ? 'text-lg sm:text-xl' :
+                  block.fontSize === 'xl' ? 'text-xl sm:text-2xl' :
+                  fontSize === 'sm' ? 'text-sm sm:text-base' :
+                  fontSize === 'lg' ? 'text-lg sm:text-xl' :
+                  fontSize === 'xl' ? 'text-xl sm:text-2xl' : 'text-base sm:text-lg';
+
+                const pWeight =
+                  block.fontWeight === 'light' ? 'font-light' :
+                  block.fontWeight === 'normal' ? 'font-normal' :
+                  block.fontWeight === 'medium' ? 'font-medium' :
+                  block.fontWeight === 'bold' ? 'font-bold' : 'font-light';
+
                 return (
                   <p
                     key={idx}
                     style={{ color: block.textColor || '#2d3748' }}
-                    className="text-base sm:text-lg leading-[1.85] font-light"
+                    className={`${pSize} ${pFont} ${pWeight} leading-[1.85]`}
                   >
                     {block.content}
                   </p>
