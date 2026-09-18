@@ -73,7 +73,10 @@ export default function AdminPhotosPage() {
   const fetchPhotos = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch('/api/admin/photos');
+      const res = await fetch('/api/admin/photos', {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' },
+      });
       if (res.ok) {
         const data = await res.json();
         setPhotos(data.photos || []);

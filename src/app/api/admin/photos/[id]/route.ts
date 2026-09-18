@@ -1,6 +1,9 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getSessionFromRequest } from '@/lib/auth';
-import { updatePhoto, deletePhoto } from '@/lib/db';
+import { updatePhotoAsync, deletePhotoAsync } from '@/lib/db';
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -10,10 +13,17 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     }
 
     const body = await req.json();
-    const updated = updatePhoto(params.id, body);
+    const updated = await updatePhotoAsync(params.id, body);
 
     if (!updated) {
       return NextResponse.json({ error: 'Photo not found' }, { status: 404 });
+    }
+
+    try {
+      revalidatePath('/gallery');
+      revalidatePath('/admin/photos');
+    } catch (e) {
+      console.warn('Revalidate warning:', e);
     }
 
     return NextResponse.json({ success: true, photo: updated });
@@ -30,9 +40,16 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const success = deletePhoto(params.id);
+    const success = await deletePhotoAsync(params.id);
     if (!success) {
       return NextResponse.json({ error: 'Photo not found' }, { status: 404 });
+    }
+
+    try {
+      revalidatePath('/gallery');
+      revalidatePath('/admin/photos');
+    } catch (e) {
+      console.warn('Revalidate warning:', e);
     }
 
     return NextResponse.json({ success: true, message: 'Photo deleted successfully' });

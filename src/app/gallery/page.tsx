@@ -38,7 +38,9 @@ export default function GalleryPage() {
   useEffect(() => {
     async function loadLivePhotos() {
       try {
-        const res = await fetch('/api/public/content');
+        const res = await fetch('/api/public/content', {
+          cache: 'no-store',
+        });
         if (res.ok) {
           const data = await res.json();
           if (data.photos && data.photos.length > 0) {

@@ -745,6 +745,54 @@ export function deletePhoto(id: string): boolean {
   return false;
 }
 
+export async function getAllPhotosAsync(): Promise<ExtendedGalleryPhoto[]> {
+  const store = await readStoreAsync();
+  return (store.photos || []).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+}
+
+export async function createPhotoAsync(photoData: Omit<ExtendedGalleryPhoto, 'id' | 'createdAt' | 'updatedAt' | 'order'>): Promise<ExtendedGalleryPhoto> {
+  const store = await readStoreAsync();
+  const order = (store.photos || []).length;
+  const newPhoto: ExtendedGalleryPhoto = {
+    ...photoData,
+    id: `photo-${Date.now()}`,
+    order,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  store.photos = [...(store.photos || []), newPhoto];
+  await writeStoreAsync(store);
+  return newPhoto;
+}
+
+export async function updatePhotoAsync(id: string, updates: Partial<ExtendedGalleryPhoto>): Promise<ExtendedGalleryPhoto | null> {
+  const store = await readStoreAsync();
+  const index = (store.photos || []).findIndex((p) => p.id === id);
+  if (index === -1) return null;
+
+  const updated: ExtendedGalleryPhoto = {
+    ...store.photos[index],
+    ...updates,
+    updatedAt: new Date().toISOString(),
+  };
+
+  store.photos[index] = updated;
+  await writeStoreAsync(store);
+  return updated;
+}
+
+export async function deletePhotoAsync(id: string): Promise<boolean> {
+  const store = await readStoreAsync();
+  const initialLen = (store.photos || []).length;
+  store.photos = (store.photos || []).filter((p) => p.id !== id);
+  if (store.photos.length !== initialLen) {
+    await writeStoreAsync(store);
+    return true;
+  }
+  return false;
+}
+
 export function reorderPhotos(photoIds: string[]): boolean {
   const store = readStore();
   const photoMap = new Map((store.photos || []).map((p) => [p.id, p]));
