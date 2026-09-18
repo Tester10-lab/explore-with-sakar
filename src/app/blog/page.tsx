@@ -24,7 +24,9 @@ export default function BlogPage() {
   useEffect(() => {
     async function loadLiveBlogs() {
       try {
-        const res = await fetch('/api/public/content');
+        const res = await fetch('/api/public/content', {
+          cache: 'no-store',
+        });
         if (res.ok) {
           const data = await res.json();
           if (data.blogs && data.blogs.length > 0) {

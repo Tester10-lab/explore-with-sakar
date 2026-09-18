@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getSessionFromRequest, getAdminSession } from '@/lib/auth';
 import { getAllBlogs, createBlog } from '@/lib/db';
 
@@ -62,6 +63,14 @@ export async function POST(req: NextRequest) {
       },
       relatedSlugs: Array.isArray(body.relatedSlugs) ? body.relatedSlugs : [],
     });
+
+    try {
+      revalidatePath('/blog');
+      revalidatePath(`/blog/${newBlog.slug}`);
+      revalidatePath('/admin/blogs');
+    } catch (e) {
+      console.warn('Path revalidation error:', e);
+    }
 
     return NextResponse.json({ success: true, blog: newBlog });
   } catch (error: any) {

@@ -46,7 +46,10 @@ export default function AdminBlogsPage() {
   const fetchBlogs = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch('/api/admin/blogs');
+      const res = await fetch('/api/admin/blogs', {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' },
+      });
       if (res.ok) {
         const data = await res.json();
         setBlogs(data.blogs || []);

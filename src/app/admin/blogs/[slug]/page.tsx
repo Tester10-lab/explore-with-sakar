@@ -18,7 +18,10 @@ export default function EditBlogPage() {
       if (!slug) return;
       try {
         setIsLoading(true);
-        const res = await fetch(`/api/admin/blogs/${slug}`);
+        const res = await fetch(`/api/admin/blogs/${slug}`, {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache' },
+        });
         if (!res.ok) throw new Error('Blog post not found');
         const data = await res.json();
         setBlog(data.blog);

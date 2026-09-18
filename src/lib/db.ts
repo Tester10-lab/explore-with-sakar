@@ -527,7 +527,8 @@ export function getAllBlogs(includeDrafts = true): ExtendedBlogPost[] {
 
 export function getBlogBySlug(slug: string, includeDrafts = true): ExtendedBlogPost | null {
   const blogs = getAllBlogs(includeDrafts);
-  return blogs.find((b) => b.slug === slug || b.id === slug) || null;
+  const decoded = decodeURIComponent(slug).trim();
+  return blogs.find((b) => b.slug === slug || b.id === slug || b.slug === decoded || b.id === decoded) || null;
 }
 
 export function createBlog(blogData: Omit<ExtendedBlogPost, 'id' | 'createdAt' | 'updatedAt'>): ExtendedBlogPost {
@@ -546,7 +547,10 @@ export function createBlog(blogData: Omit<ExtendedBlogPost, 'id' | 'createdAt' |
 
 export function updateBlog(id: string, updates: Partial<ExtendedBlogPost>): ExtendedBlogPost | null {
   const store = readStore();
-  const index = (store.blogs || []).findIndex((b) => b.id === id || b.slug === id);
+  const decoded = decodeURIComponent(id).trim();
+  const index = (store.blogs || []).findIndex(
+    (b) => b.id === id || b.slug === id || b.id === decoded || b.slug === decoded
+  );
   if (index === -1) return null;
 
   const updated: ExtendedBlogPost = {
@@ -562,8 +566,11 @@ export function updateBlog(id: string, updates: Partial<ExtendedBlogPost>): Exte
 
 export function deleteBlog(id: string): boolean {
   const store = readStore();
+  const decoded = decodeURIComponent(id).trim();
   const initialLen = (store.blogs || []).length;
-  store.blogs = (store.blogs || []).filter((b) => b.id !== id && b.slug !== id);
+  store.blogs = (store.blogs || []).filter(
+    (b) => b.id !== id && b.slug !== id && b.id !== decoded && b.slug !== decoded
+  );
   if (store.blogs.length !== initialLen) {
     writeStore(store);
     return true;
