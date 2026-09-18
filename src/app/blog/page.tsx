@@ -7,7 +7,6 @@ import JournalHero from '@/components/blog/JournalHero';
 import BlogCategoryFilter from '@/components/blog/BlogCategoryFilter';
 import FeaturedStory from '@/components/blog/FeaturedStory';
 import BlogCard from '@/components/blog/BlogCard';
-import NewsletterSubscription from '@/components/blog/NewsletterSubscription';
 import { ExtendedBlogPost } from '@/types/cms';
 
 export default function BlogPage() {
@@ -109,9 +108,6 @@ export default function BlogPage() {
             </button>
           </div>
         )}
-
-        {/* 5. Newsletter / Journal Dispatches */}
-        <NewsletterSubscription />
       </div>
     </div>
   );

@@ -8,7 +8,6 @@ import {
   MapPin,
   ArrowUpRight,
   Heart,
-  Compass,
 } from 'lucide-react';
 import { useSettings } from '@/context/SettingsContext';
 
@@ -25,17 +24,14 @@ export default function Footer() {
         {/* Top Call to Action Banner */}
         <div className="mb-20 flex flex-col md:flex-row items-start md:items-end justify-between gap-8 border-b border-parchment-300 pb-16">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center text-xs font-semibold uppercase tracking-widest text-terracotta mb-2">
-              <Compass className="w-3.5 h-3.5 mr-1.5" />
-              <span>Begin Your Chapter in Nepal</span>
-            </span>
             <h3 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight mb-4">
-              {settings.footer?.headline || "Let's craft your meaningful journey through Nepal."}
+              {settings.footer?.headline || "Would you like to create a similar travel story in Nepal with Sakar?"}
             </h3>
-            <p className="text-himalaya-600 text-sm sm:text-base font-light max-w-xl leading-relaxed">
-              {settings.footer?.subheadline ||
-                'Connect directly with Sakar to discuss your travel dates, preferred pace, and cultural curiosities.'}
-            </p>
+            {settings.footer?.subheadline ? (
+              <p className="text-himalaya-600 text-sm sm:text-base font-light max-w-xl leading-relaxed">
+                {settings.footer.subheadline}
+              </p>
+            ) : null}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0">
