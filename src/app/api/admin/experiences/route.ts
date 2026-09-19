@@ -33,6 +33,9 @@ export async function POST(req: NextRequest) {
     const newExperience = createExperience({
       title: body.title,
       slug: body.slug,
+      subtitle: body.subtitle || '',
+      tagline: body.tagline || '',
+      nepaliTitle: body.nepaliTitle || '',
       category: body.category || 'heritage',
       categoryLabel: body.categoryLabel || 'Living Heritage',
       duration: body.duration || '3 - 5 Days',
@@ -42,6 +45,19 @@ export async function POST(req: NextRequest) {
       groupSize: body.groupSize || 'Private / 2 - 8 Travelers',
       season: body.season || 'Year Round',
       featured: Boolean(body.featured),
+      featuredOrder:
+        body.featuredOrder !== undefined && body.featuredOrder !== '' && body.featuredOrder !== null
+          ? Number(body.featuredOrder)
+          : undefined,
+      homepageVisible: body.homepageVisible !== undefined ? Boolean(body.homepageVisible) : true,
+      blogVisible: body.blogVisible !== undefined ? Boolean(body.blogVisible) : true,
+      whatMakesDifferent: body.whatMakesDifferent || '',
+      idealFor: body.idealFor || '',
+      seoTitle: body.seoTitle || '',
+      seoDescription: body.seoDescription || '',
+      ogImage: body.ogImage || '',
+      ctaText: body.ctaText || '',
+      ctaLink: body.ctaLink || '',
       heroImage: body.heroImage || { src: '', alt: '' },
       gallery: Array.isArray(body.gallery) ? body.gallery : [],
       shortDescription: body.shortDescription || '',

@@ -41,6 +41,9 @@ export interface ExtendedExperience {
   id: string;
   title: string;
   slug: string;
+  subtitle?: string;
+  tagline?: string;
+  nepaliTitle?: string;
   category:
     | 'heritage'
     | 'spiritual'
@@ -62,18 +65,30 @@ export interface ExtendedExperience {
   groupSize: string;
   season: string;
   featured: boolean;
+  featuredOrder?: number; // 1, 2, or 3 for top featured slots
+  homepageVisible?: boolean;
+  blogVisible?: boolean;
   heroImage: ImageAsset;
   gallery: ImageAsset[];
   shortDescription: string;
   fullDescription: string[];
   highlights: string[];
   inclusions: string[];
+  included?: string[];
   exclusions?: string[];
   days: ItineraryDay[];
+  idealFor?: string;
+  whatMakesDifferent?: string;
+  contentSections?: { heading: string; paragraphs: string[] }[];
   sakarNote?: string;
   impactFootprint?: string;
   relatedDestination?: string;
   relatedPackage?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  ogImage?: string;
   status: 'draft' | 'published';
   createdAt: string;
   updatedAt: string;

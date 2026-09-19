@@ -52,7 +52,7 @@ export default function DestinationsPage() {
         primaryButtonText="Inquire About Destinations"
         primaryButtonHref="/contact"
         secondaryButtonText="Explore Experiences"
-        secondaryButtonHref="/experiences"
+        secondaryButtonHref="/experience"
       />
     </div>
   );

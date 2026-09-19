@@ -7,7 +7,9 @@ import JournalHero from '@/components/blog/JournalHero';
 import BlogCategoryFilter from '@/components/blog/BlogCategoryFilter';
 import FeaturedStory from '@/components/blog/FeaturedStory';
 import BlogCard from '@/components/blog/BlogCard';
-import { ExtendedBlogPost } from '@/types/cms';
+import BlogFeaturedExperiences from '@/components/blog/BlogFeaturedExperiences';
+import { ExtendedBlogPost, ExtendedExperience } from '@/types/cms';
+import { EXPERIENCES } from '@/data/experiences';
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState<ExtendedBlogPost[]>(
@@ -19,10 +21,11 @@ export default function BlogPage() {
       updatedAt: new Date().toISOString(),
     }))
   );
+  const [experiences, setExperiences] = useState<ExtendedExperience[]>([]);
   const [activeCategory, setActiveCategory] = useState<BlogCategory | 'All'>('All');
 
   useEffect(() => {
-    async function loadLiveBlogs() {
+    async function loadLiveContent() {
       try {
         const res = await fetch('/api/public/content', {
           cache: 'no-store',
@@ -32,13 +35,32 @@ export default function BlogPage() {
           if (data.blogs && data.blogs.length > 0) {
             setBlogs(data.blogs);
           }
+          if (data.experiences && data.experiences.length > 0) {
+            setExperiences(data.experiences);
+          }
         }
       } catch (err) {
         // Fallback in state
       }
     }
-    loadLiveBlogs();
+    loadLiveContent();
   }, []);
+
+  const topExperiences = useMemo(() => {
+    const candidates = experiences.filter(
+      (e) =>
+        e.status === 'published' &&
+        (e.featured || (e.featuredOrder !== undefined && e.featuredOrder > 0) || e.blogVisible !== false)
+    );
+    const pool = candidates.length >= 3 ? candidates : experiences;
+    return [...pool]
+      .sort((a, b) => {
+        const orderA = a.featuredOrder !== undefined && a.featuredOrder > 0 ? a.featuredOrder : (a.featured ? 10 : 99);
+        const orderB = b.featuredOrder !== undefined && b.featuredOrder > 0 ? b.featuredOrder : (b.featured ? 10 : 99);
+        return orderA - orderB;
+      })
+      .slice(0, 3);
+  }, [experiences]);
 
   const publishedPosts = useMemo(() => {
     return blogs.filter((b) => b.status === 'published');
@@ -111,6 +133,11 @@ export default function BlogPage() {
           </div>
         )}
       </div>
+
+      {/* 5. Top 3 Experiences Linked from Stories */}
+      {topExperiences.length > 0 && (
+        <BlogFeaturedExperiences experiences={topExperiences} />
+      )}
     </div>
   );
 }

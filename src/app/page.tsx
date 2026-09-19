@@ -15,11 +15,10 @@ import Hero from '@/components/home/Hero';
 import {
   getLiveBlogs,
   getLiveBlogsAsync,
-  getLiveServices,
+  getTopFeaturedExperiences,
   getLiveSettings,
   getLiveSettingsAsync,
 } from '@/lib/cms';
-import ServiceCard from '@/components/common/ServiceCard';
 import BlogCard from '@/components/blog/BlogCard';
 import SectionHeading from '@/components/common/SectionHeading';
 import InquiryForm from '@/components/booking/InquiryForm';
@@ -33,7 +32,7 @@ export default async function HomePage() {
   const settings = await getLiveSettingsAsync();
   const stats = settings.stats || [];
 
-  const services = getLiveServices(false);
+  const featuredExperiences = getTopFeaturedExperiences(3);
 
   const blogs = await getLiveBlogsAsync(false);
   const latestBlogs = blogs.slice(0, 3);
@@ -68,36 +67,100 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 2. Core Travel Pillars */}
+      {/* 2. Top 3 Featured Experiences (CMS Controlled) */}
       <section className="py-20 sm:py-28 bg-white border-b border-parchment-300">
         <div className="editorial-container">
           <SectionHeading
-            tag="Our Core Pillars"
-            nepaliTag="हाम्रा यात्राहरू"
-            title="Meaningful Travel, Deeply Curated"
-            description="We move away from hurried checklists and mass tourism. Explore our dedicated travel offerings, each crafted to forge genuine human connection."
+            tag="Curated Experiences"
+            nepaliTag="हाम्रा विशेष यात्राहरू"
+            title="Featured Experiences"
+            description="Three unhurried pathways into the living soul of Nepal. Handpicked, hosted personally by Sakar, and customized around your rhythm."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {services.slice(0, 3).map((service) => (
-              <ServiceCard key={service.id} service={service} layout="grid" />
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            {featuredExperiences.map((exp, idx) => {
+              const imageSrc =
+                exp.heroImage?.src ||
+                (exp as any).image ||
+                '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg';
+
+              return (
+                <div
+                  key={exp.id || exp.slug}
+                  className="group flex flex-col bg-sand-light rounded-3xl overflow-hidden border border-parchment-300 shadow-subtle hover:shadow-editorial transition-all duration-300 hover:-translate-y-1"
+                >
+                  {/* Hero Image Container */}
+                  <Link
+                    href={`/experience/${exp.slug}`}
+                    className="block relative aspect-[16/11] overflow-hidden bg-himalaya-900"
+                  >
+                    <Image
+                      src={imageSrc}
+                      alt={exp.heroImage?.alt || exp.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/70 via-transparent to-transparent opacity-70 group-hover:opacity-50 transition-opacity" />
+
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-md text-himalaya-950 text-[10px] font-bold uppercase tracking-widest rounded-full shadow-sm">
+                      {exp.categoryLabel || exp.category}
+                    </div>
+
+                    {/* Priority Badge */}
+                    <div className="absolute top-4 right-4 px-2.5 py-1 bg-himalaya-950/80 backdrop-blur-md text-saffron text-[10px] font-mono font-bold tracking-wider rounded-full border border-saffron/20">
+                      Featured #{idx + 1}
+                    </div>
+
+                    {/* Small Supporting Info in Image Overlay */}
+                    {exp.location && (
+                      <div className="absolute bottom-3 left-4 right-4 text-parchment-200 text-xs flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-terracotta" />
+                        <span className="truncate">{exp.location.split(',')[0]}</span>
+                        {exp.duration && <span className="opacity-70">• {exp.duration}</span>}
+                      </div>
+                    )}
+                  </Link>
+
+                  {/* Editorial Content */}
+                  <div className="flex-1 p-7 flex flex-col justify-between space-y-6">
+                    <div className="space-y-3">
+                      {exp.nepaliTitle && (
+                        <span className="block text-xs font-serif text-himalaya-500">
+                          {exp.nepaliTitle}
+                        </span>
+                      )}
+                      <h3 className="font-editorial-serif text-2xl font-bold text-himalaya-950 leading-snug group-hover:text-terracotta transition-colors">
+                        <Link href={`/experience/${exp.slug}`}>{exp.title}</Link>
+                      </h3>
+                      <p className="text-sm text-himalaya-600 font-light leading-relaxed line-clamp-3">
+                        {exp.shortDescription}
+                      </p>
+                    </div>
+
+                    {/* Card Footer & CTA */}
+                    <div className="pt-4 border-t border-parchment-200">
+                      <Link
+                        href={`/experience/${exp.slug}`}
+                        className="inline-flex items-center justify-center w-full py-3.5 rounded-xl bg-himalaya-950 hover:bg-terracotta text-white font-semibold text-xs tracking-wider uppercase transition-all duration-300 shadow-subtle hover:shadow-warm group-hover:bg-terracotta"
+                      >
+                        <span>Explore Experience</span>
+                        <ArrowRight className="w-3.5 h-3.5 ml-2" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          {services.length > 3 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              {services.slice(3, 5).map((service) => (
-                <ServiceCard key={service.id} service={service} layout="grid" />
-              ))}
-            </div>
-          )}
-
-          <div className="text-center pt-4">
+          <div className="text-center pt-2">
             <Link
-              href="/experiences"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-himalaya-950 hover:bg-terracotta text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 shadow-subtle hover:shadow-warm"
+              href="/experience"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-parchment-100 hover:bg-himalaya-950 text-himalaya-950 hover:text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 border border-parchment-300 shadow-subtle hover:shadow-warm"
             >
-              <span>Explore All Experiences</span>
+              <span>Explore All Experiences & Pillars</span>
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </div>

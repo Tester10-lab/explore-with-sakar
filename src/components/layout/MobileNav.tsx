@@ -108,7 +108,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   <div className="px-4 pb-4 pt-1 space-y-3 border-t border-parchment-200 divide-y divide-parchment-100">
                     {/* Pillar 1: Go Beyond the Map */}
                     <Link
-                      href="/services/beyond-the-map"
+                      href="/experience/go-beyond"
                       onClick={onClose}
                       className="block group pt-2 first:pt-1 pb-1"
                     >
@@ -118,37 +118,37 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                           Go Beyond the Map
                         </span>
                         <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
-                          Trails & Stories
+                          Exploration
                         </span>
                       </div>
                       <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Guided exploration, hidden communities, sacred places, trails, local stories.
+                        Living courtyards, medieval stone mysteries & master artisan guilds.
                       </p>
                     </Link>
 
-                    {/* Pillar 2: Go Within */}
+                    {/* Pillar 2: Go Spiritual */}
                     <Link
-                      href="/services/spiritual-wellness"
+                      href="/experience/go-spiritual"
                       onClick={onClose}
                       className="block group pt-2.5 pb-1"
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
                           <Sparkles className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
-                          Go Within
+                          Go Spiritual
                         </span>
                         <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
                           Spiritual
                         </span>
                       </div>
                       <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Spiritual journeys, Himalayan practices, meditation, sacred traditions, sound experiences.
+                        Himalayan singing bowl resonance, monastery chanting & meditation caves.
                       </p>
                     </Link>
 
                     {/* Pillar 3: Feel Closer */}
                     <Link
-                      href="/services/homestays"
+                      href="/experience/feel-closer"
                       onClick={onClose}
                       className="block group pt-2.5 pb-1"
                     >
@@ -162,13 +162,13 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         </span>
                       </div>
                       <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Homestays, local families, food, traditional skills, cultural immersion.
+                        Traditional village homestays, hearthside cooking & warm family bonds.
                       </p>
                     </Link>
 
                     {/* Pillar 4: Leave a Mark */}
                     <Link
-                      href="/experiences?category=responsible"
+                      href="/experience/leave-a-mark"
                       onClick={onClose}
                       className="block group pt-2.5 pb-1"
                     >
@@ -178,18 +178,18 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                           Leave a Mark
                         </span>
                         <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
-                          Community
+                          Impact
                         </span>
                       </div>
                       <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Community projects, school programs, environmental activities, volunteering and meaningful events.
+                        Regenerative travel, rural education support & community conservation.
                       </p>
                     </Link>
 
                     {/* Overview links */}
                     <div className="pt-3 flex flex-col space-y-1.5">
                       <Link
-                        href="/experiences"
+                        href="/experience"
                         onClick={onClose}
                         className="text-xs font-semibold uppercase tracking-wider text-terracotta hover:underline py-1 flex items-center justify-between"
                       >
@@ -197,7 +197,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                       <Link
-                        href="/services/custom-journeys"
+                        href="/experience/custom-private-journeys"
                         onClick={onClose}
                         className="text-xs font-medium text-himalaya-700 hover:text-terracotta py-1"
                       >

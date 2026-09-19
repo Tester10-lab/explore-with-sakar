@@ -737,7 +737,7 @@ export default function BeyondTheMapClient() {
         subtitle="A sequenced editorial journey through living courtyards, ancient trade corridors, multi-generational artisan workshops, and calm Himalayan waters with Sakar."
         backgroundImage="/images/beyond-the-map/living-courtyards.jpg"
         breadcrumbs={[
-          { label: 'Services', href: '/services' },
+          { label: 'Experiences', href: '/experience' },
           { label: 'Go Beyond the Map' },
         ]}
       />
@@ -1008,7 +1008,7 @@ export default function BeyondTheMapClient() {
         primaryButtonText="Inquire About Beyond the Map"
         primaryButtonHref="/contact?subject=Go%20Beyond%20the%20Map%20Custom%20Journey"
         secondaryButtonText="Explore All Journeys"
-        secondaryButtonHref="/experiences"
+        secondaryButtonHref="/experience"
       />
     </div>
   );

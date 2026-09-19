@@ -19,19 +19,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/services`,
+      url: `${baseUrl}/experience`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.95,
     },
     {
       url: `${baseUrl}/packages`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/experiences`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -69,11 +63,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   try {
-    const [packages, experiences, blogs, services] = await Promise.all([
+    const [packages, experiences, blogs] = await Promise.all([
       getLivePackages(),
       getLiveExperiences(),
       getLiveBlogs(),
-      getLiveServices(),
     ]);
 
     const packageRoutes: MetadataRoute.Sitemap = packages.map((pkg) => ({
@@ -84,7 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
     const experienceRoutes: MetadataRoute.Sitemap = experiences.map((exp) => ({
-      url: `${baseUrl}/experiences/${exp.slug}`,
+      url: `${baseUrl}/experience/${exp.slug}`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.85,
@@ -99,16 +92,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.75,
       }));
 
-    const serviceRoutes: MetadataRoute.Sitemap = services
-      .filter((s) => s.status !== 'draft')
-      .map((svc) => ({
-        url: `${baseUrl}/services/${svc.slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.8,
-      }));
-
-    return [...staticRoutes, ...packageRoutes, ...experienceRoutes, ...blogRoutes, ...serviceRoutes];
+    return [...staticRoutes, ...packageRoutes, ...experienceRoutes, ...blogRoutes];
   } catch (err) {
     console.error('Error generating sitemap:', err);
     return staticRoutes;

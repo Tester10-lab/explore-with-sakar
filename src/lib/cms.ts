@@ -224,6 +224,25 @@ export function getLiveExperienceBySlug(slug: string, includeDrafts = false): Ex
 }
 
 /**
+ * Fetch top featured experiences (CMS controlled via featuredOrder: 1, 2, 3)
+ */
+export function getTopFeaturedExperiences(limit = 3, includeDrafts = false): ExtendedExperience[] {
+  const all = getLiveExperiences(includeDrafts);
+  
+  // Filter for items explicitly featured or homepage visible, or default to all
+  const candidates = all.filter((e) => e.status === 'published' && (e.featured || (e.featuredOrder !== undefined && e.featuredOrder > 0) || e.homepageVisible !== false));
+  const pool = candidates.length >= limit ? candidates : all;
+
+  const sorted = [...pool].sort((a, b) => {
+    const orderA = a.featuredOrder !== undefined && a.featuredOrder > 0 ? a.featuredOrder : (a.featured ? 10 : 99);
+    const orderB = b.featuredOrder !== undefined && b.featuredOrder > 0 ? b.featuredOrder : (b.featured ? 10 : 99);
+    return orderA - orderB;
+  });
+
+  return sorted.slice(0, limit);
+}
+
+/**
  * Fetch all published blogs with fallback to static BLOG_POSTS
  */
 export function getLiveBlogs(includeDrafts = false): ExtendedBlogPost[] {

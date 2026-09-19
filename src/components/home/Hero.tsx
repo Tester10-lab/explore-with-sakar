@@ -119,7 +119,7 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Link
-                href="/experiences"
+                href="/experience"
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-terracotta hover:bg-terracotta-dark text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 shadow-warm hover:shadow-floating"
               >
                 <span>Explore Experiences</span>

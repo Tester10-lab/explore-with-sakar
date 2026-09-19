@@ -1,3 +1,5 @@
-import BeyondTheMapPage from '../beyond-the-map/page';
+import { redirect } from 'next/navigation';
 
-export default BeyondTheMapPage;
+export default function TrekkingRedirect() {
+  redirect('/experience/go-beyond');
+}

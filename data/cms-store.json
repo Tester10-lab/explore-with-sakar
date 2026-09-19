@@ -3133,6 +3133,492 @@
   ],
   "experiences": [
     {
+      "id": "exp-go-beyond",
+      "title": "Go Beyond the Map",
+      "subtitle": "Where Every Stone Holds a Story",
+      "tagline": "Living Courtyards, Medieval Stone Mysteries & Master Artisan Guilds",
+      "slug": "go-beyond",
+      "category": "beyond-the-map",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "Full Day to Multi-Day",
+      "difficulty": "Gentle",
+      "location": "Kathmandu Valley, Patan, Bhaktapur & Pokhara",
+      "groupSize": "Private / 1–6 Travelers",
+      "season": "Year-Round",
+      "featured": true,
+      "featuredOrder": 1,
+      "homepageVisible": true,
+      "blogVisible": true,
+      "heroImage": {
+        "src": "/images/beyond-the-map/living-courtyards.jpg",
+        "alt": "Ancient living courtyards of Kathmandu Valley"
+      },
+      "gallery": [
+        {
+          "src": "/images/beyond-the-map/living-courtyards.jpg",
+          "alt": "Living courtyards in morning light"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/durbar-square.jpg",
+          "alt": "Historic Bhaktapur Durbar Square"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/temple-courtyard.jpg",
+          "alt": "Patan sacred courtyards"
+        },
+        {
+          "src": "/explore-with-sakar/images/mountains/mountain-ridge.jpg",
+          "alt": "Pokhara lake and mountain reflections"
+        }
+      ],
+      "shortDescription": "Step past tourist facades into living courtyards, ancient Silk Road trade alleys, multi-generational artisan workshops, and calm Himalayan waters with Sakar.",
+      "fullDescription": [
+        "If you want to understand Kathmandu, do not start with a monument. Start with a morning walk where the city wakes up in the narrow alleys of Ason.",
+        "As the first rays of sunlight enter between old brick houses, the smell of spices, incense, fresh vegetables, and traditional sweets fills the air. Ason is not just a marketplace; it is a living memory standing along the ancient trade routes connecting the plains of India with the Tibetan plateau.",
+        "One of Kathmandu’s greatest secrets is hidden not in its palaces, but in its neighbourhoods. The old settlements were designed around people—with homes, markets, temples, schools, and social spaces within walking distance.",
+        "From Kathmandu Durbar Square to medieval Bhaktapur, the maker courtyards of Patan, and the laid-back waters of Pokhara, Go Beyond the Map is a journey through living history."
+      ],
+      "highlights": [
+        "Dawn morning walk through spice-scented Ason alleys as wooden shutters open to morning devotion",
+        "Entering Bhaktapur: vehicle-free brick lanes, master potters shaping clay, and fresh Juju Dhau",
+        "Behind-the-scenes ateliers in Patan watching sacred deities forged and carved by hand",
+        "Early morning silent wooden paddle boat on Phewa Lake reflecting sacred Machhapuchhre"
+      ],
+      "inclusions": [
+        "Dedicated personal hosting & cultural interpretation by Sakar throughout",
+        "Private air-conditioned overland vehicle and scenic transfers",
+        "Boutique heritage accommodations & tranquil lakeside retreats",
+        "All UNESCO World Heritage site permits, museum fees, and pottery workshop materials",
+        "Authentic multi-course Newari feasts, tea tastings, and fresh local delicacies"
+      ],
+      "exclusions": [
+        "International flights",
+        "Nepal visa fees",
+        "Personal travel insurance"
+      ],
+      "days": [
+        {
+          "dayNumber": 1,
+          "title": "Kathmandu Durbar Square & Ason Alleys",
+          "description": "Dawn walk from Ason trade crossroads through Newar residential courtyards into Basantapur palace square."
+        },
+        {
+          "dayNumber": 2,
+          "title": "Bhaktapur Living Medieval City & Pottery Square",
+          "description": "Car-free brick pavements, master clay wheel demonstrations, Nyatapola Temple, and authentic Juju Dhau."
+        },
+        {
+          "dayNumber": 3,
+          "title": "Patan: City of Makers & Sacred Water Hitis",
+          "description": "Lost-wax bronze foundries, stone-carved Krishna Mandir, Golden Temple, and ancient Manga Hiti conduits."
+        },
+        {
+          "dayNumber": 4,
+          "title": "Pokhara: The Laid-Back City That Makes You Want to Stay",
+          "description": "Phewa Lake wooden boat to Tal Barahi, Machhapuchhre dawn reflections, and historic Gurung/Magar trade quarters."
+        }
+      ],
+      "idealFor": "Travelers seeking authentic cultural depth, living crafts, architecture, and unhurried pacing.",
+      "whatMakesDifferent": "We do not treat monuments as isolated tourist attractions behind glass. We walk through residential family compounds, meet multi-generational makers in their workshops, and explore how ancient architecture, social relationships, and daily rituals remain alive today.",
+      "sakarNote": "In Kathmandu, every cobblestone holds a story, and every carved window frames five centuries of living devotion. When you step off the tourist street, the city whispers eight centuries of living peace.",
+      "impactFootprint": "All workshop honorariums and fees go directly into the hands of traditional Newari artisan families, community preservation trusts, and local boatmen.",
+      "ctaText": "Inquire About Go Beyond the Map",
+      "ctaLink": "/contact?subject=Go%20Beyond%20the%20Map",
+      "seoTitle": "Go Beyond the Map | Explore With Sakar",
+      "seoDescription": "Step past the tourist facades into living courtyards, ancient Silk Road trade alleys, master artisan workshops, and calm Himalayan waters with Sakar.",
+      "status": "published",
+      "createdAt": "2026-09-19T19:30:58.575Z",
+      "updatedAt": "2026-09-19T19:30:58.607Z"
+    },
+    {
+      "id": "exp-go-spiritual",
+      "title": "Go Spiritual",
+      "subtitle": "Himalayan Spiritual & Sound Sanctuary",
+      "tagline": "7-Metal Tibetan Singing Bowls, Monastery Dawns & Sacred Mountain Stillness",
+      "slug": "go-spiritual",
+      "category": "spiritual-wellness",
+      "categoryLabel": "Go Spiritual",
+      "duration": "5 – 8 Days",
+      "difficulty": "Gentle",
+      "location": "Pharping Sacred Caves, Boudhanath & Foothill Gompas",
+      "groupSize": "Private / 1–4 Travelers",
+      "season": "Year-Round",
+      "featured": true,
+      "featuredOrder": 2,
+      "homepageVisible": true,
+      "blogVisible": true,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
+        "alt": "Sacred stupa with prayer flags in tranquil morning light"
+      },
+      "gallery": [
+        {
+          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
+          "alt": "Sacred stupa"
+        },
+        {
+          "src": "/explore-with-sakar/images/spiritual/meditation-cave.jpg",
+          "alt": "Ancient meditation caves in Pharping"
+        },
+        {
+          "src": "/explore-with-sakar/images/mountains/sunrise-himalayas.jpg",
+          "alt": "Himalayan mountain stillness"
+        }
+      ],
+      "shortDescription": "A sanctuary for inner restoration. Experience private singing bowl sound therapies, Buddhist monastery chanting, sacred cave walks, and mindful presence in the Himalayas.",
+      "fullDescription": [
+        "For millennia, the Himalayan peaks and valleys have served as the earth’s most revered sanctuary for seekers, meditators, and yogis. This journey is crafted for those who wish to step off the global treadmill and reconnect with inner quietude.",
+        "Our approach centers on experiential mindfulness and ancient sound vibration: certified 7-metal hand-hammered singing bowl sessions, dawn pujas inside serene hillside gompas, and quiet walks through sacred pine forests.",
+        "Rather than dogmatic ritual, we cultivate pure presence, gentle breathwork, and deep somatic restoration in sacred power places like Pharping and high Himalayan ridges."
+      ],
+      "highlights": [
+        "Private 1-on-1 and group sound resonance sessions using 7-metal hand-hammered Himalayan singing bowls",
+        "Dawn monastery chanting, long horn resonance, and butter lamp rituals inside peaceful Buddhist gompas",
+        "Walk tranquil trails to the ancient 8th-century meditation caves of Guru Padmasambhava in Pharping",
+        "Guided quiet walking meditations, restorative breathwork, and nourishing herbal nutrition"
+      ],
+      "inclusions": [
+        "Personal accompaniment & spiritual context translation by Sakar",
+        "Daily guided meditation and private singing bowl acoustic sound therapies with master practitioners",
+        "Monastery guesthouse & peaceful hillside wellness eco-lodge accommodations",
+        "All private road transfers in dedicated comfortable vehicle",
+        "Nutritious organic vegetarian meals and herbal teas throughout",
+        "Monastery donations and sacred site ceremonial offerings"
+      ],
+      "exclusions": [
+        "International flights",
+        "Nepal visa",
+        "Personal sound bowl purchases"
+      ],
+      "days": [
+        {
+          "dayNumber": 1,
+          "title": "Boudhanath Dawn Kora & Sound Initiation",
+          "description": "Morning circumambulation with Tibetan pilgrims before sunrise, butter lamp lighting, and initial acoustic assessment."
+        },
+        {
+          "dayNumber": 2,
+          "title": "Pharping Sacred Caves & Padmasambhava Heritage",
+          "description": "Meditation inside the Asura Cave where Guru Rinpoche practiced, and dialogue with senior resident lamas."
+        },
+        {
+          "dayNumber": 3,
+          "title": "Hillside Gompa Puja & Restorative Breathwork",
+          "description": "Dawn monastery horns, drum resonance, mindful pine forest walking, and private evening vibrational therapy."
+        },
+        {
+          "dayNumber": 4,
+          "title": "High Ridge Solitude & Integration",
+          "description": "Sunrise over Himalayan snowpeaks, silent journaling, tea ceremony, and deep somatic closing blessing."
+        }
+      ],
+      "idealFor": "Seekers of inner stillness, wellness travelers, yogis, and anyone needing a deep mental and nervous system reset.",
+      "whatMakesDifferent": "We practice unhurried mindfulness rather than commercialized spiritual sightseeing. Every sound healing session is one-on-one with verified master tuners using genuine heirloom 7-metal bowls.",
+      "sakarNote": "The singing bowl does not force silence upon the mind; its pure harmonic vibration gently invites the mind home.",
+      "impactFootprint": "All monastery offerings support resident monastics, elderly retreats, and local Buddhist preservation trusts.",
+      "ctaText": "Inquire About Go Spiritual",
+      "ctaLink": "/contact?subject=Go%20Spiritual",
+      "seoTitle": "Go Spiritual | Explore With Sakar",
+      "seoDescription": "Experience authentic 7-metal singing bowl sound therapies, Buddhist monastery chanting, and sacred Himalayan cave meditations with Sakar.",
+      "status": "published",
+      "createdAt": "2026-09-19T19:30:58.607Z",
+      "updatedAt": "2026-09-19T19:30:58.607Z"
+    },
+    {
+      "id": "exp-feel-closer",
+      "title": "Feel Closer",
+      "subtitle": "Village Homestays & Living Hearth Hospitality",
+      "tagline": "Stay With Nepal: Living Hearth Hospitality, Organic Farming & Lifelong Human Connections",
+      "slug": "feel-closer",
+      "category": "homestays",
+      "categoryLabel": "Feel Closer",
+      "duration": "4 – 7 Days",
+      "difficulty": "Gentle",
+      "location": "Panauti, Balthali & Annapurna Gurung Foothills",
+      "groupSize": "Private / 1–6 Travelers",
+      "season": "Year-Round",
+      "featured": true,
+      "featuredOrder": 3,
+      "homepageVisible": true,
+      "blogVisible": true,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
+        "alt": "Family and guests sharing a home-cooked meal around wooden table"
+      },
+      "gallery": [
+        {
+          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
+          "alt": "Village meal by the hearth"
+        },
+        {
+          "src": "/explore-with-sakar/images/homestays/village-homestay.jpg",
+          "alt": "Traditional village home"
+        },
+        {
+          "src": "/explore-with-sakar/images/trails/suspension-bridge.jpg",
+          "alt": "Village walking trails"
+        }
+      ],
+      "shortDescription": "Step beyond hotels to live under traditional slate roofs with Gurung and Tamang mountain families. Share meals, learn ancestral recipes, and forge genuine lifelong bonds.",
+      "fullDescription": [
+        "True cultural understanding never happens through the tinted window of a tourist bus. It happens when you sit cross-legged by a wood-burning hearth (Chulo), sharing steaming tea with a grandmother whose hands have worked the mountain soil for eighty years.",
+        "Our homestay experiences are carefully curated with verified host families who receive you not as a transactional customer, but as an honored family guest. Sakar bridges language and cultural nuances so meaningful conversations flow naturally.",
+        "100% of your hosting payment remains directly in the hands of village mothers and community development funds, providing sustainable livelihoods that keep rural heritage alive."
+      ],
+      "highlights": [
+        "Clean, cozy guest rooms with fresh private bedding, warm blankets, and panoramic mountain views",
+        "Harvest organic greens from terraced gardens and learn to cook traditional Dal Bhat on a wood fire",
+        "Participate in dawn butter lamp rituals, tea harvesting, community weaving looms, and evening folk songs",
+        "Direct economic impact empowering women-led cooperatives and rural village schools"
+      ],
+      "inclusions": [
+        "Full personal guidance and translation by Sakar throughout",
+        "Private family homestay accommodations with verified clean private bedrooms",
+        "All hearty, home-cooked farm-to-hearth organic meals and morning teas",
+        "All community homestay cooperative contributions and village permits",
+        "Private overland transport between Kathmandu and foothill villages"
+      ],
+      "exclusions": [
+        "International flights",
+        "Personal travel insurance",
+        "Souvenirs"
+      ],
+      "days": [
+        {
+          "dayNumber": 1,
+          "title": "Arrival & Welcome into Family Hearth",
+          "description": "Traditional marigold garland welcome, settling into cozy private guest room, and evening hearth tea."
+        },
+        {
+          "dayNumber": 2,
+          "title": "Farm Harvesting & Woodfire Kitchen Secrets",
+          "description": "Gathering organic vegetables from terrace plots, grinding spices by stone, and cooking authentic dal bhat."
+        },
+        {
+          "dayNumber": 3,
+          "title": "Village Ridge Walks & Community Stories",
+          "description": "Walking through orange groves and ancient stone paths with village elders, sharing folklore by the fire."
+        }
+      ],
+      "idealFor": "Slow travelers, food lovers, families, and anyone who cherishes genuine human connection.",
+      "whatMakesDifferent": "We never use commercialized fake homestays. You stay with real multi-generational families who have welcomed Sakar as family for over a decade.",
+      "sakarNote": "We do not receive visitors as clients. When you sit by our wood fire and eat our rice, you are family.",
+      "impactFootprint": "100% of accommodation and food payments stay in the village, funding local girls’ scholarships and organic farming.",
+      "ctaText": "Inquire About Feel Closer",
+      "ctaLink": "/contact?subject=Feel%20Closer",
+      "seoTitle": "Feel Closer | Explore With Sakar",
+      "seoDescription": "Live with authentic Gurung, Newar, and Tamang families in verified private village homestays with home-cooked hearth dining and cultural immersion.",
+      "status": "published",
+      "createdAt": "2026-09-19T19:30:58.607Z",
+      "updatedAt": "2026-09-19T19:30:58.607Z"
+    },
+    {
+      "id": "exp-leave-a-mark",
+      "title": "Leave a Mark",
+      "subtitle": "Regenerative Travel & Community Conservation",
+      "tagline": "Community Projects, Village School Mentorship, River Care & Ethical Wildlife Stewardship",
+      "slug": "leave-a-mark",
+      "category": "leave-a-mark",
+      "categoryLabel": "Leave a Mark",
+      "duration": "4 – 7 Days",
+      "difficulty": "Moderate",
+      "location": "Chitwan Buffer Zones & Rural Mountain Communities",
+      "groupSize": "Private / 1–8 Travelers",
+      "season": "Year-Round",
+      "featured": true,
+      "homepageVisible": true,
+      "blogVisible": true,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/trails/river-gorge.jpg",
+        "alt": "Serene Himalayan river and forest conservation sanctuary"
+      },
+      "gallery": [
+        {
+          "src": "/explore-with-sakar/images/trails/river-gorge.jpg",
+          "alt": "River gorge conservation"
+        },
+        {
+          "src": "/explore-with-sakar/images/trails/suspension-bridge.jpg",
+          "alt": "Mountain trail care"
+        },
+        {
+          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
+          "alt": "Community support"
+        }
+      ],
+      "shortDescription": "Travel that gives back more than it takes. Support women-led rural cooperatives, plant native trees, volunteer with mountain schools, and preserve endangered heritage.",
+      "fullDescription": [
+        "We believe travel should be regenerative, leaving ecosystems healthier and communities stronger than when we arrived.",
+        "Leave a Mark connects travelers with grassroots conservation and education initiatives led directly by local community leaders. Rather than superficial performative volunteering, we participate in tangible, long-term programs requested by the communities themselves.",
+        "A portion of every journey funds village drinking water filters, solar lighting, scholarship funds for rural girls, and wildlife buffer zone protection."
+      ],
+      "highlights": [
+        "Direct investment and cooperative exchange with women-led weaving and organic collectives",
+        "Supply books, solar learning tools, and sports gear to remote mountain schools",
+        "Participate in native oak and rhododendron reforestation along eroded mountain ridges",
+        "Support community anti-poaching buffer zones around Chitwan and Annapurna sanctuaries"
+      ],
+      "inclusions": [
+        "Dedicated guidance and community relationship facilitation by Sakar",
+        "Private eco-lodge & community homestay lodgings",
+        "Direct contribution to community conservation trusts and school supplies",
+        "All meals and private overland transportation"
+      ],
+      "exclusions": [
+        "International airfare",
+        "Personal insurance"
+      ],
+      "days": [
+        {
+          "dayNumber": 1,
+          "title": "Community Welcome & Project Briefing",
+          "description": "Meet local village teachers and forest rangers to understand ongoing ecological priorities."
+        },
+        {
+          "dayNumber": 2,
+          "title": "School Mentorship & Library Contribution",
+          "description": "Hands-on interactive learning with students, distributing solar reading lights and illustrated storybooks."
+        },
+        {
+          "dayNumber": 3,
+          "title": "Native Tree Planting & River Trail Care",
+          "description": "Planting indigenous saplings on slope lines and learning traditional soil retention techniques."
+        }
+      ],
+      "idealFor": "Conscious travelers, educators, families, and environmentalists who want their travel to leave positive change.",
+      "whatMakesDifferent": "Zero performative voluntourism. Every initiative is community-designed, community-led, and verified for long-term self-sufficiency.",
+      "sakarNote": "True travel does not just change the traveler; it honors and uplifts the soil and people that hosted them.",
+      "impactFootprint": "Every traveler directly finances 10 native trees and school supplies for five rural students.",
+      "ctaText": "Inquire About Leave a Mark",
+      "ctaLink": "/contact?subject=Leave%20a%20Mark",
+      "seoTitle": "Leave a Mark | Explore With Sakar",
+      "seoDescription": "Participate in meaningful community conservation, rural school mentorship, and regenerative travel projects in Nepal with Sakar.",
+      "status": "published",
+      "createdAt": "2026-09-19T19:30:58.607Z",
+      "updatedAt": "2026-09-19T19:30:58.607Z"
+    },
+    {
+      "id": "exp-all-curated-experiences",
+      "title": "All Curated Experiences",
+      "subtitle": "The Complete Directory of Private Itineraries",
+      "tagline": "Day-by-Day Himalayan Routes • Living Heritage • Mountain Trails & Departures",
+      "slug": "all-curated-experiences",
+      "category": "all-curated",
+      "categoryLabel": "All Curated Experiences",
+      "duration": "Flexible (3 to 16 Days)",
+      "difficulty": "Custom",
+      "location": "Across Nepal: Valleys, Ridges & Historic Towns",
+      "groupSize": "Private / 1–8 Travelers",
+      "season": "Year-Round",
+      "featured": false,
+      "homepageVisible": false,
+      "blogVisible": false,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/mountains/sunrise-himalayas.jpg",
+        "alt": "Panoramic Himalayan horizon over Nepal mountain ridges"
+      },
+      "gallery": [
+        {
+          "src": "/explore-with-sakar/images/mountains/sunrise-himalayas.jpg",
+          "alt": "Himalayan sunrise"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/durbar-square.jpg",
+          "alt": "Durbar Square temples"
+        }
+      ],
+      "shortDescription": "Explore our full collection of unhurried, private itineraries across Nepal—from medieval Newari courtyards to high alpine pastures and tranquil lakes.",
+      "fullDescription": [
+        "Explore With Sakar designs private, slow-paced journeys meant to spark genuine connection with sacred shrines, village families, and quiet Himalayan ridges.",
+        "Every itinerary in our collection can be reserved as a private journey or tailored to match your exact dates, fitness level, and personal travel curiosity."
+      ],
+      "highlights": [
+        "Comprehensive day-by-day itineraries across all four core travel pillars",
+        "Transparent inclusions, dedicated private transport, and personal hosting by Sakar",
+        "Options ranging from gentle 3-day cultural walks to 16-day grand Himalayan expeditions"
+      ],
+      "inclusions": [
+        "Full private hosting by Sakar",
+        "All lodging, permits, and private transfers"
+      ],
+      "days": [],
+      "idealFor": "Travelers who wish to browse our complete catalog of routes before designing their bespoke journey.",
+      "whatMakesDifferent": "100% private travel with zero tourist buses, rigid schedules, or compulsory shopping stops.",
+      "ctaText": "Browse Full Catalog",
+      "ctaLink": "/experience",
+      "seoTitle": "All Curated Experiences | Explore With Sakar",
+      "seoDescription": "Browse our complete collection of private, slow-paced journeys across Nepal guided by local host Sakar.",
+      "status": "published",
+      "createdAt": "2026-09-19T19:30:58.607Z",
+      "updatedAt": "2026-09-19T19:30:58.607Z"
+    },
+    {
+      "id": "exp-custom-private-journeys",
+      "title": "Custom Private Journeys",
+      "subtitle": "Bespoke Private Itinerary Curation",
+      "tagline": "Tailor-Made Routes Designed Around Your Personal Rhythm, Dates & Curiosity",
+      "slug": "custom-private-journeys",
+      "category": "custom-journeys",
+      "categoryLabel": "Custom Private Journeys",
+      "duration": "Bespoke (Tailored to You)",
+      "difficulty": "Custom",
+      "location": "Tailored Across Nepal",
+      "groupSize": "Private (Solo, Couple or Family)",
+      "season": "Year-Round",
+      "featured": false,
+      "homepageVisible": false,
+      "blogVisible": false,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/mountains/mountain-ridge.jpg",
+        "alt": "Scenic mountain ridge overlooking Himalayan horizon"
+      },
+      "gallery": [
+        {
+          "src": "/explore-with-sakar/images/mountains/mountain-ridge.jpg",
+          "alt": "High mountain ridge"
+        },
+        {
+          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
+          "alt": "Warm village hospitality"
+        }
+      ],
+      "shortDescription": "Every traveler is unique. We craft 100% private, bespoke Nepal journeys for solo travelers, couples, and multi-generational families with personal host care.",
+      "fullDescription": [
+        "No two travelers are alike. Some wish to spend three days in a quiet pottery courtyard; others dream of meditating at dawn on a high ridge or tasting wild honey with village beekeepers.",
+        "Our bespoke curation begins with a personal conversation. Sakar listens to your travel dreams, physical comfort preferences, and dates, crafting a seamless, deeply considered journey from airport greeting to farewell blessing.",
+        "You travel with complete flexibility, private vehicle comfort, handpicked lodgings, and Sakar’s dedicated personal accompaniment."
+      ],
+      "highlights": [
+        "Interactive collaborative itinerary tailoring until every day matches your preferred rhythm",
+        "Exclusive private vehicle, private guide, and the agility to modify daily plans on the go",
+        "Thoughtful arrangements for solo traveler safety, romantic escapes, and family-friendly pacing",
+        "Direct contact with Sakar from initial planning through your entire time in Nepal"
+      ],
+      "inclusions": [
+        "Dedicated 1-on-1 itinerary design consultations with Sakar",
+        "Full private journey accompaniment & cultural interpretation",
+        "Private air-conditioned overland vehicle and dedicated driver",
+        "Handpicked boutique hotels, luxury lodges, or verified village homestays",
+        "All government conservation permits, TIMS cards, and heritage admissions"
+      ],
+      "exclusions": [
+        "International flights",
+        "Nepal visa fees",
+        "Personal travel insurance"
+      ],
+      "days": [],
+      "idealFor": "Solo travelers, couples on honeymoon, creative writers, and multi-generational families.",
+      "whatMakesDifferent": "We do not sell pre-packaged mass tours off a shelf; we co-create a personal chapter of your life in Nepal.",
+      "sakarNote": "We don’t sell packaged tours off a shelf; we co-create a personal chapter of your life in Nepal.",
+      "ctaText": "Plan Your Custom Journey",
+      "ctaLink": "/contact?subject=Custom%20Private%20Journey",
+      "seoTitle": "Custom Private Journeys | Explore With Sakar",
+      "seoDescription": "Collaborate with local host Sakar to design a 100% private, tailor-made Nepal itinerary around your personal pace and passions.",
+      "status": "published",
+      "createdAt": "2026-09-19T19:30:58.607Z",
+      "updatedAt": "2026-09-19T19:30:58.607Z"
+    },
+    {
       "id": "exp-beyond-ktm",
       "title": "Kathmandu Durbar Square: Where Every Stone Holds a Story",
       "slug": "kathmandu-durbar-square",

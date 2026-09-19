@@ -41,7 +41,7 @@ export default function JournalCTA({ cta }: JournalCTAProps) {
 
           {cta.experienceSlug && (
             <Link
-              href={`/experiences/${cta.experienceSlug}`}
+              href={`/experience/${cta.experienceSlug}`}
               className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3.5 rounded-xl border border-white/30 hover:bg-white/10 text-white font-semibold text-xs sm:text-sm transition-colors"
             >
               <span>View Related Itinerary</span>

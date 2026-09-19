@@ -5,12 +5,13 @@ export const revalidate = 0;
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getLiveBlogs, getLiveBlogBySlug, getLiveBlogBySlugAsync, getLiveRelatedBlogs } from '@/lib/cms';
+import { getLiveBlogs, getLiveBlogBySlug, getLiveBlogBySlugAsync, getLiveRelatedBlogs, getTopFeaturedExperiences } from '@/lib/cms';
 import ArticleHeader from '@/components/blog/ArticleHeader';
 import ArticleContent from '@/components/blog/ArticleContent';
 import AuthorBio from '@/components/blog/AuthorBio';
 import JournalCTA from '@/components/blog/JournalCTA';
 import RelatedStories from '@/components/blog/RelatedStories';
+import BlogFeaturedExperiences from '@/components/blog/BlogFeaturedExperiences';
 
 interface ArticlePageProps {
   params: {
@@ -53,6 +54,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   }
 
   const relatedPosts = getLiveRelatedBlogs(post.slug, 3);
+  const featuredExperiences = getTopFeaturedExperiences(3);
 
   return (
     <article className="min-h-screen bg-parchment-100 pb-20">
@@ -71,7 +73,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <JournalCTA cta={post.contextualCta} />
       </div>
 
-      {/* 4. Related Stories Reel */}
+      {/* 4. Top 3 Experiences Linked from Story */}
+      <BlogFeaturedExperiences
+        experiences={featuredExperiences}
+        title="Featured Journeys Connected to Our Stories"
+      />
+
+      {/* 5. Related Stories Reel */}
       <RelatedStories posts={relatedPosts} />
     </article>
   );

@@ -217,7 +217,7 @@ export default function EventsClient({ initialEvents }: EventsClientProps) {
         primaryButtonText="Contact Sakar"
         primaryButtonHref="/contact"
         secondaryButtonText="Browse All Experiences"
-        secondaryButtonHref="/experiences"
+        secondaryButtonHref="/experience"
       />
     </div>
   );

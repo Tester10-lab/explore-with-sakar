@@ -172,7 +172,7 @@ export default function AboutPage() {
         primaryButtonText="Start a Conversation"
         primaryButtonHref="/contact"
         secondaryButtonText="Explore Experiences"
-        secondaryButtonHref="/experiences"
+        secondaryButtonHref="/experience"
       />
     </div>
   );

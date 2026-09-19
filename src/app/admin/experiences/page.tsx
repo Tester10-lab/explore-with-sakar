@@ -27,9 +27,9 @@ import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { ExtendedExperience, ItineraryDay } from '@/types/cms';
 
 const CATEGORY_OPTIONS = [
-  { value: 'beyond-the-map', label: 'Go Beyond the Map' },
-  { value: 'spiritual-wellness', label: 'Go Within' },
-  { value: 'homestays', label: 'Feel Closer' },
+  { value: 'go-beyond', label: 'Go Beyond the Map' },
+  { value: 'go-spiritual', label: 'Go Spiritual' },
+  { value: 'feel-closer', label: 'Feel Closer' },
   { value: 'leave-a-mark', label: 'Leave a Mark' },
   { value: 'all-curated', label: 'All Curated Experiences' },
   { value: 'custom-journeys', label: 'Custom Private Journeys' },
@@ -40,7 +40,7 @@ function getPillarLabel(category?: string, categoryLabel?: string): string {
     categoryLabel &&
     [
       'Go Beyond the Map',
-      'Go Within',
+      'Go Spiritual',
       'Feel Closer',
       'Leave a Mark',
       'All Curated Experiences',
@@ -50,9 +50,9 @@ function getPillarLabel(category?: string, categoryLabel?: string): string {
     return categoryLabel;
   }
   if (!category) return 'Go Beyond the Map';
-  if (category === 'beyond-the-map' || category === 'heritage') return 'Go Beyond the Map';
-  if (category === 'spiritual-wellness' || category === 'spiritual') return 'Go Within';
-  if (category === 'homestays' || category === 'homestay') return 'Feel Closer';
+  if (category === 'go-beyond' || category === 'beyond-the-map' || category === 'heritage') return 'Go Beyond the Map';
+  if (category === 'go-spiritual' || category === 'spiritual-wellness' || category === 'spiritual') return 'Go Spiritual';
+  if (category === 'feel-closer' || category === 'homestays' || category === 'homestay') return 'Feel Closer';
   if (category === 'leave-a-mark' || category === 'responsible') return 'Leave a Mark';
   if (category === 'all-curated' || category === 'adventure') return 'All Curated Experiences';
   if (category === 'custom-journeys') return 'Custom Private Journeys';
@@ -314,7 +314,7 @@ export default function AdminExperiencesPage() {
       <AdminHeader
         onToggleMobileSidebar={() => {}}
         title="Experiences: All Curated Experiences"
-        subtitle="Manage detailed day-by-day itineraries, cultural highlights, and responsible hosting published under /experiences/[slug]"
+        subtitle="Manage detailed day-by-day itineraries, cultural highlights, and responsible hosting published under /experience/[slug]"
         actionButton={{
           label: 'New Curated Experience',
           onClick: handleOpenNew,
@@ -331,10 +331,10 @@ export default function AdminExperiencesPage() {
             </div>
             <div>
               <h3 className="font-editorial-serif text-base font-bold text-white">
-                Day-by-Day Journey Builder
+                Experience Package Builder & Featured Ordering
               </h3>
               <p className="text-xs text-parchment-400 font-light mt-0.5">
-                Manage interactive itinerary outlines, Sakar notes, and highlights for <code>/experiences/[slug]</code>.
+                Manage independent experiences, SEO, and top-3 priority for <code>/experience/[slug]</code>.
               </p>
             </div>
           </div>
@@ -345,35 +345,38 @@ export default function AdminExperiencesPage() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-terracotta hover:bg-terracotta-light text-white text-xs font-semibold shadow-warm transition-all"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Create Curated Experience</span>
+              <span>Create Experience Package</span>
             </button>
           </div>
         </div>
 
-        {/* Public Pillar Hierarchy Filter Bar */}
-        <div className="bg-himalaya-900/90 border border-himalaya-800 rounded-2xl p-2.5 flex items-center gap-2 overflow-x-auto">
+        {/* Pillar Filter Tabs */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
           <button
             onClick={() => setSelectedPillar('all')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap flex items-center gap-1.5 ${
               selectedPillar === 'all'
                 ? 'bg-terracotta text-white shadow-warm'
-                : 'text-parchment-400 hover:text-parchment-200 hover:bg-himalaya-800/60'
+                : 'bg-himalaya-900/80 text-parchment-300 hover:bg-himalaya-800 border border-himalaya-800'
             }`}
           >
-            All Experiences ({experiences.length})
+            <span>All Experiences</span>
+            <span className="text-[10px] opacity-75 font-mono">({experiences.length})</span>
           </button>
+
           {CATEGORY_OPTIONS.map((cat) => {
-            const count = experiences.filter(
-              (e) => e.category === cat.value || getPillarLabel(e.category, e.categoryLabel) === cat.label
-            ).length;
+            const count = experiences.filter((e) => {
+              const label = getPillarLabel(e.category, e.categoryLabel);
+              return e.category === cat.value || label === cat.label;
+            }).length;
             return (
               <button
                 key={cat.value}
                 onClick={() => setSelectedPillar(cat.value)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap flex items-center gap-1.5 ${
                   selectedPillar === cat.value
                     ? 'bg-terracotta text-white shadow-warm'
-                    : 'text-parchment-400 hover:text-parchment-200 hover:bg-himalaya-800/60'
+                    : 'bg-himalaya-900/80 text-parchment-300 hover:bg-himalaya-800 border border-himalaya-800'
                 }`}
               >
                 <span>{cat.label}</span>
@@ -447,6 +450,11 @@ export default function AdminExperiencesPage() {
                       >
                         {exp.status}
                       </span>
+                      {exp.featuredOrder && (
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider font-bold bg-saffron text-himalaya-950 shadow-sm">
+                          Featured #{exp.featuredOrder}
+                        </span>
+                      )}
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider font-bold bg-himalaya-950/80 text-parchment-200 border border-himalaya-700">
                         {getPillarLabel(exp.category, exp.categoryLabel)}
                       </span>
@@ -503,7 +511,7 @@ export default function AdminExperiencesPage() {
                       )}
                     </button>
                     <a
-                      href={`/experiences/${exp.slug}`}
+                      href={`/experience/${exp.slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-2 rounded-lg text-parchment-400 hover:text-white hover:bg-himalaya-800 transition-colors"
@@ -604,6 +612,55 @@ export default function AdminExperiencesPage() {
                     }
                     placeholder="e.g. kathmandu-heritage-shrine"
                     className="w-full px-4 py-2.5 rounded-xl bg-himalaya-950 border border-himalaya-700 text-parchment-100 text-sm font-mono focus:outline-none focus:border-terracotta"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-parchment-300 mb-1.5">
+                    Subtitle / Tagline
+                  </label>
+                  <input
+                    type="text"
+                    value={editingExp.subtitle || editingExp.tagline || ''}
+                    onChange={(e) =>
+                      setEditingExp((prev) => ({
+                        ...prev,
+                        subtitle: e.target.value,
+                        tagline: e.target.value,
+                      }))
+                    }
+                    placeholder="e.g. Living Courtyards & Medieval Stone Mysteries"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-himalaya-950 border border-himalaya-700 text-parchment-100 text-sm focus:outline-none focus:border-terracotta"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-parchment-300 mb-1.5">
+                    Nepali Script Title
+                  </label>
+                  <input
+                    type="text"
+                    value={editingExp.nepaliTitle || ''}
+                    onChange={(e) =>
+                      setEditingExp((prev) => ({ ...prev, nepaliTitle: e.target.value }))
+                    }
+                    placeholder="e.g. नक्साभन्दा परको यात्रा"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-himalaya-950 border border-himalaya-700 text-parchment-100 text-sm font-serif focus:outline-none focus:border-terracotta"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-parchment-300 mb-1.5">
+                    Ideal For
+                  </label>
+                  <input
+                    type="text"
+                    value={editingExp.idealFor || ''}
+                    onChange={(e) =>
+                      setEditingExp((prev) => ({ ...prev, idealFor: e.target.value }))
+                    }
+                    placeholder="e.g. Cultural connoisseurs, slow travelers"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-himalaya-950 border border-himalaya-700 text-parchment-100 text-sm focus:outline-none focus:border-terracotta"
                   />
                 </div>
               </div>
@@ -763,6 +820,21 @@ export default function AdminExperiencesPage() {
                 />
               </div>
 
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-parchment-300 mb-1.5">
+                  What Makes This Experience Different (Storytelling Focus)
+                </label>
+                <textarea
+                  rows={3}
+                  value={editingExp.whatMakesDifferent || ''}
+                  onChange={(e) =>
+                    setEditingExp((prev) => ({ ...prev, whatMakesDifferent: e.target.value }))
+                  }
+                  placeholder="Explain what sets this journey apart from ordinary commercial tours..."
+                  className="w-full px-4 py-2.5 rounded-xl bg-himalaya-950 border border-himalaya-700 text-parchment-100 text-sm focus:outline-none focus:border-terracotta"
+                />
+              </div>
+
               {/* Day-by-day Itinerary Builder */}
               <div className="p-5 rounded-2xl bg-himalaya-950/70 border border-himalaya-800 space-y-4">
                 <div className="flex items-center justify-between">
@@ -888,7 +960,126 @@ export default function AdminExperiencesPage() {
                 </div>
               </div>
 
-              {/* Status & Featured */}
+              {/* Featured Priority & Visibility */}
+              <div className="p-5 rounded-2xl bg-himalaya-950/80 border border-himalaya-800 space-y-4">
+                <div className="flex items-center gap-2 text-saffron text-xs font-mono font-bold uppercase tracking-wider">
+                  <Sparkles className="w-4 h-4" />
+                  <span>Homepage & Blog Top 3 Featured System</span>
+                </div>
+                <p className="text-xs text-parchment-400 font-light">
+                  Assign priority order to feature exactly in the Homepage Top 3 and Blog Top 3 experiences sections.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-parchment-300 mb-1.5">
+                      Top 3 Priority Slot
+                    </label>
+                    <select
+                      value={editingExp.featuredOrder ?? 0}
+                      onChange={(e) => {
+                        const val = Number(e.target.value);
+                        setEditingExp((prev) => ({
+                          ...prev,
+                          featuredOrder: val > 0 ? val : undefined,
+                          featured: val > 0 ? true : prev?.featured,
+                        }));
+                      }}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-himalaya-900 border border-himalaya-700 text-parchment-100 text-xs font-mono focus:outline-none focus:border-terracotta"
+                    >
+                      <option value={0}>None (Standard Catalog)</option>
+                      <option value={1}>Featured #1 (Highest Priority)</option>
+                      <option value={2}>Featured #2 (Second Priority)</option>
+                      <option value={3}>Featured #3 (Third Priority)</option>
+                    </select>
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-6">
+                    <input
+                      type="checkbox"
+                      id="exp-homepage-vis"
+                      checked={editingExp.homepageVisible !== false}
+                      onChange={(e) =>
+                        setEditingExp((prev) => ({ ...prev, homepageVisible: e.target.checked }))
+                      }
+                      className="w-4 h-4 rounded border-himalaya-700 text-terracotta focus:ring-terracotta"
+                    />
+                    <label htmlFor="exp-homepage-vis" className="text-xs text-parchment-200 cursor-pointer">
+                      Homepage Visible
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-6">
+                    <input
+                      type="checkbox"
+                      id="exp-blog-vis"
+                      checked={editingExp.blogVisible !== false}
+                      onChange={(e) =>
+                        setEditingExp((prev) => ({ ...prev, blogVisible: e.target.checked }))
+                      }
+                      className="w-4 h-4 rounded border-himalaya-700 text-terracotta focus:ring-terracotta"
+                    />
+                    <label htmlFor="exp-blog-vis" className="text-xs text-parchment-200 cursor-pointer">
+                      Blog / Stories Visible
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              {/* SEO & Metadata */}
+              <div className="p-5 rounded-2xl bg-himalaya-950/70 border border-himalaya-800 space-y-4">
+                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-parchment-200">
+                  SEO & Social Sharing Metadata
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-parchment-400 mb-1.5">
+                      Custom SEO Title
+                    </label>
+                    <input
+                      type="text"
+                      value={editingExp.seoTitle || ''}
+                      onChange={(e) =>
+                        setEditingExp((prev) => ({ ...prev, seoTitle: e.target.value }))
+                      }
+                      placeholder="e.g. Go Beyond the Map | Explore With Sakar"
+                      className="w-full px-3.5 py-2 rounded-xl bg-himalaya-900 border border-himalaya-700 text-parchment-100 text-xs focus:outline-none focus:border-terracotta"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-parchment-400 mb-1.5">
+                      OG Social Image URL
+                    </label>
+                    <input
+                      type="text"
+                      value={editingExp.ogImage || ''}
+                      onChange={(e) =>
+                        setEditingExp((prev) => ({ ...prev, ogImage: e.target.value }))
+                      }
+                      placeholder="/images/beyond-the-map/living-courtyards.jpg"
+                      className="w-full px-3.5 py-2 rounded-xl bg-himalaya-900 border border-himalaya-700 text-parchment-100 text-xs focus:outline-none focus:border-terracotta"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-parchment-400 mb-1.5">
+                    SEO Meta Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={editingExp.seoDescription || ''}
+                    onChange={(e) =>
+                      setEditingExp((prev) => ({ ...prev, seoDescription: e.target.value }))
+                    }
+                    placeholder="Meta description for search engine results..."
+                    className="w-full px-3.5 py-2 rounded-xl bg-himalaya-900 border border-himalaya-700 text-parchment-100 text-xs focus:outline-none focus:border-terracotta"
+                  />
+                </div>
+              </div>
+
+              {/* Status */}
               <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-himalaya-950/60 border border-himalaya-800">
                 <div className="flex items-center gap-3">
                   <input
@@ -901,12 +1092,12 @@ export default function AdminExperiencesPage() {
                     className="w-4 h-4 rounded border-himalaya-700 text-terracotta focus:ring-terracotta"
                   />
                   <label htmlFor="exp-featured" className="text-xs text-parchment-200 cursor-pointer">
-                    Feature on homepage and highlight in journeys
+                    Featured Journey Badge
                   </label>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono text-parchment-400">Status:</span>
+                  <span className="text-xs font-mono text-parchment-400">Publication Status:</span>
                   <select
                     value={editingExp.status || 'published'}
                     onChange={(e) =>
