@@ -13,6 +13,14 @@ import {
   WebsiteSettings,
   AdminUser,
   HandwrittenReviewPage,
+  CmsEvent,
+  CmsDestination,
+  CmsFaqItem,
+  PageContent,
+  PageRevision,
+  PageSection,
+  NavigationConfig,
+  NavigationLink,
 } from '@/types/cms';
 import { BLOG_POSTS } from '@/data/blog';
 import { GALLERY_PHOTOS } from '@/data/gallery';
@@ -1137,3 +1145,404 @@ export function updateAdminPassword(passwordHash: string, salt: string): void {
   store.admin.updatedAt = new Date().toISOString();
   writeStore(store);
 }
+
+// ==================== EVENTS OPERATIONS ====================
+
+export function getAllEvents(includeHidden = true): CmsEvent[] {
+  const store = readStore();
+  let events = store.events || [];
+  if (!includeHidden) {
+    events = events.filter((e) => e.isVisible !== false);
+  }
+  return events.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+}
+
+export function getEventById(id: string): CmsEvent | null {
+  const events = getAllEvents(true);
+  return events.find((e) => e.id === id) || null;
+}
+
+export function createEvent(data: Omit<CmsEvent, 'id' | 'createdAt' | 'updatedAt' | 'order'>): CmsEvent {
+  const store = readStore();
+  const existing = store.events || [];
+  const newEvent: CmsEvent = {
+    ...data,
+    id: `event-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    order: existing.length,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  store.events = [...existing, newEvent];
+  writeStore(store);
+  return newEvent;
+}
+
+export function updateEvent(id: string, updates: Partial<CmsEvent>): CmsEvent | null {
+  const store = readStore();
+  const list = store.events || [];
+  const index = list.findIndex((e) => e.id === id);
+  if (index === -1) return null;
+  const updated: CmsEvent = { ...list[index], ...updates, updatedAt: new Date().toISOString() };
+  list[index] = updated;
+  store.events = list;
+  writeStore(store);
+  return updated;
+}
+
+export function deleteEvent(id: string): boolean {
+  const store = readStore();
+  const list = store.events || [];
+  const initialLen = list.length;
+  store.events = list.filter((e) => e.id !== id);
+  if (store.events.length !== initialLen) {
+    writeStore(store);
+    return true;
+  }
+  return false;
+}
+
+export function reorderEvents(ids: string[]): boolean {
+  const store = readStore();
+  const map = new Map((store.events || []).map((e) => [e.id, e]));
+  const reordered: CmsEvent[] = [];
+  ids.forEach((id, index) => {
+    const item = map.get(id);
+    if (item) { item.order = index; item.updatedAt = new Date().toISOString(); reordered.push(item); }
+  });
+  store.events = reordered;
+  writeStore(store);
+  return true;
+}
+
+// ==================== DESTINATIONS OPERATIONS ====================
+
+export function getAllDestinations(includeHidden = true): CmsDestination[] {
+  const store = readStore();
+  let dests = store.destinations || [];
+  if (!includeHidden) {
+    dests = dests.filter((d) => d.isVisible !== false);
+  }
+  return dests.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+}
+
+export function getDestinationById(id: string): CmsDestination | null {
+  return (getAllDestinations(true)).find((d) => d.id === id || d.slug === id) || null;
+}
+
+export function createDestination(data: Omit<CmsDestination, 'id' | 'createdAt' | 'updatedAt' | 'order'>): CmsDestination {
+  const store = readStore();
+  const existing = store.destinations || [];
+  const newDest: CmsDestination = {
+    ...data,
+    id: `dest-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    order: existing.length,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  store.destinations = [...existing, newDest];
+  writeStore(store);
+  return newDest;
+}
+
+export function updateDestination(id: string, updates: Partial<CmsDestination>): CmsDestination | null {
+  const store = readStore();
+  const list = store.destinations || [];
+  const index = list.findIndex((d) => d.id === id || d.slug === id);
+  if (index === -1) return null;
+  const updated: CmsDestination = { ...list[index], ...updates, updatedAt: new Date().toISOString() };
+  list[index] = updated;
+  store.destinations = list;
+  writeStore(store);
+  return updated;
+}
+
+export function deleteDestination(id: string): boolean {
+  const store = readStore();
+  const list = store.destinations || [];
+  const initialLen = list.length;
+  store.destinations = list.filter((d) => d.id !== id && d.slug !== id);
+  if (store.destinations.length !== initialLen) { writeStore(store); return true; }
+  return false;
+}
+
+export function reorderDestinations(ids: string[]): boolean {
+  const store = readStore();
+  const map = new Map((store.destinations || []).map((d) => [d.id, d]));
+  const reordered: CmsDestination[] = [];
+  ids.forEach((id, index) => {
+    const item = map.get(id);
+    if (item) { item.order = index; item.updatedAt = new Date().toISOString(); reordered.push(item); }
+  });
+  store.destinations = reordered;
+  writeStore(store);
+  return true;
+}
+
+// ==================== FAQ OPERATIONS ====================
+
+export function getAllFaq(includeHidden = true): CmsFaqItem[] {
+  const store = readStore();
+  let items = store.faq || [];
+  if (!includeHidden) {
+    items = items.filter((f) => f.isVisible !== false);
+  }
+  return items.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+}
+
+export function getFaqById(id: string): CmsFaqItem | null {
+  return (getAllFaq(true)).find((f) => f.id === id) || null;
+}
+
+export function createFaq(data: Omit<CmsFaqItem, 'id' | 'createdAt' | 'updatedAt' | 'order'>): CmsFaqItem {
+  const store = readStore();
+  const existing = store.faq || [];
+  const newFaq: CmsFaqItem = {
+    ...data,
+    id: `faq-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    order: existing.length,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  store.faq = [...existing, newFaq];
+  writeStore(store);
+  return newFaq;
+}
+
+export function updateFaq(id: string, updates: Partial<CmsFaqItem>): CmsFaqItem | null {
+  const store = readStore();
+  const list = store.faq || [];
+  const index = list.findIndex((f) => f.id === id);
+  if (index === -1) return null;
+  const updated: CmsFaqItem = { ...list[index], ...updates, updatedAt: new Date().toISOString() };
+  list[index] = updated;
+  store.faq = list;
+  writeStore(store);
+  return updated;
+}
+
+export function deleteFaq(id: string): boolean {
+  const store = readStore();
+  const list = store.faq || [];
+  const initialLen = list.length;
+  store.faq = list.filter((f) => f.id !== id);
+  if (store.faq.length !== initialLen) { writeStore(store); return true; }
+  return false;
+}
+
+export function reorderFaq(ids: string[]): boolean {
+  const store = readStore();
+  const map = new Map((store.faq || []).map((f) => [f.id, f]));
+  const reordered: CmsFaqItem[] = [];
+  ids.forEach((id, index) => {
+    const item = map.get(id);
+    if (item) { item.order = index; item.updatedAt = new Date().toISOString(); reordered.push(item); }
+  });
+  store.faq = reordered;
+  writeStore(store);
+  return true;
+}
+
+// ==================== PAGE CONTENT OPERATIONS ====================
+
+export function getAllPages(): PageContent[] {
+  const store = readStore();
+  return store.pages || [];
+}
+
+export function getPageBySlug(slug: string): PageContent | null {
+  const pages = getAllPages();
+  return pages.find((p) => p.slug === slug) || null;
+}
+
+export function createPage(data: Omit<PageContent, 'createdAt' | 'updatedAt'>): PageContent {
+  const store = readStore();
+  const existing = store.pages || [];
+  const newPage: PageContent = {
+    ...data,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  store.pages = [...existing, newPage];
+  writeStore(store);
+  return newPage;
+}
+
+export function updatePage(slug: string, updates: Partial<PageContent>): PageContent | null {
+  const store = readStore();
+  const list = store.pages || [];
+  const index = list.findIndex((p) => p.slug === slug);
+  if (index === -1) return null;
+  const updated: PageContent = { ...list[index], ...updates, updatedAt: new Date().toISOString() };
+  list[index] = updated;
+  store.pages = list;
+  writeStore(store);
+  return updated;
+}
+
+export function publishPage(slug: string, editedBy: string): PageContent | null {
+  const store = readStore();
+  const list = store.pages || [];
+  const index = list.findIndex((p) => p.slug === slug);
+  if (index === -1) return null;
+
+  // Save revision before publishing
+  savePageRevision(slug, editedBy, 'published');
+
+  const updated: PageContent = {
+    ...list[index],
+    status: 'published',
+    publishedAt: new Date().toISOString(),
+    lastEditedBy: editedBy,
+    updatedAt: new Date().toISOString(),
+  };
+  list[index] = updated;
+  store.pages = list;
+  writeStore(store);
+  return updated;
+}
+
+export function unpublishPage(slug: string): PageContent | null {
+  return updatePage(slug, { status: 'draft' });
+}
+
+// ==================== PAGE REVISION OPERATIONS ====================
+
+export function getPageRevisions(pageSlug: string): PageRevision[] {
+  const store = readStore();
+  return (store.pageRevisions || [])
+    .filter((r) => r.pageSlug === pageSlug)
+    .sort((a, b) => b.version - a.version);
+}
+
+export function savePageRevision(pageSlug: string, editedBy: string, status: 'published' | 'draft' = 'draft'): PageRevision | null {
+  const store = readStore();
+  const page = (store.pages || []).find((p) => p.slug === pageSlug);
+  if (!page) return null;
+
+  const revisions = store.pageRevisions || [];
+  const existingForPage = revisions.filter((r) => r.pageSlug === pageSlug);
+  const nextVersion = existingForPage.length > 0
+    ? Math.max(...existingForPage.map((r) => r.version)) + 1
+    : 1;
+
+  const revision: PageRevision = {
+    id: `rev-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    pageSlug,
+    version: nextVersion,
+    sections: JSON.parse(JSON.stringify(page.sections)),
+    seo: JSON.parse(JSON.stringify(page.seo)),
+    editedBy,
+    status,
+    createdAt: new Date().toISOString(),
+  };
+
+  store.pageRevisions = [...revisions, revision];
+  // Keep only last 20 revisions per page
+  const allForPage = store.pageRevisions.filter((r) => r.pageSlug === pageSlug);
+  if (allForPage.length > 20) {
+    const toRemove = allForPage.sort((a, b) => a.version - b.version).slice(0, allForPage.length - 20);
+    const removeIds = new Set(toRemove.map((r) => r.id));
+    store.pageRevisions = store.pageRevisions.filter((r) => !removeIds.has(r.id));
+  }
+
+  writeStore(store);
+  return revision;
+}
+
+export function restorePageRevision(revisionId: string, editedBy: string): PageContent | null {
+  const store = readStore();
+  const revision = (store.pageRevisions || []).find((r) => r.id === revisionId);
+  if (!revision) return null;
+
+  const pageIndex = (store.pages || []).findIndex((p) => p.slug === revision.pageSlug);
+  if (pageIndex === -1) return null;
+
+  // Save current state as a revision before restoring
+  savePageRevision(revision.pageSlug, editedBy, 'draft');
+
+  const restored: PageContent = {
+    ...store.pages![pageIndex],
+    sections: JSON.parse(JSON.stringify(revision.sections)),
+    seo: JSON.parse(JSON.stringify(revision.seo)),
+    status: 'draft',
+    lastEditedBy: editedBy,
+    updatedAt: new Date().toISOString(),
+  };
+
+  store.pages![pageIndex] = restored;
+  writeStore(store);
+  return restored;
+}
+
+// ==================== NAVIGATION OPERATIONS ====================
+
+export function getNavigation(): NavigationConfig {
+  const store = readStore();
+  return store.navigation || getDefaultNavigation();
+}
+
+export function updateNavigation(config: NavigationConfig): NavigationConfig {
+  const store = readStore();
+  config.updatedAt = new Date().toISOString();
+  store.navigation = config;
+  writeStore(store);
+  return config;
+}
+
+function getDefaultNavigation(): NavigationConfig {
+  return {
+    header: [
+      { id: 'nav-home', label: 'Home', url: '/', visible: true, order: 0 },
+      { id: 'nav-about', label: 'About', url: '/about', visible: true, order: 1 },
+      { id: 'nav-services', label: 'Services', url: '/services', visible: true, order: 2, children: [
+        { id: 'nav-culture', label: 'Living Culture', url: '/services/culture', visible: true, order: 0 },
+        { id: 'nav-homestays', label: 'Village Homestays', url: '/services/homestays', visible: true, order: 1 },
+        { id: 'nav-spiritual', label: 'Spiritual Wellness', url: '/services/spiritual-wellness', visible: true, order: 2 },
+        { id: 'nav-trekking', label: 'Mountain Treks', url: '/services/trekking', visible: true, order: 3 },
+        { id: 'nav-custom', label: 'Custom Journeys', url: '/services/custom-journeys', visible: true, order: 4 },
+      ]},
+      { id: 'nav-experiences', label: 'Experiences', url: '/experiences', visible: true, order: 3 },
+      { id: 'nav-packages', label: 'Packages', url: '/packages', visible: true, order: 4 },
+      { id: 'nav-destinations', label: 'Destinations', url: '/destinations', visible: true, order: 5 },
+      { id: 'nav-events', label: 'Events', url: '/events', visible: true, order: 6 },
+      { id: 'nav-blog', label: 'Blog', url: '/blog', visible: true, order: 7 },
+      { id: 'nav-gallery', label: 'Gallery', url: '/gallery', visible: true, order: 8 },
+      { id: 'nav-reviews', label: 'Reviews', url: '/reviews', visible: true, order: 9 },
+      { id: 'nav-contact', label: 'Contact', url: '/contact', visible: true, order: 10 },
+    ],
+    footer: {
+      columns: [
+        {
+          id: 'footer-explore', title: 'Explore',
+          links: [
+            { id: 'fl-1', label: 'Experiences', url: '/experiences', visible: true, order: 0 },
+            { id: 'fl-2', label: 'Packages', url: '/packages', visible: true, order: 1 },
+            { id: 'fl-3', label: 'Destinations', url: '/destinations', visible: true, order: 2 },
+            { id: 'fl-4', label: 'Events', url: '/events', visible: true, order: 3 },
+          ],
+        },
+        {
+          id: 'footer-learn', title: 'Learn',
+          links: [
+            { id: 'fl-5', label: 'About Sakar', url: '/about', visible: true, order: 0 },
+            { id: 'fl-6', label: 'Blog', url: '/blog', visible: true, order: 1 },
+            { id: 'fl-7', label: 'Reviews', url: '/reviews', visible: true, order: 2 },
+            { id: 'fl-8', label: 'Gallery', url: '/gallery', visible: true, order: 3 },
+            { id: 'fl-9', label: 'FAQ', url: '/faq', visible: true, order: 4 },
+          ],
+        },
+        {
+          id: 'footer-info', title: 'Information',
+          links: [
+            { id: 'fl-10', label: 'Contact', url: '/contact', visible: true, order: 0 },
+            { id: 'fl-11', label: 'Resources', url: '/resources', visible: true, order: 1 },
+            { id: 'fl-12', label: 'Privacy Policy', url: '/privacy', visible: true, order: 2 },
+            { id: 'fl-13', label: 'Terms', url: '/terms', visible: true, order: 3 },
+          ],
+        },
+      ],
+    },
+    updatedAt: new Date().toISOString(),
+  };
+}
+

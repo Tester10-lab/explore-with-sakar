@@ -19,11 +19,32 @@ import {
   Package as PackageIcon,
   Compass,
   X,
+  Calendar,
+  MapPin,
+  HelpCircle,
+  Menu as MenuIcon,
+  Eye,
+  Heart,
+  Home,
+  BookOpen,
+  Users,
+  Phone,
+  ShieldCheck,
 } from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
   onClose?: () => void;
+}
+
+interface NavSection {
+  title?: string;
+  items: {
+    label: string;
+    href: string;
+    icon: any;
+    badge?: number | string | null;
+  }[];
 }
 
 export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
@@ -50,66 +71,167 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
     fetchUnreadCount();
   }, [pathname]);
 
-  const NAV_ITEMS = [
+  // Exact 1:1 match with current public website hierarchy and names
+  const NAV_SECTIONS: NavSection[] = [
     {
-      label: 'Dashboard',
-      href: '/admin',
-      icon: LayoutDashboard,
-      badge: null,
+      items: [
+        {
+          label: 'Dashboard',
+          href: '/admin',
+          icon: LayoutDashboard,
+        },
+        {
+          label: 'Live Website Preview',
+          href: '/admin/preview',
+          icon: Eye,
+        },
+      ],
     },
     {
-      label: 'Inquiries',
-      href: '/admin/inquiries',
-      icon: Inbox,
-      badge: unreadInquiries > 0 ? unreadInquiries : null,
+      title: 'EXPERIENCES',
+      items: [
+        {
+          label: 'Go Beyond the Map',
+          href: '/admin/pages/beyond-the-map',
+          icon: Compass,
+        },
+        {
+          label: 'Go Within',
+          href: '/admin/services',
+          icon: Sparkles,
+        },
+        {
+          label: 'Feel Closer',
+          href: '/admin/services',
+          icon: Home,
+        },
+        {
+          label: 'Leave a Mark',
+          href: '/admin/experiences?category=responsible',
+          icon: Heart,
+        },
+        {
+          label: 'All Curated Experiences',
+          href: '/admin/experiences',
+          icon: Calendar,
+        },
+        {
+          label: 'Custom Private Journeys',
+          href: '/admin/services',
+          icon: ShieldCheck,
+        },
+      ],
     },
     {
-      label: 'Homepage CMS',
-      href: '/admin/homepage',
-      icon: Globe,
-      badge: null,
+      title: 'EVENTS',
+      items: [
+        {
+          label: 'Events & Festivals',
+          href: '/admin/events',
+          icon: Calendar,
+        },
+      ],
     },
     {
-      label: 'Services / Pillars',
-      href: '/admin/services',
-      icon: Layers,
-      badge: null,
+      title: 'STORIES',
+      items: [
+        {
+          label: 'Sakar’s Journal & Blogs',
+          href: '/admin/blogs',
+          icon: BookOpen,
+        },
+        {
+          label: 'Traveler Reviews & Guestbook',
+          href: '/admin/reviews',
+          icon: Star,
+        },
+      ],
     },
     {
-      label: 'Packages',
-      href: '/admin/packages',
-      icon: PackageIcon,
-      badge: null,
+      title: 'ABOUT SAKAR',
+      items: [
+        {
+          label: 'About Sakar & Story',
+          href: '/admin/pages/about',
+          icon: Users,
+        },
+      ],
     },
     {
-      label: 'Itineraries',
-      href: '/admin/experiences',
-      icon: Compass,
-      badge: null,
+      title: 'HOMEPAGE',
+      items: [
+        {
+          label: 'Homepage Sections',
+          href: '/admin/homepage',
+          icon: Globe,
+        },
+      ],
     },
     {
-      label: 'Blogs',
-      href: '/admin/blogs',
-      icon: FileText,
-      badge: null,
+      title: 'EXPLORE & GUIDES',
+      items: [
+        {
+          label: 'Destinations',
+          href: '/admin/destinations',
+          icon: MapPin,
+        },
+        {
+          label: 'Packages & Pricing',
+          href: '/admin/packages',
+          icon: PackageIcon,
+        },
+        {
+          label: 'Visual Journey Gallery',
+          href: '/admin/photos',
+          icon: ImageIcon,
+        },
+        {
+          label: 'Frequently Asked Questions',
+          href: '/admin/faq',
+          icon: HelpCircle,
+        },
+        {
+          label: 'Travel Resources & Visas',
+          href: '/admin/pages/resources',
+          icon: FileText,
+        },
+      ],
     },
     {
-      label: 'Photos',
-      href: '/admin/photos',
-      icon: ImageIcon,
-      badge: null,
+      title: 'INQUIRIES & CONTACT',
+      items: [
+        {
+          label: 'Guest Inquiries',
+          href: '/admin/inquiries',
+          icon: Inbox,
+          badge: unreadInquiries > 0 ? unreadInquiries : null,
+        },
+        {
+          label: 'Contact & Inquiries Page',
+          href: '/admin/pages/contact',
+          icon: Phone,
+        },
+      ],
     },
     {
-      label: 'Reviews',
-      href: '/admin/reviews',
-      icon: Star,
-      badge: null,
-    },
-    {
-      label: 'Settings & Contact',
-      href: '/admin/settings',
-      icon: Settings,
-      badge: null,
+      title: 'WEBSITE MANAGEMENT',
+      items: [
+        {
+          label: 'All Website Pages',
+          href: '/admin/pages',
+          icon: Layers,
+        },
+        {
+          label: 'Navigation & Menus',
+          href: '/admin/navigation',
+          icon: MenuIcon,
+        },
+        {
+          label: 'Site Settings & Branding',
+          href: '/admin/settings',
+          icon: Settings,
+        },
+      ],
     },
   ];
 
@@ -117,24 +239,24 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
     try {
       await fetch('/api/admin/auth/logout', { method: 'POST' });
       router.push('/admin/login');
-      router.refresh();
-    } catch (err) {
-      console.error('Logout error:', err);
+    } catch {
+      router.push('/admin/login');
     }
   };
 
   return (
     <>
-      {/* Mobile backdrop */}
+      {/* Mobile Backdrop */}
       {isOpen && (
         <div
           onClick={onClose}
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden animate-fade-in"
+          className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 lg:hidden"
         />
       )}
 
+      {/* Main Sidebar */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 shadow-lg lg:shadow-sm ${
+        className={`fixed top-0 left-0 bottom-0 w-64 bg-white border-r border-slate-200 z-50 flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -170,53 +292,62 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
             </button>
           </div>
 
-          {/* Navigation Links */}
-          <nav className="p-3 space-y-1">
-            {NAV_ITEMS.map((item) => {
-              const isActive =
-                item.href === '/admin'
-                  ? pathname === '/admin'
-                  : pathname.startsWith(item.href);
+          {/* Navigation Sections */}
+          <div className="p-3 space-y-6">
+            {NAV_SECTIONS.map((section, sIdx) => (
+              <div key={sIdx} className="space-y-1">
+                {section.title && (
+                  <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 font-mono">
+                    {section.title}
+                  </p>
+                )}
 
-              const Icon = item.icon;
+                {section.items.map((item) => {
+                  const isActive =
+                    item.href === '/admin'
+                      ? pathname === '/admin'
+                      : pathname === item.href || (item.href !== '/admin/services' && pathname.startsWith(item.href));
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={onClose}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium transition-all group ${
-                    isActive
-                      ? 'bg-slate-900 text-white font-semibold shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                  }`}
-                >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <Icon
-                      className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                        isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-700'
+                  const Icon = item.icon;
+
+                  return (
+                    <Link
+                      key={`${item.href}-${item.label}`}
+                      href={item.href}
+                      onClick={onClose}
+                      className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all group ${
+                        isActive
+                          ? 'bg-slate-900 text-white font-semibold shadow-sm'
+                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                       }`}
-                    />
-                    <span className="truncate">{item.label}</span>
-                  </div>
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <Icon
+                          className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
+                            isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-700'
+                          }`}
+                        />
+                        <span className="truncate">{item.label}</span>
+                      </div>
 
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    {item.badge !== null && (
-                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900">
-                        {item.badge}
-                      </span>
-                    )}
-                    {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
-                  </div>
-                </Link>
-              );
-            })}
-          </nav>
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        {item.badge !== undefined && item.badge !== null && (
+                          <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900">
+                            {item.badge}
+                          </span>
+                        )}
+                        {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Bottom Actions */}
         <div className="p-3 border-t border-slate-200 space-y-1.5 bg-slate-50/50">
-          {/* Public site shortcut */}
           <Link
             href="/"
             target="_blank"
@@ -228,7 +359,6 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
             </span>
           </Link>
 
-          {/* Logout Button */}
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-rose-600 hover:text-rose-700 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all text-left"

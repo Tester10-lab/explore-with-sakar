@@ -17,6 +17,12 @@ import {
   getInquiryById,
   getAllHandwrittenReviews,
   getHandwrittenReviewById,
+  getAllEvents,
+  getAllDestinations,
+  getAllFaq,
+  getNavigation,
+  getAllPages,
+  getPageBySlug,
   readStoreAsync,
 } from './db';
 import { BLOG_POSTS, getPostBySlug as getStaticPostBySlug, getRelatedPosts as getStaticRelatedPosts } from '@/data/blog';
@@ -25,6 +31,11 @@ import { TESTIMONIALS } from '@/data/homestays';
 import { TRAVEL_PACKAGES } from '@/data/packages';
 import { EXPERIENCES } from '@/data/experiences';
 import { SERVICE_PILLARS } from '@/data/services';
+import { EVENTS_DATA } from '@/data/events';
+import { DESTINATIONS } from '@/data/destinations';
+import { FAQ_ITEMS } from '@/data/faq';
+import { DEFAULT_PUBLIC_PAGES } from '@/data/pages';
+export { DEFAULT_PUBLIC_PAGES };
 import { BlogPost, GalleryPhoto, Testimonial } from '@/types';
 import {
   ExtendedBlogPost,
@@ -36,6 +47,12 @@ import {
   ContactInquiry,
   WebsiteSettings,
   HandwrittenReviewPage,
+  CmsEvent,
+  CmsDestination,
+  CmsFaqItem,
+  NavigationConfig,
+  PageContent,
+  PageSection,
 } from '@/types/cms';
 
 /**
@@ -522,4 +539,149 @@ export function getLiveHandwrittenReviews(includeHidden = false): HandwrittenRev
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }));
+}
+
+/**
+ * Fetch all events with fallback to static EVENTS_DATA
+ */
+export function getLiveEvents(includeHidden = false): CmsEvent[] {
+  try {
+    const events = getAllEvents(includeHidden);
+    if (events && events.length > 0) {
+      return events;
+    }
+  } catch (err) {
+    console.warn('Fallback to static events due to CMS error:', err);
+  }
+
+  return EVENTS_DATA.map((e, i) => ({
+    ...e,
+    order: i,
+    isVisible: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }));
+}
+
+/**
+ * Fetch single event by id with fallback
+ */
+export function getLiveEventById(id: string): CmsEvent | null {
+  const events = getLiveEvents(true);
+  return events.find((e) => e.id === id) || null;
+}
+
+/**
+ * Fetch all destinations with fallback to static DESTINATIONS
+ */
+export function getLiveDestinations(includeHidden = false): CmsDestination[] {
+  try {
+    const dests = getAllDestinations(includeHidden);
+    if (dests && dests.length > 0) {
+      return dests;
+    }
+  } catch (err) {
+    console.warn('Fallback to static destinations due to CMS error:', err);
+  }
+
+  return DESTINATIONS.map((d, i) => ({
+    ...d,
+    slug: d.id,
+    order: i,
+    isVisible: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }));
+}
+
+/**
+ * Fetch all FAQ items with fallback to static FAQ_ITEMS
+ */
+export function getLiveFaq(includeHidden = false): CmsFaqItem[] {
+  try {
+    const items = getAllFaq(includeHidden);
+    if (items && items.length > 0) {
+      return items;
+    }
+  } catch (err) {
+    console.warn('Fallback to static FAQ items due to CMS error:', err);
+  }
+
+  return FAQ_ITEMS.map((f, i) => ({
+    id: f.id,
+    category: f.category,
+    question: f.question,
+    answer: f.answer,
+    order: i,
+    isVisible: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }));
+}
+
+/**
+ * Fetch live navigation configuration
+ */
+export function getLiveNavigation(): NavigationConfig {
+  try {
+    return getNavigation();
+  } catch (err) {
+    console.warn('Fallback to default navigation:', err);
+    return getNavigation();
+  }
+}
+
+// DEFAULT_PUBLIC_PAGES is imported and exported from '@/data/pages'
+
+/**
+ * Fetch all page configs with fallback to default pages list
+ */
+export function getLiveAllPages(): PageContent[] {
+  try {
+    const pages = getAllPages();
+    if (pages && pages.length > 0) {
+      const existingSlugs = new Set(pages.map((p) => p.slug));
+      const missingDefaults = DEFAULT_PUBLIC_PAGES.filter((p) => !existingSlugs.has(p.slug));
+      return [...pages, ...missingDefaults];
+    }
+  } catch (err) {
+    console.warn('Fallback to default pages due to CMS error:', err);
+  }
+
+  return DEFAULT_PUBLIC_PAGES;
+}
+
+/**
+ * Fetch page content by slug with fallback to default structure
+ */
+export function getLivePageContent(slug: string): PageContent {
+  try {
+    const page = getPageBySlug(slug);
+    if (page) return page;
+  } catch (err) {
+    console.warn(`Fallback to default page for ${slug}:`, err);
+  }
+
+  const defaultPage = DEFAULT_PUBLIC_PAGES.find((p) => p.slug === slug);
+  if (defaultPage) return defaultPage;
+
+  return {
+    slug,
+    name: slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, ' '),
+    url: `/${slug}`,
+    status: 'published',
+    seo: {
+      title: `${slug.charAt(0).toUpperCase() + slug.slice(1)} | Explore With Sakar`,
+      metaDescription: 'Meaningful Nepal travel experiences beyond ordinary tourism.',
+      canonicalUrl: `https://explorewithsakar.com/${slug}`,
+      sitemapVisible: true,
+    },
+    sections: [
+      { id: `sec-${slug}-hero`, type: 'hero', label: 'Hero Header', visible: true, order: 0, content: {} },
+      { id: `sec-${slug}-main`, type: 'main-content', label: 'Main Content Section', visible: true, order: 1, content: {} },
+      { id: `sec-${slug}-cta`, type: 'cta', label: 'Call to Action', visible: true, order: 2, content: {} },
+    ],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
 }

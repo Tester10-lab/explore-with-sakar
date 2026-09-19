@@ -6,7 +6,7 @@ import PageHero from '@/components/common/PageHero';
 import SectionHeading from '@/components/common/SectionHeading';
 import DestinationCard from '@/components/common/DestinationCard';
 import CTASection from '@/components/common/CTASection';
-import { DESTINATIONS } from '@/data/destinations';
+import { getLiveDestinations } from '@/lib/cms';
 
 export const metadata: Metadata = {
   title: 'Curated Destinations in Nepal | Explore With Sakar',
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function DestinationsPage() {
+  const destinations = getLiveDestinations(false);
   return (
     <div className="min-h-screen bg-parchment-100">
       {/* 1. Page Hero */}
@@ -37,7 +38,7 @@ export default function DestinationsPage() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {DESTINATIONS.map((dest) => (
+            {destinations.map((dest) => (
               <DestinationCard key={dest.id} destination={dest} />
             ))}
           </div>

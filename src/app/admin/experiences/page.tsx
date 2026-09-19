@@ -277,10 +277,10 @@ export default function AdminExperiencesPage() {
     <div className="space-y-6">
       <AdminHeader
         onToggleMobileSidebar={() => {}}
-        title="Curated Itineraries & Experiences"
-        subtitle="Build day-by-day itineraries, cultural highlights, and responsible hosting details"
+        title="Experiences: All Curated Experiences"
+        subtitle="Manage detailed day-by-day itineraries, cultural highlights, and responsible hosting published under /experiences/[slug]"
         actionButton={{
-          label: 'New Itinerary',
+          label: 'New Curated Experience',
           onClick: handleOpenNew,
           icon: <Plus className="w-4 h-4" />,
         }}
@@ -309,7 +309,7 @@ export default function AdminExperiencesPage() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-terracotta hover:bg-terracotta-light text-white text-xs font-semibold shadow-warm transition-all"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Create Itinerary</span>
+              <span>Create Curated Experience</span>
             </button>
           </div>
         </div>

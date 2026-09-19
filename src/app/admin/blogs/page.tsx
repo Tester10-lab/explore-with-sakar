@@ -128,10 +128,10 @@ export default function AdminBlogsPage() {
 
       <AdminHeader
         onToggleMobileSidebar={() => {}}
-        title="Blog & Story Management"
-        subtitle={`Total of ${blogs.length} articles in database`}
+        title="Stories: Sakar’s Journal & Blogs"
+        subtitle={`Total of ${blogs.length} stories & field notes published in the Himalayan Journal`}
         actionButton={{
-          label: 'Create Blog Post',
+          label: 'Write New Story',
           href: '/admin/blogs/new',
           icon: <Plus className="w-4 h-4" />,
         }}

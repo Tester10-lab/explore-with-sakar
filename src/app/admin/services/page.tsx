@@ -185,8 +185,8 @@ export default function AdminServicesPage() {
   return (
     <div className="p-4 sm:p-8 max-w-7xl mx-auto space-y-6">
       <AdminHeader
-        title="Services & Travel Pillars"
-        subtitle="Manage the 5 core travel offerings displayed on the homepage and services portal."
+        title="Experiences: Travel Pillars & Curation"
+        subtitle="Manage the 4 core experience pillars (Go Beyond the Map, Go Within, Feel Closer, Leave a Mark) and offerings displayed on the public website."
       />
 
       <ToastContainer toasts={toasts} onRemove={removeToast} />
@@ -199,7 +199,7 @@ export default function AdminServicesPage() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search services..."
+            placeholder="Search pillars and experiences..."
             className="w-full pl-9 pr-3 py-2 bg-himalaya-950 border border-himalaya-800 rounded-xl text-xs text-parchment-100 placeholder:text-himalaya-500 focus:outline-none focus:border-terracotta"
           />
         </div>
@@ -218,7 +218,7 @@ export default function AdminServicesPage() {
             className="w-full sm:w-auto px-4 py-2 bg-terracotta hover:bg-terracotta-light text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 shadow-warm transition-all"
           >
             <Plus className="w-4 h-4" />
-            <span>Add New Service</span>
+            <span>Add Experience Pillar</span>
           </button>
         </div>
       </div>

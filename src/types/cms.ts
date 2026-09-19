@@ -232,6 +232,130 @@ export interface WebsiteSettings {
   };
 }
 
+// ==================== PAGE CONTENT MANAGEMENT ====================
+
+export interface PageSeo {
+  title?: string;
+  metaDescription?: string;
+  canonicalUrl?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+  sitemapVisible?: boolean;
+}
+
+export interface PageSection {
+  id: string;
+  type: string;           // e.g. 'hero', 'stats', 'services', 'meet-sakar', 'blog-teaser', 'inquiry-form', etc.
+  label: string;           // Display name in admin
+  visible: boolean;
+  order: number;
+  content: Record<string, any>; // Section-specific content fields
+}
+
+export interface PageContent {
+  slug: string;            // e.g. 'home', 'about', 'services', 'contact'
+  name: string;            // Display name e.g. 'Homepage', 'About Sakar'
+  url: string;             // Public URL e.g. '/', '/about'
+  status: 'published' | 'draft';
+  sections: PageSection[];
+  seo: PageSeo;
+  publishedAt?: string;
+  lastEditedBy?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PageRevision {
+  id: string;
+  pageSlug: string;
+  version: number;
+  sections: PageSection[];
+  seo: PageSeo;
+  editedBy: string;
+  status: 'published' | 'draft';
+  createdAt: string;
+}
+
+// ==================== EVENTS ====================
+
+export interface CmsEvent {
+  id: string;
+  title: string;
+  nepaliName: string;
+  category: 'festival' | 'spiritual' | 'community';
+  categoryLabel: string;
+  date: string;
+  location: string;
+  season: string;
+  image: string;
+  shortDesc: string;
+  highlights: string[];
+  sakarNote: string;
+  order: number;
+  isVisible: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ==================== DESTINATIONS ====================
+
+export interface CmsDestination {
+  id: string;
+  name: string;
+  slug: string;
+  nepaliName: string;
+  tagline: string;
+  elevation: string;
+  description: string;
+  image: { src: string; alt: string };
+  highlights: string[];
+  order: number;
+  isVisible: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ==================== FAQ ====================
+
+export interface CmsFaqItem {
+  id: string;
+  category: string;
+  question: string;
+  answer: string;
+  order: number;
+  isVisible: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ==================== NAVIGATION ====================
+
+export interface NavigationLink {
+  id: string;
+  label: string;
+  url: string;
+  openInNewTab?: boolean;
+  visible: boolean;
+  order: number;
+  children?: NavigationLink[];
+}
+
+export interface NavigationConfig {
+  header: NavigationLink[];
+  footer: {
+    columns: {
+      id: string;
+      title: string;
+      links: NavigationLink[];
+    }[];
+  };
+  updatedAt: string;
+}
+
+// ==================== EXTENDED DATA STORE ====================
+
 export interface CMSDataStore {
   admin: AdminUser;
   packages: ExtendedPackage[];
@@ -242,6 +366,12 @@ export interface CMSDataStore {
   photos: ExtendedGalleryPhoto[];
   reviews: ExtendedTestimonial[];
   handwrittenReviews?: HandwrittenReviewPage[];
+  pages?: PageContent[];
+  pageRevisions?: PageRevision[];
+  events?: CmsEvent[];
+  destinations?: CmsDestination[];
+  faq?: CmsFaqItem[];
+  navigation?: NavigationConfig;
   settings: WebsiteSettings;
   version: number;
   lastUpdated: string;

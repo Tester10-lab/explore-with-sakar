@@ -10,6 +10,10 @@ import {
   getLiveReviews,
   getLiveHandwrittenReviews,
   getLiveSettings,
+  getLiveEvents,
+  getLiveDestinations,
+  getLiveFaq,
+  getLiveNavigation,
 } from '@/lib/cms';
 
 export async function GET() {
@@ -25,6 +29,10 @@ export async function GET() {
     const reviews = getLiveReviews();
     const handwrittenReviews = getLiveHandwrittenReviews(false);
     const settings = getLiveSettings();
+    const events = getLiveEvents(false);
+    const destinations = getLiveDestinations(false);
+    const faq = getLiveFaq(false);
+    const navigation = getLiveNavigation();
 
     return NextResponse.json(
       {
@@ -37,6 +45,10 @@ export async function GET() {
         reviews,
         handwrittenReviews,
         settings,
+        events,
+        destinations,
+        faq,
+        navigation,
       },
       {
         headers: {

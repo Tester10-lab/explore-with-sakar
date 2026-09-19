@@ -293,11 +293,11 @@ export default function AdminReviewsPage() {
       <ToastContainer toasts={toasts} onDismiss={(id) => setToasts((t) => t.filter((x) => x.id !== id))} />
 
       <AdminHeader
-        title={activeTab === 'handwritten' ? 'Handwritten Guest Journal' : 'Digital Testimonials'}
+        title={`Stories: Traveler Reviews & Guestbook (${activeTab === 'handwritten' ? 'Handwritten Journal' : 'Digital Testimonials'})`}
         subtitle={
           activeTab === 'handwritten'
-            ? `Manage ${handwrittenPages.length} physical handwritten journal pages shown in the interactive flipbook`
-            : `Manage ${reviews.length} digital customer testimonial cards`
+            ? `Manage ${handwrittenPages.length} physical handwritten journal pages shown in the interactive flipbook on the public website`
+            : `Manage ${reviews.length} digital customer testimonial cards displayed on the public website`
         }
         actionButton={
           activeTab === 'handwritten'
