@@ -96,12 +96,12 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
   {
     slug: 'leave-a-mark',
     name: 'Leave a Mark',
-    url: '/experiences?category=responsible',
+    url: '/services/leave-a-mark',
     status: 'published',
     seo: {
-      title: 'Leave a Mark | Responsible Travel & Community Initiatives in Nepal',
+      title: 'Leave a Mark | Regenerative Travel & Community Initiatives in Nepal',
       metaDescription: 'Community projects, village schools, environmental activities, and ethical volunteering with direct local benefit.',
-      canonicalUrl: 'https://explorewithsakar.com/experiences?category=responsible',
+      canonicalUrl: 'https://explorewithsakar.com/services/leave-a-mark',
       sitemapVisible: true,
     },
     sections: [

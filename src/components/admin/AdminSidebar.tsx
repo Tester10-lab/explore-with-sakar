@@ -97,17 +97,17 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
         },
         {
           label: 'Go Within',
-          href: '/admin/services',
+          href: '/admin/pages/spiritual-wellness',
           icon: Sparkles,
         },
         {
           label: 'Feel Closer',
-          href: '/admin/services',
+          href: '/admin/pages/homestays',
           icon: Home,
         },
         {
           label: 'Leave a Mark',
-          href: '/admin/experiences?category=responsible',
+          href: '/admin/pages/leave-a-mark',
           icon: Heart,
         },
         {
@@ -117,7 +117,7 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
         },
         {
           label: 'Custom Private Journeys',
-          href: '/admin/services',
+          href: '/admin/pages/custom-journeys',
           icon: ShieldCheck,
         },
       ],

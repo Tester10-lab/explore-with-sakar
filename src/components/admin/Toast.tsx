@@ -17,11 +17,30 @@ interface ToastProps {
 
 export default function ToastContainer({ toasts, onDismiss, onRemove }: ToastProps) {
   const dismissToast = onDismiss || onRemove;
+
+  // Auto-dismiss each toast after 3.5 seconds
+  React.useEffect(() => {
+    if (toasts.length === 0 || !dismissToast) return;
+
+    const timers = toasts.map((toast) =>
+      setTimeout(() => {
+        dismissToast(toast.id);
+      }, 3500)
+    );
+
+    return () => {
+      timers.forEach((t) => clearTimeout(t));
+    };
+  }, [toasts, dismissToast]);
+
   if (toasts.length === 0) return null;
+
+  // Show at most 3 toasts to prevent screen crowding
+  const visibleToasts = toasts.slice(-3);
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2 max-w-md w-full px-4 pointer-events-none">
-      {toasts.map((toast) => {
+      {visibleToasts.map((toast) => {
         const isSuccess = toast.type === 'success';
         const isError = toast.type === 'error';
 
@@ -45,6 +64,7 @@ export default function ToastContainer({ toasts, onDismiss, onRemove }: ToastPro
             <button
               onClick={() => dismissToast?.(toast.id)}
               className="text-white/60 hover:text-white transition-colors p-1"
+              aria-label="Dismiss notification"
             >
               <X className="w-4 h-4" />
             </button>

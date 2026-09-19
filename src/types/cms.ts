@@ -41,7 +41,19 @@ export interface ExtendedExperience {
   id: string;
   title: string;
   slug: string;
-  category: 'heritage' | 'spiritual' | 'homestay' | 'adventure' | 'responsible';
+  category:
+    | 'heritage'
+    | 'spiritual'
+    | 'homestay'
+    | 'adventure'
+    | 'responsible'
+    | 'beyond-the-map'
+    | 'spiritual-wellness'
+    | 'homestays'
+    | 'leave-a-mark'
+    | 'all-curated'
+    | 'custom-journeys'
+    | string;
   categoryLabel: string;
   duration: string;
   difficulty?: 'Gentle' | 'Moderate' | 'Challenging' | 'Custom';

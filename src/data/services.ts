@@ -216,6 +216,84 @@ export const SERVICE_PILLARS: ServicePillar[] = [
     badge: 'Bespoke Private',
     relatedSlug: 'kathmandu-heritage-living-culture',
   },
+  {
+    id: 'beyond-the-map',
+    slug: 'beyond-the-map',
+    title: 'Go Beyond the Map',
+    nepaliTitle: 'नक्साभन्दा परको यात्रा',
+    tagline: 'Step Past Grand Facades into Secret Residential Bahals, Untold Histories & Master Artisan Guilds',
+    shortDescription: 'Step past the grand facades into the secret residential bahals of old Kathmandu, untold histories of Patan and Bhaktapur, master artisan guilds, and the sacred geometry of the Valley.',
+    fullPhilosophy: [
+      'Most visitors stop at the grand monuments. We walk past them, slipping into the hidden courtyards where the true pulse of the valley has beaten for centuries.',
+      'Sakar leads you through spice-scented alleyways to meet multi-generational masters in their private studios, decode sacred mandala architecture, and witness living heritage in daily morning devotion.',
+      'A slow, contemplative journey that honors the living residents and ancestral crafts of Nepal.',
+    ],
+    heroImage: {
+      src: '/images/beyond-the-map/living-courtyards.jpg',
+      alt: 'Hidden courtyards of old Kathmandu',
+    },
+    keyFeatures: [
+      {
+        title: 'Hidden Bahal Walks',
+        description: 'Explore secretive residential courtyards and ancient trade stupas.',
+      },
+      {
+        title: 'Artisan Lineage Deep-Dive',
+        description: 'Behind-closed-doors sessions with master woodcarvers and bronze smiths.',
+      },
+      {
+        title: 'Sacred Mandala Geometry',
+        description: 'Decode the astronomical and architectural blueprint of the valley.',
+      },
+      {
+        title: 'Unhurried Pacing',
+        description: 'Ample time for tea, conversations with elders, and slow photography.',
+      },
+    ],
+    quote: 'When we step off the tourist street through a low doorway, the noise disappears and the stones begin to speak.',
+    quoteAuthor: 'Sakar, Founder & Host',
+    badge: 'Signature Exploration',
+    relatedSlug: 'living-courtyards-kathmandu',
+  },
+  {
+    id: 'leave-a-mark',
+    slug: 'leave-a-mark',
+    title: 'Leave a Mark: Regenerative Travel & Community Conservation',
+    nepaliTitle: 'सकारात्मक प्रभाव र दिगो संरक्षण',
+    tagline: 'Community Projects, Village School Mentorship, River Care & Ethical Wildlife Stewardship',
+    shortDescription: 'Travel that gives back more than it takes. Support women-led rural cooperatives, plant native trees, volunteer with mountain schools, and preserve endangered heritage.',
+    fullPhilosophy: [
+      'We believe travel should be regenerative, leaving ecosystems healthier and communities stronger than when we arrived.',
+      'Leave a Mark connects travelers with grassroots conservation and education initiatives led directly by local community leaders. Rather than superficial performative volunteering, we participate in tangible, long-term programs requested by the communities themselves.',
+      'A portion of every journey funds village drinking water filters, solar lighting, scholarship funds for rural girls, and wildlife buffer zone protection.',
+    ],
+    heroImage: {
+      src: '/explore-with-sakar/images/trails/river-gorge.jpg',
+      alt: 'Serene Himalayan river and forest conservation sanctuary',
+    },
+    keyFeatures: [
+      {
+        title: 'Community Cooperative Support',
+        description: 'Direct investment in women-led handloom weaving and organic farming collectives.',
+      },
+      {
+        title: 'Rural Education & Libraries',
+        description: 'Supply books, solar learning tools, and school sports equipment to remote mountain schools.',
+      },
+      {
+        title: 'Native Reforestation & Trail Care',
+        description: 'Participate in indigenous rhododendron and oak planting along eroded ridgelines.',
+      },
+      {
+        title: 'Ethical Wildlife Protection',
+        description: 'Support community anti-poaching buffer zones around Chitwan and Annapurna sanctuaries.',
+      },
+    ],
+    quote: 'True travel does not just change the traveler; it honors and uplifts the soil and people that hosted them.',
+    quoteAuthor: 'Community Elder, Chitwan Buffer Zone',
+    badge: 'Regenerative Impact',
+    relatedSlug: 'chitwan-indigenous-wildlife-tharu',
+  },
 ];
 
 export function getServiceBySlug(slug: string): ServicePillar | undefined {

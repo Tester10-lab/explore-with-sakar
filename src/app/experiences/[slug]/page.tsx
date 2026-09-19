@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { getLiveExperiences, getLiveExperienceBySlug } from '@/lib/cms';
 import { MapPin, Clock, Users, Sun, ArrowLeft, Check, Sparkles } from 'lucide-react';
 import InquiryForm from '@/components/booking/InquiryForm';
@@ -12,6 +12,22 @@ interface Props {
 }
 
 export function generateMetadata({ params }: Props): Metadata {
+  if (params.slug === 'leave-a-mark') {
+    return { title: 'Leave a Mark | Explore With Sakar' };
+  }
+  if (params.slug === 'beyond-the-map') {
+    return { title: 'Go Beyond the Map | Explore With Sakar' };
+  }
+  if (params.slug === 'spiritual-wellness') {
+    return { title: 'Go Within | Explore With Sakar' };
+  }
+  if (params.slug === 'homestays') {
+    return { title: 'Feel Closer | Explore With Sakar' };
+  }
+  if (params.slug === 'custom-journeys') {
+    return { title: 'Custom Private Journeys | Explore With Sakar' };
+  }
+
   const experience = getLiveExperienceBySlug(params.slug);
   
   if (!experience) {
@@ -26,12 +42,33 @@ export function generateMetadata({ params }: Props): Metadata {
 
 export function generateStaticParams() {
   const experiences = getLiveExperiences(false);
-  return experiences.map((exp) => ({
-    slug: exp.slug,
-  }));
+  return [
+    ...experiences.map((exp) => ({ slug: exp.slug })),
+    { slug: 'leave-a-mark' },
+    { slug: 'beyond-the-map' },
+    { slug: 'spiritual-wellness' },
+    { slug: 'homestays' },
+    { slug: 'custom-journeys' },
+  ];
 }
 
 export default function ExperienceDetailPage({ params }: Props) {
+  if (params.slug === 'leave-a-mark') {
+    redirect('/services/leave-a-mark');
+  }
+  if (params.slug === 'beyond-the-map') {
+    redirect('/services/beyond-the-map');
+  }
+  if (params.slug === 'spiritual-wellness') {
+    redirect('/services/spiritual-wellness');
+  }
+  if (params.slug === 'homestays') {
+    redirect('/services/homestays');
+  }
+  if (params.slug === 'custom-journeys') {
+    redirect('/services/custom-journeys');
+  }
+
   const experience = getLiveExperienceBySlug(params.slug);
 
   if (!experience) {

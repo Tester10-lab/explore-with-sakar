@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Plus,
   Compass,
@@ -27,16 +27,42 @@ import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { ExtendedExperience, ItineraryDay } from '@/types/cms';
 
 const CATEGORY_OPTIONS = [
-  { value: 'heritage', label: 'Living Heritage' },
-  { value: 'spiritual', label: 'Spiritual & Wellness' },
-  { value: 'homestay', label: 'Village Homestays' },
-  { value: 'adventure', label: 'Hidden Trails' },
-  { value: 'responsible', label: 'Responsible Wildlife' },
+  { value: 'beyond-the-map', label: 'Go Beyond the Map' },
+  { value: 'spiritual-wellness', label: 'Go Within' },
+  { value: 'homestays', label: 'Feel Closer' },
+  { value: 'leave-a-mark', label: 'Leave a Mark' },
+  { value: 'all-curated', label: 'All Curated Experiences' },
+  { value: 'custom-journeys', label: 'Custom Private Journeys' },
 ];
+
+function getPillarLabel(category?: string, categoryLabel?: string): string {
+  if (
+    categoryLabel &&
+    [
+      'Go Beyond the Map',
+      'Go Within',
+      'Feel Closer',
+      'Leave a Mark',
+      'All Curated Experiences',
+      'Custom Private Journeys',
+    ].includes(categoryLabel)
+  ) {
+    return categoryLabel;
+  }
+  if (!category) return 'Go Beyond the Map';
+  if (category === 'beyond-the-map' || category === 'heritage') return 'Go Beyond the Map';
+  if (category === 'spiritual-wellness' || category === 'spiritual') return 'Go Within';
+  if (category === 'homestays' || category === 'homestay') return 'Feel Closer';
+  if (category === 'leave-a-mark' || category === 'responsible') return 'Leave a Mark';
+  if (category === 'all-curated' || category === 'adventure') return 'All Curated Experiences';
+  if (category === 'custom-journeys') return 'Custom Private Journeys';
+  return categoryLabel || category;
+}
 
 export default function AdminExperiencesPage() {
   const [experiences, setExperiences] = useState<ExtendedExperience[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedPillar, setSelectedPillar] = useState<string>('all');
 
   // Edit / New Modal
   const [editingExp, setEditingExp] = useState<Partial<ExtendedExperience> | null>(null);
@@ -90,8 +116,8 @@ export default function AdminExperiencesPage() {
     setEditingExp({
       title: '',
       slug: '',
-      category: 'heritage',
-      categoryLabel: 'Living Heritage',
+      category: 'beyond-the-map',
+      categoryLabel: 'Go Beyond the Map',
       duration: '7 Days / 6 Nights',
       difficulty: 'Moderate',
       location: 'Kathmandu Valley, Nepal',
@@ -137,6 +163,15 @@ export default function AdminExperiencesPage() {
       ].join('\n')
     );
   };
+
+  const filteredExperiences = useMemo(() => {
+    if (selectedPillar === 'all') return experiences;
+    const selectedOption = CATEGORY_OPTIONS.find((c) => c.value === selectedPillar);
+    return experiences.filter((exp) => {
+      const label = getPillarLabel(exp.category, exp.categoryLabel);
+      return exp.category === selectedPillar || label === selectedOption?.label;
+    });
+  }, [experiences, selectedPillar]);
 
   const handleOpenEdit = (exp: ExtendedExperience) => {
     setIsNewExp(false);
@@ -190,7 +225,8 @@ export default function AdminExperiencesPage() {
       const selectedCat = CATEGORY_OPTIONS.find((c) => c.value === editingExp.category);
       const payload: Partial<ExtendedExperience> = {
         ...editingExp,
-        categoryLabel: selectedCat ? selectedCat.label : 'Living Heritage',
+        category: editingExp.category || 'beyond-the-map',
+        categoryLabel: selectedCat ? selectedCat.label : 'Go Beyond the Map',
         fullDescription: fullDescText
           .split('\n\n')
           .map((s) => s.trim())
@@ -314,6 +350,39 @@ export default function AdminExperiencesPage() {
           </div>
         </div>
 
+        {/* Public Pillar Hierarchy Filter Bar */}
+        <div className="bg-himalaya-900/90 border border-himalaya-800 rounded-2xl p-2.5 flex items-center gap-2 overflow-x-auto">
+          <button
+            onClick={() => setSelectedPillar('all')}
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+              selectedPillar === 'all'
+                ? 'bg-terracotta text-white shadow-warm'
+                : 'text-parchment-400 hover:text-parchment-200 hover:bg-himalaya-800/60'
+            }`}
+          >
+            All Experiences ({experiences.length})
+          </button>
+          {CATEGORY_OPTIONS.map((cat) => {
+            const count = experiences.filter(
+              (e) => e.category === cat.value || getPillarLabel(e.category, e.categoryLabel) === cat.label
+            ).length;
+            return (
+              <button
+                key={cat.value}
+                onClick={() => setSelectedPillar(cat.value)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                  selectedPillar === cat.value
+                    ? 'bg-terracotta text-white shadow-warm'
+                    : 'text-parchment-400 hover:text-parchment-200 hover:bg-himalaya-800/60'
+                }`}
+              >
+                <span>{cat.label}</span>
+                <span className="text-[10px] opacity-75 font-mono">({count})</span>
+              </button>
+            );
+          })}
+        </div>
+
         {/* List */}
         {isLoading ? (
           <div className="p-16 text-center">
@@ -322,7 +391,7 @@ export default function AdminExperiencesPage() {
               Loading itineraries...
             </p>
           </div>
-        ) : experiences.length === 0 ? (
+        ) : filteredExperiences.length === 0 ? (
           <div className="bg-himalaya-900/40 border border-himalaya-800/80 rounded-2xl p-12 text-center space-y-4">
             <div className="w-14 h-14 rounded-2xl bg-himalaya-800 text-parchment-300 flex items-center justify-center mx-auto">
               <Compass className="w-7 h-7" />
@@ -332,7 +401,9 @@ export default function AdminExperiencesPage() {
                 No Itineraries Found
               </h4>
               <p className="text-xs text-parchment-400 font-light mt-1">
-                Create your first curated journey to showcase on the experiences page.
+                {selectedPillar !== 'all'
+                  ? `No journeys currently listed under ${CATEGORY_OPTIONS.find((c) => c.value === selectedPillar)?.label}. Create one or select another filter.`
+                  : 'Create your first curated journey to showcase on the experiences page.'}
               </p>
             </div>
             <button
@@ -345,7 +416,7 @@ export default function AdminExperiencesPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {experiences.map((exp) => (
+            {filteredExperiences.map((exp) => (
               <div
                 key={exp.id}
                 className="bg-himalaya-900/60 border border-himalaya-800/80 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-himalaya-700 transition-all shadow-subtle group"
@@ -377,7 +448,7 @@ export default function AdminExperiencesPage() {
                         {exp.status}
                       </span>
                       <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider font-bold bg-himalaya-950/80 text-parchment-200 border border-himalaya-700">
-                        {exp.categoryLabel || exp.category}
+                        {getPillarLabel(exp.category, exp.categoryLabel)}
                       </span>
                     </div>
 
@@ -540,16 +611,19 @@ export default function AdminExperiencesPage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-wider text-parchment-300 mb-1.5">
-                    Category *
+                    Experience Pillar (Category) *
                   </label>
                   <select
-                    value={editingExp.category || 'heritage'}
-                    onChange={(e) =>
+                    value={editingExp.category || 'beyond-the-map'}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      const matched = CATEGORY_OPTIONS.find((c) => c.value === val);
                       setEditingExp((prev) => ({
                         ...prev,
-                        category: e.target.value as any,
-                      }))
-                    }
+                        category: val as any,
+                        categoryLabel: matched?.label || 'Go Beyond the Map',
+                      }));
+                    }}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-himalaya-950 border border-himalaya-700 text-parchment-100 text-sm focus:outline-none focus:border-terracotta"
                   >
                     {CATEGORY_OPTIONS.map((c) => (

@@ -103,7 +103,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/experiences?category=responsible" className="hover:text-terracotta transition-colors">
+                <Link href="/services/leave-a-mark" className="hover:text-terracotta transition-colors">
                   Leave a Mark
                 </Link>
               </li>
@@ -114,7 +114,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/experiences" className="font-medium text-terracotta hover:underline pt-1 inline-block">
-                  All Experiences Hub →
+                  All Curated Experiences →
                 </Link>
               </li>
             </ul>

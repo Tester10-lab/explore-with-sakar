@@ -74,7 +74,7 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
       {
         title: 'Leave a Mark',
         description: 'Community projects, school programs, environmental activities, volunteering and meaningful events.',
-        href: '/experiences?category=responsible',
+        href: '/services/leave-a-mark',
         badge: 'Impact',
         icon: Heart,
       },

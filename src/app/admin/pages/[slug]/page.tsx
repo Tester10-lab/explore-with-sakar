@@ -64,8 +64,15 @@ export default function AdminPageEditor() {
   const [restoringRevisionId, setRestoringRevisionId] = useState<string | null>(null);
 
   const addToast = (type: 'success' | 'error' | 'info', message: string) => {
-    const id = Date.now().toString();
-    setToasts((prev) => [...prev, { id, type, message }]);
+    const id = Date.now().toString() + Math.random().toString(36).substring(2, 5);
+    setToasts((prev) => {
+      // Avoid exact duplicate consecutive message stacking
+      const filtered = prev.filter((t) => t.message !== message);
+      return [...filtered, { id, type, message }];
+    });
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 3500);
   };
 
   const removeToast = (id: string) => {

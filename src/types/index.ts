@@ -4,7 +4,13 @@ export type ExperienceCategory =
   | 'homestay'
   | 'adventure'
   | 'heritage'
-  | 'responsible';
+  | 'responsible'
+  | 'beyond-the-map'
+  | 'spiritual-wellness'
+  | 'homestays'
+  | 'leave-a-mark'
+  | 'all-curated'
+  | 'custom-journeys';
 
 export interface ImageAsset {
   src: string;
