@@ -40,7 +40,4 @@ next-env.d.ts
 /*.jpg
 /*.png
 /*.zip
-/Review/
-/personal blog/
-*.py
 /scratch/

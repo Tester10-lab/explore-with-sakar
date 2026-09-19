@@ -20,7 +20,7 @@ import {
   getLiveSettingsAsync,
 } from '@/lib/cms';
 import ServiceCard from '@/components/common/ServiceCard';
-import BlogCard from '@/components/common/BlogCard';
+import BlogCard from '@/components/blog/BlogCard';
 import SectionHeading from '@/components/common/SectionHeading';
 import InquiryForm from '@/components/booking/InquiryForm';
 

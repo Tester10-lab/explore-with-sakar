@@ -21,10 +21,13 @@ const CATEGORIES: { key: ExperienceCategory | 'all'; label: string }[] = [
   { key: 'heritage', label: 'Living Heritage' },
 ];
 
+const ITEMS_PER_PAGE = 4;
+
 function ExperiencesContent() {
   const searchParams = useSearchParams();
   const [experiences, setExperiences] = useState<any[]>(EXPERIENCES);
   const [activeCategory, setActiveCategory] = useState<ExperienceCategory | 'all'>('all');
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     const categoryParam = searchParams.get('category') || searchParams.get('pillar');
@@ -40,6 +43,7 @@ function ExperiencesContent() {
       } else if (categoryParam === 'heritage') {
         setActiveCategory('heritage');
       }
+      setCurrentPage(1);
     }
   }, [searchParams]);
 
@@ -60,10 +64,40 @@ function ExperiencesContent() {
     loadLiveExperiences();
   }, []);
 
+  const matchesCategory = (category: string, targetKey: ExperienceCategory | 'all') => {
+    if (targetKey === 'all') return true;
+    if (targetKey === 'adventure') return category === 'adventure' || category === 'beyond-the-map';
+    if (targetKey === 'spiritual') return category === 'spiritual' || category === 'spiritual-wellness';
+    if (targetKey === 'homestay') return category === 'homestay' || category === 'homestays';
+    if (targetKey === 'responsible') return category === 'responsible' || category === 'leave-a-mark';
+    if (targetKey === 'heritage') return category === 'heritage' || category === 'culture';
+    return category === targetKey;
+  };
+
   const filteredExperiences = useMemo(() => {
-    if (activeCategory === 'all') return experiences;
-    return experiences.filter((e) => e.category === activeCategory);
+    return experiences.filter((e) => matchesCategory(e.category, activeCategory));
   }, [activeCategory, experiences]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredExperiences.length / ITEMS_PER_PAGE));
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+
+  const paginatedExperiences = useMemo(() => {
+    const start = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
+    return filteredExperiences.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredExperiences, safeCurrentPage]);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    const el = document.getElementById('experiences-grid');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleCategorySelect = (key: ExperienceCategory | 'all') => {
+    setActiveCategory(key);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="min-h-screen bg-parchment-100">
@@ -83,15 +117,12 @@ function ExperiencesContent() {
           <div className="flex items-center justify-start sm:justify-center overflow-x-auto gap-2 pb-2 sm:pb-0 scrollbar-none">
             {CATEGORIES.map((cat) => {
               const isActive = activeCategory === cat.key;
-              const count =
-                cat.key === 'all'
-                  ? experiences.length
-                  : experiences.filter((e) => e.category === cat.key).length;
+              const count = experiences.filter((e) => matchesCategory(e.category, cat.key)).length;
 
               return (
                 <button
                   key={cat.key}
-                  onClick={() => setActiveCategory(cat.key)}
+                  onClick={() => handleCategorySelect(cat.key)}
                   className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex items-center space-x-1.5 ${
                     isActive
                       ? 'bg-terracotta text-white shadow-warm'
@@ -114,13 +145,63 @@ function ExperiencesContent() {
       </section>
 
       {/* 3. Experiences Grid */}
-      <section className="py-20 sm:py-32 bg-sand">
+      <section id="experiences-grid" className="py-20 sm:py-28 bg-sand">
         <div className="editorial-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredExperiences.map((exp) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {paginatedExperiences.map((exp) => (
               <ExperienceCard key={exp.id} experience={exp} />
             ))}
           </div>
+
+          {/* Pagination Controls: 4 items per page, page numbers 1, 2, 3, 4, 5... */}
+          {totalPages > 1 && (
+            <div className="mt-16 pt-8 border-t border-parchment-300 flex flex-col sm:flex-row items-center justify-between gap-6">
+              <p className="text-xs sm:text-sm text-himalaya-600 font-light">
+                Showing <span className="font-semibold text-himalaya-950">{(safeCurrentPage - 1) * ITEMS_PER_PAGE + 1}–{Math.min(safeCurrentPage * ITEMS_PER_PAGE, filteredExperiences.length)}</span> of <span className="font-semibold text-himalaya-950">{filteredExperiences.length}</span> curated experiences
+              </p>
+
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => handlePageChange(safeCurrentPage - 1)}
+                  disabled={safeCurrentPage <= 1}
+                  className="px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 border border-parchment-300 bg-white text-himalaya-700 hover:bg-parchment-200 disabled:opacity-40 disabled:pointer-events-none"
+                  aria-label="Previous page"
+                >
+                  Previous
+                </button>
+
+                <div className="flex items-center space-x-1.5">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
+                    const isCurrent = pageNum === safeCurrentPage;
+                    return (
+                      <button
+                        key={pageNum}
+                        onClick={() => handlePageChange(pageNum)}
+                        className={`w-10 h-10 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center ${
+                          isCurrent
+                            ? 'bg-terracotta text-white shadow-warm'
+                            : 'bg-white text-himalaya-700 hover:bg-parchment-200 border border-parchment-300'
+                        }`}
+                        aria-label={`Page ${pageNum}`}
+                        aria-current={isCurrent ? 'page' : undefined}
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <button
+                  onClick={() => handlePageChange(safeCurrentPage + 1)}
+                  disabled={safeCurrentPage >= totalPages}
+                  className="px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 border border-parchment-300 bg-white text-himalaya-700 hover:bg-parchment-200 disabled:opacity-40 disabled:pointer-events-none"
+                  aria-label="Next page"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

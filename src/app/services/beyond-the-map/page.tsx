@@ -6,35 +6,32 @@ import {
   Compass,
   MapPin,
   Sparkles,
-  Clock,
-  Users,
   Check,
   ArrowRight,
-  ShieldCheck,
-  Eye,
   Heart,
-  Camera,
-  Layers,
-  Award,
-  Calendar,
-  Coffee,
-  Palette,
-  Flame,
+  ChevronDown,
+  BookOpen,
+  Quote,
 } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
-import SectionHeading from '@/components/common/SectionHeading';
 import CTASection from '@/components/common/CTASection';
 
 export const metadata: Metadata = {
   title: 'Go Beyond the Map | Authentic Exploration with Sakar',
   description:
-    'Step past the grand facades into the secret residential bahals of old Kathmandu, untold histories of Patan and Bhaktapur, master artisan guilds, and the sacred geometry of the Valley.',
+    'Kathmandu, Bhaktapur, Patan, and Pokhara. Step past the tourist facades into living courtyards, ancient Silk Road trade alleys, multi-generational artisan workshops, and calm Himalayan waters.',
 };
+
+interface StorySection {
+  heading: string;
+  paragraphs: string[];
+}
 
 interface BeyondJourney {
   id: string;
   chapter: string;
   title: string;
+  nepaliTitle?: string;
   tagline: string;
   location: string;
   duration: string;
@@ -43,105 +40,283 @@ interface BeyondJourney {
   imageAlt: string;
   promise: string;
   experience: string;
+  keyQuote: {
+    quote: string;
+    attribution: string;
+  };
   highlights: string[];
+  storySections: StorySection[];
   ctaSubject: string;
-  slug: string;
 }
 
 const BEYOND_JOURNEYS: BeyondJourney[] = [
   {
-    id: 'living-courtyards',
+    id: 'kathmandu-durbar-square',
     chapter: 'Chapter 01',
-    title: 'The Living Courtyards: Beyond the Temples of Kathmandu',
-    tagline: 'Hidden Bahals • Old Spice Alleys • Morning Community Rhythms',
-    location: 'Old Kathmandu (Ason & Indra Chowk)',
+    title: 'Kathmandu Durbar Square: Where Every Stone Holds a Story',
+    nepaliTitle: 'काठमाडौँ दरबार क्षेत्र',
+    tagline: 'Ason Morning Alleys • Ancient Silk Routes • Sustainable Human Settlements',
+    location: 'Old Kathmandu (Ason Alleys & Basantapur Durbar Square)',
     duration: 'Full Day (Unhurried)',
     groupSize: 'Private / 1–6 Travelers',
     image: '/images/beyond-the-map/living-courtyards.jpg',
-    imageAlt: 'Hidden Newari residential courtyard bahal with stone stupa, morning chiya tea and warm sunlight in Kathmandu',
+    imageAlt: 'Morning light across ancient brick courtyards and temples in Kathmandu',
     promise:
-      'Most visitors stop at the grand facades of Kathmandu Durbar Square. We walk past them, slipping into the hidden bahals (residential courtyards) where the true pulse of the city has beaten for centuries.',
+      'If you want to understand Kathmandu, do not start with a monument. Start with a morning walk where the city wakes up in the narrow alleys of Ason.',
     experience:
-      'This is a sensory journey through the labyrinth of old Kathmandu. We navigate the spice-scented alleys of Ason and Indra Chowk, stepping into secret courtyards to discover hidden stupas built by Silk Road merchants. You will sit with locals over a glass of strong, sweet chiya, observe morning community rituals, and witness how ancient heritage is not just preserved in museums, but actively lived in every day by the Kathmandu Valley’s original inhabitants.',
+      'As the first rays of sunlight enter between old brick houses, the smell of spices, incense, fresh vegetables, and traditional sweets fills the air. Ason is not just a marketplace—it is a living memory standing along the ancient trade routes connecting the plains of India with the Tibetan plateau. Here, northern mountains met southern civilizations, and Hindu temples stood beside Buddhist monasteries. As you walk towards Basantapur, the noise of the market meets the silence of history: ancient palace walls rise, carved windows look down, and history breathes in the present.',
+    keyQuote: {
+      quote:
+        'Kathmandu reminds the world that the future of cities is not only about technology, but also about preserving communities where people live, work, and care for each other.',
+      attribution: 'Anil Chitrakar, Heritage Conservationist',
+    },
     highlights: [
-      'Slipping past tourist crowds through secret low-ceilinged passageways into serene residential bahals',
-      'Discovering centuries-old chaityas and private family shrines founded by ancient Silk Road merchants',
-      'Sitting with neighborhood elders over freshly poured sweet, cardamom-spiced chiya tea',
-      'Witnessing authentic morning devotion: butter lamps, vermilion offerings, and courtyard community life',
+      'Dawn walk through spice-scented Ason alleys as wooden shutters open to morning devotion',
+      'Discovering traditional Newar settlements designed for walkable community and human connection',
+      'Uncovering the Licchavi and Malla era rivalries that transformed brick and timber into artistic poetry',
+      'Entering Basantapur where royal palace walls grew alongside the everyday life of the people',
     ],
-    ctaSubject: 'The Living Courtyards: Beyond the Temples of Kathmandu',
-    slug: 'living-courtyards-kathmandu',
+    ctaSubject: 'Kathmandu Durbar Square: Where Every Stone Holds a Story',
+    storySections: [
+      {
+        heading: 'Start With a Morning Walk in Ason',
+        paragraphs: [
+          'If you want to understand Kathmandu, do not start with a monument. Start with a morning walk. Start where the city wakes up in the narrow alleys of Ason.',
+          'As the first rays of sunlight enter between old brick houses, the smell of spices, incense, fresh vegetables, and traditional sweets fills the air. Shopkeepers open wooden shutters that have witnessed generations of customers. People rush through lanes that appear too narrow for a modern city, yet somehow carry the rhythm of thousands of years.',
+          'This is not just a marketplace. This is a memory.',
+          'For centuries, Ason remained one of the beating hearts of Kathmandu, standing along ancient trade routes that connected the southern plains of India with the Tibetan plateau. Traders, pilgrims, monks, and travellers passed through these streets carrying goods, stories, beliefs, and cultures.',
+          'Perhaps that is why Kathmandu has always felt different. It was never a city that belonged to only one culture. It was a meeting point—a place where northern mountains met southern civilizations, where Hindu temples stood beside Buddhist monasteries, where merchants discussed business while bells from nearby shrines reminded them of something beyond wealth.',
+        ],
+      },
+      {
+        heading: 'A City Designed for Human Connection',
+        paragraphs: [
+          'One of Kathmandu’s greatest secrets is hidden not in its palaces, but in its neighbourhoods. The old settlements were designed around people.',
+          'A family could live in a traditional courtyard house, walk a few steps to a temple, visit a nearby market, meet neighbours in community spaces, and participate in festivals that connected generations. The city was not separated into residential areas, commercial areas, and religious zones like many modern cities. Life happened together.',
+          'A temple was not only a place of worship. A courtyard was not only empty space. A marketplace was not only for buying and selling. Everything had a purpose. The traditional Newar settlements of the valley show a remarkable understanding of community living, where architecture, social relationships, culture, and daily activities were woven together.',
+          'As the world discusses climate change and the importance of sustainable urban living, the traditional close-knit communities of Kathmandu Valley offer a valuable lesson. For centuries, these settlements were designed around people—with homes, markets, temples, schools, and social spaces within walking distance.',
+          'Heritage conservationist Anil Chitrakar, often regarded as a walking encyclopedia of Nepal’s heritage, highlights how these traditional communities represent a way of living where culture, sustainability, and human connection existed together. Kathmandu reminds the world that the future of cities is not only about technology, but also about preserving communities where people live, work, and care for each other.',
+        ],
+      },
+      {
+        heading: 'The Valley That Attracted Kings',
+        paragraphs: [
+          'Why did so many rulers dream of controlling Kathmandu? Because Kathmandu was never just beautiful. It was valuable. The valley had fertile land, water resources, skilled artisans, and a strategic location between Tibet and the Indian subcontinent. Whoever controlled Kathmandu controlled the centre of trade, administration, and influence in the Himalayan region.',
+          'The earliest chapters of Kathmandu’s recorded history take us back to ancient kingdoms, including the Licchavi period, when administration, art, inscriptions, and religious architecture began flourishing.',
+          'Imagine walking through Kathmandu today and knowing that beneath the roads and houses is a civilization that has been continuously evolving for centuries. The city you see is not one city. There are many cities built on top of each other.',
+        ],
+      },
+      {
+        heading: 'When Rivalry Created Beauty',
+        paragraphs: [
+          'Then came the Malla era, the age when Kathmandu Valley became a canvas for royal imagination. The kings of Kathmandu, Patan, and Bhaktapur competed with each other, not only for power but also for beauty.',
+          'They wanted their temples to reach higher. They wanted their palaces to become grander. They wanted their cities to be remembered. This rivalry created something extraordinary: a competition of creativity.',
+          'The result was a valley filled with artistic treasures where wood, stone, metal, and brick were transformed into stories. The artisans were not simply builders. They were storytellers. A carved window was a chapter. The temple roof was a poem. A courtyard was a gathering place where generations shared life.',
+        ],
+      },
+      {
+        heading: 'Entering Basantapur: Where the Stones Remember',
+        paragraphs: [
+          'As the walk continues from Ason towards Basantapur, the noise of the market slowly meets the silence of history. And suddenly, Kathmandu changes.',
+          'The old palace walls appear. The temples rise above the square. The wooden carvings look down as if they have been watching the city for centuries.',
+          'Kathmandu Durbar Square is not a place where history ended. It is a place where history is still breathing. Here, kings were crowned. Festivals were celebrated. Artists created masterpieces. And ordinary people continued their everyday lives around extraordinary monuments.',
+          'The palace was never separated from the people. The city and the palace grew together.',
+        ],
+      },
+    ],
   },
   {
-    id: 'echoes-in-stone',
+    id: 'bhaktapur-durbar-square',
     chapter: 'Chapter 02',
-    title: 'Echoes in Stone: The Untold Histories of Patan and Bhaktapur',
-    tagline: 'Malla Dynasties • Stone Hitis • Architectural Arms Race',
-    location: 'Patan (Lalitpur) & Medieval Bhaktapur',
+    title: 'Exploring Bhaktapur Durbar Square: A Walk Through Nepal’s Living Medieval City',
+    nepaliTitle: 'भक्तपुर दरबार क्षेत्र',
+    tagline: 'The City That Slowed Down • Pottery Square Wheels • Juju Dhau (King of Yogurt)',
+    location: 'Bhaktapur Durbar Square & Pottery Square',
     duration: 'Full Day (Unhurried)',
     groupSize: 'Private / 1–6 Travelers',
-    image: '/images/beyond-the-map/echoes-in-stone.jpg',
-    imageAlt: 'Ancient stone Makara water spout hiti and soaring medieval pagoda temples in Patan and Bhaktapur',
+    image: '/explore-with-sakar/images/heritage/durbar-square.jpg',
+    imageAlt: 'Soaring medieval pagoda temples and red brick courtyards of Bhaktapur Durbar Square',
     promise:
-      'History isn\'t just dates and dynasties; it is the rivalry, romance, and tragedy carved into the brick and timber of the Valley\'s greatest medieval kingdoms.',
+      'Bhaktapur is not a place where you simply visit the past. It is a place where the past still welcomes you. It slowed down and protected its memories.',
     experience:
-      'We bypass the standard historical summaries to explore the deep narratives of Patan (The City of Fine Arts) and Bhaktapur (The City of Devotees). You will trace the legendary rivalries between the Malla kings that fueled an architectural arms race. We will walk the intricate networks of ancient stone water conduits (hitis), explore the shadowed corners where royal secrets were kept, and decode the subtle mythologies carved into the wooden struts of towering pagoda temples.',
+      'The first feeling you get when you enter Bhaktapur is not excitement. It is calm. Footsteps on ancient brick pavements replace the noise of busy roads. The fragrance of incense mingles with the aroma of freshly prepared Newari feasts. An artisan sits quietly working with his hands, continuing a skill that has travelled through generations. Here, history is not displayed behind glass—it is actively lived as a living museum.',
+    keyQuote: {
+      quote:
+        'A city does not become timeless because it has old buildings. A city becomes timeless when people continue to give those buildings meaning.',
+      attribution: 'Sakar, on the Timelessness of Bhaktapur',
+    },
     highlights: [
-      'Tracing the intense artistic rivalry between Malla rulers that birthed competing architectural wonders',
-      'Exploring subterranean hydraulic engineering: ancient stone hitis with carved dragon/makara spouts',
-      'Uncovering shadowed palace corridors, royal romances, political intrigues, and historic tragedies',
-      'Decoding esoteric mythologies, deity iconography, and erotic symbolism carved into pagoda roof struts',
+      'Walking traffic-free brick lanes where footsteps replace the roar of modern city roads',
+      'Entering the Golden Gate and Palace of Fifty-Five Windows in unhurried contemplative peace',
+      'Observing master potters shape spinning clay into ritual vessels at Pottery Square',
+      'Tasting authentic Juju Dhau (King of Yogurt) prepared with centuries-old skill in clay pots',
     ],
-    ctaSubject: 'Echoes in Stone: The Untold Histories of Patan and Bhaktapur',
-    slug: 'echoes-in-stone-patan-bhaktapur',
+    ctaSubject: 'Exploring Bhaktapur Durbar Square: Living Medieval City',
+    storySections: [
+      {
+        heading: 'A Place Where the Past Still Welcomes You',
+        paragraphs: [
+          'Bhaktapur is not a place where you simply visit the past. It is a place where the past still welcomes you. There are cities that move forward by leaving the past behind. Bhaktapur chose a different path.',
+          'It slowed down. It protected its memories. It allowed its old brick lanes, wooden windows, courtyards and traditions to continue telling stories in a world that is changing faster than ever.',
+          'The first feeling you get when you enter Bhaktapur is not excitement. It is calm. The sound of footsteps on old brick pavements replaces the noise of busy roads. The smell of freshly prepared Newari food mixes with the fragrance of incense. An artisan sits quietly working with his hands, continuing a skill that may have travelled through generations. You suddenly realize: this is not a city where history is displayed. This is a city where history is lived—so it is known as a living museum.',
+        ],
+      },
+      {
+        heading: 'A City Built Around People & The Taste of Abundance',
+        paragraphs: [
+          'Before modern ideas of sustainable cities became popular, Bhaktapur had already created a human-centred way of living. The city was not divided into places where people lived, worked, worshipped, and gathered separately. Everything existed together.',
+          'A temple was not only a religious space. A courtyard was not only architecture. A public water source was not only infrastructure. They were places where relationships were created. Neighbours met, festivals were organized, knowledge was shared and communities looked after each other. Its heritage is not only in the monuments—it is in the lifestyle that surrounds them.',
+          'Bhaktapur’s culture also tells a story of a community connected with its land. The fertile valley provided crops, and those crops became part of celebrations, rituals, and social life. Traditional foods, festivals and drinks like Ayla became expressions of sharing and togetherness.',
+          'There is a beautiful thought hidden in such traditions: A community that has enough to preserve, create and celebrate has moved beyond survival. It has created culture.',
+        ],
+      },
+      {
+        heading: 'Walking Through Bhaktapur Durbar Square',
+        paragraphs: [
+          'When you finally arrive at Bhaktapur Durbar Square, you do not feel like you have reached a monument. You feel like you have entered a conversation with the past.',
+          'The palace windows silently watch over the square. The temples rise above the city like guardians. The statues stand as if they are waiting for the next generation to hear their stories. The Golden Gate, the Palace of Fifty-Five Windows, and the temples around the square are not just examples of architecture—they are reminders of a civilization that believed beauty was an essential part of life.',
+          'A city does not become timeless because it has old buildings. A city becomes timeless when people continue to give those buildings meaning.',
+        ],
+      },
+      {
+        heading: 'The Hands That Keep Bhaktapur Alive: Pottery & Juju Dhau',
+        paragraphs: [
+          'Beyond the grand temples and royal courtyards, the true heartbeat of Bhaktapur can be found in the hands of its people.',
+          'At Pottery Square, the rhythm of the spinning wheel has continued for generations. As the potter’s wheel turns slowly, ordinary clay transforms into lamps, vessels, and everyday objects. It is not just a craft; it is a conversation between the earth and human hands. The potters of Bhaktapur remind us that heritage is not only found in palaces. Sometimes, it lives in the simplest objects created for daily life.',
+          'And then there is Juju Dhau—the “King of Yogurt” of Bhaktapur. Prepared through traditional methods using buffalo milk and clay pots, Juju Dhau is more than a sweet delicacy. It represents patience, skill and a culture where food carries identity. For generations, it has been part of festivals, celebrations, and hospitality, offering visitors a taste of Bhaktapur’s warmth.',
+          'Perhaps this is what makes Bhaktapur different: the city’s heritage is not only carved into wood and stone. It is also shaped in clay and preserved in taste. A temple tells the story of kings. A potter tells the story of ordinary people. A bowl of Juju Dhau tells the story of a community that knows how to preserve tradition.',
+        ],
+      },
+    ],
   },
   {
-    id: 'artisan-path',
+    id: 'patan-durbar-square',
     chapter: 'Chapter 03',
-    title: 'The Artisan’s Path: A Heritage Deep-Dive',
-    tagline: 'Multi-Generational Guilds • Lost-Wax Casting • Living Meditation',
-    location: 'Patan & Bhaktapur Artisan Quarters',
-    duration: 'Full Day (Unhurried)',
-    groupSize: 'Private / 1–4 Travelers',
-    image: '/images/beyond-the-map/artisan-path.jpg',
-    imageAlt: 'Master Newari artisan hand-carving sacred wooden deity statue with traditional chisels in Patan atelier',
-    promise:
-      'We don\'t just look at the art; we sit with the masters whose families have been creating it for generations.',
-    experience:
-      'This tour goes behind closed doors into the workshops of Patan and Bhaktapur. You will witness the hypnotic, meticulous process of Thangka painting, the intense heat of traditional lost-wax bronze casting, and the precise chiseling of Newari woodcarvers. You will learn how these crafts are not merely decorative, but deeply spiritual acts of meditation. By the end of the day, a statue or a painting will no longer be a souvenir, but a sacred text you know how to read.',
-    highlights: [
-      'Exclusive behind-closed-doors entry into private family ateliers closed to regular tourists',
-      'Witnessing the intense heat, clay molds, and glowing metal of 1,000-year-old lost-wax bronze casting',
-      'Observing master Thangka artists grind natural lapis lazuli and gold leaf into meditative cosmic scrolls',
-      'Hands-on chisel demonstrations with master Newari woodcarvers transforming raw timber into deities',
-      'Learning to read sacred iconography, mudras, and symbolic attributes as living scripture',
-    ],
-    ctaSubject: 'The Artisan’s Path: A Heritage Deep-Dive',
-    slug: 'artisans-path-heritage-deep-dive',
-  },
-  {
-    id: 'sacred-geometry',
-    chapter: 'Chapter 04',
-    title: 'Sacred Geometry: The Architecture and Spirit of the Valley',
-    tagline: 'Cosmic Mandala • Sacred Mathematics • Earth-Resilient Shrines',
-    location: 'Kathmandu, Patan, Bhaktapur & Changu Narayan',
+    title: 'Patan Durbar Square: The City of Hidden Courtyards and Living Craft',
+    nepaliTitle: 'पाटन दरबार क्षेत्र (ललितपुर)',
+    tagline: 'City of Makers • Krishna Mandir • Sacred Bahals & The Living Workshop',
+    location: 'Patan (Lalitpur) & Hidden Monastic Bahals',
     duration: 'Full Day (Unhurried)',
     groupSize: 'Private / 1–6 Travelers',
-    image: '/images/beyond-the-map/sacred-geometry.jpg',
-    imageAlt: 'Symmetrical sacred pagoda temple complex in Kathmandu Valley aligned with cosmic mandala geometry',
+    image: '/images/beyond-the-map/artisan-path.jpg',
+    imageAlt: 'Master metal, bronze, and wood artisans in traditional Patan ateliers',
     promise:
-      'The Kathmandu Valley was not built by accident. It was designed as a living, breathing mandala.',
+      'Patan is a city of makers. In Kathmandu, you encounter history everywhere. In Bhaktapur, you feel history surrounding you. In Patan, you watch history being made by hand.',
     experience:
-      'For the analytically and spiritually curious, this tour decodes the blueprint of the Valley. We explore how Hindu and Buddhist cosmologies dictated the placement of every temple, courtyard, and city gate. You will learn the mathematics behind the multi-tiered pagodas, the spiritual engineering required to build shrines that withstand centuries of earthquakes, and how the physical layout of the cities was designed to guide the soul toward enlightenment.',
+      'Walk away from the main road and the city begins to reveal itself: a small doorway opens into a courtyard; a shrine appears between two old houses; nearby, metal is being hammered into shape. Patan’s square feels like an open museum of Newar civilization, except the museum is still alive and the workshops are still actively creating deities, windows, and sacred bronze details.',
+    keyQuote: {
+      quote:
+        'Patan is not simply a city where ancient things remain. It is a city where ancient knowledge still has work to do.',
+      attribution: 'Sakar, on Patan’s Living Guilds',
+    },
     highlights: [
-      'Decoding the cosmological blueprint: how the valley was mapped as a 3D sacred living mandala',
-      'Understanding the sacred mathematics, golden ratios, and proportions of multi-tiered pagodas',
-      'Uncovering ancient seismic engineering: interlocking timber joints that survived catastrophic earthquakes',
-      'Discovering how city gates, water springs, and cardinal shrines align with celestial cycles',
-      'Experiencing how sacred architecture was engineered to guide human consciousness toward stillness',
+      'Walking through quiet residential bahals echoing with the rhythmic chime of bronze hammers',
+      'Admiring the stone mastery of Krishna Mandir and the water engineering of Sundari Chowk and Tusha Hiti',
+      'Crossing the sacred threshold between Hinduism and Buddhism at the Golden Temple (Hiranya Varna Mahavihar)',
+      'Discovering terracotta marvels like Mahaboudha and ancient public water spouts like Manga Hiti',
     ],
-    ctaSubject: 'Sacred Geometry: The Architecture and Spirit of the Valley',
-    slug: 'sacred-geometry-architecture-valley',
+    ctaSubject: 'Patan Durbar Square: City of Hidden Courtyards and Living Craft',
+    storySections: [
+      {
+        heading: 'A City Built by Makers',
+        paragraphs: [
+          'There is something different about Patan. Kathmandu can feel restless. Bhaktapur feels as though it has paused to remember another time. But Patan feels busy creating—quietly, patiently, almost unnoticed.',
+          'Walk away from the main road and the city begins to reveal itself. A small doorway opens into a courtyard. A shrine appears between two old houses. Somewhere nearby, metal is being hammered into shape. A craftsman sits with the concentration of someone who has done the same work for decades.',
+          'Patan is often introduced through its temples and Durbar Square. But if you only look at its monuments, you miss what makes the city special: Patan is a city of makers.',
+          'For generations, artisans here have worked with metal, wood, stone and clay. Walk through the older neighbourhoods and you may hear the unmistakable rhythm of a hammer striking metal. The techniques are ancient, but the work is not simply preserved behind glass. It is still being done. In Kathmandu, you can encounter history everywhere. In Bhaktapur, you can feel history surrounding everyday life. In Patan, you can sometimes watch history being made by hand.',
+        ],
+      },
+      {
+        heading: 'Patan Durbar Square: More Than a Royal Palace',
+        paragraphs: [
+          'Patan Durbar Square was once the royal centre of the Malla kingdom, but standing there today, it is difficult to think of it simply as a palace complex. The square feels more like an open museum of Newar civilization—except that the museum is still alive.',
+          'The Krishna Mandir, with its distinctive stone architecture, stands at the heart of the square. The courtyards lead you deeper into the old palace complex, where carved windows, bronze details and traditional architectural forms reveal the extraordinary skill of the people who built them.',
+          'And then there are places such as Sundari Chowk and Tusha Hiti, where water, architecture and craftsmanship come together. The remarkable thing is not simply that these structures survived. It is that their ideas still belong to the city.',
+        ],
+      },
+      {
+        heading: 'Where Hinduism and Buddhism Meet',
+        paragraphs: [
+          'Perhaps nowhere is Patan’s character clearer than in its religious architecture. You do not have to travel far to move between Hindu temples and Buddhist monasteries. A few steps can take you from one tradition into another.',
+          'The Golden Temple, or Hiranya Varna Mahavihar, leads you into one of Patan’s historic Buddhist courtyards. Elsewhere, temples and bahals continue to exist within the same urban fabric.',
+          'This is not simply a story of two religions existing side by side. For centuries, the traditions have influenced one another, shared artistic traditions and become part of the same community life. Patan teaches you that heritage does not always have neat boundaries. Sometimes, it grows through exchange.',
+        ],
+      },
+      {
+        heading: 'Leave the Main Square: Shrines & Ancient Water',
+        paragraphs: [
+          'This is where I would encourage anyone visiting Patan to do something simple: Leave the main square.',
+          'You may find Mahaboudha, an extraordinary terracotta Buddhist monument covered with countless Buddha images. You may discover Rudra Varna Mahavihar, with its remarkable collection of religious art. You may come across an old bahal where people are still gathering, a small shrine tucked between houses, or a traditional water spout that once formed part of the city’s sophisticated water system.',
+          'These are the moments when Patan becomes interesting, because the city does not always announce its treasures. You have to look for them.',
+          'Patan’s old water systems reveal another side of its intelligence. Places such as Manga Hiti and Kumbheshwar remind us that these cities were not built only around temples and palaces. They were designed around life. Water had to reach communities. People needed gathering places. Religious spaces, homes, courtyards, markets and public infrastructure had to function together. The old city was not a collection of beautiful buildings. It was an urban system.',
+        ],
+      },
+      {
+        heading: 'The Real Museum Is the Workshop',
+        paragraphs: [
+          'Eventually, you begin to understand something: Patan’s greatest museum may not be a museum at all. It may be the workshop of an artisan.',
+          'A piece of metal slowly becomes a deity. A block of wood becomes a window. Clay becomes an architectural detail. A traditional technique passes quietly from one generation to another. The city’s heritage survives because someone still knows how to make it.',
+          'Kathmandu tells you about a city shaped by power, trade and constant change. Bhaktapur invites you into a city that seems determined to remember. Patan introduces you to the people who know how to create.',
+          'And perhaps that is the best way to explore Patan—not by rushing from one monument to another, but by slowing down enough to notice the hands, sounds, courtyards and traditions that continue to give the city its identity. Patan is not simply a city where ancient things remain. It is a city where ancient knowledge still has work to do.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'pokhara-laid-back-city',
+    chapter: 'Chapter 04',
+    title: 'Pokhara: The Laid-Back City That Makes You Want to Stay',
+    nepaliTitle: 'पोखरा उपत्यका',
+    tagline: 'Phewa Lake Reflections • Tal Barahi Temple • Beyond Lakeside to Living Roots',
+    location: 'Pokhara Valley, Phewa Lake & Old Bazaar',
+    duration: '1–3 Days (Unhurried)',
+    groupSize: 'Private / 1–6 Travelers',
+    image: '/explore-with-sakar/images/mountains/mountain-ridge.jpg',
+    imageAlt: 'Morning mist and wooden boats on Phewa Lake reflecting Annapurna peaks in Pokhara',
+    promise:
+      'Some places make you want to see everything. Pokhara makes you want to stay. It teaches you to stop rushing and embrace true laid-back peace.',
+    experience:
+      'Photographs cannot really explain Pokhara, because it is not only about what you see—it is about how the place makes you feel. The morning light on the lake, the sound of paddles touching the water, a distant temple bell, Machhapuchhre rising behind the mist. Here, nature and spirituality become one landscape. Leaving Lakeside reveals the older city, shaped by trade routes and the living traditions of Gurung, Magar, and Thakali communities.',
+    keyQuote: {
+      quote:
+        'Photographs cannot really explain Pokhara. Because Pokhara is not only about what you see. It is about how the place makes you feel.',
+      attribution: 'Sakar, on the Cadence of Pokhara',
+    },
+    highlights: [
+      'Gliding across Phewa Lake in a wooden boat at dawn before the morning bustle awakens',
+      'Watching the reflection of Machhapuchhre (Fishtail) touch the clear waters',
+      'Visiting island shrine Tal Barahi Temple where landscape and worship merge in stillness',
+      'Walking through Pokhara’s historic trade quarters and indigenous Gurung, Magar, and Thakali neighbourhoods',
+    ],
+    ctaSubject: 'Pokhara: The Laid-Back City Exploration',
+    storySections: [
+      {
+        heading: 'Some Places Make You Want to Stay',
+        paragraphs: [
+          'Some places make you want to see everything. Pokhara makes you want to stay. I think that is the first thing you should know about Pokhara.',
+          'You may arrive thinking you are here to see the Himalayas. You may have seen the photographs already of Phewa Lake, a wooden boat, Machhapuchhre rising behind the water. But photographs cannot really explain Pokhara. Because Pokhara is not only about what you see. It is about how the place makes you feel.',
+          'The morning light on the lake. The sound of paddles touching the water. A distant temple bell. The mountains appear between buildings. A small café opened its doors. The smell of rain on the hills. And suddenly, without realizing it, you stop rushing. Pokhara teaches you to slow down. Gives you that laid back vibes.',
+        ],
+      },
+      {
+        heading: 'Start With the Lake: Nature & Spirituality',
+        paragraphs: [
+          'I would not begin by taking you from one attraction to another. I would begin at Phewa Lake.',
+          'Early in the morning, before Lakeside becomes busy, the lake has a completely different personality. Take a boat. Don’t rush to the other side. Just sit.',
+          'Watch the hills reflected in the water. Look towards the mountains. If the sky is clear, Machhapuchhre appears almost impossibly close. And somewhere in the middle of the lake is Tal Barahi Temple, connecting the landscape with the spiritual life of the city.',
+          'This is one of the things I love about Pokhara: Nature and spirituality don’t feel separated here. They are part of the same landscape.',
+        ],
+      },
+      {
+        heading: 'Then Let Me Show You Another Pokhara',
+        paragraphs: [
+          'Most visitors stay around Lakeside. And I understand why. But if you want to know Pokhara, I would ask you to leave it.',
+          'Go towards the older parts of the city. Walk through local neighbourhoods. Find the places where tourism becomes less visible and everyday life becomes more visible.',
+          'Pokhara has been shaped by movement for generations. It was historically connected to trade routes between India and Tibet, and the wider area carries the traditions of communities including Gurung, Magar and Thakali people.',
+          'This is the Pokhara I want you to notice. Not just the hotels. Not just the adventure activities. The people who make the place what it is.',
+        ],
+      },
+    ],
   },
 ];
 
@@ -153,8 +328,8 @@ export default function BeyondTheMapPage() {
         badge="Pillar 01 • Guided Exploration"
         nepaliTitle="नक्साभन्दा परको यात्रा"
         title="Go Beyond the Map"
-        subtitle="Step past the grand facades and crowded tourist corridors into the living courtyards, medieval stone mysteries, master artisan guilds, and sacred geometry of the Kathmandu Valley."
-        backgroundImage="/images/beyond-the-map/sacred-geometry.jpg"
+        subtitle="Step past the tourist facades and crowded souvenir corridors. Journey through the living courtyards, ancient Silk Road trade alleys, master artisan workshops, and calm waters of Kathmandu, Bhaktapur, Patan, and Pokhara."
+        backgroundImage="/images/beyond-the-map/living-courtyards.jpg"
         breadcrumbs={[
           { label: 'Experiences', href: '/experiences' },
           { label: 'Go Beyond the Map' },
@@ -176,11 +351,11 @@ export default function BeyondTheMapPage() {
               </h2>
 
               <p className="text-base sm:text-lg text-himalaya-700 font-light leading-relaxed">
-                Most visitors see Nepal through the hurried frame of a tour bus window or the crowded ticket gates of main squares. <strong className="font-semibold text-himalaya-900">&ldquo;Go Beyond the Map&rdquo;</strong> is our personal pledge to walk past the superficial facades into the real, beating pulse of our homeland.
+                Most visitors see Nepal through the hurried frame of a tour bus window or the crowded ticket gates of main monuments. <strong className="font-semibold text-himalaya-900">&ldquo;Go Beyond the Map&rdquo;</strong> is our personal pledge to walk past the superficial facades into the real, beating pulse of our homeland.
               </p>
 
               <p className="text-sm sm:text-base text-himalaya-600 font-light leading-relaxed">
-                Guided by Sakar, you enter quiet residential bahals where life has continued uninterrupted for centuries, sit beside master artisans in private ateliers, discover subterranean water hitis holding medieval royal secrets, and decode the sacred geometry that transformed this whole valley into a living cosmological mandala.
+                Guided by Sakar, you enter quiet residential bahals where community life has continued uninterrupted for centuries, sit beside master artisans in private ateliers, discover ancient water conduits holding medieval secrets, and slow down on peaceful Himalayan lake shores where nature and spirituality live as one.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-parchment-200">
@@ -248,40 +423,69 @@ export default function BeyondTheMapPage() {
                 <div
                   key={journey.id}
                   id={journey.id}
-                  className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-parchment-300 shadow-sm hover:shadow-floating transition-shadow"
+                  className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-parchment-300 shadow-sm hover:shadow-floating transition-shadow"
                 >
                   {/* Photo Column */}
-                  <div className={`lg:col-span-6 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <div className="relative rounded-2xl overflow-hidden aspect-[16/10] sm:aspect-[4/3] bg-himalaya-900 border border-parchment-200 shadow-warm group">
-                      <Image
-                        src={journey.image}
-                        alt={journey.imageAlt}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 600px"
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/60 via-transparent to-transparent opacity-60" />
-                      <div className="absolute top-4 left-4">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-himalaya-950/80 backdrop-blur-sm text-parchment-100 text-[11px] font-bold tracking-wider uppercase">
-                          {journey.chapter}
-                        </span>
+                  <div className={`lg:col-span-5 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+                    <div className="sticky top-24 space-y-6">
+                      <div className="relative rounded-2xl overflow-hidden aspect-[16/10] sm:aspect-[4/3] bg-himalaya-900 border border-parchment-200 shadow-warm group">
+                        <Image
+                          src={journey.image}
+                          alt={journey.imageAlt}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 500px"
+                          className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/60 via-transparent to-transparent opacity-60" />
+                        <div className="absolute top-4 left-4">
+                          <span className="inline-flex items-center px-3 py-1 rounded-full bg-himalaya-950/80 backdrop-blur-sm text-parchment-100 text-[11px] font-bold tracking-wider uppercase">
+                            {journey.chapter}
+                          </span>
+                        </div>
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <p className="text-xs text-parchment-200 font-mono flex items-center gap-1.5 drop-shadow">
+                            <MapPin className="w-3.5 h-3.5 text-terracotta shrink-0" />
+                            <span>{journey.location}</span>
+                          </p>
+                        </div>
                       </div>
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <p className="text-xs text-parchment-200 font-mono flex items-center gap-1.5 drop-shadow">
-                          <MapPin className="w-3.5 h-3.5 text-terracotta shrink-0" />
-                          <span>{journey.location}</span>
+
+                      {/* Pull Quote Card */}
+                      <div className="p-5 rounded-2xl bg-parchment-100 border border-parchment-300 relative">
+                        <Quote className="w-6 h-6 text-terracotta/20 absolute top-4 right-4" />
+                        <p className="font-editorial-serif italic text-sm text-himalaya-900 leading-relaxed">
+                          &ldquo;{journey.keyQuote.quote}&rdquo;
                         </p>
+                        <p className="text-[11px] font-mono font-semibold text-terracotta mt-2 uppercase tracking-wider">
+                          — {journey.keyQuote.attribution}
+                        </p>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                        <Link
+                          href={`/contact?subject=${encodeURIComponent(journey.ctaSubject)}`}
+                          className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-terracotta hover:bg-terracotta-light text-white text-xs font-bold uppercase tracking-wider shadow-warm transition-all text-center flex-1"
+                        >
+                          <span>Inquire About Journey</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
                       </div>
                     </div>
                   </div>
 
                   {/* Content Column */}
-                  <div className={`lg:col-span-6 space-y-6 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
+                  <div className={`lg:col-span-7 space-y-6 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
                     <div className="space-y-2">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="text-xs font-mono font-semibold text-terracotta uppercase tracking-wider">
                           {journey.tagline}
                         </span>
+                        {journey.nepaliTitle && (
+                          <span className="text-xs font-serif text-himalaya-500">
+                            • {journey.nepaliTitle}
+                          </span>
+                        )}
                       </div>
                       <h3 className="font-editorial-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-himalaya-950 leading-tight">
                         {journey.title}
@@ -302,7 +506,7 @@ export default function BeyondTheMapPage() {
                     {/* The Experience Description */}
                     <div className="space-y-2">
                       <h4 className="text-xs font-bold uppercase tracking-wider text-himalaya-700">
-                        The Experience
+                        The Experience Overview
                       </h4>
                       <p className="text-sm sm:text-base text-himalaya-700 font-light leading-relaxed">
                         {journey.experience}
@@ -326,23 +530,37 @@ export default function BeyondTheMapPage() {
                       </div>
                     </div>
 
-                    {/* Action Bar */}
-                    <div className="pt-4 flex flex-wrap items-center gap-3">
-                      <Link
-                        href={`/contact?subject=${encodeURIComponent(journey.ctaSubject)}`}
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-terracotta hover:bg-terracotta-light text-white text-xs font-bold uppercase tracking-wider shadow-warm transition-all"
-                      >
-                        <span>Inquire About This Tour</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
+                    {/* Expandable Field Essay Reader */}
+                    <div className="pt-4 border-t border-parchment-200">
+                      <details className="group rounded-2xl bg-parchment-50 border border-parchment-200/80 overflow-hidden transition-all duration-300 open:shadow-sm">
+                        <summary className="cursor-pointer flex items-center justify-between p-4 sm:p-5 text-xs font-bold uppercase tracking-wider text-himalaya-900 hover:text-terracotta transition-colors select-none">
+                          <div className="flex items-center gap-2.5">
+                            <BookOpen className="w-4 h-4 text-terracotta" />
+                            <span>Read Sakar&apos;s Full Field Story ({journey.storySections.length} Chapters)</span>
+                          </div>
+                          <ChevronDown className="w-4 h-4 text-himalaya-500 group-open:rotate-180 transition-transform duration-200" />
+                        </summary>
 
-                      <Link
-                        href={`/experiences/${journey.slug}`}
-                        className="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-parchment-200 hover:bg-parchment-300 text-himalaya-900 text-xs font-semibold uppercase tracking-wider transition-colors"
-                      >
-                        <Eye className="w-3.5 h-3.5 text-himalaya-700" />
-                        <span>View Itinerary Details</span>
-                      </Link>
+                        <div className="p-5 sm:p-7 pt-2 space-y-8 border-t border-parchment-200/60 bg-white/60">
+                          {journey.storySections.map((sec, sIdx) => (
+                            <div key={sIdx} className="space-y-3">
+                              <h5 className="font-editorial-serif text-lg sm:text-xl font-bold text-himalaya-950 border-b border-parchment-200 pb-1.5">
+                                {sec.heading}
+                              </h5>
+                              <div className="space-y-3">
+                                {sec.paragraphs.map((p, pIdx) => (
+                                  <p
+                                    key={pIdx}
+                                    className="text-sm sm:text-base text-himalaya-700 font-light leading-relaxed"
+                                  >
+                                    {p}
+                                  </p>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </details>
                     </div>
                   </div>
                 </div>
@@ -406,7 +624,7 @@ export default function BeyondTheMapPage() {
       {/* 5. Comprehensive CTA Section */}
       <CTASection
         title="Ready to Step Beyond the Map?"
-        subtitle="Whether you have an afternoon in Kathmandu or wish to spend a week decoding medieval kingdoms and master ateliers, we will tailor the journey completely around your pace and curiosity."
+        subtitle="Whether you have an afternoon in Kathmandu or wish to spend a week decoding medieval kingdoms, living workshops, and peaceful lakes, we will tailor the journey completely around your pace and curiosity."
         primaryButtonText="Design Your Beyond the Map Journey"
         primaryButtonHref="/contact?subject=Go%20Beyond%20the%20Map%20Custom%20Journey"
       />
