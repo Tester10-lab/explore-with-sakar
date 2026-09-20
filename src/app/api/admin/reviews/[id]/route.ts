@@ -10,7 +10,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     }
 
     const body = await req.json();
-    const updated = updateReview(params.id, body);
+    const updated = await updateReview(params.id, body);
 
     if (!updated) {
       return NextResponse.json({ error: 'Review not found' }, { status: 404 });
@@ -18,6 +18,9 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
     return NextResponse.json({ success: true, review: updated });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Update review error:', error);
     return NextResponse.json({ error: error?.message || 'Failed to update review' }, { status: 500 });
   }
@@ -30,13 +33,16 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const success = deleteReview(params.id);
+    const success = await deleteReview(params.id);
     if (!success) {
       return NextResponse.json({ error: 'Review not found' }, { status: 404 });
     }
 
     return NextResponse.json({ success: true, message: 'Review deleted successfully' });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Delete review error:', error);
     return NextResponse.json({ error: error?.message || 'Failed to delete review' }, { status: 500 });
   }

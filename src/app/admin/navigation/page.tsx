@@ -92,7 +92,8 @@ export default function AdminNavigationPage() {
         addToast('success', 'Navigation menu updated live!');
         fetchNavigation();
       } else {
-        addToast('error', 'Failed to save navigation');
+        const errorData = await res.json().catch(() => ({}));
+        addToast('error', errorData.error || 'Failed to save navigation');
       }
     } catch {
       addToast('error', 'Error saving navigation');

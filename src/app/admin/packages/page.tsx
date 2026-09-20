@@ -196,7 +196,10 @@ export default function AdminPackagesPage() {
         method: 'DELETE',
       });
 
-      if (!res.ok) throw new Error('Failed to delete package');
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to delete package');
+      }
 
       showToast('success', `Deleted "${deleteTarget.name}"`);
       setDeleteTarget(null);
@@ -217,14 +220,12 @@ export default function AdminPackagesPage() {
         body: JSON.stringify({ status: newStatus }),
       });
 
-      if (!res.ok) throw new Error('Failed to toggle status');
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to toggle status');
+      }
 
-      showToast(
-        'success',
-        newStatus === 'published'
-          ? `"${pkg.name}" is now published on the public site`
-          : `"${pkg.name}" moved to drafts`
-      );
+      showToast('success', `Package ${newStatus === 'published' ? 'published' : 'moved to drafts'}`);
       fetchPackages();
     } catch (err: any) {
       showToast('error', err?.message || 'Error updating status');

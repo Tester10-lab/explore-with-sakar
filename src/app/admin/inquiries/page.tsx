@@ -88,7 +88,8 @@ export default function AdminInquiriesPage() {
         }
         addToast('success', `Marked inquiry as ${newStatus}`);
       } else {
-        addToast('error', 'Failed to update status');
+        const errorData = await res.json().catch(() => ({}));
+        addToast('error', errorData.error || 'Failed to update status');
       }
     } catch {
       addToast('error', 'Network error updating inquiry');
@@ -110,7 +111,8 @@ export default function AdminInquiriesPage() {
         }
         addToast('success', 'Inquiry deleted successfully');
       } else {
-        addToast('error', 'Failed to delete inquiry');
+        const errorData = await res.json().catch(() => ({}));
+        addToast('error', errorData.error || 'Failed to delete inquiry');
       }
     } catch {
       addToast('error', 'Network error deleting inquiry');

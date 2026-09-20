@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const pages = getLiveAllPages();
+    const pages = await getLiveAllPages();
     return NextResponse.json({ success: true, pages });
   } catch (error: any) {
     return NextResponse.json({ error: 'Failed to fetch pages' }, { status: 500 });
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     }
 
     const cleanSlug = slug.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-');
-    const page = createPage({
+    const page = await createPage({
       slug: cleanSlug,
       name: name.trim(),
       url: url || `/${cleanSlug}`,
@@ -46,6 +46,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, page }, { status: 201 });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to create page' }, { status: 500 });
   }
 }

@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const reviews = getAllReviews(false);
+  const reviews = await getAllReviews(false);
   return NextResponse.json({ success: true, reviews });
 }
 
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Customer Name and Review Text are required' }, { status: 400 });
     }
 
-    const newReview = createReview({
+    const newReview = await createReview({
       author: body.author.trim(),
       country: body.country || 'International Traveler',
       countryFlag: body.countryFlag || '🌍',
@@ -41,6 +41,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, review: newReview });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Create review error:', error);
     return NextResponse.json({ error: error?.message || 'Failed to create review' }, { status: 500 });
   }

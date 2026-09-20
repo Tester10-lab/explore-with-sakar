@@ -73,8 +73,8 @@ const CORE_PILLARS = [
   },
 ];
 
-export default function ExperienceLandingPage() {
-  const experiences = getLiveExperiences(false);
+export default async function ExperienceLandingPage() {
+  const experiences = await getLiveExperiences(false);
 
   return (
     <div className="min-h-screen bg-parchment-100">

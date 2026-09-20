@@ -50,6 +50,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, photo: newPhoto });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Create photo error:', error);
     return NextResponse.json({ error: error?.message || 'Failed to create photo' }, { status: 500 });
   }

@@ -77,7 +77,8 @@ export default function AdminSettingsPage() {
         body: JSON.stringify(settings),
       });
 
-      if (!res.ok) throw new Error('Failed to update settings');
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'Failed to update settings');
 
       showToast(
         'success',

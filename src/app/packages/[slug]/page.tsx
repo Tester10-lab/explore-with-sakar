@@ -23,8 +23,8 @@ interface PackagePageProps {
   };
 }
 
-export function generateMetadata({ params }: PackagePageProps): Metadata {
-  const pkg = getLivePackageBySlug(params.slug);
+export async function generateMetadata({ params }: PackagePageProps): Promise<Metadata> {
+  const pkg = await getLivePackageBySlug(params.slug);
 
   if (!pkg) {
     return {
@@ -38,15 +38,15 @@ export function generateMetadata({ params }: PackagePageProps): Metadata {
   };
 }
 
-export function generateStaticParams() {
-  const packages = getLivePackages(false);
+export async function generateStaticParams() {
+  const packages = await getLivePackages(false);
   return packages.map((pkg) => ({
     slug: pkg.slug,
   }));
 }
 
-export default function PackageDetailPage({ params }: PackagePageProps) {
-  const pkg = getLivePackageBySlug(params.slug);
+export default async function PackageDetailPage({ params }: PackagePageProps) {
+  const pkg = await getLivePackageBySlug(params.slug);
 
   if (!pkg) {
     notFound();

@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description: 'Experience Nepal’s living spiritual calendar: Indra Jatra, Tihar, Mani Rimdu, Solstice retreats, and Shivaratri with authentic local hosting by Sakar.',
 };
 
-export default function EventsPage() {
-  const events = getLiveEvents(false);
+export default async function EventsPage() {
+  const events = await getLiveEvents(false);
 
   return <EventsClient initialEvents={events} />;
 }

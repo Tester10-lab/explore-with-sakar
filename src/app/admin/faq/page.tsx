@@ -125,7 +125,8 @@ export default function AdminFaqPage() {
         addToast('success', 'FAQ item deleted');
         fetchFaq();
       } else {
-        addToast('error', 'Failed to delete item');
+        const errorData = await res.json().catch(() => ({}));
+        addToast('error', errorData.error || 'Failed to delete item');
       }
     } catch {
       addToast('error', 'Error deleting item');
@@ -142,6 +143,9 @@ export default function AdminFaqPage() {
       if (res.ok) {
         addToast('success', `FAQ ${!item.isVisible ? 'published' : 'hidden'}`);
         fetchFaq();
+      } else {
+        const errorData = await res.json().catch(() => ({}));
+        addToast('error', errorData.error || 'Error updating visibility');
       }
     } catch {
       addToast('error', 'Error updating visibility');
@@ -160,7 +164,7 @@ export default function AdminFaqPage() {
     setFaqItems(reordered);
 
     try {
-      await fetch('/api/admin/faq', {
+      const res = await fetch('/api/admin/faq', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -168,9 +172,13 @@ export default function AdminFaqPage() {
           ids: reordered.map((f) => f.id),
         }),
       });
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to save order');
+      }
       addToast('success', 'FAQ order saved');
-    } catch {
-      addToast('error', 'Failed to save order');
+    } catch (err: any) {
+      addToast('error', err?.message || 'Failed to save order');
       fetchFaq();
     }
   };

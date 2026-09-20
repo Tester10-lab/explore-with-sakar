@@ -28,6 +28,9 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
     return NextResponse.json({ success: true, photo: updated });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Update photo error:', error);
     return NextResponse.json({ error: error?.message || 'Failed to update photo' }, { status: 500 });
   }
@@ -54,6 +57,9 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 
     return NextResponse.json({ success: true, message: 'Photo deleted successfully' });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Delete photo error:', error);
     return NextResponse.json({ error: error?.message || 'Failed to delete photo' }, { status: 500 });
   }

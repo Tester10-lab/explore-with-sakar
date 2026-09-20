@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   description: 'Explore curated regions in Nepal: Kathmandu Valley, Pokhara & Annapurna, Mustang & Muktinath, Langtang, Chitwan Lowlands, and Bandipur.',
 };
 
-export default function DestinationsPage() {
-  const destinations = getLiveDestinations(false);
+export default async function DestinationsPage() {
+  const destinations = await getLiveDestinations(false);
   return (
     <div className="min-h-screen bg-parchment-100">
       {/* 1. Page Hero */}

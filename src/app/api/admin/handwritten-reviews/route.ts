@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const pages = getAllHandwrittenReviews(true);
+  const pages = await getAllHandwrittenReviews(true);
   return NextResponse.json({ success: true, pages });
 }
 
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const newPage = createHandwrittenReview({
+    const newPage = await createHandwrittenReview({
       guestName: body.guestName.trim(),
       country: body.country ? body.country.trim() : '',
       date: body.date ? body.date.trim() : new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
@@ -41,6 +41,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, page: newPage });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Create handwritten review error:', error);
     return NextResponse.json(
       { error: error?.message || 'Failed to upload handwritten review' },

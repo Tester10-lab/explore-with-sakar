@@ -13,7 +13,7 @@ export async function GET(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const destination = getDestinationById(params.id);
+  const destination = await getDestinationById(params.id);
   if (!destination) {
     return NextResponse.json({ error: 'Destination not found' }, { status: 404 });
   }
@@ -32,7 +32,7 @@ export async function PUT(
 
   try {
     const body = await req.json();
-    const updated = updateDestination(params.id, body);
+    const updated = await updateDestination(params.id, body);
 
     if (!updated) {
       return NextResponse.json({ error: 'Destination not found' }, { status: 404 });
@@ -40,6 +40,9 @@ export async function PUT(
 
     return NextResponse.json({ success: true, destination: updated });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to update destination' }, { status: 500 });
   }
 }
@@ -54,12 +57,15 @@ export async function DELETE(
   }
 
   try {
-    const success = deleteDestination(params.id);
+    const success = await deleteDestination(params.id);
     if (!success) {
       return NextResponse.json({ error: 'Destination not found' }, { status: 404 });
     }
     return NextResponse.json({ success: true });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to delete destination' }, { status: 500 });
   }
 }

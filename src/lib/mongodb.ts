@@ -1,44 +1,91 @@
 import { MongoClient, Db } from 'mongodb';
 import dns from 'dns';
 
-// Configure DNS resolution fallback for SRV lookups if needed
-if (typeof dns.setServers === 'function') {
-  try {
-    dns.setServers(['8.8.8.8', '1.1.1.1']);
-  } catch {
-    // In restricted runtimes, ignore
+export class MongoUnavailableError extends Error {
+  constructor(message = 'Database unavailable.') {
+    super(message);
+    this.name = 'MongoUnavailableError';
   }
 }
 
-const DEFAULT_URI =
-  'mongodb+srv://explorewithsakar_db_user:SakarTravel2026@cluster0.1dq7qw7.mongodb.net/explore_with_sakar?retryWrites=true&w=majority&appName=Cluster0';
-
-const uri = process.env.MONGODB_URI || DEFAULT_URI;
-
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
-
-declare global {
-  var _mongoClientPromise: Promise<MongoClient> | undefined;
+// Apply custom DNS servers only when MONGODB_DNS_SERVERS is explicitly set
+if (process.env.MONGODB_DNS_SERVERS && typeof dns.setServers === 'function') {
+  try {
+    const servers = process.env.MONGODB_DNS_SERVERS.split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+    if (servers.length > 0) {
+      dns.setServers(servers);
+    }
+  } catch (err) {
+    console.warn('[mongodb] Failed to set custom DNS servers:', err);
+  }
 }
 
-if (!global._mongoClientPromise) {
-  client = new MongoClient(uri, {
+let clientPromise: Promise<MongoClient> | null = null;
+let lastFailureTime = 0;
+const FAILURE_COOLDOWN_MS = 10000; // 10s cooldown before retrying connection
+let hasWarnedMissingUriDev = false;
+
+export function isMongoCoolingDown(): boolean {
+  return Date.now() - lastFailureTime < FAILURE_COOLDOWN_MS;
+}
+
+export function getMongoClient(): Promise<MongoClient> {
+  const uri = process.env.MONGODB_URI;
+  const isProduction = process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL);
+
+  if (!uri) {
+    if (isProduction) {
+      throw new Error('MONGODB_URI environment variable is missing.');
+    }
+    if (!hasWarnedMissingUriDev) {
+      console.warn('[mongodb] MONGODB_URI is not set in development. Using file/seed mode.');
+      hasWarnedMissingUriDev = true;
+    }
+    throw new MongoUnavailableError('MONGODB_URI is not set.');
+  }
+
+  const now = Date.now();
+  if (lastFailureTime > 0 && now - lastFailureTime < FAILURE_COOLDOWN_MS) {
+    throw new MongoUnavailableError('MongoDB connection in cooldown period after recent failure.');
+  }
+
+  if (clientPromise) {
+    return clientPromise;
+  }
+
+  const client = new MongoClient(uri, {
     maxPoolSize: 10,
     serverSelectionTimeoutMS: 5000,
   });
-  global._mongoClientPromise = client.connect();
+
+  clientPromise = client
+    .connect()
+    .then((c) => {
+      lastFailureTime = 0;
+      return c;
+    })
+    .catch((err) => {
+      lastFailureTime = Date.now();
+      clientPromise = null;
+      throw new MongoUnavailableError(`MongoDB connection error: ${err.message || err}`);
+    });
+
+  return clientPromise;
 }
-clientPromise = global._mongoClientPromise;
 
-export default clientPromise;
+export default getMongoClient;
 
-export async function getDb(): Promise<Db | null> {
+export async function getDb(): Promise<Db> {
   try {
-    const c = await clientPromise;
-    return c.db('explore_with_sakar');
-  } catch (err) {
-    console.error('MongoDB connection error in getDb():', err);
-    return null;
+    const client = await getMongoClient();
+    const dbName = process.env.MONGODB_DB || 'explore_with_sakar';
+    return client.db(dbName);
+  } catch (err: any) {
+    if (err instanceof MongoUnavailableError) {
+      throw err;
+    }
+    throw new MongoUnavailableError(err.message || 'Database unavailable');
   }
 }

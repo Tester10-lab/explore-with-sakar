@@ -16,9 +16,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'serviceIds must be an array' }, { status: 400 });
     }
 
-    reorderServices(body.serviceIds);
+    await reorderServices(body.serviceIds);
     return NextResponse.json({ success: true });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to reorder services' }, { status: 500 });
   }
 }

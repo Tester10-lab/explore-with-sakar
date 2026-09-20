@@ -19,8 +19,8 @@ import { HOMESTAYS } from '@/data/homestays';
 import { getLiveExperiences } from '@/lib/cms';
 import ExperienceCard from '@/components/common/ExperienceCard';
 
-export default function FeelCloserExperience() {
-  const allExperiences = getLiveExperiences(false);
+export default async function FeelCloserExperience() {
+  const allExperiences = await getLiveExperiences(false);
   const homestayItineraries = allExperiences.filter(
     (e) =>
       e.category === 'homestays' ||

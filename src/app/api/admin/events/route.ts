@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const events = getAllEvents(true);
+    const events = await getAllEvents(true);
     return NextResponse.json({ success: true, events });
   } catch (error: any) {
     return NextResponse.json({ error: 'Failed to fetch events' }, { status: 500 });
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
     // Handle reorder
     if (body.action === 'reorder' && Array.isArray(body.ids)) {
-      reorderEvents(body.ids);
+      await reorderEvents(body.ids);
       return NextResponse.json({ success: true });
     }
 
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Title is required' }, { status: 400 });
     }
 
-    const event = createEvent({
+    const event = await createEvent({
       title: title.trim(),
       nepaliName: nepaliName?.trim() || '',
       category: category || 'festival',
@@ -55,6 +55,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, event }, { status: 201 });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to create event' }, { status: 500 });
   }
 }

@@ -13,7 +13,7 @@ export async function GET(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const inquiry = getInquiryById(params.id);
+  const inquiry = await getInquiryById(params.id);
   if (!inquiry) {
     return NextResponse.json({ error: 'Inquiry not found' }, { status: 404 });
   }
@@ -32,7 +32,7 @@ export async function PATCH(
 
   try {
     const body = await req.json();
-    const updated = updateInquiry(params.id, body);
+    const updated = await updateInquiry(params.id, body);
 
     if (!updated) {
       return NextResponse.json({ error: 'Inquiry not found' }, { status: 404 });
@@ -40,6 +40,9 @@ export async function PATCH(
 
     return NextResponse.json({ success: true, inquiry: updated });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to update inquiry' }, { status: 500 });
   }
 }
@@ -54,12 +57,15 @@ export async function DELETE(
   }
 
   try {
-    const success = deleteInquiry(params.id);
+    const success = await deleteInquiry(params.id);
     if (!success) {
       return NextResponse.json({ error: 'Inquiry not found' }, { status: 404 });
     }
     return NextResponse.json({ success: true });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to delete inquiry' }, { status: 500 });
   }
 }

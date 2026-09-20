@@ -6,7 +6,7 @@ const nextConfig = {
   },
   experimental: {
     outputFileTracingIncludes: {
-      '/api/**/*': ['./data/**/*'],
+      '/**/*': ['./data/**/*'],
     },
   },
   async redirects() {

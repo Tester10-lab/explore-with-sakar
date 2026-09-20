@@ -12,12 +12,15 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
   try {
     const body = await req.json();
-    const updated = updatePackage(params.id, body);
+    const updated = await updatePackage(params.id, body);
     if (!updated) {
       return NextResponse.json({ error: 'Package not found' }, { status: 404 });
     }
     return NextResponse.json({ success: true, package: updated });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to update package' }, { status: 500 });
   }
 }
@@ -29,12 +32,15 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
   }
 
   try {
-    const deleted = deletePackage(params.id);
+    const deleted = await deletePackage(params.id);
     if (!deleted) {
       return NextResponse.json({ error: 'Package not found' }, { status: 404 });
     }
     return NextResponse.json({ success: true });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to delete package' }, { status: 500 });
   }
 }

@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const packages = getAllPackages(true);
+    const packages = await getAllPackages(true);
     return NextResponse.json({ success: true, packages });
   } catch (error: any) {
     return NextResponse.json({ error: 'Failed to fetch packages' }, { status: 500 });
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Name and slug are required' }, { status: 400 });
     }
 
-    const newPackage = createPackage({
+    const newPackage = await createPackage({
       name: body.name,
       slug: body.slug,
       summary: body.summary || '',
@@ -51,6 +51,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, package: newPackage });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to create package' }, { status: 500 });
   }
 }

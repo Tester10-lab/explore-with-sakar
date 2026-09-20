@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ authenticated: false }, { status: 401 });
   }
 
-  const admin = getAdminUser();
+  const admin = await getAdminUser();
   return NextResponse.json({
     authenticated: true,
     user: {

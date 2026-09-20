@@ -24,8 +24,9 @@ export const metadata: Metadata = {
   description: 'Meet Sakar, Responsible Tour Director in Nepal. Learn about his background in community development, local roots in Kathmandu, and philosophy of slow, meaningful travel.',
 };
 
-export default function AboutPage() {
-  const reviews = getLiveReviews().slice(0, 3);
+export default async function AboutPage() {
+  const allReviews = await getLiveReviews();
+  const reviews = allReviews.slice(0, 3);
   return (
     <div className="min-h-screen bg-parchment-100">
       {/* 1. Page Hero */}

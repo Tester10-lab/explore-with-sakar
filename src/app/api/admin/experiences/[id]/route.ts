@@ -12,12 +12,15 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
   try {
     const body = await req.json();
-    const updated = updateExperience(params.id, body);
+    const updated = await updateExperience(params.id, body);
     if (!updated) {
       return NextResponse.json({ error: 'Experience not found' }, { status: 404 });
     }
     return NextResponse.json({ success: true, experience: updated });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to update experience' }, { status: 500 });
   }
 }
@@ -29,12 +32,15 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
   }
 
   try {
-    const deleted = deleteExperience(params.id);
+    const deleted = await deleteExperience(params.id);
     if (!deleted) {
       return NextResponse.json({ error: 'Experience not found' }, { status: 404 });
     }
     return NextResponse.json({ success: true });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to delete experience' }, { status: 500 });
   }
 }

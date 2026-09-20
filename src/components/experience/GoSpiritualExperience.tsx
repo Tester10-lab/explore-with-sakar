@@ -17,8 +17,8 @@ import CTASection from '@/components/common/CTASection';
 import ExperienceCard from '@/components/common/ExperienceCard';
 import { getLiveExperiences } from '@/lib/cms';
 
-export default function GoSpiritualExperience() {
-  const allExperiences = getLiveExperiences(false);
+export default async function GoSpiritualExperience() {
+  const allExperiences = await getLiveExperiences(false);
   const spiritualItineraries = allExperiences.filter(
     (e) =>
       e.category === 'spiritual' ||

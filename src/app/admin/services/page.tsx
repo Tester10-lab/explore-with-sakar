@@ -137,7 +137,8 @@ export default function AdminServicesPage() {
         setServices((prev) => prev.filter((s) => s.id !== deleteTargetId));
         addToast('success', 'Service deleted successfully');
       } else {
-        addToast('error', 'Failed to delete service');
+        const errorData = await res.json().catch(() => ({}));
+        addToast('error', errorData.error || 'Failed to delete service');
       }
     } catch {
       addToast('error', 'Error deleting service');
@@ -159,14 +160,18 @@ export default function AdminServicesPage() {
 
     try {
       const serviceIds = newServices.map((s) => s.id);
-      await fetch('/api/admin/services/reorder', {
+      const res = await fetch('/api/admin/services/reorder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ serviceIds }),
       });
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to save reordered list');
+      }
       addToast('success', 'Service order updated');
-    } catch {
-      addToast('error', 'Failed to save reordered list');
+    } catch (err: any) {
+      addToast('error', err?.message || 'Failed to save reordered list');
     }
   };
 

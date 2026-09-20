@@ -206,7 +206,8 @@ export default function AdminPageEditor() {
         fetchRevisions();
         setPreviewKey((k) => k + 1);
       } else {
-        addToast('error', 'Failed to save draft');
+        const err = await res.json().catch(() => ({}));
+        addToast('error', err.error || 'Failed to save draft');
       }
     } catch {
       addToast('error', 'Error saving draft');
@@ -235,7 +236,8 @@ export default function AdminPageEditor() {
         fetchRevisions();
         setPreviewKey((k) => k + 1);
       } else {
-        addToast('error', 'Failed to publish page');
+        const err = await res.json().catch(() => ({}));
+        addToast('error', err.error || 'Failed to publish page');
       }
     } catch {
       addToast('error', 'Error publishing page');
@@ -265,7 +267,8 @@ export default function AdminPageEditor() {
         fetchRevisions();
         setPreviewKey((k) => k + 1);
       } else {
-        addToast('error', 'Failed to restore revision');
+        const err = await res.json().catch(() => ({}));
+        addToast('error', err.error || 'Failed to restore revision');
       }
     } catch {
       addToast('error', 'Error restoring revision');

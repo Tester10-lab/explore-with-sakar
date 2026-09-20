@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description: 'Clear, honest answers about Nepal travel: best seasons, visa on arrival, homestay living standards, altitude safety, booking deposits, and responsible tourism.',
 };
 
-export default function FAQPage() {
-  const faqItems = getLiveFaq(false);
+export default async function FAQPage() {
+  const faqItems = await getLiveFaq(false);
 
   return <FAQClient initialFaq={faqItems} />;
 }

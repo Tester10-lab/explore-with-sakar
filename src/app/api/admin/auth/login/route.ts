@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Username and password are required' }, { status: 400 });
     }
 
-    const admin = getAdminUser();
+    const admin = await getAdminUser();
 
     // Check username
     if (username.trim().toLowerCase() !== admin.username.toLowerCase()) {

@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const services = getAllServices(true);
+    const services = await getAllServices(true);
     return NextResponse.json({ success: true, services });
   } catch (error: any) {
     console.error('Fetch services error:', error);
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Title and slug are required' }, { status: 400 });
     }
 
-    const newService = createService({
+    const newService = await createService({
       slug: body.slug,
       title: body.title,
       nepaliTitle: body.nepaliTitle || '',
@@ -50,6 +50,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, service: newService });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Create service error:', error);
     return NextResponse.json({ error: 'Failed to create service' }, { status: 500 });
   }

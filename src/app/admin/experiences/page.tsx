@@ -274,7 +274,10 @@ export default function AdminExperiencesPage() {
         method: 'DELETE',
       });
 
-      if (!res.ok) throw new Error('Failed to delete experience');
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to delete experience');
+      }
 
       showToast('success', `Deleted "${deleteTarget.title}"`);
       setDeleteTarget(null);
@@ -295,7 +298,10 @@ export default function AdminExperiencesPage() {
         body: JSON.stringify({ status: newStatus }),
       });
 
-      if (!res.ok) throw new Error('Failed to toggle status');
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to toggle status');
+      }
 
       showToast(
         'success',

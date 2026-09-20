@@ -105,7 +105,10 @@ export default function AdminReviewsPage() {
         body: JSON.stringify({ isVisible: !review.isVisible }),
       });
 
-      if (!res.ok) throw new Error('Failed to update visibility');
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to update visibility');
+      }
 
       showToast(
         'success',
@@ -163,7 +166,10 @@ export default function AdminReviewsPage() {
         method: 'DELETE',
       });
 
-      if (!res.ok) throw new Error('Failed to delete review');
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to delete review');
+      }
 
       showToast('success', `Review by ${deleteTarget.author} deleted successfully`);
       setDeleteTarget(null);
@@ -276,7 +282,10 @@ export default function AdminReviewsPage() {
         method: 'DELETE',
       });
 
-      if (!res.ok) throw new Error('Failed to delete review page');
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to delete review page');
+      }
 
       showToast('success', `Page #${deletePageTarget.pageNumber} deleted successfully`);
       setDeletePageTarget(null);

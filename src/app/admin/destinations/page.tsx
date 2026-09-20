@@ -129,7 +129,8 @@ export default function AdminDestinationsPage() {
         addToast('success', 'Destination deleted');
         fetchDestinations();
       } else {
-        addToast('error', 'Failed to delete destination');
+        const errorData = await res.json().catch(() => ({}));
+        addToast('error', errorData.error || 'Failed to delete destination');
       }
     } catch {
       addToast('error', 'Error deleting destination');
@@ -146,6 +147,9 @@ export default function AdminDestinationsPage() {
       if (res.ok) {
         addToast('success', `Destination ${!dest.isVisible ? 'published' : 'hidden'}`);
         fetchDestinations();
+      } else {
+        const errorData = await res.json().catch(() => ({}));
+        addToast('error', errorData.error || 'Error updating visibility');
       }
     } catch {
       addToast('error', 'Error updating visibility');
@@ -164,7 +168,7 @@ export default function AdminDestinationsPage() {
     setDestinations(reordered);
 
     try {
-      await fetch('/api/admin/destinations', {
+      const res = await fetch('/api/admin/destinations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -172,9 +176,13 @@ export default function AdminDestinationsPage() {
           ids: reordered.map((d) => d.id),
         }),
       });
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to save order');
+      }
       addToast('success', 'Destinations reordered');
-    } catch {
-      addToast('error', 'Failed to save order');
+    } catch (err: any) {
+      addToast('error', err?.message || 'Failed to save order');
       fetchDestinations();
     }
   };

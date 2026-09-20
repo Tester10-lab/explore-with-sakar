@@ -13,20 +13,17 @@ interface Props {
   params: { slug: string };
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const baseUrl = 'https://explorewithsakar.com';
-  const canonicalUrl = `${baseUrl}/experience/${params.slug}`;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const canonicalUrl = `https://explorewithsakar.com/experience/${params.slug}`;
 
   if (params.slug === 'go-beyond') {
     return {
       title: 'Go Beyond the Map | Explore With Sakar',
-      description:
-        'Living courtyards, medieval stone mysteries, ancient Silk Road trade corridors, and master artisan guilds with Sakar.',
+      description: 'Step beyond the common tourist map. Walk medieval courtyards, meet master artisans, and experience Living Nepal.',
       alternates: { canonical: canonicalUrl },
       openGraph: {
         title: 'Go Beyond the Map | Explore With Sakar',
-        description:
-          'Living courtyards, medieval stone mysteries, and master artisan guilds with Sakar.',
+        description: 'Step beyond the common tourist map. Walk medieval courtyards, meet master artisans, and experience Living Nepal.',
         url: canonicalUrl,
         images: ['/images/beyond-the-map/living-courtyards.jpg'],
       },
@@ -35,30 +32,26 @@ export function generateMetadata({ params }: Props): Metadata {
 
   if (params.slug === 'go-spiritual') {
     return {
-      title: 'Go Spiritual: Himalayan Sound & Mountain Stillness | Explore With Sakar',
-      description:
-        'Tibetan singing bowl sound therapy, dawn monastery chant pujas, and sacred Padmasambhava meditation caves with Sakar.',
+      title: 'Go Spiritual | Explore With Sakar',
+      description: 'Himalayan singing bowls, monastery dawns, sacred stillness, and deep inner renewal in Nepal.',
       alternates: { canonical: canonicalUrl },
       openGraph: {
         title: 'Go Spiritual | Explore With Sakar',
-        description:
-          'Tibetan singing bowl sound therapy, dawn monastery chant pujas, and sacred meditation caves.',
+        description: 'Himalayan singing bowls, monastery dawns, sacred stillness, and deep inner renewal in Nepal.',
         url: canonicalUrl,
-        images: ['/explore-with-sakar/images/spiritual/buddhist-stupa.jpg'],
+        images: ['/images/spiritual/monastery-dawn.jpg'],
       },
     };
   }
 
   if (params.slug === 'feel-closer') {
     return {
-      title: 'Feel Closer: Village Homestays & Living Hearths | Explore With Sakar',
-      description:
-        'Stay under the slate roofs of Gurung and Tamang mountain homes. Share woodfire meals and forge lifelong human bonds with Sakar.',
+      title: 'Feel Closer | Explore With Sakar',
+      description: 'Mountain village homestays, traditional family hearths, and warm human connections in Nepal.',
       alternates: { canonical: canonicalUrl },
       openGraph: {
         title: 'Feel Closer | Explore With Sakar',
-        description:
-          'Stay under the slate roofs of Gurung and Tamang mountain homes and share woodfire meals.',
+        description: 'Mountain village homestays, traditional family hearths, and warm human connections in Nepal.',
         url: canonicalUrl,
         images: ['/explore-with-sakar/images/homestays/village-meal.jpg'],
       },
@@ -67,14 +60,12 @@ export function generateMetadata({ params }: Props): Metadata {
 
   if (params.slug === 'leave-a-mark') {
     return {
-      title: 'Leave a Mark: Strategic Volunteer Tourism | Explore With Sakar',
-      description:
-        'Matching your professional skills with local communities in Nepal that need structural, strategic, and administrative empowerment.',
+      title: 'Leave a Mark | Explore With Sakar',
+      description: 'Strategic volunteering and regenerative travel that empowers local communities in Nepal.',
       alternates: { canonical: canonicalUrl },
       openGraph: {
-        title: 'Leave a Mark: Strategic Volunteer Tourism | Explore With Sakar',
-        description:
-          'Matching your professional skills with local communities in Nepal that need structural, strategic, and administrative empowerment.',
+        title: 'Leave a Mark | Explore With Sakar',
+        description: 'Strategic volunteering and regenerative travel that empowers local communities in Nepal.',
         url: canonicalUrl,
         images: ['/explore-with-sakar/images/trails/river-gorge.jpg'],
       },
@@ -83,14 +74,12 @@ export function generateMetadata({ params }: Props): Metadata {
 
   if (params.slug === 'custom-private-journeys') {
     return {
-      title: 'Custom Private Journeys & Bespoke Planning | Explore With Sakar',
-      description:
-        '100% tailor-made Nepal itineraries for solo travelers, couples, and multi-generational families with Sakar.',
+      title: 'Custom Private Journeys | Explore With Sakar',
+      description: 'Tailored private Himalayan routes designed around your passions, rhythm, and values.',
       alternates: { canonical: canonicalUrl },
       openGraph: {
         title: 'Custom Private Journeys | Explore With Sakar',
-        description:
-          '100% tailor-made Nepal itineraries designed around your dates, pace, and passions.',
+        description: 'Tailored private Himalayan routes designed around your passions, rhythm, and values.',
         url: canonicalUrl,
         images: ['/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'],
       },
@@ -105,7 +94,7 @@ export function generateMetadata({ params }: Props): Metadata {
     };
   }
 
-  const experience = getLiveExperienceBySlug(params.slug);
+  const experience = await getLiveExperienceBySlug(params.slug);
 
   if (!experience) {
     return {
@@ -133,8 +122,8 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export function generateStaticParams() {
-  const experiences = getLiveExperiences(false);
+export async function generateStaticParams() {
+  const experiences = await getLiveExperiences(false);
   const existingSlugs = new Set(experiences.map((exp) => exp.slug));
 
   const coreSlugs = [
@@ -151,7 +140,7 @@ export function generateStaticParams() {
   return Array.from(existingSlugs).map((slug) => ({ slug }));
 }
 
-export default function ExperienceDetailPage({ params }: Props) {
+export default async function ExperienceDetailPage({ params }: Props) {
   const { slug } = params;
 
   if (slug === 'all-curated-experiences') {
@@ -178,13 +167,13 @@ export default function ExperienceDetailPage({ params }: Props) {
     return <CustomJourneysExperience />;
   }
 
-  const experience = getLiveExperienceBySlug(slug);
+  const experience = await getLiveExperienceBySlug(slug);
 
   if (!experience) {
     notFound();
   }
 
-  const allExperiences = getLiveExperiences(false);
+  const allExperiences = await getLiveExperiences(false);
   const relatedExperiences = allExperiences
     .filter((e) => e.slug !== slug && e.slug !== 'all-curated-experiences')
     .slice(0, 3);

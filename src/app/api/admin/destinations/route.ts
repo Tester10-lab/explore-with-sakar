@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const destinations = getAllDestinations(true);
+    const destinations = await getAllDestinations(true);
     return NextResponse.json({ success: true, destinations });
   } catch (error: any) {
     return NextResponse.json({ error: 'Failed to fetch destinations' }, { status: 500 });
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     if (body.action === 'reorder' && Array.isArray(body.ids)) {
-      reorderDestinations(body.ids);
+      await reorderDestinations(body.ids);
       return NextResponse.json({ success: true });
     }
 
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Name and slug are required' }, { status: 400 });
     }
 
-    const destination = createDestination({
+    const destination = await createDestination({
       name: name.trim(),
       slug: slug.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-'),
       nepaliName: nepaliName?.trim() || '',
@@ -51,6 +51,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, destination }, { status: 201 });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to create destination' }, { status: 500 });
   }
 }

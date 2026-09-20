@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 import { NextResponse } from 'next/server';
-import { readStoreAsync, getAllBlogsAsync, getAllPhotosAsync } from '@/lib/db';
+import { getAllBlogs, getAllPhotos } from '@/lib/db';
 import {
   getLivePackages,
   getLiveExperiences,
@@ -18,21 +18,33 @@ import {
 
 export async function GET() {
   try {
-    // Ensure fresh data from MongoDB
-    await readStoreAsync();
-
-    const packages = getLivePackages(false);
-    const experiences = getLiveExperiences(false);
-    const services = getLiveServices(false);
-    const blogs = await getAllBlogsAsync(false);
-    const photos = await getAllPhotosAsync();
-    const reviews = getLiveReviews();
-    const handwrittenReviews = getLiveHandwrittenReviews(false);
-    const settings = getLiveSettings();
-    const events = getLiveEvents(false);
-    const destinations = getLiveDestinations(false);
-    const faq = getLiveFaq(false);
-    const navigation = getLiveNavigation();
+    const [
+      packages,
+      experiences,
+      services,
+      blogs,
+      photos,
+      reviews,
+      handwrittenReviews,
+      settings,
+      events,
+      destinations,
+      faq,
+      navigation,
+    ] = await Promise.all([
+      getLivePackages(false),
+      getLiveExperiences(false),
+      getLiveServices(false),
+      getAllBlogs(false),
+      getAllPhotos(),
+      getLiveReviews(),
+      getLiveHandwrittenReviews(false),
+      getLiveSettings(),
+      getLiveEvents(false),
+      getLiveDestinations(false),
+      getLiveFaq(false),
+      getLiveNavigation(),
+    ]);
 
     return NextResponse.json(
       {
@@ -58,6 +70,12 @@ export async function GET() {
     );
   } catch (error: any) {
     console.error('Public content fetch error:', error);
-    return NextResponse.json({ error: 'Failed to fetch content' }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: error.message || 'Failed to fetch public content',
+      },
+      { status: 500 }
+    );
   }
 }

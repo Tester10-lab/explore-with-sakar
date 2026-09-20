@@ -35,6 +35,9 @@ export async function PUT(req: NextRequest) {
 
     return NextResponse.json({ success: true, settings: updated });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Update settings error:', error);
     return NextResponse.json({ error: error?.message || 'Failed to update settings' }, { status: 500 });
   }

@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const inquiries = getAllInquiries();
+    const inquiries = await getAllInquiries();
     return NextResponse.json({ success: true, inquiries });
   } catch (error: any) {
     console.error('Fetch inquiries error:', error);

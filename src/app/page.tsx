@@ -32,7 +32,7 @@ export default async function HomePage() {
   const settings = await getLiveSettingsAsync();
   const stats = settings.stats || [];
 
-  const featuredExperiences = getTopFeaturedExperiences(3);
+  const featuredExperiences = await getTopFeaturedExperiences(3);
 
   const blogs = await getLiveBlogsAsync(false);
   const latestBlogs = blogs.slice(0, 3);

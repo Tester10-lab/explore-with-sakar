@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description: 'Explore our signature curated travel packages in Nepal with transparent inclusions, accommodation standards, and bespoke custom pricing options.',
 };
 
-export default function PackagesPage() {
-  const packages = getLivePackages(false);
+export default async function PackagesPage() {
+  const packages = await getLivePackages(false);
 
   return <PackagesClient initialPackages={packages} />;
 }

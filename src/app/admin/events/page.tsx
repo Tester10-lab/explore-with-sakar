@@ -140,7 +140,8 @@ export default function AdminEventsPage() {
         addToast('success', 'Event deleted');
         fetchEvents();
       } else {
-        addToast('error', 'Failed to delete event');
+        const errorData = await res.json().catch(() => ({}));
+        addToast('error', errorData.error || 'Failed to delete event');
       }
     } catch {
       addToast('error', 'Error deleting event');
@@ -157,6 +158,9 @@ export default function AdminEventsPage() {
       if (res.ok) {
         addToast('success', `Event ${!event.isVisible ? 'published' : 'hidden'}`);
         fetchEvents();
+      } else {
+        const errorData = await res.json().catch(() => ({}));
+        addToast('error', errorData.error || 'Error updating visibility');
       }
     } catch {
       addToast('error', 'Error updating visibility');
@@ -175,7 +179,7 @@ export default function AdminEventsPage() {
     setEvents(reordered);
 
     try {
-      await fetch('/api/admin/events', {
+      const res = await fetch('/api/admin/events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -183,9 +187,13 @@ export default function AdminEventsPage() {
           ids: reordered.map((e) => e.id),
         }),
       });
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to save order');
+      }
       addToast('success', 'Events reordered');
-    } catch {
-      addToast('error', 'Failed to save order');
+    } catch (err: any) {
+      addToast('error', err?.message || 'Failed to save order');
       fetchEvents();
     }
   };

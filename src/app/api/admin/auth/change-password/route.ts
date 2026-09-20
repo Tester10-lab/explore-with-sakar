@@ -19,17 +19,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'New password must be at least 6 characters long' }, { status: 400 });
     }
 
-    const admin = getAdminUser();
+    const admin = await getAdminUser();
     const isValid = verifyPassword(currentPassword, admin.passwordHash, admin.salt);
     if (!isValid) {
       return NextResponse.json({ error: 'Incorrect current password' }, { status: 400 });
     }
 
     const { hash, salt } = hashPassword(newPassword);
-    updateAdminPassword(hash, salt);
+    await updateAdminPassword(hash, salt);
 
     return NextResponse.json({ success: true, message: 'Password updated successfully' });
   } catch (error: any) {
+    if (error.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Password change error:', error);
     return NextResponse.json({ error: 'Failed to update password' }, { status: 500 });
   }

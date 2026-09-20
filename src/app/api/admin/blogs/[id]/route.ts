@@ -43,6 +43,9 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
     return NextResponse.json({ success: true, blog: updated });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Update blog error:', error);
     return NextResponse.json({ error: error?.message || 'Failed to update blog' }, { status: 500 });
   }
@@ -74,6 +77,9 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     return NextResponse.json({ success: true, message: 'Blog deleted successfully' });
 
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     console.error('Delete blog error:', error);
     return NextResponse.json({ error: error?.message || 'Failed to delete blog' }, { status: 500 });
   }

@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const experiences = getAllExperiences(true);
+    const experiences = await getAllExperiences(true);
     return NextResponse.json({ success: true, experiences });
   } catch (error: any) {
     return NextResponse.json({ error: 'Failed to fetch experiences' }, { status: 500 });
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Title and slug are required' }, { status: 400 });
     }
 
-    const newExperience = createExperience({
+    const newExperience = await createExperience({
       title: body.title,
       slug: body.slug,
       subtitle: body.subtitle || '',
@@ -75,6 +75,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, experience: newExperience });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to create experience' }, { status: 500 });
   }
 }

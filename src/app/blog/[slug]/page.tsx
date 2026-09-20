@@ -53,8 +53,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
-  const relatedPosts = getLiveRelatedBlogs(post.slug, 3);
-  const featuredExperiences = getTopFeaturedExperiences(3);
+  const relatedPosts = await getLiveRelatedBlogs(post.slug, 3);
+  const featuredExperiences = await getTopFeaturedExperiences(3);
 
   return (
     <article className="min-h-screen bg-parchment-100 pb-20">

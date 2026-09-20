@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const faq = getAllFaq(true);
+    const faq = await getAllFaq(true);
     return NextResponse.json({ success: true, faq });
   } catch (error: any) {
     return NextResponse.json({ error: 'Failed to fetch FAQ items' }, { status: 500 });
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     if (body.action === 'reorder' && Array.isArray(body.ids)) {
-      reorderFaq(body.ids);
+      await reorderFaq(body.ids);
       return NextResponse.json({ success: true });
     }
 
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Question and answer are required' }, { status: 400 });
     }
 
-    const item = createFaq({
+    const item = await createFaq({
       category: category || 'planning',
       question: question.trim(),
       answer: answer.trim(),
@@ -46,6 +46,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, item }, { status: 201 });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to create FAQ item' }, { status: 500 });
   }
 }

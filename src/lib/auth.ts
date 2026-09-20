@@ -3,7 +3,31 @@ import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
 export const COOKIE_NAME = 'sakar_admin_session';
-const SECRET_KEY = process.env.ADMIN_JWT_SECRET || 'explore-with-sakar-ultra-secure-secret-key-2026';
+
+let hasWarnedAuthSecretDev = false;
+
+function getSecretKey(): string {
+  const secret = process.env.ADMIN_JWT_SECRET;
+  const isProduction = process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL);
+
+  if (secret) {
+    return secret;
+  }
+
+  if (isProduction) {
+    throw new Error('ADMIN_JWT_SECRET environment variable is required in production.');
+  }
+
+  if (!hasWarnedAuthSecretDev) {
+    console.warn('[auth] ADMIN_JWT_SECRET is not set in development. Using temporary per-process secret.');
+    hasWarnedAuthSecretDev = true;
+  }
+
+  if (!(global as any)._devAuthSecret) {
+    (global as any)._devAuthSecret = crypto.randomBytes(32).toString('hex');
+  }
+  return (global as any)._devAuthSecret;
+}
 
 export function hashPassword(password: string, salt?: string): { hash: string; salt: string } {
   const generatedSalt = salt || crypto.randomBytes(16).toString('hex');
@@ -30,7 +54,7 @@ export function signToken(payload: SessionPayload): string {
   const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
   const body = Buffer.from(JSON.stringify(payload)).toString('base64url');
   const signature = crypto
-    .createHmac('sha256', SECRET_KEY)
+    .createHmac('sha256', getSecretKey())
     .update(`${header}.${body}`)
     .digest('base64url');
   return `${header}.${body}.${signature}`;
@@ -43,7 +67,7 @@ export function verifyToken(token: string): SessionPayload | null {
 
   const [header, body, signature] = parts;
   const expectedSignature = crypto
-    .createHmac('sha256', SECRET_KEY)
+    .createHmac('sha256', getSecretKey())
     .update(`${header}.${body}`)
     .digest('base64url');
 

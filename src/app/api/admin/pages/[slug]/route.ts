@@ -9,12 +9,12 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  const session = getSessionFromRequest(req) || await getAdminSession(req);
+  const session = getSessionFromRequest(req) || (await getAdminSession(req));
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const page = getLivePageContent(params.slug);
+  const page = await getLivePageContent(params.slug);
   return NextResponse.json({ success: true, page });
 }
 
@@ -22,7 +22,7 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  const session = getSessionFromRequest(req) || await getAdminSession(req);
+  const session = getSessionFromRequest(req) || (await getAdminSession(req));
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -32,10 +32,10 @@ export async function PUT(
     const editorName = session.username || 'admin';
 
     // Ensure page exists in store
-    let existing = getPageBySlug(params.slug);
+    let existing = await getPageBySlug(params.slug);
     if (!existing) {
-      const defaultPage = getLivePageContent(params.slug);
-      existing = createPage({
+      const defaultPage = await getLivePageContent(params.slug);
+      existing = await createPage({
         slug: defaultPage.slug,
         name: defaultPage.name,
         url: defaultPage.url,
@@ -47,22 +47,25 @@ export async function PUT(
     }
 
     if (body.action === 'publish') {
-      const published = publishPage(params.slug, editorName);
+      const published = await publishPage(params.slug, editorName);
       return NextResponse.json({ success: true, page: published });
     }
 
     if (body.action === 'unpublish') {
-      const draft = unpublishPage(params.slug);
+      const draft = await unpublishPage(params.slug);
       return NextResponse.json({ success: true, page: draft });
     }
 
-    const updated = updatePage(params.slug, {
+    const updated = await updatePage(params.slug, {
       ...body,
       lastEditedBy: editorName,
     });
 
     return NextResponse.json({ success: true, page: updated });
   } catch (error: any) {
+    if (error.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to update page' }, { status: 500 });
   }
 }

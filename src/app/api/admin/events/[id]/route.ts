@@ -13,7 +13,7 @@ export async function GET(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const event = getEventById(params.id);
+  const event = await getEventById(params.id);
   if (!event) {
     return NextResponse.json({ error: 'Event not found' }, { status: 404 });
   }
@@ -32,7 +32,7 @@ export async function PUT(
 
   try {
     const body = await req.json();
-    const updated = updateEvent(params.id, body);
+    const updated = await updateEvent(params.id, body);
 
     if (!updated) {
       return NextResponse.json({ error: 'Event not found' }, { status: 404 });
@@ -40,6 +40,9 @@ export async function PUT(
 
     return NextResponse.json({ success: true, event: updated });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to update event' }, { status: 500 });
   }
 }
@@ -54,12 +57,15 @@ export async function DELETE(
   }
 
   try {
-    const success = deleteEvent(params.id);
+    const success = await deleteEvent(params.id);
     if (!success) {
       return NextResponse.json({ error: 'Event not found' }, { status: 404 });
     }
     return NextResponse.json({ success: true });
   } catch (error: any) {
+    if (error?.name === 'MongoUnavailableError') {
+      return NextResponse.json({ error: 'Database unavailable. Change was not saved.' }, { status: 503 });
+    }
     return NextResponse.json({ error: 'Failed to delete event' }, { status: 500 });
   }
 }

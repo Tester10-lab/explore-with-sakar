@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const newInquiry = createInquiry({
+    const newInquiry = await createInquiry({
       fullName,
       email,
       whatsapp: whatsapp || undefined,
@@ -71,6 +71,12 @@ export async function POST(req: NextRequest) {
       { status: 201 }
     );
   } catch (error: any) {
+    if (error.name === 'MongoUnavailableError') {
+      return NextResponse.json(
+        { error: 'Database unavailable. Change was not saved.' },
+        { status: 503 }
+      );
+    }
     console.error('Inquiry submission error:', error);
     return NextResponse.json(
       { error: 'Something went wrong submitting your inquiry. Please try again or message Sakar directly on WhatsApp.' },
