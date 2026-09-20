@@ -12,6 +12,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/blog/test-by-diplon',
+        destination: '/blog/bound-by-a-thread-eliza-and-sakar',
+        permanent: true,
+      },
+      {
         source: '/services/beyond-the-map',
         destination: '/experience/go-beyond',
         permanent: true,

@@ -91,7 +91,8 @@ export default function AdminBlogsPage() {
     setIsDeleting(true);
 
     try {
-      const res = await fetch(`/api/admin/blogs/${deleteTarget.slug}`, {
+      const targetKey = deleteTarget.id || deleteTarget.slug;
+      const res = await fetch(`/api/admin/blogs/${encodeURIComponent(targetKey)}`, {
         method: 'DELETE',
       });
 

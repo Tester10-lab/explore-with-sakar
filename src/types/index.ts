@@ -141,6 +141,10 @@ export interface BlogPost {
   subtitle: string;
   excerpt: string;
   category: BlogCategory;
+  id?: string;
+  status?: 'published' | 'draft';
+  createdAt?: string;
+  updatedAt?: string;
   fontFamily?: 'serif' | 'sans' | 'display' | 'mono';
   fontSize?: 'sm' | 'base' | 'lg' | 'xl';
   author: {

@@ -630,11 +630,14 @@ export function updateBlog(id: string, updates: Partial<ExtendedBlogPost>): Exte
 export function deleteBlog(id: string): boolean {
   const store = readStore();
   const decoded = decodeURIComponent(id).trim();
-  const initialLen = (store.blogs || []).length;
-  store.blogs = (store.blogs || []).filter(
-    (b) => b.id !== id && b.slug !== id && b.id !== decoded && b.slug !== decoded
-  );
-  if (store.blogs.length !== initialLen) {
+  const list = store.blogs || [];
+  let index = list.findIndex((b) => b.id === id || b.id === decoded);
+  if (index === -1) {
+    index = list.findIndex((b) => b.slug === id || b.slug === decoded);
+  }
+  if (index !== -1) {
+    list.splice(index, 1);
+    store.blogs = list;
     writeStore(store);
     return true;
   }
@@ -692,11 +695,14 @@ export async function updateBlogAsync(id: string, updates: Partial<ExtendedBlogP
 export async function deleteBlogAsync(id: string): Promise<boolean> {
   const store = await readStoreAsync();
   const decoded = decodeURIComponent(id).trim();
-  const initialLen = (store.blogs || []).length;
-  store.blogs = (store.blogs || []).filter(
-    (b) => b.id !== id && b.slug !== id && b.id !== decoded && b.slug !== decoded
-  );
-  if (store.blogs.length !== initialLen) {
+  const list = store.blogs || [];
+  let index = list.findIndex((b) => b.id === id || b.id === decoded);
+  if (index === -1) {
+    index = list.findIndex((b) => b.slug === id || b.slug === decoded);
+  }
+  if (index !== -1) {
+    list.splice(index, 1);
+    store.blogs = list;
     await writeStoreAsync(store);
     return true;
   }
