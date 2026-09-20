@@ -88,5 +88,23 @@
   - `npm run build` generated 106/106 static pages with code 0.
   - Verified T8 (navigation dynamic sync and default fallbacks) and T12 (all AdminSidebar links resolve to valid CMS entries).
 
-### Phase 4
-*(Pending execution)*
+### Phase 4: Images & Media
+- **P4.1 Image Optimization Engine**:
+  - Removed `images.unoptimized: true` in `next.config.mjs`.
+  - Configured Next.js image optimization with modern AVIF and WebP formats and remote patterns.
+  - Added `priority` and responsive `sizes` to all LCP hero images (`Hero.tsx`, `PageHero.tsx`, `ArticleHeader.tsx`, `ExperienceDetailTemplate.tsx`, `packages/[slug]/page.tsx`, `destinations/[slug]/page.tsx`).
+  - Converted raw `<img>` elements in `Navbar.tsx`, `MobileNav.tsx`, and `Footer.tsx` to `next/image` with explicit dimensions and priority loading.
+- **P4.2 Local Asset Compression & Audit**:
+  - Created `scripts/optimize-images.mjs` using `sharp` to resize and compress oversized images.
+  - Compressed all 14 images exceeding 500 KB in `public/` and `uploads/`, saving ~5.0 MB of space.
+  - Verified Test T6: 0 images in `public/` or `uploads/` now exceed 500 KB.
+- **P4.3 Upload Pipeline & Fallback Guard**:
+  - Enhanced `src/app/api/upload/route.ts` with automatic `sharp` compression for newly uploaded photos.
+  - Enforced a strict 500 KB cap on serverless base64 fallback with clear, actionable error messages.
+- **Test T7 Image Link Integrity**:
+  - Created `scripts/verify-images.mjs` verifying all 102 image references across data collections.
+  - Fixed missing spiritual asset paths, ensuring 100% of image references resolve to valid files.
+- **Final Verification**:
+  - `npx tsc --noEmit`: Code 0 (zero errors).
+  - `npm run build`: Code 0 (106/106 static pages generated).
+  - Zero visual, styling, or copy regressions across the entire public application.

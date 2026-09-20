@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   ChevronDown,
@@ -203,9 +204,12 @@ export default function Navbar() {
         <div className="editorial-container flex items-center justify-between">
           {/* Brand Logo */}
           <Link href="/" className="inline-flex items-center space-x-3 group">
-            <img
+            <Image
               src={settings.branding?.logoUrl || '/explore-with-sakar/images/logo.png'}
               alt={settings.branding?.siteName || 'Explore With Sakar'}
+              width={160}
+              height={44}
+              priority
               className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </Link>

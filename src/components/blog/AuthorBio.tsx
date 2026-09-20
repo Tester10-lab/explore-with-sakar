@@ -23,6 +23,7 @@ export default function AuthorBio({ author }: AuthorBioProps) {
             src={author.avatar}
             alt={author.name}
             fill
+            sizes="(max-width: 640px) 80px, 96px"
             className="object-cover object-top"
           />
         </div>

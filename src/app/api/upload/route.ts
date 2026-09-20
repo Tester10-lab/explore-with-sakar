@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import sharp from 'sharp';
 import { getSessionFromRequest } from '@/lib/auth';
 
 const ALLOWED_MIME_TYPES = [
@@ -13,6 +14,7 @@ const ALLOWED_MIME_TYPES = [
 ];
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_BASE64_FALLBACK_SIZE = 500 * 1024; // 500KB cap for serverless data URL fallback
 
 export async function POST(req: NextRequest) {
   try {
@@ -56,20 +58,47 @@ export async function POST(req: NextRequest) {
       .slice(0, 30);
     const uniqueName = `${Date.now()}-${sanitizedBase || 'image'}${ext.toLowerCase()}`;
 
+    const arrayBuffer = await file.arrayBuffer();
+    let buffer = Buffer.from(arrayBuffer);
+
+    // Auto-optimize standard bitmap images with sharp
+    if (['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      try {
+        let pipeline = sharp(buffer).rotate();
+        const metadata = await pipeline.metadata();
+        if ((metadata.width && metadata.width > 1920) || (metadata.height && metadata.height > 1920)) {
+          pipeline = pipeline.resize({ width: 1920, height: 1920, fit: 'inside', withoutEnlargement: true });
+        }
+        if (file.type === 'image/jpeg') {
+          buffer = await pipeline.jpeg({ quality: 80, mozjpeg: true }).toBuffer();
+        } else if (file.type === 'image/png') {
+          buffer = await pipeline.png({ quality: 80, compressionLevel: 8 }).toBuffer();
+        } else if (file.type === 'image/webp') {
+          buffer = await pipeline.webp({ quality: 80 }).toBuffer();
+        }
+      } catch (sharpErr) {
+        console.warn('Sharp optimization skipped for upload:', sharpErr);
+      }
+    }
+
     try {
       const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
       if (!fs.existsSync(uploadsDir)) {
         fs.mkdirSync(uploadsDir, { recursive: true });
       }
       const filePath = path.join(uploadsDir, uniqueName);
-      const arrayBuffer = await file.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
       fs.writeFileSync(filePath, buffer);
       publicUrl = `/uploads/${uniqueName}`;
     } catch (fsErr) {
       console.warn('Read-only filesystem detected, falling back to base64 Data URL:', fsErr);
-      const arrayBuffer = await file.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
+      if (buffer.length > MAX_BASE64_FALLBACK_SIZE) {
+        return NextResponse.json(
+          {
+            error: `Image size (${(buffer.length / 1024).toFixed(0)} KB) exceeds the 500 KB limit for serverless storage fallback. Please upload a smaller image or configure cloud storage.`,
+          },
+          { status: 413 }
+        );
+      }
       publicUrl = `data:${file.type};base64,${buffer.toString('base64')}`;
     }
 
@@ -77,7 +106,7 @@ export async function POST(req: NextRequest) {
       success: true,
       url: publicUrl,
       fileName: uniqueName,
-      size: file.size,
+      size: buffer.length,
       mimeType: file.type,
     });
   } catch (error: any) {

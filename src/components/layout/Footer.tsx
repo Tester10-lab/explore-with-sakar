@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Phone,
   Mail,
@@ -61,9 +62,11 @@ export default function Footer() {
           {/* Brand & Host Column */}
           <div className="sm:col-span-2 space-y-6 pr-4">
             <Link href="/" className="inline-block group">
-              <img
+              <Image
                 src={settings.branding?.logoUrl || '/explore-with-sakar/images/logo.png'}
                 alt={settings.branding?.siteName || 'Explore With Sakar Logo'}
+                width={180}
+                height={48}
                 className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </Link>

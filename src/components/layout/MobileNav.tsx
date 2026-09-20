@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   X,
@@ -72,9 +73,12 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
             {/* Top Bar */}
             <div className="p-5 flex items-center justify-between border-b border-parchment-300 bg-white">
               <Link href="/" onClick={onClose} className="inline-block touch-manipulation">
-                <img
+                <Image
                   src={settings.branding?.logoUrl || '/explore-with-sakar/images/logo.png'}
                   alt={settings.branding?.siteName || 'Explore With Sakar'}
+                  width={140}
+                  height={36}
+                  priority
                   className="h-9 w-auto object-contain"
                 />
               </Link>

@@ -60,6 +60,7 @@ export default function FeaturedStory({ post }: FeaturedStoryProps) {
                   src={post.author.avatar}
                   alt={post.author.name}
                   fill
+                  sizes="32px"
                   className="object-cover"
                 />
               </div>
