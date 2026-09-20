@@ -23,7 +23,8 @@ import {
   Star,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSettings } from '@/context/SettingsContext';
+import { useSettings, useSiteNavigation } from '@/context/SettingsContext';
+import { getNavIcon } from '@/lib/navIcons';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -33,6 +34,7 @@ interface MobileNavProps {
 export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
   const pathname = usePathname();
   const { settings } = useSettings();
+  const siteNav = useSiteNavigation();
   const [openSection, setOpenSection] = useState<string | null>('experiences');
 
   const toggleSection = (section: string) => {
@@ -87,206 +89,313 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
             {/* Nav Accordions */}
             <div className="p-5 space-y-3 flex-1">
-              {/* 1. Experiences Group */}
-              <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden shadow-xs">
-                <button
-                  onClick={() => toggleSection('experiences')}
-                  className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold text-himalaya-950"
-                >
-                  <span className="flex items-center space-x-2">
-                    <Compass className="w-4 h-4 text-terracotta" />
-                    <span>Experiences</span>
-                  </span>
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${
-                      openSection === 'experiences' ? 'rotate-180 text-terracotta' : ''
-                    }`}
-                  />
-                </button>
+              {siteNav?.header && siteNav.header.length > 0 ? (
+                siteNav.header
+                  .filter((item) => item.visible !== false)
+                  .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+                  .map((item) => {
+                    const children = (item.children || [])
+                      .filter((c) => c.visible !== false)
+                      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+                    const hasChildren = children.length > 0;
+                    const sectionKey = item.id || item.label.toLowerCase();
+                    const isSectionOpen =
+                      openSection === sectionKey ||
+                      (openSection === 'experiences' && sectionKey.includes('exp'));
+                    const ParentIcon =
+                      (item.icon ? getNavIcon(item.icon) : null) ||
+                      (item.label.toLowerCase().includes('exp')
+                        ? Compass
+                        : item.label.toLowerCase().includes('stor')
+                        ? BookOpen
+                        : Sparkles);
 
-                {openSection === 'experiences' && (
-                  <div className="px-4 pb-4 pt-1 space-y-3 border-t border-parchment-200 divide-y divide-parchment-100">
-                    {/* Pillar 1: Go Beyond the Map */}
-                    <Link
-                      href="/experience/go-beyond"
-                      onClick={onClose}
-                      className="block group pt-2 first:pt-1 pb-1"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
-                          <Compass className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
-                          Go Beyond the Map
-                        </span>
-                        <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
-                          Exploration
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Living courtyards, medieval stone mysteries & master artisan guilds.
-                      </p>
-                    </Link>
+                    if (hasChildren) {
+                      return (
+                        <div key={sectionKey} className="rounded-xl border border-parchment-300 bg-white overflow-hidden shadow-xs">
+                          <button
+                            onClick={() => toggleSection(sectionKey)}
+                            className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold text-himalaya-950"
+                          >
+                            <span className="flex items-center space-x-2">
+                              <ParentIcon className="w-4 h-4 text-terracotta" />
+                              <span>{item.label}</span>
+                            </span>
+                            <ChevronDown
+                              className={`w-4 h-4 transition-transform duration-200 ${
+                                isSectionOpen ? 'rotate-180 text-terracotta' : ''
+                              }`}
+                            />
+                          </button>
 
-                    {/* Pillar 2: Go Spiritual */}
-                    <Link
-                      href="/experience/go-spiritual"
-                      onClick={onClose}
-                      className="block group pt-2.5 pb-1"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
-                          <Sparkles className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
-                          Go Spiritual
-                        </span>
-                        <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
-                          Spiritual
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Himalayan singing bowl resonance, monastery chanting & meditation caves.
-                      </p>
-                    </Link>
+                          {isSectionOpen && (
+                            <div className="px-4 pb-4 pt-1 space-y-3 border-t border-parchment-200 divide-y divide-parchment-100">
+                              {children.map((child, cIdx) => {
+                                const ChildIcon = (child.icon ? getNavIcon(child.icon) : null) || Compass;
+                                return (
+                                  <Link
+                                    key={child.id || child.url}
+                                    href={child.url}
+                                    onClick={onClose}
+                                    className={`block group pb-1 ${cIdx === 0 ? 'pt-2 first:pt-1' : 'pt-2.5'}`}
+                                  >
+                                    <div className="flex items-center justify-between">
+                                      <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                                        <ChildIcon className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                                        {child.label}
+                                      </span>
+                                      {child.badge && (
+                                        <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                                          {child.badge}
+                                        </span>
+                                      )}
+                                    </div>
+                                    {child.description && (
+                                      <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                                        {child.description}
+                                      </p>
+                                    )}
+                                  </Link>
+                                );
+                              })}
 
-                    {/* Pillar 3: Feel Closer */}
-                    <Link
-                      href="/experience/feel-closer"
-                      onClick={onClose}
-                      className="block group pt-2.5 pb-1"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
-                          <Home className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
-                          Feel Closer
-                        </span>
-                        <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
-                          Homestays
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Traditional village homestays, hearthside cooking & warm family bonds.
-                      </p>
-                    </Link>
+                              {/* Overview links for experience section */}
+                              {item.url === '/experience' && (
+                                <div className="pt-3 flex flex-col space-y-1.5">
+                                  <Link
+                                    href="/experience"
+                                    onClick={onClose}
+                                    className="text-xs font-semibold uppercase tracking-wider text-terracotta hover:underline py-1 flex items-center justify-between"
+                                  >
+                                    <span>• View All Experiences Catalog</span>
+                                    <ArrowRight className="w-3.5 h-3.5" />
+                                  </Link>
+                                  <Link
+                                    href="/experience/custom-private-journeys"
+                                    onClick={onClose}
+                                    className="text-xs font-medium text-himalaya-700 hover:text-terracotta py-1"
+                                  >
+                                    • Custom Tailor-Made Journeys with Sakar
+                                  </Link>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }
 
-                    {/* Pillar 4: Leave a Mark */}
-                    <Link
-                      href="/experience/leave-a-mark"
-                      onClick={onClose}
-                      className="block group pt-2.5 pb-1"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
-                          <Heart className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
-                          Leave a Mark
-                        </span>
-                        <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
-                          Strategic
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Strategic volunteer tourism & administrative empowerment.
-                      </p>
-                    </Link>
-
-                    {/* Overview links */}
-                    <div className="pt-3 flex flex-col space-y-1.5">
+                    return (
                       <Link
-                        href="/experience"
+                        key={sectionKey}
+                        href={item.url}
                         onClick={onClose}
-                        className="text-xs font-semibold uppercase tracking-wider text-terracotta hover:underline py-1 flex items-center justify-between"
+                        className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-between shadow-xs"
                       >
-                        <span>• View All Experiences Catalog</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        <span>{item.label}</span>
+                        <ArrowRight className="w-4 h-4 text-terracotta" />
                       </Link>
-                      <Link
-                        href="/experience/custom-private-journeys"
-                        onClick={onClose}
-                        className="text-xs font-medium text-himalaya-700 hover:text-terracotta py-1"
-                      >
-                        • Custom Tailor-Made Journeys with Sakar
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* 2. EVENTS */}
-              <Link
-                href="/events"
-                onClick={onClose}
-                className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-between shadow-xs"
-              >
-                <span>EVENTS</span>
-                <ArrowRight className="w-4 h-4 text-terracotta" />
-              </Link>
-
-              {/* 3. STORIES Group */}
-              <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden shadow-xs">
-                <button
-                  onClick={() => toggleSection('stories')}
-                  className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950"
-                >
-                  <span className="flex items-center space-x-2">
-                    <BookOpen className="w-4 h-4 text-terracotta" />
-                    <span>STORIES</span>
-                  </span>
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${
-                      openSection === 'stories' ? 'rotate-180 text-terracotta' : ''
-                    }`}
-                  />
-                </button>
-
-                {openSection === 'stories' && (
-                  <div className="px-4 pb-4 pt-1 space-y-3 border-t border-parchment-200 divide-y divide-parchment-100">
-                    <Link
-                      href="/blog"
-                      onClick={onClose}
-                      className="block group pt-2 first:pt-1 pb-1"
+                    );
+                  })
+              ) : (
+                <>
+                  {/* 1. Experiences Group */}
+                  <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden shadow-xs">
+                    <button
+                      onClick={() => toggleSection('experiences')}
+                      className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold text-himalaya-950"
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
-                          <BookOpen className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
-                          Sakar’s Journal & Blogs
-                        </span>
-                        <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
-                          Blogs
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Field notes, personal essays, and reflections on slow travel and heritage.
-                      </p>
-                    </Link>
+                      <span className="flex items-center space-x-2">
+                        <Compass className="w-4 h-4 text-terracotta" />
+                        <span>Experiences</span>
+                      </span>
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          openSection === 'experiences' ? 'rotate-180 text-terracotta' : ''
+                        }`}
+                      />
+                    </button>
 
-                    <Link
-                      href="/reviews"
-                      onClick={onClose}
-                      className="block group pt-2.5 pb-1"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
-                          <Star className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
-                          Traveler Reviews & Guestbook
-                        </span>
-                        <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
-                          Reviews
-                        </span>
+                    {openSection === 'experiences' && (
+                      <div className="px-4 pb-4 pt-1 space-y-3 border-t border-parchment-200 divide-y divide-parchment-100">
+                        <Link
+                          href="/experience/go-beyond"
+                          onClick={onClose}
+                          className="block group pt-2 first:pt-1 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <Compass className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Go Beyond the Map
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Exploration
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Living courtyards, medieval stone mysteries & master artisan guilds.
+                          </p>
+                        </Link>
+
+                        <Link
+                          href="/experience/go-spiritual"
+                          onClick={onClose}
+                          className="block group pt-2.5 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <Sparkles className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Go Spiritual
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Spiritual
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Himalayan singing bowl resonance, monastery chanting & meditation caves.
+                          </p>
+                        </Link>
+
+                        <Link
+                          href="/experience/feel-closer"
+                          onClick={onClose}
+                          className="block group pt-2.5 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <Home className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Feel Closer
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Homestays
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Traditional village homestays, hearthside cooking & warm family bonds.
+                          </p>
+                        </Link>
+
+                        <Link
+                          href="/experience/leave-a-mark"
+                          onClick={onClose}
+                          className="block group pt-2.5 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <Heart className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Leave a Mark
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Strategic
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Strategic volunteer tourism & administrative empowerment.
+                          </p>
+                        </Link>
+
+                        <div className="pt-3 flex flex-col space-y-1.5">
+                          <Link
+                            href="/experience"
+                            onClick={onClose}
+                            className="text-xs font-semibold uppercase tracking-wider text-terracotta hover:underline py-1 flex items-center justify-between"
+                          >
+                            <span>• View All Experiences Catalog</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                          <Link
+                            href="/experience/custom-private-journeys"
+                            onClick={onClose}
+                            className="text-xs font-medium text-himalaya-700 hover:text-terracotta py-1"
+                          >
+                            • Custom Tailor-Made Journeys with Sakar
+                          </Link>
+                        </div>
                       </div>
-                      <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Read guest reflections and flip through Sakar’s handwritten guestbook.
-                      </p>
-                    </Link>
+                    )}
                   </div>
-                )}
-              </div>
 
-              {/* 4. ABOUT SAKAR */}
-              <Link
-                href="/about"
-                onClick={onClose}
-                className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-between shadow-xs"
-              >
-                <span>ABOUT SAKAR</span>
-                <ArrowRight className="w-4 h-4 text-terracotta" />
-              </Link>
+                  {/* 2. EVENTS */}
+                  <Link
+                    href="/events"
+                    onClick={onClose}
+                    className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-between shadow-xs"
+                  >
+                    <span>EVENTS</span>
+                    <ArrowRight className="w-4 h-4 text-terracotta" />
+                  </Link>
+
+                  {/* 3. STORIES Group */}
+                  <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden shadow-xs">
+                    <button
+                      onClick={() => toggleSection('stories')}
+                      className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950"
+                    >
+                      <span className="flex items-center space-x-2">
+                        <BookOpen className="w-4 h-4 text-terracotta" />
+                        <span>STORIES</span>
+                      </span>
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          openSection === 'stories' ? 'rotate-180 text-terracotta' : ''
+                        }`}
+                      />
+                    </button>
+
+                    {openSection === 'stories' && (
+                      <div className="px-4 pb-4 pt-1 space-y-3 border-t border-parchment-200 divide-y divide-parchment-100">
+                        <Link
+                          href="/blog"
+                          onClick={onClose}
+                          className="block group pt-2 first:pt-1 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <BookOpen className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Sakar’s Journal & Blogs
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Blogs
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Field notes, personal essays, and reflections on slow travel and heritage.
+                          </p>
+                        </Link>
+
+                        <Link
+                          href="/reviews"
+                          onClick={onClose}
+                          className="block group pt-2.5 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <Star className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Traveler Reviews & Guestbook
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Reviews
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Read guest reflections and flip through Sakar’s handwritten guestbook.
+                          </p>
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* 4. ABOUT SAKAR */}
+                  <Link
+                    href="/about"
+                    onClick={onClose}
+                    className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-between shadow-xs"
+                  >
+                    <span>ABOUT SAKAR</span>
+                    <ArrowRight className="w-4 h-4 text-terracotta" />
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Bottom Actions */}

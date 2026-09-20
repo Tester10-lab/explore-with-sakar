@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Plus,
   Package as PackageIcon,
@@ -25,6 +26,7 @@ import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { ExtendedPackage } from '@/types/cms';
 
 export default function AdminPackagesPage() {
+  const router = useRouter();
   const [packages, setPackages] = useState<ExtendedPackage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -179,6 +181,7 @@ export default function AdminPackagesPage() {
 
       showToast('success', isNewPkg ? 'New package created successfully!' : 'Package updated!');
       setEditingPkg(null);
+      router.refresh();
       fetchPackages();
     } catch (err: any) {
       showToast('error', err?.message || 'Failed to save package');
@@ -203,6 +206,7 @@ export default function AdminPackagesPage() {
 
       showToast('success', `Deleted "${deleteTarget.name}"`);
       setDeleteTarget(null);
+      router.refresh();
       fetchPackages();
     } catch (err: any) {
       showToast('error', err?.message || 'Error deleting package');

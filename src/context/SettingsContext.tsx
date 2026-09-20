@@ -149,3 +149,6 @@ export function useNavigation() {
   const { navigation } = useSettings();
   return navigation;
 }
+
+export const useSiteNavigation = useNavigation;
+

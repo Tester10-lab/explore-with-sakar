@@ -24,11 +24,13 @@ import {
   RefreshCw,
   Loader2,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { ContactInquiry } from '@/types/cms';
 
 export default function AdminInquiriesPage() {
+  const router = useRouter();
   const [inquiries, setInquiries] = useState<ContactInquiry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -86,6 +88,7 @@ export default function AdminInquiriesPage() {
         if (selectedInquiry && selectedInquiry.id === id) {
           setSelectedInquiry((prev) => (prev ? { ...prev, status: newStatus } : null));
         }
+        router.refresh();
         addToast('success', `Marked inquiry as ${newStatus}`);
       } else {
         const errorData = await res.json().catch(() => ({}));
@@ -109,6 +112,7 @@ export default function AdminInquiriesPage() {
         if (selectedInquiry?.id === deleteTargetId) {
           setSelectedInquiry(null);
         }
+        router.refresh();
         addToast('success', 'Inquiry deleted successfully');
       } else {
         const errorData = await res.json().catch(() => ({}));

@@ -18,6 +18,7 @@ import {
   Loader2,
   Crop,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ImageUploader from '@/components/admin/ImageUploader';
 import ImageCropModal from '@/components/admin/ImageCropModal';
@@ -35,6 +36,7 @@ const CATEGORIES = [
 ];
 
 export default function AdminPhotosPage() {
+  const router = useRouter();
   const [photos, setPhotos] = useState<ExtendedGalleryPhoto[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -100,6 +102,7 @@ export default function AdminPhotosPage() {
       if (!res.ok) throw new Error('Failed to update photo');
       setPhotos((prev) => prev.map((p) => (p.id === cropPhotoTarget.id ? updated : p)));
       showToast('success', 'Photo cropped, rotated & updated!');
+      router.refresh();
     } catch (err: any) {
       showToast('error', err?.message || 'Error saving cropped photo');
     } finally {
@@ -159,6 +162,7 @@ export default function AdminPhotosPage() {
     setIsUploadingMultiple(false);
     showToast('success', `Successfully uploaded ${successCount} photographs!`);
     fetchPhotos();
+    router.refresh();
   };
 
   const handleToggleFeatured = async (photo: ExtendedGalleryPhoto) => {
@@ -178,6 +182,7 @@ export default function AdminPhotosPage() {
           : `Set "${photo.title}" as featured in Hero & Gallery!`
       );
       fetchPhotos();
+      router.refresh();
     } catch (err: any) {
       showToast('error', err?.message || 'Error updating photo');
     }
@@ -211,6 +216,7 @@ export default function AdminPhotosPage() {
       );
       setEditingPhoto(null);
       fetchPhotos();
+      router.refresh();
     } catch (err: any) {
       showToast('error', err?.message || 'Error saving photo');
     } finally {
@@ -232,6 +238,7 @@ export default function AdminPhotosPage() {
       showToast('success', `Deleted "${deleteTarget.title}"`);
       setDeleteTarget(null);
       fetchPhotos();
+      router.refresh();
     } catch (err: any) {
       showToast('error', err?.message || 'Error deleting photo');
     } finally {

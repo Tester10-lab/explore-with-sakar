@@ -17,12 +17,14 @@ import {
   Check,
   CheckCircle2,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { CmsFaqItem } from '@/types/cms';
 import { FAQ_CATEGORIES } from '@/data/faq';
 
 export default function AdminFaqPage() {
+  const router = useRouter();
   const [faqItems, setFaqItems] = useState<CmsFaqItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -105,6 +107,7 @@ export default function AdminFaqPage() {
       if (res.ok) {
         addToast('success', isEdit ? 'FAQ item updated' : 'FAQ item created');
         setEditingItem(null);
+        router.refresh();
         fetchFaq();
       } else {
         const errorData = await res.json();
@@ -123,6 +126,7 @@ export default function AdminFaqPage() {
       const res = await fetch(`/api/admin/faq/${id}`, { method: 'DELETE' });
       if (res.ok) {
         addToast('success', 'FAQ item deleted');
+        router.refresh();
         fetchFaq();
       } else {
         const errorData = await res.json().catch(() => ({}));
@@ -142,6 +146,7 @@ export default function AdminFaqPage() {
       });
       if (res.ok) {
         addToast('success', `FAQ ${!item.isVisible ? 'published' : 'hidden'}`);
+        router.refresh();
         fetchFaq();
       } else {
         const errorData = await res.json().catch(() => ({}));
@@ -177,6 +182,7 @@ export default function AdminFaqPage() {
         throw new Error(errorData.error || 'Failed to save order');
       }
       addToast('success', 'FAQ order saved');
+      router.refresh();
     } catch (err: any) {
       addToast('error', err?.message || 'Failed to save order');
       fetchFaq();

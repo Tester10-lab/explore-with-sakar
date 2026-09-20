@@ -21,12 +21,14 @@ import {
   Clock,
   Heart,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import ImageUploader from '@/components/admin/ImageUploader';
 import { CmsEvent } from '@/types/cms';
 
 export default function AdminEventsPage() {
+  const router = useRouter();
   const [events, setEvents] = useState<CmsEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -120,6 +122,7 @@ export default function AdminEventsPage() {
       if (res.ok) {
         addToast('success', isEdit ? 'Event updated' : 'Event created');
         setEditingEvent(null);
+        router.refresh();
         fetchEvents();
       } else {
         const errorData = await res.json();
@@ -138,6 +141,7 @@ export default function AdminEventsPage() {
       const res = await fetch(`/api/admin/events/${id}`, { method: 'DELETE' });
       if (res.ok) {
         addToast('success', 'Event deleted');
+        router.refresh();
         fetchEvents();
       } else {
         const errorData = await res.json().catch(() => ({}));
@@ -157,6 +161,7 @@ export default function AdminEventsPage() {
       });
       if (res.ok) {
         addToast('success', `Event ${!event.isVisible ? 'published' : 'hidden'}`);
+        router.refresh();
         fetchEvents();
       } else {
         const errorData = await res.json().catch(() => ({}));
@@ -192,6 +197,7 @@ export default function AdminEventsPage() {
         throw new Error(errorData.error || 'Failed to save order');
       }
       addToast('success', 'Events reordered');
+      router.refresh();
     } catch (err: any) {
       addToast('error', err?.message || 'Failed to save order');
       fetchEvents();

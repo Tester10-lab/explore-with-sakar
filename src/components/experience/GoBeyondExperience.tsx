@@ -17,10 +17,16 @@ import {
 import PageHero from '@/components/common/PageHero';
 import CTASection from '@/components/common/CTASection';
 import { BEYOND_EXPERIENCES } from '@/data/beyond-the-map';
+import { PageContent } from '@/types/cms';
+import { getPageHeroOverrides, isSectionVisible } from '@/lib/pageContentHelper';
 
 const ITEMS_PER_PAGE = 4;
 
-export default function GoBeyondExperience() {
+interface GoBeyondExperienceProps {
+  pageContent?: PageContent | null;
+}
+
+export default function GoBeyondExperience({ pageContent }: GoBeyondExperienceProps) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const totalPages = Math.ceil(BEYOND_EXPERIENCES.length / ITEMS_PER_PAGE);
 
@@ -28,6 +34,12 @@ export default function GoBeyondExperience() {
   const startIdx = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
   const currentExperiences = BEYOND_EXPERIENCES.slice(startIdx, startIdx + ITEMS_PER_PAGE);
   const endIdx = Math.min(safeCurrentPage * ITEMS_PER_PAGE, BEYOND_EXPERIENCES.length);
+
+  const hero = getPageHeroOverrides(pageContent, {
+    badge: 'Independent Experience Package',
+    title: 'Go Beyond the Map',
+    subtitle: 'A sequenced editorial journey through living courtyards, ancient trade corridors, multi-generational artisan workshops, and calm Himalayan waters with Sakar.',
+  });
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -47,59 +59,64 @@ export default function GoBeyondExperience() {
   return (
     <div className="min-h-screen bg-parchment-100">
       {/* 1. Hero */}
-      <PageHero
-        badge="Independent Experience Package"
-        nepaliTitle="नक्साभन्दा परको यात्रा"
-        title="Go Beyond the Map"
-        subtitle="A sequenced editorial journey through living courtyards, ancient trade corridors, multi-generational artisan workshops, and calm Himalayan waters with Sakar."
-        backgroundImage="/images/beyond-the-map/living-courtyards.jpg"
-        breadcrumbs={[
-          { label: 'Experiences', href: '/experience' },
-          { label: 'Go Beyond the Map' },
-        ]}
-      />
+      {hero.visible && (
+        <PageHero
+          badge={hero.badge}
+          nepaliTitle="नक्साभन्दा परको यात्रा"
+          title={hero.title}
+          subtitle={hero.subtitle}
+          backgroundImage="/images/beyond-the-map/living-courtyards.jpg"
+          breadcrumbs={[
+            { label: 'Experiences', href: '/experience' },
+            { label: 'Go Beyond the Map' },
+          ]}
+        />
+      )}
 
       {/* 2. Editorial Philosophy Banner */}
-      <section className="py-16 sm:py-20 bg-white border-b border-parchment-300">
-        <div className="editorial-container">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-terracotta/10 text-terracotta text-xs font-semibold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Dedicated Experience Package</span>
-            </span>
+      {isSectionVisible(pageContent, 'sec-btm-manifesto', 'philosophy') && (
+        <section className="py-16 sm:py-20 bg-white border-b border-parchment-300">
+          <div className="editorial-container">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+              <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-terracotta/10 text-terracotta text-xs font-semibold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Dedicated Experience Package</span>
+              </span>
 
-            <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-              Not Just Visiting Places — Stepping Inside the Living Soul of Nepal
-            </h2>
+              <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
+                Not Just Visiting Places — Stepping Inside the Living Soul of Nepal
+              </h2>
 
-            <p className="text-base sm:text-lg text-himalaya-700 font-light leading-relaxed">
-              Most visitors see Nepal through the hurried frame of a tour bus window or the crowded ticket gates of main monuments. <strong className="font-semibold text-himalaya-900">&ldquo;Go Beyond the Map&rdquo;</strong> is our personal pledge to walk past superficial facades into the real, beating pulse of our homeland.
-            </p>
-
-            {/* Chapter Quick Index */}
-            <div className="pt-6 border-t border-parchment-200">
-              <p className="text-xs font-mono font-bold uppercase tracking-wider text-himalaya-500 mb-3">
-                The 4 Canonical Narratives:
+              <p className="text-base sm:text-lg text-himalaya-700 font-light leading-relaxed">
+                Most visitors see Nepal through the hurried frame of a tour bus window or the crowded ticket gates of main monuments. <strong className="font-semibold text-himalaya-900">&ldquo;Go Beyond the Map&rdquo;</strong> is our personal pledge to walk past superficial facades into the real, beating pulse of our homeland.
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-2">
-                {BEYOND_EXPERIENCES.map((exp) => (
-                  <button
-                    key={exp.id}
-                    onClick={() => scrollToSection(exp.id)}
-                    className="px-3.5 py-1.5 rounded-full text-xs transition-all font-mono bg-parchment-100 text-himalaya-700 hover:bg-parchment-200 border border-parchment-300 hover:border-terracotta"
-                    title={`${exp.pageNumber}: ${exp.title}`}
-                  >
-                    <span className="font-bold text-terracotta">{exp.pageNumber}:</span> {exp.title}
-                  </button>
-                ))}
+
+              {/* Chapter Quick Index */}
+              <div className="pt-6 border-t border-parchment-200">
+                <p className="text-xs font-mono font-bold uppercase tracking-wider text-himalaya-500 mb-3">
+                  The 4 Canonical Narratives:
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  {BEYOND_EXPERIENCES.map((exp) => (
+                    <button
+                      key={exp.id}
+                      onClick={() => scrollToSection(exp.id)}
+                      className="px-3.5 py-1.5 rounded-full text-xs transition-all font-mono bg-parchment-100 text-himalaya-700 hover:bg-parchment-200 border border-parchment-300 hover:border-terracotta"
+                      title={`${exp.pageNumber}: ${exp.title}`}
+                    >
+                      <span className="font-bold text-terracotta">{exp.pageNumber}:</span> {exp.title}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 3. Paginated Experiences Main Section */}
-      <section id="beyond-editorial-grid" className="py-20 sm:py-28 bg-parchment-100 scroll-mt-24">
+      {isSectionVisible(pageContent, 'sec-btm-chapters', 'chapters-grid', 'experiences') && (
+        <section id="beyond-editorial-grid" className="py-20 sm:py-28 bg-parchment-100 scroll-mt-24">
         <div className="editorial-container">
           {/* Top Pagination Toolbar */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-12 p-4 sm:p-5 rounded-2xl bg-white border border-parchment-300 shadow-subtle">
@@ -391,16 +408,19 @@ export default function GoBeyondExperience() {
           </div>
         </div>
       </section>
+      )}
 
       {/* 4. Bottom CTA */}
-      <CTASection
-        title="Ready to Weave These Experiences Into a Bespoke Journey?"
-        subtitle="Every chapter can be experienced individually or combined into an unhurried multi-day expedition guided personally by Sakar."
-        primaryButtonText="Inquire About Beyond the Map"
-        primaryButtonHref="/contact?subject=Go%20Beyond%20the%20Map%20Custom%20Journey"
-        secondaryButtonText="Explore All Experiences"
-        secondaryButtonHref="/experience"
-      />
+      {isSectionVisible(pageContent, 'sec-btm-cta', 'cta') && (
+        <CTASection
+          title="Ready to Weave These Experiences Into a Bespoke Journey?"
+          subtitle="Every chapter can be experienced individually or combined into an unhurried multi-day expedition guided personally by Sakar."
+          primaryButtonText="Inquire About Beyond the Map"
+          primaryButtonHref="/contact?subject=Go%20Beyond%20the%20Map%20Custom%20Journey"
+          secondaryButtonText="Explore All Experiences"
+          secondaryButtonHref="/experience"
+        />
+      )}
     </div>
   );
 }

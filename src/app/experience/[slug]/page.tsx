@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
-import { getPublicExperienceBySlug, getPublicExperiences } from '@/lib/content';
+import { getPublicExperienceBySlug, getPublicExperiences, getPageContent } from '@/lib/content';
 import GoBeyondExperience from '@/components/experience/GoBeyondExperience';
 import GoSpiritualExperience from '@/components/experience/GoSpiritualExperience';
 import FeelCloserExperience from '@/components/experience/FeelCloserExperience';
@@ -148,23 +148,28 @@ export default async function ExperienceDetailPage({ params }: Props) {
   }
 
   if (slug === 'go-beyond') {
-    return <GoBeyondExperience />;
+    const pageContent = await getPageContent('go-beyond');
+    return <GoBeyondExperience pageContent={pageContent} />;
   }
 
   if (slug === 'go-spiritual') {
-    return <GoSpiritualExperience />;
+    const pageContent = await getPageContent('go-spiritual');
+    return <GoSpiritualExperience pageContent={pageContent} />;
   }
 
   if (slug === 'feel-closer') {
-    return <FeelCloserExperience />;
+    const pageContent = await getPageContent('feel-closer');
+    return <FeelCloserExperience pageContent={pageContent} />;
   }
 
   if (slug === 'leave-a-mark') {
-    return <LeaveAMarkExperience />;
+    const pageContent = await getPageContent('leave-a-mark');
+    return <LeaveAMarkExperience pageContent={pageContent} />;
   }
 
   if (slug === 'custom-private-journeys') {
-    return <CustomJourneysExperience />;
+    const pageContent = await getPageContent('custom-private-journeys');
+    return <CustomJourneysExperience pageContent={pageContent} />;
   }
 
   const experience = await getPublicExperienceBySlug(slug);

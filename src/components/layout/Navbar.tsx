@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -26,7 +26,8 @@ import {
 } from 'lucide-react';
 import MobileNav from './MobileNav';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSettings } from '@/context/SettingsContext';
+import { useSettings, useSiteNavigation } from '@/context/SettingsContext';
+import { getNavIcon } from '@/lib/navIcons';
 
 export interface NavChildItem {
   title: string;
@@ -128,9 +129,42 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
 export default function Navbar() {
   const pathname = usePathname();
   const { settings } = useSettings();
+  const siteNav = useSiteNavigation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navItems: NavItem[] = useMemo(() => {
+    if (!siteNav?.header || siteNav.header.length === 0) {
+      return MAIN_NAV_STRUCTURE;
+    }
+    return siteNav.header
+      .filter((item) => item.visible !== false)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+      .map((item) => {
+        const children =
+          item.children && item.children.length > 0
+            ? item.children
+                .filter((c) => c.visible !== false)
+                .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+                .map((c) => ({
+                  title: c.label,
+                  description: c.description,
+                  href: c.url,
+                  badge: c.badge,
+                  icon: (c.icon ? getNavIcon(c.icon) : null) || Compass,
+                }))
+            : undefined;
+
+        return {
+          label: item.label,
+          href: item.url,
+          subtitle: item.subtitle,
+          columns: item.columns || (children && children.length > 3 ? 2 : 1),
+          children,
+        };
+      });
+  }, [siteNav]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -178,7 +212,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-            {MAIN_NAV_STRUCTURE.map((item) => {
+            {navItems.map((item) => {
               const active = isRouteActive(item);
               const hasDropdown = Boolean(item.children && item.children.length > 0);
 

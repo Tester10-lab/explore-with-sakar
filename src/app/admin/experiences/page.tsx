@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Plus,
   Compass,
@@ -60,6 +61,7 @@ function getPillarLabel(category?: string, categoryLabel?: string): string {
 }
 
 export default function AdminExperiencesPage() {
+  const router = useRouter();
   const [experiences, setExperiences] = useState<ExtendedExperience[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedPillar, setSelectedPillar] = useState<string>('all');
@@ -257,6 +259,7 @@ export default function AdminExperiencesPage() {
 
       showToast('success', isNewExp ? 'New itinerary created successfully!' : 'Itinerary updated!');
       setEditingExp(null);
+      router.refresh();
       fetchExperiences();
     } catch (err: any) {
       showToast('error', err?.message || 'Failed to save experience');
@@ -279,8 +282,9 @@ export default function AdminExperiencesPage() {
         throw new Error(errorData.error || 'Failed to delete experience');
       }
 
-      showToast('success', `Deleted "${deleteTarget.title}"`);
+      showToast('success', 'Experience deleted successfully');
       setDeleteTarget(null);
+      router.refresh();
       fetchExperiences();
     } catch (err: any) {
       showToast('error', err?.message || 'Error deleting experience');

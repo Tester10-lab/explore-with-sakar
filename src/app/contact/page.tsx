@@ -1,98 +1,22 @@
-'use client';
-
 import React from 'react';
-import { Sparkles, Phone, Mail, MapPin, Clock, ShieldCheck, Heart } from 'lucide-react';
-import PageHero from '@/components/common/PageHero';
-import InquiryForm from '@/components/booking/InquiryForm';
-import { useSettings } from '@/context/SettingsContext';
+import { Metadata } from 'next';
+import { getPageContent } from '@/lib/content';
+import ContactClient from '@/components/contact/ContactClient';
 
-export default function ContactPage() {
-  const { settings } = useSettings();
+export const metadata: Metadata = {
+  title: 'Contact Sakar | Start Planning Your Nepal Journey',
+  description:
+    'Direct contact with Sakar Aryal via WhatsApp, email, or inquiry form to plan your custom Nepal journey.',
+  alternates: { canonical: 'https://explorewithsakar.com/contact' },
+  openGraph: {
+    title: 'Contact Sakar | Start Planning Your Nepal Journey',
+    description:
+      'Direct contact with Sakar Aryal via WhatsApp, email, or inquiry form to plan your custom Nepal journey.',
+    url: 'https://explorewithsakar.com/contact',
+  },
+};
 
-  const whatsappUrl = `https://wa.me/${settings.contact?.whatsappNumber || '9779840482692'}?text=${encodeURIComponent(
-    settings.contact?.whatsappDefaultMessage ||
-      'Namaste Sakar, I am interested in planning an authentic Nepal journey.'
-  )}`;
-
-  return (
-    <div className="min-h-screen bg-parchment-100 pb-16">
-      {/* 1. Page Hero */}
-      <PageHero
-        badge="Direct Host Communication"
-        nepaliTitle="सम्पर्क तथा यात्रा परामर्श"
-        title="Begin Your Journey With Sakar"
-        subtitle="Every meaningful journey begins with a simple conversation. Reach out directly to discuss dates, routes, and authentic cultural experiences."
-        backgroundImage="/explore-with-sakar/images/mountains/sunrise-himalayas.jpg"
-        breadcrumbs={[{ label: 'Contact' }]}
-      />
-
-      {/* 2. Direct Contact Channels */}
-      <section className="py-12 bg-white border-b border-parchment-300">
-        <div className="editorial-container max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {/* WhatsApp */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-sand/60 border border-parchment-300 text-center space-y-3 hover:bg-white hover:shadow-subtle transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
-                <Phone className="w-6 h-6" />
-              </div>
-              <h3 className="font-editorial-serif text-lg font-bold text-himalaya-950">
-                WhatsApp Direct
-              </h3>
-              <p className="text-xs text-himalaya-600 font-light">
-                {settings.contact?.phoneDisplay || '+977 984-0482692'}
-              </p>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-xs font-bold text-emerald-700 hover:underline pt-1"
-              >
-                Chat with Sakar on WhatsApp →
-              </a>
-            </div>
-
-            {/* Email */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-sand/60 border border-parchment-300 text-center space-y-3 hover:bg-white hover:shadow-subtle transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-terracotta/10 text-terracotta flex items-center justify-center mx-auto">
-                <Mail className="w-6 h-6" />
-              </div>
-              <h3 className="font-editorial-serif text-lg font-bold text-himalaya-950">
-                Email Inquiries
-              </h3>
-              <p className="text-xs text-himalaya-600 font-light">
-                {settings.contact?.email || 'Explorewithsakar@gmail.com'}
-              </p>
-              <a
-                href={`mailto:${settings.contact?.email || 'Explorewithsakar@gmail.com'}`}
-                className="inline-block text-xs font-bold text-terracotta hover:underline pt-1"
-              >
-                Send Email to Sakar →
-              </a>
-            </div>
-
-            {/* Base Location */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-sand/60 border border-parchment-300 text-center space-y-3 hover:bg-white hover:shadow-subtle transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-saffron/15 text-saffron-dark flex items-center justify-center mx-auto">
-                <MapPin className="w-6 h-6" />
-              </div>
-              <h3 className="font-editorial-serif text-lg font-bold text-himalaya-950">
-                Kathmandu Base
-              </h3>
-              <p className="text-xs text-himalaya-600 font-light">
-                {settings.contact?.addressDetails || 'Patan & Thamel Heritage Quarter'}
-              </p>
-              <span className="inline-block text-xs text-himalaya-500 pt-1">
-                {settings.contact?.address || 'Kathmandu, Nepal'}
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Inquiry Form Section */}
-      <section className="py-8">
-        <InquiryForm />
-      </section>
-    </div>
-  );
+export default async function ContactPage() {
+  const pageContent = await getPageContent('contact');
+  return <ContactClient pageContent={pageContent} />;
 }

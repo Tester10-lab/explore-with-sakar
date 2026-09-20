@@ -205,6 +205,7 @@ export default function AdminPageEditor() {
         addToast('success', 'Draft saved successfully');
         fetchRevisions();
         setPreviewKey((k) => k + 1);
+        router.refresh();
       } else {
         const err = await res.json().catch(() => ({}));
         addToast('error', err.error || 'Failed to save draft');
@@ -235,6 +236,7 @@ export default function AdminPageEditor() {
         addToast('success', 'Page published live to main website!');
         fetchRevisions();
         setPreviewKey((k) => k + 1);
+        router.refresh();
       } else {
         const err = await res.json().catch(() => ({}));
         addToast('error', err.error || 'Failed to publish page');
@@ -415,6 +417,11 @@ export default function AdminPageEditor() {
             {/* SECTIONS TAB */}
             {activeTab === 'sections' && (
               <div className="space-y-4">
+                <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-amber-300 text-xs flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-amber-400" />
+                  <span>Only hero text and section visibility are live for this page.</span>
+                </div>
+
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">

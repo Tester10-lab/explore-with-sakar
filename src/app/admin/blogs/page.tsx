@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Plus,
   Search,
@@ -22,6 +23,7 @@ import { ExtendedBlogPost } from '@/types/cms';
 import { BlogCategory } from '@/types';
 
 export default function AdminBlogsPage() {
+  const router = useRouter();
   const [blogs, setBlogs] = useState<ExtendedBlogPost[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -80,6 +82,7 @@ export default function AdminBlogsPage() {
         'success',
         `Article "${blog.title}" marked as ${newStatus}`
       );
+      router.refresh();
       fetchBlogs();
     } catch (err: any) {
       showToast('error', err?.message || 'Error updating status');
@@ -100,6 +103,7 @@ export default function AdminBlogsPage() {
 
       showToast('success', `Deleted "${deleteTarget.title}"`);
       setDeleteTarget(null);
+      router.refresh();
       fetchBlogs();
     } catch (err: any) {
       showToast('error', err?.message || 'Error deleting blog');

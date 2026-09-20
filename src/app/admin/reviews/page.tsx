@@ -23,6 +23,7 @@ import {
   Calendar,
   ExternalLink,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ImageUploader from '@/components/admin/ImageUploader';
 import ConfirmationModal from '@/components/admin/ConfirmationModal';
@@ -30,6 +31,7 @@ import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { ExtendedTestimonial, HandwrittenReviewPage } from '@/types/cms';
 
 export default function AdminReviewsPage() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<'handwritten' | 'testimonials'>('handwritten');
 
   // Digital Reviews state
@@ -117,6 +119,7 @@ export default function AdminReviewsPage() {
           : `Review by ${review.author} is now visible on public site!`
       );
       fetchReviews();
+      router.refresh();
     } catch (err: any) {
       showToast('error', err?.message || 'Error updating review');
     }
@@ -150,6 +153,7 @@ export default function AdminReviewsPage() {
       showToast('success', isNewReview ? 'Review created successfully!' : 'Review updated!');
       setEditingReview(null);
       fetchReviews();
+      router.refresh();
     } catch (err: any) {
       showToast('error', err?.message || 'Failed to save review');
     } finally {
@@ -174,6 +178,7 @@ export default function AdminReviewsPage() {
       showToast('success', `Review by ${deleteTarget.author} deleted successfully`);
       setDeleteTarget(null);
       fetchReviews();
+      router.refresh();
     } catch (err: any) {
       showToast('error', err?.message || 'Failed to delete review');
     } finally {
@@ -206,6 +211,7 @@ export default function AdminReviewsPage() {
         }),
       ]);
       showToast('info', 'Review order updated');
+      router.refresh();
     } catch (err) {
       showToast('error', 'Failed to update order');
       fetchReviews();
@@ -230,6 +236,7 @@ export default function AdminReviewsPage() {
           : `Page #${page.pageNumber} (${page.guestName}) is now live in guestbook!`
       );
       fetchHandwrittenPages();
+      router.refresh();
     } catch (err: any) {
       showToast('error', err?.message || 'Error updating page');
     }
@@ -266,6 +273,7 @@ export default function AdminReviewsPage() {
       );
       setEditingPage(null);
       fetchHandwrittenPages();
+      router.refresh();
     } catch (err: any) {
       showToast('error', err?.message || 'Failed to save page');
     } finally {
@@ -290,6 +298,7 @@ export default function AdminReviewsPage() {
       showToast('success', `Page #${deletePageTarget.pageNumber} deleted successfully`);
       setDeletePageTarget(null);
       fetchHandwrittenPages();
+      router.refresh();
     } catch (err: any) {
       showToast('error', err?.message || 'Failed to delete page');
     } finally {

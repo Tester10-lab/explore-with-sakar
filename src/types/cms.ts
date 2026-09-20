@@ -366,6 +366,11 @@ export interface NavigationLink {
   openInNewTab?: boolean;
   visible: boolean;
   order: number;
+  description?: string;
+  badge?: string;
+  icon?: string;
+  subtitle?: string;
+  columns?: number;
   children?: NavigationLink[];
 }
 

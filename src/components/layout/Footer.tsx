@@ -9,10 +9,11 @@ import {
   ArrowUpRight,
   Heart,
 } from 'lucide-react';
-import { useSettings } from '@/context/SettingsContext';
+import { useSettings, useSiteNavigation } from '@/context/SettingsContext';
 
 export default function Footer() {
   const { settings } = useSettings();
+  const siteNav = useSiteNavigation();
 
   const whatsappUrl = `https://wa.me/${settings.contact?.whatsappNumber || '9779840482692'}?text=${encodeURIComponent(
     'Namaste Sakar, I would like to consult with you about planning a trip in Nepal.'
@@ -81,122 +82,173 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 1: Experiences */}
-          <div className="space-y-4">
-            <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
-              Experiences
-            </h4>
-            <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
-              <li>
-                <Link href="/experience/go-beyond" className="hover:text-terracotta transition-colors">
-                  Go Beyond the Map
-                </Link>
-              </li>
-              <li>
-                <Link href="/experience/go-spiritual" className="hover:text-terracotta transition-colors">
-                  Go Spiritual
-                </Link>
-              </li>
-              <li>
-                <Link href="/experience/feel-closer" className="hover:text-terracotta transition-colors">
-                  Feel Closer
-                </Link>
-              </li>
-              <li>
-                <Link href="/experience/leave-a-mark" className="hover:text-terracotta transition-colors">
-                  Leave a Mark
-                </Link>
-              </li>
-              <li>
-                <Link href="/experience/custom-private-journeys" className="hover:text-terracotta transition-colors">
-                  Custom Private Journeys
-                </Link>
-              </li>
-              <li>
-                <Link href="/experience" className="font-medium text-terracotta hover:underline pt-1 inline-block">
-                  All Curated Experiences →
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* Dynamic or Fallback Footer Columns */}
+          {siteNav?.footer?.columns && siteNav.footer.columns.length > 0 ? (
+            siteNav.footer.columns.map((col, cIdx) => {
+              const visibleLinks = (col.links || [])
+                .filter((link) => link.visible !== false)
+                .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+              const isLast = cIdx === siteNav.footer.columns.length - 1;
 
-          {/* Column 2: Explore */}
-          <div className="space-y-4">
-            <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
-              Explore
-            </h4>
-            <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
-              <li>
-                <Link href="/destinations" className="hover:text-terracotta transition-colors">
-                  Destinations
-                </Link>
-              </li>
-              <li>
-                <Link href="/experience" className="hover:text-terracotta transition-colors">
-                  Curated Itineraries
-                </Link>
-              </li>
-              <li>
-                <Link href="/packages" className="hover:text-terracotta transition-colors">
-                  Packages & Pricing
-                </Link>
-              </li>
-              <li>
-                <Link href="/gallery" className="hover:text-terracotta transition-colors">
-                  Visual Journey Gallery
-                </Link>
-              </li>
-              <li>
-                <Link href="/events" className="hover:text-terracotta transition-colors">
-                  Events & Festivals
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-terracotta transition-colors">
-                  Stories & Field Notes
-                </Link>
-              </li>
-            </ul>
-          </div>
+              return (
+                <div key={col.id || col.title} className="space-y-4">
+                  <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
+                    {col.title}
+                  </h4>
+                  <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
+                    {visibleLinks.map((link) => (
+                      <li key={link.id || link.url}>
+                        <Link
+                          href={link.url}
+                          target={link.openInNewTab ? '_blank' : undefined}
+                          rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+                          className="hover:text-terracotta transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
 
-          {/* Column 3: Travel Guide & Contact */}
-          <div className="space-y-4">
-            <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
-              Travel Guide
-            </h4>
-            <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
-              <li>
-                <Link href="/resources" className="hover:text-terracotta transition-colors">
-                  Travel Resources & Visas
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="hover:text-terracotta transition-colors">
-                  Frequently Asked Questions
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-terracotta transition-colors">
-                  Contact & Inquiries
-                </Link>
-              </li>
-            </ul>
+                  {isLast && (
+                    <div className="pt-4 border-t border-parchment-200 space-y-2 text-xs text-himalaya-600 font-light">
+                      <div className="flex items-center space-x-2">
+                        <MapPin className="w-3.5 h-3.5 text-terracotta shrink-0" />
+                        <span>{settings.contact?.address || 'Kathmandu, Nepal'}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Mail className="w-3.5 h-3.5 text-terracotta shrink-0" />
+                        <span className="truncate">{settings.contact?.email || 'Explorewithsakar@gmail.com'}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Phone className="w-3.5 h-3.5 text-terracotta shrink-0" />
+                        <span>{settings.contact?.phoneDisplay || '+977 984-0482692'}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <>
+              {/* Column 1: Experiences */}
+              <div className="space-y-4">
+                <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
+                  Experiences
+                </h4>
+                <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
+                  <li>
+                    <Link href="/experience/go-beyond" className="hover:text-terracotta transition-colors">
+                      Go Beyond the Map
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/experience/go-spiritual" className="hover:text-terracotta transition-colors">
+                      Go Spiritual
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/experience/feel-closer" className="hover:text-terracotta transition-colors">
+                      Feel Closer
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/experience/leave-a-mark" className="hover:text-terracotta transition-colors">
+                      Leave a Mark
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/experience/custom-private-journeys" className="hover:text-terracotta transition-colors">
+                      Custom Private Journeys
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/experience" className="font-medium text-terracotta hover:underline pt-1 inline-block">
+                      All Curated Experiences →
+                    </Link>
+                  </li>
+                </ul>
+              </div>
 
-            <div className="pt-4 border-t border-parchment-200 space-y-2 text-xs text-himalaya-600 font-light">
-              <div className="flex items-center space-x-2">
-                <MapPin className="w-3.5 h-3.5 text-terracotta shrink-0" />
-                <span>{settings.contact?.address || 'Kathmandu, Nepal'}</span>
+              {/* Column 2: Explore */}
+              <div className="space-y-4">
+                <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
+                  Explore
+                </h4>
+                <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
+                  <li>
+                    <Link href="/destinations" className="hover:text-terracotta transition-colors">
+                      Destinations
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/experience" className="hover:text-terracotta transition-colors">
+                      Curated Itineraries
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/packages" className="hover:text-terracotta transition-colors">
+                      Packages & Pricing
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/gallery" className="hover:text-terracotta transition-colors">
+                      Visual Journey Gallery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/events" className="hover:text-terracotta transition-colors">
+                      Events & Festivals
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/blog" className="hover:text-terracotta transition-colors">
+                      Stories & Field Notes
+                    </Link>
+                  </li>
+                </ul>
               </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="w-3.5 h-3.5 text-terracotta shrink-0" />
-                <span className="truncate">{settings.contact?.email || 'Explorewithsakar@gmail.com'}</span>
+
+              {/* Column 3: Travel Guide & Contact */}
+              <div className="space-y-4">
+                <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
+                  Travel Guide
+                </h4>
+                <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
+                  <li>
+                    <Link href="/resources" className="hover:text-terracotta transition-colors">
+                      Travel Resources & Visas
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/faq" className="hover:text-terracotta transition-colors">
+                      Frequently Asked Questions
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/contact" className="hover:text-terracotta transition-colors">
+                      Contact & Inquiries
+                    </Link>
+                  </li>
+                </ul>
+
+                <div className="pt-4 border-t border-parchment-200 space-y-2 text-xs text-himalaya-600 font-light">
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="w-3.5 h-3.5 text-terracotta shrink-0" />
+                    <span>{settings.contact?.address || 'Kathmandu, Nepal'}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Mail className="w-3.5 h-3.5 text-terracotta shrink-0" />
+                    <span className="truncate">{settings.contact?.email || 'Explorewithsakar@gmail.com'}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Phone className="w-3.5 h-3.5 text-terracotta shrink-0" />
+                    <span>{settings.contact?.phoneDisplay || '+977 984-0482692'}</span>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="w-3.5 h-3.5 text-terracotta shrink-0" />
-                <span>{settings.contact?.phoneDisplay || '+977 984-0482692'}</span>
-              </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
 
         {/* Bottom Legal & Philosophy Bar */}

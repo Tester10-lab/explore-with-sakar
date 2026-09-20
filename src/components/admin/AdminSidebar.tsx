@@ -92,17 +92,17 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
       items: [
         {
           label: 'Go Beyond the Map',
-          href: '/admin/pages/beyond-the-map',
+          href: '/admin/pages/go-beyond',
           icon: Compass,
         },
         {
           label: 'Go Within',
-          href: '/admin/pages/spiritual-wellness',
+          href: '/admin/pages/go-spiritual',
           icon: Sparkles,
         },
         {
           label: 'Feel Closer',
-          href: '/admin/pages/homestays',
+          href: '/admin/pages/feel-closer',
           icon: Home,
         },
         {
@@ -117,7 +117,7 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
         },
         {
           label: 'Custom Private Journeys',
-          href: '/admin/pages/custom-journeys',
+          href: '/admin/pages/custom-private-journeys',
           icon: ShieldCheck,
         },
       ],

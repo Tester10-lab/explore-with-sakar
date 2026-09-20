@@ -25,6 +25,7 @@ import {
 import AdminHeader from '@/components/admin/AdminHeader';
 import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { NavigationConfig, NavigationLink } from '@/types/cms';
+import { AVAILABLE_NAV_ICONS } from '@/lib/navIcons';
 
 export default function AdminNavigationPage() {
   const router = useRouter();
@@ -640,6 +641,114 @@ export default function AdminNavigationPage() {
                   className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm font-mono text-slate-100"
                 />
               </div>
+
+              {/* Top-Level Header Item Fields */}
+              {!editingLink.isFooter && !editingLink.parentLinkId && (
+                <>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      Menu Subtitle (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      value={editingLink.link.subtitle || ''}
+                      placeholder="e.g. Our Curated Travel Experiences"
+                      onChange={(e) =>
+                        setEditingLink({
+                          ...editingLink,
+                          link: { ...editingLink.link, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      Dropdown Columns (1 or 2)
+                    </label>
+                    <select
+                      value={editingLink.link.columns || 1}
+                      onChange={(e) =>
+                        setEditingLink({
+                          ...editingLink,
+                          link: { ...editingLink.link, columns: Number(e.target.value) },
+                        })
+                      }
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100"
+                    >
+                      <option value={1}>1 Column</option>
+                      <option value={2}>2 Columns (Mega Menu)</option>
+                    </select>
+                  </div>
+                </>
+              )}
+
+              {/* Sub-item Fields (Dropdown Children) */}
+              {!editingLink.isFooter && Boolean(editingLink.parentLinkId) && (
+                <>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      Short Description
+                    </label>
+                    <input
+                      type="text"
+                      value={editingLink.link.description || ''}
+                      placeholder="e.g. Living courtyards & artisan guilds"
+                      onChange={(e) =>
+                        setEditingLink({
+                          ...editingLink,
+                          link: { ...editingLink.link, description: e.target.value },
+                        })
+                      }
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        Pill / Badge Text
+                      </label>
+                      <input
+                        type="text"
+                        value={editingLink.link.badge || ''}
+                        placeholder="e.g. Exploration"
+                        onChange={(e) =>
+                          setEditingLink({
+                            ...editingLink,
+                            link: { ...editingLink.link, badge: e.target.value },
+                          })
+                        }
+                        className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                        Icon Key
+                      </label>
+                      <select
+                        value={editingLink.link.icon || ''}
+                        onChange={(e) =>
+                          setEditingLink({
+                            ...editingLink,
+                            link: { ...editingLink.link, icon: e.target.value || undefined },
+                          })
+                        }
+                        className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100"
+                      >
+                        <option value="">None</option>
+                        {AVAILABLE_NAV_ICONS.map((ico) => (
+                          <option key={ico.key} value={ico.key}>
+                            {ico.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </>
+              )}
 
               <div className="flex items-center gap-2 pt-2">
                 <input

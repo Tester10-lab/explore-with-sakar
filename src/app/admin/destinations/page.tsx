@@ -19,11 +19,13 @@ import {
   Mountain,
   Layers,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { CmsDestination } from '@/types/cms';
 
 export default function AdminDestinationsPage() {
+  const router = useRouter();
   const [destinations, setDestinations] = useState<CmsDestination[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -109,6 +111,7 @@ export default function AdminDestinationsPage() {
       if (res.ok) {
         addToast('success', isEdit ? 'Destination updated' : 'Destination created');
         setEditingDest(null);
+        router.refresh();
         fetchDestinations();
       } else {
         const errorData = await res.json();
@@ -127,6 +130,7 @@ export default function AdminDestinationsPage() {
       const res = await fetch(`/api/admin/destinations/${id}`, { method: 'DELETE' });
       if (res.ok) {
         addToast('success', 'Destination deleted');
+        router.refresh();
         fetchDestinations();
       } else {
         const errorData = await res.json().catch(() => ({}));
@@ -146,6 +150,7 @@ export default function AdminDestinationsPage() {
       });
       if (res.ok) {
         addToast('success', `Destination ${!dest.isVisible ? 'published' : 'hidden'}`);
+        router.refresh();
         fetchDestinations();
       } else {
         const errorData = await res.json().catch(() => ({}));
@@ -181,6 +186,7 @@ export default function AdminDestinationsPage() {
         throw new Error(errorData.error || 'Failed to save order');
       }
       addToast('success', 'Destinations reordered');
+      router.refresh();
     } catch (err: any) {
       addToast('error', err?.message || 'Failed to save order');
       fetchDestinations();

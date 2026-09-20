@@ -64,8 +64,29 @@
   - Pre-rendered static pages generated across all 106 routes.
   - Zero type errors with `npx tsc --noEmit`. Production build passed with 0 errors.
 
-### Phase 3
-*(Pending execution)*
+### Phase 3: Admin Matches Site
+- **P3.1 Fix AdminSidebar Links**:
+  - Replaced broken links in `src/components/admin/AdminSidebar.tsx` with valid seed slugs (`go-beyond`, `go-spiritual`, `feel-closer`, `custom-private-journeys`).
+  - Verified all sidebar links now resolve to valid routes and seeded content (verified Test T12).
+- **P3.2 Dynamic Navigation Engine**:
+  - Created `src/lib/navIcons.ts` with custom Lucide icon registry and graceful fallbacks.
+  - Added seeded default navigation structure in `src/lib/seed.ts` matching existing public navbar.
+  - Exported `useSiteNavigation` hook in `src/context/SettingsContext.tsx` with resilient fallback.
+  - Updated `Navbar.tsx`, `MobileNav.tsx`, and `Footer.tsx` to render dynamically from CMS settings, falling back seamlessly if unconfigured.
+  - Added icon picker in `src/app/admin/navigation/page.tsx` with live previews (verified Test T8).
+- **P3.3 Services Architecture Audit**:
+  - Verified `ServiceCard` and `SERVICE_PILLARS` are unused on public routes.
+  - Confirmed `/admin/services` remains safely decoupled and excluded from main admin navigation.
+- **P3.4 Page Editor Overrides & Admin Sync**:
+  - Created `src/lib/pageContentHelper.ts` with `getPageHeroOverrides` and variadic `isSectionVisible`.
+  - Added notice banner and `router.refresh()` in `src/app/admin/pages/[slug]/page.tsx`.
+  - Connected `pageContent` and section visibility toggles into all 8 hand-coded pages (`experience/[slug]`, `GoBeyondExperience`, `GoSpiritualExperience`, `FeelCloserExperience`, `LeaveAMarkExperience`, `CustomJourneysExperience`, `about/page.tsx`, `contact/page.tsx`, and `resources/page.tsx`).
+  - Refactored `src/app/contact/page.tsx` into a Server Component with `src/components/contact/ContactClient.tsx`.
+  - Added `router.refresh()` to every mutation in all admin management pages (`reviews`, `photos`, `inquiries`, `events`, `destinations`, `faq`, `packages`, `experiences`, `blogs`, `settings`, `pages`) ensuring immediate client-side synchronization.
+- **Verification**:
+  - `npx tsc --noEmit` exited with code 0.
+  - `npm run build` generated 106/106 static pages with code 0.
+  - Verified T8 (navigation dynamic sync and default fallbacks) and T12 (all AdminSidebar links resolve to valid CMS entries).
 
 ### Phase 4
 *(Pending execution)*
