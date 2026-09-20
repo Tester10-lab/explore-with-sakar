@@ -2783,42 +2783,42 @@
       "updatedAt": "2026-09-19T18:34:34.849Z"
     },
     {
-      "id": "pkg-13-upper-mustang-forbidden-kingdom-caves",
-      "name": "Upper Mustang: The Walled Kingdom of Lo Manthang & Sky Caves",
-      "slug": "upper-mustang-forbidden-kingdom-caves",
-      "summary": "Enter a forgotten realm preserved behind the Annapurna and Dhaulagiri peaks. Upper Mustang remains a pristine living enclave of Tibetan culture. Walk inside the walled medieval capital of Lo Manthang, explore 2,000-year-old human-carved sky caves, and marvel at preserved 14th-century monastery murals.",
-      "price": 3600,
+      "id": "pkg-13-gorkha-historic-citadel-foothills",
+      "name": "Gorkha: Historic Royal Citadel & Foothill Living Heritage",
+      "slug": "gorkha-historic-citadel-foothills",
+      "summary": "Perched on a dramatic mountain ridge, the historic citadel of Gorkha offers a profound look into Nepal's founding history. Walk up ancient stone staircases to the 16th-century royal palace, visit sacred shrines overlooking panoramic Himalayan peaks, and spend quiet days in peaceful foothill villages.",
+      "price": 1850,
       "currency": "USD",
       "priceNote": "Per person (custom group pricing)",
-      "duration": "11 – 14 Days",
+      "duration": "7 – 9 Days",
       "highlights": [
-        "Walk the narrow flagstone alleys inside the historic walled capital of Lo Manthang",
-        "Inspect ancient Buddhist frescoes and giant Maitreya statues in 14th-century gompas",
-        "Hike to the mysterious multi-level sky caves of Chhoser carved into vertical cliffs",
-        "Witness stark trans-Himalayan desert landscapes glowing red and gold at dusk",
-        "Stay in authentic Mustang earthen lodges hosted by local Loba families"
+        "Walk the ancient stone stairways to the hilltop Gorkha Durbar and Gorakhnath cave shrine",
+        "Panoramic sunrise views of the Manaslu, Himalchuli, and Annapurna ranges",
+        "Stay in traditional foothill village homestays with local Gurung and Magar families",
+        "Learn traditional hill farming, organic cooking, and regional folk history",
+        "Unhurried walks along serene ridgeline trails away from commercial tourist circuits"
       ],
       "inclusions": [
-        "Full personal hosting and translation by Sakar throughout",
-        "Special Upper Mustang Restricted Area Permit ($500 government fee included)",
-        "ACAP conservation entry permits and local administrative checkpoints",
-        "Private rugged 4WD overland vehicle with experienced mountain driver",
-        "All boutique Loba family lodge accommodations and hearty traditional meals"
+        "Full personal hosting and cultural interpretation by Sakar throughout",
+        "All heritage site entrance fees and community donations",
+        "Private comfortable overland transport with experienced driver",
+        "Authentic heritage inn and village homestay accommodations",
+        "All freshly prepared organic farm meals and mountain refreshments"
       ],
       "exclusions": [
         "International flights",
         "Nepal visa",
         "Personal travel insurance"
       ],
-      "accommodationStyle": "Traditional Earthen Stone Lodges & Heritage Inns",
+      "accommodationStyle": "Heritage Inns & Verified Mountain Family Homestays",
       "heroImage": {
         "src": "/explore-with-sakar/images/mountains/himalayan-peaks.jpg",
-        "alt": "Ochre sandstone cliffs and ancient chortens of Upper Mustang"
+        "alt": "Ancient hilltop palace and terraced valleys of Gorkha"
       },
       "gallery": [
         {
           "src": "/explore-with-sakar/images/mountains/himalayan-peaks.jpg",
-          "alt": "Ochre sandstone cliffs and ancient chortens of Upper Mustang"
+          "alt": "Ancient hilltop palace and terraced valleys of Gorkha"
         }
       ],
       "featured": false,

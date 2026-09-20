@@ -524,44 +524,44 @@ export const TRAVEL_PACKAGES: PackageItem[] = [
     "currency": "USD"
   },
   {
-    "id": "upper-mustang-forbidden-kingdom-caves",
-    "slug": "upper-mustang-forbidden-kingdom-caves",
-    "title": "Upper Mustang: The Walled Kingdom of Lo Manthang & Sky Caves",
-    "nepaliTitle": "माथिल्लो मुस्ताङ: लो मान्थाङ र गुफाहरू",
-    "tagline": "Centuries-Old Tibetan Buddhist Monasteries, Red Canyons & Living Royal Lineage",
-    "duration": "11 – 14 Days",
-    "idealFor": "Adventurers, anthropologists, spiritual seekers, and landscape photographers",
-    "season": "May – Nov (Monsoon-free rainshadow paradise)",
+    "id": "gorkha-historic-citadel-foothills",
+    "slug": "gorkha-historic-citadel-foothills",
+    "title": "Gorkha: Historic Royal Citadel & Foothill Living Heritage",
+    "nepaliTitle": "गोरखा: ऐतिहासिक दरबार र गाउँले जनजीवन",
+    "tagline": "Ancient Hilltop Palace, Gurung Heritage & Unhurried Himalayan Ridgeways",
+    "duration": "7 – 9 Days",
+    "idealFor": "History enthusiasts, cultural travelers, and seekers of quiet mountain life",
+    "season": "Sep – May (Clear Himalayan views and pleasant hill climate)",
     "groupSize": "Private (2 – 6 Travelers)",
     "image": {
       "src": "/explore-with-sakar/images/mountains/himalayan-peaks.jpg",
-      "alt": "Ochre sandstone cliffs and ancient chortens of Upper Mustang"
+      "alt": "Ancient hilltop palace and terraced valleys of Gorkha"
     },
-    "overview": "Enter a forgotten realm preserved behind the Annapurna and Dhaulagiri peaks. Upper Mustang remains a pristine living enclave of Tibetan culture. Walk inside the walled medieval capital of Lo Manthang, explore 2,000-year-old human-carved sky caves, and marvel at preserved 14th-century monastery murals.",
+    "overview": "Perched on a dramatic mountain ridge, the historic citadel of Gorkha offers a profound look into Nepal's founding history. Walk up ancient stone staircases to the 16th-century royal palace, visit sacred shrines overlooking panoramic Himalayan peaks, and spend quiet days in peaceful foothill villages.",
     "highlights": [
-      "Walk the narrow flagstone alleys inside the historic walled capital of Lo Manthang",
-      "Inspect ancient Buddhist frescoes and giant Maitreya statues in 14th-century gompas",
-      "Hike to the mysterious multi-level sky caves of Chhoser carved into vertical cliffs",
-      "Witness stark trans-Himalayan desert landscapes glowing red and gold at dusk",
-      "Stay in authentic Mustang earthen lodges hosted by local Loba families"
+      "Walk the ancient stone stairways to the hilltop Gorkha Durbar and Gorakhnath cave shrine",
+      "Panoramic sunrise views of the Manaslu, Himalchuli, and Annapurna ranges",
+      "Stay in traditional foothill village homestays with local Gurung and Magar families",
+      "Learn traditional hill farming, organic cooking, and regional folk history",
+      "Unhurried walks along serene ridgeline trails away from commercial tourist circuits"
     ],
     "inclusions": [
-      "Full personal hosting and translation by Sakar throughout",
-      "Special Upper Mustang Restricted Area Permit ($500 government fee included)",
-      "ACAP conservation entry permits and local administrative checkpoints",
-      "Private rugged 4WD overland vehicle with experienced mountain driver",
-      "All boutique Loba family lodge accommodations and hearty traditional meals"
+      "Full personal hosting and cultural interpretation by Sakar throughout",
+      "All heritage site entrance fees and community donations",
+      "Private comfortable overland transport with experienced driver",
+      "Authentic heritage inn and village homestay accommodations",
+      "All freshly prepared organic farm meals and mountain refreshments"
     ],
     "exclusions": [
       "International flights",
       "Nepal visa",
       "Personal travel insurance"
     ],
-    "accommodationStyle": "Traditional Earthen Stone Lodges & Heritage Inns",
-    "transportStyle": "Private 4WD High-Clearance Jeep & Walking",
+    "accommodationStyle": "Heritage Inns & Verified Mountain Family Homestays",
+    "transportStyle": "Private Overland Vehicle & Gentle Walking",
     "customizable": true,
     "featured": false,
-    "price": 3600,
+    "price": 1850,
     "currency": "USD"
   },
   {

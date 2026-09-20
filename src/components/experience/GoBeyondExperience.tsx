@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
 import CTASection from '@/components/common/CTASection';
-import { BEYOND_EXPERIENCES } from '@/app/services/beyond-the-map/BeyondTheMapClient';
+import { BEYOND_EXPERIENCES } from '@/data/beyond-the-map';
 
 const ITEMS_PER_PAGE = 4;
 
@@ -32,6 +32,13 @@ export default function GoBeyondExperience() {
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
     const el = document.getElementById('beyond-editorial-grid');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -58,7 +65,7 @@ export default function GoBeyondExperience() {
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <span className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-terracotta/10 text-terracotta text-xs font-semibold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Sequenced Editorial Archive</span>
+              <span>Dedicated Experience Package</span>
             </span>
 
             <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
@@ -72,27 +79,19 @@ export default function GoBeyondExperience() {
             {/* Chapter Quick Index */}
             <div className="pt-6 border-t border-parchment-200">
               <p className="text-xs font-mono font-bold uppercase tracking-wider text-himalaya-500 mb-3">
-                Complete 12-Experience Series Index:
+                The 4 Canonical Narratives:
               </p>
               <div className="flex flex-wrap items-center justify-center gap-2">
-                {BEYOND_EXPERIENCES.map((exp, idx) => {
-                  const targetPage = Math.floor(idx / ITEMS_PER_PAGE) + 1;
-                  const isActivePage = targetPage === safeCurrentPage;
-                  return (
-                    <button
-                      key={exp.id}
-                      onClick={() => handlePageChange(targetPage)}
-                      className={`px-3 py-1.5 rounded-full text-xs transition-all font-mono ${
-                        isActivePage
-                          ? 'bg-terracotta text-white shadow-warm font-bold'
-                          : 'bg-parchment-100 text-himalaya-700 hover:bg-parchment-200 border border-parchment-300'
-                      }`}
-                      title={`${exp.pageNumber}: ${exp.title}`}
-                    >
-                      <span className="font-bold">{exp.pageNumber}:</span> {exp.title}
-                    </button>
-                  );
-                })}
+                {BEYOND_EXPERIENCES.map((exp) => (
+                  <button
+                    key={exp.id}
+                    onClick={() => scrollToSection(exp.id)}
+                    className="px-3.5 py-1.5 rounded-full text-xs transition-all font-mono bg-parchment-100 text-himalaya-700 hover:bg-parchment-200 border border-parchment-300 hover:border-terracotta"
+                    title={`${exp.pageNumber}: ${exp.title}`}
+                  >
+                    <span className="font-bold text-terracotta">{exp.pageNumber}:</span> {exp.title}
+                  </button>
+                ))}
               </div>
             </div>
           </div>

@@ -44,7 +44,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     sections: [
       { id: 'sec-btm-hero', type: 'hero', label: 'Page Hero Header', visible: true, order: 0, content: { badge: 'Pillar 01 • Guided Exploration', title: 'Go Beyond the Map', subtitle: 'Step past grand facades into the living courtyards, medieval stone mysteries, master artisan guilds, and sacred geometry.' } },
       { id: 'sec-btm-manifesto', type: 'philosophy', label: 'Beyond the Map Philosophy & Manifesto', visible: true, order: 1, content: { heading: 'Not Just Visiting Places — Stepping Inside the Living Soul of Nepal' } },
-      { id: 'sec-btm-chapters', type: 'chapters-grid', label: 'The 12 Distinct Narrative Chapters (Kathmandu Durbar Square, Bhaktapur, Patan, Pokhara, etc.)', visible: true, order: 2, content: {} },
+      { id: 'sec-btm-chapters', type: 'chapters-grid', label: 'The 4 Distinct Editorial Narratives (Kathmandu Durbar Square, Bhaktapur Durbar Square, Patan Durbar Square, Pokhara)', visible: true, order: 2, content: {} },
       { id: 'sec-btm-host-note', type: 'host-note', label: 'Host Note from Sakar', visible: true, order: 3, content: { quote: 'Nepal Is Best Experienced Hand-in-Hand, Not Through a Turnstile.' } },
       { id: 'sec-btm-cta', type: 'cta', label: 'Design Your Beyond the Map Journey CTA', visible: true, order: 4, content: {} },
     ],
