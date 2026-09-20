@@ -178,11 +178,11 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                           Leave a Mark
                         </span>
                         <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
-                          Impact
+                          Strategic
                         </span>
                       </div>
                       <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                        Regenerative travel, rural education support & community conservation.
+                        Strategic volunteer tourism & administrative empowerment.
                       </p>
                     </Link>
 

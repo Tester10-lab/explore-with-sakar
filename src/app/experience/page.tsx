@@ -55,11 +55,11 @@ const CORE_PILLARS = [
   },
   {
     title: 'Leave a Mark',
-    subtitle: 'Regenerative Travel & Conservation',
-    description: 'Grassroots community development, rural mountain school support, and native tree reforestation.',
+    subtitle: 'Strategic Volunteer Tourism',
+    description: 'Matching your actual professional skills with local communities in Nepal that need structural and administrative empowerment.',
     href: '/experience/leave-a-mark',
-    badge: 'Impact',
-    icon: Heart,
+    badge: 'Strategic Impact',
+    icon: Sparkles,
     image: '/explore-with-sakar/images/trails/river-gorge.jpg',
   },
   {

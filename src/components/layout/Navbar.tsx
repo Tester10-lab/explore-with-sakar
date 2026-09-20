@@ -74,9 +74,9 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
       },
       {
         title: 'Leave a Mark',
-        description: 'Regenerative travel, rural education support & community conservation.',
+        description: 'Strategic volunteer tourism & administrative empowerment for grassroots communities.',
         href: '/experience/leave-a-mark',
-        badge: 'Impact',
+        badge: 'Strategic',
         icon: Heart,
       },
       {

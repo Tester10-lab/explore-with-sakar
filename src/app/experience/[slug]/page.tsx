@@ -67,14 +67,14 @@ export function generateMetadata({ params }: Props): Metadata {
 
   if (params.slug === 'leave-a-mark') {
     return {
-      title: 'Leave a Mark: Regenerative Travel & Community Conservation | Explore With Sakar',
+      title: 'Leave a Mark: Strategic Volunteer Tourism | Explore With Sakar',
       description:
-        'Travel that gives back more than it takes. Community-led conservation, rural education, and native reforestation in Nepal.',
+        'Matching your professional skills with local communities in Nepal that need structural, strategic, and administrative empowerment.',
       alternates: { canonical: canonicalUrl },
       openGraph: {
-        title: 'Leave a Mark | Explore With Sakar',
+        title: 'Leave a Mark: Strategic Volunteer Tourism | Explore With Sakar',
         description:
-          'Travel that gives back more than it takes: community-led conservation and reforestation in Nepal.',
+          'Matching your professional skills with local communities in Nepal that need structural, strategic, and administrative empowerment.',
         url: canonicalUrl,
         images: ['/explore-with-sakar/images/trails/river-gorge.jpg'],
       },
