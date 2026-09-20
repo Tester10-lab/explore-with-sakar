@@ -4,9 +4,13 @@ import sharp from 'sharp';
 
 const PUBLIC_DIR = path.resolve('public');
 const MAX_SIZE_BYTES = 500 * 1024; // 500 KB threshold
-const MAX_WIDTH = 1600;
+const MAX_WIDTH = 1920;
+const JPEG_QUALITY = 82;
+
+const isCheckOnly = process.argv.includes('--check');
 
 function getAllFiles(dirPath, arrayOfFiles = []) {
+  if (!fs.existsSync(dirPath)) return arrayOfFiles;
   const files = fs.readdirSync(dirPath);
 
   files.forEach((file) => {
@@ -21,8 +25,7 @@ function getAllFiles(dirPath, arrayOfFiles = []) {
   return arrayOfFiles;
 }
 
-async function optimizeImages() {
-  console.log(`Scanning ${PUBLIC_DIR} for images larger than ${MAX_SIZE_BYTES / 1024} KB...`);
+async function run() {
   const allFiles = getAllFiles(PUBLIC_DIR);
   const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
 
@@ -33,6 +36,22 @@ async function optimizeImages() {
     return stat.size > MAX_SIZE_BYTES;
   });
 
+  if (isCheckOnly) {
+    console.log(`[CHECK MODE] Scanning ${PUBLIC_DIR} for images > 500 KB...`);
+    if (largeImages.length === 0) {
+      console.log('✓ All images in public/ are within the 500 KB limit. (0 oversized)');
+      process.exit(0);
+    } else {
+      console.error(`✗ Found ${largeImages.length} image(s) exceeding 500 KB:`);
+      largeImages.forEach((f) => {
+        const sizeKb = (fs.statSync(f).size / 1024).toFixed(1);
+        console.error(`  - ${path.relative(PUBLIC_DIR, f)}: ${sizeKb} KB`);
+      });
+      process.exit(1);
+    }
+  }
+
+  console.log(`Scanning ${PUBLIC_DIR} for images larger than ${MAX_SIZE_BYTES / 1024} KB...`);
   console.log(`Found ${largeImages.length} images requiring optimization.\n`);
 
   let totalSavedBytes = 0;
@@ -44,30 +63,28 @@ async function optimizeImages() {
 
     try {
       const inputBuffer = fs.readFileSync(file);
-      const image = sharp(inputBuffer);
-      const metadata = await image.metadata();
+      const metadata = await sharp(inputBuffer).metadata();
 
       let pipeline = sharp(inputBuffer).rotate();
 
-      // If very tall or wide, scale down to max 1280 to ensure file is under 500KB
-      const targetDimension = (ext === '.png' && !metadata.hasAlpha) ? 1200 : MAX_WIDTH;
-      if ((metadata.width && metadata.width > targetDimension) || (metadata.height && metadata.height > targetDimension)) {
-        pipeline = pipeline.resize({ width: targetDimension, height: targetDimension, fit: 'inside', withoutEnlargement: true });
+      // Constrain width to 1920 without enlargement
+      if (metadata.width && metadata.width > MAX_WIDTH) {
+        pipeline = pipeline.resize({ width: MAX_WIDTH, withoutEnlargement: true });
       }
 
       let optimizedBuffer;
       if (ext === '.png') {
         optimizedBuffer = await pipeline
-          .png({ quality: 75, compressionLevel: 9, palette: true, colours: 256 })
+          .png({ quality: 80, compressionLevel: 9, palette: !metadata.hasAlpha })
           .toBuffer();
       } else if (ext === '.webp') {
         optimizedBuffer = await pipeline
-          .webp({ quality: 75, effort: 6 })
+          .webp({ quality: 82, effort: 6 })
           .toBuffer();
       } else {
         // jpg or jpeg
         optimizedBuffer = await pipeline
-          .jpeg({ quality: 75, mozjpeg: true })
+          .jpeg({ quality: JPEG_QUALITY, mozjpeg: true })
           .toBuffer();
       }
 
@@ -93,4 +110,4 @@ async function optimizeImages() {
   console.log(`\nOptimization Complete! Total space saved: ${(totalSavedBytes / 1024 / 1024).toFixed(2)} MB`);
 }
 
-optimizeImages();
+run();
