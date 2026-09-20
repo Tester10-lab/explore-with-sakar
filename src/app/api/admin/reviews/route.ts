@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionFromRequest } from '@/lib/auth';
 import { getAllReviews, createReview } from '@/lib/db';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req);
@@ -38,6 +39,8 @@ export async function POST(req: NextRequest) {
       status: body.status || 'approved',
       isVisible: body.isVisible !== undefined ? Boolean(body.isVisible) : true,
     });
+
+    revalidateContent('reviews');
 
     return NextResponse.json({ success: true, review: newReview });
   } catch (error: any) {

@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { getNavigation, updateNavigation } from '@/lib/db';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req) || await getAdminSession(req);
@@ -31,6 +32,7 @@ export async function PUT(req: NextRequest) {
     }
 
     const updated = await updateNavigation(body);
+    revalidateContent('navigation');
     return NextResponse.json({ success: true, navigation: updated });
   } catch (error: any) {
     if (error?.name === 'MongoUnavailableError') {

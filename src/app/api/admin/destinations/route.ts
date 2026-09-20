@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllDestinations, createDestination, reorderDestinations } from '@/lib/db';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req) || await getAdminSession(req);
@@ -29,6 +30,7 @@ export async function POST(req: NextRequest) {
 
     if (body.action === 'reorder' && Array.isArray(body.ids)) {
       await reorderDestinations(body.ids);
+      revalidateContent('destinations');
       return NextResponse.json({ success: true });
     }
 
@@ -48,6 +50,8 @@ export async function POST(req: NextRequest) {
       highlights: Array.isArray(highlights) ? highlights : [],
       isVisible: isVisible !== false,
     });
+
+    revalidateContent('destinations');
 
     return NextResponse.json({ success: true, destination }, { status: 201 });
   } catch (error: any) {

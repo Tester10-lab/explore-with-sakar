@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { updatePackage, deletePackage, getPackageBySlug } from '@/lib/db';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   const session = getSessionFromRequest(req) || await getAdminSession(req);
@@ -16,6 +17,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     if (!updated) {
       return NextResponse.json({ error: 'Package not found' }, { status: 404 });
     }
+    revalidateContent('packages');
     return NextResponse.json({ success: true, package: updated });
   } catch (error: any) {
     if (error?.name === 'MongoUnavailableError') {
@@ -36,6 +38,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     if (!deleted) {
       return NextResponse.json({ error: 'Package not found' }, { status: 404 });
     }
+    revalidateContent('packages');
     return NextResponse.json({ success: true });
   } catch (error: any) {
     if (error?.name === 'MongoUnavailableError') {

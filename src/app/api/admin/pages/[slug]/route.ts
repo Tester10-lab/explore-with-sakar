@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getLivePageContent } from '@/lib/cms';
 import { getPageBySlug, createPage, updatePage, publishPage, unpublishPage } from '@/lib/db';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(
   req: NextRequest,
@@ -48,11 +49,13 @@ export async function PUT(
 
     if (body.action === 'publish') {
       const published = await publishPage(params.slug, editorName);
+      revalidateContent('pages', params.slug);
       return NextResponse.json({ success: true, page: published });
     }
 
     if (body.action === 'unpublish') {
       const draft = await unpublishPage(params.slug);
+      revalidateContent('pages', params.slug);
       return NextResponse.json({ success: true, page: draft });
     }
 
@@ -60,6 +63,8 @@ export async function PUT(
       ...body,
       lastEditedBy: editorName,
     });
+
+    revalidateContent('pages', params.slug);
 
     return NextResponse.json({ success: true, page: updated });
   } catch (error: any) {

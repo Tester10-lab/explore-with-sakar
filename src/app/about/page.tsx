@@ -17,7 +17,7 @@ import PageHero from '@/components/common/PageHero';
 import SectionHeading from '@/components/common/SectionHeading';
 import CTASection from '@/components/common/CTASection';
 import TestimonialCard from '@/components/common/TestimonialCard';
-import { getLiveReviews } from '@/lib/cms';
+import { getPublicReviews } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'About Sakar & Our Story | Explore With Sakar',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const allReviews = await getLiveReviews();
+  const allReviews = await getPublicReviews();
   const reviews = allReviews.slice(0, 3);
   return (
     <div className="min-h-screen bg-parchment-100">

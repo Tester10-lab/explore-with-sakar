@@ -16,11 +16,11 @@ import PageHero from '@/components/common/PageHero';
 import SectionHeading from '@/components/common/SectionHeading';
 import CTASection from '@/components/common/CTASection';
 import { HOMESTAYS } from '@/data/homestays';
-import { getLiveExperiences } from '@/lib/cms';
+import { getPublicExperiences } from '@/lib/content';
 import ExperienceCard from '@/components/common/ExperienceCard';
 
 export default async function FeelCloserExperience() {
-  const allExperiences = await getLiveExperiences(false);
+  const allExperiences = await getPublicExperiences();
   const homestayItineraries = allExperiences.filter(
     (e) =>
       e.category === 'homestays' ||

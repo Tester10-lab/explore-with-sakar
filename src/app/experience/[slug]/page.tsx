@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
-import { getLiveExperienceBySlug, getLiveExperiences } from '@/lib/cms';
+import { getPublicExperienceBySlug, getPublicExperiences } from '@/lib/content';
 import GoBeyondExperience from '@/components/experience/GoBeyondExperience';
 import GoSpiritualExperience from '@/components/experience/GoSpiritualExperience';
 import FeelCloserExperience from '@/components/experience/FeelCloserExperience';
@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const experience = await getLiveExperienceBySlug(params.slug);
+  const experience = await getPublicExperienceBySlug(params.slug);
 
   if (!experience) {
     return {
@@ -123,7 +123,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const experiences = await getLiveExperiences(false);
+  const experiences = await getPublicExperiences();
   const existingSlugs = new Set(experiences.map((exp) => exp.slug));
 
   const coreSlugs = [
@@ -167,13 +167,13 @@ export default async function ExperienceDetailPage({ params }: Props) {
     return <CustomJourneysExperience />;
   }
 
-  const experience = await getLiveExperienceBySlug(slug);
+  const experience = await getPublicExperienceBySlug(slug);
 
   if (!experience) {
     notFound();
   }
 
-  const allExperiences = await getLiveExperiences(false);
+  const allExperiences = await getPublicExperiences();
   const relatedExperiences = allExperiences
     .filter((e) => e.slug !== slug && e.slug !== 'all-curated-experiences')
     .slice(0, 3);

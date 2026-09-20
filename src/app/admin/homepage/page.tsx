@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Globe,
   Sparkles,
@@ -22,6 +23,7 @@ import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { WebsiteSettings, HomepageStat } from '@/types/cms';
 
 export default function AdminHomepagePage() {
+  const router = useRouter();
   const [settings, setSettings] = useState<WebsiteSettings | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -76,6 +78,7 @@ export default function AdminHomepagePage() {
       }
 
       setSettings(data.settings);
+      router.refresh();
       addToast('success', 'Homepage content updated successfully!');
     } catch (err: any) {
       addToast('error', err?.message || 'Error updating homepage');

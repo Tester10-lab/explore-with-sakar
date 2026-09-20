@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { DESTINATIONS } from '@/data/destinations';
+import { getPublicDestinationBySlug, getPublicDestinations } from '@/lib/content';
 import { MapPin, Mountain, Check, ArrowLeft } from 'lucide-react';
 import InquiryForm from '@/components/booking/InquiryForm';
 
@@ -11,8 +11,8 @@ interface Props {
   params: { slug: string };
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const destination = DESTINATIONS.find((d) => d.id === params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const destination = await getPublicDestinationBySlug(params.slug);
   
   if (!destination) {
     return { title: 'Destination Not Found | Explore With Sakar' };
@@ -24,14 +24,15 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export function generateStaticParams() {
-  return DESTINATIONS.map((dest) => ({
-    slug: dest.id,
+export async function generateStaticParams() {
+  const destinations = await getPublicDestinations();
+  return destinations.map((dest) => ({
+    slug: dest.slug || dest.id,
   }));
 }
 
-export default function DestinationDetailPage({ params }: Props) {
-  const destination = DESTINATIONS.find((d) => d.id === params.slug);
+export default async function DestinationDetailPage({ params }: Props) {
+  const destination = await getPublicDestinationBySlug(params.slug);
 
   if (!destination) {
     notFound();

@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllPackages, createPackage } from '@/lib/db';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req) || await getAdminSession(req);
@@ -48,6 +49,8 @@ export async function POST(req: NextRequest) {
       featured: Boolean(body.featured),
       status: body.status || 'published',
     });
+
+    revalidateContent('packages');
 
     return NextResponse.json({ success: true, package: newPackage });
   } catch (error: any) {

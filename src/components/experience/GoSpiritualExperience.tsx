@@ -15,10 +15,10 @@ import PageHero from '@/components/common/PageHero';
 import SectionHeading from '@/components/common/SectionHeading';
 import CTASection from '@/components/common/CTASection';
 import ExperienceCard from '@/components/common/ExperienceCard';
-import { getLiveExperiences } from '@/lib/cms';
+import { getPublicExperiences } from '@/lib/content';
 
 export default async function GoSpiritualExperience() {
-  const allExperiences = await getLiveExperiences(false);
+  const allExperiences = await getPublicExperiences();
   const spiritualItineraries = allExperiences.filter(
     (e) =>
       e.category === 'spiritual' ||

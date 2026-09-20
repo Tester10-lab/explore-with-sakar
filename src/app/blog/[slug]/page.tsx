@@ -1,11 +1,11 @@
-export const dynamic = 'force-dynamic';
-export const dynamicParams = true;
-export const revalidate = 0;
-
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getLiveBlogs, getLiveBlogBySlug, getLiveBlogBySlugAsync, getLiveRelatedBlogs, getTopFeaturedExperiences } from '@/lib/cms';
+import {
+  getPublicBlogBySlug,
+  getPublicRelatedBlogs,
+  getPublicTopFeaturedExperiences,
+} from '@/lib/content';
 import ArticleHeader from '@/components/blog/ArticleHeader';
 import ArticleContent from '@/components/blog/ArticleContent';
 import AuthorBio from '@/components/blog/AuthorBio';
@@ -20,7 +20,7 @@ interface ArticlePageProps {
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  const post = await getLiveBlogBySlugAsync(params.slug, false);
+  const post = await getPublicBlogBySlug(params.slug);
   if (!post) {
     return {
       title: 'Story Not Found — Sakar’s Journal',
@@ -47,14 +47,16 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const post = await getLiveBlogBySlugAsync(params.slug, false);
+  const post = await getPublicBlogBySlug(params.slug);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = await getLiveRelatedBlogs(post.slug, 3);
-  const featuredExperiences = await getTopFeaturedExperiences(3);
+  const [relatedPosts, featuredExperiences] = await Promise.all([
+    getPublicRelatedBlogs(post.slug, 3),
+    getPublicTopFeaturedExperiences(3),
+  ]);
 
   return (
     <article className="min-h-screen bg-parchment-100 pb-20">

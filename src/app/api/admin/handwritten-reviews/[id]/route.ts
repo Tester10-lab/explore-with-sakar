@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionFromRequest } from '@/lib/auth';
 import { updateHandwrittenReview, deleteHandwrittenReview } from '@/lib/db';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -15,6 +16,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     if (!updated) {
       return NextResponse.json({ error: 'Handwritten review page not found' }, { status: 404 });
     }
+
+    revalidateContent('handwrittenReviews');
 
     return NextResponse.json({ success: true, page: updated });
   } catch (error: any) {
@@ -37,6 +40,8 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     if (!success) {
       return NextResponse.json({ error: 'Handwritten review page not found' }, { status: 404 });
     }
+
+    revalidateContent('handwrittenReviews');
 
     return NextResponse.json({ success: true, message: 'Handwritten review page deleted successfully' });
   } catch (error: any) {

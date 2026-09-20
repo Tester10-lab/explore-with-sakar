@@ -2,11 +2,13 @@
 
 import React from 'react';
 import { BlogPost } from '@/types';
+import { ExtendedBlogPost } from '@/types/cms';
+import { PublicBlogListItem } from '@/lib/content';
 import BlogCard from './BlogCard';
 import { BookOpen } from 'lucide-react';
 
 interface RelatedStoriesProps {
-  posts: BlogPost[];
+  posts: (BlogPost | ExtendedBlogPost | PublicBlogListItem)[];
 }
 
 export default function RelatedStories({ posts }: RelatedStoriesProps) {

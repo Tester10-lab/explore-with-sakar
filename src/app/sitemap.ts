@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getLivePackages, getLiveExperiences, getLiveBlogs, getLiveServices } from '@/lib/cms';
+import { getPublicPackages, getPublicExperiences, getPublicBlogs } from '@/lib/content';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://explorewithsakar.com';
@@ -64,9 +64,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const [packages, experiences, blogs] = await Promise.all([
-      getLivePackages(),
-      getLiveExperiences(),
-      getLiveBlogs(),
+      getPublicPackages(),
+      getPublicExperiences(),
+      getPublicBlogs(),
     ]);
 
     const packageRoutes: MetadataRoute.Sitemap = packages.map((pkg) => ({

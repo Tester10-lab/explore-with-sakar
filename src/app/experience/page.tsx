@@ -14,7 +14,7 @@ import {
 import PageHero from '@/components/common/PageHero';
 import CTASection from '@/components/common/CTASection';
 import ExperienceCatalogClient from './ExperienceCatalogClient';
-import { getLiveExperiences } from '@/lib/cms';
+import { getPublicExperiences } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'Experiences & Curated Journeys | Explore With Sakar',
@@ -74,7 +74,7 @@ const CORE_PILLARS = [
 ];
 
 export default async function ExperienceLandingPage() {
-  const experiences = await getLiveExperiences(false);
+  const experiences = await getPublicExperiences();
 
   return (
     <div className="min-h-screen bg-parchment-100">

@@ -4,10 +4,12 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BlogPost } from '@/types';
+import { ExtendedBlogPost } from '@/types/cms';
+import { PublicBlogListItem } from '@/lib/content';
 import { Clock, Calendar, ArrowRight } from 'lucide-react';
 
 interface BlogCardProps {
-  post: BlogPost;
+  post: BlogPost | ExtendedBlogPost | PublicBlogListItem;
   featured?: boolean;
 }
 

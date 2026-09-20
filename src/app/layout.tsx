@@ -3,6 +3,7 @@ import { Cinzel, Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import PublicLayoutWrapper from '@/components/layout/PublicLayoutWrapper';
 import { SettingsProvider } from '@/context/SettingsContext';
+import { getPublicSettings, getPublicNavigation } from '@/lib/content';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -75,11 +76,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [settings, navigation] = await Promise.all([
+    getPublicSettings(),
+    getPublicNavigation(),
+  ]);
+
   return (
     <html
       lang="en"
@@ -115,7 +121,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-parchment-100 text-himalaya-900 antialiased selection:bg-terracotta/20 selection:text-terracotta-dark min-h-screen flex flex-col">
-        <SettingsProvider>
+        <SettingsProvider initialSettings={settings} initialNavigation={navigation}>
           <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
         </SettingsProvider>
       </body>

@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllFaq, createFaq, reorderFaq } from '@/lib/db';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req) || await getAdminSession(req);
@@ -29,6 +30,7 @@ export async function POST(req: NextRequest) {
 
     if (body.action === 'reorder' && Array.isArray(body.ids)) {
       await reorderFaq(body.ids);
+      revalidateContent('faq');
       return NextResponse.json({ success: true });
     }
 
@@ -43,6 +45,8 @@ export async function POST(req: NextRequest) {
       answer: answer.trim(),
       isVisible: isVisible !== false,
     });
+
+    revalidateContent('faq');
 
     return NextResponse.json({ success: true, item }, { status: 201 });
   } catch (error: any) {

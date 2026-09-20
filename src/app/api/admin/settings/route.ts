@@ -1,9 +1,9 @@
 export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 import { getSessionFromRequest } from '@/lib/auth';
 import { getSettingsAsync, updateSettingsAsync } from '@/lib/db';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req);
@@ -25,13 +25,7 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     const updated = await updateSettingsAsync(body);
 
-    try {
-      revalidatePath('/');
-      revalidatePath('/admin/homepage');
-      revalidatePath('/admin/settings');
-    } catch (e) {
-      console.warn('Settings revalidation warning:', e);
-    }
+    revalidateContent('settings');
 
     return NextResponse.json({ success: true, settings: updated });
   } catch (error: any) {

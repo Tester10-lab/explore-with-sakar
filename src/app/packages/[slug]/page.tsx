@@ -14,7 +14,7 @@ import {
   MapPin,
   Calendar,
 } from 'lucide-react';
-import { getLivePackageBySlug, getLivePackages } from '@/lib/cms';
+import { getPublicPackageBySlug, getPublicPackages } from '@/lib/content';
 import InquiryForm from '@/components/booking/InquiryForm';
 
 interface PackagePageProps {
@@ -24,7 +24,7 @@ interface PackagePageProps {
 }
 
 export async function generateMetadata({ params }: PackagePageProps): Promise<Metadata> {
-  const pkg = await getLivePackageBySlug(params.slug);
+  const pkg = await getPublicPackageBySlug(params.slug);
 
   if (!pkg) {
     return {
@@ -39,14 +39,14 @@ export async function generateMetadata({ params }: PackagePageProps): Promise<Me
 }
 
 export async function generateStaticParams() {
-  const packages = await getLivePackages(false);
+  const packages = await getPublicPackages();
   return packages.map((pkg) => ({
     slug: pkg.slug,
   }));
 }
 
 export default async function PackageDetailPage({ params }: PackagePageProps) {
-  const pkg = await getLivePackageBySlug(params.slug);
+  const pkg = await getPublicPackageBySlug(params.slug);
 
   if (!pkg) {
     notFound();

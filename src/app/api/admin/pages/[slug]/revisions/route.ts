@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getPageRevisions, savePageRevision, restorePageRevision, getPageBySlug, createPage } from '@/lib/db';
 import { getLivePageContent } from '@/lib/cms';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(
   req: NextRequest,
@@ -55,6 +56,7 @@ export async function POST(
       if (!restored) {
         return NextResponse.json({ error: 'Revision not found' }, { status: 404 });
       }
+      revalidateContent('pages', params.slug);
       return NextResponse.json({ success: true, page: restored });
     }
 

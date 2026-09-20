@@ -66,7 +66,7 @@ function normalizeCollectionShape(key: string, value: any): any {
  * If key is missing in the database document, seeds it atomically and only once.
  * Falls back to read-only in-memory seed if MongoDB is unavailable.
  */
-export async function readKey<T = any>(key: string): Promise<T> {
+export async function readKey<T = any>(key: string, options?: { throwOnError?: boolean }): Promise<T> {
   const startTime = Date.now();
 
   // 1. Check if offline file dev mode is enabled
@@ -118,6 +118,9 @@ export async function readKey<T = any>(key: string): Promise<T> {
     const val = doc ? doc[key] : getSeedForKey(key);
     return normalizeCollectionShape(key, val) as T;
   } catch (err: any) {
+    if (options?.throwOnError) {
+      throw err;
+    }
     const elapsed = Date.now() - startTime;
     if (IS_DEV) {
       console.warn(`[store] read ${key} ${elapsed}ms (fallback to seed due to: ${err.message})`);

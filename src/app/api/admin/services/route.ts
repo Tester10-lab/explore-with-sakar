@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllServices, createService } from '@/lib/db';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req) || await getAdminSession(req);
@@ -47,6 +48,8 @@ export async function POST(req: NextRequest) {
       relatedSlug: body.relatedSlug || '',
       status: body.status || 'published',
     });
+
+    revalidateContent('services');
 
     return NextResponse.json({ success: true, service: newService });
   } catch (error: any) {

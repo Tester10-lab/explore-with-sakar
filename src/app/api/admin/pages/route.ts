@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getLiveAllPages } from '@/lib/cms';
 import { createPage, updatePage } from '@/lib/db';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req) || await getAdminSession(req);
@@ -43,6 +44,8 @@ export async function POST(req: NextRequest) {
       sections: Array.isArray(sections) ? sections : [],
       lastEditedBy: session.username || 'admin',
     });
+
+    revalidateContent('pages', cleanSlug);
 
     return NextResponse.json({ success: true, page }, { status: 201 });
   } catch (error: any) {

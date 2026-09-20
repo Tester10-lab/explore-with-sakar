@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { WebsiteSettings } from '@/types/cms';
+import { WebsiteSettings, NavigationConfig } from '@/types/cms';
 
 const DEFAULT_SETTINGS: WebsiteSettings = {
   contact: {
@@ -61,12 +61,14 @@ const DEFAULT_SETTINGS: WebsiteSettings = {
 
 interface SettingsContextType {
   settings: WebsiteSettings;
+  navigation?: NavigationConfig;
   refreshSettings: () => Promise<void>;
   isLoading: boolean;
 }
 
 const SettingsContext = createContext<SettingsContextType>({
   settings: DEFAULT_SETTINGS,
+  navigation: undefined,
   refreshSettings: async () => {},
   isLoading: false,
 });
@@ -74,21 +76,39 @@ const SettingsContext = createContext<SettingsContextType>({
 export function SettingsProvider({
   children,
   initialSettings,
+  initialNavigation,
 }: {
   children: React.ReactNode;
   initialSettings?: WebsiteSettings;
+  initialNavigation?: NavigationConfig;
 }) {
   const [settings, setSettings] = useState<WebsiteSettings>(initialSettings || DEFAULT_SETTINGS);
+  const [navigation, setNavigation] = useState<NavigationConfig | undefined>(initialNavigation);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (initialSettings) {
+      setSettings(initialSettings);
+    }
+  }, [initialSettings]);
+
+  useEffect(() => {
+    if (initialNavigation) {
+      setNavigation(initialNavigation);
+    }
+  }, [initialNavigation]);
 
   const fetchSettings = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch('/api/public/content', { cache: 'no-store' });
+      const res = await fetch('/api/public/settings', { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
         if (data.settings) {
           setSettings(data.settings);
+        }
+        if (data.navigation) {
+          setNavigation(data.navigation);
         }
       }
     } catch (err) {
@@ -98,14 +118,11 @@ export function SettingsProvider({
     }
   };
 
-  useEffect(() => {
-    fetchSettings();
-  }, []);
-
   return (
     <SettingsContext.Provider
       value={{
         settings,
+        navigation,
         refreshSettings: fetchSettings,
         isLoading,
       }}
@@ -120,9 +137,15 @@ export function useSettings() {
   if (!context) {
     return {
       settings: DEFAULT_SETTINGS,
+      navigation: undefined,
       refreshSettings: async () => {},
       isLoading: false,
     };
   }
   return context;
+}
+
+export function useNavigation() {
+  const { navigation } = useSettings();
+  return navigation;
 }

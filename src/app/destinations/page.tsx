@@ -6,7 +6,7 @@ import PageHero from '@/components/common/PageHero';
 import SectionHeading from '@/components/common/SectionHeading';
 import DestinationCard from '@/components/common/DestinationCard';
 import CTASection from '@/components/common/CTASection';
-import { getLiveDestinations } from '@/lib/cms';
+import { getPublicDestinations } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'Curated Destinations in Nepal | Explore With Sakar',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function DestinationsPage() {
-  const destinations = await getLiveDestinations(false);
+  const destinations = await getPublicDestinations();
   return (
     <div className="min-h-screen bg-parchment-100">
       {/* 1. Page Hero */}

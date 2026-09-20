@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { getLiveFaq } from '@/lib/cms';
+import { getPublicFaq } from '@/lib/content';
 import FAQClient from './FAQClient';
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function FAQPage() {
-  const faqItems = await getLiveFaq(false);
+  const faqItems = await getPublicFaq();
 
   return <FAQClient initialFaq={faqItems} />;
 }

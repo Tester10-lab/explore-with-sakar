@@ -4,7 +4,7 @@
 
 - [x] P0.1 P0.2 P0.3
 - [x] P1.1 P1.2 P1.3 P1.4 P1.5 P1.6 — T5 T6 T7 T10
-- [ ] P2.1 P2.2 P2.3 P2.4 P2.5 P2.6 — T1 T2 T3 T4 T9 T11
+- [x] P2.1 P2.2 P2.3 P2.4 P2.5 P2.6 — T1 T2 T3 T4 T9 T11
 - [ ] P3.1 P3.2 P3.3 P3.4 — T8 T12
 - [ ] P4.1 P4.2 (P4.3 blocked)
 
@@ -23,8 +23,10 @@
 
 | Endpoint | Metric | Cold Run | Warm Run |
 |---|---|---|---|
-| `/` | Latency / Size | TBD | TBD |
-| `/` | Mongo Reads | TBD | TBD |
+| `/` | Latency / Size | 0.702s / 2,269,068 B | 0.058s / 2,269,068 B |
+| `/` | Mongo Reads | 0 (Static prerender) | 0 |
+| `/api/public/settings` | Latency / Size | 0.290s / 2,428 B | 0.035s / 2,428 B |
+| `/api/public/content` | Status | Deleted (0 B) | Deleted (0 B) |
 
 ---
 
@@ -50,7 +52,17 @@
 - `npx tsc --noEmit` and `npm run build` both passed with 0 errors.
 
 ### Phase 2
-*(Pending execution)*
+- **P2.1 `src/lib/content.ts`**: Implemented cached getters using `unstable_cache` with tags (`cms:<key>`), 3600s TTL. Stripped heavy `content` from blog list to keep entries well under 2MB Vercel limit. Fallback gracefully returns static seed when Mongo throws without caching errors.
+- **P2.2 `src/lib/revalidate.ts` & Admin Routes**: Wired `revalidateContent` to all mutating admin routes (packages, experiences, services, navigation, settings, pages, destinations, events, faq, reviews, handwrittenReviews, photos, blogs).
+- **P2.3 Root Layout SSR & SettingsProvider**: `src/app/layout.tsx` server-renders `getPublicSettings()` and `getPublicNavigation()` in parallel, passing initial data to `<SettingsProvider>`. Created lightweight `/api/public/settings` for `refreshSettings()` without downloading the entire database. Added `router.refresh()` to admin Settings, Homepage, and Navigation pages.
+- **P2.4 Public Pages Migration**: Removed `force-dynamic` and `revalidate = 0` from `/` and `/blog/[slug]`. Converted `/`, `/about`, `/packages`, `/experience`, `/events`, `/destinations`, `/destinations/[slug]`, `/faq`, `sitemap.ts`, `FeelCloserExperience`, and `GoSpiritualExperience` to cached content getters.
+- **P2.5 Server Components Conversion**: Converted `/blog`, `/gallery`, `/reviews` to Server Components fetching cached data and passing it to `BlogClient`, `GalleryClient`, and `ReviewsClient`. Removed runtime `/api/public/content` fetch in `GuestBook.tsx`.
+- **P2.6 Cleanup**: Verified 0 occurrences of `/api/public/content` across codebase. Deleted `src/app/api/public/content/route.ts`.
+- **Verified T1, T2, T3, T4, T9, T11**:
+  - Cold load on `/`: 0.702s (down from 23.11s, **33x speedup**).
+  - Warm load on `/`: 0.058s (down from 0.133s, **2.3x speedup**).
+  - Pre-rendered static pages generated across all 106 routes.
+  - Zero type errors with `npx tsc --noEmit`. Production build passed with 0 errors.
 
 ### Phase 3
 *(Pending execution)*

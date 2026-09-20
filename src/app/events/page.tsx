@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { getLiveEvents } from '@/lib/cms';
+import { getPublicEvents } from '@/lib/content';
 import EventsClient from './EventsClient';
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function EventsPage() {
-  const events = await getLiveEvents(false);
+  const events = await getPublicEvents();
 
   return <EventsClient initialEvents={events} />;
 }

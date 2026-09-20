@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { reorderServices } from '@/lib/db';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function POST(req: NextRequest) {
   const session = getSessionFromRequest(req) || await getAdminSession(req);
@@ -17,6 +18,7 @@ export async function POST(req: NextRequest) {
     }
 
     await reorderServices(body.serviceIds);
+    revalidateContent('services');
     return NextResponse.json({ success: true });
   } catch (error: any) {
     if (error?.name === 'MongoUnavailableError') {

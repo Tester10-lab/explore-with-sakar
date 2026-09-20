@@ -1,6 +1,3 @@
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
 import React from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -13,12 +10,10 @@ import {
 } from 'lucide-react';
 import Hero from '@/components/home/Hero';
 import {
-  getLiveBlogs,
-  getLiveBlogsAsync,
-  getTopFeaturedExperiences,
-  getLiveSettings,
-  getLiveSettingsAsync,
-} from '@/lib/cms';
+  getPublicBlogs,
+  getPublicTopFeaturedExperiences,
+  getPublicSettings,
+} from '@/lib/content';
 import BlogCard from '@/components/blog/BlogCard';
 import SectionHeading from '@/components/common/SectionHeading';
 import InquiryForm from '@/components/booking/InquiryForm';
@@ -29,12 +24,12 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const settings = await getLiveSettingsAsync();
+  const [settings, featuredExperiences, blogs] = await Promise.all([
+    getPublicSettings(),
+    getPublicTopFeaturedExperiences(3),
+    getPublicBlogs(),
+  ]);
   const stats = settings.stats || [];
-
-  const featuredExperiences = await getTopFeaturedExperiences(3);
-
-  const blogs = await getLiveBlogsAsync(false);
   const latestBlogs = blogs.slice(0, 3);
 
   return (

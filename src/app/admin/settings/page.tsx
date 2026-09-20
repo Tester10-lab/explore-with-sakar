@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Save,
   Phone,
@@ -25,6 +26,7 @@ import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { WebsiteSettings } from '@/types/cms';
 
 export default function AdminSettingsPage() {
+  const router = useRouter();
   const [settings, setSettings] = useState<WebsiteSettings | null>(null);
   const [activeTab, setActiveTab] = useState<'contact' | 'social' | 'hero' | 'announcement' | 'branding' | 'security'>('contact');
   const [isLoading, setIsLoading] = useState(true);
@@ -80,6 +82,7 @@ export default function AdminSettingsPage() {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || 'Failed to update settings');
 
+      router.refresh();
       showToast(
         'success',
         'Website settings saved! Changes are now live on public website.'

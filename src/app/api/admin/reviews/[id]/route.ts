@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionFromRequest } from '@/lib/auth';
 import { updateReview, deleteReview } from '@/lib/db';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -15,6 +16,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     if (!updated) {
       return NextResponse.json({ error: 'Review not found' }, { status: 404 });
     }
+
+    revalidateContent('reviews');
 
     return NextResponse.json({ success: true, review: updated });
   } catch (error: any) {
@@ -37,6 +40,8 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     if (!success) {
       return NextResponse.json({ error: 'Review not found' }, { status: 404 });
     }
+
+    revalidateContent('reviews');
 
     return NextResponse.json({ success: true, message: 'Review deleted successfully' });
   } catch (error: any) {

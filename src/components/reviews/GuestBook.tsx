@@ -112,22 +112,8 @@ export default function GuestBook({ initialPages }: GuestBookProps) {
   );
 
   useEffect(() => {
-    async function loadLivePages() {
-      try {
-        const res = await fetch('/api/public/content');
-        if (res.ok) {
-          const data = await res.json();
-          if (data.handwrittenReviews && data.handwrittenReviews.length > 0) {
-            setPages(data.handwrittenReviews);
-          }
-        }
-      } catch (e) {
-        // Graceful fallback to default pages
-      }
-    }
-
-    if (!initialPages || initialPages.length === 0) {
-      loadLivePages();
+    if (initialPages && initialPages.length > 0) {
+      setPages(initialPages);
     }
   }, [initialPages]);
 

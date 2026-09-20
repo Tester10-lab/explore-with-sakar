@@ -1,9 +1,9 @@
 export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 import { getSessionFromRequest } from '@/lib/auth';
 import { updatePhotoAsync, deletePhotoAsync } from '@/lib/db';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   try {
@@ -19,12 +19,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       return NextResponse.json({ error: 'Photo not found' }, { status: 404 });
     }
 
-    try {
-      revalidatePath('/gallery');
-      revalidatePath('/admin/photos');
-    } catch (e) {
-      console.warn('Revalidate warning:', e);
-    }
+    revalidateContent('photos');
 
     return NextResponse.json({ success: true, photo: updated });
   } catch (error: any) {
@@ -48,12 +43,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
       return NextResponse.json({ error: 'Photo not found' }, { status: 404 });
     }
 
-    try {
-      revalidatePath('/gallery');
-      revalidatePath('/admin/photos');
-    } catch (e) {
-      console.warn('Revalidate warning:', e);
-    }
+    revalidateContent('photos');
 
     return NextResponse.json({ success: true, message: 'Photo deleted successfully' });
   } catch (error: any) {

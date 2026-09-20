@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { getFaqById, updateFaq, deleteFaq } from '@/lib/db';
 import { getAdminSession, getSessionFromRequest } from '@/lib/auth';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(
   req: NextRequest,
@@ -38,6 +39,8 @@ export async function PUT(
       return NextResponse.json({ error: 'FAQ item not found' }, { status: 404 });
     }
 
+    revalidateContent('faq');
+
     return NextResponse.json({ success: true, item: updated });
   } catch (error: any) {
     if (error?.name === 'MongoUnavailableError') {
@@ -61,6 +64,7 @@ export async function DELETE(
     if (!success) {
       return NextResponse.json({ error: 'FAQ item not found' }, { status: 404 });
     }
+    revalidateContent('faq');
     return NextResponse.json({ success: true });
   } catch (error: any) {
     if (error?.name === 'MongoUnavailableError') {

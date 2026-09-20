@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Compass,
   Plus,
@@ -26,6 +27,7 @@ import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { NavigationConfig, NavigationLink } from '@/types/cms';
 
 export default function AdminNavigationPage() {
+  const router = useRouter();
   const [navConfig, setNavConfig] = useState<NavigationConfig | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -89,6 +91,7 @@ export default function AdminNavigationPage() {
       });
 
       if (res.ok) {
+        router.refresh();
         addToast('success', 'Navigation menu updated live!');
         fetchNavigation();
       } else {

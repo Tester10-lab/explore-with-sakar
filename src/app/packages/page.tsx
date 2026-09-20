@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { getLivePackages } from '@/lib/cms';
+import { getPublicPackages } from '@/lib/content';
 import PackagesClient from './PackagesClient';
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function PackagesPage() {
-  const packages = await getLivePackages(false);
+  const packages = await getPublicPackages();
 
   return <PackagesClient initialPackages={packages} />;
 }

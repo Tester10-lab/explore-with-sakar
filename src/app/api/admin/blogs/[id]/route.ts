@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
+import { revalidateContent } from '@/lib/revalidate';
 import { getSessionFromRequest, getAdminSession } from '@/lib/auth';
 import { getBlogBySlugAsync, updateBlogAsync, deleteBlogAsync } from '@/lib/db';
 
@@ -33,13 +33,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
     }
 
-    try {
-      revalidatePath('/blog');
-      revalidatePath(`/blog/${updated.slug}`);
-      revalidatePath('/admin/blogs');
-    } catch (e) {
-      console.warn('Path revalidation error:', e);
-    }
+    revalidateContent('blogs');
 
     return NextResponse.json({ success: true, blog: updated });
   } catch (error: any) {
@@ -64,15 +58,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
       return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
     }
 
-    try {
-      revalidatePath('/blog');
-      if (blogToDelete?.slug) {
-        revalidatePath(`/blog/${blogToDelete.slug}`);
-      }
-      revalidatePath('/admin/blogs');
-    } catch (e) {
-      console.warn('Path revalidation error:', e);
-    }
+    revalidateContent('blogs');
 
     return NextResponse.json({ success: true, message: 'Blog deleted successfully' });
 

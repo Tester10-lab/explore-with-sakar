@@ -1,9 +1,9 @@
 export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 import { getSessionFromRequest } from '@/lib/auth';
 import { getAllPhotosAsync, createPhotoAsync } from '@/lib/db';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req);
@@ -41,12 +41,7 @@ export async function POST(req: NextRequest) {
       featured: Boolean(body.featured),
     });
 
-    try {
-      revalidatePath('/gallery');
-      revalidatePath('/admin/photos');
-    } catch (e) {
-      console.warn('Revalidate warning:', e);
-    }
+    revalidateContent('photos');
 
     return NextResponse.json({ success: true, photo: newPhoto });
   } catch (error: any) {

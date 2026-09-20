@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionFromRequest } from '@/lib/auth';
 import { getAllHandwrittenReviews, createHandwrittenReview } from '@/lib/db';
+import { revalidateContent } from '@/lib/revalidate';
 
 export async function GET(req: NextRequest) {
   const session = getSessionFromRequest(req);
@@ -38,6 +39,8 @@ export async function POST(req: NextRequest) {
       order: typeof body.order === 'number' ? body.order : undefined,
       isVisible: body.isVisible !== undefined ? Boolean(body.isVisible) : true,
     });
+
+    revalidateContent('handwrittenReviews');
 
     return NextResponse.json({ success: true, page: newPage });
   } catch (error: any) {
