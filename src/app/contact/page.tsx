@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo';
-import { getPageContent } from '@/lib/content';
+import { getPageContent, getPublicEvents } from '@/lib/content';
 import ContactClient from '@/components/contact/ContactClient';
 
 const FALLBACK_METADATA: Metadata = {
@@ -16,6 +16,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  const pageContent = await getPageContent('contact');
-  return <ContactClient pageContent={pageContent} />;
+  const [pageContent, events] = await Promise.all([
+    getPageContent('contact'),
+    getPublicEvents(),
+  ]);
+  const availableEvents = events.map((evt) => ({
+    id: evt.id,
+    title: evt.title,
+    date: evt.date,
+  }));
+  return <ContactClient pageContent={pageContent} availableEvents={availableEvents} />;
 }

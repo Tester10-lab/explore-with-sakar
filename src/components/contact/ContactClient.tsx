@@ -8,11 +8,14 @@ import { useSettings } from '@/context/SettingsContext';
 import { PageContent } from '@/types/cms';
 import { getPageHeroOverrides, isSectionVisible } from '@/lib/pageContentHelper';
 
+import { EventOption } from '@/components/booking/InquiryForm';
+
 interface ContactClientProps {
   pageContent?: PageContent | null;
+  availableEvents?: EventOption[];
 }
 
-export default function ContactClient({ pageContent }: ContactClientProps) {
+export default function ContactClient({ pageContent, availableEvents }: ContactClientProps) {
   const { settings } = useSettings();
 
   const hero = getPageHeroOverrides(pageContent, {
@@ -108,7 +111,7 @@ export default function ContactClient({ pageContent }: ContactClientProps) {
       {/* 3. Inquiry Form Section */}
       {isSectionVisible(pageContent, 'sec-cnt-form', 'inquiry-form') && (
         <section className="py-8">
-          <InquiryForm />
+          <InquiryForm availableEvents={availableEvents} />
         </section>
       )}
     </div>

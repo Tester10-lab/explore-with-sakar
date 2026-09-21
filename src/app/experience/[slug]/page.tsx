@@ -1,7 +1,14 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
-import { getPublicExperienceBySlug, getPublicExperiences, getPageContent, getPublicBeyondChapters, getPublicLeaveAMark } from '@/lib/content';
+import {
+  getPublicExperienceBySlug,
+  getPublicExperiences,
+  getPageContent,
+  getPublicBeyondChapters,
+  getPublicLeaveAMark,
+  getPublicEvents,
+} from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 import GoBeyondExperience from '@/components/experience/GoBeyondExperience';
 import GoSpiritualExperience from '@/components/experience/GoSpiritualExperience';
@@ -178,8 +185,16 @@ export default async function ExperienceDetailPage({ params }: Props) {
   }
 
   if (slug === 'custom-private-journeys') {
-    const pageContent = await getPageContent('custom-private-journeys');
-    return <CustomJourneysExperience pageContent={pageContent} />;
+    const [pageContent, events] = await Promise.all([
+      getPageContent('custom-private-journeys'),
+      getPublicEvents(),
+    ]);
+    const availableEvents = events.map((evt) => ({
+      id: evt.id,
+      title: evt.title,
+      date: evt.date,
+    }));
+    return <CustomJourneysExperience pageContent={pageContent} availableEvents={availableEvents} />;
   }
 
   const experience = await getPublicExperienceBySlug(slug);

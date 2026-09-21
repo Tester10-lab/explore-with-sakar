@@ -86,15 +86,8 @@ function InquiryFormInner({ defaultPackage, defaultExperience, availableEvents }
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!availableEvents || availableEvents.length === 0) {
-      fetch('/api/public/events')
-        .then((res) => (res.ok ? res.json() : { events: [] }))
-        .then((data) => {
-          if (data.events && Array.isArray(data.events)) {
-            setEvents(data.events);
-          }
-        })
-        .catch((err) => console.warn('Failed to load events in inquiry form:', err));
+    if (availableEvents && availableEvents.length > 0) {
+      setEvents(availableEvents);
     }
   }, [availableEvents]);
 

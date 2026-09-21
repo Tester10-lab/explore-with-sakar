@@ -15,14 +15,14 @@ export const viewport: Viewport = {
 
 const cinzel = Cinzel({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
+  weight: ['400', '700', '800'],
   variable: '--font-cinzel',
   display: 'swap',
 });
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '700'],
   style: ['normal', 'italic'],
   variable: '--font-playfair',
   display: 'swap',
@@ -30,7 +30,7 @@ const playfair = Playfair_Display({
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '700'],
   variable: '--font-sans',
   display: 'swap',
 });

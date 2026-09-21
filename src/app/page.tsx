@@ -14,6 +14,7 @@ import {
   getPublicBlogs,
   getPublicTopFeaturedExperiences,
   getPublicSettings,
+  getPublicEvents,
 } from '@/lib/content';
 import BlogCard from '@/components/blog/BlogCard';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -30,13 +31,19 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [settings, featuredExperiences, blogs] = await Promise.all([
+  const [settings, featuredExperiences, blogs, events] = await Promise.all([
     getPublicSettings(),
     getPublicTopFeaturedExperiences(3),
     getPublicBlogs(),
+    getPublicEvents(),
   ]);
   const stats = settings.stats || [];
   const latestBlogs = blogs.slice(0, 3);
+  const eventOptions = events.map((evt) => ({
+    id: evt.id,
+    title: evt.title,
+    date: evt.date,
+  }));
 
   return (
     <div className="flex flex-col min-h-screen bg-parchment-100">
@@ -297,7 +304,7 @@ export default async function HomePage() {
 
       {/* 5. Final Consultation & Inquiry Form */}
       <section id="inquiry" className="border-t border-parchment-300">
-        <InquiryForm />
+        <InquiryForm availableEvents={eventOptions} />
       </section>
     </div>
   );

@@ -19,6 +19,7 @@ export function revalidateContent(collection: string, extraPathOrSlug?: string):
       case 'settings':
       case 'navigation':
         revalidatePath('/', 'layout');
+        revalidatePath('/api/public/settings');
         break;
       case 'packages':
         revalidatePath('/experience', 'layout');

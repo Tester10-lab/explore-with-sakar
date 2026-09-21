@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import SafeImage from '@/components/common/SafeImage';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getPublicDestinationBySlug, getPublicDestinations } from '@/lib/content';
+import { getPublicDestinationBySlug, getPublicDestinations, getPublicEvents } from '@/lib/content';
 import { MapPin, Mountain, Check, ArrowLeft } from 'lucide-react';
 import InquiryForm from '@/components/booking/InquiryForm';
 
@@ -32,11 +32,20 @@ export async function generateStaticParams() {
 }
 
 export default async function DestinationDetailPage({ params }: Props) {
-  const destination = await getPublicDestinationBySlug(params.slug);
+  const [destination, events] = await Promise.all([
+    getPublicDestinationBySlug(params.slug),
+    getPublicEvents(),
+  ]);
 
   if (!destination) {
     notFound();
   }
+
+  const availableEvents = events.map((evt) => ({
+    id: evt.id,
+    title: evt.title,
+    date: evt.date,
+  }));
 
   return (
     <div className="min-h-screen bg-sand">
@@ -155,7 +164,7 @@ export default async function DestinationDetailPage({ params }: Props) {
         </div>
       </div>
 
-      <InquiryForm />
+      <InquiryForm availableEvents={availableEvents} />
     </div>
   );
 }

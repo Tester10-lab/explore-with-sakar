@@ -15,7 +15,6 @@ import {
   Heart,
 } from 'lucide-react';
 import { ExtendedExperience } from '@/types/cms';
-import InquiryForm from '@/components/booking/InquiryForm';
 import ExperienceCard from '@/components/common/ExperienceCard';
 import CTASection from '@/components/common/CTASection';
 

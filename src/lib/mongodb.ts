@@ -43,7 +43,8 @@ export function getMongoClient(): Promise<MongoClient> {
 
   if (!uri) {
     if (isProduction) {
-      throw new Error('MONGODB_URI environment variable is missing.');
+      console.warn('[mongodb] MONGODB_URI environment variable is missing in production. Falling back to seed data.');
+      throw new MongoUnavailableError('MONGODB_URI environment variable is missing.');
     }
     if (!hasWarnedMissingUriDev) {
       console.warn('[mongodb] MONGODB_URI is not set in development. Using file/seed mode.');

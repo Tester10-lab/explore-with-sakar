@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Compass, Sparkles, Phone } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Compass } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useSettings } from '@/context/SettingsContext';
 
 const DEFAULT_SLIDESHOW = [
@@ -17,6 +17,7 @@ const DEFAULT_SLIDESHOW = [
 export default function Hero() {
   const { settings } = useSettings();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   const slideshowImages =
     settings.hero?.backgroundSlideshowImages && settings.hero.backgroundSlideshowImages.length > 0
@@ -24,6 +25,7 @@ export default function Hero() {
       : DEFAULT_SLIDESHOW;
 
   useEffect(() => {
+    setIsMounted(true);
     if (slideshowImages.length === 0) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slideshowImages.length);
@@ -32,36 +34,37 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [slideshowImages.length]);
 
+  // On initial SSR, render only the first hero image with high priority to keep the critical path lean
+  const renderedSlides = isMounted ? slideshowImages : slideshowImages.slice(0, 1);
+
   return (
     <section className="relative min-h-[95svh] w-full flex items-center justify-center overflow-hidden bg-himalaya-950 film-grain pt-24 pb-16">
-      {/* Background Slideshow Layer */}
+      {/* Background Slideshow Layer — pure CSS transitions, no framer-motion */}
       <div className="absolute inset-0 z-0">
-        <AnimatePresence initial={false}>
-          {slideshowImages.length > 0 && (
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 0.6, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.5, ease: 'easeInOut' }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={slideshowImages[currentSlide % slideshowImages.length]}
-                alt="Background scenery of Nepal"
-                fill
-                priority={currentSlide === 0}
-                className="object-cover object-center"
-                sizes="100vw"
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {renderedSlides.map((src, idx) => (
+          <div
+            key={src}
+            className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
+            style={{ opacity: idx === currentSlide ? 0.6 : 0 }}
+            aria-hidden={idx !== currentSlide}
+          >
+            <Image
+              src={src}
+              alt="Background scenery of Nepal"
+              fill
+              priority={idx === 0}
+              loading={idx === 0 ? undefined : 'lazy'}
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+          </div>
+        ))}
 
         {/* Cinematic gradient overlays for maximum text clarity */}
         <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950 via-himalaya-950/60 to-himalaya-950/30" />
         <div className="absolute inset-0 bg-gradient-to-r from-himalaya-950 via-himalaya-950/70 to-transparent" />
       </div>
+
 
       {/* Foreground Sakar Cutout */}
       <div className="absolute bottom-0 right-0 lg:right-[8%] w-full max-w-[550px] h-[70vh] z-10 pointer-events-none flex items-end justify-end opacity-85 sm:opacity-100">

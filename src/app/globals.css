@@ -24,7 +24,6 @@
     background-color: #FBF8F2;
     color: #192026;
     font-family: var(--font-sans), 'Plus Jakarta Sans', system-ui, sans-serif;
-    touch-action: manipulation;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -36,7 +35,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-overflow-scrolling: touch;
-    touch-action: manipulation;
   }
 
   button, a, input, select, textarea, [role="button"] {

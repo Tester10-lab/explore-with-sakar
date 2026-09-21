@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { WebsiteSettings, NavigationConfig } from '@/types/cms';
 
 const DEFAULT_SETTINGS: WebsiteSettings = {
@@ -86,18 +86,8 @@ export function SettingsProvider({
   const [navigation, setNavigation] = useState<NavigationConfig | undefined>(initialNavigation);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (initialSettings) {
-      setSettings(initialSettings);
-    }
-  }, [initialSettings]);
-
-  useEffect(() => {
-    if (initialNavigation) {
-      setNavigation(initialNavigation);
-    }
-  }, [initialNavigation]);
-
+  // fetchSettings is intentionally NOT called on mount — settings are already server-rendered into the page.
+  // It is only exposed as `refreshSettings` for admin panels to call after saving changes.
   const fetchSettings = async () => {
     try {
       setIsLoading(true);

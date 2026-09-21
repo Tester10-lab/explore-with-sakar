@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import { NextResponse } from 'next/server';
 import { getPublicSettings, getPublicNavigation } from '@/lib/content';
 
@@ -13,7 +11,9 @@ export async function GET() {
       { settings, navigation },
       {
         headers: {
-          'Cache-Control': 'no-store, max-age=0',
+          // Cache public settings at the CDN edge for 60s; serve stale for up to 1h while revalidating.
+          // Settings change infrequently and are already cached server-side via unstable_cache.
+          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=3600',
         },
       }
     );

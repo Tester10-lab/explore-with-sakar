@@ -19,11 +19,14 @@ import InquiryForm from '@/components/booking/InquiryForm';
 import { PageContent } from '@/types/cms';
 import { getPageHeroOverrides, isSectionVisible } from '@/lib/pageContentHelper';
 
+import { EventOption } from '@/components/booking/InquiryForm';
+
 interface CustomJourneysExperienceProps {
   pageContent?: PageContent | null;
+  availableEvents?: EventOption[];
 }
 
-export default function CustomJourneysExperience({ pageContent }: CustomJourneysExperienceProps) {
+export default function CustomJourneysExperience({ pageContent, availableEvents }: CustomJourneysExperienceProps) {
   const hero = getPageHeroOverrides(pageContent, {
     badge: 'Independent Experience Package',
     title: 'Custom Private Journeys',
@@ -248,7 +251,7 @@ export default function CustomJourneysExperience({ pageContent }: CustomJourneys
       {/* 5. Direct Consultation Form */}
       {isSectionVisible(pageContent, 'sec-cj-cta', 'cta', 'inquiry-form') && (
         <section id="consultation" className="py-12 bg-sand">
-          <InquiryForm />
+          <InquiryForm availableEvents={availableEvents} />
         </section>
       )}
     </div>

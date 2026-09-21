@@ -9,6 +9,32 @@ const IS_DEV = process.env.NODE_ENV !== 'production' && !process.env.VERCEL;
 const DEV_FILE_DIR = path.join(process.cwd(), '.data');
 const DEV_FILE_PATH = path.join(DEV_FILE_DIR, 'dev-store.json');
 
+/**
+ * Module-level flag: set to true once migrations have been verified in this process instance.
+ * On Vercel serverless, each cold start gets a fresh process (flag starts false, migrations run).
+ * On warm invocations, the flag is already true so we skip the extra MongoDB round-trip.
+ * This eliminates 1–3 redundant migration-check queries per warm request.
+ */
+let migrationsVerifiedInProcess = false;
+let migrationsPromise: Promise<void> | null = null;
+
+async function ensureMigrations(db: import('mongodb').Db): Promise<void> {
+  if (migrationsVerifiedInProcess) return;
+  if (!migrationsPromise) {
+    migrationsPromise = (async () => {
+      try {
+        await runPendingMigrations(db);
+        migrationsVerifiedInProcess = true;
+      } finally {
+        if (!migrationsVerifiedInProcess) {
+          migrationsPromise = null;
+        }
+      }
+    })();
+  }
+  await migrationsPromise;
+}
+
 function isDevFileStorage(): boolean {
   return Boolean(IS_DEV && process.env.CMS_STORAGE === 'file');
 }
@@ -92,7 +118,7 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
   // 2. Read from MongoDB with single-field projection
   try {
     const db = await getDb();
-    await runPendingMigrations(db);
+    await ensureMigrations(db);
     const col = db.collection('cms_store');
 
     // Fetch only the requested field
@@ -153,7 +179,7 @@ export async function writeKey<T = any>(key: string, value: T): Promise<void> {
   }
 
   const db = await getDb();
-  await runPendingMigrations(db);
+  await ensureMigrations(db);
   const col = db.collection('cms_store');
   await col.updateOne(
     { _id: 'active_store' as any },
@@ -181,7 +207,7 @@ export async function pushInquiry(inquiry: ContactInquiry): Promise<void> {
   }
 
   const db = await getDb();
-  await runPendingMigrations(db);
+  await ensureMigrations(db);
   const col = db.collection('cms_store');
   await col.updateOne(
     { _id: 'active_store' as any },
@@ -212,7 +238,7 @@ export async function updateInquiryById(id: string, updates: Partial<ContactInqu
   }
 
   const db = await getDb();
-  await runPendingMigrations(db);
+  await ensureMigrations(db);
   const col = db.collection('cms_store');
 
   const setFields: Record<string, any> = { lastUpdated };
@@ -250,7 +276,7 @@ export async function deleteInquiryById(id: string): Promise<boolean> {
   }
 
   const db = await getDb();
-  await runPendingMigrations(db);
+  await ensureMigrations(db);
   const col = db.collection('cms_store');
   const result = await col.updateOne(
     { _id: 'active_store' as any },

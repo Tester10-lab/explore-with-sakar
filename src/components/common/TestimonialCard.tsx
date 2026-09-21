@@ -1,7 +1,5 @@
-'use client';
-
 import React from 'react';
-import { Quote, Sparkles } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import { Testimonial } from '@/types';
 import { ExtendedTestimonial } from '@/types/cms';
 

@@ -201,8 +201,10 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
       )}
 
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 shadow-lg lg:shadow-sm ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed top-0 left-0 bottom-0 z-50 w-72 max-w-[85vw] bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-300 ease-in-out lg:translate-x-0 shadow-2xl lg:shadow-sm ${
+          isOpen
+            ? 'translate-x-0 opacity-100 pointer-events-auto visible'
+            : '-translate-x-full opacity-0 pointer-events-none invisible lg:opacity-100 lg:pointer-events-auto lg:visible'
         }`}
       >
         {/* Top Branding & Navigation with Scroll Container */}

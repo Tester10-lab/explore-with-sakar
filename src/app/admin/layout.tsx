@@ -36,8 +36,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           onClose={closeMobileSidebar}
         />
 
-        <div className="flex-1 lg:pl-64 flex flex-col min-w-0 min-h-screen">
-          <main className="flex-1 pb-16">{children}</main>
+        <div className="flex-1 lg:pl-72 flex flex-col min-w-0 min-h-screen max-w-full overflow-x-hidden">
+          <main className="flex-1 pb-16 min-w-0 overflow-x-hidden">{children}</main>
         </div>
       </div>
     </AdminContext.Provider>
