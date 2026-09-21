@@ -1,12 +1,8 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import Link from 'next/link';
 import {
   HelpCircle,
-  Sparkles,
-  Phone,
-  ArrowRight,
   Search,
 } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
@@ -25,10 +21,39 @@ export default function FAQClient({ initialFaq }: FAQClientProps) {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Derive category tabs dynamically from stored FAQ items
+  const categories = useMemo(() => {
+    const labelMap = new Map(FAQ_CATEGORIES.map((c) => [c.key.toLowerCase(), c.label]));
+
+    const formatLabel = (cat: string) => {
+      const lower = cat.toLowerCase();
+      if (labelMap.has(lower)) return labelMap.get(lower)!;
+      return cat
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+    };
+
+    const uniqueCats = new Set<string>();
+    initialFaq.forEach((item) => {
+      if (item.category && item.isVisible !== false) {
+        uniqueCats.add(item.category);
+      }
+    });
+
+    const list: { key: string; label: string }[] = [{ key: 'all', label: 'All Questions' }];
+    Array.from(uniqueCats).forEach((cat) => {
+      list.push({ key: cat, label: formatLabel(cat) });
+    });
+
+    return list;
+  }, [initialFaq]);
+
   const filteredItems = useMemo(() => {
     return initialFaq.filter((item) => {
       const matchesCategory =
-        activeCategory === 'all' || item.category === activeCategory;
+        activeCategory === 'all' ||
+        item.category === activeCategory ||
+        item.category?.toLowerCase() === activeCategory.toLowerCase();
       const matchesSearch =
         searchQuery.trim() === '' ||
         item.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -76,9 +101,9 @@ export default function FAQClient({ initialFaq }: FAQClientProps) {
             )}
           </div>
 
-          {/* Category Tabs */}
+          {/* Category Tabs (derived dynamically from stored FAQ items) */}
           <div className="flex items-center justify-start sm:justify-center overflow-x-auto gap-2 pb-2 sm:pb-0 scrollbar-none">
-            {FAQ_CATEGORIES.map((cat) => {
+            {categories.map((cat) => {
               const isActive = activeCategory === cat.key;
               return (
                 <button

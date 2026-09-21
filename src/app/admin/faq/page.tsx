@@ -10,12 +10,9 @@ import {
   ArrowDown,
   Eye,
   EyeOff,
-  Sparkles,
   RefreshCw,
   Search,
   X,
-  Check,
-  CheckCircle2,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
@@ -31,6 +28,8 @@ export default function AdminFaqPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [editingItem, setEditingItem] = useState<Partial<CmsFaqItem> | null>(null);
+  const [isCustomCategory, setIsCustomCategory] = useState(false);
+  const [customCategoryInput, setCustomCategoryInput] = useState('');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
   const addToast = (type: 'success' | 'error' | 'info', message: string) => {
@@ -63,6 +62,23 @@ export default function AdminFaqPage() {
     fetchFaq();
   }, []);
 
+  // Derive categories from stored FAQ items merged with defaults
+  const categories = useMemo(() => {
+    const catsMap = new Map<string, string>();
+    FAQ_CATEGORIES.forEach((c) => catsMap.set(c.key, c.label));
+    faqItems.forEach((f) => {
+      if (f.category && !catsMap.has(f.category)) {
+        catsMap.set(
+          f.category,
+          f.category
+            .replace(/[-_]/g, ' ')
+            .replace(/\b\w/g, (c) => c.toUpperCase())
+        );
+      }
+    });
+    return Array.from(catsMap.entries()).map(([key, label]) => ({ key, label }));
+  }, [faqItems]);
+
   const filteredItems = useMemo(() => {
     return faqItems.filter((f) => {
       const matchesSearch =
@@ -77,12 +93,26 @@ export default function AdminFaqPage() {
   }, [faqItems, searchQuery, categoryFilter]);
 
   const handleCreateNew = () => {
+    setIsCustomCategory(false);
+    setCustomCategoryInput('');
     setEditingItem({
-      category: 'planning',
+      category: categories[0]?.key || 'planning',
       question: '',
       answer: '',
       isVisible: true,
     });
+  };
+
+  const handleEditItem = (item: CmsFaqItem) => {
+    const knownKeys = categories.map((c) => c.key);
+    if (!knownKeys.includes(item.category)) {
+      setIsCustomCategory(true);
+      setCustomCategoryInput(item.category);
+    } else {
+      setIsCustomCategory(false);
+      setCustomCategoryInput('');
+    }
+    setEditingItem({ ...item });
   };
 
   const handleSaveItem = async (e: React.FormEvent) => {
@@ -91,6 +121,10 @@ export default function AdminFaqPage() {
       addToast('error', 'Question and Answer are required');
       return;
     }
+
+    const finalCategory = isCustomCategory
+      ? customCategoryInput.trim().toLowerCase().replace(/\s+/g, '-') || 'general'
+      : editingItem.category || 'planning';
 
     setIsSaving(true);
     const isEdit = Boolean(editingItem.id);
@@ -101,7 +135,10 @@ export default function AdminFaqPage() {
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(editingItem),
+        body: JSON.stringify({
+          ...editingItem,
+          category: finalCategory,
+        }),
       });
 
       if (res.ok) {
@@ -196,6 +233,11 @@ export default function AdminFaqPage() {
       <AdminHeader
         title="Frequently Asked Questions (FAQ)"
         subtitle="Manage traveler questions, category tabs, and detailed guidance responses."
+        actionButton={{
+          label: 'Add Question',
+          onClick: handleCreateNew,
+          icon: <Plus className="w-4 h-4" />,
+        }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
@@ -222,7 +264,17 @@ export default function AdminFaqPage() {
             </div>
 
             <div className="flex items-center gap-1.5 bg-slate-950/50 p-1 rounded-xl border border-slate-800 overflow-x-auto scrollbar-none">
-              {FAQ_CATEGORIES.map((cat) => (
+              <button
+                onClick={() => setCategoryFilter('all')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+                  categoryFilter === 'all'
+                    ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                All
+              </button>
+              {categories.map((cat) => (
                 <button
                   key={cat.key}
                   onClick={() => setCategoryFilter(cat.key)}
@@ -252,7 +304,7 @@ export default function AdminFaqPage() {
               className="flex items-center gap-2 px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm rounded-xl transition-all shadow-lg shadow-amber-500/20 hover:scale-[1.02] active:scale-[0.98]"
             >
               <Plus className="w-4 h-4" />
-              <span>Add FAQ</span>
+              <span>Add Question</span>
             </button>
           </div>
         </div>
@@ -335,7 +387,7 @@ export default function AdminFaqPage() {
                   </button>
 
                   <button
-                    onClick={() => setEditingItem(item)}
+                    onClick={() => handleEditItem(item)}
                     className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-200 hover:text-amber-300 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl transition-all"
                   >
                     <Edit2 className="w-3.5 h-3.5" />
@@ -376,20 +428,41 @@ export default function AdminFaqPage() {
             <form onSubmit={handleSaveItem} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Category
+                  Category *
                 </label>
-                <select
-                  value={editingItem.category || 'planning'}
-                  onChange={(e) => setEditingItem({ ...editingItem, category: e.target.value })}
-                  className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100"
-                >
-                  <option value="planning">Trip Planning</option>
-                  <option value="customization">Bespoke Customization</option>
-                  <option value="homestays">Homestay Living</option>
-                  <option value="health">Health & Altitude</option>
-                  <option value="booking">Booking & Policies</option>
-                  <option value="responsible">Responsible Tourism</option>
-                </select>
+                <div className="space-y-2">
+                  <select
+                    value={isCustomCategory ? '__new__' : editingItem.category || categories[0]?.key || 'planning'}
+                    onChange={(e) => {
+                      if (e.target.value === '__new__') {
+                        setIsCustomCategory(true);
+                      } else {
+                        setIsCustomCategory(false);
+                        setEditingItem({ ...editingItem, category: e.target.value });
+                      }
+                    }}
+                    className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                  >
+                    {categories.map((c) => (
+                      <option key={c.key} value={c.key}>
+                        {c.label} ({c.key})
+                      </option>
+                    ))}
+                    <option value="__new__">+ Add New Category...</option>
+                  </select>
+
+                  {isCustomCategory && (
+                    <input
+                      type="text"
+                      placeholder="Enter new category identifier (e.g. permits)..."
+                      value={customCategoryInput}
+                      onChange={(e) => setCustomCategoryInput(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-slate-950 border border-amber-500/50 rounded-xl text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                      required
+                      autoFocus
+                    />
+                  )}
+                </div>
               </div>
 
               <div>
