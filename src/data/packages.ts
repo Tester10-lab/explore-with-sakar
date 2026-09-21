@@ -252,7 +252,7 @@ export const TRAVEL_PACKAGES: PackageItem[] = [
     "season": "Year-Round",
     "groupSize": "Private (1 – 4 Travelers)",
     "image": {
-      "src": "/explore-with-sakar/images/spiritual/meditation-cave.jpg",
+      "src": "/explore-with-sakar/images/spiritual/meditation-session.jpg",
       "alt": "Ancient meditation caves and singing bowls in the Himalayan foothills"
     },
     "overview": "An unhurried spiritual pilgrimage dedicated to inner stillness. Undergo personalized 7-metal Tibetan singing bowl acoustic healing sessions, meditate inside ancient 8th-century caves in Pharping, and attend dawn monastic chanting.",
@@ -696,7 +696,7 @@ export const TRAVEL_PACKAGES: PackageItem[] = [
     "season": "Year-Round",
     "groupSize": "Private (1 – 4 Travelers)",
     "image": {
-      "src": "/explore-with-sakar/images/spiritual/meditation-cave.jpg",
+      "src": "/explore-with-sakar/images/spiritual/meditation-session.jpg",
       "alt": "Butter lamps burning in front of golden Buddha statue in Pharping"
     },
     "overview": "Pharping (known to Tibetans as Yangleshö) is considered second only to Bodh Gaya in sanctity for Tibetan Buddhists. Here, Guru Padmasambhava achieved profound realization in the 8th century. Explore Asura Cave, ancient Vajrayogini temple, and tranquil monastic gardens.",

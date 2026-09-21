@@ -390,14 +390,14 @@ export const EXPERIENCES: Experience[] = [
     season: 'Year Round',
     featured: true,
     heroImage: {
-      src: '/explore-with-sakar/images/spiritual/singing-bowls.jpg',
+      src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg',
       alt: 'Hand-hammered seven-metal Himalayan singing bowl placed on silk cushion',
       caption: 'Ancient vibrational frequencies tuned to body chakras.',
     },
     galleryImages: [
-      { src: '/explore-with-sakar/images/spiritual/singing-bowls.jpg', alt: 'Tibetan singing bowls' },
+      { src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg', alt: 'Tibetan singing bowls' },
       { src: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg', alt: 'Boudhanath Stupa at dusk' },
-      { src: '/explore-with-sakar/images/spiritual/meditation-cave.jpg', alt: 'Pharping cave shrine' },
+      { src: '/explore-with-sakar/images/spiritual/meditation-session.jpg', alt: 'Pharping cave shrine' },
     ],
     shortDescription: 'A restorative journey focused on Himalayan acoustic sound therapy, mindfulness meditation, and sacred Buddhist pilgrimage traditions.',
     fullDescription: [
@@ -433,13 +433,13 @@ export const EXPERIENCES: Experience[] = [
     season: 'Year Round',
     featured: false,
     heroImage: {
-      src: '/explore-with-sakar/images/spiritual/meditation-cave.jpg',
+      src: '/explore-with-sakar/images/spiritual/meditation-session.jpg',
       alt: 'Ancient cliff meditation cave in Pharping with butter lamps',
       caption: 'The sacred Asura Cave where ancient meditation masters achieved inner illumination.',
     },
     galleryImages: [
-      { src: '/explore-with-sakar/images/spiritual/meditation-cave.jpg', alt: 'Pharping cave' },
-      { src: '/explore-with-sakar/images/spiritual/singing-bowls.jpg', alt: 'Meditation bells' },
+      { src: '/explore-with-sakar/images/spiritual/meditation-session.jpg', alt: 'Pharping cave' },
+      { src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg', alt: 'Meditation bells' },
     ],
     shortDescription: 'Sit in the deep silence of Asura Cave where Padmasambhava meditated in the 8th century, surrounded by whispering pine forests and prayer flags.',
     fullDescription: [
@@ -512,12 +512,12 @@ export const EXPERIENCES: Experience[] = [
     season: 'Year Round',
     featured: false,
     heroImage: {
-      src: '/explore-with-sakar/images/spiritual/singing-bowls.jpg',
+      src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg',
       alt: 'Monastery sound bowls and sacred meditation cushions in quiet hall',
       caption: 'Quiet monastery sanctuary tuned to contemplation and inner renewal.',
     },
     galleryImages: [
-      { src: '/explore-with-sakar/images/spiritual/singing-bowls.jpg', alt: 'Monastery chanting cushions' },
+      { src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg', alt: 'Monastery chanting cushions' },
       { src: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg', alt: 'Peaceful stupa' },
     ],
     shortDescription: 'Step out of constant digital connection into the restorative rhythm of living monastic life, resonant deep-throat chanting, and silent morning walks.',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import Image from 'next/image';
+import SafeImage from '@/components/common/SafeImage';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPublicDestinationBySlug, getPublicDestinations } from '@/lib/content';
@@ -42,9 +42,9 @@ export default async function DestinationDetailPage({ params }: Props) {
     <div className="min-h-screen bg-sand">
       {/* Cinematic Hero Image */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] lg:h-[80vh] overflow-hidden">
-        <Image
-          src={destination.image.src}
-          alt={destination.image.alt}
+        <SafeImage
+          src={destination.image?.src || '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'}
+          alt={destination.image?.alt || destination.name}
           fill
           priority
           sizes="100vw"
@@ -122,9 +122,9 @@ export default async function DestinationDetailPage({ params }: Props) {
               {/* Polaroid Image */}
               <div className="polaroid-frame rotate-2 bg-white">
                 <div className="relative aspect-square w-full">
-                   <Image
-                    src={destination.image.src}
-                    alt={destination.image.alt}
+                   <SafeImage
+                    src={destination.image?.src || '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'}
+                    alt={destination.image?.alt || destination.name}
                     fill
                     sizes="(max-width: 1024px) 100vw, 33vw"
                     className="object-cover"

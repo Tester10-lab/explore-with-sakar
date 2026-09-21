@@ -35,6 +35,12 @@ export function getMongoClient(): Promise<MongoClient> {
   const uri = process.env.MONGODB_URI;
   const isProduction = process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL);
 
+  // During `next build`, never try to connect — use seed data instead.
+  // NEXT_PHASE is set by Next.js to 'phase-production-build' during `next build`.
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    throw new MongoUnavailableError('Skipping MongoDB during build phase — seed data will be used.');
+  }
+
   if (!uri) {
     if (isProduction) {
       throw new Error('MONGODB_URI environment variable is missing.');

@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import SafeImage from '@/components/common/SafeImage';
 import Link from 'next/link';
 import {
   MapPin,
@@ -123,7 +123,7 @@ export default function ExperienceDetailTemplate({
 
         {/* Right: Hero Image */}
         <div className="order-1 lg:order-2 relative w-full min-h-[40vh] lg:min-h-full bg-himalaya-900">
-          <Image
+          <SafeImage
             src={heroImg}
             alt={heroAlt}
             fill
@@ -363,7 +363,7 @@ export default function ExperienceDetailTemplate({
                     idx === 1 ? 'sm:-translate-y-4' : ''
                   }`}
                 >
-                  <Image
+                  <SafeImage
                     src={img.src}
                     alt={img.alt || 'Experience impression'}
                     fill

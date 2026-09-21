@@ -41,8 +41,8 @@ try {
 // If we get here, git grep found something. Filter out placeholders and .env.example.
 const lines = output.split('\n').filter(Boolean);
 const violations = lines.filter(line => {
-  // Skip .env.example
-  if (line.startsWith('.env.example:')) return false;
+  // Skip .env.example and check-secrets.mjs itself
+  if (line.startsWith('.env.example:') || line.startsWith('scripts/check-secrets.mjs:')) return false;
   // Extract the matched content after the line number
   const content = line.split(':').slice(2).join(':');
   // Skip if all tokens in the credentials are uppercase-only placeholders
