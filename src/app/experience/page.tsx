@@ -75,6 +75,19 @@ const CORE_PILLARS = [
 
 export default async function ExperienceLandingPage() {
   const experiences = await getPublicExperiences();
+  const catalogExperiences = experiences.map((exp) => ({
+    id: exp.id,
+    slug: exp.slug,
+    title: exp.title,
+    category: exp.category,
+    categoryLabel: exp.categoryLabel,
+    featured: exp.featured,
+    duration: exp.duration,
+    location: exp.location,
+    shortDescription: exp.shortDescription,
+    groupSize: exp.groupSize,
+    heroImage: exp.heroImage ? { src: exp.heroImage.src, alt: exp.heroImage.alt } : undefined,
+  }));
 
   return (
     <div className="min-h-screen bg-parchment-100">
@@ -162,7 +175,7 @@ export default async function ExperienceLandingPage() {
 
       {/* 3. Interactive Catalog (Paginated: 4 per page) */}
       <Suspense fallback={<div className="py-20 text-center text-terracotta">Loading catalog...</div>}>
-        <ExperienceCatalogClient initialExperiences={experiences} />
+        <ExperienceCatalogClient initialExperiences={catalogExperiences} />
       </Suspense>
 
       {/* 4. Final CTA */}

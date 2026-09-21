@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { getPublicBlogs, getPublicExperiences } from '@/lib/content';
+import { getPublicBlogs, getPublicTopFeaturedExperiences } from '@/lib/content';
 import BlogClient from './BlogClient';
 
 export const metadata: Metadata = {
@@ -9,10 +9,22 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const [blogs, experiences] = await Promise.all([
+  const [blogs, topExperiences] = await Promise.all([
     getPublicBlogs(),
-    getPublicExperiences(),
+    getPublicTopFeaturedExperiences(3),
   ]);
 
-  return <BlogClient initialBlogs={blogs} initialExperiences={experiences} />;
+  const lightweightExperiences = topExperiences.map((e) => ({
+    id: e.id,
+    slug: e.slug,
+    title: e.title,
+    location: e.location,
+    duration: e.duration,
+    shortDescription: e.shortDescription,
+    heroImage: e.heroImage ? { src: e.heroImage.src, alt: e.heroImage.alt } : undefined,
+    status: 'published' as const,
+    featured: true,
+  }));
+
+  return <BlogClient initialBlogs={blogs} initialExperiences={lightweightExperiences as any} />;
 }

@@ -6,8 +6,25 @@ import Image from 'next/image';
 import { ArrowRight, MapPin, Clock, Users, Sparkles } from 'lucide-react';
 import { ExtendedExperience } from '@/types/cms';
 
+export type CatalogExperience = {
+  id: string;
+  slug: string;
+  title: string;
+  category: string;
+  categoryLabel?: string;
+  featured?: boolean;
+  duration?: string;
+  location?: string;
+  shortDescription?: string;
+  groupSize?: string;
+  heroImage?: {
+    src: string;
+    alt: string;
+  };
+};
+
 interface ExperienceCatalogClientProps {
-  initialExperiences: ExtendedExperience[];
+  initialExperiences: (CatalogExperience | ExtendedExperience)[];
 }
 
 const ITEMS_PER_PAGE = 4;
