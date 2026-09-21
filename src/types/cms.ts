@@ -1,3 +1,5 @@
+import { BeyondExperience } from '@/data/beyond-the-map';
+import { LeaveAMarkData } from '@/data/leave-a-mark';
 import { BlogPost, GalleryPhoto, Testimonial, ImageAsset, BlogCategory, BlogBlock } from './index';
 import { PackageItem } from '@/data/travelPackages';
 
@@ -391,6 +393,14 @@ export interface NavigationConfig {
   updatedAt: string;
 }
 
+
+export interface CmsBeyondChapter extends BeyondExperience {
+  order: number;
+  isPublished: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // ==================== EXTENDED DATA STORE ====================
 
 export interface CMSDataStore {
@@ -409,6 +419,8 @@ export interface CMSDataStore {
   destinations?: CmsDestination[];
   faq?: CmsFaqItem[];
   navigation?: NavigationConfig;
+  beyondChapters?: CmsBeyondChapter[];
+  leaveAMark?: LeaveAMarkData;
   settings: WebsiteSettings;
   migrations?: string[];
   version: number;

@@ -16,14 +16,15 @@ import {
   LogOut,
   Sparkles,
   ChevronRight,
-  ChevronDown,
-  Package as PackageIcon,
   Compass,
   X,
   Calendar,
   MapPin,
   HelpCircle,
   Menu as MenuIcon,
+  Search,
+  BookOpen,
+  Heart,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -31,22 +32,23 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
+interface NavItem {
+  label: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  badge?: React.ReactNode | number | null;
+  exact?: boolean;
+}
+
+interface NavGroup {
+  title: string;
+  items: NavItem[];
+}
+
 export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [unreadInquiries, setUnreadInquiries] = useState<number>(0);
-
-  // Check if current page is inside the extra/advanced section
-  const isMoreActive =
-    pathname.startsWith('/admin/events') ||
-    pathname.startsWith('/admin/destinations') ||
-    pathname.startsWith('/admin/faq') ||
-    pathname.startsWith('/admin/navigation') ||
-    pathname.startsWith('/admin/pages') ||
-    pathname.startsWith('/admin/seo') ||
-    pathname.startsWith('/admin/preview');
-
-  const [showMore, setShowMore] = useState<boolean>(isMoreActive);
 
   useEffect(() => {
     async function fetchUnreadCount() {
@@ -67,95 +69,114 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
     fetchUnreadCount();
   }, [pathname]);
 
-  // Clean, straightforward 10-item primary navigation
-  const CORE_NAV_ITEMS = [
+  const NAV_GROUPS: NavGroup[] = [
     {
-      label: 'Dashboard',
-      href: '/admin',
-      icon: LayoutDashboard,
-      badge: null,
+      title: 'Dashboard & Inquiries',
+      items: [
+        {
+          label: 'Dashboard',
+          href: '/admin',
+          icon: LayoutDashboard,
+          badge: null,
+          exact: true,
+        },
+        {
+          label: 'Inquiries',
+          href: '/admin/inquiries',
+          icon: Inbox,
+          badge: unreadInquiries > 0 ? unreadInquiries : null,
+        },
+      ],
     },
     {
-      label: 'Inquiries',
-      href: '/admin/inquiries',
-      icon: Inbox,
-      badge: unreadInquiries > 0 ? unreadInquiries : null,
+      title: 'Itineraries by Experience',
+      items: [
+        {
+          label: 'All Itineraries',
+          href: '/admin/experiences',
+          icon: Compass,
+        },
+        {
+          label: 'Beyond the Map Chapters',
+          href: '/admin/beyond-chapters',
+          icon: BookOpen,
+        },
+        {
+          label: 'Leave a Mark Strategy',
+          href: '/admin/leave-a-mark',
+          icon: Heart,
+        },
+        {
+          label: 'Services & Pillars',
+          href: '/admin/services',
+          icon: Layers,
+        },
+      ],
     },
     {
-      label: 'Homepage CMS',
-      href: '/admin/homepage',
-      icon: Globe,
-      badge: null,
+      title: 'Events & Stories',
+      items: [
+        {
+          label: 'Events & Festivals',
+          href: '/admin/events',
+          icon: Calendar,
+        },
+        {
+          label: 'Blogs & Stories',
+          href: '/admin/blogs',
+          icon: FileText,
+        },
+        {
+          label: 'Photo Gallery',
+          href: '/admin/photos',
+          icon: ImageIcon,
+        },
+        {
+          label: 'Traveler Reviews',
+          href: '/admin/reviews',
+          icon: Star,
+        },
+      ],
     },
     {
-      label: 'Services / Pillars',
-      href: '/admin/services',
-      icon: Layers,
-      badge: null,
-    },
-    {
-      label: 'Itineraries',
-      href: '/admin/experiences',
-      icon: Compass,
-      badge: null,
-    },
-    {
-      label: 'Blogs',
-      href: '/admin/blogs',
-      icon: FileText,
-      badge: null,
-    },
-    {
-      label: 'Photos',
-      href: '/admin/photos',
-      icon: ImageIcon,
-      badge: null,
-    },
-    {
-      label: 'Reviews',
-      href: '/admin/reviews',
-      icon: Star,
-      badge: null,
-    },
-    {
-      label: 'Settings & Contact',
-      href: '/admin/settings',
-      icon: Settings,
-      badge: null,
-    },
-  ];
-
-  // Optional secondary items (collapsed by default)
-  const MORE_NAV_ITEMS = [
-    {
-      label: 'Events & Festivals',
-      href: '/admin/events',
-      icon: Calendar,
-    },
-    {
-      label: 'Destinations',
-      href: '/admin/destinations',
-      icon: MapPin,
-    },
-    {
-      label: 'FAQ Items',
-      href: '/admin/faq',
-      icon: HelpCircle,
-    },
-    {
-      label: 'Navigation Menus',
-      href: '/admin/navigation',
-      icon: MenuIcon,
-    },
-    {
-      label: 'Page Overrides',
-      href: '/admin/pages',
-      icon: Layers,
-    },
-    {
-      label: 'SEO & Metadata',
-      href: '/admin/seo',
-      icon: Globe,
+      title: 'Site Configuration',
+      items: [
+        {
+          label: 'Homepage CMS',
+          href: '/admin/homepage',
+          icon: Globe,
+        },
+        {
+          label: 'SEO & Metadata',
+          href: '/admin/seo',
+          icon: Search,
+        },
+        {
+          label: 'Page Overrides',
+          href: '/admin/pages',
+          icon: Layers,
+        },
+        {
+          label: 'Destinations',
+          href: '/admin/destinations',
+          icon: MapPin,
+        },
+        {
+          label: 'FAQ Questions',
+          href: '/admin/faq',
+          icon: HelpCircle,
+        },
+        {
+          label: 'Navigation Menus',
+          href: '/admin/navigation',
+          icon: MenuIcon,
+        },
+        {
+          label: 'Settings & Contact',
+          href: '/admin/settings',
+          icon: Settings,
+        },
+      ],
     },
   ];
 
@@ -216,67 +237,19 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
             </button>
           </div>
 
-          {/* Clean 10-Item Primary Navigation */}
-          <nav className="p-3 space-y-1">
-            {CORE_NAV_ITEMS.map((item) => {
-              const isActive =
-                item.href === '/admin'
-                  ? pathname === '/admin'
-                  : pathname === item.href || (item.href !== '/admin/services' && pathname.startsWith(item.href));
+          {/* Grouped Navigation */}
+          <nav className="p-3 space-y-5">
+            {NAV_GROUPS.map((group) => (
+              <div key={group.title} className="space-y-1">
+                <h3 className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  {group.title}
+                </h3>
+                <div className="space-y-0.5">
+                  {group.items.map((item) => {
+                    const isActive = item.exact
+                      ? pathname === item.href
+                      : pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href));
 
-              const Icon = item.icon;
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={onClose}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium transition-all group ${
-                    isActive
-                      ? 'bg-slate-900 text-white font-semibold shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                  }`}
-                >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <Icon
-                      className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                        isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-700'
-                      }`}
-                    />
-                    <span className="truncate">{item.label}</span>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    {item.badge !== null && item.badge !== undefined && (
-                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900">
-                        {item.badge}
-                      </span>
-                    )}
-                    {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
-                  </div>
-                </Link>
-              );
-            })}
-
-            {/* Optional Collapsible "More Tools" Section */}
-            <div className="pt-2 border-t border-slate-100">
-              <button
-                type="button"
-                onClick={() => setShowMore((prev) => !prev)}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors"
-              >
-                <span>More Pages & Tools</span>
-                {showMore ? (
-                  <ChevronDown className="w-3.5 h-3.5 opacity-70" />
-                ) : (
-                  <ChevronRight className="w-3.5 h-3.5 opacity-70" />
-                )}
-              </button>
-
-              {showMore && (
-                <div className="mt-1 space-y-0.5 pl-2">
-                  {MORE_NAV_ITEMS.map((item) => {
-                    const isActive = pathname.startsWith(item.href);
                     const Icon = item.icon;
 
                     return (
@@ -284,27 +257,35 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
                         key={item.href}
                         href={item.href}
                         onClick={onClose}
-                        className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group ${
+                        className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all group ${
                           isActive
                             ? 'bg-slate-900 text-white font-semibold shadow-sm'
-                            : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                         }`}
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
                           <Icon
-                            className={`w-3.5 h-3.5 shrink-0 transition-transform group-hover:scale-110 ${
-                              isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-600'
+                            className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
+                              isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-700'
                             }`}
                           />
                           <span className="truncate">{item.label}</span>
                         </div>
-                        {isActive && <ChevronRight className="w-3 h-3 opacity-60" />}
+
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          {item.badge !== null && item.badge !== undefined && (
+                            <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900">
+                              {item.badge}
+                            </span>
+                          )}
+                          {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
+                        </div>
                       </Link>
                     );
                   })}
                 </div>
-              )}
-            </div>
+              </div>
+            ))}
           </nav>
         </div>
 

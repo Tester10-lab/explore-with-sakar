@@ -16,24 +16,29 @@ import {
 } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
 import CTASection from '@/components/common/CTASection';
-import { BEYOND_EXPERIENCES } from '@/data/beyond-the-map';
-import { PageContent } from '@/types/cms';
+import { BEYOND_EXPERIENCES, BeyondExperience } from '@/data/beyond-the-map';
+import { PageContent, CmsBeyondChapter } from '@/types/cms';
 import { getPageHeroOverrides, isSectionVisible } from '@/lib/pageContentHelper';
 
 const ITEMS_PER_PAGE = 4;
 
 interface GoBeyondExperienceProps {
   pageContent?: PageContent | null;
+  chapters?: (BeyondExperience | CmsBeyondChapter)[];
 }
 
-export default function GoBeyondExperience({ pageContent }: GoBeyondExperienceProps) {
+export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondExperienceProps) {
+  const allExperiences: BeyondExperience[] = (chapters && chapters.length > 0)
+    ? (chapters as BeyondExperience[]).filter((c: any) => c.isPublished !== false)
+    : BEYOND_EXPERIENCES;
+
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const totalPages = Math.ceil(BEYOND_EXPERIENCES.length / ITEMS_PER_PAGE);
+  const totalPages = Math.max(1, Math.ceil(allExperiences.length / ITEMS_PER_PAGE));
 
   const safeCurrentPage = Math.max(1, Math.min(currentPage, totalPages));
   const startIdx = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
-  const currentExperiences = BEYOND_EXPERIENCES.slice(startIdx, startIdx + ITEMS_PER_PAGE);
-  const endIdx = Math.min(safeCurrentPage * ITEMS_PER_PAGE, BEYOND_EXPERIENCES.length);
+  const currentExperiences = allExperiences.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+  const endIdx = Math.min(safeCurrentPage * ITEMS_PER_PAGE, allExperiences.length);
 
   const hero = getPageHeroOverrides(pageContent, {
     badge: 'Independent Experience Package',
@@ -97,7 +102,7 @@ export default function GoBeyondExperience({ pageContent }: GoBeyondExperiencePr
                   The 4 Canonical Narratives:
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-2">
-                  {BEYOND_EXPERIENCES.map((exp) => (
+                  {allExperiences.map((exp) => (
                     <button
                       key={exp.id}
                       onClick={() => scrollToSection(exp.id)}
@@ -126,7 +131,7 @@ export default function GoBeyondExperience({ pageContent }: GoBeyondExperiencePr
               </span>
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-himalaya-950">
-                  Showing Chapters {startIdx + 1}–{endIdx} of {BEYOND_EXPERIENCES.length}
+                  Showing Chapters {startIdx + 1}–{endIdx} of {allExperiences.length}
                 </p>
                 <p className="text-[11px] text-himalaya-500 font-serif">
                   Page {safeCurrentPage} of {totalPages} • Curated sequentially by Sakar
@@ -354,7 +359,7 @@ export default function GoBeyondExperience({ pageContent }: GoBeyondExperiencePr
                 Page {safeCurrentPage} of {totalPages}
               </p>
               <p className="text-[11px] text-himalaya-500 font-serif">
-                Showing experiences {startIdx + 1} through {endIdx} of {BEYOND_EXPERIENCES.length}
+                Showing experiences {startIdx + 1} through {endIdx} of {allExperiences.length}
               </p>
             </div>
 
@@ -373,7 +378,7 @@ export default function GoBeyondExperience({ pageContent }: GoBeyondExperiencePr
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
                   const isCurrent = pageNum === safeCurrentPage;
                   const pageStart = (pageNum - 1) * ITEMS_PER_PAGE + 1;
-                  const pageEnd = Math.min(pageNum * ITEMS_PER_PAGE, BEYOND_EXPERIENCES.length);
+                  const pageEnd = Math.min(pageNum * ITEMS_PER_PAGE, allExperiences.length);
                   return (
                     <button
                       key={pageNum}

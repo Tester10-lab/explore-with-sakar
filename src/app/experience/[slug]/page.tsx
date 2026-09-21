@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
-import { getPublicExperienceBySlug, getPublicExperiences, getPageContent } from '@/lib/content';
+import { getPublicExperienceBySlug, getPublicExperiences, getPageContent, getPublicBeyondChapters, getPublicLeaveAMark } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 import GoBeyondExperience from '@/components/experience/GoBeyondExperience';
 import GoSpiritualExperience from '@/components/experience/GoSpiritualExperience';

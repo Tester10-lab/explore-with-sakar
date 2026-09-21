@@ -16,7 +16,9 @@ import {
   ExtendedGalleryPhoto,
   ExtendedBlogPost,
   PageContent,
+  CmsBeyondChapter,
 } from '@/types/cms';
+import { LeaveAMarkData } from '@/data/leave-a-mark';
 
 /**
  * Type for public blog list items: strips heavy `content` array
@@ -429,5 +431,52 @@ export async function getPageContent(slug: string): Promise<PageContent | null> 
     console.warn(`[content] Mongo unreachable, returning static fallback for page ${slug}:`, err);
     const seed = getSeedForKey('pages') as PageContent[];
     return (seed || []).find((p) => p.slug === slug) || null;
+  }
+}
+
+// ==========================================
+// 13. Beyond the Map Chapters
+// ==========================================
+const fetchCachedBeyondChapters = unstable_cache(
+  async (): Promise<CmsBeyondChapter[]> => {
+    const list = await readKey<CmsBeyondChapter[]>('beyondChapters', { throwOnError: true });
+    return (list || [])
+      .filter((c) => c.isPublished !== false)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  },
+  ['cms', 'beyondChapters'],
+  { tags: ['cms:beyondChapters'], revalidate: 3600 }
+);
+
+export async function getPublicBeyondChapters(): Promise<CmsBeyondChapter[]> {
+  try {
+    return await fetchCachedBeyondChapters();
+  } catch (err) {
+    console.warn('[content] Mongo unreachable, returning static fallback for beyondChapters:', err);
+    const seed = getSeedForKey('beyondChapters') as CmsBeyondChapter[];
+    return (seed || [])
+      .filter((c) => c.isPublished !== false)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  }
+}
+
+// ==========================================
+// 14. Leave a Mark Singleton
+// ==========================================
+const fetchCachedLeaveAMark = unstable_cache(
+  async (): Promise<LeaveAMarkData> => {
+    const data = await readKey<LeaveAMarkData>('leaveAMark', { throwOnError: true });
+    return data;
+  },
+  ['cms', 'leaveAMark'],
+  { tags: ['cms:leaveAMark'], revalidate: 3600 }
+);
+
+export async function getPublicLeaveAMark(): Promise<LeaveAMarkData> {
+  try {
+    return await fetchCachedLeaveAMark();
+  } catch (err) {
+    console.warn('[content] Mongo unreachable, returning static fallback for leaveAMark:', err);
+    return getSeedForKey('leaveAMark') as LeaveAMarkData;
   }
 }

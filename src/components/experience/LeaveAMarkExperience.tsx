@@ -15,17 +15,19 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
-import { LEAVE_A_MARK_CONTENT } from '@/data/leave-a-mark';
+import { LEAVE_A_MARK_CONTENT, LeaveAMarkData } from '@/data/leave-a-mark';
 import { PageContent } from '@/types/cms';
 import { getPageHeroOverrides, isSectionVisible } from '@/lib/pageContentHelper';
 
 interface LeaveAMarkExperienceProps {
   pageContent?: PageContent | null;
+  initialContent?: LeaveAMarkData | null;
 }
 
-export default function LeaveAMarkExperience({ pageContent }: LeaveAMarkExperienceProps) {
+export default function LeaveAMarkExperience({ pageContent, initialContent }: LeaveAMarkExperienceProps) {
+  const content = initialContent || LEAVE_A_MARK_CONTENT;
   const { title, subtitle, beyondTheMapPromise, framework, whoShouldApply, ultimateImpact } =
-    LEAVE_A_MARK_CONTENT;
+    content;
 
   const hero = getPageHeroOverrides(pageContent, {
     badge: 'Independent Experience Package',

@@ -20,6 +20,9 @@ import { EVENTS_DATA } from '@/data/events';
 import { DESTINATIONS } from '@/data/destinations';
 import { FAQ_ITEMS } from '@/data/faq';
 import { DEFAULT_PUBLIC_PAGES } from '@/data/pages';
+import { BEYOND_EXPERIENCES } from '@/data/beyond-the-map';
+import { LEAVE_A_MARK_CONTENT } from '@/data/leave-a-mark';
+import { CmsBeyondChapter } from '@/types/cms';
 
 const SEED_FILE = path.join(process.cwd(), 'data', 'cms-store.json');
 
@@ -280,6 +283,21 @@ export function getDefaultFaq(): CmsFaqItem[] {
   }));
 }
 
+
+export function getDefaultBeyondChapters(): CmsBeyondChapter[] {
+  return BEYOND_EXPERIENCES.map((exp, i) => ({
+    ...exp,
+    order: i,
+    isPublished: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }));
+}
+
+export function getDefaultLeaveAMark() {
+  return LEAVE_A_MARK_CONTENT;
+}
+
 export function getDefaultPages() {
   return DEFAULT_PUBLIC_PAGES;
 }
@@ -336,6 +354,10 @@ export function getSeedForKey(key: string): any {
       return getDefaultPages();
     case 'navigation':
       return getDefaultNavigation();
+    case 'beyondChapters':
+      return getDefaultBeyondChapters();
+    case 'leaveAMark':
+      return getDefaultLeaveAMark();
     case 'settings': {
       const fileStore = getSeedStoreFromDisk();
       return fileStore.settings || DEFAULT_SETTINGS;

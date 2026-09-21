@@ -16,7 +16,9 @@ import {
   PageContent,
   PageRevision,
   NavigationConfig,
+  CmsBeyondChapter,
 } from '@/types/cms';
+import { LeaveAMarkData } from '@/data/leave-a-mark';
 import { readKey, writeKey, pushInquiry, updateInquiryById, deleteInquiryById } from './store';
 import { hashPassword } from './auth';
 
@@ -897,4 +899,99 @@ export async function updateNavigation(config: NavigationConfig): Promise<Naviga
   config.updatedAt = new Date().toISOString();
   await writeKey('navigation', config);
   return config;
+}
+
+// ==================== BEYOND THE MAP CHAPTERS OPERATIONS ====================
+
+export async function getAllBeyondChapters(includeUnpublished = true): Promise<CmsBeyondChapter[]> {
+  const list = (await readKey<CmsBeyondChapter[]>('beyondChapters')) || [];
+  const sorted = [...list].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  return includeUnpublished ? sorted : sorted.filter((c) => c.isPublished !== false);
+}
+
+export async function getBeyondChapterById(id: string): Promise<CmsBeyondChapter | null> {
+  const list = await getAllBeyondChapters(true);
+  return list.find((c) => c.id === id) || null;
+}
+
+export async function createBeyondChapter(
+  data: Omit<CmsBeyondChapter, 'id' | 'createdAt' | 'updatedAt' | 'order'>
+): Promise<CmsBeyondChapter> {
+  const list = (await readKey<CmsBeyondChapter[]>('beyondChapters')) || [];
+  const now = new Date().toISOString();
+  const id = (data.title || 'chapter').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const newChapter: CmsBeyondChapter = {
+    ...data,
+    id: id || `chapter-${Date.now()}`,
+    order: list.length,
+    isPublished: data.isPublished !== undefined ? data.isPublished : true,
+    createdAt: now,
+    updatedAt: now,
+  };
+  list.push(newChapter);
+  await writeKey('beyondChapters', list);
+  return newChapter;
+}
+
+export async function updateBeyondChapter(
+  id: string,
+  updates: Partial<CmsBeyondChapter>
+): Promise<CmsBeyondChapter | null> {
+  const list = (await readKey<CmsBeyondChapter[]>('beyondChapters')) || [];
+  const index = list.findIndex((c) => c.id === id);
+  if (index === -1) return null;
+
+  list[index] = {
+    ...list[index],
+    ...updates,
+    updatedAt: new Date().toISOString(),
+  };
+  await writeKey('beyondChapters', list);
+  return list[index];
+}
+
+export async function deleteBeyondChapter(id: string): Promise<boolean> {
+  const list = (await readKey<CmsBeyondChapter[]>('beyondChapters')) || [];
+  const filtered = list.filter((c) => c.id !== id);
+  if (filtered.length === list.length) return false;
+  await writeKey('beyondChapters', filtered);
+  return true;
+}
+
+export async function reorderBeyondChapters(orderedIds: string[]): Promise<boolean> {
+  const list = (await readKey<CmsBeyondChapter[]>('beyondChapters')) || [];
+  const map = new Map(list.map((c) => [c.id, c]));
+  const reordered: CmsBeyondChapter[] = [];
+
+  orderedIds.forEach((id, index) => {
+    const item = map.get(id);
+    if (item) {
+      reordered.push({ ...item, order: index, updatedAt: new Date().toISOString() });
+      map.delete(id);
+    }
+  });
+
+  // Append any remaining
+  map.forEach((item) => {
+    reordered.push({ ...item, order: reordered.length });
+  });
+
+  await writeKey('beyondChapters', reordered);
+  return true;
+}
+
+// ==================== LEAVE A MARK SINGLETON OPERATIONS ====================
+
+export async function getLeaveAMark(): Promise<LeaveAMarkData> {
+  return await readKey<LeaveAMarkData>('leaveAMark');
+}
+
+export async function updateLeaveAMark(data: Partial<LeaveAMarkData>): Promise<LeaveAMarkData> {
+  const current = await getLeaveAMark();
+  const updated = {
+    ...current,
+    ...data,
+  };
+  await writeKey('leaveAMark', updated);
+  return updated;
 }

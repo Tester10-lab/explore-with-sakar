@@ -9,19 +9,23 @@ interface AdminHeaderProps {
   onToggleMobileSidebar?: () => void;
   title: string;
   subtitle?: string;
+  action?: React.ReactNode;
   actionButton?: {
     label: string;
     href?: string;
     onClick?: () => void;
     icon?: React.ReactNode;
   };
+  children?: React.ReactNode;
 }
 
 export default function AdminHeader({
   onToggleMobileSidebar,
   title,
   subtitle,
+  action,
   actionButton,
+  children,
 }: AdminHeaderProps) {
   const { toggleMobileSidebar } = useAdminLayout();
   const handleToggle = onToggleMobileSidebar || toggleMobileSidebar;
@@ -49,6 +53,8 @@ export default function AdminHeader({
       </div>
 
       <div className="flex items-center gap-3">
+        {action}
+        {children}
         {actionButton && (
           actionButton.href ? (
             <Link
