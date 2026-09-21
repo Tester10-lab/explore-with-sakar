@@ -26,6 +26,9 @@ const DB_NAME = process.env.MONGODB_DB || 'explore_with_sakar_dev';
 if (!MONGODB_URI) {
   throw new Error('MONGODB_URI environment variable is required.');
 }
+if (!DB_NAME.endsWith('_dev') && !DB_NAME.endsWith('_test')) {
+  throw new Error(`SAFETY: MONGODB_DB must end in _dev or _test (got: ${DB_NAME}). Refusing to run against production.`);
+}
 
 async function main() {
   console.log(`Connecting to ${DB_NAME}...`);

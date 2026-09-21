@@ -30,6 +30,9 @@ const JWT_SECRET = process.env.ADMIN_JWT_SECRET || 'test-secret-key-for-admin-sy
 if (!MONGODB_URI) {
   throw new Error('MONGODB_URI environment variable is required.');
 }
+if (!DB_NAME.endsWith('_dev') && !DB_NAME.endsWith('_test')) {
+  throw new Error(`SAFETY: MONGODB_DB must end in _dev or _test (got: ${DB_NAME}). Refusing to run against production.`);
+}
 
 async function main() {
   console.log('Connecting to Atlas dev database for document verification...');

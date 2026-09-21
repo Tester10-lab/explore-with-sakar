@@ -1,5 +1,28 @@
 # Progress: Fix Slow Loading and Admin ↔ Site Sync
 
+## Resume after crash — 2026-09-21T10:50 +0545
+
+### Git state
+- Branch: `fix/loading-and-sync` (clean working tree, no uncommitted changes, no stash)
+- HEAD: `3f4cac1` — refactor(packages): remove packages in favor of curated experiences
+- No stray node processes on ports 300x
+
+### Verified state of each item
+| Item | Status | Evidence |
+|------|--------|---------|
+| Q0 check-secrets.mjs | ❌ NOT DONE | `scripts/check-secrets.mjs` missing; `check:secrets` not in package.json |
+| Q1 smoke.mjs | ❌ NOT DONE | `scripts/smoke.mjs` missing; old scripts exist but lack S1–S8 coverage |
+| Q2 page weight/latency | ❌ NOT DONE | No current-HEAD measurements; previous numbers were from build machine |
+| Q3 images | ⚠️ PARTLY | Hero compressed; duplicate spiritual images issue still unresolved |
+| F0 migrations | ✅ DONE | `migrations.ts` exists; PASS in PROGRESS.md |
+| F1 remove-packages | ✅ DONE | Redirects committed; migration registered; PASS in PROGRESS.md |
+| F2 FAQ categories | ❌ NOT DONE | No category dropdown in admin or public tabs in code |
+| F3 Events→inquiries | ❌ NOT DONE | `interestedEvent` field absent from types and APIs |
+| F4 SEO | ❌ NOT DONE | No `/admin/seo` route; no `pages[].seo` in CMS |
+| F5 Itineraries | ❌ NOT DONE | No `beyondChapters` collection or admin |
+
+### Continuing from: Q0
+
 ## Checklist
 
 - [x] P0.1 P0.2 P0.3
