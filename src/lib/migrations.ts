@@ -1,4 +1,5 @@
 import { Db } from 'mongodb';
+import { BLOG_POSTS } from '@/data/blog';
 
 export interface Migration {
   id: string;
@@ -73,6 +74,32 @@ export const MIGRATIONS: Migration[] = [
             col.links = col.links.filter((l: any) => l?.url !== legacyPkgUrl);
           }
         });
+      }
+    },
+  },
+  {
+    id: '2026-restore-original-blogs',
+    run: async (db: Db) => {
+      const col = db.collection('cms_store');
+      const doc = await col.findOne({ _id: 'active_store' as any }, { projection: { blogs: 1 } });
+      const currentBlogs: any[] = (doc && Array.isArray(doc.blogs)) ? doc.blogs : [];
+      const currentSlugs = new Set(currentBlogs.map((b: any) => b?.slug));
+
+      const missing = BLOG_POSTS.filter((b) => !currentSlugs.has(b.slug));
+      if (missing.length > 0) {
+        const updated = [...missing, ...currentBlogs];
+        await col.updateOne(
+          { _id: 'active_store' as any },
+          { $set: { blogs: updated, lastUpdated: new Date().toISOString() } }
+        );
+      }
+    },
+    runFile: (store: Record<string, any>) => {
+      const currentBlogs: any[] = Array.isArray(store.blogs) ? store.blogs : [];
+      const currentSlugs = new Set(currentBlogs.map((b: any) => b?.slug));
+      const missing = BLOG_POSTS.filter((b) => !currentSlugs.has(b.slug));
+      if (missing.length > 0) {
+        store.blogs = [...missing, ...currentBlogs];
       }
     },
   },
