@@ -341,6 +341,12 @@ export default function AdminInquiriesPage() {
                           {inq.travelersCount ? `${inq.travelersCount} • ` : ''}
                           {inq.travelStyle || 'Slow & Meaningful'}
                         </div>
+                        {inq.interestedEvent && (
+                          <div className="mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-terracotta/10 text-terracotta text-[10px] font-semibold border border-terracotta/30">
+                            <Calendar className="w-3 h-3 shrink-0" />
+                            <span className="truncate max-w-[190px]">{inq.interestedEvent.title}</span>
+                          </div>
+                        )}
                       </td>
 
                       {/* Status Badge */}
@@ -441,6 +447,28 @@ export default function AdminInquiriesPage() {
                 <X className="w-5 h-5" />
               </button>
             </div>
+
+            {/* Interested Event Banner (if present) */}
+            {selectedInquiry.interestedEvent && (
+              <div className="p-4 rounded-2xl bg-terracotta/10 border border-terracotta/30 flex items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-terracotta text-white flex items-center justify-center shrink-0 shadow-subtle">
+                    <Calendar className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-terracotta tracking-wider block">
+                      Interested In Specific Event
+                    </span>
+                    <h5 className="font-editorial-serif text-sm font-bold text-parchment-100">
+                      {selectedInquiry.interestedEvent.title}
+                    </h5>
+                    <span className="text-[11px] text-himalaya-400 block font-mono">
+                      Event ID: {selectedInquiry.interestedEvent.id}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Traveler Contact Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs bg-himalaya-950 p-4 rounded-2xl border border-himalaya-850">

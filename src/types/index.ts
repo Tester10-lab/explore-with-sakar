@@ -180,4 +180,8 @@ export interface BookingInquiry {
   preferredInterests: string[];
   homestayInterest: string;
   message: string;
+  interestedEvent?: {
+    id: string;
+    title: string;
+  };
 }

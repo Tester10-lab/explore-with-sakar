@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   Sparkles,
   Send,
@@ -45,13 +46,24 @@ const ACCOMMODATION_OPTIONS = [
   'Luxury Mountain Resorts',
 ];
 
+export interface EventOption {
+  id: string;
+  title: string;
+  date: string;
+}
+
 interface InquiryFormProps {
   defaultPackage?: string;
   defaultExperience?: string;
+  availableEvents?: EventOption[];
 }
 
-export default function InquiryForm({ defaultPackage, defaultExperience }: InquiryFormProps = {}) {
+function InquiryFormInner({ defaultPackage, defaultExperience, availableEvents }: InquiryFormProps = {}) {
   const { settings } = useSettings();
+  const searchParams = useSearchParams();
+  const eventParam = searchParams.get('event');
+
+  const [events, setEvents] = useState<EventOption[]>(availableEvents || []);
   const [formData, setFormData] = useState<BookingInquiry>({
     fullName: '',
     email: '',
@@ -72,6 +84,38 @@ export default function InquiryForm({ defaultPackage, defaultExperience }: Inqui
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!availableEvents || availableEvents.length === 0) {
+      fetch('/api/public/events')
+        .then((res) => (res.ok ? res.json() : { events: [] }))
+        .then((data) => {
+          if (data.events && Array.isArray(data.events)) {
+            setEvents(data.events);
+          }
+        })
+        .catch((err) => console.warn('Failed to load events in inquiry form:', err));
+    }
+  }, [availableEvents]);
+
+  useEffect(() => {
+    if (eventParam && events.length > 0) {
+      const matched = events.find(
+        (e) => e.id.toLowerCase() === eventParam.toLowerCase()
+      );
+      if (matched) {
+        setFormData((prev) => ({
+          ...prev,
+          interestedEvent: { id: matched.id, title: matched.title },
+          message:
+            !prev.message ||
+            prev.message.startsWith('Hello Sakar, I am interested in planning my journey around')
+              ? `Hello Sakar, I am interested in planning my journey around the "${matched.title}" event (${matched.date}).`
+              : prev.message,
+        }));
+      }
+    }
+  }, [eventParam, events]);
 
   const toggleInterest = (interest: string) => {
     setFormData((prev) => {
@@ -308,6 +352,44 @@ export default function InquiryForm({ defaultPackage, defaultExperience }: Inqui
                       />
                     </div>
                   </div>
+
+                  {/* Sacred Festival or Event Selection */}
+                  <div className="mt-4 pt-3 border-t border-parchment-200">
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-terracotta" />
+                      <span>Planning Around a Sacred Festival or Event? (Optional)</span>
+                    </label>
+                    <select
+                      value={formData.interestedEvent?.id || ''}
+                      onChange={(e) => {
+                        const selectedId = e.target.value;
+                        if (!selectedId) {
+                          setFormData((prev) => ({ ...prev, interestedEvent: undefined }));
+                        } else {
+                          const selected = events.find((evt) => evt.id === selectedId);
+                          if (selected) {
+                            setFormData((prev) => ({
+                              ...prev,
+                              interestedEvent: { id: selected.id, title: selected.title },
+                              message:
+                                !prev.message ||
+                                prev.message.startsWith('Hello Sakar, I am interested in planning my journey around')
+                                  ? `Hello Sakar, I am interested in planning my journey around the "${selected.title}" event (${selected.date}).`
+                                  : prev.message,
+                            }));
+                          }
+                        }
+                      }}
+                      className="w-full px-4 py-3 rounded-xl bg-parchment-50 border border-parchment-300 focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-sm text-himalaya-950"
+                    >
+                      <option value="">No specific event / General journey</option>
+                      {events.map((evt) => (
+                        <option key={evt.id} value={evt.id}>
+                          {evt.title} ({evt.date})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 {/* Section 3: What Inspires You to Come to Nepal? */}
@@ -404,5 +486,20 @@ export default function InquiryForm({ defaultPackage, defaultExperience }: Inqui
         </div>
       </div>
     </section>
+  );
+}
+
+
+export default function InquiryForm(props: InquiryFormProps) {
+  return (
+    <Suspense
+      fallback={
+        <div className="py-20 text-center text-xs text-himalaya-500">
+          Loading inquiry form...
+        </div>
+      }
+    >
+      <InquiryFormInner {...props} />
+    </Suspense>
   );
 }

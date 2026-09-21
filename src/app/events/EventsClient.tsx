@@ -165,7 +165,7 @@ export default function EventsClient({ initialEvents }: EventsClientProps) {
                 {/* Card Footer Actions */}
                 <div className="p-6 pt-0">
                   <Link
-                    href={`/contact?subject=${encodeURIComponent(`Inquiry about ${evt.title}`)}`}
+                    href={`/contact?event=${encodeURIComponent(evt.id)}`}
                     className="w-full flex items-center justify-center py-2.5 rounded-xl bg-parchment-200 hover:bg-terracotta hover:text-white text-himalaya-900 text-xs font-bold uppercase tracking-wider transition-colors duration-200"
                   >
                     <span>Plan Your Trip for this Event</span>

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createInquiry } from '@/lib/db';
+import { createInquiry, getAllEvents } from '@/lib/db';
 
 function sanitize(str: unknown): string {
   if (typeof str !== 'string') return '';
@@ -48,6 +48,28 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    let interestedEvent: { id: string; title: string } | undefined = undefined;
+    const reqEventId = typeof body.interestedEventId === 'string'
+      ? sanitize(body.interestedEventId)
+      : (body.interestedEvent && typeof body.interestedEvent.id === 'string'
+          ? sanitize(body.interestedEvent.id)
+          : '');
+
+    if (reqEventId) {
+      try {
+        const events = await getAllEvents(false);
+        const matched = (events || []).find((e) => e.id === reqEventId && e.isVisible !== false);
+        if (matched) {
+          interestedEvent = {
+            id: matched.id,
+            title: matched.title,
+          };
+        }
+      } catch (err) {
+        console.warn('Could not validate event for inquiry:', err);
+      }
+    }
+
     const newInquiry = await createInquiry({
       fullName,
       email,
@@ -60,6 +82,7 @@ export async function POST(req: NextRequest) {
       preferredInterests,
       homestayInterest: homestayInterest || undefined,
       message,
+      interestedEvent,
     });
 
     return NextResponse.json(
