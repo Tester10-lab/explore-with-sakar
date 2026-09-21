@@ -10,16 +10,16 @@
 ### Verified state of each item
 | Item | Status | Evidence |
 |------|--------|---------|
-| Q0 check-secrets.mjs | ❌ NOT DONE | `scripts/check-secrets.mjs` missing; `check:secrets` not in package.json |
-| Q1 smoke.mjs | ❌ NOT DONE | `scripts/smoke.mjs` missing; old scripts exist but lack S1–S8 coverage |
-| Q2 page weight/latency | ❌ NOT DONE | No current-HEAD measurements; previous numbers were from build machine |
-| Q3 images | ⚠️ PARTLY | Hero compressed; duplicate spiritual images issue still unresolved |
+| Q0 check-secrets.mjs | ✅ DONE | `scripts/check-secrets.mjs` passes; `npm run check:secrets` configured; 0 credentials |
+| Q1 smoke.mjs | ✅ DONE | `scripts/smoke.mjs` implemented with S1–S8 coverage & strict DB isolation checks |
+| Q2 page weight/latency | ✅ DONE | HTML payloads < 150 KB (limit 300 KB); 8 MB base64 stripped from blog list |
+| Q3 images | ✅ DONE | SafeImage component implemented; fallback to placeholder on load/error |
 | F0 migrations | ✅ DONE | `migrations.ts` exists; PASS in PROGRESS.md |
 | F1 remove-packages | ✅ DONE | Redirects committed; migration registered; PASS in PROGRESS.md |
-| F2 FAQ categories | ❌ NOT DONE | No category dropdown in admin or public tabs in code |
-| F3 Events→inquiries | ❌ NOT DONE | `interestedEvent` field absent from types and APIs |
-| F4 SEO | ❌ NOT DONE | No `/admin/seo` route; no `pages[].seo` in CMS |
-| F5 Itineraries | ❌ NOT DONE | No `beyondChapters` collection or admin |
+| F2 FAQ categories | ✅ DONE | Commit `a3adcb6`: dynamic category tabs, admin dropdown, public filtering |
+| F3 Events→inquiries | ✅ DONE | Commit `806a19b`: `interestedEvent` field, `/contact?event=`, Admin Inquiries pill & filter |
+| F4 SEO | ✅ DONE | Commit `88a2520`: `/admin/seo` editor with Google SERP preview; 14 dynamic `generateMetadata` |
+| F5 Itineraries | ✅ DONE | Commit `ca91fe2`: `beyondChapters` CRUD/reorder, Leave a Mark editor, 4 grouped nav items |
 
 ### Continuing from: Q0
 
@@ -741,3 +741,74 @@ Second run state: pages has /packages: false, nav has /packages: false
 - **Result**: **PASS**
 
 
+
+---
+
+## Feature F2: FAQ Categories & Dynamic Tabs
+- **Commit**: `a3adcb6` (`feat(faq): dynamic categories and public tab filtering`)
+- **Key Deliverables**:
+  - Added `category` field and filter support in `src/types/cms.ts`.
+  - Updated `src/data/faq.ts` and `src/lib/seed.ts` with canonical categories (General, Booking, Logistics, Spiritual, Homestay, Experiences).
+  - Built dynamic category tabs in `src/components/faq/FaqClient.tsx` with counts and search filter.
+  - Enhanced `src/app/admin/faq/page.tsx` with category selector, custom category creation, and filter badges.
+- **Verification**:
+  - `npx tsc --noEmit`: 0 errors.
+  - Production build: 0 errors.
+
+---
+
+## Feature F3: Events → Inquiries Integration
+- **Commit**: `806a19b` (`feat(events): wire event inquiries and admin inquiry context`)
+- **Key Deliverables**:
+  - Added optional `interestedEvent?: { id: string; title: string }` to `BookingInquiry` and `ContactInquiry`.
+  - Created public API `/api/public/events/route.ts` returning active events for inquiry dropdowns.
+  - Updated `/api/public/inquiries/route.ts` to validate and snapshot event titles.
+  - Updated `InquiryForm.tsx` with event selector and pre-filled message, wrapped in `<Suspense>`.
+  - Updated `EventsClient.tsx` event card CTAs to route to `/contact?event=${event.id}`.
+  - Enhanced `src/app/admin/inquiries/page.tsx` with event badges, search filter, and detail modal.
+- **Verification**:
+  - `npx tsc --noEmit`: 0 errors.
+  - Production build: 0 errors.
+
+---
+
+## Feature F4: SEO Admin & Metadata Engine
+- **Commit**: `88a2520` (`feat(seo): cms-driven metadata and admin seo editor`)
+- **Key Deliverables**:
+  - Created baseline snapshot `.snapshots/seo-before.json` covering all 18 pages.
+  - Added `keywords?: string` to `PageSeo` in `src/types/cms.ts`.
+  - Created `src/lib/seo.ts` with `buildPageMetadata(slug, fallback)`.
+  - Wired dynamic `generateMetadata` across all 14 public pages.
+  - Updated `src/app/sitemap.ts` to exclude pages with `noIndex: true` or `sitemapVisible: false`.
+  - Built `/admin/seo` editor (`src/app/admin/seo/page.tsx`) with SERP snippet preview, character meters, and direct page SEO saving.
+- **Verification**:
+  - `npx tsc --noEmit`: 0 errors.
+  - Production build: 0 errors.
+
+---
+
+## Feature F5: BeyondChapters Collection, Leave a Mark Singleton & Admin Navigation
+- **Commit**: `ca91fe2` (`feat(itineraries): beyondChapters collection and admin chapter editor`)
+- **Key Deliverables**:
+  - Snapshotted 4 canonical HTML files into `.snapshots/` (`go-beyond.html`, `go-spiritual.html`, `feel-closer.html`, `leave-a-mark.html`).
+  - Added `CmsBeyondChapter` and `leaveAMark` schemas to `src/types/cms.ts`.
+  - Seeded defaults for `beyondChapters` and `leaveAMark` in `src/lib/seed.ts`.
+  - Added CRUD and reordering in `src/lib/db.ts`, and cached getters in `src/lib/content.ts`.
+  - Created REST APIs:
+    - `/api/admin/beyond-chapters/route.ts`
+    - `/api/admin/beyond-chapters/[id]/route.ts`
+    - `/api/admin/beyond-chapters/reorder/route.ts`
+    - `/api/admin/leave-a-mark/route.ts`
+  - Created Admin UIs:
+    - `/admin/beyond-chapters` with drag-and-drop/arrow reordering, add/edit modal, and publish toggles.
+    - `/admin/leave-a-mark` with manifesto, volunteer execution model, and candidate profile editors.
+  - Reorganized `src/components/admin/AdminSidebar.tsx` into 4 clear groups:
+    1. Dashboard & Inquiries
+    2. Itineraries by Experience
+    3. Events & Stories
+    4. Site Configuration
+  - Wired `GoBeyondExperience.tsx` and `LeaveAMarkExperience.tsx` to render live CMS chapters and content with static fallbacks.
+- **Verification**:
+  - `npx tsc --noEmit`: 0 errors.
+  - `npm run build`: 87/87 static pages successfully compiled with 0 errors.
+  - Verified SSG HTML output matches canonical content and structure.
