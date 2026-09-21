@@ -405,6 +405,7 @@ export interface CMSDataStore {
   faq?: CmsFaqItem[];
   navigation?: NavigationConfig;
   settings: WebsiteSettings;
+  migrations?: string[];
   version: number;
   lastUpdated: string;
 }

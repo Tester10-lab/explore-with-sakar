@@ -620,3 +620,32 @@ Both benchmarks executed on `next start` on the same Windows machine against Mon
 | **Item 6** | Images (P4) | **PASS** |
 | **Item 7** | Latency Comparison | **PASS** |
 
+---
+
+# Architecture Restructure Execution Log
+
+## Item 0: Migrations Mechanism
+- **Mechanism**:
+  - `CMSDataStore.migrations: string[]` added to store schema.
+  - `runPendingMigrations(db)` executes registered migrations atomically before store operations.
+  - Guard: `{ _id: 'active_store', migrations: { $ne: migrationId } }` with `$addToSet: { migrations: migrationId }`.
+  - Ensures each migration runs strictly once across any number of app instances or invocations.
+  - Missing keys continue to be seeded atomically only if undefined.
+- **Registered Migrations**:
+  - `2026-remove-packages`: Pending in Item 1.
+- **Verification Command & Raw Output**:
+```
+$ cmd /c "set MONGODB_DNS_SERVERS=8.8.8.8,1.1.1.1&& node scripts/test-migrations.mjs"
+Connecting to Atlas dev database: explore_with_sakar_dev...
+Connected to Atlas: explore_with_sakar_dev
+Atlas active_store document exists: true
+Current migrations array: []
+Testing atomic lock with ID: test-migration-1774234661339
+Attempt 1 modifiedCount: 1 (Expected: 1)
+Attempt 2 modifiedCount: 0 (Expected: 0)
+Cleaned up test migration marker from active_store.
+
+=== Migration Mechanism Check Result: PASS ===
+```
+- **Result**: **PASS**
+

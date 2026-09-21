@@ -1,0 +1,96 @@
+import { Db } from 'mongodb';
+
+export interface Migration {
+  id: string;
+  run: (db: Db) => Promise<void>;
+  runFile?: (store: Record<string, any>) => Promise<void> | void;
+}
+
+/**
+ * Registry of all store migrations in chronological order.
+ * Each migration is guaranteed to execute at most once per database/store.
+ */
+export const MIGRATIONS: Migration[] = [
+  // Migrations registered here
+];
+
+let migrationsRunPromise: Promise<void> | null = null;
+
+/**
+ * Runs all pending migrations against MongoDB atomically.
+ * Uses atomic $addToSet with an equality guard ($ne) so concurrent requests or multiple server instances
+ * never execute the same migration twice.
+ */
+export async function runPendingMigrations(db: Db): Promise<void> {
+  if (MIGRATIONS.length === 0) return;
+
+  if (migrationsRunPromise) {
+    return migrationsRunPromise;
+  }
+
+  migrationsRunPromise = (async () => {
+    const col = db.collection('cms_store');
+
+    // Ensure active_store document exists
+    await col.updateOne(
+      { _id: 'active_store' as any },
+      { $setOnInsert: { createdAt: new Date().toISOString() } },
+      { upsert: true }
+    );
+
+    for (const m of MIGRATIONS) {
+      // Atomically check and register the migration ID
+      const res = await col.updateOne(
+        { _id: 'active_store' as any, migrations: { $ne: m.id } },
+        {
+          $addToSet: { migrations: m.id } as any,
+          $set: { lastUpdated: new Date().toISOString() },
+        }
+      );
+
+      // If modifiedCount > 0, this instance won the race to run this migration
+      if (res.modifiedCount > 0) {
+        console.log(`[migration] Starting migration: ${m.id}`);
+        try {
+          await m.run(db);
+          console.log(`[migration] Completed migration: ${m.id}`);
+        } catch (err) {
+          console.error(`[migration] Failed executing ${m.id}:`, err);
+          // Revert atomic registration on failure so it can be retried
+          await col.updateOne(
+            { _id: 'active_store' as any },
+            { $pull: { migrations: m.id } as any }
+          );
+          throw err;
+        }
+      }
+    }
+  })().catch((err) => {
+    migrationsRunPromise = null;
+    throw err;
+  });
+
+  return migrationsRunPromise;
+}
+
+/**
+ * Runs pending migrations against offline file store in development when CMS_STORAGE=file.
+ */
+export function runPendingFileMigrations(store: Record<string, any>): boolean {
+  if (!Array.isArray(store.migrations)) {
+    store.migrations = [];
+  }
+
+  let modified = false;
+  for (const m of MIGRATIONS) {
+    if (!store.migrations.includes(m.id)) {
+      console.log(`[migration] Running file migration: ${m.id}`);
+      if (m.runFile) {
+        m.runFile(store);
+      }
+      store.migrations.push(m.id);
+      modified = true;
+    }
+  }
+  return modified;
+}

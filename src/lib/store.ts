@@ -3,6 +3,7 @@ import path from 'path';
 import { getDb, MongoUnavailableError } from './mongodb';
 import { getSeedForKey, getSeedStoreFromDisk } from './seed';
 import { ContactInquiry } from '@/types/cms';
+import { runPendingMigrations, runPendingFileMigrations } from './migrations';
 
 const IS_DEV = process.env.NODE_ENV !== 'production' && !process.env.VERCEL;
 const DEV_FILE_DIR = path.join(process.cwd(), '.data');
@@ -72,10 +73,13 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
   // 1. Check if offline file dev mode is enabled
   if (isDevFileStorage()) {
     const store = readDevFileStore();
+    const migrated = runPendingFileMigrations(store);
     let val = store[key];
     if (val === undefined) {
       val = getSeedForKey(key);
       store[key] = val;
+      writeDevFileStore(store);
+    } else if (migrated) {
       writeDevFileStore(store);
     }
     const elapsed = Date.now() - startTime;
@@ -88,6 +92,7 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
   // 2. Read from MongoDB with single-field projection
   try {
     const db = await getDb();
+    await runPendingMigrations(db);
     const col = db.collection('cms_store');
 
     // Fetch only the requested field
@@ -140,6 +145,7 @@ export async function writeKey<T = any>(key: string, value: T): Promise<void> {
 
   if (isDevFileStorage()) {
     const store = readDevFileStore();
+    runPendingFileMigrations(store);
     store[key] = value;
     store.lastUpdated = lastUpdated;
     writeDevFileStore(store);
@@ -147,6 +153,7 @@ export async function writeKey<T = any>(key: string, value: T): Promise<void> {
   }
 
   const db = await getDb();
+  await runPendingMigrations(db);
   const col = db.collection('cms_store');
   await col.updateOne(
     { _id: 'active_store' as any },
@@ -163,6 +170,7 @@ export async function pushInquiry(inquiry: ContactInquiry): Promise<void> {
 
   if (isDevFileStorage()) {
     const store = readDevFileStore();
+    runPendingFileMigrations(store);
     if (!Array.isArray(store.inquiries)) {
       store.inquiries = [];
     }
@@ -173,6 +181,7 @@ export async function pushInquiry(inquiry: ContactInquiry): Promise<void> {
   }
 
   const db = await getDb();
+  await runPendingMigrations(db);
   const col = db.collection('cms_store');
   await col.updateOne(
     { _id: 'active_store' as any },
@@ -192,6 +201,7 @@ export async function updateInquiryById(id: string, updates: Partial<ContactInqu
 
   if (isDevFileStorage()) {
     const store = readDevFileStore();
+    runPendingFileMigrations(store);
     const list = store.inquiries || [];
     const idx = list.findIndex((inq: any) => inq.id === id);
     if (idx === -1) return false;
@@ -202,6 +212,7 @@ export async function updateInquiryById(id: string, updates: Partial<ContactInqu
   }
 
   const db = await getDb();
+  await runPendingMigrations(db);
   const col = db.collection('cms_store');
 
   const setFields: Record<string, any> = { lastUpdated };
@@ -226,6 +237,7 @@ export async function deleteInquiryById(id: string): Promise<boolean> {
 
   if (isDevFileStorage()) {
     const store = readDevFileStore();
+    runPendingFileMigrations(store);
     const list = store.inquiries || [];
     const initialLen = list.length;
     store.inquiries = list.filter((inq: any) => inq.id !== id);
@@ -238,6 +250,7 @@ export async function deleteInquiryById(id: string): Promise<boolean> {
   }
 
   const db = await getDb();
+  await runPendingMigrations(db);
   const col = db.collection('cms_store');
   const result = await col.updateOne(
     { _id: 'active_store' as any },

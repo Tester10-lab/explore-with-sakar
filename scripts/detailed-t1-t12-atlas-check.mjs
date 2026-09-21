@@ -6,10 +6,30 @@ if (process.env.MONGODB_DNS_SERVERS && typeof dns.setServers === 'function') {
   dns.setServers(process.env.MONGODB_DNS_SERVERS.split(','));
 }
 
+import fs from 'fs';
+
+if (!process.env.MONGODB_URI && fs.existsSync('.env.local')) {
+  for (const line of fs.readFileSync('.env.local', 'utf8').split('\n')) {
+    const trimmed = line.trim();
+    if (trimmed && !trimmed.startsWith('#')) {
+      const idx = trimmed.indexOf('=');
+      if (idx !== -1) {
+        const k = trimmed.slice(0, idx).trim();
+        const v = trimmed.slice(idx + 1).trim();
+        if (!process.env[k]) process.env[k] = v;
+      }
+    }
+  }
+}
+
 const BASE_URL = process.env.TEST_BASE_URL || 'http://localhost:3000';
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://explorewithsakar_db_user:SakarTravel2026@cluster0.1dq7qw7.mongodb.net/explore_with_sakar_dev?retryWrites=true&w=majority';
+const MONGODB_URI = process.env.MONGODB_URI;
 const DB_NAME = process.env.MONGODB_DB || 'explore_with_sakar_dev';
 const JWT_SECRET = process.env.ADMIN_JWT_SECRET || 'test-secret-key-for-admin-sync';
+
+if (!MONGODB_URI) {
+  throw new Error('MONGODB_URI environment variable is required.');
+}
 
 async function main() {
   console.log('Connecting to Atlas dev database for document verification...');
