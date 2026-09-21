@@ -49,7 +49,7 @@ export default function LeaveAMarkExperience({ pageContent, initialContent }: Le
           subtitle={hero.subtitle}
           backgroundImage="/explore-with-sakar/images/trails/river-gorge.jpg"
           breadcrumbs={[
-            { label: 'Experiences', href: '/experience' },
+            { label: 'Experiences', href: '/experiences' },
             { label: 'Leave a Mark' },
           ]}
         />
@@ -217,7 +217,7 @@ export default function LeaveAMarkExperience({ pageContent, initialContent }: Le
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/experience"
+                href="/experiences"
                 className="inline-flex items-center space-x-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest transition-all border border-white/20"
               >
                 <span>Browse All Experiences</span>

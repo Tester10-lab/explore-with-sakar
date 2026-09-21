@@ -51,8 +51,8 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
           subtitle={hero.subtitle}
           backgroundImage="/explore-with-sakar/images/spiritual/buddhist-stupa.jpg"
           breadcrumbs={[
-            { label: 'Experiences', href: '/experience' },
-            { label: 'Go Spiritual' },
+            { label: 'Experiences', href: '/experiences' },
+            { label: 'Go Within' },
           ]}
         />
       )}
@@ -193,7 +193,7 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
 
             <div className="mt-12 text-center">
               <Link
-                href="/experience"
+                href="/experiences"
                 className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-terracotta hover:text-terracotta-dark transition-colors"
               >
                 <span>View All Experience Packages</span>
@@ -209,10 +209,10 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
         <CTASection
           title="Begin Your Himalayan Spiritual Journey"
           subtitle="Connect with Sakar to discuss personal wellness preferences, dates, and quiet mountain retreat options."
-          primaryButtonText="Inquire About Go Spiritual"
-          primaryButtonHref="/contact?subject=Go%20Spiritual%20Journey%20Inquiry"
+          primaryButtonText="Inquire About Go Within"
+          primaryButtonHref="/contact?subject=Go%20Within%20Journey%20Inquiry"
           secondaryButtonText="Explore All Experiences"
-          secondaryButtonHref="/experience"
+          secondaryButtonHref="/experiences"
         />
       )}
     </div>

@@ -151,7 +151,8 @@ export async function getAllBlogs(includeDrafts = true): Promise<ExtendedBlogPos
 
 export async function getBlogBySlug(slug: string, includeDrafts = true): Promise<ExtendedBlogPost | null> {
   const blogs = await getAllBlogs(includeDrafts);
-  return blogs.find((b) => b.slug === slug || b.id === slug) || null;
+  const decoded = decodeURIComponent(slug).trim();
+  return blogs.find((b) => b.slug === slug || b.id === slug || b.slug === decoded || b.id === decoded) || null;
 }
 
 export async function createBlog(
@@ -172,7 +173,8 @@ export async function createBlog(
 
 export async function updateBlog(id: string, updates: Partial<ExtendedBlogPost>): Promise<ExtendedBlogPost | null> {
   const list = (await readKey<ExtendedBlogPost[]>('blogs')) || [];
-  const index = list.findIndex((b) => b.id === id || b.slug === id);
+  const decoded = decodeURIComponent(id).trim();
+  const index = list.findIndex((b) => b.id === id || b.slug === id || b.id === decoded || b.slug === decoded);
   if (index === -1) return null;
 
   list[index] = {

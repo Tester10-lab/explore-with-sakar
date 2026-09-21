@@ -31,14 +31,14 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
 
   // --- EXPERIENCES (PUBLIC NAVBAR DROPDOWN) ---
   {
-    slug: 'go-beyond',
+    slug: 'beyond-the-map',
     name: 'Go Beyond the Map',
-    url: '/experience/go-beyond',
+    url: '/experiences/beyond-the-map',
     status: 'published',
     seo: {
       title: 'Go Beyond the Map | Authentic Exploration with Sakar',
       metaDescription: 'Step past grand facades into hidden residential bahals, Patan and Bhaktapur histories, master artisan guilds, and sacred geometry.',
-      canonicalUrl: 'https://explorewithsakar.com/experience/go-beyond',
+      canonicalUrl: 'https://explorewithsakar.com/experiences/beyond-the-map',
       sitemapVisible: true,
     },
     sections: [
@@ -52,14 +52,14 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    slug: 'go-spiritual',
-    name: 'Go Spiritual',
-    url: '/experience/go-spiritual',
+    slug: 'spiritual-wellness',
+    name: 'Go Within (Spiritual & Sound Sanctuary)',
+    url: '/experiences/spiritual-wellness',
     status: 'published',
     seo: {
       title: 'Himalayan Spiritual & Sound Sanctuary | Explore With Sakar',
       metaDescription: 'Experience Tibetan singing bowl sound therapy, dawn monastery chanting, sacred meditation caves, and restorative mindfulness in the Himalayas.',
-      canonicalUrl: 'https://explorewithsakar.com/experience/go-spiritual',
+      canonicalUrl: 'https://explorewithsakar.com/experiences/spiritual-wellness',
       sitemapVisible: true,
     },
     sections: [
@@ -73,14 +73,14 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    slug: 'feel-closer',
-    name: 'Feel Closer',
-    url: '/experience/feel-closer',
+    slug: 'homestays',
+    name: 'Feel Closer (Village Homestays)',
+    url: '/experiences/homestays',
     status: 'published',
     seo: {
       title: 'Village Homestays & Community Living | Explore With Sakar',
       metaDescription: 'Stay with Gurung and Tamang mountain families. Share woodfire meals, harvest organic terraced fields, and experience authentic Nepali hospitality.',
-      canonicalUrl: 'https://explorewithsakar.com/experience/feel-closer',
+      canonicalUrl: 'https://explorewithsakar.com/experiences/homestays',
       sitemapVisible: true,
     },
     sections: [
@@ -96,12 +96,12 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
   {
     slug: 'leave-a-mark',
     name: 'Leave a Mark',
-    url: '/experience/leave-a-mark',
+    url: '/experiences/leave-a-mark',
     status: 'published',
     seo: {
       title: 'Leave a Mark: Strategic Volunteer Tourism | Explore With Sakar',
       metaDescription: 'Matching your actual professional skills with local communities in Nepal that need structural, strategic, and administrative empowerment.',
-      canonicalUrl: 'https://explorewithsakar.com/experience/leave-a-mark',
+      canonicalUrl: 'https://explorewithsakar.com/experiences/leave-a-mark',
       sitemapVisible: true,
     },
     sections: [
@@ -115,14 +115,14 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    slug: 'all-curated-experiences',
+    slug: 'experiences',
     name: 'All Curated Experiences',
-    url: '/experience/all-curated-experiences',
+    url: '/experiences',
     status: 'published',
     seo: {
       title: 'Curated Experiences | Handcrafted Journeys in Nepal',
       metaDescription: 'Immersive multi-day itineraries crafted by Sakar combining cultural celebrations, mountain sanctuary walks, and village warmth.',
-      canonicalUrl: 'https://explorewithsakar.com/experience/all-curated-experiences',
+      canonicalUrl: 'https://explorewithsakar.com/experiences',
       sitemapVisible: true,
     },
     sections: [
@@ -134,14 +134,14 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    slug: 'custom-private-journeys',
+    slug: 'custom-journeys',
     name: 'Custom Private Journeys',
-    url: '/experience/custom-private-journeys',
+    url: '/experiences/custom-journeys',
     status: 'published',
     seo: {
       title: 'Custom Private Journeys | Bespoke Nepal Travel Curation',
       metaDescription: 'Tailor-made itineraries for solo travelers, couples & families with Sakar. Private vehicles, personalized pace, and direct host accompaniment.',
-      canonicalUrl: 'https://explorewithsakar.com/experience/custom-private-journeys',
+      canonicalUrl: 'https://explorewithsakar.com/experiences/custom-journeys',
       sitemapVisible: true,
     },
     sections: [

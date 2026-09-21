@@ -52,7 +52,7 @@ export default async function FeelCloserExperience({ pageContent }: FeelCloserEx
           subtitle={hero.subtitle}
           backgroundImage="/explore-with-sakar/images/homestays/village-meal.jpg"
           breadcrumbs={[
-            { label: 'Experiences', href: '/experience' },
+            { label: 'Experiences', href: '/experiences' },
             { label: 'Feel Closer' },
           ]}
         />
@@ -299,7 +299,7 @@ export default async function FeelCloserExperience({ pageContent }: FeelCloserEx
 
             <div className="mt-12 text-center">
               <Link
-                href="/experience"
+                href="/experiences"
                 className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-terracotta hover:text-terracotta-dark transition-colors"
               >
                 <span>View All Experience Packages</span>
@@ -318,7 +318,7 @@ export default async function FeelCloserExperience({ pageContent }: FeelCloserEx
           primaryButtonText="Inquire About Feel Closer"
           primaryButtonHref="/contact?subject=Feel%20Closer%20Homestay%20Inquiry"
           secondaryButtonText="Explore All Experiences"
-          secondaryButtonHref="/experience"
+          secondaryButtonHref="/experiences"
         />
       )}
     </div>

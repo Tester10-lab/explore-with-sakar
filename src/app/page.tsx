@@ -15,6 +15,8 @@ import {
   getPublicTopFeaturedExperiences,
   getPublicSettings,
   getPublicEvents,
+  getPublicPillarStories,
+  type PillarStory,
 } from '@/lib/content';
 import BlogCard from '@/components/blog/BlogCard';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -31,11 +33,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [settings, featuredExperiences, blogs, events] = await Promise.all([
+  const [settings, featuredExperiences, blogs, events, pillarStories] = await Promise.all([
     getPublicSettings(),
     getPublicTopFeaturedExperiences(3),
     getPublicBlogs(),
     getPublicEvents(),
+    getPublicPillarStories(),
   ]);
   const stats = settings.stats || [];
   const latestBlogs = blogs.slice(0, 3);
@@ -99,7 +102,7 @@ export default async function HomePage() {
                 >
                   {/* Hero Image Container */}
                   <Link
-                    href={`/experience/${exp.slug}`}
+                    href={`/experiences/${exp.slug}`}
                     className="block relative aspect-[16/11] overflow-hidden bg-himalaya-900"
                   >
                     <Image
@@ -140,7 +143,7 @@ export default async function HomePage() {
                         </span>
                       )}
                       <h3 className="font-editorial-serif text-2xl font-bold text-himalaya-950 leading-snug group-hover:text-terracotta transition-colors">
-                        <Link href={`/experience/${exp.slug}`}>{exp.title}</Link>
+                        <Link href={`/experiences/${exp.slug}`}>{exp.title}</Link>
                       </h3>
                       <p className="text-sm text-himalaya-600 font-light leading-relaxed line-clamp-3">
                         {exp.shortDescription}
@@ -150,7 +153,7 @@ export default async function HomePage() {
                     {/* Card Footer & CTA */}
                     <div className="pt-4 border-t border-parchment-200">
                       <Link
-                        href={`/experience/${exp.slug}`}
+                        href={`/experiences/${exp.slug}`}
                         className="inline-flex items-center justify-center w-full py-3.5 rounded-xl bg-himalaya-950 hover:bg-terracotta text-white font-semibold text-xs tracking-wider uppercase transition-all duration-300 shadow-subtle hover:shadow-warm group-hover:bg-terracotta"
                       >
                         <span>Explore Experience</span>
@@ -165,7 +168,7 @@ export default async function HomePage() {
 
           <div className="text-center pt-2">
             <Link
-              href="/experience"
+              href="/experiences"
               className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-parchment-100 hover:bg-himalaya-950 text-himalaya-950 hover:text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 border border-parchment-300 shadow-subtle hover:shadow-warm"
             >
               <span>Explore All Experiences & Pillars</span>
@@ -258,7 +261,81 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 4. From Sakar's Journal (Blog Teaser) */}
+      {/* 4. Stories That Take You Further — Three Content Pillars */}
+      {pillarStories.length > 0 && (
+        <section className="py-20 sm:py-28 bg-white border-b border-parchment-300">
+          <div className="editorial-container">
+            <SectionHeading
+              tag="Three Paths Into Nepal"
+              nepaliTag="तीन यात्रा मार्गहरू"
+              title="Stories That Take You Further"
+              description="Each pillar is a distinct philosophy of travel — choose the one that speaks to your soul."
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+              {pillarStories.map((ps: PillarStory) => (
+                <div
+                  key={ps.pillar}
+                  className="group relative flex flex-col rounded-3xl overflow-hidden border border-parchment-300 shadow-subtle hover:shadow-editorial transition-all duration-300 hover:-translate-y-1 bg-sand-light"
+                >
+                  {/* Image */}
+                  <div className="relative aspect-[3/2] overflow-hidden bg-himalaya-900">
+                    <Image
+                      src={ps.blog.featuredImage?.src || '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'}
+                      alt={ps.blog.featuredImage?.alt || ps.blog.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/75 via-himalaya-950/20 to-transparent" />
+
+                    {/* Pillar badge */}
+                    <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-md text-himalaya-950 text-[10px] font-bold uppercase tracking-widest rounded-full shadow-sm">
+                      {ps.pillarLabel}
+                    </div>
+
+                    {/* Blog category */}
+                    <div className="absolute bottom-3 left-4 right-4 text-parchment-200 text-xs flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-terracotta" />
+                      <span className="truncate font-mono uppercase tracking-wider text-[10px] font-bold">{ps.blog.category}</span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 p-6 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <h3 className="font-editorial-serif text-lg sm:text-xl font-bold text-himalaya-950 leading-snug group-hover:text-terracotta transition-colors">
+                        {ps.blog.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-himalaya-600 font-light line-clamp-3 leading-relaxed">
+                        {ps.blog.excerpt}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 border-t border-parchment-200 flex items-center justify-between">
+                      <a
+                        href={`/blog/${ps.blog.slug}`}
+                        className="text-xs font-bold text-terracotta flex items-center group-hover:translate-x-1 transition-transform"
+                      >
+                        <span>Read Story</span>
+                        <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                      </a>
+                      <a
+                        href={ps.pillarHref}
+                        className="text-[10px] font-bold uppercase tracking-wider text-himalaya-500 hover:text-himalaya-950 transition-colors"
+                      >
+                        Explore Pillar →
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 5. From Sakar's Journal (Blog Teaser) */}
       <section className="py-20 sm:py-28 bg-sand border-b border-parchment-300">
         <div className="editorial-container">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">

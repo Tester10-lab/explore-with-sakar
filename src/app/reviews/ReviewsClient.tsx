@@ -183,7 +183,7 @@ export default function ReviewsClient({
         primaryButtonText="Begin Your Journey"
         primaryButtonHref="/contact"
         secondaryButtonText="Explore Experiences"
-        secondaryButtonHref="/experience"
+        secondaryButtonHref="/experiences"
       />
     </div>
   );

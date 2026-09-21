@@ -36,7 +36,22 @@ async function ensureMigrations(db: import('mongodb').Db): Promise<void> {
 }
 
 function isDevFileStorage(): boolean {
-  return Boolean(IS_DEV && process.env.CMS_STORAGE === 'file');
+  return Boolean(IS_DEV && (process.env.CMS_STORAGE === 'file' || !process.env.MONGODB_URI));
+}
+
+interface CacheEntry {
+  data: any;
+  timestamp: number;
+}
+const readCache = new Map<string, CacheEntry>();
+const READ_CACHE_TTL_MS = 2000; // 2 seconds TTL
+
+export function invalidateStoreCache(key?: string): void {
+  if (key) {
+    readCache.delete(key);
+  } else {
+    readCache.clear();
+  }
 }
 
 function readDevFileStore(): Record<string, any> {
@@ -94,6 +109,11 @@ function normalizeCollectionShape(key: string, value: any): any {
  * Falls back to read-only in-memory seed if MongoDB is unavailable.
  */
 export async function readKey<T = any>(key: string, options?: { throwOnError?: boolean }): Promise<T> {
+  const cached = readCache.get(key);
+  if (cached && Date.now() - cached.timestamp < READ_CACHE_TTL_MS) {
+    return cached.data as T;
+  }
+
   const startTime = Date.now();
 
   // 1. Check if offline file dev mode is enabled
@@ -112,7 +132,9 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
     if (IS_DEV) {
       console.log(`[store] read ${key} ${elapsed}ms (file)`);
     }
-    return normalizeCollectionShape(key, val) as T;
+    const res = normalizeCollectionShape(key, val) as T;
+    readCache.set(key, { data: res, timestamp: Date.now() });
+    return res;
   }
 
   // 2. Read from MongoDB with single-field projection
@@ -147,7 +169,9 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
     }
 
     const val = doc ? doc[key] : getSeedForKey(key);
-    return normalizeCollectionShape(key, val) as T;
+    const res = normalizeCollectionShape(key, val) as T;
+    readCache.set(key, { data: res, timestamp: Date.now() });
+    return res;
   } catch (err: any) {
     if (options?.throwOnError) {
       throw err;
@@ -158,7 +182,9 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
     }
     // Mongo unreachable: reads come from the seed file (read-only, in memory)
     const seedVal = getSeedForKey(key);
-    return normalizeCollectionShape(key, seedVal) as T;
+    const res = normalizeCollectionShape(key, seedVal) as T;
+    readCache.set(key, { data: res, timestamp: Date.now() });
+    return res;
   }
 }
 
@@ -167,6 +193,7 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
  * Throws MongoUnavailableError on failure. Never falls back to local disk writes on Mongo failure.
  */
 export async function writeKey<T = any>(key: string, value: T): Promise<void> {
+  invalidateStoreCache(key);
   const lastUpdated = new Date().toISOString();
 
   if (isDevFileStorage()) {
@@ -192,6 +219,7 @@ export async function writeKey<T = any>(key: string, value: T): Promise<void> {
  * Atomic inquiry creation: pushes to the front of the inquiries array.
  */
 export async function pushInquiry(inquiry: ContactInquiry): Promise<void> {
+  invalidateStoreCache('inquiries');
   const lastUpdated = new Date().toISOString();
 
   if (isDevFileStorage()) {
@@ -223,6 +251,7 @@ export async function pushInquiry(inquiry: ContactInquiry): Promise<void> {
  * Atomic inquiry update using arrayFilters (no read-modify-write).
  */
 export async function updateInquiryById(id: string, updates: Partial<ContactInquiry>): Promise<boolean> {
+  invalidateStoreCache('inquiries');
   const lastUpdated = new Date().toISOString();
 
   if (isDevFileStorage()) {
@@ -259,6 +288,7 @@ export async function updateInquiryById(id: string, updates: Partial<ContactInqu
  * Atomic inquiry deletion using $pull (no read-modify-write).
  */
 export async function deleteInquiryById(id: string): Promise<boolean> {
+  invalidateStoreCache('inquiries');
   const lastUpdated = new Date().toISOString();
 
   if (isDevFileStorage()) {

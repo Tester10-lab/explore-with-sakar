@@ -197,7 +197,7 @@ export default async function AboutPage() {
           primaryButtonText="Start a Conversation"
           primaryButtonHref="/contact"
           secondaryButtonText="Explore Experiences"
-          secondaryButtonHref="/experience"
+          secondaryButtonHref="/experiences"
         />
       )}
     </div>

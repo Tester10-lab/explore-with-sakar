@@ -7,6 +7,7 @@ import { ExtendedBlogPost } from '@/types/cms';
 import { Loader2 } from 'lucide-react';
 
 export default function EditBlogPage() {
+  const router = useRouter();
   const params = useParams();
   const slug = params?.slug as string;
   const [blog, setBlog] = useState<ExtendedBlogPost | null>(null);
@@ -18,10 +19,14 @@ export default function EditBlogPage() {
       if (!slug) return;
       try {
         setIsLoading(true);
-        const res = await fetch(`/api/admin/blogs/${slug}`, {
+        const res = await fetch(`/api/admin/blogs/${encodeURIComponent(slug)}`, {
           cache: 'no-store',
           headers: { 'Cache-Control': 'no-cache' },
         });
+        if (res.status === 401) {
+          router.push('/admin/login');
+          return;
+        }
         if (!res.ok) throw new Error('Blog post not found');
         const data = await res.json();
         setBlog(data.blog);

@@ -141,32 +141,32 @@ export default function Footer() {
                 </h4>
                 <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
                   <li>
-                    <Link href="/experience/go-beyond" className="hover:text-terracotta transition-colors">
+                    <Link href="/experiences/beyond-the-map" className="hover:text-terracotta transition-colors">
                       Go Beyond the Map
                     </Link>
                   </li>
                   <li>
-                    <Link href="/experience/go-spiritual" className="hover:text-terracotta transition-colors">
-                      Go Spiritual
+                    <Link href="/experiences/spiritual-wellness" className="hover:text-terracotta transition-colors">
+                      Go Within
                     </Link>
                   </li>
                   <li>
-                    <Link href="/experience/feel-closer" className="hover:text-terracotta transition-colors">
+                    <Link href="/experiences/homestays" className="hover:text-terracotta transition-colors">
                       Feel Closer
                     </Link>
                   </li>
                   <li>
-                    <Link href="/experience/leave-a-mark" className="hover:text-terracotta transition-colors">
+                    <Link href="/experiences/leave-a-mark" className="hover:text-terracotta transition-colors">
                       Leave a Mark
                     </Link>
                   </li>
                   <li>
-                    <Link href="/experience/custom-private-journeys" className="hover:text-terracotta transition-colors">
+                    <Link href="/experiences/custom-journeys" className="hover:text-terracotta transition-colors">
                       Custom Private Journeys
                     </Link>
                   </li>
                   <li>
-                    <Link href="/experience" className="font-medium text-terracotta hover:underline pt-1 inline-block">
+                    <Link href="/experiences" className="font-medium text-terracotta hover:underline pt-1 inline-block">
                       All Curated Experiences →
                     </Link>
                   </li>
@@ -185,7 +185,7 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/experience" className="hover:text-terracotta transition-colors">
+                    <Link href="/experiences" className="hover:text-terracotta transition-colors">
                       Curated Itineraries
                     </Link>
                   </li>

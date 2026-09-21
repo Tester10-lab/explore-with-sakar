@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, MapPin, Clock, Users, Sparkles } from 'lucide-react';
+import { ArrowRight, MapPin, Clock, Sparkles } from 'lucide-react';
 import { ExtendedExperience } from '@/types/cms';
 
 export type CatalogExperience = {
@@ -32,7 +32,7 @@ const ITEMS_PER_PAGE = 4;
 const CATEGORIES = [
   { key: 'all', label: 'All Curated Departures' },
   { key: 'beyond-the-map', label: 'Go Beyond the Map' },
-  { key: 'spiritual-wellness', label: 'Go Spiritual' },
+  { key: 'spiritual-wellness', label: 'Go Within' },
   { key: 'homestays', label: 'Feel Closer' },
   { key: 'leave-a-mark', label: 'Leave a Mark' },
 ];
@@ -52,7 +52,6 @@ export default function ExperienceCatalogClient({
     return category === targetKey;
   };
 
-  // Filter out the meta packages from the individual departure grid if needed, or include them
   const filteredExperiences = useMemo(() => {
     return initialExperiences.filter((e) => matchesCategory(e.category, activeCategory));
   }, [activeCategory, initialExperiences]);
@@ -79,58 +78,45 @@ export default function ExperienceCatalogClient({
   };
 
   return (
-    <section id="catalog-grid" className="py-20 sm:py-28 bg-sand border-b border-parchment-300 scroll-mt-20">
+    <section id="catalog" className="py-20 bg-parchment-100 min-h-[600px]">
       <div className="editorial-container">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest font-bold text-terracotta block">
-              Curated Departures
+            <span className="text-xs font-mono uppercase tracking-widest font-bold text-terracotta">
+              Complete Catalog
             </span>
             <h2 className="font-editorial-serif text-3xl sm:text-4xl font-bold text-himalaya-950 mt-1">
-              Browse All Curated Itineraries
+              Curated Day-by-Day Itineraries
             </h2>
-            <p className="text-xs sm:text-sm text-himalaya-600 font-light mt-1">
-              Showing 4 itineraries per page with verified local hosting and transparent pricing.
+            <p className="text-sm text-himalaya-600 font-light mt-2 max-w-xl">
+              Filter through our handcrafted journeys. Every itinerary can be tailored to your private party.
             </p>
           </div>
 
-          <div className="text-xs font-mono bg-white px-4 py-2 rounded-xl border border-parchment-300 text-himalaya-700 shadow-subtle">
-            Page <span className="font-bold text-terracotta">{safeCurrentPage}</span> of <span className="font-bold">{totalPages}</span>
+          {/* Category Tabs */}
+          <div className="flex flex-wrap gap-2">
+            {CATEGORIES.map((cat) => {
+              const isActive = activeCategory === cat.key;
+              return (
+                <button
+                  key={cat.key}
+                  onClick={() => handleCategorySelect(cat.key)}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 ${
+                    isActive
+                      ? 'bg-himalaya-950 text-white shadow-warm'
+                      : 'bg-white text-himalaya-700 hover:bg-parchment-200 border border-parchment-300'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Filter Bar */}
-        <div className="flex items-center justify-start sm:justify-center overflow-x-auto gap-2 pb-4 mb-10 scrollbar-none">
-          {CATEGORIES.map((cat) => {
-            const isActive = activeCategory === cat.key;
-            const count = initialExperiences.filter((e) => matchesCategory(e.category, cat.key)).length;
-
-            return (
-              <button
-                key={cat.key}
-                onClick={() => handleCategorySelect(cat.key)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex items-center space-x-1.5 ${
-                  isActive
-                    ? 'bg-terracotta text-white shadow-warm'
-                    : 'bg-white text-himalaya-700 hover:bg-parchment-200 border border-parchment-300'
-                }`}
-              >
-                <span>{cat.label}</span>
-                <span
-                  className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                    isActive ? 'bg-white/20 text-white' : 'bg-parchment-200 text-himalaya-600'
-                  }`}
-                >
-                  {count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
         {/* 4 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div id="catalog-grid" className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {paginatedExperiences.map((exp) => (
             <div
               key={exp.id}
@@ -173,7 +159,7 @@ export default function ExperienceCatalogClient({
               <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-4">
                 <div>
                   <h3 className="font-editorial-serif text-2xl font-bold text-himalaya-950 group-hover:text-terracotta transition-colors leading-tight">
-                    {exp.title}
+                    <Link href={`/experiences/${exp.slug}`}>{exp.title}</Link>
                   </h3>
                   <p className="text-xs sm:text-sm text-himalaya-600 font-light mt-2 line-clamp-3 leading-relaxed">
                     {exp.shortDescription}
@@ -185,7 +171,7 @@ export default function ExperienceCatalogClient({
                     {exp.groupSize || 'Private party'}
                   </span>
                   <Link
-                    href={`/experience/${exp.slug}`}
+                    href={`/experiences/${exp.slug}`}
                     className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-terracotta hover:text-terracotta-light transition-colors"
                   >
                     <span>View Journey</span>
@@ -197,7 +183,7 @@ export default function ExperienceCatalogClient({
           ))}
         </div>
 
-        {/* Pagination Controls (4 items/page, page numbers 1, 2, 3, 4, 5...) */}
+        {/* Pagination Controls */}
         {totalPages > 1 && (
           <div className="mt-16 pt-8 border-t border-parchment-300 flex flex-col sm:flex-row items-center justify-between gap-6">
             <p className="text-xs sm:text-sm text-himalaya-600 font-light">
@@ -221,13 +207,11 @@ export default function ExperienceCatalogClient({
                     <button
                       key={pageNum}
                       onClick={() => handlePageChange(pageNum)}
-                      className={`w-10 h-10 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center ${
+                      className={`w-9 h-9 rounded-xl text-xs font-bold font-mono transition-all duration-200 ${
                         isCurrent
                           ? 'bg-terracotta text-white shadow-warm'
                           : 'bg-white text-himalaya-700 hover:bg-parchment-200 border border-parchment-300'
                       }`}
-                      aria-label={`Page ${pageNum}`}
-                      aria-current={isCurrent ? 'page' : undefined}
                     >
                       {pageNum}
                     </button>

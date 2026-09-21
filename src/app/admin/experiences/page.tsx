@@ -324,7 +324,7 @@ export default function AdminExperiencesPage() {
       <AdminHeader
         onToggleMobileSidebar={() => {}}
         title="Experiences: All Curated Experiences"
-        subtitle="Manage detailed day-by-day itineraries, cultural highlights, and responsible hosting published under /experience/[slug]"
+        subtitle="Manage detailed day-by-day itineraries, cultural highlights, and responsible hosting published under /experiences/[slug]"
         actionButton={{
           label: 'New Curated Experience',
           onClick: handleOpenNew,
@@ -344,7 +344,7 @@ export default function AdminExperiencesPage() {
                 Experience Package Builder & Featured Ordering
               </h3>
               <p className="text-xs text-parchment-400 font-light mt-0.5">
-                Manage independent experiences, SEO, and top-3 priority for <code>/experience/[slug]</code>.
+                Manage independent experiences, SEO, and top-3 priority for <code>/experiences/[slug]</code>.
               </p>
             </div>
           </div>
@@ -521,7 +521,7 @@ export default function AdminExperiencesPage() {
                       )}
                     </button>
                     <a
-                      href={`/experience/${exp.slug}`}
+                      href={`/experiences/${exp.slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-2 rounded-lg text-parchment-400 hover:text-white hover:bg-himalaya-800 transition-colors"

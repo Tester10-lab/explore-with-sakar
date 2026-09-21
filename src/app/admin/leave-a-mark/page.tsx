@@ -111,7 +111,7 @@ export default function AdminLeaveAMarkPage() {
         action={
           <div className="flex items-center gap-2">
             <Link
-              href="/experience/leave-a-mark"
+              href="/experiences/leave-a-mark"
               target="_blank"
               className="px-4 py-2 rounded-xl bg-himalaya-800 hover:bg-himalaya-700 text-parchment-200 text-xs font-semibold flex items-center gap-1.5 transition-colors"
             >

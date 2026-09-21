@@ -215,7 +215,7 @@ export default function GalleryClient({ initialPhotos }: GalleryClientProps) {
         primaryButtonText="Inquire About Journeys"
         primaryButtonHref="/contact"
         secondaryButtonText="Explore Experiences"
-        secondaryButtonHref="/experience"
+        secondaryButtonHref="/experiences"
       />
     </div>
   );

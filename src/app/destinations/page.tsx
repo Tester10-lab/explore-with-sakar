@@ -58,7 +58,7 @@ export default async function DestinationsPage() {
         primaryButtonText="Inquire About Destinations"
         primaryButtonHref="/contact"
         secondaryButtonText="Explore Experiences"
-        secondaryButtonHref="/experience"
+        secondaryButtonHref="/experiences"
       />
     </div>
   );

@@ -96,7 +96,7 @@ export function getDefaultNavigation(): NavigationConfig {
       {
         id: 'nav-experiences',
         label: 'EXPERIENCES',
-        url: '/experience',
+        url: '/experiences',
         subtitle: 'Our Curated Travel Experiences',
         columns: 2,
         visible: true,
@@ -106,7 +106,7 @@ export function getDefaultNavigation(): NavigationConfig {
             id: 'nav-beyond',
             label: 'Go Beyond the Map',
             description: 'Living courtyards, medieval stone mysteries & master artisan guilds.',
-            url: '/experience/go-beyond',
+            url: '/experiences/beyond-the-map',
             badge: 'Exploration',
             icon: 'compass',
             visible: true,
@@ -114,9 +114,9 @@ export function getDefaultNavigation(): NavigationConfig {
           },
           {
             id: 'nav-within',
-            label: 'Go Spiritual',
+            label: 'Go Within',
             description: 'Himalayan singing bowl resonance, monastery chanting & meditation caves.',
-            url: '/experience/go-spiritual',
+            url: '/experiences/spiritual-wellness',
             badge: 'Spiritual',
             icon: 'sparkles',
             visible: true,
@@ -126,7 +126,7 @@ export function getDefaultNavigation(): NavigationConfig {
             id: 'nav-closer',
             label: 'Feel Closer',
             description: 'Traditional village homestays, hearthside cooking & warm family bonds.',
-            url: '/experience/feel-closer',
+            url: '/experiences/homestays',
             badge: 'Homestays',
             icon: 'home',
             visible: true,
@@ -136,7 +136,7 @@ export function getDefaultNavigation(): NavigationConfig {
             id: 'nav-mark',
             label: 'Leave a Mark',
             description: 'Strategic volunteer tourism & administrative empowerment for grassroots communities.',
-            url: '/experience/leave-a-mark',
+            url: '/experiences/leave-a-mark',
             badge: 'Strategic',
             icon: 'heart',
             visible: true,
@@ -146,7 +146,7 @@ export function getDefaultNavigation(): NavigationConfig {
             id: 'nav-all-exp',
             label: 'All Curated Experiences',
             description: 'Browse complete day-by-day itineraries, departures & cultural routes.',
-            url: '/experience/all-curated-experiences',
+            url: '/experiences',
             icon: 'calendar',
             visible: true,
             order: 4,
@@ -155,7 +155,7 @@ export function getDefaultNavigation(): NavigationConfig {
             id: 'nav-custom-exp',
             label: 'Custom Private Journeys',
             description: '100% tailor-made itineraries for solo travelers, couples & families with Sakar.',
-            url: '/experience/custom-private-journeys',
+            url: '/experiences/custom-journeys',
             badge: 'Bespoke',
             icon: 'shield-check',
             visible: true,
@@ -215,12 +215,12 @@ export function getDefaultNavigation(): NavigationConfig {
           id: 'footer-experiences',
           title: 'Experiences',
           links: [
-            { id: 'fl-1', label: 'Go Beyond the Map', url: '/experience/go-beyond', visible: true, order: 0 },
-            { id: 'fl-2', label: 'Go Spiritual', url: '/experience/go-spiritual', visible: true, order: 1 },
-            { id: 'fl-3', label: 'Feel Closer', url: '/experience/feel-closer', visible: true, order: 2 },
-            { id: 'fl-4', label: 'Leave a Mark', url: '/experience/leave-a-mark', visible: true, order: 3 },
-            { id: 'fl-5', label: 'Custom Private Journeys', url: '/experience/custom-private-journeys', visible: true, order: 4 },
-            { id: 'fl-6', label: 'All Curated Experiences →', url: '/experience', visible: true, order: 5 },
+            { id: 'fl-1', label: 'Go Beyond the Map', url: '/experiences/beyond-the-map', visible: true, order: 0 },
+            { id: 'fl-2', label: 'Go Within', url: '/experiences/spiritual-wellness', visible: true, order: 1 },
+            { id: 'fl-3', label: 'Feel Closer', url: '/experiences/homestays', visible: true, order: 2 },
+            { id: 'fl-4', label: 'Leave a Mark', url: '/experiences/leave-a-mark', visible: true, order: 3 },
+            { id: 'fl-5', label: 'Custom Private Journeys', url: '/experiences/custom-journeys', visible: true, order: 4 },
+            { id: 'fl-6', label: 'All Curated Experiences →', url: '/experiences', visible: true, order: 5 },
           ],
         },
         {
@@ -228,7 +228,7 @@ export function getDefaultNavigation(): NavigationConfig {
           title: 'Explore',
           links: [
             { id: 'fl-7', label: 'Destinations', url: '/destinations', visible: true, order: 0 },
-            { id: 'fl-8', label: 'Curated Itineraries', url: '/experience', visible: true, order: 1 },
+            { id: 'fl-8', label: 'Curated Itineraries', url: '/experiences', visible: true, order: 1 },
             { id: 'fl-10', label: 'Visual Journey Gallery', url: '/gallery', visible: true, order: 2 },
             { id: 'fl-11', label: 'Events & Festivals', url: '/events', visible: true, order: 3 },
             { id: 'fl-12', label: 'Stories & Field Notes', url: '/blog', visible: true, order: 4 },
@@ -338,37 +338,37 @@ export function getSeedStoreFromDisk(): CMSDataStore {
   };
 }
 
-/**
- * Returns the exact seed payload for any collection key.
- * Used for atomic seeding in Mongo and in-memory read-only fallback when Mongo is down.
- */
 export function getSeedForKey(key: string): any {
+  const fileStore = getSeedStoreFromDisk();
+  // Always honor explicit data from fileStore, even if it is an empty array []
+  if (fileStore && (fileStore as any)[key] !== undefined) {
+    return (fileStore as any)[key];
+  }
+
+  // Fallback defaults only for initial structural setup if key is completely missing
   switch (key) {
-    case 'events':
-      return getDefaultEvents();
-    case 'destinations':
-      return getDefaultDestinations();
-    case 'faq':
-      return getDefaultFaq();
     case 'pages':
       return getDefaultPages();
     case 'navigation':
       return getDefaultNavigation();
-    case 'beyondChapters':
-      return getDefaultBeyondChapters();
+    case 'settings':
+      return fileStore?.settings || DEFAULT_SETTINGS;
     case 'leaveAMark':
       return getDefaultLeaveAMark();
-    case 'settings': {
-      const fileStore = getSeedStoreFromDisk();
-      return fileStore.settings || DEFAULT_SETTINGS;
-    }
+    case 'events':
+    case 'destinations':
+    case 'faq':
+    case 'beyondChapters':
     case 'inquiries':
-      return [];
     case 'pageRevisions':
+    case 'packages':
+    case 'experiences':
+    case 'services':
+    case 'blogs':
+    case 'photos':
+    case 'reviews':
+    case 'handwrittenReviews':
+    default:
       return [];
-    default: {
-      const fileStore = getSeedStoreFromDisk();
-      return (fileStore as any)[key] ?? [];
-    }
   }
 }

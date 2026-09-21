@@ -40,19 +40,81 @@ export default function ExperienceDetailTemplate({
     '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg';
   const heroAlt = experience.heroImage?.alt || experience.title;
 
+  const canonicalUrl = `https://explorewithsakar.com/experiences/${experience.slug}`;
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': 'Home',
+            'item': 'https://explorewithsakar.com',
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': 'Experiences',
+            'item': 'https://explorewithsakar.com/experiences',
+          },
+          {
+            '@type': 'ListItem',
+            'position': 3,
+            'name': experience.title,
+            'item': canonicalUrl,
+          },
+        ],
+      },
+      {
+        '@type': 'TouristTrip',
+        'name': experience.title,
+        'description': experience.shortDescription,
+        'url': canonicalUrl,
+        'image': heroImg,
+        'touristType': experience.category || 'Cultural',
+        'offers': {
+          '@type': 'Offer',
+          'category': 'Curated Experience',
+          'availability': 'https://schema.org/InStock',
+        },
+        'provider': {
+          '@type': 'TravelAgency',
+          'name': 'Explore With Sakar',
+          'url': 'https://explorewithsakar.com',
+        },
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-sand">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* 1. Full-Width Cinematic Hero Split */}
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[60vh] lg:min-h-[75vh]">
         {/* Left: Content & Meta */}
         <div className="order-2 lg:order-1 flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-16 lg:py-24 bg-parchment-200">
-          <div className="mb-8">
+          <div className="mb-8 flex items-center space-x-2 text-xs uppercase font-bold tracking-widest text-himalaya-600">
             <Link
-              href="/experience"
-              className="inline-flex items-center text-xs uppercase font-bold tracking-widest text-himalaya-600 hover:text-terracotta transition-colors"
+              href="/"
+              className="hover:text-terracotta transition-colors"
             >
-              <ArrowLeft className="w-3.5 h-3.5 mr-2" /> All Experiences
+              Home
             </Link>
+            <span className="text-himalaya-400">/</span>
+            <Link
+              href="/experiences"
+              className="hover:text-terracotta transition-colors inline-flex items-center"
+            >
+              Experiences
+            </Link>
+            <span className="text-himalaya-400">/</span>
+            <span className="text-terracotta truncate max-w-[200px]">{experience.title}</span>
           </div>
 
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-himalaya-950 text-white text-[10px] font-bold uppercase tracking-widest w-max mb-6">
@@ -411,7 +473,7 @@ export default function ExperienceDetailTemplate({
         primaryButtonText="Start Planning Your Journey"
         primaryButtonHref={`/contact?subject=${encodeURIComponent(`Custom Inquiry: ${experience.title}`)}`}
         secondaryButtonText="Explore All Experiences"
-        secondaryButtonHref="/experience"
+        secondaryButtonHref="/experiences"
       />
     </div>
   );

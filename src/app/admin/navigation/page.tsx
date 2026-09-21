@@ -827,7 +827,7 @@ export default function AdminNavigationPage() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. /services/trekking"
+                  placeholder="e.g. /experiences/beyond-the-map"
                   value={newLink.url}
                   onChange={(e) => setNewLink({ ...newLink, url: e.target.value })}
                   className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm font-mono text-slate-100"

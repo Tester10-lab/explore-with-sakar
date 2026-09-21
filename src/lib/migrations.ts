@@ -1,5 +1,4 @@
 import { Db } from 'mongodb';
-import { BLOG_POSTS } from '@/data/blog';
 
 export interface Migration {
   id: string;
@@ -77,29 +76,173 @@ export const MIGRATIONS: Migration[] = [
       }
     },
   },
+  // Migration 2026-restore-original-blogs removed to prevent legacy sample records from being repopulated
   {
-    id: '2026-restore-original-blogs',
+    id: '2026-canonical-experiences-urls',
     run: async (db: Db) => {
       const col = db.collection('cms_store');
-      const doc = await col.findOne({ _id: 'active_store' as any }, { projection: { blogs: 1 } });
-      const currentBlogs: any[] = (doc && Array.isArray(doc.blogs)) ? doc.blogs : [];
-      const currentSlugs = new Set(currentBlogs.map((b: any) => b?.slug));
+      const doc = await col.findOne({ _id: 'active_store' as any });
+      if (!doc) return;
 
-      const missing = BLOG_POSTS.filter((b) => !currentSlugs.has(b.slug));
-      if (missing.length > 0) {
-        const updated = [...missing, ...currentBlogs];
-        await col.updateOne(
-          { _id: 'active_store' as any },
-          { $set: { blogs: updated, lastUpdated: new Date().toISOString() } }
-        );
+      const normalizeUrl = (u: string) => {
+        if (!u) return u;
+        if (u === '/experience' || u === '/services' || u === '/service' || u === '/experience/all-curated-experiences') {
+          return '/experiences';
+        }
+        if (u === '/experience/go-beyond' || u === '/services/beyond-the-map' || u === '/experience/beyond-the-map') {
+          return '/experiences/beyond-the-map';
+        }
+        if (u === '/experience/go-spiritual' || u === '/services/spiritual-wellness' || u === '/experience/spiritual-wellness') {
+          return '/experiences/spiritual-wellness';
+        }
+        if (u === '/experience/feel-closer' || u === '/services/homestays' || u === '/experience/homestays') {
+          return '/experiences/homestays';
+        }
+        if (u === '/experience/leave-a-mark' || u === '/services/leave-a-mark') {
+          return '/experiences/leave-a-mark';
+        }
+        if (u === '/experience/custom-private-journeys' || u === '/services/custom-journeys' || u === '/experience/custom-journeys') {
+          return '/experiences/custom-journeys';
+        }
+        if (u.startsWith('/experience/')) {
+          return u.replace('/experience/', '/experiences/');
+        }
+        if (u.startsWith('/services/')) {
+          return u.replace('/services/', '/experiences/');
+        }
+        return u;
+      };
+
+      // 1. Update navigation
+      let navModified = false;
+      const nav = doc.navigation;
+      if (nav) {
+        if (Array.isArray(nav.mainNav)) {
+          nav.mainNav.forEach((item: any) => {
+            const newUrl = normalizeUrl(item.url);
+            if (newUrl !== item.url) {
+              item.url = newUrl;
+              navModified = true;
+            }
+            if (Array.isArray(item.children)) {
+              item.children.forEach((child: any) => {
+                const childUrl = normalizeUrl(child.url);
+                if (childUrl !== child.url) {
+                  child.url = childUrl;
+                  navModified = true;
+                }
+              });
+            }
+          });
+        }
+        if (nav.footer?.columns && Array.isArray(nav.footer.columns)) {
+          nav.footer.columns.forEach((c: any) => {
+            if (Array.isArray(c.links)) {
+              c.links.forEach((l: any) => {
+                const linkUrl = normalizeUrl(l.url);
+                if (linkUrl !== l.url) {
+                  l.url = linkUrl;
+                  navModified = true;
+                }
+              });
+            }
+          });
+        }
+      }
+
+      // 2. Update pages
+      let pagesModified = false;
+      const pages: any[] = Array.isArray(doc.pages) ? doc.pages : [];
+      pages.forEach((p) => {
+        const newUrl = normalizeUrl(p.url);
+        if (newUrl !== p.url) {
+          p.url = newUrl;
+          pagesModified = true;
+        }
+        if (p.seo?.canonicalUrl) {
+          const canon = normalizeUrl(p.seo.canonicalUrl);
+          if (canon !== p.seo.canonicalUrl) {
+            p.seo.canonicalUrl = canon;
+            pagesModified = true;
+          }
+        }
+      });
+
+      // 3. Update experiences CTA link
+      let expModified = false;
+      const experiences: any[] = Array.isArray(doc.experiences) ? doc.experiences : [];
+      experiences.forEach((e) => {
+        if (e.ctaLink && normalizeUrl(e.ctaLink) !== e.ctaLink) {
+          e.ctaLink = normalizeUrl(e.ctaLink);
+          expModified = true;
+        }
+      });
+
+      if (navModified || pagesModified || expModified) {
+        const updateDoc: any = { lastUpdated: new Date().toISOString() };
+        if (navModified) updateDoc.navigation = nav;
+        if (pagesModified) updateDoc.pages = pages;
+        if (expModified) updateDoc.experiences = experiences;
+        await col.updateOne({ _id: 'active_store' as any }, { $set: updateDoc });
       }
     },
     runFile: (store: Record<string, any>) => {
-      const currentBlogs: any[] = Array.isArray(store.blogs) ? store.blogs : [];
-      const currentSlugs = new Set(currentBlogs.map((b: any) => b?.slug));
-      const missing = BLOG_POSTS.filter((b) => !currentSlugs.has(b.slug));
-      if (missing.length > 0) {
-        store.blogs = [...missing, ...currentBlogs];
+      const normalizeUrl = (u: string) => {
+        if (!u) return u;
+        if (u === '/experience' || u === '/services' || u === '/service' || u === '/experience/all-curated-experiences') {
+          return '/experiences';
+        }
+        if (u === '/experience/go-beyond' || u === '/services/beyond-the-map' || u === '/experience/beyond-the-map') {
+          return '/experiences/beyond-the-map';
+        }
+        if (u === '/experience/go-spiritual' || u === '/services/spiritual-wellness' || u === '/experience/spiritual-wellness') {
+          return '/experiences/spiritual-wellness';
+        }
+        if (u === '/experience/feel-closer' || u === '/services/homestays' || u === '/experience/homestays') {
+          return '/experiences/homestays';
+        }
+        if (u === '/experience/leave-a-mark' || u === '/services/leave-a-mark') {
+          return '/experiences/leave-a-mark';
+        }
+        if (u === '/experience/custom-private-journeys' || u === '/services/custom-journeys' || u === '/experience/custom-journeys') {
+          return '/experiences/custom-journeys';
+        }
+        if (u.startsWith('/experience/')) {
+          return u.replace('/experience/', '/experiences/');
+        }
+        if (u.startsWith('/services/')) {
+          return u.replace('/services/', '/experiences/');
+        }
+        return u;
+      };
+
+      if (store.navigation?.mainNav && Array.isArray(store.navigation.mainNav)) {
+        store.navigation.mainNav.forEach((item: any) => {
+          item.url = normalizeUrl(item.url);
+          if (Array.isArray(item.children)) {
+            item.children.forEach((c: any) => { c.url = normalizeUrl(c.url); });
+          }
+        });
+      }
+      if (store.navigation?.footer?.columns && Array.isArray(store.navigation.footer.columns)) {
+        store.navigation.footer.columns.forEach((col: any) => {
+          if (Array.isArray(col.links)) {
+            col.links.forEach((l: any) => { l.url = normalizeUrl(l.url); });
+          }
+        });
+      }
+      if (Array.isArray(store.pages)) {
+        store.pages.forEach((p: any) => {
+          p.url = normalizeUrl(p.url);
+          if (p.seo?.canonicalUrl) {
+            p.seo.canonicalUrl = normalizeUrl(p.seo.canonicalUrl);
+          }
+        });
+      }
+      if (Array.isArray(store.experiences)) {
+        store.experiences.forEach((e: any) => {
+          if (e.ctaLink) e.ctaLink = normalizeUrl(e.ctaLink);
+        });
       }
     },
   },

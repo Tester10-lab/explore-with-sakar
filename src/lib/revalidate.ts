@@ -22,11 +22,11 @@ export function revalidateContent(collection: string, extraPathOrSlug?: string):
         revalidatePath('/api/public/settings');
         break;
       case 'packages':
-        revalidatePath('/experience', 'layout');
+        revalidatePath('/experiences', 'layout');
         revalidatePath('/');
         break;
       case 'experiences':
-        revalidatePath('/experience', 'layout');
+        revalidatePath('/experiences', 'layout');
         revalidatePath('/blog');
         revalidatePath('/');
         revalidatePath('/sitemap.xml');

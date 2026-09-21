@@ -64,8 +64,8 @@ export function getMongoClient(): Promise<MongoClient> {
 
   const client = new MongoClient(uri, {
     maxPoolSize: 5,
-    serverSelectionTimeoutMS: 5000,
-    connectTimeoutMS: 5000,
+    serverSelectionTimeoutMS: 2000,
+    connectTimeoutMS: 2000,
   });
 
   clientPromise = client

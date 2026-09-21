@@ -99,6 +99,10 @@ export default function AdminPagesManagerPage() {
     setIsLoading(true);
     try {
       const res = await fetch('/api/admin/pages');
+      if (res.status === 401) {
+        window.location.href = '/admin/login';
+        return;
+      }
       if (res.ok) {
         const data = await res.json();
         setPages(data.pages || []);
@@ -118,15 +122,20 @@ export default function AdminPagesManagerPage() {
 
   const filteredPages = useMemo(() => {
     return pages.filter((page) => {
+      const name = (page.name || '').toLowerCase();
+      const slug = (page.slug || '').toLowerCase();
+      const url = (page.url || '').toLowerCase();
+      const q = searchQuery.toLowerCase();
+
       const matchesSearch =
-        page.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        page.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        page.url.toLowerCase().includes(searchQuery.toLowerCase());
+        name.includes(q) ||
+        slug.includes(q) ||
+        url.includes(q);
 
       const matchesStatus =
         statusFilter === 'all' || page.status === statusFilter;
 
-      const pageCat = getPageHierarchy(page.slug);
+      const pageCat = getPageHierarchy(page.slug || '');
       const matchesHierarchy =
         hierarchyFilter === 'all' || pageCat === hierarchyFilter;
 
@@ -493,7 +502,7 @@ export default function AdminPagesManagerPage() {
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g. /services/homestays"
+                  placeholder="e.g. /experiences/homestays"
                   value={newPage.url}
                   onChange={(e) => setNewPage({ ...newPage, url: e.target.value })}
                   className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 font-mono focus:outline-none focus:border-amber-500"

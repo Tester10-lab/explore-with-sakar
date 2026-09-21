@@ -53,10 +53,12 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
   useEffect(() => {
     async function fetchUnreadCount() {
       try {
-        const res = await fetch('/api/admin/inquiries');
+        const res = await fetch('/api/admin/inquiries?countOnly=true');
         if (res.ok) {
           const data = await res.json();
-          if (Array.isArray(data.inquiries)) {
+          if (typeof data.unreadCount === 'number') {
+            setUnreadInquiries(data.unreadCount);
+          } else if (Array.isArray(data.inquiries)) {
             const unread = data.inquiries.filter((i: any) => i.status === 'unread').length;
             setUnreadInquiries(unread);
           }
@@ -67,7 +69,9 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
     }
 
     fetchUnreadCount();
-  }, [pathname]);
+    const interval = setInterval(fetchUnreadCount, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   const NAV_GROUPS: NavGroup[] = [
     {
@@ -122,7 +126,7 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
           icon: Calendar,
         },
         {
-          label: 'Blogs & Stories',
+          label: 'Blog & Stories',
           href: '/admin/blogs',
           icon: FileText,
         },

@@ -94,7 +94,7 @@ export default function CustomJourneysExperience({ pageContent, availableEvents 
           subtitle={hero.subtitle}
           backgroundImage="/explore-with-sakar/images/mountains/sunrise-himalayas.jpg"
           breadcrumbs={[
-            { label: 'Experiences', href: '/experience' },
+            { label: 'Experiences', href: '/experiences' },
             { label: 'Custom Private Journeys' },
           ]}
         />

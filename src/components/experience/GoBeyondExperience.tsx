@@ -72,7 +72,7 @@ export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondEx
           subtitle={hero.subtitle}
           backgroundImage="/images/beyond-the-map/living-courtyards.jpg"
           breadcrumbs={[
-            { label: 'Experiences', href: '/experience' },
+            { label: 'Experiences', href: '/experiences' },
             { label: 'Go Beyond the Map' },
           ]}
         />
@@ -423,7 +423,7 @@ export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondEx
           primaryButtonText="Inquire About Beyond the Map"
           primaryButtonHref="/contact?subject=Go%20Beyond%20the%20Map%20Custom%20Journey"
           secondaryButtonText="Explore All Experiences"
-          secondaryButtonHref="/experience"
+          secondaryButtonHref="/experiences"
         />
       )}
     </div>

@@ -164,10 +164,10 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                               })}
 
                               {/* Overview links for experience section */}
-                              {item.url === '/experience' && (
-                                <div className="pt-3 flex flex-col space-y-1.5">
+                              {(item.url === '/experience' || item.url === '/experiences') && (
+                                <div className="pt-2 flex flex-col space-y-1">
                                   <Link
-                                    href="/experience"
+                                    href="/experiences"
                                     onClick={onClose}
                                     className="text-xs font-semibold uppercase tracking-wider text-terracotta hover:underline py-1 flex items-center justify-between"
                                   >
@@ -175,7 +175,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                     <ArrowRight className="w-3.5 h-3.5" />
                                   </Link>
                                   <Link
-                                    href="/experience/custom-private-journeys"
+                                    href="/experiences/custom-journeys"
                                     onClick={onClose}
                                     className="text-xs font-medium text-himalaya-700 hover:text-terracotta py-1"
                                   >
@@ -191,8 +191,8 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
                     return (
                       <Link
-                        key={sectionKey}
-                        href={item.url}
+                        key={item.url || sectionKey}
+                        href={item.url || '#'}
                         onClick={onClose}
                         className="block p-4 rounded-xl border border-parchment-300 bg-white font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-between shadow-xs"
                       >
@@ -203,18 +203,19 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   })
               ) : (
                 <>
-                  {/* 1. Experiences Group */}
+                  {/* Fallback Hardcoded Structure */}
+                  {/* 1. EXPERIENCES Group */}
                   <div className="rounded-xl border border-parchment-300 bg-white overflow-hidden shadow-xs">
                     <button
                       onClick={() => toggleSection('experiences')}
-                      className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold text-himalaya-950"
+                      className="w-full p-4 flex items-center justify-between font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950"
                     >
                       <span className="flex items-center space-x-2">
                         <Compass className="w-4 h-4 text-terracotta" />
-                        <span>Experiences</span>
+                        <span>EXPERIENCES</span>
                       </span>
                       <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
+                        className={`w-4 h-4 text-himalaya-500 transition-transform duration-300 ${
                           openSection === 'experiences' ? 'rotate-180 text-terracotta' : ''
                         }`}
                       />
@@ -223,7 +224,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                     {openSection === 'experiences' && (
                       <div className="px-4 pb-4 pt-1 space-y-3 border-t border-parchment-200 divide-y divide-parchment-100">
                         <Link
-                          href="/experience/go-beyond"
+                          href="/experiences/beyond-the-map"
                           onClick={onClose}
                           className="block group pt-2 first:pt-1 pb-1"
                         >
@@ -242,14 +243,14 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         </Link>
 
                         <Link
-                          href="/experience/go-spiritual"
+                          href="/experiences/spiritual-wellness"
                           onClick={onClose}
                           className="block group pt-2.5 pb-1"
                         >
                           <div className="flex items-center justify-between">
                             <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
                               <Sparkles className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
-                              Go Spiritual
+                              Go Within
                             </span>
                             <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
                               Spiritual
@@ -261,7 +262,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         </Link>
 
                         <Link
-                          href="/experience/feel-closer"
+                          href="/experiences/homestays"
                           onClick={onClose}
                           className="block group pt-2.5 pb-1"
                         >
@@ -280,7 +281,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         </Link>
 
                         <Link
-                          href="/experience/leave-a-mark"
+                          href="/experiences/leave-a-mark"
                           onClick={onClose}
                           className="block group pt-2.5 pb-1"
                         >
@@ -300,7 +301,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
                         <div className="pt-3 flex flex-col space-y-1.5">
                           <Link
-                            href="/experience"
+                            href="/experiences"
                             onClick={onClose}
                             className="text-xs font-semibold uppercase tracking-wider text-terracotta hover:underline py-1 flex items-center justify-between"
                           >
@@ -308,7 +309,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                             <ArrowRight className="w-3.5 h-3.5" />
                           </Link>
                           <Link
-                            href="/experience/custom-private-journeys"
+                            href="/experiences/custom-journeys"
                             onClick={onClose}
                             className="text-xs font-medium text-himalaya-700 hover:text-terracotta py-1"
                           >

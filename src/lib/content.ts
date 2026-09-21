@@ -388,6 +388,49 @@ export async function getPublicBlogBySlug(slug: string): Promise<ExtendedBlogPos
   }
 }
 
+export interface PillarStory {
+  pillar: 'go-within' | 'go-beyond' | 'leave-a-mark';
+  pillarLabel: string;
+  pillarHref: string;
+  blog: PublicBlogListItem;
+}
+
+/**
+ * Returns one representative blog per content pillar for the homepage
+ * "Stories That Take You Further" section.
+ * Uses preferred slug order so the most illustrative stories appear first.
+ */
+export async function getPublicPillarStories(): Promise<PillarStory[]> {
+  const all = await getPublicBlogs();
+
+  const pickFirst = (preferredSlugs: string[], fallbackCategories: string[]): PublicBlogListItem | null => {
+    for (const slug of preferredSlugs) {
+      const found = all.find((b) => b.slug === slug);
+      if (found) return found;
+    }
+    return all.find((b) => fallbackCategories.includes(b.category)) || null;
+  };
+
+  const goWithin = pickFirst(
+    ['the-cosmic-language-of-sound', 'himalayan-shamanism-ancient-bridge', 'taudaha-and-pharping-living-stories', 'a-leisurely-walk-through-pashupati'],
+    ['Spiritual Nepal']
+  );
+  const goBeyond = pickFirst(
+    ['kathmandu-durbar-square-every-stone-holds-a-story', 'exploring-bhaktapur-durbar-square', 'patan-durbar-square-hidden-courtyards-living-craft'],
+    ['Living Culture', 'Walking Nepal']
+  );
+  const leaveAMark = pickFirst(
+    ['beyond-tourism-building-trust-volunteering-nepal', 'inspiring-young-lad-logan-storck', 'women-in-the-cold-war-dr-merose-wang'],
+    ['Travel With Meaning']
+  );
+
+  const result: PillarStory[] = [];
+  if (goWithin) result.push({ pillar: 'go-within', pillarLabel: 'Go Within', pillarHref: '/experiences/spiritual-wellness', blog: goWithin });
+  if (goBeyond) result.push({ pillar: 'go-beyond', pillarLabel: 'Go Beyond the Map', pillarHref: '/experiences/beyond-the-map', blog: goBeyond });
+  if (leaveAMark) result.push({ pillar: 'leave-a-mark', pillarLabel: 'Leave a Mark', pillarHref: '/experiences/leave-a-mark', blog: leaveAMark });
+  return result;
+}
+
 export async function getPublicRelatedBlogs(currentSlug: string, count = 3): Promise<PublicBlogListItem[]> {
   const all = await getPublicBlogs();
   const current = all.find((b) => b.slug === currentSlug);

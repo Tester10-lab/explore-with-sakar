@@ -24,23 +24,60 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       (p) => p.status === 'published' && p.seo?.sitemapVisible !== false && p.seo?.noIndex !== true
     );
 
-    const pageRoutes: MetadataRoute.Sitemap = visiblePages.map((page) => {
-      const isHome = page.slug === 'home';
-      const isPriorityExp = page.slug.startsWith('go-') || page.slug === 'all-curated-experiences';
-      return {
-        url: isHome ? `${baseUrl}` : `${baseUrl}${page.url}`,
-        lastModified: page.updatedAt ? new Date(page.updatedAt) : new Date(),
-        changeFrequency: isHome ? 'daily' : isPriorityExp ? 'weekly' : 'monthly',
-        priority: isHome ? 1.0 : isPriorityExp ? 0.9 : 0.8,
-      };
-    });
+    const CANONICAL_EXPERIENCE_MAP: Record<string, string> = {
+      'go-beyond': '/experiences/beyond-the-map',
+      'beyond-the-map': '/experiences/beyond-the-map',
+      'go-spiritual': '/experiences/spiritual-wellness',
+      'spiritual-wellness': '/experiences/spiritual-wellness',
+      'feel-closer': '/experiences/homestays',
+      'homestays': '/experiences/homestays',
+      'leave-a-mark': '/experiences/leave-a-mark',
+      'all-curated-experiences': '/experiences',
+      'experiences': '/experiences',
+      'custom-private-journeys': '/experiences/custom-journeys',
+      'custom-journeys': '/experiences/custom-journeys',
+    };
 
-    // 2. Experiences
+    const pageRoutes: MetadataRoute.Sitemap = visiblePages
+      .filter((page) => !page.url?.startsWith('/admin') && !page.url?.startsWith('/api'))
+      .map((page) => {
+        const isHome = page.slug === 'home';
+        let pagePath = page.url;
+
+        // Check if page corresponds to one of the canonical experience pillars/catalog
+        if (CANONICAL_EXPERIENCE_MAP[page.slug]) {
+          pagePath = CANONICAL_EXPERIENCE_MAP[page.slug];
+        } else if (pagePath.startsWith('/experience/') || pagePath.startsWith('/services/')) {
+          pagePath = pagePath.replace(/^\/(?:experience|services)\//, '/experiences/');
+        }
+
+        const isCanonicalExp = Object.values(CANONICAL_EXPERIENCE_MAP).includes(pagePath);
+
+        return {
+          url: isHome ? `${baseUrl}` : `${baseUrl}${pagePath}`,
+          lastModified: page.updatedAt ? new Date(page.updatedAt) : new Date(),
+          changeFrequency: isHome ? 'daily' : isCanonicalExp ? 'weekly' : 'monthly',
+          priority: isHome ? 1.0 : isCanonicalExp ? 0.9 : 0.8,
+        };
+      });
+
+    // Explicitly guarantee all 6 canonical experience routes are included
+    const now = new Date();
+    const coreExperienceRoutes: MetadataRoute.Sitemap = [
+      { url: `${baseUrl}/experiences`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+      { url: `${baseUrl}/experiences/beyond-the-map`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+      { url: `${baseUrl}/experiences/spiritual-wellness`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+      { url: `${baseUrl}/experiences/homestays`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+      { url: `${baseUrl}/experiences/leave-a-mark`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+      { url: `${baseUrl}/experiences/custom-journeys`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    ];
+
+    // 2. Curated Experiences (dynamic package departures)
     const experiences = await getPublicExperiences();
     const experienceRoutes: MetadataRoute.Sitemap = (experiences || [])
-      .filter((exp) => exp.status === 'published')
+      .filter((exp) => exp.status === 'published' && !CANONICAL_EXPERIENCE_MAP[exp.slug])
       .map((exp) => ({
-        url: `${baseUrl}/experience/${exp.slug}`,
+        url: `${baseUrl}/experiences/${exp.slug}`,
         lastModified: exp.updatedAt ? new Date(exp.updatedAt) : new Date(),
         changeFrequency: 'weekly',
         priority: 0.85,
@@ -59,7 +96,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Deduplicate URLs
     const routeMap = new Map<string, MetadataRoute.Sitemap[number]>();
-    for (const route of [...pageRoutes, ...experienceRoutes, ...blogRoutes]) {
+    for (const route of [...coreExperienceRoutes, ...pageRoutes, ...experienceRoutes, ...blogRoutes]) {
       routeMap.set(route.url, route);
     }
 

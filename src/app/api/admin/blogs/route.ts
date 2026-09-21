@@ -11,8 +11,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  const full = req.nextUrl.searchParams.get('full') === 'true';
   const blogs = await getAllBlogsAsync(true);
-  return NextResponse.json({ success: true, blogs });
+  const result = full ? blogs : blogs.map(({ content, ...rest }) => rest);
+  return NextResponse.json({ success: true, blogs: result });
 }
 
 export async function POST(req: NextRequest) {

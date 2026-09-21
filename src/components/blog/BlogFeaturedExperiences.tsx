@@ -49,7 +49,7 @@ export default function BlogFeaturedExperiences({
               >
                 {/* Larger Editorial Image */}
                 <Link
-                  href={`/experience/${exp.slug}`}
+                  href={`/experiences/${exp.slug}`}
                   className="block relative aspect-[4/3] overflow-hidden bg-himalaya-900"
                 >
                   <Image
@@ -87,7 +87,7 @@ export default function BlogFeaturedExperiences({
                       </span>
                     )}
                     <h3 className="font-editorial-serif text-xl font-bold text-himalaya-950 group-hover:text-terracotta transition-colors leading-snug">
-                      <Link href={`/experience/${exp.slug}`}>{exp.title}</Link>
+                      <Link href={`/experiences/${exp.slug}`}>{exp.title}</Link>
                     </h3>
                     <p className="text-xs sm:text-sm text-himalaya-700 font-light leading-relaxed line-clamp-3">
                       {exp.shortDescription}
@@ -97,7 +97,7 @@ export default function BlogFeaturedExperiences({
                   {/* Explore CTA */}
                   <div className="pt-3 border-t border-parchment-200">
                     <Link
-                      href={`/experience/${exp.slug}`}
+                      href={`/experiences/${exp.slug}`}
                       className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-terracotta group-hover:text-terracotta-dark transition-colors"
                     >
                       <span>Explore Experience</span>
@@ -113,7 +113,7 @@ export default function BlogFeaturedExperiences({
         {/* View All Experiences Link */}
         <div className="mt-12 text-center">
           <Link
-            href="/experience"
+            href="/experiences"
             className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-widest text-himalaya-700 hover:text-terracotta transition-colors"
           >
             <span>Explore All Nepal Experiences</span>

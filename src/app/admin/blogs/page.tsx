@@ -52,9 +52,15 @@ export default function AdminBlogsPage() {
         cache: 'no-store',
         headers: { 'Cache-Control': 'no-cache' },
       });
+      if (res.status === 401) {
+        router.push('/admin/login');
+        return;
+      }
       if (res.ok) {
         const data = await res.json();
         setBlogs(data.blogs || []);
+      } else {
+        showToast('error', 'Failed to fetch blogs');
       }
     } catch (err) {
       showToast('error', 'Failed to fetch blogs');
@@ -80,7 +86,7 @@ export default function AdminBlogsPage() {
 
       showToast(
         'success',
-        `Article "${blog.title}" marked as ${newStatus}`
+        `Article "${blog.title || blog.slug}" marked as ${newStatus}`
       );
       router.refresh();
       fetchBlogs();
@@ -101,7 +107,7 @@ export default function AdminBlogsPage() {
 
       if (!res.ok) throw new Error('Failed to delete blog post');
 
-      showToast('success', `Deleted "${deleteTarget.title}"`);
+      showToast('success', `Deleted "${deleteTarget.title || deleteTarget.slug}"`);
       setDeleteTarget(null);
       router.refresh();
       fetchBlogs();
@@ -113,10 +119,15 @@ export default function AdminBlogsPage() {
   };
 
   const filteredBlogs = blogs.filter((blog) => {
+    const title = (blog.title || '').toLowerCase();
+    const slug = (blog.slug || '').toLowerCase();
+    const excerpt = (blog.excerpt || '').toLowerCase();
+    const q = searchQuery.toLowerCase();
+
     const matchesSearch =
-      blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      blog.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      blog.excerpt?.toLowerCase().includes(searchQuery.toLowerCase());
+      title.includes(q) ||
+      slug.includes(q) ||
+      excerpt.includes(q);
 
     const matchesCategory =
       selectedCategory === 'all' || blog.category === selectedCategory;

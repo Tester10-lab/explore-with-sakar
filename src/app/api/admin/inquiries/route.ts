@@ -12,6 +12,10 @@ export async function GET(req: NextRequest) {
 
   try {
     const inquiries = await getAllInquiries();
+    if (req.nextUrl.searchParams.get('countOnly') === 'true') {
+      const unreadCount = inquiries.filter((i) => i.status === 'unread').length;
+      return NextResponse.json({ success: true, unreadCount, totalCount: inquiries.length });
+    }
     return NextResponse.json({ success: true, inquiries });
   } catch (error: any) {
     console.error('Fetch inquiries error:', error);

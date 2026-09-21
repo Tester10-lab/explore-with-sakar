@@ -29,68 +29,70 @@ import {
   Menu as MenuIcon,
 } from 'lucide-react';
 import AdminHeader from '@/components/admin/AdminHeader';
-import {
-  ExtendedBlogPost,
-  ExtendedGalleryPhoto,
-  ExtendedTestimonial,
-  ExtendedExperience,
-  ExtendedServicePillar,
-  ContactInquiry,
-  WebsiteSettings,
-} from '@/types/cms';
 
 export default function AdminDashboardPage() {
-  const [experiences, setExperiences] = useState<ExtendedExperience[]>([]);
-  const [services, setServices] = useState<ExtendedServicePillar[]>([]);
-  const [inquiries, setInquiries] = useState<ContactInquiry[]>([]);
-  const [blogs, setBlogs] = useState<ExtendedBlogPost[]>([]);
-  const [photos, setPhotos] = useState<ExtendedGalleryPhoto[]>([]);
-  const [reviews, setReviews] = useState<ExtendedTestimonial[]>([]);
-  const [settings, setSettings] = useState<WebsiteSettings | null>(null);
+  const [dashboardData, setDashboardData] = useState<{
+    counts: {
+      inquiries: number;
+      unreadInquiries: number;
+      services: number;
+      experiences: number;
+      publishedExperiences: number;
+      blogs: number;
+      publishedBlogs: number;
+      photos: number;
+      reviews: number;
+      visibleReviews: number;
+    };
+    recentInquiries: any[];
+    recentBlogs: any[];
+    recentPhotos: any[];
+    recentReviews: any[];
+  }>({
+    counts: {
+      inquiries: 0,
+      unreadInquiries: 0,
+      services: 0,
+      experiences: 0,
+      publishedExperiences: 0,
+      blogs: 0,
+      publishedBlogs: 0,
+      photos: 0,
+      reviews: 0,
+      visibleReviews: 0,
+    },
+    recentInquiries: [],
+    recentBlogs: [],
+    recentPhotos: [],
+    recentReviews: [],
+  });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadDashboardData() {
       try {
         setIsLoading(true);
-        const [expsRes, srvRes, inqRes, blogsRes, photosRes, reviewsRes, settingsRes] =
-          await Promise.all([
-            fetch('/api/admin/experiences'),
-            fetch('/api/admin/services'),
-            fetch('/api/admin/inquiries'),
-            fetch('/api/admin/blogs'),
-            fetch('/api/admin/photos'),
-            fetch('/api/admin/reviews'),
-            fetch('/api/admin/settings'),
-          ]);
-
-        if (expsRes.ok) {
-          const data = await expsRes.json();
-          setExperiences(data.experiences || []);
-        }
-        if (srvRes.ok) {
-          const data = await srvRes.json();
-          setServices(data.services || []);
-        }
-        if (inqRes.ok) {
-          const data = await inqRes.json();
-          setInquiries(data.inquiries || []);
-        }
-        if (blogsRes.ok) {
-          const data = await blogsRes.json();
-          setBlogs(data.blogs || []);
-        }
-        if (photosRes.ok) {
-          const data = await photosRes.json();
-          setPhotos(data.photos || []);
-        }
-        if (reviewsRes.ok) {
-          const data = await reviewsRes.json();
-          setReviews(data.reviews || []);
-        }
-        if (settingsRes.ok) {
-          const data = await settingsRes.json();
-          setSettings(data.settings);
+        const res = await fetch('/api/admin/dashboard');
+        if (res.ok) {
+          const data = await res.json();
+          setDashboardData({
+            counts: data.counts || {
+              inquiries: 0,
+              unreadInquiries: 0,
+              services: 0,
+              experiences: 0,
+              publishedExperiences: 0,
+              blogs: 0,
+              publishedBlogs: 0,
+              photos: 0,
+              reviews: 0,
+              visibleReviews: 0,
+            },
+            recentInquiries: data.recentInquiries || [],
+            recentBlogs: data.recentBlogs || [],
+            recentPhotos: data.recentPhotos || [],
+            recentReviews: data.recentReviews || [],
+          });
         }
       } catch (err) {
         console.error('Failed to load admin dashboard data:', err);
@@ -102,10 +104,7 @@ export default function AdminDashboardPage() {
     loadDashboardData();
   }, []);
 
-  const publishedBlogs = blogs.filter((b) => b.status === 'published');
-  const visibleReviews = reviews.filter((r) => r.isVisible);
-  const publishedExperiences = experiences.filter((e) => e.status === 'published');
-  const unreadInquiries = inquiries.filter((i) => i.status === 'unread');
+  const { counts, recentInquiries, recentBlogs, recentPhotos, recentReviews } = dashboardData;
 
   return (
     <div className="space-y-6">
@@ -182,10 +181,10 @@ export default function AdminDashboardPage() {
               </div>
             </div>
             <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : inquiries.length}
+              {isLoading ? '...' : counts.inquiries}
             </div>
             <div className="text-[11px] text-slate-500">
-              <span className="text-amber-600 font-bold">{unreadInquiries.length} Awaiting Reply</span>
+              <span className="text-amber-600 font-bold">{counts.unreadInquiries} Awaiting Reply</span>
             </div>
           </Link>
 
@@ -203,10 +202,10 @@ export default function AdminDashboardPage() {
               </div>
             </div>
             <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : services.length}
+              {isLoading ? '...' : counts.services}
             </div>
             <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{services.length} Live Pillars</span>
+              <span className="text-emerald-600 font-semibold">{counts.services} Live Pillars</span>
             </div>
           </Link>
 
@@ -224,10 +223,10 @@ export default function AdminDashboardPage() {
               </div>
             </div>
             <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : experiences.length}
+              {isLoading ? '...' : counts.experiences}
             </div>
             <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{publishedExperiences.length} Live</span>
+              <span className="text-emerald-600 font-semibold">{counts.publishedExperiences} Live</span>
             </div>
           </Link>
 
@@ -245,10 +244,10 @@ export default function AdminDashboardPage() {
               </div>
             </div>
             <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : blogs.length}
+              {isLoading ? '...' : counts.blogs}
             </div>
             <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{publishedBlogs.length} Stories</span>
+              <span className="text-emerald-600 font-semibold">{counts.publishedBlogs} Stories</span>
             </div>
           </Link>
 
@@ -266,10 +265,10 @@ export default function AdminDashboardPage() {
               </div>
             </div>
             <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : reviews.length}
+              {isLoading ? '...' : counts.reviews}
             </div>
             <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{visibleReviews.length} Active</span>
+              <span className="text-emerald-600 font-semibold">{counts.visibleReviews} Active</span>
             </div>
           </Link>
         </div>
@@ -290,18 +289,18 @@ export default function AdminDashboardPage() {
               href="/admin/inquiries"
               className="text-xs font-semibold text-terracotta hover:text-terracotta-dark flex items-center gap-1 transition-colors"
             >
-              <span>View All ({inquiries.length})</span>
+              <span>View All ({counts.inquiries})</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {inquiries.length === 0 ? (
+          {recentInquiries.length === 0 ? (
             <div className="text-center py-8 text-slate-400 text-xs">
               No inquiries yet. When travelers contact you, their submissions will appear here.
             </div>
           ) : (
             <div className="divide-y divide-slate-100">
-              {inquiries.slice(0, 4).map((inq) => (
+              {recentInquiries.slice(0, 4).map((inq: any) => (
                 <div
                   key={inq.id}
                   className="py-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
@@ -309,7 +308,7 @@ export default function AdminDashboardPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="font-semibold text-slate-900 truncate">
-                        {inq.fullName}
+                        {inq.fullName || inq.name}
                       </span>
                       {inq.status === 'unread' && (
                         <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 text-amber-900">
@@ -374,7 +373,7 @@ export default function AdminDashboardPage() {
             </div>
 
             <div className="space-y-3">
-              {blogs.slice(0, 5).map((blog) => (
+              {recentBlogs.slice(0, 5).map((blog: any) => (
                 <div
                   key={blog.id}
                   className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-all flex items-center justify-between gap-4"
@@ -439,7 +438,7 @@ export default function AdminDashboardPage() {
               </div>
 
               <div className="grid grid-cols-3 gap-2">
-                {photos.slice(0, 6).map((photo) => (
+                {recentPhotos.slice(0, 6).map((photo: any) => (
                   <div
                     key={photo.id}
                     className="relative aspect-square rounded-lg overflow-hidden bg-slate-100 group"
@@ -467,13 +466,13 @@ export default function AdminDashboardPage() {
                   href="/admin/reviews"
                   className="text-xs font-semibold text-terracotta hover:text-terracotta-dark flex items-center gap-1 transition-colors"
                 >
-                  <span>All ({reviews.length})</span>
+                  <span>All ({counts.reviews})</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
               <div className="space-y-3">
-                {reviews.slice(0, 2).map((review) => (
+                {recentReviews.slice(0, 2).map((review: any) => (
                   <div
                     key={review.id}
                     className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs space-y-1.5"

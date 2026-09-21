@@ -205,7 +205,7 @@ export default async function ResourcesPage() {
             primaryButtonText="Contact Sakar Directly"
             primaryButtonHref="/contact"
             secondaryButtonText="Explore Experiences"
-            secondaryButtonHref="/experience"
+            secondaryButtonHref="/experiences"
           />
         </>
       )}
