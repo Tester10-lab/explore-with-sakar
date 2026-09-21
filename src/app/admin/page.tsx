@@ -48,10 +48,6 @@ export default function AdminDashboardPage() {
   const [blogs, setBlogs] = useState<ExtendedBlogPost[]>([]);
   const [photos, setPhotos] = useState<ExtendedGalleryPhoto[]>([]);
   const [reviews, setReviews] = useState<ExtendedTestimonial[]>([]);
-  const [pages, setPages] = useState<any[]>([]);
-  const [events, setEvents] = useState<any[]>([]);
-  const [destinations, setDestinations] = useState<any[]>([]);
-  const [faq, setFaq] = useState<any[]>([]);
   const [settings, setSettings] = useState<WebsiteSettings | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -59,7 +55,7 @@ export default function AdminDashboardPage() {
     async function loadDashboardData() {
       try {
         setIsLoading(true);
-        const [pkgsRes, expsRes, srvRes, inqRes, blogsRes, photosRes, reviewsRes, settingsRes, pagesRes, eventsRes, destsRes, faqRes] =
+        const [pkgsRes, expsRes, srvRes, inqRes, blogsRes, photosRes, reviewsRes, settingsRes] =
           await Promise.all([
             fetch('/api/admin/packages'),
             fetch('/api/admin/experiences'),
@@ -69,10 +65,6 @@ export default function AdminDashboardPage() {
             fetch('/api/admin/photos'),
             fetch('/api/admin/reviews'),
             fetch('/api/admin/settings'),
-            fetch('/api/admin/pages'),
-            fetch('/api/admin/events'),
-            fetch('/api/admin/destinations'),
-            fetch('/api/admin/faq'),
           ]);
 
         if (pkgsRes.ok) {
@@ -107,22 +99,6 @@ export default function AdminDashboardPage() {
           const data = await settingsRes.json();
           setSettings(data.settings);
         }
-        if (pagesRes.ok) {
-          const data = await pagesRes.json();
-          setPages(data.pages || []);
-        }
-        if (eventsRes.ok) {
-          const data = await eventsRes.json();
-          setEvents(data.events || []);
-        }
-        if (destsRes.ok) {
-          const data = await destsRes.json();
-          setDestinations(data.destinations || []);
-        }
-        if (faqRes.ok) {
-          const data = await faqRes.json();
-          setFaq(data.faq || []);
-        }
       } catch (err) {
         console.error('Failed to load admin dashboard data:', err);
       } finally {
@@ -144,7 +120,7 @@ export default function AdminDashboardPage() {
       <AdminHeader
         onToggleMobileSidebar={() => {}}
         title="Dashboard Overview"
-        subtitle="Manage guest inquiries, experiences, events, stories, and website pages matching the public website."
+        subtitle="Manage leads, travel pillars, packages, itineraries, journal essays, and website settings."
         actionButton={{
           label: 'View Inquiries',
           href: '/admin/inquiries',
@@ -158,31 +134,14 @@ export default function AdminDashboardPage() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <h3 className="font-editorial-serif text-lg font-bold text-slate-900">
-                Quick Website Actions
+                Quick CMS Actions
               </h3>
               <p className="text-xs text-slate-500 font-light mt-0.5">
-                Direct shortcuts matching the public website navigation and customer entrypoints
+                Direct shortcuts to incoming leads, homepage configuration, and travel offerings
               </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
-              <Link
-                href="/admin/pages"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition-all"
-              >
-                <Layers className="w-3.5 h-3.5 text-amber-400" />
-                <span>All Website Pages</span>
-                <span className="px-1.5 py-0.2 bg-amber-500/20 text-amber-300 text-[10px] rounded-full font-bold">
-                  {pages.length}
-                </span>
-              </Link>
-              <Link
-                href="/admin/preview"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
-              >
-                <Eye className="w-3.5 h-3.5 text-indigo-600" />
-                <span>Live Preview</span>
-              </Link>
               <Link
                 href="/admin/inquiries"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-terracotta hover:bg-terracotta-dark text-white text-xs font-semibold shadow-sm transition-all"
@@ -196,77 +155,47 @@ export default function AdminDashboardPage() {
                 )}
               </Link>
               <Link
-                href="/admin/events"
+                href="/admin/homepage"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
               >
-                <Calendar className="w-3.5 h-3.5 text-amber-600" />
-                <span>Events</span>
+                <Globe className="w-3.5 h-3.5 text-amber-600" />
+                <span>Homepage CMS</span>
               </Link>
               <Link
-                href="/admin/blogs"
+                href="/admin/services"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
               >
-                <FileText className="w-3.5 h-3.5 text-rose-600" />
-                <span>Stories (Blogs)</span>
+                <Layers className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Travel Pillars</span>
               </Link>
               <Link
-                href="/admin/destinations"
+                href="/admin/packages"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
               >
-                <MapPin className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Destinations</span>
+                <PackageIcon className="w-3.5 h-3.5 text-slate-600" />
+                <span>Packages</span>
               </Link>
               <Link
-                href="/admin/faq"
+                href="/admin/blogs/new"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
               >
-                <HelpCircle className="w-3.5 h-3.5 text-blue-600" />
-                <span>FAQ</span>
-              </Link>
-              <Link
-                href="/admin/navigation"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
-              >
-                <MenuIcon className="w-3.5 h-3.5 text-slate-600" />
-                <span>Navigation</span>
+                <FileText className="w-3.5 h-3.5 text-amber-600" />
+                <span>Write Blog</span>
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Overview Metric Cards Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {/* Card: Public Pages */}
-          <Link
-            href="/admin/pages"
-            className="group bg-white border border-slate-200 hover:border-amber-400/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                All Website Pages
-              </span>
-              <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Layers className="w-4 h-4" />
-              </div>
-            </div>
-            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : pages.length}
-            </div>
-            <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-bold">
-                {pages.filter((p: any) => p.status === 'published').length} Live Pages
-              </span>
-            </div>
-          </Link>
-
-          {/* Card: Inquiries */}
+        {/* 6 Overview Metric Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          {/* Card 1: Inquiries */}
           <Link
             href="/admin/inquiries"
             className="group bg-white border border-slate-200 hover:border-amber-400/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
               <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Guest Inquiries
+                Inquiries
               </span>
               <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Inbox className="w-4 h-4" />
@@ -280,14 +209,14 @@ export default function AdminDashboardPage() {
             </div>
           </Link>
 
-          {/* Card: Experiences: Travel Pillars */}
+          {/* Card 2: Services / Pillars */}
           <Link
             href="/admin/services"
             className="group bg-white border border-slate-200 hover:border-emerald-500/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
               <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Pillars & Curation
+                Pillars
               </span>
               <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Layers className="w-4 h-4" />
@@ -297,127 +226,18 @@ export default function AdminDashboardPage() {
               {isLoading ? '...' : services.length}
             </div>
             <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{services.length} Core Pillars</span>
+              <span className="text-emerald-600 font-semibold">{services.length} Live Pillars</span>
             </div>
           </Link>
 
-          {/* Card: Curated Experiences */}
-          <Link
-            href="/admin/experiences"
-            className="group bg-white border border-slate-200 hover:border-amber-400/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Curated Experiences
-              </span>
-              <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Compass className="w-4 h-4" />
-              </div>
-            </div>
-            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : experiences.length}
-            </div>
-            <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{publishedExperiences.length} Live Itineraries</span>
-            </div>
-          </Link>
-
-          {/* Card: Events & Festivals */}
-          <Link
-            href="/admin/events"
-            className="group bg-white border border-slate-200 hover:border-amber-400/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Events & Festivals
-              </span>
-              <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Calendar className="w-4 h-4" />
-              </div>
-            </div>
-            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : events.length}
-            </div>
-            <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">
-                {events.filter((e: any) => e.isVisible !== false).length} Active Gatherings
-              </span>
-            </div>
-          </Link>
-
-          {/* Card: Stories: Sakar's Journal & Blogs */}
-          <Link
-            href="/admin/blogs"
-            className="group bg-white border border-slate-200 hover:border-terracotta/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Sakar’s Journal
-              </span>
-              <div className="w-8 h-8 rounded-xl bg-rose-50 text-terracotta flex items-center justify-center group-hover:scale-110 transition-transform">
-                <FileText className="w-4 h-4" />
-              </div>
-            </div>
-            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : blogs.length}
-            </div>
-            <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{publishedBlogs.length} Published Stories</span>
-            </div>
-          </Link>
-
-          {/* Card: Stories: Traveler Reviews & Guestbook */}
-          <Link
-            href="/admin/reviews"
-            className="group bg-white border border-slate-200 hover:border-amber-400/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Reviews & Guestbook
-              </span>
-              <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Star className="w-4 h-4" />
-              </div>
-            </div>
-            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : reviews.length}
-            </div>
-            <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{visibleReviews.length} Approved Reflections</span>
-            </div>
-          </Link>
-
-          {/* Card: Destinations */}
-          <Link
-            href="/admin/destinations"
-            className="group bg-white border border-slate-200 hover:border-emerald-500/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Destinations
-              </span>
-              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <MapPin className="w-4 h-4" />
-              </div>
-            </div>
-            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : destinations.length}
-            </div>
-            <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">
-                {destinations.filter((d: any) => d.isVisible !== false).length} Valleys & Regions
-              </span>
-            </div>
-          </Link>
-
-          {/* Card: Packages & Pricing */}
+          {/* Card 3: Packages */}
           <Link
             href="/admin/packages"
             className="group bg-white border border-slate-200 hover:border-terracotta/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
               <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Packages & Pricing
+                Packages
               </span>
               <div className="w-8 h-8 rounded-xl bg-rose-50 text-terracotta flex items-center justify-center group-hover:scale-110 transition-transform">
                 <PackageIcon className="w-4 h-4" />
@@ -427,171 +247,118 @@ export default function AdminDashboardPage() {
               {isLoading ? '...' : packages.length}
             </div>
             <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{publishedPackages.length} Packages Live</span>
+              <span className="text-emerald-600 font-semibold">{publishedPackages.length} Published</span>
             </div>
           </Link>
 
-          {/* Card: Frequently Asked Questions */}
+          {/* Card 4: Itineraries */}
           <Link
-            href="/admin/faq"
-            className="group bg-white border border-slate-200 hover:border-blue-500/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
+            href="/admin/experiences"
+            className="group bg-white border border-slate-200 hover:border-amber-400/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
               <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Frequently Asked Questions
+                Itineraries
               </span>
-              <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <HelpCircle className="w-4 h-4" />
+              <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Compass className="w-4 h-4" />
               </div>
             </div>
             <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : faq.length}
+              {isLoading ? '...' : experiences.length}
             </div>
             <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">
-                {faq.filter((f: any) => f.isVisible !== false).length} Q&As Live
+              <span className="text-emerald-600 font-semibold">{publishedExperiences.length} Live</span>
+            </div>
+          </Link>
+
+          {/* Card 5: Blogs */}
+          <Link
+            href="/admin/blogs"
+            className="group bg-white border border-slate-200 hover:border-terracotta/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
+                Blogs
               </span>
+              <div className="w-8 h-8 rounded-xl bg-rose-50 text-terracotta flex items-center justify-center group-hover:scale-110 transition-transform">
+                <FileText className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
+              {isLoading ? '...' : blogs.length}
+            </div>
+            <div className="text-[11px] text-slate-500">
+              <span className="text-emerald-600 font-semibold">{publishedBlogs.length} Stories</span>
+            </div>
+          </Link>
+
+          {/* Card 6: Reviews */}
+          <Link
+            href="/admin/reviews"
+            className="group bg-white border border-slate-200 hover:border-amber-400/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
+                Reviews
+              </span>
+              <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Star className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
+              {isLoading ? '...' : reviews.length}
+            </div>
+            <div className="text-[11px] text-slate-500">
+              <span className="text-emerald-600 font-semibold">{visibleReviews.length} Active</span>
             </div>
           </Link>
         </div>
 
-        {/* Public Pages Directory & Section Manager Widget */}
+        {/* Recent Inquiries List */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div className="flex items-center gap-2">
-              <Layers className="w-5 h-5 text-amber-600" />
-              <div>
-                <h3 className="font-editorial-serif text-lg font-bold text-slate-900">
-                  Public Website Pages Inventory
-                </h3>
-                <p className="text-xs text-slate-500 font-light">
-                  Inspect and customize visual layout sections for each public route on the website
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Link
-                href="/admin/preview"
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors"
-              >
-                <Eye className="w-3.5 h-3.5 text-indigo-600" />
-                <span>Multi-Device Preview</span>
-              </Link>
-              <Link
-                href="/admin/pages"
-                className="text-xs font-semibold text-terracotta hover:text-terracotta-dark flex items-center gap-1 transition-colors"
-              >
-                <span>Manage All ({pages.length})</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {pages.slice(0, 9).map((page: any) => {
-              const hierarchy = [
-                'beyond-the-map', 'spiritual-wellness', 'homestays', 'leave-a-mark', 'experiences', 'custom-journeys', 'services'
-              ].includes(page.slug)
-                ? 'EXPERIENCES'
-                : page.slug === 'events'
-                ? 'EVENTS'
-                : ['blog', 'reviews'].includes(page.slug)
-                ? 'STORIES'
-                : page.slug === 'about'
-                ? 'ABOUT SAKAR'
-                : page.slug === 'home'
-                ? 'HOMEPAGE'
-                : ['destinations', 'packages', 'gallery', 'faq', 'resources'].includes(page.slug)
-                ? 'EXPLORE & GUIDES'
-                : 'INQUIRIES & LEGAL';
-
-              return (
-                <div
-                  key={page.slug}
-                  className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-all flex items-center justify-between gap-3"
-                >
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h4 className="font-semibold text-sm text-slate-900 truncate">
-                        {page.name}
-                      </h4>
-                      <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-slate-200 text-slate-700">
-                        {hierarchy}
-                      </span>
-                      <span
-                        className={`px-1.5 py-0.2 rounded-full text-[9px] font-bold uppercase ${
-                          page.status === 'published'
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : 'bg-amber-100 text-amber-800'
-                        }`}
-                      >
-                        {page.status}
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-500 font-mono truncate mt-0.5">
-                      {page.url} • {page.sections?.length || 0} sections
-                    </p>
-                  </div>
-
-                  <Link
-                    href={`/admin/pages/${page.slug}`}
-                    className="px-2.5 py-1.5 bg-white hover:bg-slate-900 hover:text-white text-slate-800 border border-slate-200 rounded-lg text-xs font-semibold transition-all shrink-0"
-                  >
-                    Edit
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Recent Inquiries Widget */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div className="flex items-center gap-2">
-              <Inbox className="w-5 h-5 text-terracotta" />
+            <div>
               <h3 className="font-editorial-serif text-lg font-bold text-slate-900">
-                Latest Traveler Inquiries
+                Latest Guest Inquiries
               </h3>
+              <p className="text-xs text-slate-500 font-light mt-0.5">
+                Prospective travelers who submitted the website inquiry form
+              </p>
             </div>
 
             <Link
               href="/admin/inquiries"
               className="text-xs font-semibold text-terracotta hover:text-terracotta-dark flex items-center gap-1 transition-colors"
             >
-              <span>View All Inquiries</span>
+              <span>View All ({inquiries.length})</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
           {inquiries.length === 0 ? (
-            <p className="text-xs text-slate-400 italic py-4 text-center">
-              No inquiries received yet. Booking inquiries will appear here as travelers submit the contact forms.
-            </p>
+            <div className="text-center py-8 text-slate-400 text-xs">
+              No inquiries yet. When travelers contact you, their submissions will appear here.
+            </div>
           ) : (
             <div className="divide-y divide-slate-100">
               {inquiries.slice(0, 4).map((inq) => (
                 <div
                   key={inq.id}
-                  className="py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
+                  className="py-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
                 >
                   <div className="min-w-0">
-                    <div className="flex items-center gap-2 font-bold text-slate-800">
-                      <span>{inq.fullName}</span>
-                      {inq.country && (
-                        <span className="text-slate-400 font-normal">({inq.country})</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-slate-900 truncate">
+                        {inq.fullName}
+                      </span>
+                      {inq.status === 'unread' && (
+                        <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 text-amber-900">
+                          NEW
+                        </span>
                       )}
-                      <span
-                        className={`px-2 py-0.5 rounded-full text-[10px] uppercase font-bold ${
-                          inq.status === 'unread'
-                            ? 'bg-amber-100 text-amber-800'
-                            : inq.status === 'replied'
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : 'bg-slate-100 text-slate-600'
-                        }`}
-                      >
-                        {inq.status}
+                      <span className="text-slate-400 text-[11px]">
+                        {inq.createdAt?.split('T')[0]}
                       </span>
                     </div>
                     <p className="text-slate-500 line-clamp-1 mt-0.5">
@@ -769,6 +536,33 @@ export default function AdminDashboardPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Additional Management Links (Compact Footer Banner) */}
+        <div className="p-4 bg-slate-50 border border-slate-200/80 rounded-xl flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+          <span className="font-medium text-slate-600">Additional Content:</span>
+          <div className="flex flex-wrap items-center gap-4 font-semibold">
+            <Link href="/admin/events" className="hover:text-terracotta transition-colors flex items-center gap-1">
+              <Calendar className="w-3.5 h-3.5 text-amber-600" />
+              <span>Events</span>
+            </Link>
+            <Link href="/admin/destinations" className="hover:text-terracotta transition-colors flex items-center gap-1">
+              <MapPin className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Destinations</span>
+            </Link>
+            <Link href="/admin/faq" className="hover:text-terracotta transition-colors flex items-center gap-1">
+              <HelpCircle className="w-3.5 h-3.5 text-blue-600" />
+              <span>FAQ</span>
+            </Link>
+            <Link href="/admin/navigation" className="hover:text-terracotta transition-colors flex items-center gap-1">
+              <MenuIcon className="w-3.5 h-3.5 text-slate-600" />
+              <span>Navigation Menus</span>
+            </Link>
+            <Link href="/admin/settings" className="hover:text-terracotta transition-colors flex items-center gap-1">
+              <Settings className="w-3.5 h-3.5 text-slate-600" />
+              <span>Settings</span>
+            </Link>
           </div>
         </div>
       </div>

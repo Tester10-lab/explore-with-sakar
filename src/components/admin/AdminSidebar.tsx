@@ -16,6 +16,7 @@ import {
   LogOut,
   Sparkles,
   ChevronRight,
+  ChevronDown,
   Package as PackageIcon,
   Compass,
   X,
@@ -23,13 +24,6 @@ import {
   MapPin,
   HelpCircle,
   Menu as MenuIcon,
-  Eye,
-  Heart,
-  Home,
-  BookOpen,
-  Users,
-  Phone,
-  ShieldCheck,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -37,20 +31,21 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
-interface NavSection {
-  title?: string;
-  items: {
-    label: string;
-    href: string;
-    icon: any;
-    badge?: number | string | null;
-  }[];
-}
-
 export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [unreadInquiries, setUnreadInquiries] = useState<number>(0);
+
+  // Check if current page is inside the extra/advanced section
+  const isMoreActive =
+    pathname.startsWith('/admin/events') ||
+    pathname.startsWith('/admin/destinations') ||
+    pathname.startsWith('/admin/faq') ||
+    pathname.startsWith('/admin/navigation') ||
+    pathname.startsWith('/admin/pages') ||
+    pathname.startsWith('/admin/preview');
+
+  const [showMore, setShowMore] = useState<boolean>(isMoreActive);
 
   useEffect(() => {
     async function fetchUnreadCount() {
@@ -71,167 +66,96 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
     fetchUnreadCount();
   }, [pathname]);
 
-  // Exact 1:1 match with current public website hierarchy and names
-  const NAV_SECTIONS: NavSection[] = [
+  // Clean, straightforward 10-item primary navigation
+  const CORE_NAV_ITEMS = [
     {
-      items: [
-        {
-          label: 'Dashboard',
-          href: '/admin',
-          icon: LayoutDashboard,
-        },
-        {
-          label: 'Live Website Preview',
-          href: '/admin/preview',
-          icon: Eye,
-        },
-      ],
+      label: 'Dashboard',
+      href: '/admin',
+      icon: LayoutDashboard,
+      badge: null,
     },
     {
-      title: 'EXPERIENCES',
-      items: [
-        {
-          label: 'Go Beyond the Map',
-          href: '/admin/pages/go-beyond',
-          icon: Compass,
-        },
-        {
-          label: 'Go Within',
-          href: '/admin/pages/go-spiritual',
-          icon: Sparkles,
-        },
-        {
-          label: 'Feel Closer',
-          href: '/admin/pages/feel-closer',
-          icon: Home,
-        },
-        {
-          label: 'Leave a Mark',
-          href: '/admin/pages/leave-a-mark',
-          icon: Heart,
-        },
-        {
-          label: 'All Curated Experiences',
-          href: '/admin/experiences',
-          icon: Calendar,
-        },
-        {
-          label: 'Custom Private Journeys',
-          href: '/admin/pages/custom-private-journeys',
-          icon: ShieldCheck,
-        },
-      ],
+      label: 'Inquiries',
+      href: '/admin/inquiries',
+      icon: Inbox,
+      badge: unreadInquiries > 0 ? unreadInquiries : null,
     },
     {
-      title: 'EVENTS',
-      items: [
-        {
-          label: 'Events & Festivals',
-          href: '/admin/events',
-          icon: Calendar,
-        },
-      ],
+      label: 'Homepage CMS',
+      href: '/admin/homepage',
+      icon: Globe,
+      badge: null,
     },
     {
-      title: 'STORIES',
-      items: [
-        {
-          label: 'Sakar’s Journal & Blogs',
-          href: '/admin/blogs',
-          icon: BookOpen,
-        },
-        {
-          label: 'Traveler Reviews & Guestbook',
-          href: '/admin/reviews',
-          icon: Star,
-        },
-      ],
+      label: 'Services / Pillars',
+      href: '/admin/services',
+      icon: Layers,
+      badge: null,
     },
     {
-      title: 'ABOUT SAKAR',
-      items: [
-        {
-          label: 'About Sakar & Story',
-          href: '/admin/pages/about',
-          icon: Users,
-        },
-      ],
+      label: 'Packages',
+      href: '/admin/packages',
+      icon: PackageIcon,
+      badge: null,
     },
     {
-      title: 'HOMEPAGE',
-      items: [
-        {
-          label: 'Homepage Sections',
-          href: '/admin/homepage',
-          icon: Globe,
-        },
-      ],
+      label: 'Itineraries',
+      href: '/admin/experiences',
+      icon: Compass,
+      badge: null,
     },
     {
-      title: 'EXPLORE & GUIDES',
-      items: [
-        {
-          label: 'Destinations',
-          href: '/admin/destinations',
-          icon: MapPin,
-        },
-        {
-          label: 'Packages & Pricing',
-          href: '/admin/packages',
-          icon: PackageIcon,
-        },
-        {
-          label: 'Visual Journey Gallery',
-          href: '/admin/photos',
-          icon: ImageIcon,
-        },
-        {
-          label: 'Frequently Asked Questions',
-          href: '/admin/faq',
-          icon: HelpCircle,
-        },
-        {
-          label: 'Travel Resources & Visas',
-          href: '/admin/pages/resources',
-          icon: FileText,
-        },
-      ],
+      label: 'Blogs',
+      href: '/admin/blogs',
+      icon: FileText,
+      badge: null,
     },
     {
-      title: 'INQUIRIES & CONTACT',
-      items: [
-        {
-          label: 'Guest Inquiries',
-          href: '/admin/inquiries',
-          icon: Inbox,
-          badge: unreadInquiries > 0 ? unreadInquiries : null,
-        },
-        {
-          label: 'Contact & Inquiries Page',
-          href: '/admin/pages/contact',
-          icon: Phone,
-        },
-      ],
+      label: 'Photos',
+      href: '/admin/photos',
+      icon: ImageIcon,
+      badge: null,
     },
     {
-      title: 'WEBSITE MANAGEMENT',
-      items: [
-        {
-          label: 'All Website Pages',
-          href: '/admin/pages',
-          icon: Layers,
-        },
-        {
-          label: 'Navigation & Menus',
-          href: '/admin/navigation',
-          icon: MenuIcon,
-        },
-        {
-          label: 'Site Settings & Branding',
-          href: '/admin/settings',
-          icon: Settings,
-        },
-      ],
+      label: 'Reviews',
+      href: '/admin/reviews',
+      icon: Star,
+      badge: null,
+    },
+    {
+      label: 'Settings & Contact',
+      href: '/admin/settings',
+      icon: Settings,
+      badge: null,
+    },
+  ];
+
+  // Optional secondary items (collapsed by default)
+  const MORE_NAV_ITEMS = [
+    {
+      label: 'Events & Festivals',
+      href: '/admin/events',
+      icon: Calendar,
+    },
+    {
+      label: 'Destinations',
+      href: '/admin/destinations',
+      icon: MapPin,
+    },
+    {
+      label: 'FAQ Items',
+      href: '/admin/faq',
+      icon: HelpCircle,
+    },
+    {
+      label: 'Navigation Menus',
+      href: '/admin/navigation',
+      icon: MenuIcon,
+    },
+    {
+      label: 'Page Overrides',
+      href: '/admin/pages',
+      icon: Layers,
     },
   ];
 
@@ -239,24 +163,24 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
     try {
       await fetch('/api/admin/auth/logout', { method: 'POST' });
       router.push('/admin/login');
-    } catch {
-      router.push('/admin/login');
+      router.refresh();
+    } catch (err) {
+      console.error('Logout error:', err);
     }
   };
 
   return (
     <>
-      {/* Mobile Backdrop */}
+      {/* Mobile backdrop */}
       {isOpen && (
         <div
           onClick={onClose}
-          className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden animate-fade-in"
         />
       )}
 
-      {/* Main Sidebar */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 w-64 bg-white border-r border-slate-200 z-50 flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-0 left-0 bottom-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 shadow-lg lg:shadow-sm ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -292,58 +216,96 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
             </button>
           </div>
 
-          {/* Navigation Sections */}
-          <div className="p-3 space-y-6">
-            {NAV_SECTIONS.map((section, sIdx) => (
-              <div key={sIdx} className="space-y-1">
-                {section.title && (
-                  <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 font-mono">
-                    {section.title}
-                  </p>
-                )}
+          {/* Clean 10-Item Primary Navigation */}
+          <nav className="p-3 space-y-1">
+            {CORE_NAV_ITEMS.map((item) => {
+              const isActive =
+                item.href === '/admin'
+                  ? pathname === '/admin'
+                  : pathname === item.href || (item.href !== '/admin/services' && pathname.startsWith(item.href));
 
-                {section.items.map((item) => {
-                  const isActive =
-                    item.href === '/admin'
-                      ? pathname === '/admin'
-                      : pathname === item.href || (item.href !== '/admin/services' && pathname.startsWith(item.href));
+              const Icon = item.icon;
 
-                  const Icon = item.icon;
-
-                  return (
-                    <Link
-                      key={`${item.href}-${item.label}`}
-                      href={item.href}
-                      onClick={onClose}
-                      className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all group ${
-                        isActive
-                          ? 'bg-slate-900 text-white font-semibold shadow-sm'
-                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onClose}
+                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium transition-all group ${
+                    isActive
+                      ? 'bg-slate-900 text-white font-semibold shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  }`}
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <Icon
+                      className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
+                        isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-700'
                       }`}
-                    >
-                      <div className="flex items-center gap-3 min-w-0">
-                        <Icon
-                          className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                            isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-700'
-                          }`}
-                        />
-                        <span className="truncate">{item.label}</span>
-                      </div>
+                    />
+                    <span className="truncate">{item.label}</span>
+                  </div>
 
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        {item.badge !== undefined && item.badge !== null && (
-                          <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900">
-                            {item.badge}
-                          </span>
-                        )}
-                        {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    {item.badge !== null && item.badge !== undefined && (
+                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900">
+                        {item.badge}
+                      </span>
+                    )}
+                    {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
+                  </div>
+                </Link>
+              );
+            })}
+
+            {/* Optional Collapsible "More Tools" Section */}
+            <div className="pt-2 border-t border-slate-100">
+              <button
+                type="button"
+                onClick={() => setShowMore((prev) => !prev)}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors"
+              >
+                <span>More Pages & Tools</span>
+                {showMore ? (
+                  <ChevronDown className="w-3.5 h-3.5 opacity-70" />
+                ) : (
+                  <ChevronRight className="w-3.5 h-3.5 opacity-70" />
+                )}
+              </button>
+
+              {showMore && (
+                <div className="mt-1 space-y-0.5 pl-2">
+                  {MORE_NAV_ITEMS.map((item) => {
+                    const isActive = pathname.startsWith(item.href);
+                    const Icon = item.icon;
+
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={onClose}
+                        className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group ${
+                          isActive
+                            ? 'bg-slate-900 text-white font-semibold shadow-sm'
+                            : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <Icon
+                            className={`w-3.5 h-3.5 shrink-0 transition-transform group-hover:scale-110 ${
+                              isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-600'
+                            }`}
+                          />
+                          <span className="truncate">{item.label}</span>
+                        </div>
+                        {isActive && <ChevronRight className="w-3 h-3 opacity-60" />}
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </nav>
         </div>
 
         {/* Bottom Actions */}
