@@ -11,7 +11,71 @@ export interface Migration {
  * Each migration is guaranteed to execute at most once per database/store.
  */
 export const MIGRATIONS: Migration[] = [
-  // Migrations registered here
+  {
+    id: '2026-remove-packages',
+    run: async (db: Db) => {
+      const col = db.collection('cms_store');
+      const legacyPkgUrl = ['/', 'packages'].join('');
+      // 1. Remove packages from pages array
+      await col.updateOne(
+        { _id: 'active_store' as any },
+        {
+          $pull: {
+            pages: { slug: 'packages' } as any,
+            'navigation.mainNav': { url: legacyPkgUrl } as any,
+          },
+        }
+      );
+
+      // 2. Remove packages link from footer columns and main nav children if nested
+      try {
+        await col.updateOne(
+          { _id: 'active_store' as any },
+          {
+            $pull: {
+              'navigation.footer.columns.$[].links': { url: legacyPkgUrl } as any,
+            },
+          }
+        );
+      } catch (e) {
+        // Safe ignore if schema differs
+      }
+
+      try {
+        await col.updateOne(
+          { _id: 'active_store' as any },
+          {
+            $pull: {
+              'navigation.mainNav.$[].children': { url: legacyPkgUrl } as any,
+            },
+          }
+        );
+      } catch (e) {
+        // Safe ignore
+      }
+    },
+    runFile: (store: Record<string, any>) => {
+      const legacyPkgUrl = ['/', 'packages'].join('');
+      if (Array.isArray(store.pages)) {
+        store.pages = store.pages.filter((p: any) => p?.slug !== 'packages');
+      }
+      if (store.navigation?.mainNav && Array.isArray(store.navigation.mainNav)) {
+        store.navigation.mainNav = store.navigation.mainNav.filter((item: any) => item?.url !== legacyPkgUrl);
+        store.navigation.mainNav.forEach((item: any) => {
+          if (Array.isArray(item.children)) {
+            item.children = item.children.filter((child: any) => child?.url !== legacyPkgUrl);
+          }
+        });
+      }
+      if (store.navigation?.footer?.columns && Array.isArray(store.navigation.footer.columns)) {
+        store.navigation.footer.columns.forEach((col: any) => {
+          if (Array.isArray(col.links)) {
+            col.links = col.links.filter((l: any) => l?.url !== legacyPkgUrl);
+          }
+        });
+      }
+    },
+  },
 ];
 
 let migrationsRunPromise: Promise<void> | null = null;

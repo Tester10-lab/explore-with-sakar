@@ -190,11 +190,6 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/packages" className="hover:text-terracotta transition-colors">
-                      Packages & Pricing
-                    </Link>
-                  </li>
-                  <li>
                     <Link href="/gallery" className="hover:text-terracotta transition-colors">
                       Visual Journey Gallery
                     </Link>

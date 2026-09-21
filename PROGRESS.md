@@ -649,3 +649,72 @@ Cleaned up test migration marker from active_store.
 ```
 - **Result**: **PASS**
 
+---
+
+## Item 1: Remove Packages
+- **Changes**:
+  - Added permanent redirects in `next.config.mjs`: `/packages` and `/packages/:slug` $\rightarrow$ `/experience` (HTTP 308).
+  - Repointed all `/packages` buttons in `reviews`, `gallery`, `resources`, and `experience` pages to `/experience` or `/contact`.
+  - Removed Packages from `src/app/sitemap.ts` (static & dynamic package routes removed).
+  - Removed Packages navigation item from `src/components/admin/AdminSidebar.tsx`.
+  - Removed Packages quick-action button and metric card from `src/app/admin/page.tsx`.
+  - Removed `/packages` from revalidation map in `src/lib/revalidate.ts`.
+  - Removed Packages link from default navigation in `src/lib/seed.ts` and `src/components/layout/Footer.tsx`.
+  - Removed `packages` page definition from `src/data/pages.ts`.
+  - Implemented migration `2026-remove-packages` in `src/lib/migrations.ts` removing packages from stored `navigation` and `pages` while preserving `packages` data.
+- **Verification Commands & Raw Outputs**:
+
+1. Permanent redirect checks on `/packages` and `/packages/<slug>`:
+```
+$ curl -sI http://localhost:3000/packages
+HTTP/1.1 308 Permanent Redirect
+location: /experience
+Refresh: 0;url=/experience
+Date: Mon, 21 Sep 2026 03:12:33 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+$ curl -sI http://localhost:3000/packages/living-culture-heritage
+HTTP/1.1 308 Permanent Redirect
+location: /experience
+Refresh: 0;url=/experience
+Date: Mon, 21 Sep 2026 03:12:45 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+```
+
+2. Sitemap verification (no `/packages`):
+```
+$ curl -s http://localhost:3000/sitemap.xml | findstr packages
+# (Exit code 1: 0 matches found in sitemap)
+```
+
+3. Codebase grep check (`grep -rn "/packages" src`):
+```
+$ "C:\Program Files\Git\usr\bin\grep.exe" -rn "/packages" src
+src/lib/redirects.ts:6:  { source: "/packages", destination: "/experience", permanent: true },
+src/lib/redirects.ts:7:  { source: "/packages/:slug", destination: "/experience", permanent: true },
+```
+*(Shows only the redirect configuration)*
+
+4. Migration `2026-remove-packages` on pre-change seeded database & idempotency check:
+```
+$ cmd /c "set MONGODB_DNS_SERVERS=8.8.8.8,1.1.1.1&& node scripts/test-migration-remove-packages.mjs"
+Connecting to explore_with_sakar_dev...
+--- Step 1: Simulate pre-migration database state ---
+Pre-migration state: pages has /packages: true, nav has /packages: true
+
+--- Step 2: Run migration 2026-remove-packages (First execution) ---
+[migration] Starting migration: 2026-remove-packages
+[migration] Completed migration: 2026-remove-packages
+Post-migration state: pages has /packages: false, nav has /packages: false
+Migration recorded in migrations array: true
+
+--- Step 3: Run migration second time (Idempotency test) ---
+Second run state: pages has /packages: false, nav has /packages: false
+
+=== Migration 2026-remove-packages Check: PASS ===
+```
+- **Result**: **PASS**
+
+

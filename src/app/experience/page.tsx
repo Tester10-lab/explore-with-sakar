@@ -171,8 +171,8 @@ export default async function ExperienceLandingPage() {
         subtitle="All our journeys are 100% customizable. Connect directly with Sakar to weave your dream route."
         primaryButtonText="Plan a Custom Route"
         primaryButtonHref="/experience/custom-private-journeys"
-        secondaryButtonText="View Ready Packages"
-        secondaryButtonHref="/packages"
+        secondaryButtonText="Contact Sakar"
+        secondaryButtonHref="/contact"
       />
     </div>
   );

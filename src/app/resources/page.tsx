@@ -198,8 +198,8 @@ export default async function ResourcesPage() {
             subtitle="Reach out directly to Sakar to discuss your preferred dates, packing questions, or custom travel ideas."
             primaryButtonText="Contact Sakar Directly"
             primaryButtonHref="/contact"
-            secondaryButtonText="Explore Packages"
-            secondaryButtonHref="/packages"
+            secondaryButtonText="Explore Experiences"
+            secondaryButtonHref="/experience"
           />
         </>
       )}

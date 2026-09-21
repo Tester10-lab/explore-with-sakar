@@ -261,25 +261,6 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    slug: 'packages',
-    name: 'Packages & Pricing',
-    url: '/packages',
-    status: 'published',
-    seo: {
-      title: 'Packages & Pricing | Thoughtfully Structured Travel Packages',
-      metaDescription: 'Comprehensive all-inclusive journey packages featuring heritage stays, private vehicle logistics, and personalized guidance.',
-      canonicalUrl: 'https://explorewithsakar.com/packages',
-      sitemapVisible: true,
-    },
-    sections: [
-      { id: 'sec-pkg-hero', type: 'hero', label: 'Page Hero Header', visible: true, order: 0, content: { title: 'Journey Packages', subtitle: 'Thoughtfully Structured Nepal Travel Packages' } },
-      { id: 'sec-pkg-grid', type: 'packages-grid', label: 'Packages List & Cards', visible: true, order: 1, content: {} },
-      { id: 'sec-pkg-cta', type: 'cta', label: 'Bespoke Inquiries CTA', visible: true, order: 2, content: {} },
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
     slug: 'gallery',
     name: 'Visual Journey Gallery',
     url: '/gallery',

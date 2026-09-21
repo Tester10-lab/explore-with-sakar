@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getPublicPackages, getPublicExperiences, getPublicBlogs } from '@/lib/content';
+import { getPublicExperiences, getPublicBlogs } from '@/lib/content';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://explorewithsakar.com';
@@ -23,12 +23,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/packages`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
     },
     {
       url: `${baseUrl}/destinations`,
@@ -63,18 +57,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   try {
-    const [packages, experiences, blogs] = await Promise.all([
-      getPublicPackages(),
+    const [experiences, blogs] = await Promise.all([
       getPublicExperiences(),
       getPublicBlogs(),
     ]);
-
-    const packageRoutes: MetadataRoute.Sitemap = packages.map((pkg) => ({
-      url: `${baseUrl}/packages/${pkg.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.85,
-    }));
 
     const experienceRoutes: MetadataRoute.Sitemap = experiences.map((exp) => ({
       url: `${baseUrl}/experience/${exp.slug}`,
@@ -92,7 +78,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.75,
       }));
 
-    return [...staticRoutes, ...packageRoutes, ...experienceRoutes, ...blogRoutes];
+    return [...staticRoutes, ...experienceRoutes, ...blogRoutes];
   } catch (err) {
     console.error('Error generating sitemap:', err);
     return staticRoutes;

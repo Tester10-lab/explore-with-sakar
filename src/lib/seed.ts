@@ -226,10 +226,9 @@ export function getDefaultNavigation(): NavigationConfig {
           links: [
             { id: 'fl-7', label: 'Destinations', url: '/destinations', visible: true, order: 0 },
             { id: 'fl-8', label: 'Curated Itineraries', url: '/experience', visible: true, order: 1 },
-            { id: 'fl-9', label: 'Packages & Pricing', url: '/packages', visible: true, order: 2 },
-            { id: 'fl-10', label: 'Visual Journey Gallery', url: '/gallery', visible: true, order: 3 },
-            { id: 'fl-11', label: 'Events & Festivals', url: '/events', visible: true, order: 4 },
-            { id: 'fl-12', label: 'Stories & Field Notes', url: '/blog', visible: true, order: 5 },
+            { id: 'fl-10', label: 'Visual Journey Gallery', url: '/gallery', visible: true, order: 2 },
+            { id: 'fl-11', label: 'Events & Festivals', url: '/events', visible: true, order: 3 },
+            { id: 'fl-12', label: 'Stories & Field Notes', url: '/blog', visible: true, order: 4 },
           ],
         },
         {

@@ -22,6 +22,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/packages',
+        destination: '/experience',
+        permanent: true,
+      },
+      {
+        source: '/packages/:slug',
+        destination: '/experience',
+        permanent: true,
+      },
+      {
         source: '/blog/test-by-diplon',
         destination: '/blog/bound-by-a-thread-eliza-and-sakar',
         permanent: true,

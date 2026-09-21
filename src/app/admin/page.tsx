@@ -33,7 +33,6 @@ import {
   ExtendedBlogPost,
   ExtendedGalleryPhoto,
   ExtendedTestimonial,
-  ExtendedPackage,
   ExtendedExperience,
   ExtendedServicePillar,
   ContactInquiry,
@@ -41,7 +40,6 @@ import {
 } from '@/types/cms';
 
 export default function AdminDashboardPage() {
-  const [packages, setPackages] = useState<ExtendedPackage[]>([]);
   const [experiences, setExperiences] = useState<ExtendedExperience[]>([]);
   const [services, setServices] = useState<ExtendedServicePillar[]>([]);
   const [inquiries, setInquiries] = useState<ContactInquiry[]>([]);
@@ -55,9 +53,8 @@ export default function AdminDashboardPage() {
     async function loadDashboardData() {
       try {
         setIsLoading(true);
-        const [pkgsRes, expsRes, srvRes, inqRes, blogsRes, photosRes, reviewsRes, settingsRes] =
+        const [expsRes, srvRes, inqRes, blogsRes, photosRes, reviewsRes, settingsRes] =
           await Promise.all([
-            fetch('/api/admin/packages'),
             fetch('/api/admin/experiences'),
             fetch('/api/admin/services'),
             fetch('/api/admin/inquiries'),
@@ -67,10 +64,6 @@ export default function AdminDashboardPage() {
             fetch('/api/admin/settings'),
           ]);
 
-        if (pkgsRes.ok) {
-          const data = await pkgsRes.json();
-          setPackages(data.packages || []);
-        }
         if (expsRes.ok) {
           const data = await expsRes.json();
           setExperiences(data.experiences || []);
@@ -111,7 +104,6 @@ export default function AdminDashboardPage() {
 
   const publishedBlogs = blogs.filter((b) => b.status === 'published');
   const visibleReviews = reviews.filter((r) => r.isVisible);
-  const publishedPackages = packages.filter((p) => p.status === 'published');
   const publishedExperiences = experiences.filter((e) => e.status === 'published');
   const unreadInquiries = inquiries.filter((i) => i.status === 'unread');
 
@@ -120,7 +112,7 @@ export default function AdminDashboardPage() {
       <AdminHeader
         onToggleMobileSidebar={() => {}}
         title="Dashboard Overview"
-        subtitle="Manage leads, travel pillars, packages, itineraries, journal essays, and website settings."
+        subtitle="Manage leads, travel pillars, itineraries, journal essays, and website settings."
         actionButton={{
           label: 'View Inquiries',
           href: '/admin/inquiries',
@@ -141,19 +133,7 @@ export default function AdminDashboardPage() {
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
-              <Link
-                href="/admin/inquiries"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-terracotta hover:bg-terracotta-dark text-white text-xs font-semibold shadow-sm transition-all"
-              >
-                <Inbox className="w-3.5 h-3.5" />
-                <span>Guest Inquiries</span>
-                {unreadInquiries.length > 0 && (
-                  <span className="px-1.5 py-0.2 bg-white text-terracotta text-[10px] rounded-full font-bold">
-                    {unreadInquiries.length}
-                  </span>
-                )}
-              </Link>
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
               <Link
                 href="/admin/homepage"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
@@ -169,11 +149,11 @@ export default function AdminDashboardPage() {
                 <span>Travel Pillars</span>
               </Link>
               <Link
-                href="/admin/packages"
+                href="/admin/experiences"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
               >
-                <PackageIcon className="w-3.5 h-3.5 text-slate-600" />
-                <span>Packages</span>
+                <Compass className="w-3.5 h-3.5 text-amber-600" />
+                <span>Itineraries</span>
               </Link>
               <Link
                 href="/admin/blogs/new"
@@ -186,8 +166,8 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* 6 Overview Metric Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        {/* 5 Overview Metric Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {/* Card 1: Inquiries */}
           <Link
             href="/admin/inquiries"
@@ -227,27 +207,6 @@ export default function AdminDashboardPage() {
             </div>
             <div className="text-[11px] text-slate-500">
               <span className="text-emerald-600 font-semibold">{services.length} Live Pillars</span>
-            </div>
-          </Link>
-
-          {/* Card 3: Packages */}
-          <Link
-            href="/admin/packages"
-            className="group bg-white border border-slate-200 hover:border-terracotta/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Packages
-              </span>
-              <div className="w-8 h-8 rounded-xl bg-rose-50 text-terracotta flex items-center justify-center group-hover:scale-110 transition-transform">
-                <PackageIcon className="w-4 h-4" />
-              </div>
-            </div>
-            <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : packages.length}
-            </div>
-            <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{publishedPackages.length} Published</span>
             </div>
           </Link>
 

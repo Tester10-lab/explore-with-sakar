@@ -27,7 +27,7 @@ import {
 import { BLOG_POSTS, getPostBySlug as getStaticPostBySlug, getRelatedPosts as getStaticRelatedPosts } from '@/data/blog';
 import { GALLERY_PHOTOS } from '@/data/gallery';
 import { TESTIMONIALS } from '@/data/homestays';
-import { TRAVEL_PACKAGES } from '@/data/packages';
+import { TRAVEL_PACKAGES } from '@/data/travelPackages';
 import { EXPERIENCES } from '@/data/experiences';
 import { SERVICE_PILLARS } from '@/data/services';
 import { EVENTS_DATA } from '@/data/events';

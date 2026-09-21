@@ -182,8 +182,8 @@ export default function ReviewsClient({
         subtitle="Connect directly with Sakar to discuss your dates, route ideas, and cultural curiosities."
         primaryButtonText="Begin Your Journey"
         primaryButtonHref="/contact"
-        secondaryButtonText="Explore Packages"
-        secondaryButtonHref="/packages"
+        secondaryButtonText="Explore Experiences"
+        secondaryButtonHref="/experience"
       />
     </div>
   );

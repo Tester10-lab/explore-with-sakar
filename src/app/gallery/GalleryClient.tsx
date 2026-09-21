@@ -214,8 +214,8 @@ export default function GalleryClient({ initialPhotos }: GalleryClientProps) {
         subtitle="Join Sakar on a slow-paced journey to photograph, witness, and immerse in authentic Nepal."
         primaryButtonText="Inquire About Journeys"
         primaryButtonHref="/contact"
-        secondaryButtonText="Explore Packages"
-        secondaryButtonHref="/packages"
+        secondaryButtonText="Explore Experiences"
+        secondaryButtonHref="/experience"
       />
     </div>
   );

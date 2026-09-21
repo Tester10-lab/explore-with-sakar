@@ -93,12 +93,6 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
       badge: null,
     },
     {
-      label: 'Packages',
-      href: '/admin/packages',
-      icon: PackageIcon,
-      badge: null,
-    },
-    {
       label: 'Itineraries',
       href: '/admin/experiences',
       icon: Compass,

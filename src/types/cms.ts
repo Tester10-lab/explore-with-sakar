@@ -1,5 +1,5 @@
 import { BlogPost, GalleryPhoto, Testimonial, ImageAsset, BlogCategory, BlogBlock } from './index';
-import { PackageItem } from '@/data/packages';
+import { PackageItem } from '@/data/travelPackages';
 
 export interface AdminUser {
   username: string;

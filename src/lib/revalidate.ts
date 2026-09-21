@@ -21,9 +21,8 @@ export function revalidateContent(collection: string, extraPathOrSlug?: string):
         revalidatePath('/', 'layout');
         break;
       case 'packages':
-        revalidatePath('/packages', 'layout');
+        revalidatePath('/experience', 'layout');
         revalidatePath('/');
-        revalidatePath('/sitemap.xml');
         break;
       case 'experiences':
         revalidatePath('/experience', 'layout');
