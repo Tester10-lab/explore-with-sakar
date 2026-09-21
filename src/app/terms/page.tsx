@@ -1,13 +1,19 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import { FileText, ShieldAlert, ArrowLeft } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
 
-export const metadata: Metadata = {
+const FALLBACK_METADATA: Metadata = {
   title: 'Terms of Service & Booking Conditions | Explore With Sakar',
   description: 'Booking terms, deposit conditions, cancellation policies, and traveler responsibilities for journeys with Explore With Sakar.',
+  alternates: { canonical: 'https://explorewithsakar.com/terms' },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await buildPageMetadata('terms', FALLBACK_METADATA);
+}
 
 export default function TermsOfServicePage() {
   return (

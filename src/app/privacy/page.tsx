@@ -1,13 +1,19 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import { ShieldCheck, Lock, Eye, ArrowLeft } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
 
-export const metadata: Metadata = {
+const FALLBACK_METADATA: Metadata = {
   title: 'Privacy Policy | Explore With Sakar',
   description: 'Our privacy policy outlines how Explore With Sakar collects, protects, and respects your personal travel inquiry data.',
+  alternates: { canonical: 'https://explorewithsakar.com/privacy' },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await buildPageMetadata('privacy', FALLBACK_METADATA);
+}
 
 export default function PrivacyPolicyPage() {
   return (

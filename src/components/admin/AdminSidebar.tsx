@@ -43,6 +43,7 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
     pathname.startsWith('/admin/faq') ||
     pathname.startsWith('/admin/navigation') ||
     pathname.startsWith('/admin/pages') ||
+    pathname.startsWith('/admin/seo') ||
     pathname.startsWith('/admin/preview');
 
   const [showMore, setShowMore] = useState<boolean>(isMoreActive);
@@ -150,6 +151,11 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
       label: 'Page Overrides',
       href: '/admin/pages',
       icon: Layers,
+    },
+    {
+      label: 'SEO & Metadata',
+      href: '/admin/seo',
+      icon: Globe,
     },
   ];
 

@@ -1,0 +1,164 @@
+[
+  {
+    "slug": "home",
+    "name": "Homepage",
+    "url": "/",
+    "title": "Explore With Sakar | Authentic Nepal Travel & Cultural Journeys",
+    "metaDescription": "Meaningful Nepal travel experiences beyond ordinary tourism. Intimate human connections, village homestays, and sacred heritage.",
+    "canonicalUrl": "https://explorewithsakar.com/",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "go-beyond",
+    "name": "Go Beyond the Map",
+    "url": "/experience/go-beyond",
+    "title": "Go Beyond the Map | Authentic Exploration with Sakar",
+    "metaDescription": "Step past grand facades into hidden residential bahals, Patan and Bhaktapur histories, master artisan guilds, and sacred geometry.",
+    "canonicalUrl": "https://explorewithsakar.com/experience/go-beyond",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "go-spiritual",
+    "name": "Go Spiritual",
+    "url": "/experience/go-spiritual",
+    "title": "Himalayan Spiritual & Sound Sanctuary | Explore With Sakar",
+    "metaDescription": "Experience Tibetan singing bowl sound therapy, dawn monastery chanting, sacred meditation caves, and restorative mindfulness in the Himalayas.",
+    "canonicalUrl": "https://explorewithsakar.com/experience/go-spiritual",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "feel-closer",
+    "name": "Feel Closer",
+    "url": "/experience/feel-closer",
+    "title": "Village Homestays & Community Living | Explore With Sakar",
+    "metaDescription": "Stay with Gurung and Tamang mountain families. Share woodfire meals, harvest organic terraced fields, and experience authentic Nepali hospitality.",
+    "canonicalUrl": "https://explorewithsakar.com/experience/feel-closer",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "leave-a-mark",
+    "name": "Leave a Mark",
+    "url": "/experience/leave-a-mark",
+    "title": "Leave a Mark: Strategic Volunteer Tourism | Explore With Sakar",
+    "metaDescription": "Matching your actual professional skills with local communities in Nepal that need structural, strategic, and administrative empowerment.",
+    "canonicalUrl": "https://explorewithsakar.com/experience/leave-a-mark",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "all-curated-experiences",
+    "name": "All Curated Experiences",
+    "url": "/experience/all-curated-experiences",
+    "title": "Curated Experiences | Handcrafted Journeys in Nepal",
+    "metaDescription": "Immersive multi-day itineraries crafted by Sakar combining cultural celebrations, mountain sanctuary walks, and village warmth.",
+    "canonicalUrl": "https://explorewithsakar.com/experience/all-curated-experiences",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "custom-private-journeys",
+    "name": "Custom Private Journeys",
+    "url": "/experience/custom-private-journeys",
+    "title": "Custom Private Journeys | Bespoke Nepal Travel Curation",
+    "metaDescription": "Tailor-made itineraries for solo travelers, couples & families with Sakar. Private vehicles, personalized pace, and direct host accompaniment.",
+    "canonicalUrl": "https://explorewithsakar.com/experience/custom-private-journeys",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "events",
+    "name": "Events",
+    "url": "/events",
+    "title": "Festivals & Sacred Events in Nepal | Explore With Sakar",
+    "metaDescription": "Experience Indra Jatra, Tihar, Mani Rimdu, Solstice retreats, and Shivaratri with authentic respectful access guided by Sakar.",
+    "canonicalUrl": "https://explorewithsakar.com/events",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "blog",
+    "name": "Sakar’s Journal & Blogs",
+    "url": "/blog",
+    "title": "Himalayan Journal | Stories & Reflections on Nepal Travel",
+    "metaDescription": "Firsthand essays, cultural insights, homestay memories, and practical travel wisdom from Sakar Aryal in Nepal.",
+    "canonicalUrl": "https://explorewithsakar.com/blog",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "reviews",
+    "name": "Traveler Reviews & Guestbook",
+    "url": "/reviews",
+    "title": "Traveler Reflections & Handwritten Letters | Explore With Sakar",
+    "metaDescription": "Read authentic reviews, heartfelt feedback, and scanned handwritten guestbook letters from travelers who explored Nepal with Sakar.",
+    "canonicalUrl": "https://explorewithsakar.com/reviews",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "about",
+    "name": "About Sakar",
+    "url": "/about",
+    "title": "About Sakar | Tour Director & Cultural Storyteller in Nepal",
+    "metaDescription": "Learn about Sakar Aryal, his philosophy of slow and responsible travel in Nepal, and his roots in community hosting.",
+    "canonicalUrl": "https://explorewithsakar.com/about",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "destinations",
+    "name": "Destinations",
+    "url": "/destinations",
+    "title": "Destinations in Nepal | Sacred Valleys & Mountain Havens",
+    "metaDescription": "Discover Nepal’s most resonant regions: Kathmandu Valley, Annapurna Foothills, Mustang, Langtang, Chitwan, and Bandipur.",
+    "canonicalUrl": "https://explorewithsakar.com/destinations",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "gallery",
+    "name": "Visual Journey Gallery",
+    "url": "/gallery",
+    "title": "Visual Journey | Photo Gallery of Nepal",
+    "metaDescription": "A photographic journey through Nepal: Himalayan sunrises, ancient courtyards, village kitchens, and joyful encounters.",
+    "canonicalUrl": "https://explorewithsakar.com/gallery",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "faq",
+    "name": "Frequently Asked Questions",
+    "url": "/faq",
+    "title": "FAQ | Nepal Travel Questions Answered by Sakar",
+    "metaDescription": "Practical information on best travel seasons, visa requirements, altitude safety, village homestay etiquette, and booking policies.",
+    "canonicalUrl": "https://explorewithsakar.com/faq",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "resources",
+    "name": "Traveler Resources & Visas",
+    "url": "/resources",
+    "title": "Traveler Resources | Packing Lists & Cultural Etiquette in Nepal",
+    "metaDescription": "Packing guides, cultural etiquette tips, Nepal reading lists, and health advice curated for mindful travelers.",
+    "canonicalUrl": "https://explorewithsakar.com/resources",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "contact",
+    "name": "Contact & Inquiries",
+    "url": "/contact",
+    "title": "Contact Sakar | Start Planning Your Nepal Journey",
+    "metaDescription": "Direct contact with Sakar Aryal via WhatsApp, email, or inquiry form to plan your custom Nepal journey.",
+    "canonicalUrl": "https://explorewithsakar.com/contact",
+    "sitemapVisible": true
+  },
+  {
+    "slug": "privacy",
+    "name": "Privacy Policy",
+    "url": "/privacy",
+    "title": "Privacy Policy | Explore With Sakar",
+    "metaDescription": "Privacy policy for Explore With Sakar. How we handle and protect your personal travel inquiry data.",
+    "canonicalUrl": "https://explorewithsakar.com/privacy",
+    "sitemapVisible": false
+  },
+  {
+    "slug": "terms",
+    "name": "Terms of Service & Booking Conditions",
+    "url": "/terms",
+    "title": "Terms of Service & Booking Conditions | Explore With Sakar",
+    "metaDescription": "Booking terms, payment conditions, cancellation rules, and travel insurance requirements.",
+    "canonicalUrl": "https://explorewithsakar.com/terms",
+    "sitemapVisible": false
+  }
+]

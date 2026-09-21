@@ -1,12 +1,18 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import { getPublicBlogs, getPublicTopFeaturedExperiences } from '@/lib/content';
 import BlogClient from './BlogClient';
 
-export const metadata: Metadata = {
+const FALLBACK_METADATA: Metadata = {
   title: 'Sakar’s Journal & Essays | Explore With Sakar',
   description: 'Personal essays, cultural reflections, and field dispatches from Sakar on slow travel, Himalayan spirituality, and Nepal community heritage.',
+  alternates: { canonical: 'https://explorewithsakar.com/blog' },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await buildPageMetadata('blog', FALLBACK_METADATA);
+}
 
 export default async function BlogPage() {
   const [blogs, topExperiences] = await Promise.all([

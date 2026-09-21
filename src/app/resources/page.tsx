@@ -1,5 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import {
   Sun,
@@ -20,10 +21,15 @@ import { TRAVEL_RESOURCES } from '@/data/resources';
 import { getPageContent } from '@/lib/content';
 import { getPageHeroOverrides, isSectionVisible } from '@/lib/pageContentHelper';
 
-export const metadata: Metadata = {
+const FALLBACK_METADATA: Metadata = {
   title: 'Nepal Travel Resources & Guide | Explore With Sakar',
   description: 'Essential travel advice for visiting Nepal: best seasons & climate, visa & entry, cultural etiquette, packing checklist, altitude safety, and SIM connectivity.',
+  alternates: { canonical: 'https://explorewithsakar.com/resources' },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await buildPageMetadata('resources', FALLBACK_METADATA);
+}
 
 export default async function ResourcesPage() {
   const pageContent = await getPageContent('resources');

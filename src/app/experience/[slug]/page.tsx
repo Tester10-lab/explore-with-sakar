@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { getPublicExperienceBySlug, getPublicExperiences, getPageContent } from '@/lib/content';
+import { buildPageMetadata } from '@/lib/seo';
 import GoBeyondExperience from '@/components/experience/GoBeyondExperience';
 import GoSpiritualExperience from '@/components/experience/GoSpiritualExperience';
 import FeelCloserExperience from '@/components/experience/FeelCloserExperience';
@@ -15,6 +16,15 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalUrl = `https://explorewithsakar.com/experience/${params.slug}`;
+
+  const pageContent = await getPageContent(params.slug);
+  if (pageContent?.seo?.title || pageContent?.seo?.metaDescription) {
+    return await buildPageMetadata(params.slug, {
+      title: pageContent.seo.title,
+      description: pageContent.seo.metaDescription,
+      alternates: { canonical: canonicalUrl },
+    });
+  }
 
   if (params.slug === 'go-beyond') {
     return {

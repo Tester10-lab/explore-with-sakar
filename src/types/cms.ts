@@ -274,6 +274,7 @@ export interface PageSeo {
   ogImage?: string;
   noIndex?: boolean;
   sitemapVisible?: boolean;
+  keywords?: string;
 }
 
 export interface PageSection {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import { Sparkles, Mountain, ArrowRight } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
@@ -8,10 +9,15 @@ import DestinationCard from '@/components/common/DestinationCard';
 import CTASection from '@/components/common/CTASection';
 import { getPublicDestinations } from '@/lib/content';
 
-export const metadata: Metadata = {
+const FALLBACK_METADATA: Metadata = {
   title: 'Curated Destinations in Nepal | Explore With Sakar',
   description: 'Explore curated regions in Nepal: Kathmandu Valley, Pokhara & Annapurna, Mustang & Muktinath, Langtang, Chitwan Lowlands, and Bandipur.',
+  alternates: { canonical: 'https://explorewithsakar.com/destinations' },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await buildPageMetadata('destinations', FALLBACK_METADATA);
+}
 
 export default async function DestinationsPage() {
   const destinations = await getPublicDestinations();

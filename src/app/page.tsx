@@ -1,5 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -18,10 +19,15 @@ import BlogCard from '@/components/blog/BlogCard';
 import SectionHeading from '@/components/common/SectionHeading';
 import InquiryForm from '@/components/booking/InquiryForm';
 
-export const metadata: Metadata = {
+const FALLBACK_METADATA: Metadata = {
   title: 'Explore With Sakar — Authentic Nepal Travel & Cultural Experiences',
   description: 'Meaningful Nepal travel experiences beyond ordinary tourism. Guided by local host Sakar through living culture, village homestays, Himalayan spirituality, and responsible slow travel.',
+  alternates: { canonical: 'https://explorewithsakar.com/' },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await buildPageMetadata('home', FALLBACK_METADATA);
+}
 
 export default async function HomePage() {
   const [settings, featuredExperiences, blogs] = await Promise.all([

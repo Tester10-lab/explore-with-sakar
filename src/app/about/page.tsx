@@ -1,5 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -20,10 +21,15 @@ import TestimonialCard from '@/components/common/TestimonialCard';
 import { getPublicReviews, getPageContent } from '@/lib/content';
 import { getPageHeroOverrides, isSectionVisible } from '@/lib/pageContentHelper';
 
-export const metadata: Metadata = {
+const FALLBACK_METADATA: Metadata = {
   title: 'About Sakar & Our Story | Explore With Sakar',
   description: 'Meet Sakar, Responsible Tour Director in Nepal. Learn about his background in community development, local roots in Kathmandu, and philosophy of slow, meaningful travel.',
+  alternates: { canonical: 'https://explorewithsakar.com/about' },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await buildPageMetadata('about', FALLBACK_METADATA);
+}
 
 export default async function AboutPage() {
   const [allReviews, pageContent] = await Promise.all([
