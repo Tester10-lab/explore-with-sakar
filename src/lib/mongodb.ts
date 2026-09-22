@@ -22,7 +22,10 @@ if (process.env.MONGODB_DNS_SERVERS && typeof dns.setServers === 'function') {
   }
 }
 
-let clientPromise: Promise<MongoClient> | null = null;
+declare global {
+  var _mongoClientPromise: Promise<MongoClient> | undefined;
+}
+
 let lastFailureTime = 0;
 const FAILURE_COOLDOWN_MS = 10000; // 10s cooldown before retrying connection
 let hasWarnedMissingUriDev = false;
@@ -58,17 +61,17 @@ export function getMongoClient(): Promise<MongoClient> {
     throw new MongoUnavailableError('MongoDB connection in cooldown period after recent failure.');
   }
 
-  if (clientPromise) {
-    return clientPromise;
+  if (globalThis._mongoClientPromise) {
+    return globalThis._mongoClientPromise;
   }
 
   const client = new MongoClient(uri, {
-    maxPoolSize: 5,
-    serverSelectionTimeoutMS: 2000,
-    connectTimeoutMS: 2000,
+    maxPoolSize: 10,
+    serverSelectionTimeoutMS: 3000,
+    connectTimeoutMS: 3000,
   });
 
-  clientPromise = client
+  const promise = client
     .connect()
     .then((c) => {
       lastFailureTime = 0;
@@ -76,11 +79,12 @@ export function getMongoClient(): Promise<MongoClient> {
     })
     .catch((err) => {
       lastFailureTime = Date.now();
-      clientPromise = null;
+      globalThis._mongoClientPromise = undefined;
       throw new MongoUnavailableError(`MongoDB connection error: ${err.message || err}`);
     });
 
-  return clientPromise;
+  globalThis._mongoClientPromise = promise;
+  return promise;
 }
 
 export default getMongoClient;

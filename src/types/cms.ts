@@ -55,6 +55,7 @@ export interface ExtendedExperience {
     | 'beyond-the-map'
     | 'spiritual-wellness'
     | 'homestays'
+    | 'go-deeper'
     | 'leave-a-mark'
     | 'all-curated'
     | 'custom-journeys'

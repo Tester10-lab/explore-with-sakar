@@ -19,6 +19,7 @@ import {
   Lock,
   Key,
   Palette,
+  BookOpen,
 } from 'lucide-react';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ImageUploader from '@/components/admin/ImageUploader';
@@ -28,7 +29,7 @@ import { WebsiteSettings } from '@/types/cms';
 export default function AdminSettingsPage() {
   const router = useRouter();
   const [settings, setSettings] = useState<WebsiteSettings | null>(null);
-  const [activeTab, setActiveTab] = useState<'contact' | 'social' | 'hero' | 'announcement' | 'branding' | 'security'>('contact');
+  const [activeTab, setActiveTab] = useState<'contact' | 'social' | 'hero' | 'announcement' | 'branding' | 'security' | 'guide'>('contact');
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -142,7 +143,6 @@ export default function AdminSettingsPage() {
       <ToastContainer toasts={toasts} onDismiss={(id) => setToasts((t) => t.filter((x) => x.id !== id))} />
 
       <AdminHeader
-        onToggleMobileSidebar={() => {}}
         title="Website Settings"
         subtitle="Configure live contact information, hero content, logo, social links, and security"
         actionButton={{
@@ -231,6 +231,19 @@ export default function AdminSettingsPage() {
           >
             <Shield className="w-3.5 h-3.5" />
             <span>Admin Security</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('guide')}
+            className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all flex items-center gap-2 shrink-0 ${
+              activeTab === 'guide'
+                ? 'bg-terracotta text-white font-bold shadow-warm'
+                : 'bg-himalaya-900 text-parchment-300 hover:text-white'
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Admin Guide</span>
           </button>
         </div>
 
@@ -946,6 +959,108 @@ export default function AdminSettingsPage() {
                 )}
               </button>
             </form>
+          </div>
+        )}
+
+        {/* TAB 7: Admin Guide */}
+        {activeTab === 'guide' && (
+          <div className="bg-himalaya-900 border border-himalaya-800 rounded-2xl p-6 space-y-6">
+            <div className="pb-3 border-b border-himalaya-800">
+              <h3 className="font-editorial-serif text-lg font-bold text-white">Admin Guide</h3>
+              <p className="text-xs text-parchment-400 font-light mt-0.5">
+                A reference guide to help you understand and manage the website.
+              </p>
+            </div>
+
+            <div className="space-y-6 text-sm text-parchment-200 leading-relaxed">
+              {/* Dashboard */}
+              <div>
+                <h4 className="font-bold text-white text-base mb-1">📊 Dashboard</h4>
+                <p className="text-parchment-300">
+                  Your starting point. See recent inquiries, visitor counts, and quick actions. Click any card to dive into that section.
+                </p>
+              </div>
+
+              {/* Inquiries */}
+              <div>
+                <h4 className="font-bold text-white text-base mb-1">📬 Inquiries</h4>
+                <p className="text-parchment-300">
+                  All traveler inquiries from the website contact forms appear here. You can mark them as read, reply, or archive them. The red badge on the sidebar shows unread inquiries.
+                </p>
+              </div>
+
+              {/* Experiences */}
+              <div>
+                <h4 className="font-bold text-white text-base mb-1">🧭 Experiences</h4>
+                <p className="text-parchment-300 mb-2">
+                  The website features four distinct travel experiences, each functioning as a category that houses featured topics/itineraries:
+                </p>
+                <ul className="list-disc list-inside space-y-1 text-parchment-400 ml-2">
+                  <li><strong className="text-parchment-200">Beyond the Map</strong> — Medieval Bahals, Silk Road alleys, and living courtyards</li>
+                  <li><strong className="text-parchment-200">Go Within</strong> — Sound vibration therapy, dawn monastery pujas, and cave meditation</li>
+                  <li><strong className="text-parchment-200">Go Deeper</strong> — Immersive deep-dive journeys into Nepal&apos;s hidden cultural layers and sacred architecture</li>
+                  <li><strong className="text-parchment-200">Leave a Mark</strong> — Strategic community collaboration, indigenous forest guardians, and grassroots empowerment</li>
+                </ul>
+                <div className="mt-3 bg-himalaya-950 border border-himalaya-700 rounded-xl p-4 space-y-2">
+                  <h5 className="font-semibold text-amber-400 text-xs uppercase tracking-wider">How Experiences & Topics Work</h5>
+                  <p className="text-xs text-parchment-300">
+                    <strong>1. Experience Landing Page:</strong> When a visitor goes to an experience page (e.g. <code>/experiences/beyond-the-map</code>), they see the Experience Overview, Curated Exploration Highlights, and exactly four featured topic discovery cards (Photo, Title, Short Description, and &ldquo;Explore Topic →&rdquo;).
+                  </p>
+                  <p className="text-xs text-parchment-300">
+                    <strong>2. Individual Itinerary Page:</strong> Clicking the photo or the &ldquo;Explore Topic →&rdquo; button opens the detailed topic page (e.g. <code>/experiences/beyond-the-map/kathmandu-durbar-square</code>). This is where duration, group size, quote, detailed itinerary narrative, and inquiry button appear.
+                  </p>
+                  <p className="text-xs text-parchment-300">
+                    <strong>3. Adding & Editing Topics:</strong> From the Experience Hub, click &ldquo;Add Itinerary / Package&rdquo; to create a new topic under that experience, or &ldquo;Edit Itineraries / Packages&rdquo; to update titles, photos, durations, quotes, and descriptions.
+                  </p>
+                </div>
+              </div>
+
+              {/* Blog & Stories */}
+              <div>
+                <h4 className="font-bold text-white text-base mb-1">📝 Blog & Stories</h4>
+                <p className="text-parchment-300">
+                  Manage all 37 stories in the Himalayan Journal. You can search by title/content, filter by category or publication status (Published / Draft), edit full article content, and publish updates live to MongoDB.
+                </p>
+              </div>
+
+              {/* Content & Media */}
+              <div>
+                <h4 className="font-bold text-white text-base mb-1">🖼️ Content & Media</h4>
+                <ul className="list-disc list-inside space-y-1.5 text-parchment-400 ml-2">
+                  <li><strong className="text-parchment-200">Photo Gallery</strong> — Upload, caption, and reorder photographs displayed on the public gallery.</li>
+                  <li><strong className="text-parchment-200">Traveler Reviews</strong> — Upload and manage handwritten guestbook pages and photos from past travelers.</li>
+                  <li><strong className="text-parchment-200">Digital Reviews</strong> — Manage verified digital quotes and star ratings from guests.</li>
+                  <li><strong className="text-parchment-200">Events & Festivals</strong> — Update seasonal Himalayan festivals and cultural gatherings.</li>
+                </ul>
+              </div>
+
+              {/* Site Configuration */}
+              <div>
+                <h4 className="font-bold text-white text-base mb-1">⚙️ Site Configuration</h4>
+                <ul className="list-disc list-inside space-y-1.5 text-parchment-400 ml-2">
+                  <li><strong className="text-parchment-200">Homepage Content</strong> — Customize the hero headline, slideshow photos, Sakar cutout photo, and trust statistics.</li>
+                  <li><strong className="text-parchment-200">Pages</strong> — Manage page-specific content and section visibility.</li>
+                  <li><strong className="text-parchment-200">Navigation</strong> — Configure header menus, dropdown links, and footer columns.</li>
+                  <li><strong className="text-parchment-200">FAQ</strong> — Organize frequently asked questions into searchable categories for travelers.</li>
+                </ul>
+              </div>
+
+              {/* Settings */}
+              <div>
+                <h4 className="font-bold text-white text-base mb-1">🔧 Settings</h4>
+                <p className="text-parchment-300">
+                  Configure contact info, social media links, homepage hero content, announcement bar, branding/logo, and admin password. All tabs on this page save globally with one click.
+                </p>
+              </div>
+
+              {/* SEO */}
+              <div>
+                <h4 className="font-bold text-white text-base mb-1">🔍 SEO</h4>
+                <p className="text-parchment-300">
+                  Search Engine Optimization settings are built into individual page and experience editors. When editing a blog, page, or experience, look for the SEO fields (title tag, meta description) at the bottom of the editor.
+                </p>
+              </div>
+            </div>
           </div>
         )}
       </div>

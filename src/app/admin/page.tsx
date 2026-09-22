@@ -109,7 +109,6 @@ export default function AdminDashboardPage() {
   return (
     <div className="space-y-6">
       <AdminHeader
-        onToggleMobileSidebar={() => {}}
         title="Dashboard Overview"
         subtitle="Manage leads, travel pillars, itineraries, journal essays, and website settings."
         actionButton={{
@@ -141,18 +140,18 @@ export default function AdminDashboardPage() {
                 <span>Homepage CMS</span>
               </Link>
               <Link
-                href="/admin/services"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
-              >
-                <Layers className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Travel Pillars</span>
-              </Link>
-              <Link
                 href="/admin/experiences"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
               >
                 <Compass className="w-3.5 h-3.5 text-amber-600" />
-                <span>Itineraries</span>
+                <span>Experiences</span>
+              </Link>
+              <Link
+                href="/admin/inquiries"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-all"
+              >
+                <Inbox className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Inquiries</span>
               </Link>
               <Link
                 href="/admin/blogs/new"
@@ -188,24 +187,24 @@ export default function AdminDashboardPage() {
             </div>
           </Link>
 
-          {/* Card 2: Services / Pillars */}
+          {/* Card 2: Experiences */}
           <Link
-            href="/admin/services"
+            href="/admin/experiences"
             className="group bg-white border border-slate-200 hover:border-emerald-500/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-3">
               <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 font-mono">
-                Pillars
+                Experiences
               </span>
               <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Layers className="w-4 h-4" />
+                <Compass className="w-4 h-4" />
               </div>
             </div>
             <div className="text-2xl font-bold font-editorial-serif text-slate-900 mb-1">
-              {isLoading ? '...' : counts.services}
+              4 Pillars
             </div>
             <div className="text-[11px] text-slate-500">
-              <span className="text-emerald-600 font-semibold">{counts.services} Live Pillars</span>
+              <span className="text-emerald-600 font-semibold">4 Active Experiences</span>
             </div>
           </Link>
 

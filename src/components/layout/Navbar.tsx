@@ -54,7 +54,7 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
     columns: 2,
     children: [
       {
-        title: 'Go Beyond the Map',
+        title: 'Beyond the Map',
         description: 'Living courtyards, medieval stone mysteries & master artisan guilds.',
         href: '/experiences/beyond-the-map',
         badge: 'Exploration',
@@ -63,16 +63,16 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
       {
         title: 'Go Within',
         description: 'Himalayan singing bowl resonance, monastery chanting & meditation caves.',
-        href: '/experiences/spiritual-wellness',
+        href: '/experiences/go-within',
         badge: 'Spiritual',
         icon: Sparkles,
       },
       {
-        title: 'Feel Closer',
-        description: 'Traditional village homestays, hearthside cooking & warm family bonds.',
-        href: '/experiences/homestays',
-        badge: 'Homestays',
-        icon: Home,
+        title: 'Go Deeper',
+        description: 'Immersive deep-dive journeys into hidden layers, living courtyards & sacred geometry.',
+        href: '/experiences/go-deeper',
+        badge: 'Immersion',
+        icon: Layers,
       },
       {
         title: 'Leave a Mark',
@@ -82,10 +82,11 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
         icon: Heart,
       },
       {
-        title: 'All Curated Experiences',
-        description: 'Browse complete day-by-day itineraries, departures & cultural routes.',
-        href: '/experiences',
-        icon: Calendar,
+        title: 'Feel Closer',
+        description: 'Traditional village homestays, hearthside cooking & warm family bonds.',
+        href: '/experiences/homestays',
+        badge: 'Homestays',
+        icon: Home,
       },
       {
         title: 'Custom Private Journeys',
@@ -205,7 +206,7 @@ export default function Navbar() {
           {/* Brand Logo */}
           <Link href="/" className="inline-flex items-center space-x-3 group">
             <Image
-              src={settings.branding?.logoUrl || '/explore-with-sakar/images/logo.png'}
+              src={settings.branding?.logoUrl?.trim() || '/explore-with-sakar/images/logo.png'}
               alt={settings.branding?.siteName || 'Explore With Sakar'}
               width={160}
               height={44}

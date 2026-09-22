@@ -1,4 +1,5 @@
 import { Db } from 'mongodb';
+import { getSeedStoreFromDisk } from './seed';
 
 export interface Migration {
   id: string;
@@ -243,6 +244,86 @@ export const MIGRATIONS: Migration[] = [
         store.experiences.forEach((e: any) => {
           if (e.ctaLink) e.ctaLink = normalizeUrl(e.ctaLink);
         });
+      }
+    },
+  },
+  {
+    id: '2026-sync-all-37-blogs',
+    run: async (db: Db) => {
+      const col = db.collection('cms_store');
+      const seedStore = getSeedStoreFromDisk();
+      const canonicalBlogs: any[] = seedStore.blogs || [];
+      if (canonicalBlogs.length === 0) return;
+
+      const doc = await col.findOne({ _id: 'active_store' as any }, { projection: { blogs: 1 } });
+      const currentBlogs: any[] = doc && Array.isArray(doc.blogs) ? doc.blogs : [];
+
+      const blogMap = new Map<string, any>();
+      currentBlogs.forEach((b) => {
+        if (b.slug) blogMap.set(b.slug, b);
+      });
+
+      let modified = false;
+      canonicalBlogs.forEach((cBlog: any) => {
+        const existing = blogMap.get(cBlog.slug);
+        if (!existing) {
+          blogMap.set(cBlog.slug, {
+            ...cBlog,
+            id: cBlog.id || `blog-${Date.now()}-${cBlog.slug}`,
+            status: cBlog.status || 'published',
+            createdAt: cBlog.createdAt || new Date().toISOString(),
+            updatedAt: cBlog.updatedAt || new Date().toISOString(),
+          });
+          modified = true;
+        } else {
+          let itemModified = false;
+          if (!existing.content || !Array.isArray(existing.content) || existing.content.length === 0) {
+            existing.content = cBlog.content;
+            itemModified = true;
+          }
+          if (!existing.author) {
+            existing.author = cBlog.author;
+            itemModified = true;
+          }
+          if (!existing.featuredImage) {
+            existing.featuredImage = cBlog.featuredImage;
+            itemModified = true;
+          }
+          if (!existing.id) {
+            existing.id = `blog-${Date.now()}-${cBlog.slug}`;
+            itemModified = true;
+          }
+          if (itemModified) {
+            existing.updatedAt = new Date().toISOString();
+            modified = true;
+          }
+        }
+      });
+
+      const merged = Array.from(blogMap.values());
+      if (modified || merged.length !== currentBlogs.length) {
+        await col.updateOne(
+          { _id: 'active_store' as any },
+          { $set: { blogs: merged, lastUpdated: new Date().toISOString() } }
+        );
+      }
+    },
+    runFile: (store: Record<string, any>) => {
+      const seedStore = getSeedStoreFromDisk();
+      const canonicalBlogs: any[] = seedStore.blogs || [];
+      if (!Array.isArray(store.blogs) || store.blogs.length < canonicalBlogs.length) {
+        const blogMap = new Map<string, any>();
+        if (Array.isArray(store.blogs)) {
+          store.blogs.forEach((b: any) => {
+            if (b.slug) blogMap.set(b.slug, b);
+          });
+        }
+        canonicalBlogs.forEach((cBlog: any) => {
+          if (!blogMap.has(cBlog.slug)) {
+            blogMap.set(cBlog.slug, cBlog);
+          }
+        });
+        store.blogs = Array.from(blogMap.values());
       }
     },
   },

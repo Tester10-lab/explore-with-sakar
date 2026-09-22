@@ -268,7 +268,6 @@ export default function AdminPhotosPage() {
       <ToastContainer toasts={toasts} onDismiss={(id) => setToasts((t) => t.filter((x) => x.id !== id))} />
 
       <AdminHeader
-        onToggleMobileSidebar={() => {}}
         title="Photo & Gallery Management"
         subtitle={`Total of ${photos.length} photographs in high-resolution database`}
         actionButton={{

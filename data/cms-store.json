@@ -5125,8 +5125,8 @@
       "id": "exp-beyond-ktm",
       "title": "Kathmandu Durbar Square: Where Every Stone Holds a Story",
       "slug": "kathmandu-durbar-square",
-      "category": "adventure",
-      "categoryLabel": "Go Beyond the Map",
+      "category": "beyond-the-map",
+      "categoryLabel": "Beyond the Map",
       "duration": "Full Day (Unhurried)",
       "difficulty": "Easy to Moderate",
       "location": "Ason Alleys & Basantapur Durbar Square",
@@ -5194,14 +5194,18 @@
       "impactFootprint": "Direct patronage of historic Ason courtyard tea sellers, Guthi community trusts, and local neighborhood preservation initiatives.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.932Z",
-      "updatedAt": "2026-09-19T18:32:01.955Z"
+      "updatedAt": "2026-09-22T04:55:57.319Z",
+      "keyQuote": {
+        "quote": "Kathmandu reminds the world that the future of cities is not only about technology, but also about preserving communities where people live, work, and care for each other.",
+        "attribution": "Heritage Conservationist Anil Chitrakar"
+      }
     },
     {
       "id": "exp-beyond-bkt",
       "title": "Bhaktapur Durbar Square: A Walk Through Nepal’s Living Medieval City",
       "slug": "bhaktapur-durbar-square",
-      "category": "adventure",
-      "categoryLabel": "Go Beyond the Map",
+      "category": "beyond-the-map",
+      "categoryLabel": "Beyond the Map",
       "duration": "Full Day (Unhurried)",
       "difficulty": "Easy to Moderate",
       "location": "Bhaktapur Durbar Square & Pottery Square",
@@ -5269,14 +5273,18 @@
       "impactFootprint": "Support for local pottery guild cooperatives, heritage masonry artisans, and family-owned traditional dairy producers.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "To walk through Bhaktapur is to realize that a city does not need to forget its ancestors in order to live in the modern world.",
+        "attribution": "Himalayan Cultural Historian"
+      }
     },
     {
       "id": "exp-beyond-ptn",
       "title": "Patan Durbar Square: The City of Hidden Courtyards and Living Craft",
       "slug": "patan-durbar-square",
-      "category": "adventure",
-      "categoryLabel": "Go Beyond the Map",
+      "category": "beyond-the-map",
+      "categoryLabel": "Beyond the Map",
       "duration": "Full Day (Unhurried)",
       "difficulty": "Easy to Moderate",
       "location": "Patan (Lalitpur) & Hidden Monastic Bahals",
@@ -5344,14 +5352,18 @@
       "impactFootprint": "Direct artist honorariums paid to traditional metalworking guilds, bronze sculptors, and heritage restoration woodcarvers.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "The true museum of Patan has no ticket counter. It is the sound of the hammer meeting bronze in a quiet back courtyard.",
+        "attribution": "Master Repoussé Metalsmith"
+      }
     },
     {
       "id": "exp-beyond-pkr",
       "title": "Pokhara: The Laid-Back City That Makes You Want to Stay",
       "slug": "pokhara-laid-back-city",
-      "category": "adventure",
-      "categoryLabel": "Go Beyond the Map",
+      "category": "beyond-the-map",
+      "categoryLabel": "Beyond the Map",
       "duration": "2 - 3 Days",
       "difficulty": "Easy to Moderate",
       "location": "Pokhara Valley, Phewa Lake & Old Bazaar",
@@ -5414,14 +5426,18 @@
       "impactFootprint": "Direct fair-wage compensation to local boatmen cooperatives, Old Bazaar family shopkeepers, and foothill agricultural families.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "Pokhara is where the mountains don’t just watch over you; they invite you to breathe slower and remember what stillness feels like.",
+        "attribution": "Sakar • Responsible Tour Director"
+      }
     },
     {
       "id": "exp-beyond-5",
       "title": "The Living Courtyards: Beyond the Temples of Kathmandu",
       "slug": "living-courtyards-kathmandu",
-      "category": "adventure",
-      "categoryLabel": "Go Beyond the Map",
+      "category": "go-deeper",
+      "categoryLabel": "Go Deeper",
       "duration": "1 - 2 Days",
       "difficulty": "Easy to Moderate",
       "location": "Old Kathmandu (Ason & Indra Chowk)",
@@ -5484,14 +5500,18 @@
       "impactFootprint": "Direct patronization of historic courtyard teahouses, Guthi community preservation trusts, and local neighborhood vendors.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "The courtyards of Kathmandu are outdoor living rooms where five generations dry grain, carve deities, and tell the story of their ancestors.",
+        "attribution": "Newari Cultural Elder"
+      }
     },
     {
       "id": "exp-beyond-6",
       "title": "Echoes in Stone: The Untold Histories of Patan and Bhaktapur",
       "slug": "echoes-in-stone-patan-bhaktapur",
-      "category": "adventure",
-      "categoryLabel": "Go Beyond the Map",
+      "category": "go-deeper",
+      "categoryLabel": "Go Deeper",
       "duration": "1 - 2 Days",
       "difficulty": "Easy to Moderate",
       "location": "Patan (Lalitpur) & Bhaktapur",
@@ -5553,14 +5573,18 @@
       "impactFootprint": "Support for heritage masonry preservation funds and local indigenous architectural conservancy programs.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "Every carving in Patan was placed there not as ornament, but as a protective prayer etched in grey stone.",
+        "attribution": "Patan Guild Master"
+      }
     },
     {
       "id": "exp-beyond-7",
       "title": "The Artisan’s Path: A Heritage Deep-Dive",
       "slug": "artisans-path-heritage-deep-dive",
-      "category": "adventure",
-      "categoryLabel": "Go Beyond the Map",
+      "category": "go-deeper",
+      "categoryLabel": "Go Deeper",
       "duration": "1 - 2 Days",
       "difficulty": "Easy to Moderate",
       "location": "Patan & Bhaktapur Guild Quarters",
@@ -5622,14 +5646,18 @@
       "impactFootprint": "Guaranteed ethical honorariums paid directly to master artisan families, keeping endangered traditional guilds economically viable.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "A statue made with machine has no soul. When you hammer copper for three months, your breath enters the bronze.",
+        "attribution": "Master Lost-Wax Caster"
+      }
     },
     {
       "id": "exp-beyond-8",
       "title": "Sacred Geometry: The Architecture and Spirit of the Valley",
       "slug": "sacred-geometry-architecture-valley",
-      "category": "adventure",
-      "categoryLabel": "Go Beyond the Map",
+      "category": "go-deeper",
+      "categoryLabel": "Go Deeper",
       "duration": "1 - 2 Days",
       "difficulty": "Easy to Moderate",
       "location": "Kathmandu, Patan, Bhaktapur & Changu Narayan",
@@ -5691,13 +5719,17 @@
       "impactFootprint": "Supports indigenous architectural preservation archives and youth apprenticeship in classical sacred engineering.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "The three royal cities were laid out as a giant cosmic yantra. Walking here is an unhurried pilgrimage through sacred mathematics.",
+        "attribution": "Himalayan Architectural Scholar"
+      }
     },
     {
       "id": "exp-spirit-1",
       "title": "Himalayan Spiritual Awakening & Sound Sanctuary",
       "slug": "spiritual-immersion-singing-bowls",
-      "category": "spiritual-wellness",
+      "category": "go-within",
       "categoryLabel": "Go Within",
       "duration": "4 - 7 Days",
       "difficulty": "Easy to Moderate",
@@ -5760,13 +5792,17 @@
       "impactFootprint": "Direct donations to monastic free medical clinics and support for traditional non-commercial sound healing guilds.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "The singing bowl does not force silence upon the mind; it creates a vibration so pure that chaos simply loses its desire to stay.",
+        "attribution": "Master Sound Healer Santa Ratna Shakya"
+      }
     },
     {
       "id": "exp-spirit-2",
       "title": "Pharping Sacred Cave Meditation & Guru Rinpoche Heritage",
       "slug": "pharping-sacred-cave-meditation",
-      "category": "spiritual-wellness",
+      "category": "go-within",
       "categoryLabel": "Go Within",
       "duration": "2 - 3 Days",
       "difficulty": "Easy to Moderate",
@@ -5824,13 +5860,17 @@
       "impactFootprint": "Support for monastic cave preservation and local monastery educational funds.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "In the stillness of Asura Cave, Guru Padmasambhava proved that true victory is not conquering lands, but subduing the wandering mind.",
+        "attribution": "Nyingma Lineage Elder"
+      }
     },
     {
       "id": "exp-spirit-3",
       "title": "Namo Buddha Sacred Stupa & Contemplative Ridge Walk",
       "slug": "namo-buddha-sacred-ridge-walk",
-      "category": "spiritual-wellness",
+      "category": "go-within",
       "categoryLabel": "Go Within",
       "duration": "2 - 3 Days",
       "difficulty": "Easy to Moderate",
@@ -5883,13 +5923,17 @@
       "impactFootprint": "Direct donations to monastic schools providing free education to young monks from remote mountain valleys.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "At Namo Buddha, generosity is not a transaction; it is the ultimate realization that all suffering beings are interconnected.",
+        "attribution": "Thrangu Rinpoche Monastic Tradition"
+      }
     },
     {
       "id": "exp-spirit-4",
       "title": "Monastery Dawn Chanting & Inner Silence Retreat",
       "slug": "monastery-chanting-inner-silence",
-      "category": "spiritual-wellness",
+      "category": "go-within",
       "categoryLabel": "Go Within",
       "duration": "3 - 5 Days",
       "difficulty": "Easy to Moderate",
@@ -5947,7 +5991,11 @@
       "impactFootprint": "Funds directly sponsor monastery medical dispensaries and traditional monastic manuscript preservation.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "When the dawn horns sound across the valley, the morning mist lifts and you hear the sound of centuries praying for world peace.",
+        "attribution": "Sakar • Responsible Tour Director"
+      }
     },
     {
       "id": "exp-home-1",
@@ -6275,7 +6323,11 @@
       "impactFootprint": "All porter and guide fees exceed fair-trade standards; stays exclusively at locally owned independent community lodges.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "When you trek with purpose in Langtang, your presence helps rebuild schools and keeps traditional Tamang stone hearths burning.",
+        "attribution": "Langtang Community Cooperative"
+      }
     },
     {
       "id": "exp-resp-2",
@@ -6339,7 +6391,11 @@
       "impactFootprint": "100% of safari guiding fees go directly to indigenous Tharu naturalist cooperatives and community anti-poaching units.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "The forest gave us life, and in return we protect the tiger and the rhino with traditional indigenous knowledge.",
+        "attribution": "Tharu Community Forest Ranger"
+      }
     },
     {
       "id": "exp-resp-3",
@@ -6403,7 +6459,11 @@
       "impactFootprint": "Direct purchase of saplings from community nurseries and sustained funding for tree maintenance caretakers.",
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "updatedAt": "2026-09-22T04:55:57.333Z",
+      "keyQuote": {
+        "quote": "Planting a native oak or rhododendron tree in the Himalayan foothills is an offering that outlives our children.",
+        "attribution": "Community Forestry Leader"
+      }
     },
     {
       "id": "exp-resp-4",
@@ -6468,6 +6528,74 @@
       "status": "published",
       "createdAt": "2026-09-19T18:32:01.956Z",
       "updatedAt": "2026-09-19T18:32:01.956Z"
+    },
+    {
+      "id": "exp-strategic-capacity-building",
+      "title": "Strategic Community & Administrative Empowerment",
+      "slug": "strategic-community-capacity-building",
+      "category": "leave-a-mark",
+      "categoryLabel": "Leave a Mark",
+      "duration": "2–4 Weeks (Immersive)",
+      "difficulty": "Professional Fellowship",
+      "location": "Kathmandu Valley & Highland Grassroots Hubs",
+      "groupSize": "Private / 1–4 Professional Fellows",
+      "season": "Year-Round",
+      "featured": true,
+      "featuredOrder": 4,
+      "homepageVisible": true,
+      "status": "published",
+      "heroImage": {
+        "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
+        "alt": "Strategic Community & Administrative Empowerment with Sakar",
+        "caption": "Quiet architects for change: pairing professional skills with grassroots Nepali leaders."
+      },
+      "gallery": [
+        {
+          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
+          "alt": "Community meeting"
+        },
+        {
+          "src": "/explore-with-sakar/images/trails/suspension-bridge.jpg",
+          "alt": "Highland trail"
+        },
+        {
+          "src": "/explore-with-sakar/images/homestays/welcome-tea.jpg",
+          "alt": "Hospitality"
+        }
+      ],
+      "shortDescription": "Match your actual professional skills with local communities in Nepal that need structural, strategic, and administrative empowerment. We don’t just want you to paint a wall; we want you to help build the blueprint.",
+      "fullDescription": [
+        "Traditional voluntourism often focuses on short-term manual labor that feels good but leaves little lasting impact. We take a different approach. We believe true volunteering means matching your actual professional skills with local communities that need structural, strategic, and administrative empowerment. We don’t just want you to paint a wall; we want you to help build the blueprint.",
+        "Leave a Mark is a specialized branch of our journeys designed for professionals—project managers, financial planners, writers, and strategists—who want to dedicate a portion of their travel to high-level community development.",
+        "Many local NGOs, community groups, and grassroots initiatives in Nepal have the passion and the workforce, but they lack the administrative frameworks to secure funding or execute complex logistics. This program places you behind the scenes as a quiet architect for change."
+      ],
+      "keyQuote": {
+        "quote": "True volunteering means matching your professional skills with communities that need structural empowerment. You leave behind an invisible but indestructible infrastructure.",
+        "attribution": "Sakar • Responsible Tour Director"
+      },
+      "highlights": [
+        "Project proposal structuring for international grants and partnerships",
+        "Deliverable breakdowns and timeline compression for local teams",
+        "Financial budgeting, resource allocation, and sustainable operational models",
+        "Direct mentoring alongside grassroots community leaders and coordinators"
+      ],
+      "days": [
+        {
+          "day": 1,
+          "title": "Arrival, Orientation & Community Introduction",
+          "description": "Meet local coordinators in Kathmandu, review organizational goals, and align on fellowship deliverables."
+        },
+        {
+          "day": 2,
+          "title": "Field Assessment & Framework Structuring",
+          "description": "Observe grassroots field operations and structure the 3-month deliverable blueprint."
+        },
+        {
+          "day": 3,
+          "title": "Proposal & Budget Finalization",
+          "description": "Collaborative working sessions to produce actionable project proposals and sustainable financial tools."
+        }
+      ]
     }
   ],
   "services": [

@@ -72,7 +72,18 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <AuthorBio author={post.author} />
 
         {/* Contextual Journey Booking CTA */}
-        <JournalCTA cta={post.contextualCta} />
+        {post.contextualCta ? (
+          <JournalCTA cta={post.contextualCta} />
+        ) : (
+          <JournalCTA
+            cta={{
+              title: 'Create Your Own Himalayan Story with Sakar',
+              description:
+                'Explore the quiet valleys, sacred spaces, and living heritage described in this journal.',
+              buttonText: 'Consult Sakar',
+            }}
+          />
+        )}
       </div>
 
       {/* 4. Top 3 Experiences Linked from Story */}

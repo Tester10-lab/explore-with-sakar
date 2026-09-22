@@ -33,6 +33,7 @@ const CATEGORIES = [
   { key: 'all', label: 'All Curated Departures' },
   { key: 'beyond-the-map', label: 'Go Beyond the Map' },
   { key: 'spiritual-wellness', label: 'Go Within' },
+  { key: 'go-deeper', label: 'Go Deeper' },
   { key: 'homestays', label: 'Feel Closer' },
   { key: 'leave-a-mark', label: 'Leave a Mark' },
 ];
@@ -47,6 +48,7 @@ export default function ExperienceCatalogClient({
     if (targetKey === 'all') return true;
     if (targetKey === 'beyond-the-map') return category === 'beyond-the-map' || category === 'adventure' || category === 'heritage';
     if (targetKey === 'spiritual-wellness') return category === 'spiritual-wellness' || category === 'spiritual';
+    if (targetKey === 'go-deeper') return category === 'go-deeper';
     if (targetKey === 'homestays') return category === 'homestays' || category === 'homestay';
     if (targetKey === 'leave-a-mark') return category === 'leave-a-mark' || category === 'responsible';
     return category === targetKey;

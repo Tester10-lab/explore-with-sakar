@@ -44,7 +44,7 @@ interface CacheEntry {
   timestamp: number;
 }
 const readCache = new Map<string, CacheEntry>();
-const READ_CACHE_TTL_MS = 2000; // 2 seconds TTL
+const READ_CACHE_TTL_MS = 30000; // 30 seconds TTL for fast responses (instantly cleared on writeKey)
 
 export function invalidateStoreCache(key?: string): void {
   if (key) {
@@ -168,7 +168,12 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
       console.log(`[store] read ${key} ${elapsed}ms`);
     }
 
-    const val = doc ? doc[key] : getSeedForKey(key);
+    let val = doc ? doc[key] : undefined;
+    if (key === 'blogs' && (!val || !Array.isArray(val) || val.length === 0)) {
+      val = getSeedForKey('blogs');
+    } else if (val === undefined) {
+      val = getSeedForKey(key);
+    }
     const res = normalizeCollectionShape(key, val) as T;
     readCache.set(key, { data: res, timestamp: Date.now() });
     return res;

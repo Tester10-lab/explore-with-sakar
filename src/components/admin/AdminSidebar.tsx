@@ -22,7 +22,6 @@ import {
   MapPin,
   HelpCircle,
   Menu as MenuIcon,
-  Search,
   BookOpen,
   Heart,
 } from 'lucide-react';
@@ -93,43 +92,43 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
       ],
     },
     {
-      title: 'Itineraries by Experience',
+      title: 'Experiences',
       items: [
         {
-          label: 'All Itineraries',
-          href: '/admin/experiences',
+          label: 'Beyond the Map',
+          href: '/admin/experiences/beyond-the-map',
           icon: Compass,
         },
         {
-          label: 'Beyond the Map Chapters',
-          href: '/admin/beyond-chapters',
-          icon: BookOpen,
+          label: 'Go Within',
+          href: '/admin/experiences/go-within',
+          icon: Sparkles,
         },
         {
-          label: 'Leave a Mark Strategy',
-          href: '/admin/leave-a-mark',
-          icon: Heart,
-        },
-        {
-          label: 'Services & Pillars',
-          href: '/admin/services',
+          label: 'Go Deeper',
+          href: '/admin/experiences/go-deeper',
           icon: Layers,
+        },
+        {
+          label: 'Leave a Mark',
+          href: '/admin/experiences/leave-a-mark',
+          icon: Heart,
         },
       ],
     },
     {
-      title: 'Events & Stories',
+      title: 'Blog & Stories',
       items: [
-        {
-          label: 'Events & Festivals',
-          href: '/admin/events',
-          icon: Calendar,
-        },
         {
           label: 'Blog & Stories',
           href: '/admin/blogs',
           icon: FileText,
         },
+      ],
+    },
+    {
+      title: 'Content & Media',
+      items: [
         {
           label: 'Photo Gallery',
           href: '/admin/photos',
@@ -140,49 +139,50 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
           href: '/admin/reviews',
           icon: Star,
         },
+        {
+          label: 'Digital Reviews',
+          href: '/admin/reviews?tab=testimonials',
+          icon: BookOpen,
+        },
       ],
     },
     {
       title: 'Site Configuration',
       items: [
         {
-          label: 'Homepage CMS',
+          label: 'Homepage Content',
           href: '/admin/homepage',
           icon: Globe,
         },
         {
-          label: 'SEO & Metadata',
-          href: '/admin/seo',
-          icon: Search,
-        },
-        {
-          label: 'Page Overrides',
+          label: 'Pages',
           href: '/admin/pages',
           icon: Layers,
         },
         {
-          label: 'Destinations',
-          href: '/admin/destinations',
-          icon: MapPin,
-        },
-        {
-          label: 'FAQ Questions',
-          href: '/admin/faq',
-          icon: HelpCircle,
-        },
-        {
-          label: 'Navigation Menus',
+          label: 'Navigation',
           href: '/admin/navigation',
           icon: MenuIcon,
         },
         {
-          label: 'Settings & Contact',
+          label: 'FAQ',
+          href: '/admin/faq',
+          icon: HelpCircle,
+        },
+      ],
+    },
+    {
+      title: 'Settings',
+      items: [
+        {
+          label: 'Settings & Guide',
           href: '/admin/settings',
           icon: Settings,
         },
       ],
     },
   ];
+
 
   const handleLogout = async () => {
     try {

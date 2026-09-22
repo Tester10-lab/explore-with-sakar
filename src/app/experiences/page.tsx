@@ -6,10 +6,8 @@ import Image from 'next/image';
 import {
   Compass,
   Sparkles,
-  Home,
   Heart,
   ShieldCheck,
-  Calendar,
   ArrowRight,
 } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
@@ -20,14 +18,14 @@ import { getPublicExperiences } from '@/lib/content';
 export const metadata: Metadata = {
   title: 'Experiences & Curated Journeys | Explore With Sakar',
   description:
-    'Discover our signature travel experiences in Nepal: Go Beyond the Map, Go Within, Feel Closer homestays, Leave a Mark conservation, and bespoke private journeys.',
+    'Discover our signature travel experiences in Nepal: Beyond the Map, Go Within, Go Deeper, and Leave a Mark.',
   alternates: {
     canonical: 'https://explorewithsakar.com/experiences',
   },
   openGraph: {
     title: 'Experiences & Curated Journeys | Explore With Sakar',
     description:
-      'Discover our signature travel experiences in Nepal: Go Beyond the Map, Go Within, Feel Closer homestays, Leave a Mark conservation, and bespoke private journeys.',
+      'Discover our signature travel experiences in Nepal: Beyond the Map, Go Within, Go Deeper, and Leave a Mark.',
     url: 'https://explorewithsakar.com/experiences',
     images: ['/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'],
   },
@@ -53,13 +51,13 @@ const CORE_PILLARS = [
     image: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
   },
   {
-    title: 'Feel Closer',
-    subtitle: 'Village Homestays & Living Hearths',
-    description: 'Authentic family hospitality, woodstove cooking, and lifelong human bonds with Gurung & Tamang hosts.',
-    href: '/experiences/homestays',
-    badge: 'Homestays',
-    icon: Home,
-    image: '/explore-with-sakar/images/homestays/village-meal.jpg',
+    title: 'Go Deeper',
+    subtitle: 'Immersive Deep-Dive Journeys',
+    description: 'Immersive deep-dive journeys into Nepal\'s hidden layers and living traditions beyond the surface.',
+    href: '/experiences/go-deeper',
+    badge: 'Immersive',
+    icon: Heart,
+    image: '/explore-with-sakar/images/mountains/alpine-valley.jpg',
   },
   {
     title: 'Leave a Mark',
@@ -67,17 +65,8 @@ const CORE_PILLARS = [
     description: 'Matching your actual professional skills with local communities in Nepal that need structural and administrative empowerment.',
     href: '/experiences/leave-a-mark',
     badge: 'Strategic Impact',
-    icon: Heart,
-    image: '/explore-with-sakar/images/trails/river-gorge.jpg',
-  },
-  {
-    title: 'Custom Private Journeys',
-    subtitle: 'Bespoke Itinerary Curation',
-    description: '100% private, tailor-made routes designed around your exact dates, passions, and personal rhythm with Sakar.',
-    href: '/experiences/custom-journeys',
-    badge: 'Bespoke',
     icon: ShieldCheck,
-    image: '/explore-with-sakar/images/mountains/mountain-ridge.jpg',
+    image: '/explore-with-sakar/images/trails/river-gorge.jpg',
   },
 ];
 
@@ -117,10 +106,10 @@ export default async function ExperiencesLandingPage() {
               Core Pillars of Travel
             </span>
             <h2 className="font-editorial-serif text-3xl sm:text-4xl font-bold text-himalaya-950 mt-1">
-              Five Distinct Ways to Experience Nepal
+              Four Distinct Ways to Experience Nepal
             </h2>
             <p className="text-sm sm:text-base text-himalaya-600 font-light mt-2 leading-relaxed">
-              We do not believe in one-size-fits-all sightseeing. Each package has its own dedicated philosophy, host relationships, and sensory character.
+              We do not believe in one-size-fits-all sightseeing. Each experience has its own dedicated philosophy, host relationships, and sensory character.
             </p>
           </div>
 

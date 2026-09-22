@@ -143,7 +143,6 @@ export default function AdminBlogsPage() {
       <ToastContainer toasts={toasts} onDismiss={(id) => setToasts((t) => t.filter((x) => x.id !== id))} />
 
       <AdminHeader
-        onToggleMobileSidebar={() => {}}
         title="Stories: Sakar’s Journal & Blogs"
         subtitle={`Total of ${blogs.length} stories & field notes published in the Himalayan Journal`}
         actionButton={{
@@ -216,7 +215,7 @@ export default function AdminBlogsPage() {
             <div className="divide-y divide-himalaya-800">
               {filteredBlogs.map((blog) => (
                 <div
-                  key={blog.id}
+                  key={blog.id || blog.slug}
                   className="p-5 hover:bg-himalaya-850/50 transition-colors flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
                 >
                   {/* Left info */}

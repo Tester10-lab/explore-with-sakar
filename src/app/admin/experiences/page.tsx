@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Plus,
   Compass,
@@ -29,7 +29,8 @@ import { ExtendedExperience, ItineraryDay } from '@/types/cms';
 
 const CATEGORY_OPTIONS = [
   { value: 'go-beyond', label: 'Go Beyond the Map' },
-  { value: 'go-spiritual', label: 'Go Spiritual' },
+  { value: 'go-spiritual', label: 'Go Within' },
+  { value: 'go-deeper', label: 'Go Deeper' },
   { value: 'feel-closer', label: 'Feel Closer' },
   { value: 'leave-a-mark', label: 'Leave a Mark' },
   { value: 'all-curated', label: 'All Curated Experiences' },
@@ -41,7 +42,8 @@ function getPillarLabel(category?: string, categoryLabel?: string): string {
     categoryLabel &&
     [
       'Go Beyond the Map',
-      'Go Spiritual',
+      'Go Within',
+      'Go Deeper',
       'Feel Closer',
       'Leave a Mark',
       'All Curated Experiences',
@@ -52,7 +54,8 @@ function getPillarLabel(category?: string, categoryLabel?: string): string {
   }
   if (!category) return 'Go Beyond the Map';
   if (category === 'go-beyond' || category === 'beyond-the-map' || category === 'heritage') return 'Go Beyond the Map';
-  if (category === 'go-spiritual' || category === 'spiritual-wellness' || category === 'spiritual') return 'Go Spiritual';
+  if (category === 'go-spiritual' || category === 'spiritual-wellness' || category === 'spiritual') return 'Go Within';
+  if (category === 'go-deeper') return 'Go Deeper';
   if (category === 'feel-closer' || category === 'homestays' || category === 'homestay') return 'Feel Closer';
   if (category === 'leave-a-mark' || category === 'responsible') return 'Leave a Mark';
   if (category === 'all-curated' || category === 'adventure') return 'All Curated Experiences';
@@ -60,11 +63,18 @@ function getPillarLabel(category?: string, categoryLabel?: string): string {
   return categoryLabel || category;
 }
 
-export default function AdminExperiencesPage() {
+function AdminExperiencesContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const urlPillar = searchParams.get('pillar') || 'all';
   const [experiences, setExperiences] = useState<ExtendedExperience[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedPillar, setSelectedPillar] = useState<string>('all');
+  const [selectedPillar, setSelectedPillar] = useState<string>(urlPillar);
+
+  // Sync pillar filter when URL param changes
+  useEffect(() => {
+    setSelectedPillar(searchParams.get('pillar') || 'all');
+  }, [searchParams]);
 
   // Edit / New Modal
   const [editingExp, setEditingExp] = useState<Partial<ExtendedExperience> | null>(null);
@@ -322,11 +332,10 @@ export default function AdminExperiencesPage() {
   return (
     <div className="space-y-6">
       <AdminHeader
-        onToggleMobileSidebar={() => {}}
-        title="Experiences: All Curated Experiences"
-        subtitle="Manage detailed day-by-day itineraries, cultural highlights, and responsible hosting published under /experiences/[slug]"
+        title="All Itineraries & Experiences"
+        subtitle="Manage day-by-day itineraries for all experience pillars. Use the pillar filter or navigate via the Experiences menu."
         actionButton={{
-          label: 'New Curated Experience',
+          label: 'New Experience',
           onClick: handleOpenNew,
           icon: <Plus className="w-4 h-4" />,
         }}
@@ -1170,3 +1179,12 @@ export default function AdminExperiencesPage() {
     </div>
   );
 }
+
+export default function AdminExperiencesPage() {
+  return (
+    <Suspense fallback={<div className="p-16 text-center text-parchment-400 font-mono text-xs">Loading itineraries...</div>}>
+      <AdminExperiencesContent />
+    </Suspense>
+  );
+}
+

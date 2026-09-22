@@ -5,20 +5,45 @@ import {
   getPublicExperienceBySlug,
   getPublicExperiences,
   getPageContent,
-  getPublicBeyondChapters,
-  getPublicEvents,
 } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
-import GoBeyondExperience from '@/components/experience/GoBeyondExperience';
-import GoSpiritualExperience from '@/components/experience/GoSpiritualExperience';
-import FeelCloserExperience from '@/components/experience/FeelCloserExperience';
-import LeaveAMarkExperience from '@/components/experience/LeaveAMarkExperience';
+import ExperiencePackageDiscovery, { PackageCard } from '@/components/experience/ExperiencePackageDiscovery';
 import CustomJourneysExperience from '@/components/experience/CustomJourneysExperience';
-import ExperienceDetailTemplate from '@/components/experience/ExperienceDetailTemplate';
+import { getPublicEvents } from '@/lib/content';
 
 interface Props {
   params: { slug: string };
 }
+
+import { EXPERIENCE_PILLARS } from '@/lib/experiencePillars';
+
+// Map individual topic slugs to their parent experience for backwards compatibility redirect
+const TOPIC_TO_PARENT_MAP: Record<string, string> = {
+  'kathmandu-durbar-square': 'beyond-the-map',
+  'kathmandu-square': 'beyond-the-map',
+  'bhaktapur-durbar-square': 'beyond-the-map',
+  'bhaktapur-square': 'beyond-the-map',
+  'patan-durbar-square': 'beyond-the-map',
+  'patan-square': 'beyond-the-map',
+  'pokhara-laid-back-city': 'beyond-the-map',
+  'pokhara': 'beyond-the-map',
+  'spiritual-immersion-singing-bowls': 'go-within',
+  'pharping-sacred-cave-meditation': 'go-within',
+  'namo-buddha-sacred-ridge-walk': 'go-within',
+  'monastery-chanting-inner-silence': 'go-within',
+  'living-courtyards-kathmandu': 'go-deeper',
+  'echoes-in-stone-patan-bhaktapur': 'go-deeper',
+  'artisans-path-heritage-deep-dive': 'go-deeper',
+  'sacred-geometry-architecture-valley': 'go-deeper',
+  'langtang-tamang-heritage-trail': 'leave-a-mark',
+  'chitwan-indigenous-tharu-guardians': 'leave-a-mark',
+  'community-sacred-forest-reforestation': 'leave-a-mark',
+  'strategic-community-capacity-building': 'leave-a-mark',
+  'village-homestay-panauti-balalthali': 'homestays',
+  'ghandruk-gurung-heritage-homestay': 'homestays',
+  'helambu-hyolmo-hearth-living': 'homestays',
+  'bungamati-khokana-artisan-village': 'homestays',
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = params;
@@ -39,59 +64,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
   }
 
-  // Fallbacks for the 5 canonical experience pillars
-  if (slug === 'beyond-the-map' || slug === 'go-beyond') {
+  // Experience pillar metadata
+  const pillar = EXPERIENCE_PILLARS[slug];
+  if (pillar) {
     return {
-      title: 'Go Beyond the Map | Explore With Sakar',
-      description: 'Step beyond the common tourist map. Walk medieval courtyards, meet master artisans, and experience Living Nepal.',
-      alternates: { canonical: 'https://explorewithsakar.com/experiences/beyond-the-map' },
+      title: `${pillar.name} | Explore With Sakar`,
+      description: pillar.introText,
+      alternates: { canonical: `https://explorewithsakar.com/experiences/${pillar.canonicalSlug}` },
       openGraph: {
-        title: 'Go Beyond the Map | Explore With Sakar',
-        description: 'Step beyond the common tourist map. Walk medieval courtyards, meet master artisans, and experience Living Nepal.',
-        url: 'https://explorewithsakar.com/experiences/beyond-the-map',
-        images: ['/images/beyond-the-map/living-courtyards.jpg'],
-      },
-    };
-  }
-
-  if (slug === 'spiritual-wellness' || slug === 'go-spiritual') {
-    return {
-      title: 'Go Within — Himalayan Sound & Spiritual Sanctuary | Explore With Sakar',
-      description: 'Himalayan singing bowls, monastery dawns, sacred stillness, and deep inner renewal in Nepal.',
-      alternates: { canonical: 'https://explorewithsakar.com/experiences/spiritual-wellness' },
-      openGraph: {
-        title: 'Go Within — Himalayan Sound & Spiritual Sanctuary | Explore With Sakar',
-        description: 'Himalayan singing bowls, monastery dawns, sacred stillness, and deep inner renewal in Nepal.',
-        url: 'https://explorewithsakar.com/experiences/spiritual-wellness',
-        images: ['/explore-with-sakar/images/spiritual/buddhist-stupa.jpg'],
-      },
-    };
-  }
-
-  if (slug === 'homestays' || slug === 'feel-closer') {
-    return {
-      title: 'Feel Closer — Village Homestays & Living Hearths | Explore With Sakar',
-      description: 'Mountain village homestays, traditional family hearths, and warm human connections in Nepal.',
-      alternates: { canonical: 'https://explorewithsakar.com/experiences/homestays' },
-      openGraph: {
-        title: 'Feel Closer — Village Homestays & Living Hearths | Explore With Sakar',
-        description: 'Mountain village homestays, traditional family hearths, and warm human connections in Nepal.',
-        url: 'https://explorewithsakar.com/experiences/homestays',
-        images: ['/explore-with-sakar/images/homestays/village-meal.jpg'],
-      },
-    };
-  }
-
-  if (slug === 'leave-a-mark') {
-    return {
-      title: 'Leave a Mark — Strategic Volunteer Tourism | Explore With Sakar',
-      description: 'Strategic volunteering and regenerative travel that empowers local communities in Nepal.',
-      alternates: { canonical: 'https://explorewithsakar.com/experiences/leave-a-mark' },
-      openGraph: {
-        title: 'Leave a Mark — Strategic Volunteer Tourism | Explore With Sakar',
-        description: 'Strategic volunteering and regenerative travel that empowers local communities in Nepal.',
-        url: 'https://explorewithsakar.com/experiences/leave-a-mark',
-        images: ['/explore-with-sakar/images/trails/river-gorge.jpg'],
+        title: `${pillar.name} | Explore With Sakar`,
+        description: pillar.introText,
+        url: `https://explorewithsakar.com/experiences/${pillar.canonicalSlug}`,
+        images: [pillar.heroImage],
       },
     };
   }
@@ -111,7 +95,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const experience = await getPublicExperienceBySlug(slug);
-
   if (!experience) {
     return {
       title: 'Experience Not Found | Explore With Sakar',
@@ -142,16 +125,18 @@ export async function generateStaticParams() {
   const experiences = await getPublicExperiences();
   const existingSlugs = new Set(experiences.map((exp) => exp.slug));
 
+  // Add all canonical pillars
   const canonicalPillars = [
     'beyond-the-map',
+    'go-within',
     'spiritual-wellness',
+    'go-deeper',
     'homestays',
     'leave-a-mark',
     'custom-journeys',
   ];
 
   canonicalPillars.forEach((s) => existingSlugs.add(s));
-
   return Array.from(existingSlugs).map((slug) => ({ slug }));
 }
 
@@ -166,7 +151,10 @@ export default async function ExperienceDetailPage({ params }: Props) {
     permanentRedirect('/experiences/beyond-the-map');
   }
   if (slug === 'go-spiritual') {
-    permanentRedirect('/experiences/spiritual-wellness');
+    permanentRedirect('/experiences/go-within');
+  }
+  if (slug === 'spiritual-wellness') {
+    permanentRedirect('/experiences/go-within');
   }
   if (slug === 'feel-closer') {
     permanentRedirect('/experiences/homestays');
@@ -175,34 +163,67 @@ export default async function ExperienceDetailPage({ params }: Props) {
     permanentRedirect('/experiences/custom-journeys');
   }
 
-  // 2. Canonical Pillar Handlers
-  if (slug === 'beyond-the-map') {
-    const [pageContent, chapters] = await Promise.all([
-      getPageContent('beyond-the-map').then((res) => res || getPageContent('go-beyond')),
-      getPublicBeyondChapters(),
-    ]);
-    return <GoBeyondExperience pageContent={pageContent} chapters={chapters} />;
+  // 2. If slug is an individual topic slug, redirect to its parent canonical route: /experiences/[parent]/[topic]
+  if (TOPIC_TO_PARENT_MAP[slug]) {
+    const parentSlug = TOPIC_TO_PARENT_MAP[slug];
+    permanentRedirect(`/experiences/${parentSlug}/${slug}`);
   }
 
-  if (slug === 'spiritual-wellness') {
-    const pageContent = await getPageContent('spiritual-wellness').then(
-      (res) => res || getPageContent('go-spiritual')
+  // 3. Core experience pillars → Package Discovery pages (showing Overview, Highlights, and 4 Topic cards)
+  const pillar = EXPERIENCE_PILLARS[slug];
+  if (pillar) {
+    const allExperiences = await getPublicExperiences();
+    const PARENT_SLUGS_TO_EXCLUDE = [
+      'beyond-the-map',
+      'go-beyond',
+      'go-spiritual',
+      'spiritual-wellness',
+      'go-within',
+      'leave-a-mark',
+      'feel-closer',
+      'all-curated-experiences',
+      'custom-private-journeys',
+    ];
+    const pillarPackages: PackageCard[] = allExperiences
+      .filter(
+        (exp) =>
+          pillar.categoryFilter.includes(exp.category) &&
+          !PARENT_SLUGS_TO_EXCLUDE.includes(exp.slug)
+      )
+      .map((exp) => ({
+        slug: exp.slug,
+        title: exp.title,
+        shortDescription: exp.shortDescription,
+        heroImage: exp.heroImage ? { src: exp.heroImage.src, alt: exp.heroImage.alt } : undefined,
+      }));
+
+    // If CMS has a parent experience record, allow its customized title/intro/overview/highlights to be used
+    const cmsParent = allExperiences.find((e) => e.slug === slug);
+    const expName = cmsParent?.title || pillar.name;
+    const expIntro = cmsParent?.shortDescription || pillar.introText;
+    const expOverview = (Array.isArray(cmsParent?.fullDescription) && cmsParent.fullDescription.length > 0)
+      ? cmsParent.fullDescription
+      : pillar.overviewText;
+    const expHighlights = (cmsParent?.highlights && cmsParent.highlights.length > 0)
+      ? cmsParent.highlights
+      : pillar.highlights;
+    const expHeroImage = cmsParent?.heroImage?.src || pillar.heroImage;
+
+    return (
+      <ExperiencePackageDiscovery
+        experienceName={expName}
+        nepaliTitle={cmsParent?.nepaliTitle || pillar.nepaliTitle}
+        introText={expIntro}
+        overviewText={expOverview}
+        highlights={expHighlights}
+        heroImage={expHeroImage}
+        packages={pillarPackages}
+        experienceSlug={pillar.canonicalSlug}
+      />
     );
-    return <GoSpiritualExperience pageContent={pageContent} />;
   }
 
-  if (slug === 'homestays') {
-    const pageContent = await getPageContent('homestays').then(
-      (res) => res || getPageContent('feel-closer')
-    );
-    return <FeelCloserExperience pageContent={pageContent} />;
-  }
-
-  if (slug === 'leave-a-mark') {
-    const pageContent = await getPageContent('leave-a-mark');
-    return <LeaveAMarkExperience pageContent={pageContent} />;
-  }
-
+  // 4. Custom Journeys (special handler, preserved)
   if (slug === 'custom-journeys') {
     const [pageContent, events] = await Promise.all([
       getPageContent('custom-journeys').then((res) => res || getPageContent('custom-private-journeys')),
@@ -216,22 +237,30 @@ export default async function ExperienceDetailPage({ params }: Props) {
     return <CustomJourneysExperience pageContent={pageContent} availableEvents={availableEvents} />;
   }
 
-  // 3. Curated Itinerary Journeys
+  // 5. Fallback for any single-topic experience not mapped above
   const experience = await getPublicExperienceBySlug(slug);
-
   if (!experience) {
     notFound();
   }
 
-  const allExperiences = await getPublicExperiences();
-  const relatedExperiences = allExperiences
-    .filter((e) => e.slug !== slug && e.slug !== 'all-curated-experiences')
-    .slice(0, 3);
+  // If experience has a known parent category, redirect to canonical nested route
+  const categoryToParent: Record<string, string> = {
+    'beyond-the-map': 'beyond-the-map',
+    'go-beyond': 'beyond-the-map',
+    'go-within': 'go-within',
+    'go-spiritual': 'go-within',
+    'spiritual-wellness': 'go-within',
+    'go-deeper': 'go-deeper',
+    'leave-a-mark': 'leave-a-mark',
+    'homestays': 'homestays',
+    'feel-closer': 'homestays',
+  };
 
-  return (
-    <ExperienceDetailTemplate
-      experience={experience}
-      relatedExperiences={relatedExperiences}
-    />
-  );
+  if (experience.category && categoryToParent[experience.category]) {
+    const parent = categoryToParent[experience.category];
+    permanentRedirect(`/experiences/${parent}/${experience.slug}`);
+  }
+
+  notFound();
 }
+

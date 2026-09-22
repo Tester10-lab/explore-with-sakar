@@ -157,15 +157,16 @@ export interface BlogPost {
   readingTime: string;
   featuredImage: ImageAsset;
   tags: string[];
+  pillar?: string;
   isDraftSample?: boolean;
   content: BlogBlock[];
-  contextualCta: {
+  contextualCta?: {
     title: string;
     description: string;
     buttonText: string;
     experienceSlug?: string;
   };
-  relatedSlugs: string[];
+  relatedSlugs?: string[];
 }
 
 export interface BookingInquiry {

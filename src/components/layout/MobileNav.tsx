@@ -74,7 +74,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
             <div className="p-5 flex items-center justify-between border-b border-parchment-300 bg-white">
               <Link href="/" onClick={onClose} className="inline-block touch-manipulation">
                 <Image
-                  src={settings.branding?.logoUrl || '/explore-with-sakar/images/logo.png'}
+                  src={settings.branding?.logoUrl?.trim() || '/explore-with-sakar/images/logo.png'}
                   alt={settings.branding?.siteName || 'Explore With Sakar'}
                   width={140}
                   height={36}
@@ -243,7 +243,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         </Link>
 
                         <Link
-                          href="/experiences/spiritual-wellness"
+                          href="/experiences/go-within"
                           onClick={onClose}
                           className="block group pt-2.5 pb-1"
                         >
@@ -262,21 +262,21 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         </Link>
 
                         <Link
-                          href="/experiences/homestays"
+                          href="/experiences/go-deeper"
                           onClick={onClose}
                           className="block group pt-2.5 pb-1"
                         >
                           <div className="flex items-center justify-between">
                             <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
-                              <Home className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
-                              Feel Closer
+                              <Compass className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Go Deeper
                             </span>
                             <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
-                              Homestays
+                              Immersion
                             </span>
                           </div>
                           <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                            Traditional village homestays, hearthside cooking & warm family bonds.
+                            Living courtyards, sacred geometry & generational artisan traditions.
                           </p>
                         </Link>
 
@@ -296,6 +296,25 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                           </div>
                           <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
                             Strategic volunteer tourism & administrative empowerment.
+                          </p>
+                        </Link>
+
+                        <Link
+                          href="/experiences/homestays"
+                          onClick={onClose}
+                          className="block group pt-2.5 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <Home className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Feel Closer
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Homestays
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Traditional village homestays, hearthside cooking & warm family bonds.
                           </p>
                         </Link>
 

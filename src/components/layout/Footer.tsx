@@ -63,7 +63,7 @@ export default function Footer() {
           <div className="sm:col-span-2 space-y-6 pr-4">
             <Link href="/" className="inline-block group">
               <Image
-                src={settings.branding?.logoUrl || '/explore-with-sakar/images/logo.png'}
+                src={settings.branding?.logoUrl?.trim() || '/explore-with-sakar/images/logo.png'}
                 alt={settings.branding?.siteName || 'Explore With Sakar Logo'}
                 width={180}
                 height={48}

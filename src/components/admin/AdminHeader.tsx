@@ -28,7 +28,16 @@ export default function AdminHeader({
   children,
 }: AdminHeaderProps) {
   const { toggleMobileSidebar } = useAdminLayout();
-  const handleToggle = onToggleMobileSidebar || toggleMobileSidebar;
+  const handleToggle = () => {
+    if (typeof onToggleMobileSidebar === 'function') {
+      try {
+        onToggleMobileSidebar();
+      } catch (err) {
+        console.error('onToggleMobileSidebar error:', err);
+      }
+    }
+    toggleMobileSidebar();
+  };
 
   return (
     <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-8 py-3.5 sm:py-4 shadow-xs">

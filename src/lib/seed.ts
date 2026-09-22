@@ -23,6 +23,7 @@ import { DEFAULT_PUBLIC_PAGES } from '@/data/pages';
 import { BEYOND_EXPERIENCES } from '@/data/beyond-the-map';
 import { LEAVE_A_MARK_CONTENT } from '@/data/leave-a-mark';
 import { CmsBeyondChapter } from '@/types/cms';
+import { BLOG_POSTS } from '@/data/blog';
 
 const SEED_FILE = path.join(process.cwd(), 'data', 'cms-store.json');
 
@@ -123,12 +124,12 @@ export function getDefaultNavigation(): NavigationConfig {
             order: 1,
           },
           {
-            id: 'nav-closer',
-            label: 'Feel Closer',
-            description: 'Traditional village homestays, hearthside cooking & warm family bonds.',
-            url: '/experiences/homestays',
-            badge: 'Homestays',
-            icon: 'home',
+            id: 'nav-deeper',
+            label: 'Go Deeper',
+            description: 'Immersive deep-dive journeys into Nepal\'s hidden layers and living traditions.',
+            url: '/experiences/go-deeper',
+            badge: 'Immersive',
+            icon: 'layers',
             visible: true,
             order: 2,
           },
@@ -217,7 +218,7 @@ export function getDefaultNavigation(): NavigationConfig {
           links: [
             { id: 'fl-1', label: 'Go Beyond the Map', url: '/experiences/beyond-the-map', visible: true, order: 0 },
             { id: 'fl-2', label: 'Go Within', url: '/experiences/spiritual-wellness', visible: true, order: 1 },
-            { id: 'fl-3', label: 'Feel Closer', url: '/experiences/homestays', visible: true, order: 2 },
+            { id: 'fl-3', label: 'Go Deeper', url: '/experiences/go-deeper', visible: true, order: 2 },
             { id: 'fl-4', label: 'Leave a Mark', url: '/experiences/leave-a-mark', visible: true, order: 3 },
             { id: 'fl-5', label: 'Custom Private Journeys', url: '/experiences/custom-journeys', visible: true, order: 4 },
             { id: 'fl-6', label: 'All Curated Experiences →', url: '/experiences', visible: true, order: 5 },
@@ -330,7 +331,7 @@ export function getSeedStoreFromDisk(): CMSDataStore {
     experiences: [],
     services: [],
     inquiries: [],
-    blogs: [],
+    blogs: BLOG_POSTS as any,
     photos: [],
     reviews: [],
     handwrittenReviews: [],
@@ -340,6 +341,15 @@ export function getSeedStoreFromDisk(): CMSDataStore {
 
 export function getSeedForKey(key: string): any {
   const fileStore = getSeedStoreFromDisk();
+
+  // For blogs: if fileStore has a populated array, use it; otherwise guarantee BLOG_POSTS (37 blogs)
+  if (key === 'blogs') {
+    if (fileStore && Array.isArray(fileStore.blogs) && fileStore.blogs.length > 0) {
+      return fileStore.blogs;
+    }
+    return BLOG_POSTS;
+  }
+
   // Always honor explicit data from fileStore, even if it is an empty array []
   if (fileStore && (fileStore as any)[key] !== undefined) {
     return (fileStore as any)[key];
@@ -356,18 +366,23 @@ export function getSeedForKey(key: string): any {
     case 'leaveAMark':
       return getDefaultLeaveAMark();
     case 'events':
+      return fileStore?.events || getDefaultEvents();
     case 'destinations':
+      return fileStore?.destinations || getDefaultDestinations();
     case 'faq':
+      return fileStore?.faq || getDefaultFaq();
     case 'beyondChapters':
+      return fileStore?.beyondChapters || getDefaultBeyondChapters();
+    case 'blogs':
+      return (fileStore?.blogs && fileStore.blogs.length > 0) ? fileStore.blogs : BLOG_POSTS;
+    case 'photos':
+      return fileStore?.photos || [];
+    case 'reviews':
+      return fileStore?.reviews || [];
+    case 'handwrittenReviews':
+      return fileStore?.handwrittenReviews || [];
     case 'inquiries':
     case 'pageRevisions':
-    case 'packages':
-    case 'experiences':
-    case 'services':
-    case 'blogs':
-    case 'photos':
-    case 'reviews':
-    case 'handwrittenReviews':
     default:
       return [];
   }
