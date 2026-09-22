@@ -1,8 +1,13 @@
 import { MongoClient } from 'mongodb';
 import crypto from 'crypto';
 
-const MONGODB_URI = 'mongodb+srv://explorewithsakar_db_user:SakarTravel2026@cluster0.1dq7qw7.mongodb.net/explore_with_sakar_dev?retryWrites=true&w=majority';
-const DB_NAME = 'explore_with_sakar_dev';
+const MONGODB_URI = process.env.MONGODB_URI;
+const DB_NAME = process.env.MONGODB_DB || 'explore_with_sakar_dev';
+
+if (!MONGODB_URI) {
+  console.error('Error: MONGODB_URI environment variable is not set.');
+  process.exit(1);
+}
 
 function hashPassword(password, salt) {
   const generatedSalt = salt || crypto.randomBytes(16).toString('hex');

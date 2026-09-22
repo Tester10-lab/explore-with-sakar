@@ -28,8 +28,9 @@
 - [x] P0.1 P0.2 P0.3
 - [x] P1.1 P1.2 P1.3 P1.4 P1.5 P1.6 — T5 T6 T7 T10
 - [x] P2.1 P2.2 P2.3 P2.4 P2.5 P2.6 — T1 T2 T3 T4 T9 T11
-- [ ] P3.1 P3.2 P3.3 P3.4 — T8 T12
-- [ ] P4.1 P4.2 (P4.3 blocked)
+- [x] P3.1 P3.2 P3.3 P3.4 — T8 T12
+- [x] P4.1 P4.2 P4.3 — T6 T7
+- [x] F0 F1 F2 F3 F4 F5 (Migrations, Remove Packages, FAQ, Events→Inquiries, SEO, Itineraries)
 
 ---
 

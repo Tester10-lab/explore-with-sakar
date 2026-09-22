@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
   let safeHost = '(not set)';
   if (mongoUri) {
     try {
-      // Extract host from mongodb+srv://user:pass@host/db
+      // Extract host from mongodb+srv://USER:PASS@host/db
       const withoutProto = mongoUri.replace(/^mongodb(\+srv)?:\/\//, '');
       const afterAt = withoutProto.includes('@') ? withoutProto.split('@')[1] : withoutProto;
       safeHost = afterAt.split('/')[0]; // cluster0.xxxxx.mongodb.net
