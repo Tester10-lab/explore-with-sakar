@@ -8,9 +8,15 @@ export class MongoUnavailableError extends Error {
   }
 }
 
-// Apply custom DNS servers only when MONGODB_DNS_SERVERS is explicitly set.
-// This is needed on some Vercel regions where Atlas SRV DNS resolution is slow.
-if (process.env.MONGODB_DNS_SERVERS && typeof dns.setServers === 'function') {
+// Apply custom DNS servers only in local development when explicitly requested.
+// On Vercel / AWS Lambda, external UDP port 53 is blocked by security groups,
+// which causes dns.setServers(['8.8.8.8']) to hang and drop packets indefinitely.
+if (
+  process.env.MONGODB_DNS_SERVERS &&
+  typeof dns.setServers === 'function' &&
+  !process.env.VERCEL &&
+  process.env.NODE_ENV !== 'production'
+) {
   try {
     const servers = process.env.MONGODB_DNS_SERVERS.split(',')
       .map((s) => s.trim())
