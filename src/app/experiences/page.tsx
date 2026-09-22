@@ -14,19 +14,20 @@ import PageHero from '@/components/common/PageHero';
 import CTASection from '@/components/common/CTASection';
 import ExperienceCatalogClient from './ExperienceCatalogClient';
 import { getPublicExperiences } from '@/lib/content';
+import { getCanonicalUrl } from '@/lib/config';
 
 export const metadata: Metadata = {
   title: 'Experiences & Curated Journeys | Explore With Sakar',
   description:
     'Discover our signature travel experiences in Nepal: Beyond the Map, Go Within, Go Deeper, and Leave a Mark.',
   alternates: {
-    canonical: 'https://explorewithsakar.com/experiences',
+    canonical: getCanonicalUrl('/experiences'),
   },
   openGraph: {
     title: 'Experiences & Curated Journeys | Explore With Sakar',
     description:
       'Discover our signature travel experiences in Nepal: Beyond the Map, Go Within, Go Deeper, and Leave a Mark.',
-    url: 'https://explorewithsakar.com/experiences',
+    url: getCanonicalUrl('/experiences'),
     images: ['/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'],
   },
 };

@@ -528,9 +528,16 @@ export async function getAdminUser(): Promise<AdminUser> {
   if (user && user.passwordHash) {
     return user;
   }
-  // Initialize with env credentials or fallback hash
-  const initialPassword = process.env.ADMIN_PASSWORD || 'sakar2026';
+  // Require environment configuration - never use hardcoded credentials
+  const initialPassword = process.env.ADMIN_PASSWORD;
   const initialUsername = process.env.ADMIN_USERNAME || 'admin';
+
+  if (!initialPassword) {
+    throw new Error(
+      'ADMIN_PASSWORD environment variable is not set. Please define ADMIN_PASSWORD in your environment configuration (.env.local or production host settings).'
+    );
+  }
+
   const { hash, salt } = hashPassword(initialPassword);
   const admin: AdminUser = {
     username: initialUsername,

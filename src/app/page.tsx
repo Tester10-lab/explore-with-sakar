@@ -18,6 +18,7 @@ import {
   getPublicPillarStories,
   type PillarStory,
 } from '@/lib/content';
+import { SITE_ORIGIN } from '@/lib/config';
 import BlogCard from '@/components/blog/BlogCard';
 import SectionHeading from '@/components/common/SectionHeading';
 import InquiryForm from '@/components/booking/InquiryForm';
@@ -25,7 +26,7 @@ import InquiryForm from '@/components/booking/InquiryForm';
 const FALLBACK_METADATA: Metadata = {
   title: 'Explore With Sakar — Authentic Nepal Travel & Cultural Experiences',
   description: 'Meaningful Nepal travel experiences beyond ordinary tourism. Guided by local host Sakar through living culture, village homestays, Himalayan spirituality, and responsible slow travel.',
-  alternates: { canonical: 'https://explorewithsakar.com/' },
+  alternates: { canonical: `${SITE_ORIGIN}/` },
 };
 
 export async function generateMetadata(): Promise<Metadata> {

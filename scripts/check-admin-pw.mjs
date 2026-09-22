@@ -25,18 +25,17 @@ async function main() {
   console.log('\n=== Current admin doc ===');
   console.log(JSON.stringify(doc?.value || doc, null, 2));
 
-  // Test if 'sakar2026' matches the stored hash
-  if (doc?.value?.passwordHash && doc?.value?.salt) {
-    const { hash } = hashPassword('sakar2026', doc.value.salt);
+  // Test if configured password matches the stored hash
+  const testPw = process.env.ADMIN_PASSWORD;
+  if (doc?.value?.passwordHash && doc?.value?.salt && testPw) {
+    const { hash } = hashPassword(testPw, doc.value.salt);
     const match = hash === doc.value.passwordHash;
-    console.log('\n=== Password check: "sakar2026" ===');
+    console.log('\n=== Password check for configured ADMIN_PASSWORD ===');
     console.log('Matches stored hash:', match);
-
-    const { hash: hash2 } = hashPassword('sakar@admin2026', doc.value.salt);
-    const match2 = hash2 === doc.value.passwordHash;
-    console.log('Matches stored hash: "sakar@admin2026":', match2);
+  } else if (!testPw) {
+    console.log('\nADMIN_PASSWORD environment variable not set.');
   } else {
-    console.log('\nNo admin doc found in DB — will be created on first login using default password.');
+    console.log('\nNo admin doc found in DB.');
   }
 
   await client.close();

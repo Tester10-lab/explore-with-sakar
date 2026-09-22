@@ -3,9 +3,10 @@ import { getPublicExperiences, getPublicBlogs } from '@/lib/content';
 import { readKey } from '@/lib/store';
 import { PageContent } from '@/types/cms';
 import { DEFAULT_PUBLIC_PAGES } from '@/data/pages';
+import { SITE_ORIGIN } from '@/lib/config';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://explorewithsakar.com';
+  const baseUrl = SITE_ORIGIN;
 
   try {
     // 1. Pages from CMS / Seed
@@ -27,8 +28,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const CANONICAL_EXPERIENCE_MAP: Record<string, string> = {
       'go-beyond': '/experiences/beyond-the-map',
       'beyond-the-map': '/experiences/beyond-the-map',
-      'go-spiritual': '/experiences/spiritual-wellness',
-      'spiritual-wellness': '/experiences/spiritual-wellness',
+      'go-within': '/experiences/go-within',
+      'go-spiritual': '/experiences/go-within',
+      'spiritual-wellness': '/experiences/go-within',
       'feel-closer': '/experiences/homestays',
       'homestays': '/experiences/homestays',
       'leave-a-mark': '/experiences/leave-a-mark',
@@ -66,7 +68,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const coreExperienceRoutes: MetadataRoute.Sitemap = [
       { url: `${baseUrl}/experiences`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
       { url: `${baseUrl}/experiences/beyond-the-map`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-      { url: `${baseUrl}/experiences/spiritual-wellness`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+      { url: `${baseUrl}/experiences/go-within`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
       { url: `${baseUrl}/experiences/homestays`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
       { url: `${baseUrl}/experiences/leave-a-mark`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
       { url: `${baseUrl}/experiences/custom-journeys`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },

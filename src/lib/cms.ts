@@ -437,13 +437,28 @@ export async function getLiveNavigation(): Promise<NavigationConfig> {
 }
 
 /**
- * Fetch all editable pages with fallback. Empty collection stays empty.
+ * Fetch all editable pages with fallback to DEFAULT_PUBLIC_PAGES when empty or unseeded.
  */
 export async function getLiveAllPages(): Promise<PageContent[]> {
   try {
-    const pages = await getAllPages();
-    if (Array.isArray(pages)) {
-      return pages;
+    const dbPages = await getAllPages();
+    if (Array.isArray(dbPages)) {
+      if (dbPages.length === 0) {
+        return DEFAULT_PUBLIC_PAGES;
+      }
+      // Merge DB pages over DEFAULT_PUBLIC_PAGES so all site pages exist
+      // and any page edited/saved in DB takes precedence.
+      const dbSlugMap = new Map(dbPages.map((p) => [p.slug, p]));
+      const merged = DEFAULT_PUBLIC_PAGES.map((defPage) => {
+        return dbSlugMap.get(defPage.slug) || defPage;
+      });
+      // Also include any custom pages created in DB that aren't in DEFAULT_PUBLIC_PAGES
+      dbPages.forEach((p) => {
+        if (!DEFAULT_PUBLIC_PAGES.some((dp) => dp.slug === p.slug)) {
+          merged.push(p);
+        }
+      });
+      return merged;
     }
   } catch (err) {
     console.warn('Fallback to static pages due to CMS error:', err);
@@ -454,7 +469,8 @@ export async function getLiveAllPages(): Promise<PageContent[]> {
 
 const PAGE_SLUG_ALIASES: Record<string, string> = {
   'go-beyond': 'beyond-the-map',
-  'go-spiritual': 'spiritual-wellness',
+  'go-spiritual': 'go-within',
+  'spiritual-wellness': 'go-within',
   'feel-closer': 'homestays',
   'all-curated-experiences': 'experiences',
   'custom-private-journeys': 'custom-journeys',

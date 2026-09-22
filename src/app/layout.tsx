@@ -4,6 +4,7 @@ import './globals.css';
 import PublicLayoutWrapper from '@/components/layout/PublicLayoutWrapper';
 import { SettingsProvider } from '@/context/SettingsContext';
 import { getPublicSettings, getPublicNavigation } from '@/lib/content';
+import { SITE_ORIGIN } from '@/lib/config';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -36,7 +37,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://explorewithsakar.com'),
+  metadataBase: new URL(SITE_ORIGIN),
   title: 'Explore With Sakar — Authentic Nepal Travel & Cultural Experiences',
   description: 'Meaningful Nepal travel experiences beyond ordinary tourism. Guided by local host Sakar through living culture, village homestays, Himalayan spirituality, and responsible slow travel.',
   keywords: [
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://explorewithsakar.com',
+    url: SITE_ORIGIN,
     siteName: 'Explore With Sakar',
     title: 'Explore With Sakar — Authentic Nepal Travel & Cultural Experiences',
     description: 'Discover Nepal through culture, spirituality, adventure & meaningful human connections with local host Sakar.',
@@ -131,7 +132,7 @@ export default async function RootLayout({
                 addressLocality: 'Kathmandu',
                 addressCountry: 'NP',
               },
-              url: 'https://explorewithsakar.com',
+              url: SITE_ORIGIN,
               telephone: '+977-9840482692',
               priceRange: '$$',
             }),

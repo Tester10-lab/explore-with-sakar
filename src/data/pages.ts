@@ -1,4 +1,5 @@
 import { PageContent } from '@/types/cms';
+import { SITE_ORIGIN } from '@/lib/config';
 
 /**
  * Master public pages structure mapping all current public website pages 1:1.
@@ -14,7 +15,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Explore With Sakar | Authentic Nepal Travel & Cultural Journeys',
       metaDescription: 'Meaningful Nepal travel experiences beyond ordinary tourism. Intimate human connections, village homestays, and sacred heritage.',
-      canonicalUrl: 'https://explorewithsakar.com/',
+      canonicalUrl: `${SITE_ORIGIN}/`,
       sitemapVisible: true,
     },
     sections: [
@@ -38,7 +39,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Go Beyond the Map | Authentic Exploration with Sakar',
       metaDescription: 'Step past grand facades into hidden residential bahals, Patan and Bhaktapur histories, master artisan guilds, and sacred geometry.',
-      canonicalUrl: 'https://explorewithsakar.com/experiences/beyond-the-map',
+      canonicalUrl: `${SITE_ORIGIN}/experiences/beyond-the-map`,
       sitemapVisible: true,
     },
     sections: [
@@ -52,14 +53,14 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     updatedAt: new Date().toISOString(),
   },
   {
-    slug: 'spiritual-wellness',
+    slug: 'go-within',
     name: 'Go Within (Spiritual & Sound Sanctuary)',
-    url: '/experiences/spiritual-wellness',
+    url: '/experiences/go-within',
     status: 'published',
     seo: {
       title: 'Himalayan Spiritual & Sound Sanctuary | Explore With Sakar',
       metaDescription: 'Experience Tibetan singing bowl sound therapy, dawn monastery chanting, sacred meditation caves, and restorative mindfulness in the Himalayas.',
-      canonicalUrl: 'https://explorewithsakar.com/experiences/spiritual-wellness',
+      canonicalUrl: `${SITE_ORIGIN}/experiences/go-within`,
       sitemapVisible: true,
     },
     sections: [
@@ -80,7 +81,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Village Homestays & Community Living | Explore With Sakar',
       metaDescription: 'Stay with Gurung and Tamang mountain families. Share woodfire meals, harvest organic terraced fields, and experience authentic Nepali hospitality.',
-      canonicalUrl: 'https://explorewithsakar.com/experiences/homestays',
+      canonicalUrl: `${SITE_ORIGIN}/experiences/homestays`,
       sitemapVisible: true,
     },
     sections: [
@@ -101,7 +102,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Leave a Mark: Strategic Volunteer Tourism | Explore With Sakar',
       metaDescription: 'Matching your actual professional skills with local communities in Nepal that need structural, strategic, and administrative empowerment.',
-      canonicalUrl: 'https://explorewithsakar.com/experiences/leave-a-mark',
+      canonicalUrl: `${SITE_ORIGIN}/experiences/leave-a-mark`,
       sitemapVisible: true,
     },
     sections: [
@@ -122,7 +123,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Curated Experiences | Handcrafted Journeys in Nepal',
       metaDescription: 'Immersive multi-day itineraries crafted by Sakar combining cultural celebrations, mountain sanctuary walks, and village warmth.',
-      canonicalUrl: 'https://explorewithsakar.com/experiences',
+      canonicalUrl: `${SITE_ORIGIN}/experiences`,
       sitemapVisible: true,
     },
     sections: [
@@ -141,7 +142,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Custom Private Journeys | Bespoke Nepal Travel Curation',
       metaDescription: 'Tailor-made itineraries for solo travelers, couples & families with Sakar. Private vehicles, personalized pace, and direct host accompaniment.',
-      canonicalUrl: 'https://explorewithsakar.com/experiences/custom-journeys',
+      canonicalUrl: `${SITE_ORIGIN}/experiences/custom-journeys`,
       sitemapVisible: true,
     },
     sections: [
@@ -163,7 +164,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Festivals & Sacred Events in Nepal | Explore With Sakar',
       metaDescription: 'Experience Indra Jatra, Tihar, Mani Rimdu, Solstice retreats, and Shivaratri with authentic respectful access guided by Sakar.',
-      canonicalUrl: 'https://explorewithsakar.com/events',
+      canonicalUrl: `${SITE_ORIGIN}/events`,
       sitemapVisible: true,
     },
     sections: [
@@ -185,7 +186,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Himalayan Journal | Stories & Reflections on Nepal Travel',
       metaDescription: 'Firsthand essays, cultural insights, homestay memories, and practical travel wisdom from Sakar Aryal in Nepal.',
-      canonicalUrl: 'https://explorewithsakar.com/blog',
+      canonicalUrl: `${SITE_ORIGIN}/blog`,
       sitemapVisible: true,
     },
     sections: [
@@ -204,7 +205,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Traveler Reflections & Handwritten Letters | Explore With Sakar',
       metaDescription: 'Read authentic reviews, heartfelt feedback, and scanned handwritten guestbook letters from travelers who explored Nepal with Sakar.',
-      canonicalUrl: 'https://explorewithsakar.com/reviews',
+      canonicalUrl: `${SITE_ORIGIN}/reviews`,
       sitemapVisible: true,
     },
     sections: [
@@ -227,7 +228,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'About Sakar | Tour Director & Cultural Storyteller in Nepal',
       metaDescription: 'Learn about Sakar Aryal, his philosophy of slow and responsible travel in Nepal, and his roots in community hosting.',
-      canonicalUrl: 'https://explorewithsakar.com/about',
+      canonicalUrl: `${SITE_ORIGIN}/about`,
       sitemapVisible: true,
     },
     sections: [
@@ -249,7 +250,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Destinations in Nepal | Sacred Valleys & Mountain Havens',
       metaDescription: 'Discover Nepal’s most resonant regions: Kathmandu Valley, Annapurna Foothills, Mustang, Langtang, Chitwan, and Bandipur.',
-      canonicalUrl: 'https://explorewithsakar.com/destinations',
+      canonicalUrl: `${SITE_ORIGIN}/destinations`,
       sitemapVisible: true,
     },
     sections: [
@@ -268,7 +269,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Visual Journey | Photo Gallery of Nepal',
       metaDescription: 'A photographic journey through Nepal: Himalayan sunrises, ancient courtyards, village kitchens, and joyful encounters.',
-      canonicalUrl: 'https://explorewithsakar.com/gallery',
+      canonicalUrl: `${SITE_ORIGIN}/gallery`,
       sitemapVisible: true,
     },
     sections: [
@@ -288,7 +289,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'FAQ | Nepal Travel Questions Answered by Sakar',
       metaDescription: 'Practical information on best travel seasons, visa requirements, altitude safety, village homestay etiquette, and booking policies.',
-      canonicalUrl: 'https://explorewithsakar.com/faq',
+      canonicalUrl: `${SITE_ORIGIN}/faq`,
       sitemapVisible: true,
     },
     sections: [
@@ -307,7 +308,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Traveler Resources | Packing Lists & Cultural Etiquette in Nepal',
       metaDescription: 'Packing guides, cultural etiquette tips, Nepal reading lists, and health advice curated for mindful travelers.',
-      canonicalUrl: 'https://explorewithsakar.com/resources',
+      canonicalUrl: `${SITE_ORIGIN}/resources`,
       sitemapVisible: true,
     },
     sections: [
@@ -328,7 +329,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Contact Sakar | Start Planning Your Nepal Journey',
       metaDescription: 'Direct contact with Sakar Aryal via WhatsApp, email, or inquiry form to plan your custom Nepal journey.',
-      canonicalUrl: 'https://explorewithsakar.com/contact',
+      canonicalUrl: `${SITE_ORIGIN}/contact`,
       sitemapVisible: true,
     },
     sections: [
@@ -349,7 +350,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Privacy Policy | Explore With Sakar',
       metaDescription: 'Privacy policy for Explore With Sakar. How we handle and protect your personal travel inquiry data.',
-      canonicalUrl: 'https://explorewithsakar.com/privacy',
+      canonicalUrl: `${SITE_ORIGIN}/privacy`,
       sitemapVisible: false,
     },
     sections: [
@@ -367,7 +368,7 @@ export const DEFAULT_PUBLIC_PAGES: PageContent[] = [
     seo: {
       title: 'Terms of Service & Booking Conditions | Explore With Sakar',
       metaDescription: 'Booking terms, payment conditions, cancellation rules, and travel insurance requirements.',
-      canonicalUrl: 'https://explorewithsakar.com/terms',
+      canonicalUrl: `${SITE_ORIGIN}/terms`,
       sitemapVisible: false,
     },
     sections: [

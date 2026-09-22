@@ -10,6 +10,7 @@ import { buildPageMetadata } from '@/lib/seo';
 import ExperiencePackageDiscovery, { PackageCard } from '@/components/experience/ExperiencePackageDiscovery';
 import CustomJourneysExperience from '@/components/experience/CustomJourneysExperience';
 import { getPublicEvents } from '@/lib/content';
+import { SITE_ORIGIN } from '@/lib/config';
 
 // Force dynamic rendering so Vercel never serves a stale statically-cached
 // version of a pillar page (beyond-the-map, go-within, etc.).
@@ -54,7 +55,7 @@ const TOPIC_TO_PARENT_MAP: Record<string, string> = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = params;
-  const canonicalUrl = `https://explorewithsakar.com/experiences/${slug}`;
+  const canonicalUrl = `${SITE_ORIGIN}/experiences/${slug}`;
 
   // Check CMS page content first
   const pageContent = await getPageContent(slug);
@@ -77,11 +78,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: `${pillar.name} | Explore With Sakar`,
       description: pillar.introText,
-      alternates: { canonical: `https://explorewithsakar.com/experiences/${pillar.canonicalSlug}` },
+      alternates: { canonical: `${SITE_ORIGIN}/experiences/${pillar.canonicalSlug}` },
       openGraph: {
         title: `${pillar.name} | Explore With Sakar`,
         description: pillar.introText,
-        url: `https://explorewithsakar.com/experiences/${pillar.canonicalSlug}`,
+        url: `${SITE_ORIGIN}/experiences/${pillar.canonicalSlug}`,
         images: [pillar.heroImage],
       },
     };
@@ -91,11 +92,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: 'Custom Private Journeys | Explore With Sakar',
       description: 'Tailored private Himalayan routes designed around your passions, rhythm, and values.',
-      alternates: { canonical: 'https://explorewithsakar.com/experiences/custom-journeys' },
+      alternates: { canonical: `${SITE_ORIGIN}/experiences/custom-journeys` },
       openGraph: {
         title: 'Custom Private Journeys | Explore With Sakar',
         description: 'Tailored private Himalayan routes designed around your passions, rhythm, and values.',
-        url: 'https://explorewithsakar.com/experiences/custom-journeys',
+        url: `${SITE_ORIGIN}/experiences/custom-journeys`,
         images: ['/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'],
       },
     };

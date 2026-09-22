@@ -19,6 +19,7 @@ import { buildPageMetadata } from '@/lib/seo';
 import CTASection from '@/components/common/CTASection';
 import { EXPERIENCE_PILLARS } from '@/lib/experiencePillars';
 import { EXPERIENCES } from '@/data/experiences';
+import { getCanonicalUrl } from '@/lib/config';
 
 // Force dynamic so individual topic pages always pull fresh data from
 // the database — prevents stale static builds from masking CMS edits.
@@ -84,7 +85,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Topic Not Found | Explore With Sakar' };
   }
 
-  const canonicalUrl = `https://explorewithsakar.com/experiences/${slug}/${topic}`;
+  const canonicalUrl = getCanonicalUrl(`/experiences/${slug}/${topic}`);
   const seoTitle = experience.seoTitle || `${experience.title} | Explore With Sakar`;
   const seoDesc = experience.seoDescription || experience.shortDescription;
   const ogImg =

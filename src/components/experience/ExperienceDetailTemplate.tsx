@@ -17,6 +17,7 @@ import {
 import { ExtendedExperience } from '@/types/cms';
 import ExperienceCard from '@/components/common/ExperienceCard';
 import CTASection from '@/components/common/CTASection';
+import { SITE_ORIGIN, getCanonicalUrl } from '@/lib/config';
 
 interface Props {
   experience: ExtendedExperience;
@@ -40,7 +41,7 @@ export default function ExperienceDetailTemplate({
     '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg';
   const heroAlt = experience.heroImage?.alt || experience.title;
 
-  const canonicalUrl = `https://explorewithsakar.com/experiences/${experience.slug}`;
+  const canonicalUrl = getCanonicalUrl(`/experiences/${experience.slug}`);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -52,13 +53,13 @@ export default function ExperienceDetailTemplate({
             '@type': 'ListItem',
             'position': 1,
             'name': 'Home',
-            'item': 'https://explorewithsakar.com',
+            'item': `${SITE_ORIGIN}/`,
           },
           {
             '@type': 'ListItem',
             'position': 2,
             'name': 'Experiences',
-            'item': 'https://explorewithsakar.com/experiences',
+            'item': `${SITE_ORIGIN}/experiences`,
           },
           {
             '@type': 'ListItem',
@@ -83,7 +84,7 @@ export default function ExperienceDetailTemplate({
         'provider': {
           '@type': 'TravelAgency',
           'name': 'Explore With Sakar',
-          'url': 'https://explorewithsakar.com',
+          'url': `${SITE_ORIGIN}/`,
         },
       },
     ],

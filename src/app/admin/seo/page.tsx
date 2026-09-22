@@ -26,6 +26,7 @@ import AdminHeader from '@/components/admin/AdminHeader';
 import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { PageContent, PageSeo } from '@/types/cms';
 import SeoGeoAeoAuditor from '@/components/admin/SeoGeoAeoAuditor';
+import { SITE_ORIGIN } from '@/lib/config';
 
 export default function AdminSeoPage() {
   const router = useRouter();
@@ -106,7 +107,7 @@ export default function AdminSeoPage() {
     setFormData({
       title: page.seo?.title || page.name,
       metaDescription: page.seo?.metaDescription || '',
-      canonicalUrl: page.seo?.canonicalUrl || `https://explorewithsakar.com${page.url}`,
+      canonicalUrl: page.seo?.canonicalUrl || `${SITE_ORIGIN}${page.url === '/' ? '' : page.url}`,
       ogTitle: page.seo?.ogTitle || page.seo?.title || page.name,
       ogDescription: page.seo?.ogDescription || page.seo?.metaDescription || '',
       ogImage: page.seo?.ogImage || '',
@@ -230,6 +231,7 @@ export default function AdminSeoPage() {
           pages={pages}
           initialSlug={auditorTargetSlug}
           onApplyFix={handleApplyFix}
+          onRefresh={fetchPages}
         />
       ) : (
         <>
@@ -465,6 +467,16 @@ export default function AdminSeoPage() {
                             <Edit3 className="w-3.5 h-3.5" />
                             <span>Edit SEO</span>
                           </button>
+                          <a
+                            href={page.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-himalaya-800 hover:bg-himalaya-700 text-parchment-200 hover:text-white text-xs font-semibold transition-colors border border-himalaya-700/60"
+                            title={`Open ${page.name} (${page.url}) in new tab`}
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                            <span>Open Page</span>
+                          </a>
                         </div>
                       </td>
                     </tr>
@@ -511,7 +523,7 @@ export default function AdminSeoPage() {
                   <span className="w-4 h-4 rounded-full bg-himalaya-700 inline-flex items-center justify-center text-[9px] text-white">
                     S
                   </span>
-                  <span>https://explorewithsakar.com › {editingPage.slug}</span>
+                  <span>{SITE_ORIGIN} › {editingPage.slug}</span>
                 </div>
                 <h4 className="text-[18px] text-[#8ab4f8] hover:underline cursor-pointer font-medium leading-snug truncate">
                   {formData.title || editingPage.name}

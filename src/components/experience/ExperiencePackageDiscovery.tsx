@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ArrowRight, Sparkles, Check } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
 import CTASection from '@/components/common/CTASection';
+import { SITE_ORIGIN } from '@/lib/config';
 
 export interface PackageCard {
   slug: string;
@@ -41,8 +42,71 @@ export default function ExperiencePackageDiscovery({
   const featuredPackages = packages.slice(0, featuredCount);
   const hasMore = packages.length > featuredCount;
 
+  const canonicalUrl = `${SITE_ORIGIN}/experiences/${experienceSlug}`;
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${SITE_ORIGIN}/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Experiences',
+        item: `${SITE_ORIGIN}/experiences`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: experienceName,
+        item: canonicalUrl,
+      },
+    ],
+  };
+
+  const touristTripSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'TouristTrip',
+    name: experienceName,
+    description: introText,
+    url: canonicalUrl,
+    image: heroImage?.startsWith('http') ? heroImage : `${SITE_ORIGIN}${heroImage}`,
+    touristType: 'Cultural & Authentic Slow Travel',
+    provider: {
+      '@type': 'TravelAgency',
+      name: 'Explore With Sakar',
+      url: `${SITE_ORIGIN}/`,
+    },
+    itinerary: {
+      '@type': 'ItemList',
+      numberOfItems: packages.length,
+      itemListElement: packages.map((pkg, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: pkg.title,
+        description: pkg.shortDescription,
+        url: `${SITE_ORIGIN}/experiences/${experienceSlug}/${pkg.slug}`,
+      })),
+    },
+  };
+
   return (
     <div className="min-h-screen bg-parchment-100">
+      {/* Schema.org Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(touristTripSchema) }}
+      />
+
       {/* 1. Hero */}
       <PageHero
         badge={experienceName}

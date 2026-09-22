@@ -25,14 +25,16 @@ import {
 } from 'lucide-react';
 import { PageContent } from '@/types/cms';
 import { auditPageContent, AuditResult, AuditCheck } from '@/lib/seoAuditor';
+import { SITE_ORIGIN } from '@/lib/config';
 
 interface SeoGeoAeoAuditorProps {
   pages: PageContent[];
   initialSlug?: string;
   onApplyFix?: (pageSlug: string, updates: { title?: string; metaDescription?: string }) => void;
+  onRefresh?: () => Promise<void> | void;
 }
 
-export default function SeoGeoAeoAuditor({ pages, initialSlug, onApplyFix }: SeoGeoAeoAuditorProps) {
+export default function SeoGeoAeoAuditor({ pages, initialSlug, onApplyFix, onRefresh }: SeoGeoAeoAuditorProps) {
   const [selectedSlug, setSelectedSlug] = useState<string>(initialSlug || pages[0]?.slug || 'home');
   const [filterCategory, setFilterCategory] = useState<'all' | 'seo' | 'geo' | 'aeo'>('all');
   const [statusFilter, setStatusFilter] = useState<'all' | 'issues' | 'passed'>('all');
@@ -91,11 +93,15 @@ export default function SeoGeoAeoAuditor({ pages, initialSlug, onApplyFix }: Seo
     setTimeout(() => setCopiedItem(null), 2500);
   };
 
-  const handleRunAudit = () => {
+  const handleRunAudit = async () => {
     setIsAuditing(true);
-    setTimeout(() => {
+    try {
+      if (onRefresh) {
+        await onRefresh();
+      }
+    } finally {
       setIsAuditing(false);
-    }, 400);
+    }
   };
 
   if (!currentPage || !auditResult) {
@@ -139,13 +145,30 @@ export default function SeoGeoAeoAuditor({ pages, initialSlug, onApplyFix }: Seo
               <span>Auditing Page:</span>
               <span className="text-terracotta underline decoration-terracotta/30">{currentPage.name}</span>
             </h3>
-            <p className="text-xs text-slate-500 font-mono mt-0.5">
-              URL: {currentPage.url} • Status: {currentPage.status}
-            </p>
+            <div className="flex flex-wrap items-center gap-2 mt-1">
+              <span className="text-xs text-slate-500 font-mono">
+                Public URL: <strong className="text-slate-800 font-bold">{SITE_ORIGIN}{currentPage.url}</strong>
+              </span>
+              <span className="text-slate-300">•</span>
+              <span className="text-[11px] text-slate-500">Path: <code className="bg-slate-100 text-slate-700 px-1 py-0.5 rounded font-mono">{currentPage.url}</code></span>
+              <span className="text-slate-300">•</span>
+              <span className="text-[11px] text-slate-500">Status: <strong className="capitalize text-emerald-700">{currentPage.status}</strong></span>
+            </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5 w-full md:w-auto">
+        <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+          <a
+            href={currentPage.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 rounded-xl text-xs font-semibold transition-all border border-slate-200 shadow-xs shrink-0"
+            title="Open public page in new tab"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            <span>Open Public Page</span>
+          </a>
+
           <select
             value={selectedSlug}
             onChange={(e) => setSelectedSlug(e.target.value)}
@@ -161,10 +184,10 @@ export default function SeoGeoAeoAuditor({ pages, initialSlug, onApplyFix }: Seo
           <button
             onClick={handleRunAudit}
             disabled={isAuditing}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold transition-all shadow-sm shrink-0"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold transition-all shadow-sm shrink-0 disabled:opacity-60"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isAuditing ? 'animate-spin' : ''}`} />
-            <span>Re-Audit</span>
+            <span>{isAuditing ? 'Refreshing & Auditing...' : 'Re-Audit'}</span>
           </button>
         </div>
       </div>
@@ -256,7 +279,7 @@ export default function SeoGeoAeoAuditor({ pages, initialSlug, onApplyFix }: Seo
       <div className="border-b border-slate-200 flex items-center gap-2 overflow-x-auto">
         {[
           { id: 'checklist', label: 'Audit Checklist', icon: CheckCircle2, count: auditResult.checks.length },
-          { id: 'ai-simulation', label: 'AI Search Simulator', icon: Bot },
+          { id: 'ai-simulation', label: 'Heuristic AI Search Extraction Simulation', icon: Bot },
           { id: 'schema', label: 'Schema & Auto-Fixes', icon: FileText },
           { id: 'site-overview', label: 'Site-wide Health Overview', icon: Globe, count: pages.length },
         ].map((tab) => {
@@ -426,7 +449,7 @@ export default function SeoGeoAeoAuditor({ pages, initialSlug, onApplyFix }: Seo
               <div className="flex items-center gap-2">
                 <Bot className="w-5 h-5 text-purple-600" />
                 <h4 className="font-editorial-serif text-base font-bold text-slate-900">
-                  Perplexity & ChatGPT Search Citation Preview
+                  Heuristic AI Search Extraction Simulation
                 </h4>
               </div>
               <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold border ${getScoreColor(auditResult.scores.geo)}`}>
@@ -437,14 +460,14 @@ export default function SeoGeoAeoAuditor({ pages, initialSlug, onApplyFix }: Seo
             <div className="p-4 bg-slate-900 text-slate-100 rounded-2xl space-y-3 font-sans shadow-inner">
               <div className="flex items-center gap-2 text-xs text-slate-400">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Simulated generative answer for query: "Authentic travel & cultural guides in Nepal"</span>
+                <span>Simulated generative answer for query: "Authentic travel & cultural guides in Nepal" (Heuristic Extraction)</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic">
                 "{auditResult.aiSimulation.summary}"
               </p>
               <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 font-mono">
-                <span>Source: {auditResult.url || 'explorewithsakar.com'}</span>
-                <span className="text-emerald-400">Cited via E-E-A-T & Entity Clarity</span>
+                <span>Source: {SITE_ORIGIN}{auditResult.url || ''}</span>
+                <span className="text-emerald-400">Heuristic Extraction via E-E-A-T & Entities</span>
               </div>
             </div>
 

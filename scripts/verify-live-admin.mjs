@@ -27,9 +27,13 @@ async function verifyAdmin() {
   console.log('--- Live Admin API & Blogs Verification ---');
 
   // 1. Attempt login
+  if (!process.env.ADMIN_PASSWORD) {
+    console.error('ERROR: ADMIN_PASSWORD environment variable is required to run verification.');
+    process.exit(1);
+  }
   const loginPayload = JSON.stringify({
-    username: 'admin',
-    password: process.env.ADMIN_PASSWORD || 'sakar2026',
+    username: process.env.ADMIN_USERNAME || 'admin',
+    password: process.env.ADMIN_PASSWORD,
   });
 
   console.log('Logging in to live Vercel admin API...');
