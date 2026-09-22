@@ -169,11 +169,13 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
     }
 
     let val = doc ? doc[key] : undefined;
-    if (key === 'blogs' && (!val || !Array.isArray(val) || val.length === 0)) {
-      val = getSeedForKey('blogs');
-    } else if (val === undefined) {
+    if (val === undefined) {
       val = getSeedForKey(key);
     }
+    // For blogs specifically: if MongoDB returned an empty array AND this is a fresh/unseeded DB,
+    // the auto-seed pipeline update above already seeded it. If it's still empty after that, it means
+    // someone intentionally deleted all blogs — respect that and return empty, not seed data.
+    // (The previous unconditional blogs-empty fallback was overriding intentional empty state.)
     const res = normalizeCollectionShape(key, val) as T;
     readCache.set(key, { data: res, timestamp: Date.now() });
     return res;

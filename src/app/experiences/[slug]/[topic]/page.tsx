@@ -19,6 +19,11 @@ import { buildPageMetadata } from '@/lib/seo';
 import CTASection from '@/components/common/CTASection';
 import { EXPERIENCE_PILLARS } from '@/lib/experiencePillars';
 
+// Force dynamic so individual topic pages always pull fresh data from
+// the database — prevents stale static builds from masking CMS edits.
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 interface Props {
   params: { slug: string; topic: string };
 }

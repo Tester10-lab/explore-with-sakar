@@ -11,6 +11,12 @@ import ExperiencePackageDiscovery, { PackageCard } from '@/components/experience
 import CustomJourneysExperience from '@/components/experience/CustomJourneysExperience';
 import { getPublicEvents } from '@/lib/content';
 
+// Force dynamic rendering so Vercel never serves a stale statically-cached
+// version of a pillar page (beyond-the-map, go-within, etc.).
+// Topic cards come from the database and must reflect live CMS data.
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 interface Props {
   params: { slug: string };
 }
@@ -122,22 +128,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const experiences = await getPublicExperiences();
-  const existingSlugs = new Set(experiences.map((exp) => exp.slug));
-
-  // Add all canonical pillars
+  // Only generate static params for the canonical pillar slugs.
+  // Individual topic slugs (kathmandu-durbar-square, etc.) are handled by
+  // /experiences/[slug]/[topic]/page.tsx — do NOT pre-render them here
+  // or they will resolve to a stale static page instead of triggering the
+  // runtime redirect in ExperienceDetailPage.
   const canonicalPillars = [
     'beyond-the-map',
     'go-within',
-    'spiritual-wellness',
     'go-deeper',
     'homestays',
     'leave-a-mark',
     'custom-journeys',
   ];
-
-  canonicalPillars.forEach((s) => existingSlugs.add(s));
-  return Array.from(existingSlugs).map((slug) => ({ slug }));
+  return canonicalPillars.map((slug) => ({ slug }));
 }
 
 export default async function ExperienceDetailPage({ params }: Props) {
@@ -173,22 +177,35 @@ export default async function ExperienceDetailPage({ params }: Props) {
   const pillar = EXPERIENCE_PILLARS[slug];
   if (pillar) {
     const allExperiences = await getPublicExperiences();
-    const PARENT_SLUGS_TO_EXCLUDE = [
+
+    // All experience-level (parent) slugs and their legacy aliases.
+    // These must NEVER appear as topic cards inside a pillar discovery page.
+    const PARENT_SLUGS_TO_EXCLUDE = new Set([
+      // beyond-the-map pillar + aliases
       'beyond-the-map',
       'go-beyond',
+      // go-within pillar + aliases
+      'go-within',
       'go-spiritual',
       'spiritual-wellness',
-      'go-within',
+      // go-deeper pillar
+      'go-deeper',
+      // leave-a-mark pillar
       'leave-a-mark',
+      // homestays / feel-closer pillar
+      'homestays',
       'feel-closer',
+      // other parent-level slugs
       'all-curated-experiences',
+      'custom-journeys',
       'custom-private-journeys',
-    ];
+    ]);
+
     const pillarPackages: PackageCard[] = allExperiences
       .filter(
         (exp) =>
           pillar.categoryFilter.includes(exp.category) &&
-          !PARENT_SLUGS_TO_EXCLUDE.includes(exp.slug)
+          !PARENT_SLUGS_TO_EXCLUDE.has(exp.slug)
       )
       .map((exp) => ({
         slug: exp.slug,

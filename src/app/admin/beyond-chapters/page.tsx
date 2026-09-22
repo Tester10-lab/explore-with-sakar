@@ -1,7 +1,6 @@
-'use client';
+// Legacy route — permanently redirects to the canonical admin URL.
+import { permanentRedirect } from 'next/navigation';
 
-import BeyondTheMapHubPage from '@/app/admin/experiences/beyond-the-map/page';
-
-export default function AdminBeyondChaptersPage() {
-  return <BeyondTheMapHubPage />;
+export default function AdminBeyondChaptersLegacyPage() {
+  permanentRedirect('/admin/experiences/beyond-the-map');
 }

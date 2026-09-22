@@ -1,7 +1,8 @@
-'use client';
+// Legacy route — permanently redirects to the canonical admin URL.
+// The /admin/leave-a-mark path was replaced by /admin/experiences/leave-a-mark
+// as part of the unified Experience management architecture.
+import { permanentRedirect } from 'next/navigation';
 
-import LeaveAMarkHubPage from '@/app/admin/experiences/leave-a-mark/page';
-
-export default function AdminLeaveAMarkPage() {
-  return <LeaveAMarkHubPage />;
+export default function AdminLeaveAMarkLegacyPage() {
+  permanentRedirect('/admin/experiences/leave-a-mark');
 }

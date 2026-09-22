@@ -241,6 +241,27 @@ const nextConfig = {
         destination: '/admin/blogs/:slug*',
         permanent: false,
       },
+      // 5. Legacy admin experience routes → canonical admin paths
+      {
+        source: '/admin/leave-a-mark',
+        destination: '/admin/experiences/leave-a-mark',
+        permanent: true,
+      },
+      {
+        source: '/admin/beyond-chapters',
+        destination: '/admin/experiences/beyond-the-map',
+        permanent: true,
+      },
+      {
+        source: '/admin/services',
+        destination: '/admin/experiences',
+        permanent: true,
+      },
+      {
+        source: '/admin/services/:slug*',
+        destination: '/admin/experiences/:slug*',
+        permanent: true,
+      },
     ];
   },
   async rewrites() {

@@ -27,6 +27,38 @@ import { LeaveAMarkData } from '@/data/leave-a-mark';
 export type PublicBlogListItem = Omit<ExtendedBlogPost, 'content'>;
 
 // ==========================================
+// PERFORMANCE: stable per-slug cache maps
+//
+// The IIFE pattern `unstable_cache(fn, key, opts)()` creates a NEW closure
+// on every call. Next.js cannot deduplicate these because the function
+// reference changes each time. This causes:
+//   • redundant MongoDB reads on every request for blog/experience slugs
+//   • cache entries that never get reused
+//
+// Fix: register closures once in a module-level Map so the same stable
+// function reference is always returned for the same slug.
+// ==========================================
+
+const _slugCaches = {
+  package: new Map<string, () => Promise<ExtendedPackage | null>>(),
+  experience: new Map<string, () => Promise<ExtendedExperience | null>>(),
+  destination: new Map<string, () => Promise<CmsDestination | null>>(),
+  blog: new Map<string, () => Promise<ExtendedBlogPost | null>>(),
+  page: new Map<string, () => Promise<PageContent | null>>(),
+};
+
+function getOrCreateSlugCache<T>(
+  map: Map<string, () => Promise<T>>,
+  slug: string,
+  factory: () => () => Promise<T>
+): () => Promise<T> {
+  if (!map.has(slug)) {
+    map.set(slug, factory());
+  }
+  return map.get(slug)!;
+}
+
+// ==========================================
 // 1. Settings
 // ==========================================
 const fetchCachedSettings = unstable_cache(
@@ -88,20 +120,11 @@ export async function getPublicPackages(): Promise<ExtendedPackage[]> {
   }
 }
 
-const fetchCachedPackageBySlug = (slug: string) =>
-  unstable_cache(
-    async (): Promise<ExtendedPackage | null> => {
-      const list = await readKey<ExtendedPackage[]>('packages', { throwOnError: true });
-      const pkg = (list || []).find((p) => (p.slug === slug || p.id === slug) && p.status === 'published');
-      return pkg || null;
-    },
-    ['cms', 'package', slug],
-    { tags: ['cms:packages'], revalidate: 3600 }
-  )();
-
 export async function getPublicPackageBySlug(slug: string): Promise<ExtendedPackage | null> {
+  // Filter from the already-cached list — avoids a second MongoDB read.
   try {
-    return await fetchCachedPackageBySlug(slug);
+    const all = await fetchCachedPackages();
+    return all.find((p) => p.slug === slug || p.id === slug) || null;
   } catch (err) {
     console.warn(`[content] Mongo unreachable, returning static fallback for package ${slug}:`, err);
     const seed = getSeedForKey('packages') as ExtendedPackage[];
@@ -131,20 +154,15 @@ export async function getPublicExperiences(): Promise<ExtendedExperience[]> {
   }
 }
 
-const fetchCachedExperienceBySlug = (slug: string) =>
-  unstable_cache(
-    async (): Promise<ExtendedExperience | null> => {
-      const list = await readKey<ExtendedExperience[]>('experiences', { throwOnError: true });
-      const exp = (list || []).find((e) => (e.slug === slug || e.id === slug) && e.status === 'published');
-      return exp || null;
-    },
-    ['cms', 'experience', slug],
-    { tags: ['cms:experiences'], revalidate: 3600 }
-  )();
-
+/**
+ * Returns a single experience by slug.
+ * Uses the already-cached full list so no extra MongoDB round-trip is needed.
+ * Falls back to seed data if MongoDB is unreachable.
+ */
 export async function getPublicExperienceBySlug(slug: string): Promise<ExtendedExperience | null> {
   try {
-    return await fetchCachedExperienceBySlug(slug);
+    const all = await fetchCachedExperiences();
+    return all.find((e) => e.slug === slug || e.id === slug) || null;
   } catch (err) {
     console.warn(`[content] Mongo unreachable, returning static fallback for experience ${slug}:`, err);
     const seed = getSeedForKey('experiences') as ExtendedExperience[];
@@ -236,20 +254,11 @@ export async function getPublicDestinations(): Promise<CmsDestination[]> {
   }
 }
 
-const fetchCachedDestinationBySlug = (slug: string) =>
-  unstable_cache(
-    async (): Promise<CmsDestination | null> => {
-      const list = await readKey<CmsDestination[]>('destinations', { throwOnError: true });
-      const dest = (list || []).find((d) => (d.slug === slug || d.id === slug) && d.isVisible !== false);
-      return dest || null;
-    },
-    ['cms', 'destination', slug],
-    { tags: ['cms:destinations'], revalidate: 3600 }
-  )();
-
 export async function getPublicDestinationBySlug(slug: string): Promise<CmsDestination | null> {
+  // Filter from the already-cached list — no second MongoDB read needed.
   try {
-    return await fetchCachedDestinationBySlug(slug);
+    const all = await fetchCachedDestinations();
+    return all.find((d) => d.slug === slug || d.id === slug) || null;
   } catch (err) {
     console.warn(`[content] Mongo unreachable, returning static fallback for destination ${slug}:`, err);
     const seed = getSeedForKey('destinations') as CmsDestination[];
@@ -344,6 +353,11 @@ export async function getPublicPhotos(): Promise<ExtendedGalleryPhoto[]> {
 // ==========================================
 // 11. Blogs
 // ==========================================
+
+/**
+ * Full blog list (published only, content stripped).
+ * This is the primary cache entry — all other blog lookups derive from it.
+ */
 const fetchCachedBlogsList = unstable_cache(
   async (): Promise<PublicBlogListItem[]> => {
     const list = await readKey<ExtendedBlogPost[]>('blogs', { throwOnError: true });
@@ -367,20 +381,30 @@ export async function getPublicBlogs(): Promise<PublicBlogListItem[]> {
   }
 }
 
-const fetchCachedBlogBySlug = (slug: string) =>
-  unstable_cache(
-    async (): Promise<ExtendedBlogPost | null> => {
-      const list = await readKey<ExtendedBlogPost[]>('blogs', { throwOnError: true });
-      const blog = (list || []).find((b) => b.slug === slug && b.status === 'published');
-      return blog || null;
-    },
-    ['cms', 'blog', slug],
-    { tags: ['cms:blogs'], revalidate: 3600 }
-  )();
+/**
+ * Full blog post including content blocks — used only on the individual blog page.
+ * Uses a stable per-slug cache (registered once per slug in the module Map)
+ * to avoid the IIFE antipattern that creates new cache closures on every request.
+ */
+function getOrCreateBlogSlugCache(slug: string): () => Promise<ExtendedBlogPost | null> {
+  return getOrCreateSlugCache(
+    _slugCaches.blog as Map<string, () => Promise<ExtendedBlogPost | null>>,
+    slug,
+    () =>
+      unstable_cache(
+        async (): Promise<ExtendedBlogPost | null> => {
+          const list = await readKey<ExtendedBlogPost[]>('blogs', { throwOnError: true });
+          return (list || []).find((b) => b.slug === slug && b.status === 'published') || null;
+        },
+        ['cms', 'blog', slug],
+        { tags: ['cms:blogs'], revalidate: 3600 }
+      )
+  );
+}
 
 export async function getPublicBlogBySlug(slug: string): Promise<ExtendedBlogPost | null> {
   try {
-    return await fetchCachedBlogBySlug(slug);
+    return await getOrCreateBlogSlugCache(slug)();
   } catch (err) {
     console.warn(`[content] Mongo unreachable, returning static fallback for blog ${slug}:`, err);
     const seed = getSeedForKey('blogs') as ExtendedBlogPost[];
@@ -398,7 +422,6 @@ export interface PillarStory {
 /**
  * Returns one representative blog per content pillar for the homepage
  * "Stories That Take You Further" section.
- * Uses preferred slug order so the most illustrative stories appear first.
  */
 export async function getPublicPillarStories(): Promise<PillarStory[]> {
   const all = await getPublicBlogs();
@@ -425,7 +448,7 @@ export async function getPublicPillarStories(): Promise<PillarStory[]> {
   );
 
   const result: PillarStory[] = [];
-  if (goWithin) result.push({ pillar: 'go-within', pillarLabel: 'Go Within', pillarHref: '/experiences/spiritual-wellness', blog: goWithin });
+  if (goWithin) result.push({ pillar: 'go-within', pillarLabel: 'Go Within', pillarHref: '/experiences/go-within', blog: goWithin });
   if (goBeyond) result.push({ pillar: 'go-beyond', pillarLabel: 'Go Beyond the Map', pillarHref: '/experiences/beyond-the-map', blog: goBeyond });
   if (leaveAMark) result.push({ pillar: 'leave-a-mark', pillarLabel: 'Leave a Mark', pillarHref: '/experiences/leave-a-mark', blog: leaveAMark });
   return result;
@@ -456,20 +479,29 @@ export async function getPublicRelatedBlogs(currentSlug: string, count = 3): Pro
 // ==========================================
 // 12. Pages Content
 // ==========================================
-const fetchCachedPageContent = (slug: string) =>
-  unstable_cache(
-    async (): Promise<PageContent | null> => {
-      const list = await readKey<PageContent[]>('pages', { throwOnError: true });
-      const page = (list || []).find((p) => p.slug === slug);
-      return page || null;
-    },
-    ['cms', 'page', slug],
-    { tags: ['cms:pages'], revalidate: 3600 }
-  )();
+
+/**
+ * Per-page stable cache — same stable-closure pattern as blogs.
+ */
+function getOrCreatePageCache(slug: string): () => Promise<PageContent | null> {
+  return getOrCreateSlugCache(
+    _slugCaches.page as Map<string, () => Promise<PageContent | null>>,
+    slug,
+    () =>
+      unstable_cache(
+        async (): Promise<PageContent | null> => {
+          const list = await readKey<PageContent[]>('pages', { throwOnError: true });
+          return (list || []).find((p) => p.slug === slug) || null;
+        },
+        ['cms', 'page', slug],
+        { tags: ['cms:pages'], revalidate: 3600 }
+      )
+  );
+}
 
 export async function getPageContent(slug: string): Promise<PageContent | null> {
   try {
-    return await fetchCachedPageContent(slug);
+    return await getOrCreatePageCache(slug)();
   } catch (err) {
     console.warn(`[content] Mongo unreachable, returning static fallback for page ${slug}:`, err);
     const seed = getSeedForKey('pages') as PageContent[];

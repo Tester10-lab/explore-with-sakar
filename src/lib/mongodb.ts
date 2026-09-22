@@ -8,7 +8,8 @@ export class MongoUnavailableError extends Error {
   }
 }
 
-// Apply custom DNS servers only when MONGODB_DNS_SERVERS is explicitly set
+// Apply custom DNS servers only when MONGODB_DNS_SERVERS is explicitly set.
+// This is needed on some Vercel regions where Atlas SRV DNS resolution is slow.
 if (process.env.MONGODB_DNS_SERVERS && typeof dns.setServers === 'function') {
   try {
     const servers = process.env.MONGODB_DNS_SERVERS.split(',')
@@ -27,7 +28,10 @@ declare global {
 }
 
 let lastFailureTime = 0;
-const FAILURE_COOLDOWN_MS = 10000; // 10s cooldown before retrying connection
+// Shorter cooldown (5s) so a transient network blip doesn't block all
+// requests for 10 seconds on Vercel serverless warm invocations.
+const FAILURE_COOLDOWN_MS = 5000;
+
 let hasWarnedMissingUriDev = false;
 
 export function isMongoCoolingDown(): boolean {
@@ -39,7 +43,6 @@ export function getMongoClient(): Promise<MongoClient> {
   const isProduction = process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL);
 
   // During `next build`, never try to connect — use seed data instead.
-  // NEXT_PHASE is set by Next.js to 'phase-production-build' during `next build`.
   if (process.env.NEXT_PHASE === 'phase-production-build') {
     throw new MongoUnavailableError('Skipping MongoDB during build phase — seed data will be used.');
   }
@@ -47,6 +50,7 @@ export function getMongoClient(): Promise<MongoClient> {
   if (!uri) {
     if (isProduction) {
       console.warn('[mongodb] MONGODB_URI environment variable is missing in production. Falling back to seed data.');
+      console.warn('[mongodb] *** ACTION REQUIRED: Set MONGODB_URI in Vercel project environment variables. ***');
       throw new MongoUnavailableError('MONGODB_URI environment variable is missing.');
     }
     if (!hasWarnedMissingUriDev) {
@@ -61,26 +65,38 @@ export function getMongoClient(): Promise<MongoClient> {
     throw new MongoUnavailableError('MongoDB connection in cooldown period after recent failure.');
   }
 
+  // Reuse cached connection across warm serverless invocations.
   if (globalThis._mongoClientPromise) {
     return globalThis._mongoClientPromise;
   }
 
   const client = new MongoClient(uri, {
+    // Connection pool: 10 connections is fine for Vercel serverless.
     maxPoolSize: 10,
-    serverSelectionTimeoutMS: 3000,
-    connectTimeoutMS: 3000,
+    // 5s timeouts give Atlas enough headroom on cold starts without blocking
+    // requests for too long. The previous 3s was causing silent failures on
+    // cold Vercel invocations.
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 5000,
+    // Keep alive prevents the connection being dropped between warm invocations.
+    socketTimeoutMS: 30000,
   });
 
   const promise = client
     .connect()
     .then((c) => {
       lastFailureTime = 0;
+      if (isProduction) {
+        console.log('[mongodb] Connected successfully to Atlas.');
+      }
       return c;
     })
     .catch((err) => {
       lastFailureTime = Date.now();
       globalThis._mongoClientPromise = undefined;
-      throw new MongoUnavailableError(`MongoDB connection error: ${err.message || err}`);
+      const msg = `MongoDB connection error: ${err.message || err}`;
+      console.error(`[mongodb] ${msg}`);
+      throw new MongoUnavailableError(msg);
     });
 
   globalThis._mongoClientPromise = promise;
@@ -92,6 +108,8 @@ export default getMongoClient;
 export async function getDb(): Promise<Db> {
   try {
     const client = await getMongoClient();
+    // Default database name matches the production Atlas database.
+    // Set MONGODB_DB in Vercel env vars to override (e.g. explore_with_sakar_dev for staging).
     const dbName = process.env.MONGODB_DB || 'explore_with_sakar';
     return client.db(dbName);
   } catch (err: any) {
