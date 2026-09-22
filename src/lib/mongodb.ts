@@ -87,12 +87,22 @@ export function getMongoClient(): Promise<MongoClient> {
     // requests for too long.
     serverSelectionTimeoutMS: 5000,
     connectTimeoutMS: 5000,
+    timeoutMS: 5000,
     // Keep alive prevents the connection being dropped between warm invocations.
-    socketTimeoutMS: 30000,
+    socketTimeoutMS: 10000,
   });
 
-  const promise = client
-    .connect()
+  const connectionTimeout = new Promise<never>((_, reject) => {
+    const timer = setTimeout(() => {
+      reject(new MongoUnavailableError('MongoDB connection timed out after 5000ms'));
+    }, 5000);
+    // Don't keep Node process alive just for the timer if unreferenced
+    if (typeof timer.unref === 'function') {
+      timer.unref();
+    }
+  });
+
+  const promise = Promise.race([client.connect(), connectionTimeout])
     .then((c) => {
       lastFailureTime = 0;
       const durationMs = Date.now() - connectStart;
