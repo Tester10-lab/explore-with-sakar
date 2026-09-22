@@ -71,24 +71,24 @@ export default async function AboutPage() {
                 </span>
 
                 <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 leading-tight">
-                  Born in Kathmandu, Shaped by Nepal’s Communities
+                  Connecting People With the Soul of Nepal
                 </h2>
 
                 <div className="prose prose-lg text-himalaya-800 font-light leading-relaxed space-y-6">
                   <p>
-                    Sakar’s journey into tourism began not as a commercial business, but from a profound desire to share the genuine soul of Nepal with the world. Born and raised amidst the sacred courtyards and ancient alleys of Kathmandu, the mountains and living shrines have always been his home.
+                    For Sakar, Nepal has never been just a destination. It has always been a story waiting to be understood. Growing up in the Kathmandu Valley, he was surrounded by a living heritage — ancient temples, traditional courtyards, festivals, artisans and communities where history was not preserved only in books, but experienced through everyday life.
                   </p>
 
                   <p>
-                    Before founding Explore With Sakar, he spent over a decade working directly in education, community health, and grassroots NGO initiatives with rural Himalayan villages. Leading programs focused on children’s welfare, women’s economic empowerment, and rural schools allowed him to see Nepal beyond postcards and monuments—through its real people, daily struggles, and rich oral traditions.
+                    Through his involvement in education, social development and community work, Sakar had the opportunity to walk closer with the people of Nepal — listening to their stories, understanding their challenges and witnessing their resilience. These experiences shaped the way he sees travel. For Sakar, a journey is not simply about visiting a monument, capturing a photograph or following a fixed itinerary. It is about discovering the meaning behind a place — the people, traditions, emotions and stories that give it life.
                   </p>
 
                   <blockquote className="my-8 p-8 rounded-3xl bg-sand/80 border-l-4 border-terracotta text-himalaya-950 italic font-display-serif text-xl sm:text-2xl leading-snug">
-                    &ldquo;Tourism became a natural extension of community work. I believe travel must be more than sightseeing. It should create genuine connection, reciprocal learning, and meaningful local contribution.&rdquo;
+                    &ldquo;A temple represents generations of faith and devotion. A village reflects the dreams, memories and relationships of its people. A mountain represents not only nature&rsquo;s beauty, but also humility, strength and connection.&rdquo;
                   </blockquote>
 
                   <p>
-                    Today, Sakar personally directs every journey. He acts as a trusted companion and cultural translator—opening doors to private family workshops, medieval monastic courtyards, and warm village hearths where foreign travelers rarely step.
+                    This belief inspired him to create <strong>Explore With Sakar</strong> — a platform dedicated to meaningful experiences that connect travellers with the deeper essence of Nepal. As a cultural bridge and local fixer, Sakar helps create authentic connections, bringing together travellers with local communities, artisans, traditions and experiences that are often missed through ordinary travel.
                   </p>
                 </div>
 
@@ -96,17 +96,17 @@ export default async function AboutPage() {
                 <div className="pt-8 border-t border-parchment-200">
                   <h3 className="font-editorial-serif text-2xl font-bold text-himalaya-950 mb-6 flex items-center">
                     <Globe className="w-6 h-6 text-terracotta mr-3" />
-                    What You Discover with Sakar
+                    Why Travel With Sakar?
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[
-                      'Authentic Nepalese culture & daily local life',
-                      'Quiet mountain trails away from commercial crowds',
-                      'Ancient Himalayan singing bowl sound sanctuary',
-                      'Living Newari heritage, woodcarving & bronze casting',
-                      'Direct economic benefit for rural host mothers',
-                      'Unrushed, flexible pacing tailored to your curiosity',
+                      'Meaningful connections with local communities & artisans',
+                      'Hidden corners of Nepal beyond the tourist trail',
+                      'Ancient wisdom, Himalayan traditions & spiritual landscapes',
+                      'Personalised journeys built around your curiosity',
+                      'Authentic encounters with Nepal\'s living culture',
+                      'A journey of learning, connection and self-discovery',
                     ].map((item, idx) => (
                       <div key={idx} className="flex items-start space-x-3">
                         <div className="w-5 h-5 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0 mt-0.5">
