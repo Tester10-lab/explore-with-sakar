@@ -130,17 +130,17 @@ export default function ExperienceDetailTemplate({
             {experience.title}
           </h1>
 
-          <p className="text-base sm:text-lg text-himalaya-700 font-display-serif italic leading-relaxed mb-8 border-l-2 border-terracotta pl-6">
+          <p className="text-base sm:text-lg text-himalaya-900 font-display-serif italic leading-relaxed mb-8 border-l-2 border-terracotta pl-6">
             {experience.tagline || experience.subtitle || experience.shortDescription}
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-parchment-300">
             {experience.duration && (
               <div>
-                <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-500 mb-1">
+                <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-700 mb-1">
                   Duration
                 </span>
-                <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-900">
+                <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-950">
                   <Clock className="w-3.5 h-3.5 mr-1.5 text-terracotta shrink-0" />
                   {experience.duration}
                 </span>
@@ -148,10 +148,10 @@ export default function ExperienceDetailTemplate({
             )}
             {experience.location && (
               <div>
-                <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-500 mb-1">
+                <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-700 mb-1">
                   Location
                 </span>
-                <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-900">
+                <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-950">
                   <MapPin className="w-3.5 h-3.5 mr-1.5 text-terracotta shrink-0" />
                   {experience.location.split(',')[0]}
                 </span>
@@ -159,10 +159,10 @@ export default function ExperienceDetailTemplate({
             )}
             {experience.groupSize && (
               <div>
-                <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-500 mb-1">
+                <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-700 mb-1">
                   Group Format
                 </span>
-                <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-900">
+                <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-950">
                   <Users className="w-3.5 h-3.5 mr-1.5 text-terracotta shrink-0" />
                   {experience.groupSize}
                 </span>
@@ -170,10 +170,10 @@ export default function ExperienceDetailTemplate({
             )}
             {experience.season && (
               <div>
-                <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-500 mb-1">
+                <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-700 mb-1">
                   Best Season
                 </span>
-                <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-900">
+                <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-950">
                   <Sun className="w-3.5 h-3.5 mr-1.5 text-terracotta shrink-0" />
                   {experience.season.split('(')[0].trim()}
                 </span>
@@ -213,7 +213,7 @@ export default function ExperienceDetailTemplate({
               <h2 className="font-editorial-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-himalaya-950">
                 Stepping Past the Monument Walls
               </h2>
-              <div className="prose prose-lg prose-himalaya max-w-none font-light leading-relaxed space-y-4 text-himalaya-700">
+              <div className="prose prose-lg prose-himalaya max-w-none font-normal leading-relaxed space-y-4 text-himalaya-800 text-base sm:text-lg">
                 {fullDesc.map((paragraph, idx) => (
                   <p key={idx}>{paragraph}</p>
                 ))}
@@ -227,7 +227,7 @@ export default function ExperienceDetailTemplate({
                   <Sparkles className="w-4 h-4" />
                   <span>What Makes This Experience Different</span>
                 </div>
-                <p className="text-sm sm:text-base text-himalaya-800 font-light leading-relaxed">
+                <p className="text-sm sm:text-base text-himalaya-900 font-normal leading-relaxed">
                   {experience.whatMakesDifferent}
                 </p>
               </section>
@@ -248,7 +248,7 @@ export default function ExperienceDetailTemplate({
                       <div className="w-5 h-5 rounded-full bg-parchment-200 text-terracotta flex items-center justify-center shrink-0 mt-0.5 border border-parchment-300">
                         <Check className="w-3 h-3" />
                       </div>
-                      <span className="text-himalaya-800 font-light leading-relaxed text-sm sm:text-base">
+                      <span className="text-himalaya-900 font-medium leading-relaxed text-sm sm:text-base">
                         {highlight}
                       </span>
                     </li>
@@ -284,7 +284,7 @@ export default function ExperienceDetailTemplate({
                         <h4 className="font-editorial-serif text-lg sm:text-xl font-bold text-himalaya-950">
                           {day.title}
                         </h4>
-                        <p className="text-himalaya-700 font-light text-xs sm:text-sm leading-relaxed">
+                        <p className="text-himalaya-800 font-normal text-xs sm:text-sm leading-relaxed">
                           {day.description}
                         </p>
                       </div>
@@ -292,7 +292,7 @@ export default function ExperienceDetailTemplate({
                   ))}
                 </div>
 
-                <p className="text-xs font-display-serif italic text-himalaya-500 text-center">
+                <p className="text-xs font-display-serif italic text-himalaya-600 text-center">
                   * Note: All daily rhythms are completely customizable to your physical comfort and pacing.
                 </p>
               </section>
@@ -308,7 +308,7 @@ export default function ExperienceDetailTemplate({
                   <div className="text-xs uppercase font-bold tracking-widest text-saffron mb-4 border-b border-white/20 pb-3">
                     Host Perspective from Sakar
                   </div>
-                  <p className="font-display-serif italic text-base sm:text-lg text-parchment-200 leading-relaxed relative z-10">
+                  <p className="font-display-serif italic text-base sm:text-lg text-parchment-100 leading-relaxed relative z-10">
                     &ldquo;{experience.sakarNote}&rdquo;
                   </p>
                 </div>
@@ -323,29 +323,29 @@ export default function ExperienceDetailTemplate({
                 <div className="space-y-4 text-xs sm:text-sm">
                   {experience.duration && (
                     <div className="flex justify-between py-2 border-b border-parchment-100">
-                      <span className="text-himalaya-500 font-mono uppercase text-[11px]">Duration</span>
-                      <span className="font-semibold text-himalaya-900">{experience.duration}</span>
+                      <span className="text-himalaya-700 font-mono uppercase text-[11px] font-bold">Duration</span>
+                      <span className="font-semibold text-himalaya-950">{experience.duration}</span>
                     </div>
                   )}
 
                   {experience.location && (
                     <div className="flex justify-between py-2 border-b border-parchment-100">
-                      <span className="text-himalaya-500 font-mono uppercase text-[11px]">Location</span>
-                      <span className="font-semibold text-himalaya-900">{experience.location}</span>
+                      <span className="text-himalaya-700 font-mono uppercase text-[11px] font-bold">Location</span>
+                      <span className="font-semibold text-himalaya-950">{experience.location}</span>
                     </div>
                   )}
 
                   {experience.groupSize && (
                     <div className="flex justify-between py-2 border-b border-parchment-100">
-                      <span className="text-himalaya-500 font-mono uppercase text-[11px]">Group Size</span>
-                      <span className="font-semibold text-himalaya-900">{experience.groupSize}</span>
+                      <span className="text-himalaya-700 font-mono uppercase text-[11px] font-bold">Group Size</span>
+                      <span className="font-semibold text-himalaya-950">{experience.groupSize}</span>
                     </div>
                   )}
 
                   {experience.season && (
                     <div className="flex justify-between py-2 border-b border-parchment-100">
-                      <span className="text-himalaya-500 font-mono uppercase text-[11px]">Best Months</span>
-                      <span className="font-semibold text-himalaya-900">{experience.season}</span>
+                      <span className="text-himalaya-700 font-mono uppercase text-[11px] font-bold">Best Months</span>
+                      <span className="font-semibold text-himalaya-950">{experience.season}</span>
                     </div>
                   )}
 

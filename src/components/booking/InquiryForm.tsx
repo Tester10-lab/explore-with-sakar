@@ -175,7 +175,7 @@ function InquiryFormInner({ defaultPackage, defaultExperience, availableEvents }
             <p className="text-xs uppercase font-bold tracking-widest text-terracotta mt-1">
               Responsible Tour Director • Explore With Sakar
             </p>
-            <p className="text-sm sm:text-base text-himalaya-700 font-light mt-3 max-w-xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-himalaya-800 font-normal mt-3 max-w-xl mx-auto leading-relaxed">
               Share your travel dreams, preferred dates, and curiosities. Sakar personally reviews each inquiry to curate a meaningful, slow-paced journey tailored to your rhythm.
             </p>
           </div>
@@ -205,7 +205,7 @@ function InquiryFormInner({ defaultPackage, defaultExperience, availableEvents }
                   <h3 className="font-editorial-serif text-2xl sm:text-3xl font-bold text-himalaya-950">
                     Your Journey Inquiry Has Reached Sakar
                   </h3>
-                  <p className="text-sm sm:text-base text-himalaya-700 font-light max-w-lg mx-auto leading-relaxed">
+                  <p className="text-sm sm:text-base text-himalaya-800 font-normal max-w-lg mx-auto leading-relaxed">
                     Sakar (Responsible Tour Director) will review your inspirations and reach back within 24 hours with a thoughtful custom outline.
                   </p>
                 </div>
@@ -469,7 +469,7 @@ function InquiryFormInner({ defaultPackage, defaultExperience, availableEvents }
                       </>
                     )}
                   </button>
-                  <p className="text-center text-[11px] text-himalaya-600 mt-2 font-light">
+                  <p className="text-center text-xs text-himalaya-700 mt-2 font-medium">
                     Direct personal consultation with Sakar (Responsible Tour Director). No fake booking fees.
                   </p>
                 </div>

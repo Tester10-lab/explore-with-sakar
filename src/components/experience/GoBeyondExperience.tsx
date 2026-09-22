@@ -92,13 +92,13 @@ export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondEx
                 Not Just Visiting Places — Stepping Inside the Living Soul of Nepal
               </h2>
 
-              <p className="text-base sm:text-lg text-himalaya-700 font-light leading-relaxed">
-                Most visitors see Nepal through the hurried frame of a tour bus window or the crowded ticket gates of main monuments. <strong className="font-semibold text-himalaya-900">&ldquo;Go Beyond the Map&rdquo;</strong> is our personal pledge to walk past superficial facades into the real, beating pulse of our homeland.
+              <p className="text-base sm:text-lg text-himalaya-800 font-normal leading-relaxed">
+                Most visitors see Nepal through the hurried frame of a tour bus window or the crowded ticket gates of main monuments. <strong className="font-semibold text-himalaya-950">&ldquo;Go Beyond the Map&rdquo;</strong> is our personal pledge to walk past superficial facades into the real, beating pulse of our homeland.
               </p>
 
               {/* Chapter Quick Index */}
               <div className="pt-6 border-t border-parchment-200">
-                <p className="text-xs font-mono font-bold uppercase tracking-wider text-himalaya-500 mb-3">
+                <p className="text-xs font-mono font-bold uppercase tracking-wider text-himalaya-700 mb-3">
                   The 4 Canonical Narratives:
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-2">
@@ -106,7 +106,7 @@ export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondEx
                     <button
                       key={exp.id}
                       onClick={() => scrollToSection(exp.id)}
-                      className="px-3.5 py-1.5 rounded-full text-xs transition-all font-mono bg-parchment-100 text-himalaya-700 hover:bg-parchment-200 border border-parchment-300 hover:border-terracotta"
+                      className="px-3.5 py-1.5 rounded-full text-xs transition-all font-mono bg-white text-himalaya-800 hover:bg-parchment-200 border border-parchment-300 hover:border-terracotta font-medium"
                       title={`${exp.pageNumber}: ${exp.title}`}
                     >
                       <span className="font-bold text-terracotta">{exp.pageNumber}:</span> {exp.title}
@@ -227,22 +227,22 @@ export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondEx
                       {/* Practical Details Grid */}
                       <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-parchment-50 border border-parchment-200 text-xs">
                         <div>
-                          <span className="block text-[10px] font-mono uppercase tracking-wider text-himalaya-400">Duration</span>
-                          <span className="font-semibold text-himalaya-900">{journey.duration}</span>
+                          <span className="block text-[10px] font-mono uppercase tracking-wider text-himalaya-700 font-bold">Duration</span>
+                          <span className="font-semibold text-himalaya-950">{journey.duration}</span>
                         </div>
                         <div>
-                          <span className="block text-[10px] font-mono uppercase tracking-wider text-himalaya-400">Group Format</span>
-                          <span className="font-semibold text-himalaya-900">{journey.groupSize}</span>
+                          <span className="block text-[10px] font-mono uppercase tracking-wider text-himalaya-700 font-bold">Group Format</span>
+                          <span className="font-semibold text-himalaya-950">{journey.groupSize}</span>
                         </div>
                       </div>
 
                       {/* Key Historical / Conservation Quote */}
                       <div className="p-5 rounded-2xl bg-parchment-100 border border-parchment-300 relative">
                         <Quote className="w-6 h-6 text-terracotta/20 absolute top-4 right-4" />
-                        <p className="font-editorial-serif italic text-sm text-himalaya-900 leading-relaxed">
+                        <p className="font-editorial-serif italic text-sm text-himalaya-950 leading-relaxed">
                           &ldquo;{journey.keyQuote.quote}&rdquo;
                         </p>
-                        <p className="text-[11px] font-mono font-semibold text-terracotta mt-2 uppercase tracking-wider">
+                        <p className="text-[11px] font-mono font-bold text-terracotta mt-2 uppercase tracking-wider">
                           — {journey.keyQuote.attribution}
                         </p>
                       </div>
@@ -267,7 +267,7 @@ export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondEx
                             {journey.pageNumber} • {journey.tagline}
                           </span>
                           {journey.nepaliTitle && (
-                            <span className="text-xs font-serif text-himalaya-500">
+                            <span className="text-xs font-serif text-himalaya-700 font-medium">
                               • {journey.nepaliTitle}
                             </span>
                           )}
@@ -276,18 +276,18 @@ export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondEx
                         <h3 className="font-editorial-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-himalaya-950 leading-tight">
                           {journey.title}
                         </h3>
-                        <p className="font-editorial-serif italic text-lg sm:text-xl text-terracotta">
+                        <p className="font-editorial-serif italic text-lg sm:text-xl text-terracotta-dark font-medium">
                           {journey.subtitle}
                         </p>
                       </div>
 
                       {/* The "Beyond the Map" Promise Card */}
-                      <div className="p-4 sm:p-5 rounded-2xl bg-terracotta/5 border border-terracotta/15 space-y-2">
+                      <div className="p-4 sm:p-5 rounded-2xl bg-terracotta/5 border border-terracotta/20 space-y-2">
                         <div className="flex items-center gap-2 text-terracotta text-xs font-bold uppercase tracking-wider">
                           <Sparkles className="w-4 h-4 text-terracotta" />
                           <span>The &ldquo;Beyond the Map&rdquo; Promise</span>
                         </div>
-                        <p className="text-xs sm:text-sm text-himalaya-800 font-light leading-relaxed">
+                        <p className="text-sm text-himalaya-900 font-normal leading-relaxed">
                           {journey.promise}
                         </p>
                       </div>
@@ -297,7 +297,7 @@ export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondEx
                         <h4 className="font-editorial-serif text-lg font-bold text-himalaya-950">
                           Experience Overview
                         </h4>
-                        <p className="text-sm sm:text-base text-himalaya-700 font-light leading-relaxed">
+                        <p className="text-base text-himalaya-800 font-normal leading-relaxed">
                           {journey.experienceOverview}
                         </p>
                       </div>
@@ -312,7 +312,7 @@ export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondEx
                           {journey.highlights.map((item, hIdx) => (
                             <li
                               key={hIdx}
-                              className="flex items-start gap-2.5 text-xs sm:text-sm text-himalaya-800 font-light"
+                              className="flex items-start gap-2.5 text-sm text-himalaya-900 font-medium"
                             >
                               <span className="w-1.5 h-1.5 rounded-full bg-terracotta mt-2 shrink-0" />
                               <span>{item}</span>
@@ -336,7 +336,7 @@ export default function GoBeyondExperience({ pageContent, chapters }: GoBeyondEx
                               <h5 className="font-editorial-serif font-bold text-sm sm:text-base text-himalaya-950 border-b border-parchment-200 pb-2">
                                 {section.heading}
                               </h5>
-                              <div className="space-y-3 text-xs sm:text-sm text-himalaya-700 font-light leading-relaxed">
+                              <div className="space-y-3 text-sm text-himalaya-800 font-normal leading-relaxed">
                                 {section.paragraphs.map((p, pIdx) => (
                                   <p key={pIdx}>{p}</p>
                                 ))}

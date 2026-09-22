@@ -35,7 +35,7 @@ export default function PageHero({
           ? compact
             ? 'py-20 sm:py-28'
             : 'py-24 sm:py-36 lg:py-44'
-          : 'py-16 sm:py-24 bg-gradient-to-b from-parchment-200/80 via-parchment-100 to-parchment-50 border-b border-parchment-300'
+          : 'py-16 sm:py-24 bg-parchment-100 border-b border-parchment-300'
       }`}
     >
       {/* Background Image & Overlays */}
@@ -107,8 +107,8 @@ export default function PageHero({
           {/* Subtitle */}
           {subtitle && (
             <p
-              className={`text-lg sm:text-xl font-light leading-relaxed max-w-3xl ${
-                hasBg ? 'text-parchment-200' : 'text-himalaya-700'
+              className={`text-lg sm:text-xl font-normal leading-relaxed max-w-3xl ${
+                hasBg ? 'text-parchment-100 drop-shadow-sm' : 'text-himalaya-800'
               }`}
             >
               {subtitle}

@@ -24,6 +24,7 @@ import { BEYOND_EXPERIENCES } from '@/data/beyond-the-map';
 import { LEAVE_A_MARK_CONTENT } from '@/data/leave-a-mark';
 import { CmsBeyondChapter } from '@/types/cms';
 import { BLOG_POSTS } from '@/data/blog';
+import { EXPERIENCES } from '@/data/experiences';
 
 const SEED_FILE = path.join(process.cwd(), 'data', 'cms-store.json');
 
@@ -295,6 +296,17 @@ export function getDefaultBeyondChapters(): CmsBeyondChapter[] {
   }));
 }
 
+export function getDefaultExperiences(): ExtendedExperience[] {
+  return EXPERIENCES.map((exp, i) => ({
+    ...exp,
+    order: i,
+    status: 'published',
+    isVisible: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  })) as unknown as ExtendedExperience[];
+}
+
 export function getDefaultLeaveAMark() {
   return LEAVE_A_MARK_CONTENT;
 }
@@ -328,7 +340,7 @@ export function getSeedStoreFromDisk(): CMSDataStore {
       updatedAt: new Date().toISOString(),
     },
     packages: [],
-    experiences: [],
+    experiences: getDefaultExperiences(),
     services: [],
     inquiries: [],
     blogs: BLOG_POSTS as any,
@@ -350,6 +362,14 @@ export function getSeedForKey(key: string): any {
     return BLOG_POSTS;
   }
 
+  // For experiences: guarantee canonical EXPERIENCES if empty or unpopulated
+  if (key === 'experiences') {
+    if (fileStore && Array.isArray(fileStore.experiences) && fileStore.experiences.length > 0) {
+      return fileStore.experiences;
+    }
+    return getDefaultExperiences();
+  }
+
   // Always honor explicit data from fileStore, even if it is an empty array []
   if (fileStore && (fileStore as any)[key] !== undefined) {
     return (fileStore as any)[key];
@@ -357,6 +377,8 @@ export function getSeedForKey(key: string): any {
 
   // Fallback defaults only for initial structural setup if key is completely missing
   switch (key) {
+    case 'experiences':
+      return (fileStore?.experiences && fileStore.experiences.length > 0) ? fileStore.experiences : getDefaultExperiences();
     case 'pages':
       return getDefaultPages();
     case 'navigation':

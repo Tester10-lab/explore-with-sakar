@@ -13,12 +13,12 @@ export default function GoWithinHubPage() {
       publicUrl="/experiences/go-within"
       pillarFilterValue="go-within"
       icon={Sparkles}
-      colorFrom="from-indigo-50"
-      colorTo="to-purple-50"
-      colorBorder="border-indigo-200"
-      colorBg="bg-indigo-100"
-      colorText="text-indigo-700"
-      colorHover="hover:border-indigo-300"
+      colorFrom="from-slate-50"
+      colorTo="to-slate-50"
+      colorBorder="border-slate-200"
+      colorBg="bg-slate-100"
+      colorText="text-slate-900"
+      colorHover="hover:border-terracotta"
     />
   );
 }

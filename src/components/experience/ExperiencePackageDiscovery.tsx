@@ -67,7 +67,7 @@ export default function ExperiencePackageDiscovery({
               <h2 className="font-editorial-serif text-3xl sm:text-4xl font-bold text-himalaya-950">
                 The Essence of {experienceName}
               </h2>
-              <div className="prose prose-lg prose-himalaya max-w-none font-light leading-relaxed space-y-4 text-himalaya-700 pt-2">
+              <div className="prose prose-lg prose-himalaya max-w-none font-normal leading-relaxed space-y-4 text-himalaya-800 pt-2 text-base sm:text-lg">
                 {overviewText.map((para, idx) => (
                   <p key={idx}>{para}</p>
                 ))}
@@ -88,7 +88,7 @@ export default function ExperiencePackageDiscovery({
               <h2 className="font-editorial-serif text-2xl sm:text-3xl font-bold text-himalaya-950 mt-1">
                 Signature Dimensions of {experienceName}
               </h2>
-              <p className="text-xs sm:text-sm text-himalaya-600 font-light mt-1">
+              <p className="text-sm sm:text-base text-himalaya-700 font-normal mt-1">
                 The core experiential threads that weave through every topic in this collection.
               </p>
             </div>
@@ -102,7 +102,7 @@ export default function ExperiencePackageDiscovery({
                   <div className="w-6 h-6 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0 mt-0.5">
                     <Check className="w-3.5 h-3.5" />
                   </div>
-                  <p className="text-xs sm:text-sm text-himalaya-800 font-light leading-relaxed">
+                  <p className="text-sm text-himalaya-900 font-medium leading-relaxed">
                     {highlight}
                   </p>
                 </div>
@@ -122,7 +122,7 @@ export default function ExperiencePackageDiscovery({
             <h2 className="font-editorial-serif text-3xl sm:text-4xl font-bold text-himalaya-950 mt-1">
               Curated Topics in {experienceName}
             </h2>
-            <p className="text-sm sm:text-base text-himalaya-600 font-light mt-2 leading-relaxed">
+            <p className="text-sm sm:text-base text-himalaya-700 font-normal mt-2 leading-relaxed">
               Each topic below is an unhurried, standalone itinerary. Select any topic to view its detailed schedule, host notes, and reservation details.
             </p>
           </div>
@@ -135,7 +135,7 @@ export default function ExperiencePackageDiscovery({
                   <Link
                     key={pkg.slug}
                     href={topicUrl}
-                    className="group bg-parchment-50 border border-parchment-300 rounded-3xl overflow-hidden shadow-subtle hover:shadow-editorial transition-all duration-300 flex flex-col"
+                    className="group bg-white border border-parchment-300 rounded-3xl overflow-hidden shadow-subtle hover:shadow-editorial hover:border-terracotta/40 transition-all duration-300 flex flex-col"
                   >
                     {/* Topic Image - clicking opens topic detail */}
                     <div className="relative aspect-[16/10] overflow-hidden bg-himalaya-900">
@@ -149,19 +149,19 @@ export default function ExperiencePackageDiscovery({
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-himalaya-800">
-                          <span className="text-parchment-400 text-sm font-mono">No Image</span>
+                          <span className="text-parchment-300 text-sm font-mono font-medium">No Image</span>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/60 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-himalaya-950/25 group-hover:bg-himalaya-950/15 transition-colors" />
                     </div>
 
                     {/* Topic Content - simple discovery only */}
                     <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-4">
                       <div>
-                        <h3 className="font-editorial-serif text-xl sm:text-2xl font-bold text-himalaya-950 group-hover:text-terracotta transition-colors">
+                        <h3 className="font-editorial-serif text-xl sm:text-2xl font-bold text-himalaya-950 group-hover:text-terracotta transition-colors leading-snug">
                           {pkg.title}
                         </h3>
-                        <p className="text-xs sm:text-sm text-himalaya-600 font-light mt-2 leading-relaxed line-clamp-3">
+                        <p className="text-sm text-himalaya-800 font-normal mt-2.5 leading-relaxed line-clamp-3">
                           {pkg.shortDescription}
                         </p>
                       </div>

@@ -13,12 +13,12 @@ export default function GoDeepHubPage() {
       publicUrl="/experiences/go-deeper"
       pillarFilterValue="go-deeper"
       icon={Layers}
-      colorFrom="from-cyan-50"
-      colorTo="to-blue-50"
-      colorBorder="border-cyan-200"
-      colorBg="bg-cyan-100"
-      colorText="text-cyan-700"
-      colorHover="hover:border-cyan-300"
+      colorFrom="from-slate-50"
+      colorTo="to-slate-50"
+      colorBorder="border-slate-200"
+      colorBg="bg-slate-100"
+      colorText="text-slate-900"
+      colorHover="hover:border-terracotta"
     />
   );
 }

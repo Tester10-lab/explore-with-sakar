@@ -83,18 +83,18 @@ export default function FAQClient({ initialFaq }: FAQClientProps) {
         <div className="editorial-container space-y-6">
           {/* Search Bar */}
           <div className="relative max-w-xl mx-auto">
-            <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-himalaya-400" />
+            <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-himalaya-600" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search questions (e.g., visa, altitude, food, deposit)..."
-              className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-parchment-100 border border-parchment-300 text-sm text-himalaya-900 placeholder:text-himalaya-500 focus:outline-none focus:ring-2 focus:ring-terracotta focus:bg-white transition-colors"
+              className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-parchment-100 border border-parchment-300 text-sm text-himalaya-950 placeholder:text-himalaya-600 focus:outline-none focus:ring-2 focus:ring-terracotta focus:bg-white transition-colors"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-himalaya-500 hover:text-himalaya-900"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-himalaya-700 hover:text-himalaya-950"
               >
                 Clear
               </button>
@@ -109,10 +109,10 @@ export default function FAQClient({ initialFaq }: FAQClientProps) {
                 <button
                   key={cat.key}
                   onClick={() => setActiveCategory(cat.key)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 whitespace-nowrap ${
+                  className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 whitespace-nowrap ${
                     isActive
                       ? 'bg-terracotta text-white shadow-warm'
-                      : 'bg-parchment-100 text-himalaya-700 hover:bg-parchment-200 border border-parchment-300'
+                      : 'bg-white text-himalaya-800 hover:bg-parchment-200 border border-parchment-300'
                   }`}
                 >
                   {cat.label}
@@ -128,7 +128,7 @@ export default function FAQClient({ initialFaq }: FAQClientProps) {
         <div className="editorial-container max-w-4xl mx-auto">
           {filteredItems.length > 0 ? (
             <div className="space-y-6">
-              <div className="flex items-center justify-between text-xs text-himalaya-600 font-medium px-2">
+              <div className="flex items-center justify-between text-xs text-himalaya-800 font-bold px-2">
                 <span>
                   Showing {filteredItems.length}{' '}
                   {filteredItems.length === 1 ? 'question' : 'questions'}

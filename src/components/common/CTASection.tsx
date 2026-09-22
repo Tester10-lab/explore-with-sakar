@@ -36,15 +36,12 @@ export default function CTASection({
     <section
       className={`py-20 sm:py-28 relative overflow-hidden ${
         dark
-          ? 'bg-gradient-to-br from-himalaya-950 via-himalaya-900 to-himalaya-950 text-white'
-          : 'bg-gradient-to-br from-sand to-parchment-200 text-himalaya-950 border-t border-b border-parchment-300'
+          ? 'bg-himalaya-950 text-white'
+          : 'bg-parchment-100 text-himalaya-950 border-t border-b border-parchment-300'
       }`}
     >
-      {/* Decorative texture & glow */}
+      {/* Decorative texture */}
       <div className="absolute inset-0 opacity-20 film-grain pointer-events-none" />
-      {dark && (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-terracotta/10 rounded-full blur-3xl pointer-events-none" />
-      )}
 
       <div className="editorial-container relative z-10 max-w-4xl mx-auto text-center space-y-8">
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-xs font-bold uppercase tracking-widest mx-auto border border-white/10">
@@ -57,8 +54,8 @@ export default function CTASection({
         </h2>
 
         <p
-          className={`text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto ${
-            dark ? 'text-parchment-200' : 'text-himalaya-700'
+          className={`text-base sm:text-lg font-normal leading-relaxed max-w-2xl mx-auto ${
+            dark ? 'text-parchment-100' : 'text-himalaya-800'
           }`}
         >
           {subtitle}

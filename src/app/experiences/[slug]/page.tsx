@@ -22,6 +22,7 @@ interface Props {
 }
 
 import { EXPERIENCE_PILLARS } from '@/lib/experiencePillars';
+import { EXPERIENCES } from '@/data/experiences';
 
 // Map individual topic slugs to their parent experience for backwards compatibility redirect
 const TOPIC_TO_PARENT_MAP: Record<string, string> = {
@@ -214,6 +215,24 @@ export default async function ExperienceDetailPage({ params }: Props) {
         heroImage: exp.heroImage ? { src: exp.heroImage.src, alt: exp.heroImage.alt } : undefined,
       }));
 
+    // Guarantee that all curated canonical topics are visible to the client
+    const seenSlugs = new Set(pillarPackages.map((p) => p.slug));
+    const fallbackTopics: PackageCard[] = EXPERIENCES
+      .filter(
+        (exp) =>
+          pillar.categoryFilter.includes(exp.category) &&
+          !PARENT_SLUGS_TO_EXCLUDE.has(exp.slug) &&
+          !seenSlugs.has(exp.slug)
+      )
+      .map((exp) => ({
+        slug: exp.slug,
+        title: exp.title,
+        shortDescription: exp.shortDescription,
+        heroImage: exp.heroImage ? { src: exp.heroImage.src, alt: exp.heroImage.alt } : undefined,
+      }));
+
+    const finalPackages = [...pillarPackages, ...fallbackTopics];
+
     // If CMS has a parent experience record, allow its customized title/intro/overview/highlights to be used
     const cmsParent = allExperiences.find((e) => e.slug === slug);
     const expName = cmsParent?.title || pillar.name;
@@ -234,7 +253,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
         overviewText={expOverview}
         highlights={expHighlights}
         heroImage={expHeroImage}
-        packages={pillarPackages}
+        packages={finalPackages}
         experienceSlug={pillar.canonicalSlug}
       />
     );

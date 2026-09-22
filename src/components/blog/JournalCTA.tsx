@@ -15,9 +15,9 @@ interface JournalCTAProps {
 
 export default function JournalCTA({ cta }: JournalCTAProps) {
   return (
-    <div className="my-12 p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-terracotta-dark/95 via-terracotta/90 to-terracotta-dark/95 text-white shadow-warm border border-terracotta/30">
+    <div className="my-12 p-8 sm:p-10 rounded-3xl bg-himalaya-950 text-white shadow-floating border border-himalaya-800">
       <div className="max-w-2xl mx-auto text-center space-y-4">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 text-saffron-light text-xs font-semibold uppercase tracking-wider">
+        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-terracotta/20 text-terracotta-light text-xs font-semibold uppercase tracking-wider border border-terracotta/30">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Connect Story to Experience</span>
         </div>
@@ -26,7 +26,7 @@ export default function JournalCTA({ cta }: JournalCTAProps) {
           {cta.title}
         </h3>
 
-        <p className="text-xs sm:text-sm text-parchment-200 font-light leading-relaxed">
+        <p className="text-sm sm:text-base text-parchment-100 font-normal leading-relaxed">
           {cta.description}
         </p>
 

@@ -53,14 +53,14 @@ export default function ExperienceCard({ experience, compact = false }: Experien
             </Link>
           </h3>
 
-          <p className="text-sm text-himalaya-600 font-light leading-relaxed line-clamp-2 sm:line-clamp-3 mb-4">
+          <p className="text-sm text-himalaya-800 font-normal leading-relaxed line-clamp-2 sm:line-clamp-3 mb-4">
             {experience.shortDescription}
           </p>
         </div>
 
         <div>
           {/* Metadata chips */}
-          <div className="flex items-center justify-between text-xs text-himalaya-600 font-medium py-3 border-t border-parchment-200 mb-4">
+          <div className="flex items-center justify-between text-xs text-himalaya-700 font-semibold py-3 border-t border-parchment-200 mb-4">
             <span className="flex items-center">
               <Clock className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
               {experience.duration}
@@ -73,7 +73,7 @@ export default function ExperienceCard({ experience, compact = false }: Experien
 
           <Link
             href={`/experiences/${experience.slug}`}
-            className="flex items-center justify-center w-full py-3 rounded-xl bg-parchment-100 hover:bg-himalaya-950 text-himalaya-900 hover:text-white font-semibold text-xs tracking-wider uppercase transition-all duration-300 border border-parchment-300 hover:border-himalaya-950"
+            className="flex items-center justify-center w-full py-3 rounded-xl bg-parchment-100 hover:bg-himalaya-950 text-himalaya-950 hover:text-white font-bold text-xs tracking-wider uppercase transition-all duration-300 border border-parchment-300 hover:border-himalaya-950"
           >
             <span>Explore Experience</span>
             <ArrowRight className="w-3.5 h-3.5 ml-2" />

@@ -50,7 +50,7 @@ export default function DestinationCard({ destination }: DestinationCardProps) {
           <p className="text-xs text-terracotta font-medium italic mb-2">
             {destination.tagline}
           </p>
-          <p className="text-sm text-himalaya-700 font-light leading-relaxed line-clamp-3 mb-6">
+          <p className="text-sm text-himalaya-800 font-normal leading-relaxed line-clamp-3 mb-6">
             {destination.description}
           </p>
 
@@ -59,8 +59,8 @@ export default function DestinationCard({ destination }: DestinationCardProps) {
               Signature Highlights
             </span>
             {destination.highlights.slice(0, 3).map((h, idx) => (
-              <div key={idx} className="flex items-start text-xs text-himalaya-600 font-light">
-                <span className="text-terracotta mr-2 leading-none">•</span>
+              <div key={idx} className="flex items-start text-xs text-himalaya-800 font-normal">
+                <span className="text-terracotta mr-2 leading-none font-bold">•</span>
                 <span className="truncate">{h}</span>
               </div>
             ))}

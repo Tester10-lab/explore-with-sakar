@@ -44,7 +44,7 @@ export default function FAQAccordion({ items, allowMultiple = false }: FAQAccord
               <div className="flex items-start space-x-3.5">
                 <HelpCircle
                   className={`w-5 h-5 mt-0.5 shrink-0 transition-colors ${
-                    isOpen ? 'text-terracotta' : 'text-himalaya-400'
+                    isOpen ? 'text-terracotta' : 'text-himalaya-600'
                   }`}
                 />
                 <span
@@ -60,7 +60,7 @@ export default function FAQAccordion({ items, allowMultiple = false }: FAQAccord
                 className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
                   isOpen
                     ? 'rotate-180 bg-terracotta/10 text-terracotta'
-                    : 'bg-parchment-200 text-himalaya-600'
+                    : 'bg-parchment-200 text-himalaya-800'
                 }`}
               >
                 <ChevronDown className="w-4 h-4" />
@@ -68,7 +68,7 @@ export default function FAQAccordion({ items, allowMultiple = false }: FAQAccord
             </button>
 
             {isOpen && (
-              <div className="px-5 sm:px-6 pb-6 pt-0 text-sm text-himalaya-700 font-light leading-relaxed pl-12 sm:pl-14 border-t border-parchment-200 mt-2">
+              <div className="px-5 sm:px-6 pb-6 pt-0 text-sm sm:text-base text-himalaya-800 font-normal leading-relaxed pl-12 sm:pl-14 border-t border-parchment-200 mt-2">
                 <p className="pt-4">{item.answer}</p>
               </div>
             )}

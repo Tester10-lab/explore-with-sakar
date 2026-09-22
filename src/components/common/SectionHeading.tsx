@@ -50,7 +50,7 @@ export default function SectionHeading({
           {nepaliTag && (
             <span
               className={`font-serif text-xs tracking-wider ${
-                dark ? 'text-white/60' : 'text-himalaya-500'
+                dark ? 'text-white/80' : 'text-himalaya-700 font-medium'
               }`}
             >
               {nepaliTag}
@@ -69,8 +69,8 @@ export default function SectionHeading({
 
       {description && (
         <p
-          className={`text-base sm:text-lg font-light leading-relaxed ${
-            dark ? 'text-parchment-200' : 'text-himalaya-700'
+          className={`text-base sm:text-lg font-normal leading-relaxed ${
+            dark ? 'text-parchment-100' : 'text-himalaya-800'
           }`}
         >
           {description}

@@ -72,11 +72,11 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
                   Reconnecting with Stillness in the Sacred Himalayas
                 </h2>
 
-                <p className="text-base sm:text-lg text-himalaya-700 font-light leading-relaxed">
+                <p className="text-base sm:text-lg text-himalaya-800 font-normal leading-relaxed">
                   For thousands of years, the high ridges, pine valleys, and sacred caves of Nepal have served as the world’s most potent sanctuary for yogis, meditators, and those seeking mental clarity.
                 </p>
 
-                <p className="text-sm sm:text-base text-himalaya-600 font-light leading-relaxed">
+                <p className="text-sm sm:text-base text-himalaya-800 font-normal leading-relaxed">
                   We craft gentle, contemplative journeys focused on acoustic sound resonance, dawn monastery prayers, mindful walking, and pure presence. Rather than dogmatic practice, our approach is experiential, peaceful, and restorative.
                 </p>
 
@@ -87,7 +87,7 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
                     'Pilgrimages to Guru Padmasambhava sacred caves in Pharping',
                     'Mindful ridge walks and gentle restorative breathwork',
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-center space-x-2.5 text-xs sm:text-sm text-himalaya-800">
+                    <div key={idx} className="flex items-center space-x-2.5 text-xs sm:text-sm text-himalaya-900 font-medium">
                       <div className="w-5 h-5 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
                         <Check className="w-3 h-3" />
                       </div>
@@ -141,7 +141,7 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
                 <h3 className="font-editorial-serif text-xl font-bold text-himalaya-950">
                   7-Metal Singing Bowl Sound Therapy
                 </h3>
-                <p className="text-xs sm:text-sm text-himalaya-600 font-light leading-relaxed">
+                <p className="text-xs sm:text-sm text-himalaya-800 font-normal leading-relaxed">
                   Hand-hammered using an ancient alloy of seven cosmic metals. The acoustic harmonics and gentle physical vibrations encourage deep somatic relaxation and mental quietude.
                 </p>
               </div>
@@ -153,7 +153,7 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
                 <h3 className="font-editorial-serif text-xl font-bold text-himalaya-950">
                   Dawn Monastery Pujas & Butter Lamps
                 </h3>
-                <p className="text-xs sm:text-sm text-himalaya-600 font-light leading-relaxed">
+                <p className="text-xs sm:text-sm text-himalaya-800 font-normal leading-relaxed">
                   Sit quietly at dawn inside mountain gompas while monks chant sacred Buddhist sutras, blow deep copper horns, and light lamps dedicated to universal compassion.
                 </p>
               </div>
@@ -165,7 +165,7 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
                 <h3 className="font-editorial-serif text-xl font-bold text-himalaya-950">
                   Sacred Caves & Silent Ridge Walks
                 </h3>
-                <p className="text-xs sm:text-sm text-himalaya-600 font-light leading-relaxed">
+                <p className="text-xs sm:text-sm text-himalaya-800 font-normal leading-relaxed">
                   Walk peaceful forest trails to ancient meditation caves in Pharping and high ridges above the clouds, practicing quiet walking meditation and gentle breathwork.
                 </p>
               </div>

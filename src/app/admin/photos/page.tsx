@@ -299,7 +299,7 @@ export default function AdminPhotosPage() {
               <h3 className="font-editorial-serif text-lg font-bold text-white">
                 Multi-Photo Batch Uploader
               </h3>
-              <p className="text-xs text-parchment-400 font-light mt-0.5">
+              <p className="text-xs text-parchment-200 font-normal mt-0.5">
                 Select or drag multiple image files (JPG, PNG, WebP) to upload instantly into the gallery
               </p>
             </div>
@@ -307,7 +307,7 @@ export default function AdminPhotosPage() {
             <button
               onClick={() => multiFileInputRef.current?.click()}
               disabled={isUploadingMultiple}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-terracotta to-terracotta-dark hover:from-terracotta-light hover:to-terracotta text-white text-xs font-bold uppercase tracking-wider shadow-warm transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-terracotta hover:bg-terracotta-dark text-white text-xs font-bold uppercase tracking-wider shadow-warm transition-all disabled:opacity-50"
             >
               {isUploadingMultiple ? (
                 <>

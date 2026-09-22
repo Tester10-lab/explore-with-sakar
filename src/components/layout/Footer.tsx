@@ -30,7 +30,7 @@ export default function Footer() {
               {settings.footer?.headline || "Would you like to create a similar travel story in Nepal with Sakar?"}
             </h3>
             {settings.footer?.subheadline ? (
-              <p className="text-himalaya-600 text-sm sm:text-base font-light max-w-xl leading-relaxed">
+              <p className="text-himalaya-800 text-sm sm:text-base font-normal max-w-xl leading-relaxed">
                 {settings.footer.subheadline}
               </p>
             ) : null}
@@ -70,7 +70,7 @@ export default function Footer() {
                 className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
-            <p className="text-sm text-himalaya-700 font-light leading-relaxed max-w-sm">
+            <p className="text-sm text-himalaya-800 font-normal leading-relaxed max-w-sm">
               {settings.footer?.brandDescription ||
                 'Meaningful Nepal travel experiences beyond ordinary tourism. We curate intimate human connections, authentic village homestays, living Buddhist & Hindu heritage, and responsible slow travel.'}
             </p>
@@ -98,7 +98,7 @@ export default function Footer() {
                   <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
                     {col.title}
                   </h4>
-                  <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
+                  <ul className="space-y-2.5 text-xs text-himalaya-800 font-medium">
                     {visibleLinks.map((link) => (
                       <li key={link.id || link.url}>
                         <Link
@@ -114,7 +114,7 @@ export default function Footer() {
                   </ul>
 
                   {isLast && (
-                    <div className="pt-4 border-t border-parchment-200 space-y-2 text-xs text-himalaya-600 font-light">
+                    <div className="pt-4 border-t border-parchment-200 space-y-2 text-xs text-himalaya-800 font-medium">
                       <div className="flex items-center space-x-2">
                         <MapPin className="w-3.5 h-3.5 text-terracotta shrink-0" />
                         <span>{settings.contact?.address || 'Kathmandu, Nepal'}</span>
@@ -139,7 +139,7 @@ export default function Footer() {
                 <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
                   Experiences
                 </h4>
-                <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
+                <ul className="space-y-2.5 text-xs text-himalaya-800 font-medium">
                   <li>
                     <Link href="/experiences/beyond-the-map" className="hover:text-terracotta transition-colors">
                       Go Beyond the Map
@@ -166,7 +166,7 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/experiences" className="font-medium text-terracotta hover:underline pt-1 inline-block">
+                    <Link href="/experiences" className="font-bold text-terracotta hover:underline pt-1 inline-block">
                       All Curated Experiences →
                     </Link>
                   </li>
@@ -178,7 +178,7 @@ export default function Footer() {
                 <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
                   Explore
                 </h4>
-                <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
+                <ul className="space-y-2.5 text-xs text-himalaya-800 font-medium">
                   <li>
                     <Link href="/destinations" className="hover:text-terracotta transition-colors">
                       Destinations
@@ -212,7 +212,7 @@ export default function Footer() {
                 <h4 className="font-editorial-serif text-sm font-bold uppercase tracking-wider text-himalaya-950">
                   Travel Guide
                 </h4>
-                <ul className="space-y-2.5 text-xs text-himalaya-700 font-light">
+                <ul className="space-y-2.5 text-xs text-himalaya-800 font-medium">
                   <li>
                     <Link href="/resources" className="hover:text-terracotta transition-colors">
                       Travel Resources & Visas
@@ -230,7 +230,7 @@ export default function Footer() {
                   </li>
                 </ul>
 
-                <div className="pt-4 border-t border-parchment-200 space-y-2 text-xs text-himalaya-600 font-light">
+                <div className="pt-4 border-t border-parchment-200 space-y-2 text-xs text-himalaya-800 font-medium">
                   <div className="flex items-center space-x-2">
                     <MapPin className="w-3.5 h-3.5 text-terracotta shrink-0" />
                     <span>{settings.contact?.address || 'Kathmandu, Nepal'}</span>

@@ -18,6 +18,7 @@ import { getPublicExperienceBySlug, getPublicExperiences } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 import CTASection from '@/components/common/CTASection';
 import { EXPERIENCE_PILLARS } from '@/lib/experiencePillars';
+import { EXPERIENCES } from '@/data/experiences';
 
 // Force dynamic so individual topic pages always pull fresh data from
 // the database — prevents stale static builds from masking CMS edits.
@@ -61,6 +62,17 @@ async function getTopic(topicSlug: string) {
         e.slug === topicSlug ||
         e.slug.includes(topicSlug)
     ) || null;
+  }
+  // Canonical fallback from EXPERIENCES
+  if (!experience) {
+    experience = (EXPERIENCES.find(
+      (e) =>
+        e.slug === resolvedSlug ||
+        e.slug === topicSlug ||
+        e.id === resolvedSlug ||
+        e.id === topicSlug ||
+        e.slug.includes(topicSlug)
+    ) as any) || null;
   }
   return experience;
 }
@@ -218,7 +230,7 @@ export default async function IndividualTopicPage({ params }: Props) {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-parchment-300">
               {experience.duration && (
                 <div className="p-3 bg-white rounded-xl border border-parchment-300">
-                  <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-500 mb-1">
+                  <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-700 mb-1">
                     Duration
                   </span>
                   <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-900">
@@ -230,7 +242,7 @@ export default async function IndividualTopicPage({ params }: Props) {
 
               {experience.groupSize && (
                 <div className="p-3 bg-white rounded-xl border border-parchment-300">
-                  <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-500 mb-1">
+                  <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-700 mb-1">
                     Group Format
                   </span>
                   <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-900">
@@ -242,7 +254,7 @@ export default async function IndividualTopicPage({ params }: Props) {
 
               {experience.location && (
                 <div className="p-3 bg-white rounded-xl border border-parchment-300">
-                  <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-500 mb-1">
+                  <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-700 mb-1">
                     Location
                   </span>
                   <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-900 truncate">
@@ -254,7 +266,7 @@ export default async function IndividualTopicPage({ params }: Props) {
 
               {experience.season && (
                 <div className="p-3 bg-white rounded-xl border border-parchment-300">
-                  <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-500 mb-1">
+                  <span className="block text-[10px] uppercase font-bold tracking-widest text-himalaya-700 mb-1">
                     Best Season
                   </span>
                   <span className="flex items-center text-xs sm:text-sm font-semibold text-himalaya-900 truncate">
@@ -343,7 +355,7 @@ export default async function IndividualTopicPage({ params }: Props) {
               <h2 className="font-editorial-serif text-2xl sm:text-3xl font-bold text-himalaya-950">
                 Stepping Past the Tourist Facade
               </h2>
-              <div className="prose prose-lg prose-himalaya max-w-none font-light leading-relaxed space-y-5 text-himalaya-700">
+              <div className="prose prose-lg prose-himalaya max-w-none font-normal leading-relaxed space-y-5 text-himalaya-800">
                 {fullDesc.map((paragraph: string, idx: number) => (
                   <p key={idx}>{paragraph}</p>
                 ))}
@@ -365,7 +377,7 @@ export default async function IndividualTopicPage({ params }: Props) {
                       <div className="w-5 h-5 rounded-full bg-parchment-200 text-terracotta flex items-center justify-center shrink-0 mt-0.5 border border-parchment-300">
                         <Check className="w-3 h-3" />
                       </div>
-                      <span className="text-himalaya-800 font-light leading-relaxed text-sm sm:text-base">
+                      <span className="text-himalaya-900 font-medium leading-relaxed text-sm sm:text-base">
                         {highlight}
                       </span>
                     </li>
@@ -401,7 +413,7 @@ export default async function IndividualTopicPage({ params }: Props) {
                         <h4 className="font-editorial-serif text-lg sm:text-xl font-bold text-himalaya-950">
                           {day.title}
                         </h4>
-                        <p className="text-himalaya-700 font-light text-xs sm:text-sm leading-relaxed">
+                        <p className="text-himalaya-800 font-normal text-xs sm:text-sm leading-relaxed">
                           {day.description}
                         </p>
                       </div>
@@ -409,7 +421,7 @@ export default async function IndividualTopicPage({ params }: Props) {
                   ))}
                 </div>
 
-                <p className="text-xs font-display-serif italic text-himalaya-500 text-center pt-2">
+                <p className="text-xs font-display-serif italic text-himalaya-600 text-center pt-2">
                   * Note: All daily rhythms and walking paces are personalized to your physical comfort.
                 </p>
               </section>
@@ -440,29 +452,29 @@ export default async function IndividualTopicPage({ params }: Props) {
                 <div className="space-y-3 text-xs sm:text-sm">
                   {experience.duration && (
                     <div className="flex justify-between py-1.5 border-b border-parchment-100">
-                      <span className="text-himalaya-500 font-mono uppercase text-[11px]">Duration</span>
-                      <span className="font-semibold text-himalaya-900">{experience.duration}</span>
+                      <span className="text-himalaya-700 font-mono uppercase text-[11px] font-bold">Duration</span>
+                      <span className="font-semibold text-himalaya-950">{experience.duration}</span>
                     </div>
                   )}
 
                   {experience.groupSize && (
                     <div className="flex justify-between py-1.5 border-b border-parchment-100">
-                      <span className="text-himalaya-500 font-mono uppercase text-[11px]">Group Size</span>
-                      <span className="font-semibold text-himalaya-900">{experience.groupSize}</span>
+                      <span className="text-himalaya-700 font-mono uppercase text-[11px] font-bold">Group Size</span>
+                      <span className="font-semibold text-himalaya-950">{experience.groupSize}</span>
                     </div>
                   )}
 
                   {experience.location && (
                     <div className="flex justify-between py-1.5 border-b border-parchment-100">
-                      <span className="text-himalaya-500 font-mono uppercase text-[11px]">Location</span>
-                      <span className="font-semibold text-himalaya-900">{experience.location}</span>
+                      <span className="text-himalaya-700 font-mono uppercase text-[11px] font-bold">Location</span>
+                      <span className="font-semibold text-himalaya-950">{experience.location}</span>
                     </div>
                   )}
 
                   {experience.season && (
                     <div className="flex justify-between py-1.5 border-b border-parchment-100">
-                      <span className="text-himalaya-500 font-mono uppercase text-[11px]">Best Season</span>
-                      <span className="font-semibold text-himalaya-900">{experience.season}</span>
+                      <span className="text-himalaya-700 font-mono uppercase text-[11px] font-bold">Best Season</span>
+                      <span className="font-semibold text-himalaya-950">{experience.season}</span>
                     </div>
                   )}
                 </div>
@@ -471,13 +483,13 @@ export default async function IndividualTopicPage({ params }: Props) {
                 {((experience.inclusions && experience.inclusions.length > 0) ||
                   ((experience as any).included && (experience as any).included.length > 0)) && (
                   <div className="pt-2">
-                    <span className="block text-himalaya-500 font-mono uppercase text-[11px] mb-2 font-bold">
+                    <span className="block text-himalaya-700 font-mono uppercase text-[11px] mb-2 font-bold">
                       What Is Included
                     </span>
                     <ul className="space-y-1.5">
                       {(experience.inclusions || (experience as any).included || []).map(
                         (item: string, idx: number) => (
-                          <li key={idx} className="flex items-start text-himalaya-700 text-xs">
+                          <li key={idx} className="flex items-start text-himalaya-800 font-medium text-xs">
                             <Check className="w-3.5 h-3.5 text-terracotta mr-2 shrink-0 mt-0.5" />
                             <span>{item}</span>
                           </li>
@@ -501,10 +513,10 @@ export default async function IndividualTopicPage({ params }: Props) {
               {/* Responsible Footprint */}
               {experience.impactFootprint && (
                 <div className="p-6 bg-parchment-200/60 rounded-2xl border border-parchment-300">
-                  <h5 className="text-[11px] uppercase font-bold tracking-widest text-himalaya-900 mb-2">
+                  <h5 className="text-[11px] uppercase font-bold tracking-widest text-himalaya-950 mb-2">
                     Responsible Community Footprint
                   </h5>
-                  <p className="text-xs text-himalaya-700 font-light leading-relaxed">
+                  <p className="text-xs text-himalaya-800 font-normal leading-relaxed">
                     {experience.impactFootprint}
                   </p>
                 </div>

@@ -115,11 +115,11 @@ export default function CustomJourneysExperience({ pageContent, availableEvents 
                   No Pre-Packaged Templates. Just Your Journey, Thoughtfully Crafted.
                 </h2>
 
-                <p className="text-base sm:text-lg text-himalaya-700 font-light leading-relaxed">
+                <p className="text-base sm:text-lg text-himalaya-800 font-normal leading-relaxed">
                   Whether you wish to spend three days in a quiet pottery courtyard in Bhaktapur, meditate at dawn inside a hillside monastery, or take a week-long unhurried walk through Gurung stone villages, we build your trip around what matters most to you.
                 </p>
 
-                <p className="text-sm sm:text-base text-himalaya-600 font-light leading-relaxed">
+                <p className="text-sm sm:text-base text-himalaya-800 font-normal leading-relaxed">
                   You travel with complete flexibility—meaning if we find a fascinating village festival or simply wish to spend an extra afternoon sipping tea on a sunlit balcony, your schedule adapts smoothly.
                 </p>
 
@@ -130,7 +130,7 @@ export default function CustomJourneysExperience({ pageContent, availableEvents 
                     'Handpicked boutique lodgings & verified homestays',
                     'Direct communication with Sakar from day one',
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-center space-x-2.5 text-xs sm:text-sm text-himalaya-800">
+                    <div key={idx} className="flex items-center space-x-2.5 text-xs sm:text-sm text-himalaya-900 font-medium">
                       <div className="w-5 h-5 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
                         <Check className="w-3 h-3" />
                       </div>
@@ -187,7 +187,7 @@ export default function CustomJourneysExperience({ pageContent, availableEvents 
                       <span className="font-editorial-serif text-3xl font-bold text-terracotta">
                         {step.num}
                       </span>
-                      <span className="text-[10px] font-serif text-himalaya-500">
+                      <span className="text-xs font-serif text-himalaya-700 font-medium">
                         {step.nepali}
                       </span>
                     </div>
@@ -196,12 +196,12 @@ export default function CustomJourneysExperience({ pageContent, availableEvents 
                       {step.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-himalaya-600 font-light leading-relaxed">
+                    <p className="text-sm text-himalaya-800 font-normal leading-relaxed">
                       {step.desc}
                     </p>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-parchment-100 flex items-center text-xs font-semibold text-terracotta">
+                  <div className="pt-6 mt-6 border-t border-parchment-200 flex items-center text-xs font-bold text-terracotta">
                     <span>Step {step.num}</span>
                     <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                   </div>
@@ -237,7 +237,7 @@ export default function CustomJourneysExperience({ pageContent, availableEvents 
                     <h4 className="font-editorial-serif text-lg font-bold text-himalaya-950">
                       {style.title}
                     </h4>
-                    <p className="text-xs text-himalaya-600 font-light leading-relaxed">
+                    <p className="text-xs sm:text-sm text-himalaya-800 font-normal leading-relaxed">
                       {style.desc}
                     </p>
                   </div>

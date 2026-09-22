@@ -73,11 +73,11 @@ export default async function FeelCloserExperience({ pageContent }: FeelCloserEx
                   Where Guests Arrive as Strangers and Leave as Family
                 </h2>
 
-                <p className="text-base sm:text-lg text-himalaya-700 font-light leading-relaxed">
+                <p className="text-base sm:text-lg text-himalaya-800 font-normal leading-relaxed">
                   True cultural immersion does not occur in five-star hotel lobbies. It happens around a wood-burning hearth (Chulo), where generations gather to share stories, peel garlic, and brew fresh ginger milk tea while mountain mist drifts through the valley outside.
                 </p>
 
-                <p className="text-sm sm:text-base text-himalaya-600 font-light leading-relaxed">
+                <p className="text-sm sm:text-base text-himalaya-800 font-normal leading-relaxed">
                   Our homestay network consists of vetted, clean, multi-generational family homes in authentic mountain villages. Sakar personally accompanies you as a cultural bridge—facilitating natural translation, explaining customs, and ensuring that your hosts receive fair, transparent compensation that directly empowers rural mothers and community funds.
                 </p>
 
@@ -88,7 +88,7 @@ export default async function FeelCloserExperience({ pageContent }: FeelCloserEx
                     'Respectful, ethical community economic benefit',
                     'Sakar’s dedicated cultural bridge & translation',
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-center space-x-2.5 text-xs sm:text-sm text-himalaya-800">
+                    <div key={idx} className="flex items-center space-x-2.5 text-xs sm:text-sm text-himalaya-900 font-medium">
                       <div className="w-5 h-5 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
                         <Check className="w-3 h-3" />
                       </div>
@@ -172,13 +172,13 @@ export default async function FeelCloserExperience({ pageContent }: FeelCloserEx
                     {/* Right: Village Details & Daily Rhythms */}
                     <div className="lg:col-span-7 space-y-6">
                       <div>
-                        <span className="text-xs font-bold uppercase tracking-wider text-himalaya-500">
+                        <span className="text-xs font-bold uppercase tracking-wider text-himalaya-700">
                           {hs.community}
                         </span>
                         <h3 className="font-editorial-serif text-2xl sm:text-3xl font-bold text-himalaya-950 mt-1">
                           {hs.villageName}
                         </h3>
-                        <p className="text-sm sm:text-base text-himalaya-700 font-light leading-relaxed mt-3">
+                        <p className="text-sm sm:text-base text-himalaya-800 font-normal leading-relaxed mt-3">
                           {hs.description}
                         </p>
                       </div>
@@ -193,7 +193,7 @@ export default async function FeelCloserExperience({ pageContent }: FeelCloserEx
                           {hs.dailyRhythm.map((step, idx) => (
                             <div
                               key={idx}
-                              className="p-3 rounded-xl bg-parchment-50 border border-parchment-200 text-xs text-himalaya-800 font-light flex items-start space-x-2"
+                              className="p-3 rounded-xl bg-parchment-50 border border-parchment-200 text-xs sm:text-sm text-himalaya-900 font-normal flex items-start space-x-2"
                             >
                               <span className="text-terracotta font-bold">•</span>
                               <span>{step}</span>
