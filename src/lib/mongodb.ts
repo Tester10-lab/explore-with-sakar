@@ -67,15 +67,18 @@ export function getMongoClient(): Promise<MongoClient> {
 
   // Reuse cached connection across warm serverless invocations.
   if (globalThis._mongoClientPromise) {
+    console.log('[PERF:MONGO:CONNECT_REUSED] using cached MongoClient promise');
     return globalThis._mongoClientPromise;
   }
+
+  console.log('[PERF:MONGO:CONNECT_START] initiating new MongoClient connection...');
+  const connectStart = Date.now();
 
   const client = new MongoClient(uri, {
     // Connection pool: 10 connections is fine for Vercel serverless.
     maxPoolSize: 10,
     // 5s timeouts give Atlas enough headroom on cold starts without blocking
-    // requests for too long. The previous 3s was causing silent failures on
-    // cold Vercel invocations.
+    // requests for too long.
     serverSelectionTimeoutMS: 5000,
     connectTimeoutMS: 5000,
     // Keep alive prevents the connection being dropped between warm invocations.
@@ -86,6 +89,8 @@ export function getMongoClient(): Promise<MongoClient> {
     .connect()
     .then((c) => {
       lastFailureTime = 0;
+      const durationMs = Date.now() - connectStart;
+      console.log(`[PERF:MONGO:CONNECT_DONE] durationMs=${durationMs}`);
       if (isProduction) {
         console.log('[mongodb] Connected successfully to Atlas.');
       }
@@ -94,8 +99,9 @@ export function getMongoClient(): Promise<MongoClient> {
     .catch((err) => {
       lastFailureTime = Date.now();
       globalThis._mongoClientPromise = undefined;
+      const durationMs = Date.now() - connectStart;
       const msg = `MongoDB connection error: ${err.message || err}`;
-      console.error(`[mongodb] ${msg}`);
+      console.error(`[PERF:MONGO:CONNECT_FAIL] durationMs=${durationMs} ${msg}`);
       throw new MongoUnavailableError(msg);
     });
 

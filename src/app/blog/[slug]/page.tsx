@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import {
+  getPublicBlogs,
   getPublicBlogBySlug,
   getPublicRelatedBlogs,
   getPublicTopFeaturedExperiences,
@@ -13,6 +14,14 @@ import JournalCTA from '@/components/blog/JournalCTA';
 import RelatedStories from '@/components/blog/RelatedStories';
 import BlogFeaturedExperiences from '@/components/blog/BlogFeaturedExperiences';
 
+// ISR revalidation window: 5 minutes (300 seconds)
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  const blogs = await getPublicBlogs();
+  return blogs.map((b) => ({ slug: b.slug }));
+}
+
 interface ArticlePageProps {
   params: {
     slug: string;
@@ -20,7 +29,10 @@ interface ArticlePageProps {
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
+  const tMeta0 = Date.now();
   const post = await getPublicBlogBySlug(params.slug);
+  console.log(`[PERF:BLOG_SLUG:METADATA] slug=${params.slug} durationMs=${Date.now() - tMeta0} found=${Boolean(post)}`);
+
   if (!post) {
     return {
       title: 'Story Not Found — Sakar’s Journal',
@@ -47,16 +59,30 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
+  const pageStart = Date.now();
+  console.log(`[PERF:BLOG_SLUG:PAGE_START] slug=${params.slug}`);
+
+  const postStart = Date.now();
   const post = await getPublicBlogBySlug(params.slug);
+  const postDurationMs = Date.now() - postStart;
+  console.log(`[PERF:BLOG_SLUG:GET_POST] slug=${params.slug} durationMs=${postDurationMs} found=${Boolean(post)}`);
 
   if (!post) {
     notFound();
   }
 
+  const relatedStart = Date.now();
   const [relatedPosts, featuredExperiences] = await Promise.all([
     getPublicRelatedBlogs(post.slug, 3),
     getPublicTopFeaturedExperiences(3),
   ]);
+  const relatedDurationMs = Date.now() - relatedStart;
+  console.log(
+    `[PERF:BLOG_SLUG:RELATED_AND_EXP] durationMs=${relatedDurationMs} relatedCount=${relatedPosts.length} expCount=${featuredExperiences.length}`
+  );
+
+  const totalServerMs = Date.now() - pageStart;
+  console.log(`[PERF:BLOG_SLUG:PAGE_DONE] slug=${params.slug} totalServerMs=${totalServerMs}`);
 
   return (
     <article className="min-h-screen bg-parchment-100 pb-20">

@@ -111,6 +111,7 @@ function normalizeCollectionShape(key: string, value: any): any {
 export async function readKey<T = any>(key: string, options?: { throwOnError?: boolean }): Promise<T> {
   const cached = readCache.get(key);
   if (cached && Date.now() - cached.timestamp < READ_CACHE_TTL_MS) {
+    console.log(`[PERF:STORE:READ_CACHE_HIT] key=${key} ageMs=${Date.now() - cached.timestamp}`);
     return cached.data as T;
   }
 
@@ -143,14 +144,17 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
     await ensureMigrations(db);
     const col = db.collection('cms_store');
 
+    const qStart = Date.now();
     // Fetch only the requested field
     let doc = await col.findOne(
       { _id: 'active_store' as any },
       { projection: { [key]: 1 } }
     );
+    const qDuration = Date.now() - qStart;
 
     // If active_store or key does not exist yet, atomically seed it using pipeline update
     if (!doc || doc[key] === undefined) {
+      console.log(`[PERF:STORE:SEED_REQUIRED] key=${key} missing in DB, seeding...`);
       const seedVal = getSeedForKey(key);
       await col.updateOne(
         { _id: 'active_store' as any },
@@ -164,9 +168,7 @@ export async function readKey<T = any>(key: string, options?: { throwOnError?: b
     }
 
     const elapsed = Date.now() - startTime;
-    if (IS_DEV) {
-      console.log(`[store] read ${key} ${elapsed}ms`);
-    }
+    console.log(`[PERF:STORE:READ_DONE] key=${key} queryMs=${qDuration} totalMs=${elapsed}`);
 
     let val = doc ? doc[key] : undefined;
     if (val === undefined) {
