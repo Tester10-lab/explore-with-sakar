@@ -310,26 +310,54 @@
 
 /* Admin Labels */
 .admin-clean-theme label {
-  color: #334155 !important;
+  color: #1e293b !important;
   font-weight: 600 !important;
 }
 
 /* CRITICAL: Ensure all dark buttons, action buttons & active tabs ALWAYS have crisp white text */
-.admin-clean-theme .bg-slate-900,
-.admin-clean-theme .bg-slate-900 *,
-.admin-clean-theme .bg-slate-800,
-.admin-clean-theme .bg-slate-800 *,
-.admin-clean-theme .bg-terracotta,
-.admin-clean-theme .bg-terracotta *,
-.admin-clean-theme .bg-terracotta-dark,
-.admin-clean-theme .bg-terracotta-dark *,
-.admin-clean-theme .bg-emerald-600,
-.admin-clean-theme .bg-emerald-600 *,
-.admin-clean-theme .bg-rose-600,
-.admin-clean-theme .bg-rose-600 *,
-.admin-clean-theme [class*="bg-terracotta"] *,
-.admin-clean-theme [class*="bg-slate-900"] * {
+.admin-clean-theme button[class*="bg-slate-900"],
+.admin-clean-theme button[class*="bg-slate-900"] *,
+.admin-clean-theme button[class*="bg-slate-800"],
+.admin-clean-theme button[class*="bg-slate-800"] *,
+.admin-clean-theme button[class*="bg-terracotta"],
+.admin-clean-theme button[class*="bg-terracotta"] *,
+.admin-clean-theme button[class*="bg-emerald"],
+.admin-clean-theme button[class*="bg-emerald"] *,
+.admin-clean-theme button[class*="bg-rose"],
+.admin-clean-theme button[class*="bg-rose"] *,
+.admin-clean-theme a[class*="bg-slate-900"],
+.admin-clean-theme a[class*="bg-slate-900"] *,
+.admin-clean-theme a[class*="bg-slate-800"],
+.admin-clean-theme a[class*="bg-slate-800"] *,
+.admin-clean-theme a[class*="bg-terracotta"],
+.admin-clean-theme a[class*="bg-terracotta"] *,
+.admin-clean-theme [role="tab"][aria-selected="true"],
+.admin-clean-theme [role="tab"][aria-selected="true"] * {
   color: #ffffff !important;
+}
+
+/* Modals & dialogs: ALWAYS guarantee high-contrast dark text on white/slate cards */
+.admin-clean-theme .bg-white,
+.admin-clean-theme .bg-slate-50,
+.admin-clean-theme .bg-slate-100 {
+  color: #0f172a !important;
+}
+
+.admin-clean-theme .bg-white label,
+.admin-clean-theme .bg-slate-50 label,
+.admin-clean-theme .bg-slate-100 label {
+  color: #1e293b !important;
+  font-weight: 600 !important;
+}
+
+.admin-clean-theme .bg-white span:not([class*="bg-"]):not([class*="text-white"]),
+.admin-clean-theme .bg-slate-50 span:not([class*="bg-"]):not([class*="text-white"]) {
+  color: #1e293b;
+}
+
+.admin-clean-theme .bg-white button:not([class*="bg-terracotta"]):not([class*="bg-slate-9"]):not([class*="bg-emerald"]):not([class*="bg-rose"]),
+.admin-clean-theme .bg-slate-50 button:not([class*="bg-terracotta"]):not([class*="bg-slate-9"]):not([class*="bg-emerald"]):not([class*="bg-rose"]) {
+  color: #334155 !important;
 }
 
 /* When .text-white is on an element with NO dark background, map it to dark slate for readability */

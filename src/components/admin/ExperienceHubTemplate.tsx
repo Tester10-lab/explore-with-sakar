@@ -725,10 +725,10 @@ export default function ExperienceHubTemplate({
 
       {/* TOPIC EDIT / ADD MODAL */}
       {editingTopic && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white text-slate-900 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200" style={{ color: '#0f172a' }}>
             <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between z-10">
-              <h3 className="font-editorial-serif text-lg font-bold text-slate-900">
+              <h3 className="font-editorial-serif text-lg font-bold text-slate-900" style={{ color: '#0f172a' }}>
                 {isNewTopic ? 'Add New Topic / Package' : `Edit Topic: ${editingTopic.title}`}
               </h3>
               <button
@@ -739,11 +739,11 @@ export default function ExperienceHubTemplate({
               </button>
             </div>
 
-            <div className="p-6 space-y-6">
+            <div className="p-6 space-y-6" style={{ color: '#0f172a' }}>
               {/* Basic Details */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Topic Title *</label>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>Topic Title *</label>
                   <input
                     type="text"
                     value={editingTopic.title || ''}
@@ -754,16 +754,18 @@ export default function ExperienceHubTemplate({
                         : editingTopic.slug;
                       setEditingTopic({ ...editingTopic, title, slug });
                     }}
+                    style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                     className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Slug *</label>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>Slug *</label>
                   <input
                     type="text"
                     value={editingTopic.slug || ''}
                     onChange={(e) => setEditingTopic({ ...editingTopic, slug: e.target.value })}
+                    style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                     className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 font-mono focus:outline-none focus:border-terracotta"
                   />
                 </div>
@@ -772,7 +774,7 @@ export default function ExperienceHubTemplate({
               {/* Image & Short Desc */}
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Hero Image URL</label>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>Hero Image URL</label>
                   <input
                     type="text"
                     value={editingTopic.heroImage?.src || ''}
@@ -782,18 +784,20 @@ export default function ExperienceHubTemplate({
                         heroImage: { src: e.target.value, alt: editingTopic.title || 'Hero Image' },
                       })
                     }
+                    style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                     className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>
                     Short Description (For Discovery Card)
                   </label>
                   <textarea
                     rows={3}
                     value={editingTopic.shortDescription || ''}
                     onChange={(e) => setEditingTopic({ ...editingTopic, shortDescription: e.target.value })}
+                    style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                     className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                   />
                 </div>
@@ -802,68 +806,74 @@ export default function ExperienceHubTemplate({
               {/* Itinerary Details: Duration, Group Size, Location, Season */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Duration</label>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>Duration</label>
                   <input
                     type="text"
                     value={editingTopic.duration || ''}
                     onChange={(e) => setEditingTopic({ ...editingTopic, duration: e.target.value })}
                     placeholder="Full Day / 2-3 Days"
+                    style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                     className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Group Format</label>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>Group Format</label>
                   <input
                     type="text"
                     value={editingTopic.groupSize || ''}
                     onChange={(e) => setEditingTopic({ ...editingTopic, groupSize: e.target.value })}
                     placeholder="Private / 1–6 Travelers"
+                    style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                     className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Location</label>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>Location</label>
                   <input
                     type="text"
                     value={editingTopic.location || ''}
                     onChange={(e) => setEditingTopic({ ...editingTopic, location: e.target.value })}
+                    style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                     className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Best Season</label>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>Best Season</label>
                   <input
                     type="text"
                     value={editingTopic.season || ''}
                     onChange={(e) => setEditingTopic({ ...editingTopic, season: e.target.value })}
+                    style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                     className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                   />
                 </div>
               </div>
 
               {/* Quote Block */}
-              <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
-                <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+              <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3" style={{ color: '#0f172a' }}>
+                <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5" style={{ color: '#1e293b' }}>
                   <QuoteIcon className="w-3.5 h-3.5 text-terracotta" />
                   Key Itinerary Quote
                 </span>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Quote Text</label>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>Quote Text</label>
                   <textarea
                     rows={2}
                     value={quoteText}
                     onChange={(e) => setQuoteText(e.target.value)}
                     placeholder="e.g. In Patan, history is not preserved behind ropes..."
+                    style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                     className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Attribution / Subtitle</label>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>Attribution / Subtitle</label>
                   <input
                     type="text"
                     value={quoteAttribution}
                     onChange={(e) => setQuoteAttribution(e.target.value)}
                     placeholder="e.g. Field Note • Patan Heritage Quarter"
+                    style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                     className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                   />
                 </div>
@@ -871,26 +881,28 @@ export default function ExperienceHubTemplate({
 
               {/* Detailed Narrative */}
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>
                   Detailed Itinerary Narrative (Paragraphs separated by blank line)
                 </label>
                 <textarea
                   rows={6}
                   value={topicDescText}
                   onChange={(e) => setTopicDescText(e.target.value)}
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                   className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                 />
               </div>
 
               {/* Topic Highlights */}
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-800 mb-1" style={{ color: '#1e293b' }}>
                   Topic Highlights (One per line)
                 </label>
                 <textarea
                   rows={4}
                   value={topicHighlightsText}
                   onChange={(e) => setTopicHighlightsText(e.target.value)}
+                  style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                   className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-terracotta"
                 />
               </div>
@@ -898,7 +910,7 @@ export default function ExperienceHubTemplate({
               {/* Chronicle of the Days */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-800">Chronicle of the Days</span>
+                  <span className="text-xs font-bold text-slate-800" style={{ color: '#1e293b' }}>Chronicle of the Days</span>
                   <button
                     type="button"
                     onClick={handleAddDay}
@@ -911,7 +923,7 @@ export default function ExperienceHubTemplate({
                 {(editingTopic.days || []).map((day, idx) => (
                   <div key={idx} className="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-700">Day {day.dayNumber || idx + 1}</span>
+                      <span className="text-xs font-bold text-slate-700" style={{ color: '#334155' }}>Day {day.dayNumber || idx + 1}</span>
                       <button
                         type="button"
                         onClick={() => handleRemoveDay(idx)}
@@ -929,6 +941,7 @@ export default function ExperienceHubTemplate({
                         setEditingTopic({ ...editingTopic, days: updated });
                       }}
                       placeholder="Day Title"
+                      style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                       className="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs"
                     />
                     <textarea
@@ -940,6 +953,7 @@ export default function ExperienceHubTemplate({
                         setEditingTopic({ ...editingTopic, days: updated });
                       }}
                       placeholder="Day Description"
+                      style={{ color: '#0f172a', backgroundColor: '#ffffff' }}
                       className="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-xs"
                     />
                   </div>
@@ -948,7 +962,7 @@ export default function ExperienceHubTemplate({
 
               {/* Status & Featured */}
               <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-slate-200">
-                <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
+                <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700" style={{ color: '#334155' }}>
                   <input
                     type="checkbox"
                     checked={editingTopic.status === 'published'}
@@ -963,7 +977,7 @@ export default function ExperienceHubTemplate({
                   <span>Published (Visible to public)</span>
                 </label>
 
-                <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
+                <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700" style={{ color: '#334155' }}>
                   <input
                     type="checkbox"
                     checked={Boolean(editingTopic.featured)}
@@ -985,6 +999,7 @@ export default function ExperienceHubTemplate({
               <button
                 type="button"
                 onClick={() => setEditingTopic(null)}
+                style={{ color: '#334155', backgroundColor: '#ffffff' }}
                 className="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100"
               >
                 Cancel

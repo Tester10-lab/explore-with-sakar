@@ -25,6 +25,7 @@ import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { PageContent, PageSeo } from '@/types/cms';
+import SeoGeoAeoAuditor from '@/components/admin/SeoGeoAeoAuditor';
 
 export default function AdminSeoPage() {
   const router = useRouter();
@@ -32,6 +33,9 @@ export default function AdminSeoPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterMode, setFilterMode] = useState<'all' | 'needs-review' | 'no-index' | 'excluded-sitemap'>('all');
+
+  const [activeMainTab, setActiveMainTab] = useState<'metadata' | 'auditor'>('metadata');
+  const [auditorTargetSlug, setAuditorTargetSlug] = useState<string>('home');
 
   const [editingPage, setEditingPage] = useState<PageContent | null>(null);
   const [formData, setFormData] = useState<PageSeo>({});
@@ -45,6 +49,35 @@ export default function AdminSeoPage() {
 
   const removeToast = (id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  const handleApplyFix = async (pageSlug: string, updates: { title?: string; metaDescription?: string }) => {
+    const page = pages.find((p) => p.slug === pageSlug);
+    if (!page) return;
+
+    try {
+      const updatedSeo = {
+        ...(page.seo || {}),
+        ...updates,
+      };
+
+      const res = await fetch(`/api/admin/pages/${pageSlug}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ seo: updatedSeo }),
+      });
+
+      if (res.ok) {
+        addToast('success', `Applied recommendations to ${page.name}`);
+        setPages((prev) =>
+          prev.map((p) => (p.slug === pageSlug ? { ...p, seo: updatedSeo } : p))
+        );
+      } else {
+        addToast('error', 'Failed to save recommendations');
+      }
+    } catch {
+      addToast('error', 'Network error applying recommendation');
+    }
   };
 
   const fetchPages = async () => {
@@ -159,10 +192,48 @@ export default function AdminSeoPage() {
 
       <AdminHeader
         title="SEO & Metadata Manager"
-        subtitle="Manage page titles, meta descriptions, OpenGraph tags, indexing, and sitemap visibility across all 18 pages."
+        subtitle="Manage page titles, meta descriptions, OpenGraph tags, indexing, and run automated SEO/GEO/AEO audits across all pages."
       />
 
-      {/* Metrics Row */}
+      {/* Top Level Navigation Tabs */}
+      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-himalaya-900 border border-himalaya-800 rounded-2xl">
+        <button
+          onClick={() => setActiveMainTab('metadata')}
+          className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all ${
+            activeMainTab === 'metadata'
+              ? 'bg-terracotta text-white shadow-subtle'
+              : 'text-parchment-300 hover:text-white hover:bg-himalaya-800'
+          }`}
+        >
+          <FileText className="w-4 h-4" />
+          <span>Page Metadata & Indexing</span>
+        </button>
+
+        <button
+          onClick={() => setActiveMainTab('auditor')}
+          className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all ${
+            activeMainTab === 'auditor'
+              ? 'bg-terracotta text-white shadow-subtle'
+              : 'text-parchment-300 hover:text-white hover:bg-himalaya-800'
+          }`}
+        >
+          <Sparkles className="w-4 h-4 text-amber-300" />
+          <span>Automated SEO / GEO / AEO Auditor</span>
+          <span className="hidden sm:inline-flex text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">
+            Perplexity & ChatGPT Ready
+          </span>
+        </button>
+      </div>
+
+      {activeMainTab === 'auditor' ? (
+        <SeoGeoAeoAuditor
+          pages={pages}
+          initialSlug={auditorTargetSlug}
+          onApplyFix={handleApplyFix}
+        />
+      ) : (
+        <>
+          {/* Metrics Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="bg-himalaya-900 border border-himalaya-800 rounded-2xl p-5 flex items-center justify-between">
           <div>
@@ -375,13 +446,26 @@ export default function AdminSeoPage() {
 
                       {/* Actions */}
                       <td className="py-3.5 px-4 text-right whitespace-nowrap">
-                        <button
-                          onClick={() => openEditModal(page)}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-himalaya-800 hover:bg-terracotta text-parchment-200 hover:text-white text-xs font-semibold transition-colors"
-                        >
-                          <Edit3 className="w-3.5 h-3.5" />
-                          <span>Edit SEO</span>
-                        </button>
+                        <div className="flex items-center justify-end gap-2">
+                          <button
+                            onClick={() => {
+                              setAuditorTargetSlug(page.slug);
+                              setActiveMainTab('auditor');
+                            }}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500 text-amber-300 hover:text-slate-950 text-xs font-semibold transition-all border border-amber-500/30 shadow-xs"
+                            title="Run automated 3-pillar audit (SEO / GEO / AEO) for this page"
+                          >
+                            <Sparkles className="w-3.5 h-3.5 text-amber-300 group-hover:text-slate-950" />
+                            <span>Audit</span>
+                          </button>
+                          <button
+                            onClick={() => openEditModal(page)}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-himalaya-800 hover:bg-terracotta text-parchment-200 hover:text-white text-xs font-semibold transition-colors"
+                          >
+                            <Edit3 className="w-3.5 h-3.5" />
+                            <span>Edit SEO</span>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -391,6 +475,8 @@ export default function AdminSeoPage() {
           </table>
         </div>
       </div>
+      </>
+      )}
 
       {/* Edit SEO Modal */}
       {editingPage && (
