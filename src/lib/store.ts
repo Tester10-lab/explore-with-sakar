@@ -243,17 +243,33 @@ export async function pushInquiry(inquiry: ContactInquiry): Promise<void> {
     return;
   }
 
-  const db = await getDb();
-  await ensureMigrations(db);
-  const col = db.collection('cms_store');
-  await col.updateOne(
-    { _id: 'active_store' as any },
-    {
-      $push: { inquiries: { $each: [inquiry], $position: 0 } as any },
-      $set: { lastUpdated },
-    },
-    { upsert: true }
-  );
+  try {
+    const db = await getDb();
+    await ensureMigrations(db);
+    const col = db.collection('cms_store');
+    await col.updateOne(
+      { _id: 'active_store' as any },
+      {
+        $push: { inquiries: { $each: [inquiry], $position: 0 } as any },
+        $set: { lastUpdated },
+      },
+      { upsert: true }
+    );
+  } catch (mongoErr: any) {
+    console.warn('[store] pushInquiry failed to reach MongoDB, saving to fallback store:', mongoErr?.message || mongoErr);
+    try {
+      const store = readDevFileStore();
+      if (!Array.isArray(store.inquiries)) {
+        store.inquiries = [];
+      }
+      store.inquiries.unshift(inquiry);
+      store.lastUpdated = lastUpdated;
+      writeDevFileStore(store);
+    } catch (fallbackErr) {
+      console.error('[store] Fallback inquiry storage also failed:', fallbackErr);
+      throw mongoErr;
+    }
+  }
 }
 
 /**

@@ -41,12 +41,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!message || message.length < 5) {
-      return NextResponse.json(
-        { error: 'Please provide a short message or description of your travel plans.' },
-        { status: 400 }
-      );
-    }
+    // If message is omitted or too short, construct a helpful default summary
+    const finalMessage =
+      message && message.length >= 5
+        ? message
+        : `Custom journey inquiry from ${fullName}.${travelDates ? ` Dates: ${travelDates}.` : ''}${
+            approximateDuration ? ` Duration: ${approximateDuration}.` : ''
+          }${travelersCount ? ` Party: ${travelersCount}.` : ''}${
+            preferredInterests.length > 0 ? ` Interests: ${preferredInterests.join(', ')}.` : ''
+          }`;
 
     let interestedEvent: { id: string; title: string } | undefined = undefined;
     const reqEventId = typeof body.interestedEventId === 'string'
@@ -81,7 +84,7 @@ export async function POST(req: NextRequest) {
       travelStyle: travelStyle || undefined,
       preferredInterests,
       homestayInterest: homestayInterest || undefined,
-      message,
+      message: finalMessage,
       interestedEvent,
     });
 

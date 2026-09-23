@@ -150,11 +150,21 @@ function InquiryFormInner({
     setIsSubmitting(true);
     setErrorMessage(null);
 
+    const submissionData = {
+      ...formData,
+      message:
+        formData.message && formData.message.trim().length >= 5
+          ? formData.message.trim()
+          : `Custom Nepal Journey Inquiry: Looking for ${formData.approximateDuration || 'custom duration'} journey for ${
+              formData.travelersCount || 'travelers'
+            }.${formData.travelDates ? ` Preferred dates: ${formData.travelDates}.` : ''}`,
+    };
+
     try {
       const res = await fetch('/api/public/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submissionData),
       });
 
       const data = await res.json();
@@ -163,6 +173,18 @@ function InquiryFormInner({
       }
 
       setIsSubmitted(true);
+
+      // Scroll modal or page to top to ensure success screen is immediately visible
+      if (typeof window !== 'undefined') {
+        const dialogScrollable = document.querySelector('[role="dialog"] .overflow-y-auto');
+        if (dialogScrollable) {
+          dialogScrollable.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        const dialog = document.querySelector('[role="dialog"]');
+        if (dialog) {
+          dialog.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
     } catch (err: any) {
       setErrorMessage(err?.message || 'Something went wrong submitting your inquiry. Please try again.');
     } finally {
@@ -466,9 +488,12 @@ function InquiryFormInner({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
-                      Special Requests, Fitness Level, or Specific Questions for Sakar
-                    </label>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700">
+                        Special Requests, Fitness Level, or Questions
+                      </label>
+                      <span className="text-[11px] text-himalaya-500 font-medium">Optional</span>
+                    </div>
                     <textarea
                       rows={4}
                       value={formData.message}
@@ -478,6 +503,17 @@ function InquiryFormInner({
                     />
                   </div>
                 </div>
+
+                {/* Error Banner right above submit button so it's always visible */}
+                {errorMessage && (
+                  <div className="p-4 rounded-xl bg-rose-100 border border-rose-300 text-rose-800 text-xs sm:text-sm flex items-start gap-3 animate-in fade-in">
+                    <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold">Submission Notice</p>
+                      <p>{errorMessage}</p>
+                    </div>
+                  </div>
+                )}
 
                 {/* Submit Action Button */}
                 <div className="pt-2">

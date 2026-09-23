@@ -80,6 +80,18 @@ export function getMongoClient(): Promise<MongoClient> {
   console.log('[PERF:MONGO:CONNECT_START] initiating new MongoClient connection...');
   const connectStart = Date.now();
 
+  if (typeof dns.setServers === 'function' && !process.env.VERCEL) {
+    try {
+      const dnsServers = process.env.MONGODB_DNS_SERVERS || '8.8.8.8,1.1.1.1';
+      const servers = dnsServers.split(',').map((s) => s.trim()).filter(Boolean);
+      if (servers.length > 0) {
+        dns.setServers(servers);
+      }
+    } catch {
+      // ignore
+    }
+  }
+
   const client = new MongoClient(uri, {
     // Connection pool: 10 connections is fine for Vercel serverless.
     maxPoolSize: 10,
