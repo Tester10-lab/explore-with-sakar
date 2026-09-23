@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -12,6 +14,7 @@ import {
   Calendar,
   Phone,
   ShieldCheck,
+  X,
 } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -27,6 +30,28 @@ interface CustomJourneysExperienceProps {
 }
 
 export default function CustomJourneysExperience({ pageContent, availableEvents }: CustomJourneysExperienceProps) {
+  // Popup form open on load
+  const [isFormPopupOpen, setIsFormPopupOpen] = useState(true);
+
+  // Lock body scroll and listen for Escape key when popup is open
+  useEffect(() => {
+    if (isFormPopupOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setIsFormPopupOpen(false);
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isFormPopupOpen]);
+
   const hero = getPageHeroOverrides(pageContent, {
     badge: 'Independent Experience Package',
     title: 'Custom Private Journeys',
@@ -97,7 +122,25 @@ export default function CustomJourneysExperience({ pageContent, availableEvents 
             { label: 'Experiences', href: '/experiences' },
             { label: 'Custom Private Journeys' },
           ]}
-        />
+        >
+          <div className="flex flex-wrap items-center gap-3 pt-3">
+            <button
+              type="button"
+              onClick={() => setIsFormPopupOpen(true)}
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-terracotta hover:bg-terracotta-dark text-white font-bold text-sm shadow-warm transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            >
+              <Sparkles className="w-4 h-4 text-saffron-light" />
+              <span>Design Your Custom Journey</span>
+            </button>
+            <a
+              href="#consultation"
+              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-sm backdrop-blur-md border border-white/20 transition-all"
+            >
+              <span>Scroll to Form</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </PageHero>
       )}
 
       {/* 2. Bespoke Philosophy */}
@@ -253,6 +296,43 @@ export default function CustomJourneysExperience({ pageContent, availableEvents 
         <section id="consultation" className="py-12 bg-sand">
           <InquiryForm availableEvents={availableEvents} />
         </section>
+      )}
+
+      {/* 6. Form Popup Modal (Opens First on Page Load) */}
+      {isFormPopupOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-himalaya-950/80 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
+          role="dialog"
+          aria-modal="true"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setIsFormPopupOpen(false);
+            }
+          }}
+        >
+          <div className="relative w-full max-w-4xl my-auto bg-sand rounded-3xl border border-parchment-300 shadow-floating overflow-hidden max-h-[92vh] overflow-y-auto">
+            <InquiryForm
+              isModal
+              onClose={() => setIsFormPopupOpen(false)}
+              availableEvents={availableEvents}
+              title="Design Your Custom Nepal Journey"
+              subtitle="Tell Sakar about your travel dates, party, and inspirations to receive a hand-tailored private itinerary."
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Floating Action Button to reopen form popup anytime */}
+      {!isFormPopupOpen && (
+        <button
+          type="button"
+          onClick={() => setIsFormPopupOpen(true)}
+          className="fixed bottom-6 right-6 z-40 px-5 py-3.5 rounded-full bg-terracotta hover:bg-terracotta-dark text-white font-bold text-xs sm:text-sm shadow-floating flex items-center gap-2 transition-all hover:scale-105 active:scale-95 group border-2 border-white/30"
+          title="Open Custom Journey Planning Form"
+        >
+          <Sparkles className="w-4 h-4 text-saffron-light group-hover:rotate-12 transition-transform" />
+          <span>Plan Custom Journey</span>
+        </button>
       )}
     </div>
   );

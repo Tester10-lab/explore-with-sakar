@@ -15,9 +15,13 @@ import {
   MapPin,
   Loader2,
   AlertCircle,
+  X,
 } from 'lucide-react';
 import { BookingInquiry } from '@/types';
 import { useSettings } from '@/context/SettingsContext';
+import CountryDropdown from './CountryDropdown';
+import PhoneInputWithCode from './PhoneInputWithCode';
+import CalendarDateDropdown from './CalendarDateDropdown';
 
 const INSPIRATION_OPTIONS = [
   { label: 'Adventure & Exploration', icon: '🏔️' },
@@ -52,13 +56,25 @@ export interface EventOption {
   date: string;
 }
 
-interface InquiryFormProps {
+export interface InquiryFormProps {
   defaultPackage?: string;
   defaultExperience?: string;
   availableEvents?: EventOption[];
+  isModal?: boolean;
+  onClose?: () => void;
+  title?: string;
+  subtitle?: string;
 }
 
-function InquiryFormInner({ defaultPackage, defaultExperience, availableEvents }: InquiryFormProps = {}) {
+function InquiryFormInner({
+  defaultPackage,
+  defaultExperience,
+  availableEvents,
+  isModal = false,
+  onClose,
+  title,
+  subtitle,
+}: InquiryFormProps = {}) {
   const { settings } = useSettings();
   const searchParams = useSearchParams();
   const eventParam = searchParams.get('event');
@@ -159,169 +175,182 @@ function InquiryFormInner({ defaultPackage, defaultExperience, availableEvents }
     `Namaste Sakar, I just submitted a journey inquiry for ${formData.fullName || 'a Nepal trip'}.`
   )}`;
 
-  return (
-    <section id="booking" className="py-20 sm:py-28 bg-parchment-200/90 border-t border-parchment-300 relative">
-      <div className="editorial-container">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-terracotta/10 text-terracotta text-xs font-semibold uppercase tracking-wider mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Personalized Nepal Itinerary</span>
-            </div>
-            <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-              Start Planning With Sakar
-            </h2>
-            <p className="text-xs uppercase font-bold tracking-widest text-terracotta mt-1">
-              Responsible Tour Director • Explore With Sakar
-            </p>
-            <p className="text-sm sm:text-base text-himalaya-800 font-normal mt-3 max-w-xl mx-auto leading-relaxed">
-              Share your travel dreams, preferred dates, and curiosities. Sakar personally reviews each inquiry to curate a meaningful, slow-paced journey tailored to your rhythm.
+  const headerContent = (
+    <div className={`text-center ${isModal ? 'mb-6 sm:mb-8 pt-2' : 'mb-12'}`}>
+      <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-terracotta/10 text-terracotta text-xs font-semibold uppercase tracking-wider mb-3">
+        <Sparkles className="w-3.5 h-3.5" />
+        <span>{title ? 'Direct Journey Curation' : 'Personalized Nepal Itinerary'}</span>
+      </div>
+      <h2
+        className={`font-editorial-serif font-bold text-himalaya-950 tracking-tight leading-tight ${
+          isModal ? 'text-2xl sm:text-3xl lg:text-4xl' : 'text-3xl sm:text-4xl lg:text-5xl'
+        }`}
+      >
+        {title || 'Start Planning With Sakar'}
+      </h2>
+      <p className="text-xs uppercase font-bold tracking-widest text-terracotta mt-1">
+        Responsible Tour Director • Explore With Sakar
+      </p>
+      <p
+        className={`font-normal mt-3 max-w-xl mx-auto leading-relaxed text-himalaya-800 ${
+          isModal ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'
+        }`}
+      >
+        {subtitle ||
+          'Share your travel dreams, preferred dates, and curiosities. Sakar personally reviews each inquiry to curate a meaningful, slow-paced journey tailored to your rhythm.'}
+      </p>
+    </div>
+  );
+
+  const formCard = (
+    <div
+      className={`rounded-3xl bg-sand border border-parchment-300 shadow-editorial ${
+        isModal ? 'p-5 sm:p-8 lg:p-10' : 'p-6 sm:p-10 lg:p-12'
+      }`}
+    >
+      {errorMessage && (
+        <div className="mb-6 p-4 rounded-xl bg-rose-100 border border-rose-300 text-rose-800 text-xs sm:text-sm flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+          <div>
+            <p className="font-bold">Submission Notice</p>
+            <p>{errorMessage}</p>
+          </div>
+        </div>
+      )}
+
+      {isSubmitted ? (
+        <div className="text-center py-12 space-y-6 animate-in fade-in zoom-in-95 duration-300">
+          <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto shadow-subtle">
+            <CheckCircle2 className="w-8 h-8" />
+          </div>
+
+          <div className="space-y-2">
+            <span className="text-xs uppercase font-bold tracking-widest text-emerald-800">
+              Dhanyabad! Thank You, {formData.fullName || 'Friend'}
+            </span>
+            <h3 className="font-editorial-serif text-2xl sm:text-3xl font-bold text-himalaya-950">
+              Your Journey Inquiry Has Reached Sakar
+            </h3>
+            <p className="text-sm sm:text-base text-himalaya-800 font-normal max-w-lg mx-auto leading-relaxed">
+              Sakar (Responsible Tour Director) will review your inspirations and reach back within 24 hours with a thoughtful custom outline.
             </p>
           </div>
 
-          {/* Form Card */}
-          <div className="rounded-3xl bg-sand border border-parchment-300 p-6 sm:p-10 lg:p-12 shadow-editorial">
-            {errorMessage && (
-              <div className="mb-6 p-4 rounded-xl bg-rose-100 border border-rose-300 text-rose-800 text-xs sm:text-sm flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-bold">Submission Notice</p>
-                  <p>{errorMessage}</p>
-                </div>
-              </div>
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-warm transition-all"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Chat on WhatsApp Directly</span>
+            </a>
+            <button
+              onClick={() => setIsSubmitted(false)}
+              className="px-6 py-3.5 rounded-xl bg-parchment-200 hover:bg-parchment-300 text-himalaya-900 font-semibold text-sm transition-colors"
+            >
+              Submit Another Inquiry
+            </button>
+            {isModal && onClose && (
+              <button
+                onClick={onClose}
+                className="px-6 py-3.5 rounded-xl bg-himalaya-900 hover:bg-himalaya-950 text-white font-semibold text-sm transition-colors"
+              >
+                Close & Browse Page
+              </button>
             )}
-
-            {isSubmitted ? (
-              <div className="text-center py-12 space-y-6 animate-in fade-in zoom-in-95 duration-300">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto shadow-subtle">
-                  <CheckCircle2 className="w-8 h-8" />
-                </div>
-
-                <div className="space-y-2">
-                  <span className="text-xs uppercase font-bold tracking-widest text-emerald-800">
-                    Dhanyabad! Thank You, {formData.fullName || 'Friend'}
-                  </span>
-                  <h3 className="font-editorial-serif text-2xl sm:text-3xl font-bold text-himalaya-950">
-                    Your Journey Inquiry Has Reached Sakar
-                  </h3>
-                  <p className="text-sm sm:text-base text-himalaya-800 font-normal max-w-lg mx-auto leading-relaxed">
-                    Sakar (Responsible Tour Director) will review your inspirations and reach back within 24 hours with a thoughtful custom outline.
-                  </p>
-                </div>
-
-                <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-warm transition-all"
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>Chat on WhatsApp Directly</span>
-                  </a>
-                  <button
-                    onClick={() => setIsSubmitted(false)}
-                    className="px-6 py-3.5 rounded-xl bg-parchment-200 hover:bg-parchment-300 text-himalaya-900 font-semibold text-sm transition-colors"
-                  >
-                    Submit Another Inquiry
-                  </button>
-                </div>
+          </div>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Section 1: Personal Details */}
+          <div>
+            <h4 className="font-editorial-serif text-lg font-bold text-himalaya-950 mb-4 pb-2 border-b border-parchment-300">
+              1. About You & Your Party
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.fullName}
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                  placeholder="e.g. Eleanor Vance"
+                  className="w-full px-4 py-3 rounded-xl bg-parchment-50 border border-parchment-300 focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-sm text-himalaya-950 placeholder:text-himalaya-400"
+                />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
-                {/* Section 1: Personal Details */}
-                <div>
-                  <h4 className="font-editorial-serif text-lg font-bold text-himalaya-950 mb-4 pb-2 border-b border-parchment-300">
-                    1. About You & Your Party
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.fullName}
-                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        placeholder="e.g. Eleanor Vance"
-                        className="w-full px-4 py-3 rounded-xl bg-parchment-50 border border-parchment-300 focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-sm text-himalaya-950 placeholder:text-himalaya-400"
-                      />
-                    </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="e.g. eleanor@example.com"
-                        className="w-full px-4 py-3 rounded-xl bg-parchment-50 border border-parchment-300 focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-sm text-himalaya-950 placeholder:text-himalaya-400"
-                      />
-                    </div>
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="e.g. eleanor@example.com"
+                  className="w-full px-4 py-3 rounded-xl bg-parchment-50 border border-parchment-300 focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-sm text-himalaya-950 placeholder:text-himalaya-400"
+                />
+              </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
-                        Country of Residence
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.country}
-                        onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                        placeholder="e.g. United Kingdom / USA / Germany / Australia"
-                        className="w-full px-4 py-3 rounded-xl bg-parchment-50 border border-parchment-300 focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-sm text-himalaya-950 placeholder:text-himalaya-400"
-                      />
-                    </div>
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
+                  Country of Residence
+                </label>
+                <CountryDropdown
+                  value={formData.country || ''}
+                  onChange={(countryName) => setFormData({ ...formData, country: countryName })}
+                  placeholder="Select your country"
+                />
+              </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
-                        WhatsApp / Phone (Optional)
-                      </label>
-                      <input
-                        type="tel"
-                        value={formData.whatsapp}
-                        onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                        placeholder="e.g. +44 7123 456789"
-                        className="w-full px-4 py-3 rounded-xl bg-parchment-50 border border-parchment-300 focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-sm text-himalaya-950 placeholder:text-himalaya-400"
-                      />
-                    </div>
-                  </div>
-                </div>
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
+                  WhatsApp / Phone (Optional)
+                </label>
+                <PhoneInputWithCode
+                  value={formData.whatsapp || ''}
+                  selectedCountryName={formData.country}
+                  onChange={(fullNumber) => setFormData({ ...formData, whatsapp: fullNumber })}
+                  placeholder="e.g. 7123 456789"
+                />
+              </div>
+            </div>
+          </div>
 
-                {/* Section 2: Travel Preferences */}
-                <div>
-                  <h4 className="font-editorial-serif text-lg font-bold text-himalaya-950 mb-4 pb-2 border-b border-parchment-300">
-                    2. Journey Timing & Duration
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
-                        Approximate Dates / Month
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.travelDates}
-                        onChange={(e) => setFormData({ ...formData, travelDates: e.target.value })}
-                        placeholder="e.g. October 2026 or Spring 2027"
-                        className="w-full px-4 py-3 rounded-xl bg-parchment-50 border border-parchment-300 focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-sm text-himalaya-950 placeholder:text-himalaya-400"
-                      />
-                    </div>
+          {/* Section 2: Travel Preferences */}
+          <div>
+            <h4 className="font-editorial-serif text-lg font-bold text-himalaya-950 mb-4 pb-2 border-b border-parchment-300">
+              2. Journey Timing & Duration
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
+                  Approximate Dates / Month
+                </label>
+                <CalendarDateDropdown
+                  value={formData.travelDates || ''}
+                  onChange={(dateStr) => setFormData({ ...formData, travelDates: dateStr })}
+                  placeholder="Select approximate dates or month"
+                />
+              </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
-                        Estimated Duration
-                      </label>
-                      <select
-                        value={formData.approximateDuration}
-                        onChange={(e) =>
-                          setFormData({ ...formData, approximateDuration: e.target.value })
-                        }
-                        className="w-full px-4 py-3 rounded-xl bg-parchment-50 border border-parchment-300 focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-sm text-himalaya-950"
-                      >
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-himalaya-700 mb-1.5">
+                  Estimated Duration
+                </label>
+                <select
+                  value={formData.approximateDuration}
+                  onChange={(e) =>
+                    setFormData({ ...formData, approximateDuration: e.target.value })
+                  }
+                  className="w-full px-4 py-3 rounded-xl bg-parchment-50 border border-parchment-300 focus:outline-none focus:ring-2 focus:ring-terracotta/40 text-sm text-himalaya-950"
+                >
                         {DURATION_OPTIONS.map((d) => (
                           <option key={d} value={d}>
                             {d}
@@ -476,6 +505,35 @@ function InquiryFormInner({ defaultPackage, defaultExperience, availableEvents }
               </form>
             )}
           </div>
+  );
+
+  if (isModal) {
+    return (
+      <div className="relative w-full">
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 p-2.5 rounded-full bg-parchment-200/90 hover:bg-parchment-300 text-himalaya-700 hover:text-himalaya-950 transition-colors shadow-subtle"
+            aria-label="Close form"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        )}
+        <div className="max-w-4xl mx-auto">
+          {headerContent}
+          {formCard}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <section id="booking" className="py-20 sm:py-28 bg-parchment-200/90 border-t border-parchment-300 relative">
+      <div className="editorial-container">
+        <div className="max-w-4xl mx-auto">
+          {headerContent}
+          {formCard}
         </div>
       </div>
     </section>

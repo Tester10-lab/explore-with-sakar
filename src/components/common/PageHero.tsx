@@ -14,6 +14,7 @@ interface PageHeroProps {
   backgroundImage?: string;
   breadcrumbs?: BreadcrumbItem[];
   compact?: boolean;
+  children?: React.ReactNode;
 }
 
 export default function PageHero({
@@ -25,6 +26,7 @@ export default function PageHero({
   backgroundImage,
   breadcrumbs,
   compact = false,
+  children,
 }: PageHeroProps) {
   const hasBg = Boolean(backgroundImage);
 
@@ -127,6 +129,8 @@ export default function PageHero({
               &ldquo;{quote}&rdquo;
             </blockquote>
           )}
+
+          {children && <div className="pt-2">{children}</div>}
         </div>
       </div>
     </header>
