@@ -26,6 +26,7 @@ import {
 import { PageContent } from '@/types/cms';
 import { auditPageContent, AuditResult, AuditCheck } from '@/lib/seoAuditor';
 import { SITE_ORIGIN } from '@/lib/config';
+import GoogleSearchPerformance from './GoogleSearchPerformance';
 
 interface SeoGeoAeoAuditorProps {
   pages: PageContent[];
@@ -274,6 +275,9 @@ export default function SeoGeoAeoAuditor({ pages, initialSlug, onApplyFix, onRef
           </div>
         </div>
       </div>
+
+      {/* SEPARATE LAYER: Google Search Performance (Actual Google Search Console Data) */}
+      <GoogleSearchPerformance page={currentPage} onRefreshPages={onRefresh} />
 
       {/* Sub-Navigation Tabs */}
       <div className="border-b border-slate-200 flex items-center gap-2 overflow-x-auto">

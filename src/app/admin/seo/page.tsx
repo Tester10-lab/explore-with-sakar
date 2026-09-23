@@ -27,6 +27,7 @@ import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { PageContent, PageSeo } from '@/types/cms';
 import SeoGeoAeoAuditor from '@/components/admin/SeoGeoAeoAuditor';
 import { SITE_ORIGIN } from '@/lib/config';
+import { GscMetricSummary, GscStatus, normalizeGscUrl } from '@/lib/gscShared';
 
 export default function AdminSeoPage() {
   const router = useRouter();
@@ -37,6 +38,12 @@ export default function AdminSeoPage() {
 
   const [activeMainTab, setActiveMainTab] = useState<'metadata' | 'auditor'>('metadata');
   const [auditorTargetSlug, setAuditorTargetSlug] = useState<string>('home');
+
+  // Google Search Console overview state
+  const [gscStatus, setGscStatus] = useState<GscStatus | null>(null);
+  const [gscOverview, setGscOverview] = useState<Record<string, GscMetricSummary> | null>(null);
+  const [gscRange, setGscRange] = useState<'7d' | '28d' | '3m' | '6m'>('28d');
+  const [isGscLoading, setIsGscLoading] = useState(false);
 
   const [editingPage, setEditingPage] = useState<PageContent | null>(null);
   const [formData, setFormData] = useState<PageSeo>({});
@@ -98,8 +105,46 @@ export default function AdminSeoPage() {
     }
   };
 
+  const fetchGscOverviewData = async (range: '7d' | '28d' | '3m' | '6m' = gscRange) => {
+    setIsGscLoading(true);
+    try {
+      const sRes = await fetch('/api/admin/seo/gsc/status');
+      if (sRes.ok) {
+        const sData: GscStatus = await sRes.json();
+        setGscStatus(sData);
+        if (sData.connected) {
+          const oRes = await fetch(`/api/admin/seo/gsc/overview?range=${range}`);
+          if (oRes.ok) {
+            const oData = await oRes.json();
+            setGscOverview(oData.pages || {});
+          }
+        }
+      }
+    } catch {
+      // Non-blocking in overview table
+    } finally {
+      setIsGscLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchPages();
+    fetchGscOverviewData(gscRange);
+
+    // Check for GSC OAuth redirect query parameters
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('gsc') === 'connected') {
+        addToast('success', 'Google Search Console connected successfully!');
+        setActiveMainTab('auditor');
+        fetchGscOverviewData(gscRange);
+        window.history.replaceState({}, '', window.location.pathname);
+      } else if (params.get('gsc_error')) {
+        addToast('error', params.get('gsc_error') || 'Failed to connect Google Search Console');
+        setActiveMainTab('auditor');
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    }
   }, []);
 
   const openEditModal = (page: PageContent) => {
@@ -302,9 +347,44 @@ export default function AdminSeoPage() {
           ))}
         </div>
 
-        {/* Search & Refresh */}
-        <div className="flex items-center gap-2 w-full sm:w-auto">
-          <div className="relative flex-1 sm:w-72">
+        {/* GSC Status Indicator & Range Filter */}
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+          {gscStatus?.connected ? (
+            <div className="flex items-center gap-2 bg-emerald-950/60 border border-emerald-800/60 px-3 py-1.5 rounded-xl">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-emerald-300 font-semibold text-[11px] font-mono hidden md:inline">
+                GSC: {gscStatus.property}
+              </span>
+              <select
+                value={gscRange}
+                onChange={(e) => {
+                  const val = e.target.value as any;
+                  setGscRange(val);
+                  fetchGscOverviewData(val);
+                }}
+                className="bg-emerald-900/80 border border-emerald-700/60 rounded-lg text-[10px] text-emerald-200 px-2 py-0.5 font-mono focus:outline-none"
+              >
+                <option value="7d">Last 7d</option>
+                <option value="28d">Last 28d</option>
+                <option value="3m">Last 3m</option>
+                <option value="6m">Last 6m</option>
+              </select>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 bg-himalaya-950 border border-himalaya-800 px-3 py-1.5 rounded-xl text-himalaya-400 text-[11px]">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              <span className="text-[11px]">GSC {gscStatus?.configured ? 'Disconnected' : 'Setup Required'}</span>
+              <button
+                onClick={() => setActiveMainTab('auditor')}
+                className="text-terracotta hover:underline font-semibold text-[11px] ml-1"
+              >
+                Connect →
+              </button>
+            </div>
+          )}
+
+          {/* Search & Refresh */}
+          <div className="relative flex-1 sm:w-64">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-himalaya-500" />
             <input
               type="text"
@@ -316,11 +396,14 @@ export default function AdminSeoPage() {
           </div>
 
           <button
-            onClick={fetchPages}
+            onClick={() => {
+              fetchPages();
+              fetchGscOverviewData(gscRange);
+            }}
             className="p-2 rounded-xl bg-himalaya-800 hover:bg-himalaya-700 text-parchment-300 hover:text-white transition-colors"
-            title="Refresh Pages"
+            title="Refresh Pages & Search Console Data"
           >
-            <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${isLoading || isGscLoading ? 'animate-spin' : ''}`} />
           </button>
         </div>
       </div>
@@ -328,27 +411,28 @@ export default function AdminSeoPage() {
       {/* Main Pages Table */}
       <div className="bg-himalaya-900 border border-himalaya-800 rounded-2xl overflow-hidden shadow-floating">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[800px]">
+          <table className="w-full text-left border-collapse min-w-[900px]">
             <thead>
               <tr className="border-b border-himalaya-800 bg-himalaya-950/60 text-[11px] font-bold uppercase tracking-wider text-himalaya-400">
                 <th className="py-3.5 px-4">Page & URL</th>
                 <th className="py-3.5 px-4">SEO Title</th>
                 <th className="py-3.5 px-4">Meta Description</th>
                 <th className="py-3.5 px-4">Indexing</th>
+                <th className="py-3.5 px-4">Google Search Performance</th>
                 <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-himalaya-850 text-xs">
               {isLoading ? (
                 <tr>
-                  <td colSpan={5} className="py-12 text-center text-himalaya-400">
+                  <td colSpan={6} className="py-12 text-center text-himalaya-400">
                     <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2 text-terracotta" />
                     <span>Loading pages SEO data...</span>
                   </td>
                 </tr>
               ) : filteredPages.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-12 text-center text-himalaya-400">
+                  <td colSpan={6} className="py-12 text-center text-himalaya-400">
                     <Globe className="w-8 h-8 mx-auto mb-2 opacity-40 text-himalaya-500" />
                     <p className="font-semibold text-parchment-200">No pages found</p>
                     <p className="text-[11px] text-himalaya-500 mt-0.5">Try clearing search filters.</p>
@@ -444,6 +528,47 @@ export default function AdminSeoPage() {
                             {isSitemap ? 'Sitemap Yes' : 'Sitemap No'}
                           </span>
                         </div>
+                      </td>
+
+                      {/* Google Search Performance (GSC) */}
+                      <td className="py-3.5 px-4 whitespace-nowrap">
+                        {gscStatus?.connected && gscOverview ? (
+                          (() => {
+                            const normPath = normalizeGscUrl(page.url);
+                            const metrics = gscOverview[normPath];
+                            if (!metrics || (metrics.clicks === 0 && metrics.impressions === 0)) {
+                              return (
+                                <span className="text-[11px] text-himalaya-500 italic">
+                                  No search data
+                                </span>
+                              );
+                            }
+                            return (
+                              <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[11px] font-mono leading-tight">
+                                <div>
+                                  <span className="text-himalaya-500 text-[10px]">Clicks:</span>{' '}
+                                  <strong className="text-emerald-400 font-bold">{metrics.clicks.toLocaleString()}</strong>
+                                </div>
+                                <div>
+                                  <span className="text-himalaya-500 text-[10px]">Impr:</span>{' '}
+                                  <strong className="text-parchment-200">{metrics.impressions.toLocaleString()}</strong>
+                                </div>
+                                <div>
+                                  <span className="text-himalaya-500 text-[10px]">CTR:</span>{' '}
+                                  <strong className="text-cyan-400">{(metrics.ctr * 100).toFixed(1)}%</strong>
+                                </div>
+                                <div>
+                                  <span className="text-himalaya-500 text-[10px]">Pos:</span>{' '}
+                                  <strong className="text-amber-400">{metrics.position.toFixed(1)}</strong>
+                                </div>
+                              </div>
+                            );
+                          })()
+                        ) : (
+                          <span className="text-[11px] text-himalaya-500 italic">
+                            {gscStatus?.configured ? 'GSC Disconnected' : '—'}
+                          </span>
+                        )}
                       </td>
 
                       {/* Actions */}

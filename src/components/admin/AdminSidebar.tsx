@@ -24,6 +24,7 @@ import {
   Menu as MenuIcon,
   BookOpen,
   Heart,
+  Search,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -172,10 +173,25 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
       ],
     },
     {
+      title: 'SEO & Performance',
+      items: [
+        {
+          label: 'SEO & Search Console',
+          href: '/admin/seo',
+          icon: Search,
+        },
+        {
+          label: 'Creator & SEO Guide',
+          href: '/admin/guide',
+          icon: BookOpen,
+        },
+      ],
+    },
+    {
       title: 'Settings',
       items: [
         {
-          label: 'Settings & Guide',
+          label: 'Website Settings',
           href: '/admin/settings',
           icon: Settings,
         },
