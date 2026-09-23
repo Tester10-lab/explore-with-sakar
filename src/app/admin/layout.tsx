@@ -14,19 +14,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const isLoginPage = pathname === '/admin/login';
 
-  // Proactively verify admin session; if expired or unauthorized, redirect to /admin/login
-  React.useEffect(() => {
-    if (isLoginPage) return;
-
-    fetch('/api/admin/auth/me')
-      .then((res) => {
-        if (res.status === 401) {
-          window.location.href = `/admin/login?redirect=${encodeURIComponent(pathname)}`;
-        }
-      })
-      .catch(() => {});
-  }, [isLoginPage, pathname]);
-
   if (isLoginPage) {
     return (
       <div className="admin-clean-theme min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-terracotta/20 selection:text-terracotta">

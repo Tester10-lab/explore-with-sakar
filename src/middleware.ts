@@ -43,12 +43,9 @@ export function middleware(request: NextRequest) {
   if (pathname.startsWith('/admin')) {
     const isLoginPage = pathname === '/admin/login';
 
+    // NEVER redirect away from /admin/login automatically!
+    // Allowing the user to view /admin/login eliminates infinite redirect loops.
     if (isLoginPage) {
-      if (!isInvalidOrExpired) {
-        // If already logged in with a valid token, redirect to dashboard
-        const dashboardUrl = new URL('/admin', request.url);
-        return NextResponse.redirect(dashboardUrl);
-      }
       return NextResponse.next();
     }
 

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   FileText,
   Image as ImageIcon,
@@ -66,6 +67,7 @@ export default function AdminDashboardPage() {
     recentPhotos: [],
     recentReviews: [],
   });
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export default function AdminDashboardPage() {
         setIsLoading(true);
         const res = await fetch('/api/admin/dashboard');
         if (res.status === 401) {
-          window.location.href = '/admin/login?redirect=/admin';
+          router.replace('/admin/login?redirect=/admin');
           return;
         }
         if (res.ok) {

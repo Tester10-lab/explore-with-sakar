@@ -55,7 +55,7 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
       try {
         const res = await fetch('/api/admin/inquiries?countOnly=true');
         if (res.status === 401) {
-          window.location.href = `/admin/login?redirect=${encodeURIComponent(window.location.pathname)}`;
+          // Session is unauthenticated or expired; skip updating counts without forcing redirects
           return;
         }
         if (res.ok) {
