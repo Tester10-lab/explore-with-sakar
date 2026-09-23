@@ -73,6 +73,10 @@ export default function AdminDashboardPage() {
       try {
         setIsLoading(true);
         const res = await fetch('/api/admin/dashboard');
+        if (res.status === 401) {
+          window.location.href = '/admin/login?redirect=/admin';
+          return;
+        }
         if (res.ok) {
           const data = await res.json();
           setDashboardData({

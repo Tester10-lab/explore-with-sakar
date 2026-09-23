@@ -54,6 +54,10 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
     async function fetchUnreadCount() {
       try {
         const res = await fetch('/api/admin/inquiries?countOnly=true');
+        if (res.status === 401) {
+          window.location.href = `/admin/login?redirect=${encodeURIComponent(window.location.pathname)}`;
+          return;
+        }
         if (res.ok) {
           const data = await res.json();
           if (typeof data.unreadCount === 'number') {
