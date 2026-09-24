@@ -332,6 +332,10 @@ export interface CmsEvent {
   isVisible: boolean;
   createdAt: string;
   updatedAt: string;
+  time?: string;
+  route?: string;
+  flyerImage?: string;
+  isTomorrow?: boolean;
 }
 
 // ==================== DESTINATIONS ====================

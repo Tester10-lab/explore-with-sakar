@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true });
     }
 
-    const { title, nepaliName, category, categoryLabel, date, location, season, image, shortDesc, highlights, sakarNote, isVisible } = body;
+    const { title, nepaliName, category, categoryLabel, date, location, season, image, shortDesc, highlights, sakarNote, isVisible, time, route, flyerImage, isTomorrow } = body;
     if (!title) {
       return NextResponse.json({ error: 'Title is required' }, { status: 400 });
     }
@@ -53,6 +53,10 @@ export async function POST(req: NextRequest) {
       highlights: Array.isArray(highlights) ? highlights : [],
       sakarNote: sakarNote?.trim() || '',
       isVisible: isVisible !== false,
+      time: time?.trim() || '',
+      route: route?.trim() || '',
+      flyerImage: flyerImage?.trim() || '',
+      isTomorrow: Boolean(isTomorrow),
     });
 
     revalidateContent('events');

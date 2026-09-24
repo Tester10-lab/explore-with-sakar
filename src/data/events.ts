@@ -11,9 +11,160 @@ export interface NepalEvent {
   shortDesc: string;
   highlights: string[];
   sakarNote: string;
+  time?: string;
+  route?: string;
+  flyerImage?: string;
+  isTomorrow?: boolean;
 }
 
 export const EVENTS_DATA: NepalEvent[] = [
+  // ==================== HAPPENING TOMORROW (SEP 25, 2026) ====================
+  {
+    id: 'indrajatra-koney-yaa',
+    title: 'Indrajatra – Koney Yaa (Down-Town Chariot Procession)',
+    nepaliName: 'क्वने या: (इन्द्रजात्रा)',
+    category: 'festival',
+    categoryLabel: 'Happening Tomorrow',
+    date: 'Sep 25, 2026',
+    time: '4:30 pm onwards',
+    location: 'Basantapur Durbar Square, Kathmandu',
+    route: 'Basantapur → Chikanmugal → Jaisidewal → Lagan → Bramhatole → Hyumata → Kohiti → Bhimsensthan → Basantapur',
+    season: 'Autumn',
+    image: '/images/events/indrajatra-koney-yaa.jpg',
+    flyerImage: '/images/events/indrajatra-koney-yaa-card.jpg',
+    isTomorrow: true,
+    shortDesc:
+      'The ceremonial downtown chariot procession of the Royal Living Goddess Kumari, Lord Ganesh, and Lord Bhairav pulled through the ancient southern alleyways of historic Kathmandu.',
+    highlights: [
+      'Ceremonial pulling of the multi-tiered golden chariot of the Living Goddess Kumari',
+      'Traditional Route: Basantapur → Chikanmugal → Jaisidewal → Lagan → Bramhatole → Hyumata → Kohiti → Bhimsensthan → Basantapur',
+      'Masked Lakhey demon dancers leaping and swirling through packed medieval squares',
+      'Photo credit: Ameet Ranjit Photography',
+    ],
+    sakarNote:
+      'Koney Yaa is the first grand day of the chariot procession. The energy at Jaisidewal and Lagan as dusk falls is hypnotic. Arrive near Basantapur by 3:30 PM to secure a vantage point on a temple plinth.',
+  },
+  {
+    id: 'khat-jatra-kupondole',
+    title: 'Khat Jatra — Traditional Palanquin Procession',
+    nepaliName: 'खत जात्रा (गुसिङ्गल, कुपण्डोल)',
+    category: 'festival',
+    categoryLabel: 'Happening Tomorrow',
+    date: 'Sep 25, 2026',
+    time: '2:00 pm onwards',
+    location: 'Gusingal, Kupondole, Lalitpur',
+    season: 'Autumn',
+    image: '/images/events/khat-jatra-kupondole.jpg',
+    flyerImage: '/images/events/khat-jatra-kupondole-card.jpg',
+    isTomorrow: true,
+    shortDesc:
+      'An energetic community palanquin festival where local guthi youths hoist sacred wooden shrines on their shoulders, running through the streets to rhythmic dhime beats and vermilion powder.',
+    highlights: [
+      'Shoulder-carried sacred Khat (palanquin) procession with traditional brass finials',
+      'Vibrant community gathering of Kupondole and Patan local Newar guthis',
+      'Resounding synchronized dhime drums and bhushyah cymbals echoing through the alleys',
+      'Photo credit: Bibek Tandukar',
+    ],
+    sakarNote:
+      'Khat Jatra at Gusingal starts early at 2:00 PM—it’s an intimate neighborhood celebration where travelers can stand shoulder-to-shoulder with locals and feel the raw festive pulse before the evening Kathmandu processions.',
+  },
+  {
+    id: 'siddhapokhari-mela',
+    title: 'Siddhapokhari Mela & Night Water Illuminations',
+    nepaliName: 'सिद्धपोखरी मेला (भक्तपुर)',
+    category: 'festival',
+    categoryLabel: 'Happening Tomorrow',
+    date: 'Sep 25 & 26, 2026',
+    time: '8:00 pm onwards (on 25th Sep)',
+    location: 'Siddhapokhari, Bhaktapur',
+    season: 'Autumn',
+    image: '/images/events/siddhapokhari-mela.jpg',
+    flyerImage: '/images/events/siddhapokhari-mela-card.jpg',
+    isTomorrow: true,
+    shortDesc:
+      'A spellbinding night celebration at Bhaktapur’s ancient 15th-century reflection reservoir, illuminated by thousands of floating clay oil lamps mirrored on tranquil waters.',
+    highlights: [
+      'Spectacular night illumination of the historical Ta-Pukhu (Siddhapokhari) reservoir',
+      'Thousands of earthen butter lamps glowing along medieval brick embankments',
+      'Devotional singing and traditional Newar flute music under the autumn night sky',
+      'Photo credit: Bhaktapur.com',
+    ],
+    sakarNote:
+      'Siddhapokhari at night during this festival is one of Bhaktapur’s best kept secrets. The calm reflection of oil flames across the water creates an atmosphere of pure meditation.',
+  },
+  {
+    id: 'dagin-procession',
+    title: 'Dāgin Procession — The Descent of Indra’s Mother',
+    nepaliName: 'दागिं जात्रा (मरु, बसन्तपुर)',
+    category: 'festival',
+    categoryLabel: 'Happening Tomorrow',
+    date: 'Sep 25, 2026',
+    time: '10:00 pm onwards {tentative}',
+    location: 'Maru, Basantapur, Kathmandu',
+    season: 'Autumn',
+    image: '/images/events/dagin-procession.jpg',
+    flyerImage: '/images/events/dagin-procession-card.jpg',
+    isTomorrow: true,
+    shortDesc:
+      'One of Indra Jatra’s most mystical midnight rituals: a masked representation of Goddess Dāgin (Indra’s mother) leads bereaved families through the ancient streets, guiding departed souls.',
+    highlights: [
+      'Mystic masked figure of Goddess Dāgin dressed in silk and gold robes leading the procession',
+      'Starts from Maru tole immediately after the Kumari chariot procession completes',
+      'Solemn accompaniment by families who lost loved ones during the past year',
+      'Photo credit: Ameet Ranjit Photography',
+    ],
+    sakarNote:
+      'The Dāgin procession begins late at night (tentatively 10:00 PM onwards) once the Kumari chariot rests. It is deeply moving and solemn—walk silently behind the procession with respect.',
+  },
+  {
+    id: 'baumata-procession',
+    title: 'Baumata Procession — The Towering Reed Lamp',
+    nepaliName: 'बौमत जात्रा (काष्ठमण्डप)',
+    category: 'spiritual',
+    categoryLabel: 'Happening Tomorrow',
+    date: 'Sep 25, 2026',
+    time: '10:30 pm onwards {tentative}',
+    location: 'Kasthamandap, Kathmandu',
+    season: 'Autumn',
+    image: '/images/events/baumata-procession.jpg',
+    flyerImage: '/images/events/baumata-procession-card.jpg',
+    isTomorrow: true,
+    shortDesc:
+      'A dramatic midnight spectacle of a multi-tiered bamboo tower carrying blazing oil lamps aloft, carried through medieval Kathmandu in the wake of the Dāgin procession.',
+    highlights: [
+      'Elaborate tiered bamboo frame adorned with dozens of blazing oil lamps carried by young men',
+      'Traditional route starting from the historic timber temple of Kasthamandap',
+      'Follows the midpoint of the Dāgin procession, illuminating the narrow stone corridors',
+      'Photo credit: Ameet Ranjit Photography',
+    ],
+    sakarNote:
+      'Baumata starts around 10:30 PM after Dāgin reaches halfway. Standing under the shadows of Kasthamandap as the blazing lights approach is unforgettable.',
+  },
+
+  // ==================== GAI JATRA FESTIVAL ====================
+  {
+    id: 'gai-jatra',
+    title: 'Gai Jatra — The Festival of Cows & Sacred Laughter',
+    nepaliName: 'गाईजात्रा (सापारु)',
+    category: 'festival',
+    categoryLabel: 'Sacred Living Heritage',
+    date: 'Late August or September (Bhadra Krishna Pratipada)',
+    location: 'Kathmandu, Patan & Bhaktapur Durbar Squares',
+    season: 'Monsoon / Autumn',
+    image: '/images/events/gai-jatra.jpg',
+    shortDesc:
+      'A riot of color, clashing cymbals, rhythmic dhime drums, and communal roar of laughter. Beneath this carnival atmosphere lies one of the most profoundly emotional traditions in Newar civilization: transforming isolated grief into universal love and healing laughter.',
+    highlights: [
+      'Processions of young boys dressed as sacred cows with painted faces and cardboard horns to guide departed souls safely across the mythical Baitarni river',
+      'A royal tradition dating to 17th-century King Pratap Malla, who decreed a citywide comedy procession to heal his grieving queen after the death of the crown prince',
+      'Uncensored cultural protection of satirical theater, political parody, and hilarious street humor across the medieval toles of Kathmandu Valley',
+      'Nepal’s vibrant annual LGBTQ+ Pride Parade celebrated right in the heart of this welcoming carnival atmosphere',
+    ],
+    sakarNote:
+      'Today is a day about death, but it is not a day of silence. The Newar philosophy teaches us that grief is too heavy to carry alone in the dark. We bring it out into the streets. We share it. We wrap it in absurdity, in satire, and in comedy. If a young boy dressed as a cow offers you a piece of fruit or a sweet, accept it with both hands—it is a blessing from a family remembering their loved one. The best way to heal a broken heart is to share the tears, and then, together, find the strength to laugh again.',
+  },
+
+  // ==================== CORE ANNUAL FESTIVALS ====================
   {
     id: 'indra-jatra',
     title: 'Indra Jatra & Sacred Kumari Festival',
