@@ -27,7 +27,7 @@ interface EventsClientProps {
 
 export default function EventsClient({ initialEvents }: EventsClientProps) {
   const [activeFilter, setActiveFilter] = useState<
-    'all' | 'tomorrow' | 'festival' | 'spiritual' | 'community'
+    'all' | 'today' | 'festival' | 'spiritual' | 'community'
   >('all');
   const [selectedFlyer, setSelectedFlyer] = useState<{
     title: string;
@@ -35,18 +35,25 @@ export default function EventsClient({ initialEvents }: EventsClientProps) {
   } | null>(null);
   const [expandedStoryId, setExpandedStoryId] = useState<string | null>(null);
 
-  const tomorrowCount = useMemo(() => {
+  const todayCount = useMemo(() => {
     return initialEvents.filter(
-      (e) => e.isTomorrow || e.categoryLabel?.toLowerCase().includes('tomorrow')
+      (e) =>
+        e.isToday ||
+        e.isTomorrow ||
+        e.categoryLabel?.toLowerCase().includes('today') ||
+        e.categoryLabel?.toLowerCase().includes('tomorrow')
     ).length;
   }, [initialEvents]);
 
   const filteredEvents = useMemo(() => {
     if (activeFilter === 'all') return initialEvents;
-    if (activeFilter === 'tomorrow') {
+    if (activeFilter === 'today') {
       return initialEvents.filter(
         (e) =>
-          e.isTomorrow || e.categoryLabel?.toLowerCase().includes('tomorrow')
+          e.isToday ||
+          e.isTomorrow ||
+          e.categoryLabel?.toLowerCase().includes('today') ||
+          e.categoryLabel?.toLowerCase().includes('tomorrow')
       );
     }
     return initialEvents.filter((e) => e.category === activeFilter);
@@ -71,9 +78,9 @@ export default function EventsClient({ initialEvents }: EventsClientProps) {
             {[
               { key: 'all', label: 'All Gatherings' },
               {
-                key: 'tomorrow',
-                label: 'Tomorrow (Sep 25)',
-                isTomorrowTab: true,
+                key: 'today',
+                label: 'Today (Sep 25)',
+                isTodayTab: true,
               },
               { key: 'festival', label: 'Sacred Festivals' },
               { key: 'spiritual', label: 'Spiritual Retreats' },
@@ -83,8 +90,8 @@ export default function EventsClient({ initialEvents }: EventsClientProps) {
               const count =
                 tab.key === 'all'
                   ? initialEvents.length
-                  : tab.key === 'tomorrow'
-                  ? tomorrowCount
+                  : tab.key === 'today'
+                  ? todayCount
                   : initialEvents.filter((e) => e.category === tab.key).length;
 
               return (
@@ -93,24 +100,27 @@ export default function EventsClient({ initialEvents }: EventsClientProps) {
                   onClick={() => setActiveFilter(tab.key as any)}
                   className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex items-center space-x-1.5 ${
                     isActive
-                      ? tab.isTomorrowTab
-                        ? 'bg-amber-600 text-white shadow-warm'
+                      ? tab.isTodayTab
+                        ? 'bg-rose-600 text-white shadow-warm'
                         : 'bg-terracotta text-white shadow-warm'
-                      : tab.isTomorrowTab
-                      ? 'bg-amber-50 text-amber-900 hover:bg-amber-100 border border-amber-300'
+                      : tab.isTodayTab
+                      ? 'bg-rose-50 text-rose-900 hover:bg-rose-100 border border-rose-300 font-bold'
                       : 'bg-parchment-100 text-himalaya-700 hover:bg-parchment-200 border border-parchment-300'
                   }`}
                 >
-                  {tab.isTomorrowTab && (
-                    <Sparkles className="w-3 h-3 text-amber-300 animate-pulse" />
+                  {tab.isTodayTab && (
+                    <span className="relative flex h-2 w-2 mr-0.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500" />
+                    </span>
                   )}
                   <span>{tab.label}</span>
                   <span
                     className={`text-[10px] px-1.5 py-0.5 rounded-full ${
                       isActive
                         ? 'bg-white/20 text-white'
-                        : tab.isTomorrowTab
-                        ? 'bg-amber-200 text-amber-950 font-bold'
+                        : tab.isTodayTab
+                        ? 'bg-rose-200 text-rose-950 font-bold'
                         : 'bg-parchment-300 text-himalaya-600'
                     }`}
                   >
@@ -126,25 +136,25 @@ export default function EventsClient({ initialEvents }: EventsClientProps) {
       {/* 3. Events Grid */}
       <section className="py-14 sm:py-20 bg-sand">
         <div className="editorial-container space-y-12">
-          {activeFilter === 'tomorrow' && (
-            <div className="p-6 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          {activeFilter === 'today' && (
+            <div className="p-6 rounded-2xl bg-rose-50 border border-rose-200 text-rose-950 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center space-x-3">
-                <span className="p-2.5 rounded-xl bg-amber-200/70 text-amber-800">
+                <span className="p-2.5 rounded-xl bg-rose-200/80 text-rose-800">
                   <Sparkles className="w-5 h-5" />
                 </span>
                 <div>
                   <h3 className="font-editorial-serif text-lg font-bold">
-                    Schedule for Tomorrow — Friday, September 25, 2026
+                    Live Schedule for Today — Friday, September 25, 2026
                   </h3>
-                  <p className="text-xs text-amber-800/80">
+                  <p className="text-xs text-rose-800/80">
                     Kathmandu Valley & Patan Sacred Processions, Chariot Routes,
-                    and Evening Fire Illuminations.
+                    and Evening Fire Illuminations happening today.
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setActiveFilter('all')}
-                className="self-start sm:self-auto text-xs font-bold uppercase tracking-wider text-amber-900 underline hover:text-amber-700"
+                className="self-start sm:self-auto text-xs font-bold uppercase tracking-wider text-rose-900 underline hover:text-rose-700"
               >
                 View All Events →
               </button>
@@ -153,16 +163,18 @@ export default function EventsClient({ initialEvents }: EventsClientProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredEvents.map((evt) => {
-              const isTomorrow =
+              const isToday =
+                evt.isToday ||
                 evt.isTomorrow ||
+                evt.categoryLabel?.toLowerCase().includes('today') ||
                 evt.categoryLabel?.toLowerCase().includes('tomorrow');
 
               return (
                 <div
                   key={evt.id}
                   className={`rounded-2xl bg-white border overflow-hidden shadow-subtle hover:shadow-floating transition-all duration-300 flex flex-col justify-between group ${
-                    isTomorrow
-                      ? 'border-amber-300/80 ring-1 ring-amber-300/40'
+                    isToday
+                      ? 'border-rose-300/80 ring-1 ring-rose-400/30'
                       : 'border-parchment-300'
                   }`}
                 >
@@ -183,10 +195,10 @@ export default function EventsClient({ initialEvents }: EventsClientProps) {
 
                       {/* Top Badges */}
                       <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-1.5 items-center">
-                        {isTomorrow ? (
-                          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-white shadow-sm flex items-center space-x-1">
-                            <Sparkles className="w-3 h-3" />
-                            <span>Tomorrow</span>
+                        {isToday ? (
+                          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-rose-600 text-white shadow-sm flex items-center space-x-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                            <span>Happening Today</span>
                           </span>
                         ) : null}
                         <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-terracotta">

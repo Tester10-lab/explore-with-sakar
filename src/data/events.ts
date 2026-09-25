@@ -14,25 +14,27 @@ export interface NepalEvent {
   time?: string;
   route?: string;
   flyerImage?: string;
+  isToday?: boolean;
   isTomorrow?: boolean;
 }
 
 export const EVENTS_DATA: NepalEvent[] = [
-  // ==================== HAPPENING TOMORROW (SEP 25, 2026) ====================
+  // ==================== HAPPENING TODAY (SEP 25, 2026) ====================
   {
     id: 'indrajatra-koney-yaa',
     title: 'Indrajatra – Koney Yaa (Down-Town Chariot Procession)',
     nepaliName: 'क्वने या: (इन्द्रजात्रा)',
     category: 'festival',
-    categoryLabel: 'Happening Tomorrow',
-    date: 'Sep 25, 2026',
+    categoryLabel: 'Happening Today',
+    date: 'Sep 25, 2026 (Today)',
     time: '4:30 pm onwards',
     location: 'Basantapur Durbar Square, Kathmandu',
     route: 'Basantapur → Chikanmugal → Jaisidewal → Lagan → Bramhatole → Hyumata → Kohiti → Bhimsensthan → Basantapur',
     season: 'Autumn',
     image: '/images/events/indrajatra-koney-yaa.jpg',
     flyerImage: '/images/events/indrajatra-koney-yaa-card.jpg',
-    isTomorrow: true,
+    isToday: true,
+    isTomorrow: false,
     shortDesc:
       'The ceremonial downtown chariot procession of the Royal Living Goddess Kumari, Lord Ganesh, and Lord Bhairav pulled through the ancient southern alleyways of historic Kathmandu.',
     highlights: [
@@ -49,14 +51,15 @@ export const EVENTS_DATA: NepalEvent[] = [
     title: 'Khat Jatra — Traditional Palanquin Procession',
     nepaliName: 'खत जात्रा (गुसिङ्गल, कुपण्डोल)',
     category: 'festival',
-    categoryLabel: 'Happening Tomorrow',
-    date: 'Sep 25, 2026',
+    categoryLabel: 'Happening Today',
+    date: 'Sep 25, 2026 (Today)',
     time: '2:00 pm onwards',
     location: 'Gusingal, Kupondole, Lalitpur',
     season: 'Autumn',
     image: '/images/events/khat-jatra-kupondole.jpg',
     flyerImage: '/images/events/khat-jatra-kupondole-card.jpg',
-    isTomorrow: true,
+    isToday: true,
+    isTomorrow: false,
     shortDesc:
       'An energetic community palanquin festival where local guthi youths hoist sacred wooden shrines on their shoulders, running through the streets to rhythmic dhime beats and vermilion powder.',
     highlights: [
@@ -73,14 +76,15 @@ export const EVENTS_DATA: NepalEvent[] = [
     title: 'Siddhapokhari Mela & Night Water Illuminations',
     nepaliName: 'सिद्धपोखरी मेला (भक्तपुर)',
     category: 'festival',
-    categoryLabel: 'Happening Tomorrow',
-    date: 'Sep 25 & 26, 2026',
-    time: '8:00 pm onwards (on 25th Sep)',
+    categoryLabel: 'Happening Today',
+    date: 'Sep 25 & 26, 2026 (Starts Tonight)',
+    time: '8:00 pm onwards (Tonight)',
     location: 'Siddhapokhari, Bhaktapur',
     season: 'Autumn',
     image: '/images/events/siddhapokhari-mela.jpg',
     flyerImage: '/images/events/siddhapokhari-mela-card.jpg',
-    isTomorrow: true,
+    isToday: true,
+    isTomorrow: false,
     shortDesc:
       'A spellbinding night celebration at Bhaktapur’s ancient 15th-century reflection reservoir, illuminated by thousands of floating clay oil lamps mirrored on tranquil waters.',
     highlights: [
@@ -97,14 +101,15 @@ export const EVENTS_DATA: NepalEvent[] = [
     title: 'Dāgin Procession — The Descent of Indra’s Mother',
     nepaliName: 'दागिं जात्रा (मरु, बसन्तपुर)',
     category: 'festival',
-    categoryLabel: 'Happening Tomorrow',
-    date: 'Sep 25, 2026',
+    categoryLabel: 'Happening Today',
+    date: 'Sep 25, 2026 (Tonight)',
     time: '10:00 pm onwards {tentative}',
     location: 'Maru, Basantapur, Kathmandu',
     season: 'Autumn',
     image: '/images/events/dagin-procession.jpg',
     flyerImage: '/images/events/dagin-procession-card.jpg',
-    isTomorrow: true,
+    isToday: true,
+    isTomorrow: false,
     shortDesc:
       'One of Indra Jatra’s most mystical midnight rituals: a masked representation of Goddess Dāgin (Indra’s mother) leads bereaved families through the ancient streets, guiding departed souls.',
     highlights: [
@@ -121,14 +126,15 @@ export const EVENTS_DATA: NepalEvent[] = [
     title: 'Baumata Procession — The Towering Reed Lamp',
     nepaliName: 'बौमत जात्रा (काष्ठमण्डप)',
     category: 'spiritual',
-    categoryLabel: 'Happening Tomorrow',
-    date: 'Sep 25, 2026',
+    categoryLabel: 'Happening Today',
+    date: 'Sep 25, 2026 (Tonight)',
     time: '10:30 pm onwards {tentative}',
     location: 'Kasthamandap, Kathmandu',
     season: 'Autumn',
     image: '/images/events/baumata-procession.jpg',
     flyerImage: '/images/events/baumata-procession-card.jpg',
-    isTomorrow: true,
+    isToday: true,
+    isTomorrow: false,
     shortDesc:
       'A dramatic midnight spectacle of a multi-tiered bamboo tower carrying blazing oil lamps aloft, carried through medieval Kathmandu in the wake of the Dāgin procession.',
     highlights: [

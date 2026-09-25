@@ -335,6 +335,7 @@ export interface CmsEvent {
   time?: string;
   route?: string;
   flyerImage?: string;
+  isToday?: boolean;
   isTomorrow?: boolean;
 }
 
