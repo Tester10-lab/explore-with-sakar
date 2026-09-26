@@ -71,22 +71,32 @@ const nextConfig = {
       },
       {
         source: '/services/spiritual-wellness',
-        destination: '/experiences/spiritual-wellness',
+        destination: '/experiences/beyond-the-map',
         permanent: true,
       },
       {
         source: '/service/spiritual-wellness',
-        destination: '/experiences/spiritual-wellness',
+        destination: '/experiences/beyond-the-map',
         permanent: true,
       },
       {
         source: '/services/go-spiritual',
-        destination: '/experiences/spiritual-wellness',
+        destination: '/experiences/beyond-the-map',
         permanent: true,
       },
       {
         source: '/service/go-spiritual',
-        destination: '/experiences/spiritual-wellness',
+        destination: '/experiences/beyond-the-map',
+        permanent: true,
+      },
+      {
+        source: '/services/go-within',
+        destination: '/experiences/beyond-the-map',
+        permanent: true,
+      },
+      {
+        source: '/service/go-within',
+        destination: '/experiences/beyond-the-map',
         permanent: true,
       },
       {
@@ -111,12 +121,12 @@ const nextConfig = {
       },
       {
         source: '/services/leave-a-mark',
-        destination: '/experiences/leave-a-mark',
+        destination: '/experiences/beyond-the-map',
         permanent: true,
       },
       {
         source: '/service/leave-a-mark',
-        destination: '/experiences/leave-a-mark',
+        destination: '/experiences/beyond-the-map',
         permanent: true,
       },
       {
@@ -192,12 +202,22 @@ const nextConfig = {
       },
       {
         source: '/experience/go-spiritual',
-        destination: '/experiences/spiritual-wellness',
+        destination: '/experiences/beyond-the-map',
         permanent: true,
       },
       {
         source: '/experience/spiritual-wellness',
-        destination: '/experiences/spiritual-wellness',
+        destination: '/experiences/beyond-the-map',
+        permanent: true,
+      },
+      {
+        source: '/experience/go-within',
+        destination: '/experiences/beyond-the-map',
+        permanent: true,
+      },
+      {
+        source: '/experiences/go-within',
+        destination: '/experiences/beyond-the-map',
         permanent: true,
       },
       {
@@ -212,7 +232,12 @@ const nextConfig = {
       },
       {
         source: '/experience/leave-a-mark',
-        destination: '/experiences/leave-a-mark',
+        destination: '/experiences/beyond-the-map',
+        permanent: true,
+      },
+      {
+        source: '/experiences/leave-a-mark',
+        destination: '/experiences/beyond-the-map',
         permanent: true,
       },
       {

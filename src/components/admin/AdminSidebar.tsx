@@ -105,19 +105,9 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
           icon: Compass,
         },
         {
-          label: 'Go Within',
-          href: '/admin/experiences/go-within',
-          icon: Sparkles,
-        },
-        {
           label: 'Go Deeper',
           href: '/admin/experiences/go-deeper',
           icon: Layers,
-        },
-        {
-          label: 'Leave a Mark',
-          href: '/admin/experiences/leave-a-mark',
-          icon: Heart,
         },
       ],
     },

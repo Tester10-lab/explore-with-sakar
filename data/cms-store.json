@@ -3749,7 +3749,7 @@
     ]
   },
   "version": 1,
-  "lastUpdated": "2026-09-25T05:43:27.718Z",
+  "lastUpdated": "2026-09-26T11:55:14.869Z",
   "packages": [
     {
       "id": "pkg-1-living-culture-heritage",
@@ -4734,100 +4734,6 @@
       "updatedAt": "2026-09-19T19:30:58.607Z"
     },
     {
-      "id": "exp-go-spiritual",
-      "title": "Go Spiritual",
-      "subtitle": "Himalayan Spiritual & Sound Sanctuary",
-      "tagline": "7-Metal Tibetan Singing Bowls, Monastery Dawns & Sacred Mountain Stillness",
-      "slug": "go-spiritual",
-      "category": "spiritual-wellness",
-      "categoryLabel": "Go Spiritual",
-      "duration": "5 – 8 Days",
-      "difficulty": "Gentle",
-      "location": "Pharping Sacred Caves, Boudhanath & Foothill Gompas",
-      "groupSize": "Private / 1–4 Travelers",
-      "season": "Year-Round",
-      "featured": true,
-      "featuredOrder": 2,
-      "homepageVisible": true,
-      "blogVisible": true,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
-        "alt": "Sacred stupa with prayer flags in tranquil morning light"
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
-          "alt": "Sacred stupa"
-        },
-        {
-          "src": "/explore-with-sakar/images/spiritual/meditation-cave.jpg",
-          "alt": "Ancient meditation caves in Pharping"
-        },
-        {
-          "src": "/explore-with-sakar/images/mountains/sunrise-himalayas.jpg",
-          "alt": "Himalayan mountain stillness"
-        }
-      ],
-      "shortDescription": "A sanctuary for inner restoration. Experience private singing bowl sound therapies, Buddhist monastery chanting, sacred cave walks, and mindful presence in the Himalayas.",
-      "fullDescription": [
-        "For millennia, the Himalayan peaks and valleys have served as the earth’s most revered sanctuary for seekers, meditators, and yogis. This journey is crafted for those who wish to step off the global treadmill and reconnect with inner quietude.",
-        "Our approach centers on experiential mindfulness and ancient sound vibration: certified 7-metal hand-hammered singing bowl sessions, dawn pujas inside serene hillside gompas, and quiet walks through sacred pine forests.",
-        "Rather than dogmatic ritual, we cultivate pure presence, gentle breathwork, and deep somatic restoration in sacred power places like Pharping and high Himalayan ridges."
-      ],
-      "highlights": [
-        "Private 1-on-1 and group sound resonance sessions using 7-metal hand-hammered Himalayan singing bowls",
-        "Dawn monastery chanting, long horn resonance, and butter lamp rituals inside peaceful Buddhist gompas",
-        "Walk tranquil trails to the ancient 8th-century meditation caves of Guru Padmasambhava in Pharping",
-        "Guided quiet walking meditations, restorative breathwork, and nourishing herbal nutrition"
-      ],
-      "inclusions": [
-        "Personal accompaniment & spiritual context translation by Sakar",
-        "Daily guided meditation and private singing bowl acoustic sound therapies with master practitioners",
-        "Monastery guesthouse & peaceful hillside wellness eco-lodge accommodations",
-        "All private road transfers in dedicated comfortable vehicle",
-        "Nutritious organic vegetarian meals and herbal teas throughout",
-        "Monastery donations and sacred site ceremonial offerings"
-      ],
-      "exclusions": [
-        "International flights",
-        "Nepal visa",
-        "Personal sound bowl purchases"
-      ],
-      "days": [
-        {
-          "dayNumber": 1,
-          "title": "Boudhanath Dawn Kora & Sound Initiation",
-          "description": "Morning circumambulation with Tibetan pilgrims before sunrise, butter lamp lighting, and initial acoustic assessment."
-        },
-        {
-          "dayNumber": 2,
-          "title": "Pharping Sacred Caves & Padmasambhava Heritage",
-          "description": "Meditation inside the Asura Cave where Guru Rinpoche practiced, and dialogue with senior resident lamas."
-        },
-        {
-          "dayNumber": 3,
-          "title": "Hillside Gompa Puja & Restorative Breathwork",
-          "description": "Dawn monastery horns, drum resonance, mindful pine forest walking, and private evening vibrational therapy."
-        },
-        {
-          "dayNumber": 4,
-          "title": "High Ridge Solitude & Integration",
-          "description": "Sunrise over Himalayan snowpeaks, silent journaling, tea ceremony, and deep somatic closing blessing."
-        }
-      ],
-      "idealFor": "Seekers of inner stillness, wellness travelers, yogis, and anyone needing a deep mental and nervous system reset.",
-      "whatMakesDifferent": "We practice unhurried mindfulness rather than commercialized spiritual sightseeing. Every sound healing session is one-on-one with verified master tuners using genuine heirloom 7-metal bowls.",
-      "sakarNote": "The singing bowl does not force silence upon the mind; its pure harmonic vibration gently invites the mind home.",
-      "impactFootprint": "All monastery offerings support resident monastics, elderly retreats, and local Buddhist preservation trusts.",
-      "ctaText": "Inquire About Go Spiritual",
-      "ctaLink": "/contact?subject=Go%20Spiritual",
-      "seoTitle": "Go Spiritual | Explore With Sakar",
-      "seoDescription": "Experience authentic 7-metal singing bowl sound therapies, Buddhist monastery chanting, and sacred Himalayan cave meditations with Sakar.",
-      "status": "published",
-      "createdAt": "2026-09-19T19:30:58.607Z",
-      "updatedAt": "2026-09-19T19:30:58.607Z"
-    },
-    {
       "id": "exp-feel-closer",
       "title": "Feel Closer",
       "subtitle": "Village Homestays & Living Hearth Hospitality",
@@ -4911,91 +4817,6 @@
       "ctaLink": "/contact?subject=Feel%20Closer",
       "seoTitle": "Feel Closer | Explore With Sakar",
       "seoDescription": "Live with authentic Gurung, Newar, and Tamang families in verified private village homestays with home-cooked hearth dining and cultural immersion.",
-      "status": "published",
-      "createdAt": "2026-09-19T19:30:58.607Z",
-      "updatedAt": "2026-09-19T19:30:58.607Z"
-    },
-    {
-      "id": "exp-leave-a-mark",
-      "title": "Leave a Mark",
-      "subtitle": "Regenerative Travel & Community Conservation",
-      "tagline": "Community Projects, Village School Mentorship, River Care & Ethical Wildlife Stewardship",
-      "slug": "leave-a-mark",
-      "category": "leave-a-mark",
-      "categoryLabel": "Leave a Mark",
-      "duration": "4 – 7 Days",
-      "difficulty": "Moderate",
-      "location": "Chitwan Buffer Zones & Rural Mountain Communities",
-      "groupSize": "Private / 1–8 Travelers",
-      "season": "Year-Round",
-      "featured": true,
-      "homepageVisible": true,
-      "blogVisible": true,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/trails/river-gorge.jpg",
-        "alt": "Serene Himalayan river and forest conservation sanctuary"
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/trails/river-gorge.jpg",
-          "alt": "River gorge conservation"
-        },
-        {
-          "src": "/explore-with-sakar/images/trails/suspension-bridge.jpg",
-          "alt": "Mountain trail care"
-        },
-        {
-          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
-          "alt": "Community support"
-        }
-      ],
-      "shortDescription": "Travel that gives back more than it takes. Support women-led rural cooperatives, plant native trees, volunteer with mountain schools, and preserve endangered heritage.",
-      "fullDescription": [
-        "We believe travel should be regenerative, leaving ecosystems healthier and communities stronger than when we arrived.",
-        "Leave a Mark connects travelers with grassroots conservation and education initiatives led directly by local community leaders. Rather than superficial performative volunteering, we participate in tangible, long-term programs requested by the communities themselves.",
-        "A portion of every journey funds village drinking water filters, solar lighting, scholarship funds for rural girls, and wildlife buffer zone protection."
-      ],
-      "highlights": [
-        "Direct investment and cooperative exchange with women-led weaving and organic collectives",
-        "Supply books, solar learning tools, and sports gear to remote mountain schools",
-        "Participate in native oak and rhododendron reforestation along eroded mountain ridges",
-        "Support community anti-poaching buffer zones around Chitwan and Annapurna sanctuaries"
-      ],
-      "inclusions": [
-        "Dedicated guidance and community relationship facilitation by Sakar",
-        "Private eco-lodge & community homestay lodgings",
-        "Direct contribution to community conservation trusts and school supplies",
-        "All meals and private overland transportation"
-      ],
-      "exclusions": [
-        "International airfare",
-        "Personal insurance"
-      ],
-      "days": [
-        {
-          "dayNumber": 1,
-          "title": "Community Welcome & Project Briefing",
-          "description": "Meet local village teachers and forest rangers to understand ongoing ecological priorities."
-        },
-        {
-          "dayNumber": 2,
-          "title": "School Mentorship & Library Contribution",
-          "description": "Hands-on interactive learning with students, distributing solar reading lights and illustrated storybooks."
-        },
-        {
-          "dayNumber": 3,
-          "title": "Native Tree Planting & River Trail Care",
-          "description": "Planting indigenous saplings on slope lines and learning traditional soil retention techniques."
-        }
-      ],
-      "idealFor": "Conscious travelers, educators, families, and environmentalists who want their travel to leave positive change.",
-      "whatMakesDifferent": "Zero performative voluntourism. Every initiative is community-designed, community-led, and verified for long-term self-sufficiency.",
-      "sakarNote": "True travel does not just change the traveler; it honors and uplifts the soil and people that hosted them.",
-      "impactFootprint": "Every traveler directly finances 10 native trees and school supplies for five rural students.",
-      "ctaText": "Inquire About Leave a Mark",
-      "ctaLink": "/contact?subject=Leave%20a%20Mark",
-      "seoTitle": "Leave a Mark | Explore With Sakar",
-      "seoDescription": "Participate in meaningful community conservation, rural school mentorship, and regenerative travel projects in Nepal with Sakar.",
       "status": "published",
       "createdAt": "2026-09-19T19:30:58.607Z",
       "updatedAt": "2026-09-19T19:30:58.607Z"
@@ -5726,278 +5547,6 @@
       }
     },
     {
-      "id": "exp-spirit-1",
-      "title": "Himalayan Spiritual Awakening & Sound Sanctuary",
-      "slug": "spiritual-immersion-singing-bowls",
-      "category": "go-within",
-      "categoryLabel": "Go Within",
-      "duration": "4 - 7 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Boudhanath, Pharping & Helambu Foothills",
-      "elevation": "1,400 m - 2,200 m",
-      "groupSize": "Private / 1 - 6 Travelers",
-      "season": "Year Round",
-      "featured": true,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/spiritual/singing-bowls.jpg",
-        "alt": "Hand-hammered seven-metal Himalayan singing bowl placed on silk cushion",
-        "caption": "Ancient vibrational frequencies tuned to body chakras."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/spiritual/singing-bowls.jpg",
-          "alt": "Tibetan singing bowls"
-        },
-        {
-          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
-          "alt": "Boudhanath Stupa at dusk"
-        },
-        {
-          "src": "/explore-with-sakar/images/spiritual/meditation-cave.jpg",
-          "alt": "Pharping cave shrine"
-        }
-      ],
-      "shortDescription": "A restorative journey focused on Himalayan acoustic sound therapy, mindfulness meditation, and sacred Buddhist pilgrimage traditions.",
-      "fullDescription": "In a noisy world, true luxury is inner quietude. This bespoke spiritual wellness immersion pairs private master sound healers with dawn monastery chanting and sacred meditation spaces.\n\nYou will undergo personalized 7-metal Tibetan singing bowl therapy sessions with generational master acoustic healers.\n\nBeyond acoustic healing, you will circumambulate Boudhanath Stupa during the quiet predawn hours alongside Tibetan and Sherpa pilgrims.",
-      "highlights": [
-        "Private 7-metal acoustic sound therapy sessions tailored to your energetic resonance",
-        "Exclusive predawn circumambulation (Kora) with monks around sacred stupas",
-        "Guided mindfulness meditation inside Guru Rinpoche’s 8th-century cliff caves",
-        "Vegetarian organic monastery cuisine and herbal Himalayan healing teas"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Day 1",
-          "title": "Acoustic Sound Introduction",
-          "description": "Harmonic vibrational assessment and evening singing bowl therapy session."
-        },
-        {
-          "day": "Day 2",
-          "title": "Boudhanath Dawn Puja",
-          "description": "Quiet 5:30 AM kora walk, morning butter lamp blessing with senior monks."
-        },
-        {
-          "day": "Day 3",
-          "title": "Pharping Sacred Caves Walk",
-          "description": "Hike to Asura Cave, silent sitting meditation overlooking the southern valley."
-        }
-      ],
-      "sakarNote": "When the singing bowl vibrations wash over you in a quiet courtyard while monastery horns echo across the valley, something shifts inside.",
-      "impactFootprint": "Direct donations to monastic free medical clinics and support for traditional non-commercial sound healing guilds.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "The singing bowl does not force silence upon the mind; it creates a vibration so pure that chaos simply loses its desire to stay.",
-        "attribution": "Master Sound Healer Santa Ratna Shakya"
-      }
-    },
-    {
-      "id": "exp-spirit-2",
-      "title": "Pharping Sacred Cave Meditation & Guru Rinpoche Heritage",
-      "slug": "pharping-sacred-cave-meditation",
-      "category": "go-within",
-      "categoryLabel": "Go Within",
-      "duration": "2 - 3 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Pharping & Southern Valley Ridge",
-      "elevation": "1,550 m",
-      "groupSize": "Private / 1 - 4 Travelers",
-      "season": "Year Round",
-      "featured": false,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/spiritual/meditation-cave.jpg",
-        "alt": "Ancient cliff meditation cave in Pharping with butter lamps",
-        "caption": "The sacred Asura Cave where ancient meditation masters achieved inner illumination."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/spiritual/meditation-cave.jpg",
-          "alt": "Pharping cave"
-        },
-        {
-          "src": "/explore-with-sakar/images/spiritual/singing-bowls.jpg",
-          "alt": "Meditation bells"
-        }
-      ],
-      "shortDescription": "Sit in the deep silence of Asura Cave where Padmasambhava meditated in the 8th century, surrounded by whispering pine forests and prayer flags.",
-      "fullDescription": "Pharping is one of the most powerful spiritual sanctuaries in the Himalayan region. Here, holy caves cut into rocky limestone hillsides hold centuries of continuous meditation practice.\n\nWith Sakar, you will step away from commercial tourism and spend unhurried hours sitting inside the rock chambers, learning the history of Vajrayana Buddhism, and sharing quiet moments with resident hermits.",
-      "highlights": [
-        "Unhurried sitting meditation inside Asura Cave and Yanglesho sacred cliffs",
-        "Lighting 108 butter lamps with Tibetan practitioners for world peace and clarity",
-        "Walking through sacred pine forests draped in thousands of wind-fluttered prayer flags"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Morning",
-          "title": "Ridge Trail to Sacred Caves",
-          "description": "Walk through pine groves up to the holy cave complex, meeting resident caretakers."
-        },
-        {
-          "day": "Midday",
-          "title": "Sitting Meditation & Lamp Offering",
-          "description": "Silent contemplation inside the cave followed by ceremonial butter lamp illumination."
-        },
-        {
-          "day": "Afternoon",
-          "title": "Monastery Tea & Monastic Dialogue",
-          "description": "Sit with a resident scholar monk over herbal tea discussing mindfulness and compassionate action."
-        }
-      ],
-      "sakarNote": "The air in Pharping is visibly different. Inside the rock cave, the coolness and silence immediately calm a busy mind.",
-      "impactFootprint": "Support for monastic cave preservation and local monastery educational funds.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "In the stillness of Asura Cave, Guru Padmasambhava proved that true victory is not conquering lands, but subduing the wandering mind.",
-        "attribution": "Nyingma Lineage Elder"
-      }
-    },
-    {
-      "id": "exp-spirit-3",
-      "title": "Namo Buddha Sacred Stupa & Contemplative Ridge Walk",
-      "slug": "namo-buddha-sacred-ridge-walk",
-      "category": "go-within",
-      "categoryLabel": "Go Within",
-      "duration": "2 - 3 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Namo Buddha & Kavre Ridge",
-      "elevation": "1,750 m",
-      "groupSize": "Private / 1 - 6 Travelers",
-      "season": "Year Round (Best Sep - May)",
-      "featured": false,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
-        "alt": "White stupa with colorful Buddhist prayer flags overlooking Himalayan snow peaks",
-        "caption": "Namo Buddha sacred sanctuary perched high on an emerald mountain ridge."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
-          "alt": "Namo Buddha Stupa"
-        },
-        {
-          "src": "/explore-with-sakar/images/mountains/sunrise-himalayas.jpg",
-          "alt": "Dawn Himalayan views"
-        }
-      ],
-      "shortDescription": "Perched on a tranquil mountain ridge, Namo Buddha is revered for an ancient story of radical compassion. Experience panoramic Himalayan views and peaceful monastery grounds.",
-      "fullDescription": "Namo Buddha is one of the three most sacred Buddhist pilgrimage sites in Nepal. According to ancient lore, this is where the Buddha in a previous life sacrificed his body to feed a starving tigress and her cubs.\n\nWe walk the quiet village paths leading up to Thrangu Tashi Yangtse Monastery, attend evening chanting ceremonies, and wake at dawn to watch sunrise golden light wash over the high Himalayan crests.",
-      "highlights": [
-        "Contemplative ridge trail walk through terraced farmland and Tamang villages",
-        "Attending evening drum and horn puja inside Thrangu Tashi Yangtse Monastery",
-        "Dawn sunrise panorama sweeping from Langtang to the Everest region"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Day 1",
-          "title": "Panauti to Namo Buddha Trail Walk",
-          "description": "Unhurried hike through organic fields and forested hills to the monastery ridge."
-        },
-        {
-          "day": "Day 2",
-          "title": "Monastery Puja & Sacred Stupa Kora",
-          "description": "Early morning meditation, visiting the sacred tigress cliff, and peaceful contemplation."
-        }
-      ],
-      "sakarNote": "The story of Namo Buddha is about compassion without conditions. Walking these quiet ridges helps us reflect on what we give to the world.",
-      "impactFootprint": "Direct donations to monastic schools providing free education to young monks from remote mountain valleys.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "At Namo Buddha, generosity is not a transaction; it is the ultimate realization that all suffering beings are interconnected.",
-        "attribution": "Thrangu Rinpoche Monastic Tradition"
-      }
-    },
-    {
-      "id": "exp-spirit-4",
-      "title": "Monastery Dawn Chanting & Inner Silence Retreat",
-      "slug": "monastery-chanting-inner-silence",
-      "category": "go-within",
-      "categoryLabel": "Go Within",
-      "duration": "3 - 5 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Kathmandu Foothill Sanctuaries",
-      "elevation": "1,600 m",
-      "groupSize": "Private / 1 - 4 Travelers",
-      "season": "Year Round",
-      "featured": false,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/spiritual/singing-bowls.jpg",
-        "alt": "Monastery sound bowls and sacred meditation cushions in quiet hall",
-        "caption": "Quiet monastery sanctuary tuned to contemplation and inner renewal."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/spiritual/singing-bowls.jpg",
-          "alt": "Monastery chanting cushions"
-        },
-        {
-          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
-          "alt": "Peaceful stupa"
-        }
-      ],
-      "shortDescription": "Step out of constant digital connection into the restorative rhythm of living monastic life, resonant deep-throat chanting, and silent morning walks.",
-      "fullDescription": "This retreat is designed for those seeking deep mental clarity. Hosted in a quiet monastery guesthouse in the peaceful valley foothills, you will follow the daily contemplative schedule of resident monks.\n\nEach day begins with 5:30 AM deep horn calls and resonant chanting, followed by guided mindful walking through mountain oak forests and reflective evening tea sessions with resident teachers.",
-      "highlights": [
-        "Participation in authentic dawn and dusk monastic chanting sessions",
-        "Daily periods of noble silence for mindfulness, journaling, and contemplation",
-        "Private dialogues with English-speaking Buddhist meditation masters"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Day 1",
-          "title": "Entering the Sanctuary",
-          "description": "Welcome herbal tea, monastery orientation, settling into peaceful retreat rooms."
-        },
-        {
-          "day": "Day 2",
-          "title": "Dawn Puja & Silent Forest Walk",
-          "description": "Morning chanting ceremony, mindful forest walking, and afternoon reading."
-        },
-        {
-          "day": "Day 3",
-          "title": "Closing Reflection & Blessing",
-          "description": "Personal reflection session, master blessing, and gentle re-entry into daily life."
-        }
-      ],
-      "sakarNote": "After two days of noble silence here, guests always tell me their senses have completely reopened. You notice the birds, the wind, and your own breath.",
-      "impactFootprint": "Funds directly sponsor monastery medical dispensaries and traditional monastic manuscript preservation.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "When the dawn horns sound across the valley, the morning mist lifts and you hear the sound of centuries praying for world peace.",
-        "attribution": "Sakar • Responsible Tour Director"
-      }
-    },
-    {
       "id": "exp-home-1",
       "title": "Panauti & Balthali Living Hearth Village Homestay",
       "slug": "village-homestay-panauti-balalthali",
@@ -6258,214 +5807,6 @@
       "updatedAt": "2026-09-19T18:32:01.956Z"
     },
     {
-      "id": "exp-resp-1",
-      "title": "Langtang Valley & Tamang Heritage Trail",
-      "slug": "langtang-tamang-heritage-trail",
-      "category": "leave-a-mark",
-      "categoryLabel": "Leave a Mark",
-      "duration": "6 - 9 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Langtang National Park & Kyanjin Gompa",
-      "elevation": "1,500 m - 3,870 m",
-      "groupSize": "Private / 2 - 8 Travelers",
-      "season": "Mar - May, Sep - Dec",
-      "featured": true,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/mountains/alpine-valley.jpg",
-        "alt": "Glacial alpine valley and suspension bridge in Langtang National Park",
-        "caption": "The dramatic glacial amphitheater of Langtang surrounded by soaring 7,000m peaks."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/mountains/alpine-valley.jpg",
-          "alt": "Langtang valley"
-        },
-        {
-          "src": "/explore-with-sakar/images/mountains/snowcapped-range.jpg",
-          "alt": "Snow peaks"
-        },
-        {
-          "src": "/explore-with-sakar/images/trails/river-gorge.jpg",
-          "alt": "Langtang river gorge"
-        }
-      ],
-      "shortDescription": "Walk through pristine rhododendron forests and glacial canyons while directly supporting indigenous Tamang community rebuilding and eco-lodges.",
-      "fullDescription": "The Langtang Valley was historically known as the valley of glaciers and yak pastures. It is also a story of immense human resilience after the 2015 earthquake.\n\nGuided by Sakar, you will trek along ancient trading routes, visit Kyanjin Gompa’s mountain dairy, and stay in family-run stone lodges where your presence directly rebuilds community wealth.",
-      "highlights": [
-        "Trekking unhurried trails through wild rhododendron, pine, and alpine bamboo",
-        "Visiting Kyanjin Gompa’s artisanal Swiss-Nepali organic yak cheese dairy",
-        "Experiencing indigenous Tamang hospitality, songs, and Buddhist prayer wheel shrines"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Days 1-2",
-          "title": "Syabrubesi to Lama Hotel",
-          "description": "Scenic drive from Kathmandu, walking through oak and bamboo river canyons."
-        },
-        {
-          "day": "Days 3-4",
-          "title": "Langtang Village to Kyanjin Gompa",
-          "description": "Ascend above the tree line into the wide glacial amphitheater, visit ancient monastery."
-        },
-        {
-          "day": "Days 5-7",
-          "title": "Kyanjin Ri Dawn & Gentle Return",
-          "description": "Early morning climb for panoramic views of Langtang Lirung, peaceful return descent."
-        }
-      ],
-      "sakarNote": "Langtang is my heart. Walking here is not about conquering a peak; it is about standing with the resilient families who built this paradise back from stone.",
-      "impactFootprint": "All porter and guide fees exceed fair-trade standards; stays exclusively at locally owned independent community lodges.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "When you trek with purpose in Langtang, your presence helps rebuild schools and keeps traditional Tamang stone hearths burning.",
-        "attribution": "Langtang Community Cooperative"
-      }
-    },
-    {
-      "id": "exp-resp-2",
-      "title": "Chitwan Lowlands & Indigenous Tharu Forest Guardians",
-      "slug": "chitwan-indigenous-tharu-guardians",
-      "category": "leave-a-mark",
-      "categoryLabel": "Leave a Mark",
-      "duration": "3 - 4 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Chitwan National Park & Rapti River",
-      "elevation": "150 m",
-      "groupSize": "Private / 1 - 6 Travelers",
-      "season": "Oct - Apr",
-      "featured": false,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/trails/river-gorge.jpg",
-        "alt": "Silent wooden dugout canoe gliding along misty Rapti River in Chitwan",
-        "caption": "Silent canoe river safari through the sub-tropical sanctuary of Chitwan."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/trails/river-gorge.jpg",
-          "alt": "Rapti river canoe"
-        },
-        {
-          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
-          "alt": "Tharu traditional meal"
-        }
-      ],
-      "shortDescription": "Explore the sub-tropical southern forests of Nepal with indigenous Tharu naturalist guides who have lived in harmony with wild rhinos and tigers for millennia.",
-      "fullDescription": "Chitwan is a conservation success story, home to recovering populations of the greater one-horned rhinoceros and royal Bengal tiger.\n\nRather than intrusive motorized safaris, we focus on ethical silent wooden dugout canoes and walking tours led by indigenous Tharu naturalists who read tracks in the sand.",
-      "highlights": [
-        "Silent dawn canoe safaris along the Rapti River observing gharial crocodiles and kingfishers",
-        "Walking safaris guided by indigenous Tharu trackers who read wildlife scent and tracks",
-        "Visiting community-managed buffer zone forests funded directly by eco-tourism fees"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Day 1",
-          "title": "Arrival & Tharu Village Walk",
-          "description": "Arrive in southern plains, traditional mud-and-thatch village walk, sunset on riverbank."
-        },
-        {
-          "day": "Day 2",
-          "title": "Silent Canoe & Guided Walking Safari",
-          "description": "Dawn canoe glide down Rapti River, ethical guided wildlife tracking walk on foot."
-        },
-        {
-          "day": "Day 3",
-          "title": "Buffer Zone Forest & Conservation",
-          "description": "Visit community reforestation nurseries and learn about human-wildlife coexistence."
-        }
-      ],
-      "sakarNote": "When an indigenous Tharu elder points out fresh tiger pugmarks in the river sand with a calm smile, you understand what it means to truly know a forest.",
-      "impactFootprint": "100% of safari guiding fees go directly to indigenous Tharu naturalist cooperatives and community anti-poaching units.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "The forest gave us life, and in return we protect the tiger and the rhino with traditional indigenous knowledge.",
-        "attribution": "Tharu Community Forest Ranger"
-      }
-    },
-    {
-      "id": "exp-resp-3",
-      "title": "Community Sacred Forest & Indigenous Reforestation Walk",
-      "slug": "community-sacred-forest-reforestation",
-      "category": "leave-a-mark",
-      "categoryLabel": "Leave a Mark",
-      "duration": "1 - 2 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Kathmandu Valley Hills & Sacred Groves",
-      "elevation": "1,700 m",
-      "groupSize": "Private / 1 - 8 Travelers",
-      "season": "Year Round (Best Jun - Oct)",
-      "featured": false,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/homestays/organic-farming.jpg",
-        "alt": "Lush green terraced hills and native community reforestation saplings",
-        "caption": "Planting native trees that restore Himalayan biodiversity and protect community springs."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/homestays/organic-farming.jpg",
-          "alt": "Community reforestation"
-        },
-        {
-          "src": "/explore-with-sakar/images/mountains/mountain-ridge.jpg",
-          "alt": "Green valley ridge"
-        }
-      ],
-      "shortDescription": "Join local youth conservation groups in planting native Himalayan oak and rhododendron trees around endangered community water springs.",
-      "fullDescription": "Community forestry in Nepal is globally celebrated. In this hands-on regeneration experience, travelers participate directly in restoring native tree cover along sacred hillside springs.\n\nWork alongside local villagers, learn traditional water-harvesting methods, and leave a living green footprint that will grow for centuries.",
-      "highlights": [
-        "Hands-on planting of native saplings in community-designated sacred forest catchment areas",
-        "Learning about traditional Newar and Tamang water spring conservation rituals",
-        "Sharing a celebratory organic picnic lunch with local community youth organizers"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Morning",
-          "title": "Forest Walk & Tree Nursery",
-          "description": "Walk through protected sacred groves to the community tree nursery, select native saplings."
-        },
-        {
-          "day": "Midday",
-          "title": "Community Tree Planting",
-          "description": "Work alongside village youth to plant trees and mulch seedlings around watershed springs."
-        },
-        {
-          "day": "Afternoon",
-          "title": "Hearthside Tea & Youth Dialogue",
-          "description": "Share tea and local snacks with the youth committee discussing ongoing climate resilience."
-        }
-      ],
-      "sakarNote": "Planting an oak tree in the Himalayan soil that will shade village travelers 50 years from now is the most meaningful souvenir you can take home.",
-      "impactFootprint": "Direct purchase of saplings from community nurseries and sustained funding for tree maintenance caretakers.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "Planting a native oak or rhododendron tree in the Himalayan foothills is an offering that outlives our children.",
-        "attribution": "Community Forestry Leader"
-      }
-    },
-    {
       "id": "exp-resp-4",
       "title": "Muktinath Spiritual Circuit & Lower Mustang Passage",
       "slug": "mustang-muktinath-pilgrimage-passage",
@@ -6530,72 +5871,77 @@
       "updatedAt": "2026-09-19T18:32:01.956Z"
     },
     {
-      "id": "exp-strategic-capacity-building",
-      "title": "Strategic Community & Administrative Empowerment",
-      "slug": "strategic-community-capacity-building",
-      "category": "leave-a-mark",
-      "categoryLabel": "Leave a Mark",
-      "duration": "2–4 Weeks (Immersive)",
-      "difficulty": "Professional Fellowship",
-      "location": "Kathmandu Valley & Highland Grassroots Hubs",
-      "groupSize": "Private / 1–4 Professional Fellows",
-      "season": "Year-Round",
+      "id": "exp-beyond-ctw",
+      "slug": "chitwan-national-park",
+      "title": "Chitwan National Park – Sauraha: Where the Jungle Listens",
+      "subtitle": "Rapti River dugout canoes, wild one-horned rhinos, Tharu village hearths, and sub-tropical forest silence.",
+      "category": "beyond-the-map",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "2 - 3 Days",
+      "location": "Chitwan National Park & Sauraha",
+      "elevation": "150 m",
+      "groupSize": "Private / 1–6 Travelers",
+      "season": "Oct - Apr",
       "featured": true,
-      "featuredOrder": 4,
-      "homepageVisible": true,
-      "status": "published",
       "heroImage": {
-        "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
-        "alt": "Strategic Community & Administrative Empowerment with Sakar",
-        "caption": "Quiet architects for change: pairing professional skills with grassroots Nepali leaders."
+        "src": "/explore-with-sakar/images/trails/river-gorge.jpg",
+        "alt": "Silent dugout canoe on Rapti River with sub-tropical Chitwan forest on the bank",
+        "caption": "Where the jungle listens: silent wooden canoes, morning river mist, and indigenous Tharu heritage."
       },
-      "gallery": [
+      "galleryImages": [
+        {
+          "src": "/explore-with-sakar/images/trails/river-gorge.jpg",
+          "alt": "Rapti River dugout canoe"
+        },
         {
           "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
-          "alt": "Community meeting"
+          "alt": "Tharu traditional village hospitality"
         },
         {
-          "src": "/explore-with-sakar/images/trails/suspension-bridge.jpg",
-          "alt": "Highland trail"
-        },
-        {
-          "src": "/explore-with-sakar/images/homestays/welcome-tea.jpg",
-          "alt": "Hospitality"
+          "src": "/explore-with-sakar/images/mountains/alpine-valley.jpg",
+          "alt": "Chitwan forest canopy"
         }
       ],
-      "shortDescription": "Match your actual professional skills with local communities in Nepal that need structural, strategic, and administrative empowerment. We don’t just want you to paint a wall; we want you to help build the blueprint.",
+      "shortDescription": "If you want to understand Chitwan, do not begin by chasing animals. Begin by listening to the river. The morning mist rises from the Rapti, and the jungle awakes.",
       "fullDescription": [
-        "Traditional voluntourism often focuses on short-term manual labor that feels good but leaves little lasting impact. We take a different approach. We believe true volunteering means matching your actual professional skills with local communities that need structural, strategic, and administrative empowerment. We don’t just want you to paint a wall; we want you to help build the blueprint.",
-        "Leave a Mark is a specialized branch of our journeys designed for professionals—project managers, financial planners, writers, and strategists—who want to dedicate a portion of their travel to high-level community development.",
-        "Many local NGOs, community groups, and grassroots initiatives in Nepal have the passion and the workforce, but they lack the administrative frameworks to secure funding or execute complex logistics. This program places you behind the scenes as a quiet architect for change."
+        "If you want to understand Chitwan, do not begin by chasing animals. Begin by listening to the river.",
+        "Early in the morning, before the sun warms the plains, the Rapti River moves in quiet reflection. A narrow wooden canoe glides across the water without a motor, guided only by the steady dip of a paddle. The mist rises from the surface, revealing long grass along the riverbanks. Somewhere in the distance, a bird calls, another answers, and the forest slowly comes alive. This is Chitwan—a place where nature is not a background for human activity, but a living world that demands your attention.",
+        "Located in the southern Terai plains of Nepal, Chitwan National Park represents a remarkable story of conservation and balance. Long before it became a protected national park, this region was covered by dense subtropical forests and grasslands, home to the indigenous Tharu people who lived alongside wild animals for generations.",
+        "Today, Chitwan is recognized globally as a sanctuary for endangered wildlife, including the greater one-horned rhinoceros, the Royal Bengal tiger, Asian elephants, gharial crocodiles, and hundreds of bird species. But unlike many wildlife destinations where animals are viewed from a distance, Chitwan brings you into the landscape. Here, you walk on the same paths where rhinos passed a few hours earlier. You listen for the alarm calls of deer that signal a predator nearby. You learn to read the forest.",
+        "Sauraha, a small settlement near the park entrance, serves as a gateway to this natural sanctuary. But beyond the hotels and riverfront restaurants lies a community with deep roots in the soil. The Tharu people have lived in the Terai for centuries, developing a unique culture, architecture, and relationship with the forest. Their traditional houses, built with mud, bamboo, and thatch, are designed to remain cool during hot summers and warm during winter nights. Their art, music, and food reflect a deep connection with the natural environment.",
+        "Visiting Chitwan with an unhurried perspective allows you to move beyond typical safari itineraries. Instead of rushing from one activity to another, you take time to understand how wildlife conservation, local communities, and eco-tourism connect. A morning canoe ride becomes a lesson in patience. A walk through Tharu villages becomes an opportunity to understand how people have adapted to life beside a wilderness."
       ],
-      "keyQuote": {
-        "quote": "True volunteering means matching your professional skills with communities that need structural empowerment. You leave behind an invisible but indestructible infrastructure.",
-        "attribution": "Sakar • Responsible Tour Director"
-      },
-      "highlights": [
-        "Project proposal structuring for international grants and partnerships",
-        "Deliverable breakdowns and timeline compression for local teams",
-        "Financial budgeting, resource allocation, and sustainable operational models",
-        "Direct mentoring alongside grassroots community leaders and coordinators"
+      "culturalHighlights": [
+        "Gliding down the Rapti River at dawn in a silent wooden dugout canoe without motor noise",
+        "Walking footpaths alongside indigenous Tharu naturalists who read fresh rhino tracks in the sand",
+        "Discovering traditional Tharu mud-and-bamboo architecture designed for seasonal plain weather",
+        "Understanding the living story of community-led buffer zone forestry and human-wildlife balance",
+        "Experiencing authentic Terai hospitality and traditional Tharu hearthside cuisine"
       ],
-      "days": [
+      "sakarNote": "In Chitwan, I always ask guests to step into the dugout canoe before sunrise in total silence. Watching a one-horned rhino emerge from the river mist while the paddle dips quietly is pure magic.",
+      "itineraryOutline": [
         {
-          "day": 1,
-          "title": "Arrival, Orientation & Community Introduction",
-          "description": "Meet local coordinators in Kathmandu, review organizational goals, and align on fellowship deliverables."
+          "day": "Day 1",
+          "title": "Arrival in Terai Plains & Tharu Village Walk",
+          "description": "Arrive in Sauraha, explore traditional mud-and-thatch Tharu courtyards, and watch sunset over the Rapti River."
         },
         {
-          "day": 2,
-          "title": "Field Assessment & Framework Structuring",
-          "description": "Observe grassroots field operations and structure the 3-month deliverable blueprint."
+          "day": "Day 2",
+          "title": "Silent Canoe Safari & Guided Nature Walk",
+          "description": "Dawn dugout canoe ride on the Rapti River, observing gharial crocodiles and birds, followed by an unhurried nature tracking walk."
         },
         {
-          "day": 3,
-          "title": "Proposal & Budget Finalization",
-          "description": "Collaborative working sessions to produce actionable project proposals and sustainable financial tools."
+          "day": "Day 3",
+          "title": "Buffer Zone Forest & Conservation Journey",
+          "description": "Learn about community buffer zone initiatives, meet local conservation leaders, and experience authentic Tharu hearthside cuisine."
         }
-      ]
+      ],
+      "impactFootprint": "Direct fair-wage compensation to indigenous Tharu naturalist guides, canoe operators, and community buffer zone conservation funds.",
+      "order": 4,
+      "status": "published",
+      "isVisible": true,
+      "createdAt": "2026-09-26T11:52:37.624Z",
+      "updatedAt": "2026-09-26T11:52:37.625Z"
     }
   ],
   "services": [
@@ -6682,49 +6028,6 @@
       "relatedSlug": "kathmandu-heritage-living-culture",
       "status": "published",
       "order": 1,
-      "createdAt": "2026-09-13T18:12:32.810Z",
-      "updatedAt": "2026-09-13T18:12:32.810Z"
-    },
-    {
-      "id": "spiritual-wellness",
-      "slug": "spiritual-wellness",
-      "title": "Himalayan Spiritual & Sound Sanctuary",
-      "nepaliTitle": "ध्वनि ध्यान र आध्यात्मिक शान्ति",
-      "tagline": "7-Metal Tibetan Singing Bowls, Dawn Monastery Pujas & Sacred Mountain Stillness",
-      "shortDescription": "A sanctuary for inner restoration. Experience private singing bowl sound therapies, Buddhist monastery chanting, sacred cave walks, and mindful presence in the Himalayas.",
-      "fullPhilosophy": [
-        "For millennia, the Himalayan peaks and valleys have served as the earth's most revered sanctuary for seekers, meditators, and yogis. This journey is crafted for those who wish to step off the global treadmill and reconnect with inner quietude.",
-        "Our approach centers on experiential mindfulness and ancient sound vibration: certified 7-metal hand-hammered singing bowl sessions, dawn pujas inside serene hillside gompas, and quiet walks through sacred pine forests.",
-        "Rather than dogmatic ritual, we cultivate pure presence, gentle breathwork, and deep somatic restoration in sacred power places like Pharping and high Himalayan ridges."
-      ],
-      "heroImage": {
-        "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
-        "alt": "Buddhist stupa with prayer flags in tranquil morning light"
-      },
-      "keyFeatures": [
-        {
-          "title": "Authentic Sound Bowl Therapy",
-          "description": "Private 1-on-1 and group sound resonance sessions using 7-metal hand-hammered Himalayan singing bowls."
-        },
-        {
-          "title": "Dawn Monastery Pujas",
-          "description": "Witness morning horn resonance, deep chanting, and butter lamp rituals inside peaceful Buddhist gompas."
-        },
-        {
-          "title": "Sacred Cave Pilgrimage",
-          "description": "Walk tranquil trails to the ancient meditation caves of Guru Padmasambhava in Pharping."
-        },
-        {
-          "title": "Mindfulness & Gentle Breathwork",
-          "description": "Guided quiet walking meditations, restorative breathwork, and nourishing herbal nutrition."
-        }
-      ],
-      "quote": "The singing bowl does not force silence upon the mind; its pure harmonic vibration gently invites the mind home.",
-      "quoteAuthor": "Singing Bowl Sound Master",
-      "badge": "Restorative Wellness",
-      "relatedSlug": "spiritual-immersion-singing-bowls",
-      "status": "published",
-      "order": 2,
       "createdAt": "2026-09-13T18:12:32.810Z",
       "updatedAt": "2026-09-13T18:12:32.810Z"
     },

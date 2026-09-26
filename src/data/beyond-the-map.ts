@@ -356,4 +356,61 @@ export const BEYOND_EXPERIENCES: BeyondExperience[] = [
       },
     ],
   },
+  {
+    id: 'chitwan-national-park',
+    pageNumber: 'Page 05',
+    title: 'Chitwan National Park',
+    subtitle: 'Sauraha: Where the Wild Heart of Nepal Beats',
+    nepaliTitle: 'चितवन राष्ट्रिय निकुञ्ज (सौरहा)',
+    tagline: 'Terai Lowlands • Rapti River Canoe • Indigenous Tharu Forest Guardians',
+    location: 'Sauraha & Chitwan National Park',
+    duration: '2–3 Days (Jungle & Culture)',
+    groupSize: 'Private / 1–6 Travelers',
+    image: '/explore-with-sakar/images/trails/river-gorge.jpg',
+    imageAlt: 'Peaceful Rapti river, jungle wilderness, and indigenous Tharu villages of Chitwan',
+    promise:
+      'Some places are not just visited; they are experienced. Chitwan is one of those rare destinations where nature, adventure, and culture come together in a way that stays with you long after you leave.',
+    experienceOverview:
+      'Imagine waking up in the peaceful surroundings of Sauraha, stepping outside and seeing a rhino calmly walking through the streets nearby, or watching elephants move through the village paths. Here, the boundary between the wilderness and human life feels beautifully connected. Gliding in a traditional canoe on the Rapti River, walking through ancient forests, and learning from the indigenous Tharu community reveals a side of Nepal where conservation protects the profound relationship between humans and nature.',
+    keyQuote: {
+      quote:
+        'A journey through Chitwan is a reminder that conservation is not only about protecting animals. It is about protecting the relationship between humans and nature.',
+      attribution: 'Sakar, Wild Heart of Nepal',
+    },
+    highlights: [
+      'Gliding quietly in a traditional wooden dugout canoe on the calm waters of the Rapti River alongside gharials and mugger crocodiles',
+      'Experiencing a guided jungle walking safari to observe one-horned rhinos, sloth bears, deer, and rich birdlife in their natural habitat',
+      'Connecting deeply with the indigenous Tharu community, learning their ancestral forest wisdom, traditional dances, and resilience',
+      'Discovering how human communities and wilderness coexist in harmony along the borders of Nepal’s first National Park',
+    ],
+    ctaSubject: 'Go Beyond the Map: Chitwan National Park (Page 05)',
+    storySections: [
+      {
+        heading: 'Sauraha: Where the Boundary Between Wild and Human Life Dissolves',
+        paragraphs: [
+          'Some places are not just visited; they are experienced.',
+          'Chitwan is one of those rare destinations where nature, adventure and culture come together in a way that stays with you long after you leave.',
+          'Imagine waking up in the peaceful surroundings of Sauraha, stepping outside and seeing a rhino calmly walking through the streets nearby, or watching elephants move through the village paths. Here, the boundary between the wilderness and human life feels beautifully connected.',
+        ],
+      },
+      {
+        heading: 'Gliding on the Rapti & Entering the Forest',
+        paragraphs: [
+          'The adventure begins on the waters of the Rapti River. Sitting quietly in a traditional canoe, gliding through the calm river, you observe crocodiles and the ancient-looking gharials resting along the banks. Every turn of the river brings a sense of curiosity because the jungle is alive around you.',
+          'Then comes the moment that every nature lover remembers: entering Chitwan National Park.',
+          'A jungle walk is not just a walk. It is an encounter with the unknown.',
+          'Every sound from the forest makes you pause. A movement in the bushes creates excitement. The possibility of seeing a tiger, a sloth bear, deer or other wildlife creates an unforgettable connection with the wild. It is not about finding animals only; it is about understanding the rhythm of a forest that has existed for thousands of years.',
+        ],
+      },
+      {
+        heading: 'The Indigenous Tharu Community & Conservation',
+        paragraphs: [
+          'But Chitwan is not only about wildlife. It is also about the people who have lived alongside this ecosystem for generations.',
+          'The Tharu community, one of the indigenous communities of the Terai region, has a deep relationship with the land, forests and rivers. Their traditional dances, music and stories showcase a culture shaped by nature and resilience. Through their performances, visitors get a glimpse of how communities have adapted, survived and coexisted with the wildlife around them.',
+          'A journey through Chitwan is a reminder that conservation is not only about protecting animals. It is about protecting the relationship between humans and nature.',
+          'From thrilling jungle adventures to peaceful village experiences, Chitwan offers a different side of Nepal, a place where the wild is not separated from life, but integrated into it. For those seeking adventure, connection and an authentic Nepalese experience, Chitwan is not just a destination. It is a story waiting to be lived.',
+        ],
+      },
+    ],
+  },
 ];

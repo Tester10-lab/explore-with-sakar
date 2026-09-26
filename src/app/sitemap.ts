@@ -28,12 +28,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const CANONICAL_EXPERIENCE_MAP: Record<string, string> = {
       'go-beyond': '/experiences/beyond-the-map',
       'beyond-the-map': '/experiences/beyond-the-map',
-      'go-within': '/experiences/go-within',
-      'go-spiritual': '/experiences/go-within',
-      'spiritual-wellness': '/experiences/go-within',
       'feel-closer': '/experiences/homestays',
       'homestays': '/experiences/homestays',
-      'leave-a-mark': '/experiences/leave-a-mark',
       'all-curated-experiences': '/experiences',
       'experiences': '/experiences',
       'custom-private-journeys': '/experiences/custom-journeys',
@@ -63,14 +59,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         };
       });
 
-    // Explicitly guarantee all 6 canonical experience routes are included
+    // Explicitly guarantee canonical experience routes are included
     const now = new Date();
     const coreExperienceRoutes: MetadataRoute.Sitemap = [
       { url: `${baseUrl}/experiences`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
       { url: `${baseUrl}/experiences/beyond-the-map`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-      { url: `${baseUrl}/experiences/go-within`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
       { url: `${baseUrl}/experiences/homestays`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-      { url: `${baseUrl}/experiences/leave-a-mark`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
       { url: `${baseUrl}/experiences/custom-journeys`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     ];
 

@@ -255,45 +255,7 @@ export const SERVICE_PILLARS: ServicePillar[] = [
     badge: 'Signature Exploration',
     relatedSlug: 'living-courtyards-kathmandu',
   },
-  {
-    id: 'leave-a-mark',
-    slug: 'leave-a-mark',
-    title: 'Leave a Mark: Strategic Volunteer Tourism',
-    nepaliTitle: 'रणनीतिक स्वयंसेवक यात्रा',
-    tagline: 'Matching Professional Skills with Local Communities for Structural Empowerment',
-    shortDescription: 'We don’t just want you to paint a wall; we want you to help build the blueprint. Strategic volunteer tourism placing project managers, financial planners, and strategists behind the scenes.',
-    fullPhilosophy: [
-      'Traditional "voluntourism" often focuses on short-term, unskilled manual labor that feels good but leaves little lasting impact. We take a different approach. We believe true volunteering means matching your actual professional skills with local communities that need structural, strategic, and administrative empowerment.',
-      '"Leave a Mark" is a specialized branch of our journeys designed for professionals—project managers, financial planners, writers, and strategists—who want to dedicate a portion of their travel to high-level community development.',
-      'Many local NGOs, community groups, and grassroots initiatives in Nepal have the passion and the workforce, but they lack the administrative frameworks to secure funding or execute complex logistics. This program places you behind the scenes as a quiet architect for change.',
-    ],
-    heroImage: {
-      src: '/explore-with-sakar/images/trails/river-gorge.jpg',
-      alt: 'Himalayan valley and community initiatives in Nepal',
-    },
-    keyFeatures: [
-      {
-        title: 'Project Proposal Structuring',
-        description: 'Drafting comprehensive, persuasive proposals that local organizations can use to secure grants and partnerships.',
-      },
-      {
-        title: 'Deliverable Breakdowns',
-        description: 'Taking a massive, overwhelming community goal and breaking it down into manageable, daily tasks for local teams.',
-      },
-      {
-        title: 'Timeline Compression',
-        description: 'Engineering tight, realistic execution schedules (such as a focused 3-month rollout) to ensure projects do not stall.',
-      },
-      {
-        title: 'Financial & Resource Planning',
-        description: 'Assisting with budgeting, resource allocation, and funding models to ensure long-term sustainability.',
-      },
-    ],
-    quote: 'By applying your professional expertise, you leave behind an invisible but indestructible infrastructure. You leave a lasting mark on the map.',
-    quoteAuthor: 'The "Beyond the Map" Promise',
-    badge: 'Strategic Volunteering',
-    relatedSlug: 'living-courtyards-kathmandu',
-  },
+
 ];
 
 export function getServiceBySlug(slug: string): ServicePillar | undefined {

@@ -1,7 +1,6 @@
-'use client';
-
-import LeaveAMarkHubPage from '@/app/admin/experiences/leave-a-mark/page';
+import { redirect } from 'next/navigation';
 
 export default function LegacyLeaveAMarkHubPage() {
-  return <LeaveAMarkHubPage />;
+  redirect('/admin/experiences/beyond-the-map');
 }
+
