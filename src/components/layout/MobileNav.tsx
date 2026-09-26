@@ -242,6 +242,44 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                           </p>
                         </Link>
 
+                        <Link
+                          href="/experiences/go-spiritual"
+                          onClick={onClose}
+                          className="block group pt-2.5 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <Heart className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Go Spiritual
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Spiritual
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Sound therapy, dawn monastery chant pujas & sacred meditation retreats.
+                          </p>
+                        </Link>
+
+                        <Link
+                          href="/experiences/homestays"
+                          onClick={onClose}
+                          className="block group pt-2.5 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <Home className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Feel Closer
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Homestays
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Authentic family village homestays, hearthside cooking & mountain warmth.
+                          </p>
+                        </Link>
+
                         <div className="pt-3 flex flex-col space-y-1.5">
                           <Link
                             href="/experiences"

@@ -146,6 +146,16 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
+                    <Link href="/experiences/go-spiritual" className="hover:text-terracotta transition-colors">
+                      Go Spiritual
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/experiences/homestays" className="hover:text-terracotta transition-colors">
+                      Feel Closer (Homestays)
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/experiences/custom-journeys" className="hover:text-terracotta transition-colors">
                       Custom Private Journeys
                     </Link>

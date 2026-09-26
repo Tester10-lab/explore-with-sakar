@@ -17,17 +17,54 @@ export const EXPERIENCE_PILLARS: Record<string, ExperiencePillar> = {
     overviewText: [
       'If you want to understand Kathmandu, do not start with a monument. Start with a morning walk where the city wakes up in the narrow alleys of Ason. As the first rays of sunlight enter between old brick houses, the smell of spices, incense, fresh vegetables, and traditional sweets fills the air. Ason is not just a marketplace; it is a living memory standing along the ancient trade routes connecting the plains of India with the Tibetan plateau.',
       'One of Kathmandu’s greatest secrets is hidden not in its palaces, but in its neighbourhoods. The old settlements were designed around people—with homes, markets, temples, schools, and social spaces within walking distance.',
-      'From Kathmandu Durbar Square to medieval Bhaktapur, the maker courtyards of Patan, and the laid-back waters of Pokhara, Beyond the Map is a journey through living history.',
+      'From Kathmandu Durbar Square to medieval Bhaktapur, the maker courtyards of Patan, the laid-back waters of Pokhara, and the wild rivers of Chitwan, Beyond the Map is a journey through living history and nature.',
     ],
     highlights: [
       'Dawn morning walk through spice-scented Ason alleys as wooden shutters open to morning devotion',
       'Entering Bhaktapur: vehicle-free brick lanes, master potters shaping clay, and fresh Juju Dhau',
       'Behind-the-scenes ateliers in Patan watching sacred deities forged and carved by hand',
       'Early morning silent wooden paddle boat on Phewa Lake reflecting sacred Machhapuchhre',
+      'Gliding down Rapti River in Chitwan at dawn in a silent wooden dugout canoe beside Tharu naturalists',
     ],
     heroImage: '/images/beyond-the-map/living-courtyards.jpg',
     categoryFilter: ['beyond-the-map', 'go-beyond', 'heritage'],
     canonicalSlug: 'beyond-the-map',
+  },
+  'go-spiritual': {
+    name: 'Go Spiritual',
+    nepaliTitle: 'आध्यात्मिक शान्ति',
+    introText: 'Immerse in ancient Tibetan singing bowl sound therapy, dawn monastery chant pujas, and the tranquil stillness of sacred Himalayan power places.',
+    overviewText: [
+      'For thousands of years, the high ridges, pine valleys, and sacred caves of Nepal have served as the world’s most potent sanctuary for yogis, meditators, and those seeking mental clarity.',
+      'We craft gentle, contemplative journeys focused on acoustic sound resonance, dawn monastery prayers, mindful walking, and pure presence. Rather than dogmatic practice, our approach is experiential, peaceful, and restorative.',
+    ],
+    highlights: [
+      'Private 7-metal Tibetan singing bowl sound sessions tuned to planetary frequencies',
+      'Dawn monastery pujas and butter lamp offerings with monastic communities',
+      'Pilgrimages to Guru Padmasambhava sacred meditation caves in Pharping',
+      'Mindful ridge walks and gentle restorative breathwork in mountain air',
+    ],
+    heroImage: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
+    categoryFilter: ['go-spiritual', 'spiritual-wellness', 'spiritual'],
+    canonicalSlug: 'go-spiritual',
+  },
+  'spiritual-wellness': {
+    name: 'Go Spiritual',
+    nepaliTitle: 'आध्यात्मिक शान्ति',
+    introText: 'Immerse in ancient Tibetan singing bowl sound therapy, dawn monastery chant pujas, and the tranquil stillness of sacred Himalayan power places.',
+    overviewText: [
+      'For thousands of years, the high ridges, pine valleys, and sacred caves of Nepal have served as the world’s most potent sanctuary for yogis, meditators, and those seeking mental clarity.',
+      'We craft gentle, contemplative journeys focused on acoustic sound resonance, dawn monastery prayers, mindful walking, and pure presence. Rather than dogmatic practice, our approach is experiential, peaceful, and restorative.',
+    ],
+    highlights: [
+      'Private 7-metal Tibetan singing bowl sound sessions tuned to planetary frequencies',
+      'Dawn monastery pujas and butter lamp offerings with monastic communities',
+      'Pilgrimages to Guru Padmasambhava sacred meditation caves in Pharping',
+      'Mindful ridge walks and gentle restorative breathwork in mountain air',
+    ],
+    heroImage: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
+    categoryFilter: ['go-spiritual', 'spiritual-wellness', 'spiritual'],
+    canonicalSlug: 'go-spiritual',
   },
   'go-deeper': {
     name: 'Go Deeper',
@@ -67,3 +104,4 @@ export const EXPERIENCE_PILLARS: Record<string, ExperiencePillar> = {
     canonicalSlug: 'homestays',
   },
 };
+

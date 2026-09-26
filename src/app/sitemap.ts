@@ -28,6 +28,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const CANONICAL_EXPERIENCE_MAP: Record<string, string> = {
       'go-beyond': '/experiences/beyond-the-map',
       'beyond-the-map': '/experiences/beyond-the-map',
+      'go-spiritual': '/experiences/go-spiritual',
+      'spiritual-wellness': '/experiences/go-spiritual',
       'feel-closer': '/experiences/homestays',
       'homestays': '/experiences/homestays',
       'all-curated-experiences': '/experiences',
@@ -64,6 +66,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const coreExperienceRoutes: MetadataRoute.Sitemap = [
       { url: `${baseUrl}/experiences`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
       { url: `${baseUrl}/experiences/beyond-the-map`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+      { url: `${baseUrl}/experiences/go-spiritual`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
       { url: `${baseUrl}/experiences/homestays`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
       { url: `${baseUrl}/experiences/custom-journeys`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     ];

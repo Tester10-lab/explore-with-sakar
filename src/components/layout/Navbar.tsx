@@ -61,6 +61,20 @@ export const MAIN_NAV_STRUCTURE: NavItem[] = [
         icon: Compass,
       },
       {
+        title: 'Go Spiritual',
+        description: 'Sound therapy, dawn monastery chant pujas & sacred meditation retreats.',
+        href: '/experiences/go-spiritual',
+        badge: 'Spiritual',
+        icon: Heart,
+      },
+      {
+        title: 'Feel Closer',
+        description: 'Authentic family village homestays, hearthside cooking & mountain warmth.',
+        href: '/experiences/homestays',
+        badge: 'Homestays',
+        icon: Home,
+      },
+      {
         title: 'Custom Private Journeys',
         description: '100% tailor-made itineraries for solo travelers, couples & families with Sakar.',
         href: '/experiences/custom-journeys',

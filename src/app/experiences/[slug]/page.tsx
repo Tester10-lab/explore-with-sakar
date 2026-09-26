@@ -130,17 +130,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  // Only generate static params for the canonical pillar slugs.
-  // Individual topic slugs (kathmandu-durbar-square, etc.) are handled by
-  // /experiences/[slug]/[topic]/page.tsx — do NOT pre-render them here
-  // or they will resolve to a stale static page instead of triggering the
-  // runtime redirect in ExperienceDetailPage.
   const canonicalPillars = [
     'beyond-the-map',
-    'go-within',
+    'go-spiritual',
     'go-deeper',
     'homestays',
-    'leave-a-mark',
     'custom-journeys',
   ];
   return canonicalPillars.map((slug) => ({ slug }));
@@ -156,11 +150,11 @@ export default async function ExperienceDetailPage({ params }: Props) {
   if (slug === 'go-beyond') {
     permanentRedirect('/experiences/beyond-the-map');
   }
-  if (slug === 'go-spiritual') {
-    permanentRedirect('/experiences/go-within');
+  if (slug === 'go-within') {
+    permanentRedirect('/experiences/beyond-the-map');
   }
-  if (slug === 'spiritual-wellness') {
-    permanentRedirect('/experiences/go-within');
+  if (slug === 'leave-a-mark' || slug === 'responsible') {
+    permanentRedirect('/experiences/beyond-the-map');
   }
   if (slug === 'feel-closer') {
     permanentRedirect('/experiences/homestays');

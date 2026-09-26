@@ -114,13 +114,7 @@ export async function generateStaticParams() {
     'beyond-the-map': 'beyond-the-map',
     'go-beyond': 'beyond-the-map',
     'heritage': 'beyond-the-map',
-    'go-within': 'go-within',
-    'go-spiritual': 'go-within',
-    'spiritual-wellness': 'go-within',
-    'spiritual': 'go-within',
     'go-deeper': 'go-deeper',
-    'leave-a-mark': 'leave-a-mark',
-    'responsible': 'leave-a-mark',
     'homestays': 'homestays',
     'feel-closer': 'homestays',
     'homestay': 'homestays',
@@ -141,6 +135,30 @@ export async function generateStaticParams() {
 
 export default async function IndividualTopicPage({ params }: Props) {
   const { slug, topic } = params;
+
+  const oldPillars = ['go-within', 'leave-a-mark', 'responsible'];
+  const oldTopics = [
+    'spiritual-immersion-singing-bowls',
+    'pharping-sacred-cave-meditation',
+    'namo-buddha-sacred-ridge-walk',
+    'monastery-chanting-inner-silence',
+    'langtang-tamang-heritage-trail',
+    'chitwan-indigenous-tharu-guardians',
+    'community-sacred-forest-reforestation',
+    'singing-bowls',
+    'pharping',
+    'namo-buddha',
+    'monastery-chanting',
+    'langtang',
+    'chitwan',
+    'community-reforestation',
+  ];
+
+  if (oldPillars.includes(slug) || oldTopics.includes(topic)) {
+    const { permanentRedirect } = await import('next/navigation');
+    permanentRedirect('/experiences/beyond-the-map');
+  }
+
   const experience = await getTopic(topic);
 
   if (!experience) {
