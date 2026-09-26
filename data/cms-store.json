@@ -4636,320 +4636,13 @@
   ],
   "experiences": [
     {
-      "id": "exp-go-beyond",
-      "title": "Go Beyond the Map",
-      "subtitle": "Where Every Stone Holds a Story",
-      "tagline": "Living Courtyards, Medieval Stone Mysteries & Master Artisan Guilds",
-      "slug": "go-beyond",
+      "id": "exp-beyond-ktm",
+      "slug": "kathmandu-durbar-square",
+      "title": "Kathmandu Durbar Square: Where Every Stone Holds a Story",
+      "subtitle": "Ason spice alleys, ancient Silk Road trade crossroads, sustainable Newar urban design, and living royal stones.",
       "category": "beyond-the-map",
       "categoryLabel": "Go Beyond the Map",
-      "duration": "Full Day to Multi-Day",
-      "difficulty": "Gentle",
-      "location": "Kathmandu Valley, Patan, Bhaktapur & Pokhara",
-      "groupSize": "Private / 1–6 Travelers",
-      "season": "Year-Round",
-      "featured": true,
-      "featuredOrder": 1,
-      "homepageVisible": true,
-      "blogVisible": true,
-      "heroImage": {
-        "src": "/images/beyond-the-map/living-courtyards.jpg",
-        "alt": "Ancient living courtyards of Kathmandu Valley"
-      },
-      "gallery": [
-        {
-          "src": "/images/beyond-the-map/living-courtyards.jpg",
-          "alt": "Living courtyards in morning light"
-        },
-        {
-          "src": "/explore-with-sakar/images/heritage/durbar-square.jpg",
-          "alt": "Historic Bhaktapur Durbar Square"
-        },
-        {
-          "src": "/explore-with-sakar/images/heritage/temple-courtyard.jpg",
-          "alt": "Patan sacred courtyards"
-        },
-        {
-          "src": "/explore-with-sakar/images/mountains/mountain-ridge.jpg",
-          "alt": "Pokhara lake and mountain reflections"
-        }
-      ],
-      "shortDescription": "Step past tourist facades into living courtyards, ancient Silk Road trade alleys, multi-generational artisan workshops, and calm Himalayan waters with Sakar.",
-      "fullDescription": [
-        "If you want to understand Kathmandu, do not start with a monument. Start with a morning walk where the city wakes up in the narrow alleys of Ason.",
-        "As the first rays of sunlight enter between old brick houses, the smell of spices, incense, fresh vegetables, and traditional sweets fills the air. Ason is not just a marketplace; it is a living memory standing along the ancient trade routes connecting the plains of India with the Tibetan plateau.",
-        "One of Kathmandu’s greatest secrets is hidden not in its palaces, but in its neighbourhoods. The old settlements were designed around people—with homes, markets, temples, schools, and social spaces within walking distance.",
-        "From Kathmandu Durbar Square to medieval Bhaktapur, the maker courtyards of Patan, and the laid-back waters of Pokhara, Go Beyond the Map is a journey through living history."
-      ],
-      "highlights": [
-        "Dawn morning walk through spice-scented Ason alleys as wooden shutters open to morning devotion",
-        "Entering Bhaktapur: vehicle-free brick lanes, master potters shaping clay, and fresh Juju Dhau",
-        "Behind-the-scenes ateliers in Patan watching sacred deities forged and carved by hand",
-        "Early morning silent wooden paddle boat on Phewa Lake reflecting sacred Machhapuchhre"
-      ],
-      "inclusions": [
-        "Dedicated personal hosting & cultural interpretation by Sakar throughout",
-        "Private air-conditioned overland vehicle and scenic transfers",
-        "Boutique heritage accommodations & tranquil lakeside retreats",
-        "All UNESCO World Heritage site permits, museum fees, and pottery workshop materials",
-        "Authentic multi-course Newari feasts, tea tastings, and fresh local delicacies"
-      ],
-      "exclusions": [
-        "International flights",
-        "Nepal visa fees",
-        "Personal travel insurance"
-      ],
-      "days": [
-        {
-          "dayNumber": 1,
-          "title": "Kathmandu Durbar Square & Ason Alleys",
-          "description": "Dawn walk from Ason trade crossroads through Newar residential courtyards into Basantapur palace square."
-        },
-        {
-          "dayNumber": 2,
-          "title": "Bhaktapur Living Medieval City & Pottery Square",
-          "description": "Car-free brick pavements, master clay wheel demonstrations, Nyatapola Temple, and authentic Juju Dhau."
-        },
-        {
-          "dayNumber": 3,
-          "title": "Patan: City of Makers & Sacred Water Hitis",
-          "description": "Lost-wax bronze foundries, stone-carved Krishna Mandir, Golden Temple, and ancient Manga Hiti conduits."
-        },
-        {
-          "dayNumber": 4,
-          "title": "Pokhara: The Laid-Back City That Makes You Want to Stay",
-          "description": "Phewa Lake wooden boat to Tal Barahi, Machhapuchhre dawn reflections, and historic Gurung/Magar trade quarters."
-        }
-      ],
-      "idealFor": "Travelers seeking authentic cultural depth, living crafts, architecture, and unhurried pacing.",
-      "whatMakesDifferent": "We do not treat monuments as isolated tourist attractions behind glass. We walk through residential family compounds, meet multi-generational makers in their workshops, and explore how ancient architecture, social relationships, and daily rituals remain alive today.",
-      "sakarNote": "In Kathmandu, every cobblestone holds a story, and every carved window frames five centuries of living devotion. When you step off the tourist street, the city whispers eight centuries of living peace.",
-      "impactFootprint": "All workshop honorariums and fees go directly into the hands of traditional Newari artisan families, community preservation trusts, and local boatmen.",
-      "ctaText": "Inquire About Go Beyond the Map",
-      "ctaLink": "/contact?subject=Go%20Beyond%20the%20Map",
-      "seoTitle": "Go Beyond the Map | Explore With Sakar",
-      "seoDescription": "Step past the tourist facades into living courtyards, ancient Silk Road trade alleys, master artisan workshops, and calm Himalayan waters with Sakar.",
-      "status": "published",
-      "createdAt": "2026-09-19T19:30:58.575Z",
-      "updatedAt": "2026-09-19T19:30:58.607Z"
-    },
-    {
-      "id": "exp-feel-closer",
-      "title": "Feel Closer",
-      "subtitle": "Village Homestays & Living Hearth Hospitality",
-      "tagline": "Stay With Nepal: Living Hearth Hospitality, Organic Farming & Lifelong Human Connections",
-      "slug": "feel-closer",
-      "category": "homestays",
-      "categoryLabel": "Feel Closer",
-      "duration": "4 – 7 Days",
-      "difficulty": "Gentle",
-      "location": "Panauti, Balthali & Annapurna Gurung Foothills",
-      "groupSize": "Private / 1–6 Travelers",
-      "season": "Year-Round",
-      "featured": true,
-      "featuredOrder": 3,
-      "homepageVisible": true,
-      "blogVisible": true,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
-        "alt": "Family and guests sharing a home-cooked meal around wooden table"
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
-          "alt": "Village meal by the hearth"
-        },
-        {
-          "src": "/explore-with-sakar/images/homestays/village-homestay.jpg",
-          "alt": "Traditional village home"
-        },
-        {
-          "src": "/explore-with-sakar/images/trails/suspension-bridge.jpg",
-          "alt": "Village walking trails"
-        }
-      ],
-      "shortDescription": "Step beyond hotels to live under traditional slate roofs with Gurung and Tamang mountain families. Share meals, learn ancestral recipes, and forge genuine lifelong bonds.",
-      "fullDescription": [
-        "True cultural understanding never happens through the tinted window of a tourist bus. It happens when you sit cross-legged by a wood-burning hearth (Chulo), sharing steaming tea with a grandmother whose hands have worked the mountain soil for eighty years.",
-        "Our homestay experiences are carefully curated with verified host families who receive you not as a transactional customer, but as an honored family guest. Sakar bridges language and cultural nuances so meaningful conversations flow naturally.",
-        "100% of your hosting payment remains directly in the hands of village mothers and community development funds, providing sustainable livelihoods that keep rural heritage alive."
-      ],
-      "highlights": [
-        "Clean, cozy guest rooms with fresh private bedding, warm blankets, and panoramic mountain views",
-        "Harvest organic greens from terraced gardens and learn to cook traditional Dal Bhat on a wood fire",
-        "Participate in dawn butter lamp rituals, tea harvesting, community weaving looms, and evening folk songs",
-        "Direct economic impact empowering women-led cooperatives and rural village schools"
-      ],
-      "inclusions": [
-        "Full personal guidance and translation by Sakar throughout",
-        "Private family homestay accommodations with verified clean private bedrooms",
-        "All hearty, home-cooked farm-to-hearth organic meals and morning teas",
-        "All community homestay cooperative contributions and village permits",
-        "Private overland transport between Kathmandu and foothill villages"
-      ],
-      "exclusions": [
-        "International flights",
-        "Personal travel insurance",
-        "Souvenirs"
-      ],
-      "days": [
-        {
-          "dayNumber": 1,
-          "title": "Arrival & Welcome into Family Hearth",
-          "description": "Traditional marigold garland welcome, settling into cozy private guest room, and evening hearth tea."
-        },
-        {
-          "dayNumber": 2,
-          "title": "Farm Harvesting & Woodfire Kitchen Secrets",
-          "description": "Gathering organic vegetables from terrace plots, grinding spices by stone, and cooking authentic dal bhat."
-        },
-        {
-          "dayNumber": 3,
-          "title": "Village Ridge Walks & Community Stories",
-          "description": "Walking through orange groves and ancient stone paths with village elders, sharing folklore by the fire."
-        }
-      ],
-      "idealFor": "Slow travelers, food lovers, families, and anyone who cherishes genuine human connection.",
-      "whatMakesDifferent": "We never use commercialized fake homestays. You stay with real multi-generational families who have welcomed Sakar as family for over a decade.",
-      "sakarNote": "We do not receive visitors as clients. When you sit by our wood fire and eat our rice, you are family.",
-      "impactFootprint": "100% of accommodation and food payments stay in the village, funding local girls’ scholarships and organic farming.",
-      "ctaText": "Inquire About Feel Closer",
-      "ctaLink": "/contact?subject=Feel%20Closer",
-      "seoTitle": "Feel Closer | Explore With Sakar",
-      "seoDescription": "Live with authentic Gurung, Newar, and Tamang families in verified private village homestays with home-cooked hearth dining and cultural immersion.",
-      "status": "published",
-      "createdAt": "2026-09-19T19:30:58.607Z",
-      "updatedAt": "2026-09-19T19:30:58.607Z"
-    },
-    {
-      "id": "exp-all-curated-experiences",
-      "title": "All Curated Experiences",
-      "subtitle": "The Complete Directory of Private Itineraries",
-      "tagline": "Day-by-Day Himalayan Routes • Living Heritage • Mountain Trails & Departures",
-      "slug": "all-curated-experiences",
-      "category": "all-curated",
-      "categoryLabel": "All Curated Experiences",
-      "duration": "Flexible (3 to 16 Days)",
-      "difficulty": "Custom",
-      "location": "Across Nepal: Valleys, Ridges & Historic Towns",
-      "groupSize": "Private / 1–8 Travelers",
-      "season": "Year-Round",
-      "featured": false,
-      "homepageVisible": false,
-      "blogVisible": false,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/mountains/sunrise-himalayas.jpg",
-        "alt": "Panoramic Himalayan horizon over Nepal mountain ridges"
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/mountains/sunrise-himalayas.jpg",
-          "alt": "Himalayan sunrise"
-        },
-        {
-          "src": "/explore-with-sakar/images/heritage/durbar-square.jpg",
-          "alt": "Durbar Square temples"
-        }
-      ],
-      "shortDescription": "Explore our full collection of unhurried, private itineraries across Nepal—from medieval Newari courtyards to high alpine pastures and tranquil lakes.",
-      "fullDescription": [
-        "Explore With Sakar designs private, slow-paced journeys meant to spark genuine connection with sacred shrines, village families, and quiet Himalayan ridges.",
-        "Every itinerary in our collection can be reserved as a private journey or tailored to match your exact dates, fitness level, and personal travel curiosity."
-      ],
-      "highlights": [
-        "Comprehensive day-by-day itineraries across all four core travel pillars",
-        "Transparent inclusions, dedicated private transport, and personal hosting by Sakar",
-        "Options ranging from gentle 3-day cultural walks to 16-day grand Himalayan expeditions"
-      ],
-      "inclusions": [
-        "Full private hosting by Sakar",
-        "All lodging, permits, and private transfers"
-      ],
-      "days": [],
-      "idealFor": "Travelers who wish to browse our complete catalog of routes before designing their bespoke journey.",
-      "whatMakesDifferent": "100% private travel with zero tourist buses, rigid schedules, or compulsory shopping stops.",
-      "ctaText": "Browse Full Catalog",
-      "ctaLink": "/experiences",
-      "seoTitle": "All Curated Experiences | Explore With Sakar",
-      "seoDescription": "Browse our complete collection of private, slow-paced journeys across Nepal guided by local host Sakar.",
-      "status": "published",
-      "createdAt": "2026-09-19T19:30:58.607Z",
-      "updatedAt": "2026-09-19T19:30:58.607Z"
-    },
-    {
-      "id": "exp-custom-private-journeys",
-      "title": "Custom Private Journeys",
-      "subtitle": "Bespoke Private Itinerary Curation",
-      "tagline": "Tailor-Made Routes Designed Around Your Personal Rhythm, Dates & Curiosity",
-      "slug": "custom-private-journeys",
-      "category": "custom-journeys",
-      "categoryLabel": "Custom Private Journeys",
-      "duration": "Bespoke (Tailored to You)",
-      "difficulty": "Custom",
-      "location": "Tailored Across Nepal",
-      "groupSize": "Private (Solo, Couple or Family)",
-      "season": "Year-Round",
-      "featured": false,
-      "homepageVisible": false,
-      "blogVisible": false,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/mountains/mountain-ridge.jpg",
-        "alt": "Scenic mountain ridge overlooking Himalayan horizon"
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/mountains/mountain-ridge.jpg",
-          "alt": "High mountain ridge"
-        },
-        {
-          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
-          "alt": "Warm village hospitality"
-        }
-      ],
-      "shortDescription": "Every traveler is unique. We craft 100% private, bespoke Nepal journeys for solo travelers, couples, and multi-generational families with personal host care.",
-      "fullDescription": [
-        "No two travelers are alike. Some wish to spend three days in a quiet pottery courtyard; others dream of meditating at dawn on a high ridge or tasting wild honey with village beekeepers.",
-        "Our bespoke curation begins with a personal conversation. Sakar listens to your travel dreams, physical comfort preferences, and dates, crafting a seamless, deeply considered journey from airport greeting to farewell blessing.",
-        "You travel with complete flexibility, private vehicle comfort, handpicked lodgings, and Sakar’s dedicated personal accompaniment."
-      ],
-      "highlights": [
-        "Interactive collaborative itinerary tailoring until every day matches your preferred rhythm",
-        "Exclusive private vehicle, private guide, and the agility to modify daily plans on the go",
-        "Thoughtful arrangements for solo traveler safety, romantic escapes, and family-friendly pacing",
-        "Direct contact with Sakar from initial planning through your entire time in Nepal"
-      ],
-      "inclusions": [
-        "Dedicated 1-on-1 itinerary design consultations with Sakar",
-        "Full private journey accompaniment & cultural interpretation",
-        "Private air-conditioned overland vehicle and dedicated driver",
-        "Handpicked boutique hotels, luxury lodges, or verified village homestays",
-        "All government conservation permits, TIMS cards, and heritage admissions"
-      ],
-      "exclusions": [
-        "International flights",
-        "Nepal visa fees",
-        "Personal travel insurance"
-      ],
-      "days": [],
-      "idealFor": "Solo travelers, couples on honeymoon, creative writers, and multi-generational families.",
-      "whatMakesDifferent": "We do not sell pre-packaged mass tours off a shelf; we co-create a personal chapter of your life in Nepal.",
-      "sakarNote": "We don’t sell packaged tours off a shelf; we co-create a personal chapter of your life in Nepal.",
-      "ctaText": "Plan Your Custom Journey",
-      "ctaLink": "/contact?subject=Custom%20Private%20Journey",
-      "seoTitle": "Custom Private Journeys | Explore With Sakar",
-      "seoDescription": "Collaborate with local host Sakar to design a 100% private, tailor-made Nepal itinerary around your personal pace and passions.",
-      "status": "published",
-      "createdAt": "2026-09-19T19:30:58.607Z",
-      "updatedAt": "2026-09-19T19:30:58.607Z"
-    },
-    {
-      "id": "exp-beyond-ktm",
-      "title": "Kathmandu Durbar Square: Where Every Stone Holds a Story",
-      "slug": "kathmandu-durbar-square",
-      "category": "beyond-the-map",
-      "categoryLabel": "Beyond the Map",
       "duration": "Full Day (Unhurried)",
-      "difficulty": "Easy to Moderate",
       "location": "Ason Alleys & Basantapur Durbar Square",
       "elevation": "1,400 m",
       "groupSize": "Private / 1–6 Travelers",
@@ -4960,7 +4653,7 @@
         "alt": "Morning sunlight entering the narrow brick alleys of Ason and Basantapur Durbar Square",
         "caption": "Where the city wakes up: Ason alleys, living Newar courtyards, and ancient Basantapur palace stones."
       },
-      "gallery": [
+      "galleryImages": [
         {
           "src": "/images/beyond-the-map/living-courtyards.jpg",
           "alt": "Ason merchant alleys and morning sunlight"
@@ -4975,21 +4668,24 @@
         }
       ],
       "shortDescription": "If you want to understand Kathmandu, do not start with a monument. Start with a morning walk where the city wakes up in the narrow alleys of Ason.",
-      "fullDescription": "If you want to understand Kathmandu, do not start with a monument. Start with a morning walk. Start where the city wakes up in the narrow alleys of Ason. As the first rays of sunlight enter between old brick houses, the smell of spices, incense, fresh vegetables, and traditional sweets fills the air. Shopkeepers open wooden shutters that have witnessed generations of customers. People rush through lanes that appear too narrow for a modern city, yet somehow carry the rhythm of thousands of years. This is not just a marketplace. This is a memory.\n\nFor centuries, Ason remained one of the beating hearts of Kathmandu, standing along ancient trade routes that connected the southern plains of India with the Tibetan plateau. Traders, pilgrims, monks, and travellers passed through these streets carrying goods, stories, beliefs, and cultures. Perhaps that is why Kathmandu has always felt different: it was never a city that belonged to only one culture. It was a meeting point—a place where northern mountains met southern civilizations, where Hindu temples stood beside Buddhist monasteries, where merchants discussed business while bells from nearby shrines reminded them of something beyond wealth.\n\nOne of Kathmandu’s greatest secrets is hidden not in its palaces, but in its neighbourhoods. The old settlements were designed around people. A family could live in a traditional courtyard house, walk a few steps to a temple, visit a nearby market, meet neighbours in community spaces, and participate in festivals that connected generations. The city was not separated into residential areas, commercial areas, and religious zones like many modern cities. Life happened together. A temple was not only a place of worship. A courtyard was not only empty space. A marketplace was not only for buying and selling. Everything had a purpose.\n\nAs the world discusses climate change and the importance of sustainable urban living, the traditional close-knit communities of Kathmandu Valley offer a valuable lesson. For centuries, these settlements were designed around people—with homes, markets, temples, schools, and social spaces within walking distance. Heritage conservationist Anil Chitrakar, often regarded as a walking encyclopedia of Nepal’s heritage, highlights how these traditional communities represent a way of living where culture, sustainability, and human connection existed together.\n\nWhy did so many rulers dream of controlling Kathmandu? Because Kathmandu was never just beautiful. It was valuable. The valley had fertile land, water resources, skilled artisans, and a strategic location between Tibet and the Indian subcontinent. Whoever controlled Kathmandu controlled the centre of trade, administration, and influence in the Himalayan region. The earliest chapters take us back to ancient kingdoms, including the Licchavi period, when administration, art, inscriptions, and religious architecture began flourishing. Beneath the roads and houses is a civilization continuously evolving for centuries: there are many cities built on top of each other.\n\nThen came the Malla era—the age when Kathmandu Valley became a canvas for royal imagination. The kings of Kathmandu, Patan, and Bhaktapur competed with each other, not only for power but also for beauty. They wanted their temples to reach higher, their palaces to become grander, their cities to be remembered. This rivalry created something extraordinary: a competition of creativity. The artisans were storytellers: a carved window was a chapter, a temple roof was a poem, a courtyard was a gathering place where generations shared life.\n\nAs the walk continues from Ason towards Basantapur, the noise of the market slowly meets the silence of history. And suddenly, Kathmandu changes. The old palace walls appear. The temples rise above the square. The wooden carvings look down as if watching for centuries. Kathmandu Durbar Square is not a place where history ended; it is a place where history is still breathing. Here, kings were crowned, festivals were celebrated, artists created masterpieces, and ordinary people continued their everyday lives around extraordinary monuments.",
-      "highlights": [
+      "fullDescription": [
+        "If you want to understand Kathmandu, do not start with a monument. Start with a morning walk. Start where the city wakes up in the narrow alleys of Ason. As the first rays of sunlight enter between old brick houses, the smell of spices, incense, fresh vegetables, and traditional sweets fills the air. Shopkeepers open wooden shutters that have witnessed generations of customers. People rush through lanes that appear too narrow for a modern city, yet somehow carry the rhythm of thousands of years. This is not just a marketplace. This is a memory.",
+        "For centuries, Ason remained one of the beating hearts of Kathmandu, standing along ancient trade routes that connected the southern plains of India with the Tibetan plateau. Traders, pilgrims, monks, and travellers passed through these streets carrying goods, stories, beliefs, and cultures. Perhaps that is why Kathmandu has always felt different: it was never a city that belonged to only one culture. It was a meeting point—a place where northern mountains met southern civilizations, where Hindu temples stood beside Buddhist monasteries, where merchants discussed business while bells from nearby shrines reminded them of something beyond wealth.",
+        "One of Kathmandu’s greatest secrets is hidden not in its palaces, but in its neighbourhoods. The old settlements were designed around people. A family could live in a traditional courtyard house, walk a few steps to a temple, visit a nearby market, meet neighbours in community spaces, and participate in festivals that connected generations. The city was not separated into residential areas, commercial areas, and religious zones like many modern cities. Life happened together. A temple was not only a place of worship. A courtyard was not only empty space. A marketplace was not only for buying and selling. Everything had a purpose.",
+        "As the world discusses climate change and the importance of sustainable urban living, the traditional close-knit communities of Kathmandu Valley offer a valuable lesson. For centuries, these settlements were designed around people—with homes, markets, temples, schools, and social spaces within walking distance. Heritage conservationist Anil Chitrakar, often regarded as a walking encyclopedia of Nepal’s heritage, highlights how these traditional communities represent a way of living where culture, sustainability, and human connection existed together.",
+        "Why did so many rulers dream of controlling Kathmandu? Because Kathmandu was never just beautiful. It was valuable. The valley had fertile land, water resources, skilled artisans, and a strategic location between Tibet and the Indian subcontinent. Whoever controlled Kathmandu controlled the centre of trade, administration, and influence in the Himalayan region. The earliest chapters take us back to ancient kingdoms, including the Licchavi period, when administration, art, inscriptions, and religious architecture began flourishing. Beneath the roads and houses is a civilization continuously evolving for centuries: there are many cities built on top of each other.",
+        "Then came the Malla era—the age when Kathmandu Valley became a canvas for royal imagination. The kings of Kathmandu, Patan, and Bhaktapur competed with each other, not only for power but also for beauty. They wanted their temples to reach higher, their palaces to become grander, their cities to be remembered. This rivalry created something extraordinary: a competition of creativity. The artisans were storytellers: a carved window was a chapter, a temple roof was a poem, a courtyard was a gathering place where generations shared life.",
+        "As the walk continues from Ason towards Basantapur, the noise of the market slowly meets the silence of history. And suddenly, Kathmandu changes. The old palace walls appear. The temples rise above the square. The wooden carvings look down as if watching for centuries. Kathmandu Durbar Square is not a place where history ended; it is a place where history is still breathing. Here, kings were crowned, festivals were celebrated, artists created masterpieces, and ordinary people continued their everyday lives around extraordinary monuments."
+      ],
+      "culturalHighlights": [
         "Dawn morning walk through the ancient spice trade alleys of Ason as wooden shutters open",
         "Discovering traditional Newar urban design where homes, temples, and markets exist in walking harmony",
         "Reflecting on Anil Chitrakar’s lessons on ancient human-centered and sustainable community living",
         "Tracing Licchavi and Malla royal rivalries that transformed brick and timber into architectural poetry",
         "Entering Basantapur where palace walls grew together with the everyday life of the people"
       ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
+      "sakarNote": "I love starting at Ason at 6:30 AM when the tea sellers light their stoves and grandmothers offer marigolds. When you understand the community behind the stones, the monuments become living relatives.",
+      "itineraryOutline": [
         {
           "day": "6:30 AM",
           "title": "Ason Morning Awakening",
@@ -5011,24 +4707,16 @@
           "description": "Step into the square where kings were crowned, festivals breathe, and stone carvings narrate living history."
         }
       ],
-      "sakarNote": "I love starting at Ason at 6:30 AM when the tea sellers light their stoves and grandmothers offer marigolds. When you understand the community behind the stones, the monuments become living relatives.",
-      "impactFootprint": "Direct patronage of historic Ason courtyard tea sellers, Guthi community trusts, and local neighborhood preservation initiatives.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.932Z",
-      "updatedAt": "2026-09-22T04:55:57.319Z",
-      "keyQuote": {
-        "quote": "Kathmandu reminds the world that the future of cities is not only about technology, but also about preserving communities where people live, work, and care for each other.",
-        "attribution": "Heritage Conservationist Anil Chitrakar"
-      }
+      "impactFootprint": "Direct patronage of historic Ason courtyard tea sellers, Guthi community trusts, and local neighborhood preservation initiatives."
     },
     {
       "id": "exp-beyond-bkt",
-      "title": "Bhaktapur Durbar Square: A Walk Through Nepal’s Living Medieval City",
       "slug": "bhaktapur-durbar-square",
+      "title": "Bhaktapur Durbar Square: A Walk Through Nepal’s Living Medieval City",
+      "subtitle": "The city that slowed down: traffic-free brick lanes, Pottery Square wheels, and traditional Juju Dhau.",
       "category": "beyond-the-map",
-      "categoryLabel": "Beyond the Map",
+      "categoryLabel": "Go Beyond the Map",
       "duration": "Full Day (Unhurried)",
-      "difficulty": "Easy to Moderate",
       "location": "Bhaktapur Durbar Square & Pottery Square",
       "elevation": "1,400 m",
       "groupSize": "Private / 1–6 Travelers",
@@ -5039,7 +4727,7 @@
         "alt": "Ancient brick pavements, temples, and Golden Gate of Bhaktapur Durbar Square",
         "caption": "A city that slowed down and protected its memories: medieval Bhaktapur as a living museum."
       },
-      "gallery": [
+      "galleryImages": [
         {
           "src": "/explore-with-sakar/images/heritage/durbar-square.jpg",
           "alt": "Bhaktapur Durbar Square temples"
@@ -5054,21 +4742,23 @@
         }
       ],
       "shortDescription": "Bhaktapur is not a place where you simply visit the past. It is a place where the past still welcomes you. It slowed down and protected its memories.",
-      "fullDescription": "Bhaktapur is not a place where you simply visit the past. It is a place where the past still welcomes you. There are cities that move forward by leaving the past behind. Bhaktapur chose a different path: it slowed down. It protected its memories. It allowed its old brick lanes, wooden windows, courtyards, and traditions to continue telling stories in a world that is changing faster than ever.\n\nThe first feeling you get when you enter Bhaktapur is not excitement; it is calm. The sound of footsteps on old brick pavements replaces the noise of busy roads. The smell of freshly prepared Newari food mixes with the fragrance of incense. An artisan sits quietly working with his hands, continuing a skill that may have travelled through generations. You suddenly realize: this is not a city where history is displayed. This is a city where history is lived—so it is known as a living museum.\n\nBefore modern ideas of sustainable cities became popular, Bhaktapur had already created a human-centred way of living. The city was not divided into places where people lived, worked, worshipped, and gathered separately. Everything existed together. A temple was not only a religious space. A courtyard was not only architecture. A public water source was not only infrastructure. They were places where relationships were created. Neighbours met, festivals were organized, knowledge was shared, and communities looked after each other.\n\nBhaktapur’s culture also tells a story of a community connected with its land. The fertile valley provided crops, and those crops became part of celebrations, rituals, and social life. Traditional foods, festivals, and drinks like Ayla became expressions of sharing and togetherness. A community that has enough to preserve, create, and celebrate has moved beyond survival: it has created culture.\n\nWhen you finally arrive at Bhaktapur Durbar Square, you do not feel like you have reached a monument. You feel like you have entered a conversation with the past. The Golden Gate, the Palace of Fifty-Five Windows, and the soaring pagodas are reminders of a civilization that believed beauty was an essential part of life. A city does not become timeless because it has old buildings; a city becomes timeless when people continue to give those buildings meaning.\n\nBeyond the grand temples and royal courtyards, the true heartbeat of Bhaktapur can be found in the hands of its people. At Pottery Square, the rhythm of the spinning wheel has continued for generations. As the potter’s wheel turns slowly, ordinary clay transforms into lamps, vessels, and everyday objects. And then there is Juju Dhau—the “King of Yogurt” of Bhaktapur. Prepared through traditional methods using buffalo milk and clay pots, Juju Dhau represents patience, skill, and hospitality.",
-      "highlights": [
+      "fullDescription": [
+        "Bhaktapur is not a place where you simply visit the past. It is a place where the past still welcomes you. There are cities that move forward by leaving the past behind. Bhaktapur chose a different path: it slowed down. It protected its memories. It allowed its old brick lanes, wooden windows, courtyards, and traditions to continue telling stories in a world that is changing faster than ever.",
+        "The first feeling you get when you enter Bhaktapur is not excitement; it is calm. The sound of footsteps on old brick pavements replaces the noise of busy roads. The smell of freshly prepared Newari food mixes with the fragrance of incense. An artisan sits quietly working with his hands, continuing a skill that may have travelled through generations. You suddenly realize: this is not a city where history is displayed. This is a city where history is lived—so it is known as a living museum.",
+        "Before modern ideas of sustainable cities became popular, Bhaktapur had already created a human-centred way of living. The city was not divided into places where people lived, worked, worshipped, and gathered separately. Everything existed together. A temple was not only a religious space. A courtyard was not only architecture. A public water source was not only infrastructure. They were places where relationships were created. Neighbours met, festivals were organized, knowledge was shared, and communities looked after each other.",
+        "Bhaktapur’s culture also tells a story of a community connected with its land. The fertile valley provided crops, and those crops became part of celebrations, rituals, and social life. Traditional foods, festivals, and drinks like Ayla became expressions of sharing and togetherness. A community that has enough to preserve, create, and celebrate has moved beyond survival: it has created culture.",
+        "When you finally arrive at Bhaktapur Durbar Square, you do not feel like you have reached a monument. You feel like you have entered a conversation with the past. The Golden Gate, the Palace of Fifty-Five Windows, and the soaring pagodas are reminders of a civilization that believed beauty was an essential part of life. A city does not become timeless because it has old buildings; a city becomes timeless when people continue to give those buildings meaning.",
+        "Beyond the grand temples and royal courtyards, the true heartbeat of Bhaktapur can be found in the hands of its people. At Pottery Square, the rhythm of the spinning wheel has continued for generations. As the potter’s wheel turns slowly, ordinary clay transforms into lamps, vessels, and everyday objects. And then there is Juju Dhau—the “King of Yogurt” of Bhaktapur. Prepared through traditional methods using buffalo milk and clay pots, Juju Dhau represents patience, skill, and hospitality."
+      ],
+      "culturalHighlights": [
         "Walking traffic-free brick lanes where footsteps replace the roar of modern vehicular traffic",
         "Experiencing a human-centered living medieval city where courtyards and water sources build relationships",
         "Marveling at the Golden Gate and the Palace of Fifty-Five Windows in unhurried silence",
         "Sitting beside generational master potters at Pottery Square as spinning clay turns into sacred lamps",
         "Savoring authentic Juju Dhau (King of Yogurt) prepared with centuries of skill in traditional clay pots"
       ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
+      "sakarNote": "In Bhaktapur, I ask guests to close their eyes and listen: you hear clay spinning, brick scraping, and temple bells, not horns. That calm cadence is Nepal’s greatest gift.",
+      "itineraryOutline": [
         {
           "day": "Morning",
           "title": "Entering the Living Museum",
@@ -5090,24 +4780,16 @@
           "description": "Taste the legendary King of Yogurt served fresh in clay bowls in a traditional family sweetshop."
         }
       ],
-      "sakarNote": "In Bhaktapur, I ask guests to close their eyes and listen: you hear clay spinning, brick scraping, and temple bells, not horns. That calm cadence is Nepal’s greatest gift.",
-      "impactFootprint": "Support for local pottery guild cooperatives, heritage masonry artisans, and family-owned traditional dairy producers.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "To walk through Bhaktapur is to realize that a city does not need to forget its ancestors in order to live in the modern world.",
-        "attribution": "Himalayan Cultural Historian"
-      }
+      "impactFootprint": "Support for local pottery guild cooperatives, heritage masonry artisans, and family-owned traditional dairy producers."
     },
     {
       "id": "exp-beyond-ptn",
-      "title": "Patan Durbar Square: The City of Hidden Courtyards and Living Craft",
       "slug": "patan-durbar-square",
+      "title": "Patan Durbar Square: The City of Hidden Courtyards and Living Craft",
+      "subtitle": "A city of makers: rhythm of bronze hammers, sacred monastic bahals, and stone hydraulic hitis.",
       "category": "beyond-the-map",
-      "categoryLabel": "Beyond the Map",
+      "categoryLabel": "Go Beyond the Map",
       "duration": "Full Day (Unhurried)",
-      "difficulty": "Easy to Moderate",
       "location": "Patan (Lalitpur) & Hidden Monastic Bahals",
       "elevation": "1,400 m",
       "groupSize": "Private / 1–6 Travelers",
@@ -5118,7 +4800,7 @@
         "alt": "Patan master craftsman working with bronze and wood in traditional courtyard atelier",
         "caption": "Patan is a city of makers: where ancient knowledge still has daily work to do."
       },
-      "gallery": [
+      "galleryImages": [
         {
           "src": "/images/beyond-the-map/artisan-path.jpg",
           "alt": "Patan craftsman atelier"
@@ -5133,21 +4815,23 @@
         }
       ],
       "shortDescription": "Patan is a city of makers. In Kathmandu, you encounter history everywhere. In Bhaktapur, you feel history surrounding everyday life. In Patan, you can watch history being made by hand.",
-      "fullDescription": "There is something different about Patan. Kathmandu can feel restless. Bhaktapur feels as though it has paused to remember another time. But Patan feels busy creating—quietly, patiently, almost unnoticed. Walk away from the main road and the city begins to reveal itself: a small doorway opens into a courtyard; a shrine appears between two old houses; somewhere nearby, metal is being hammered into shape. A craftsman sits with the concentration of someone who has done the same work for decades.\n\nPatan is often introduced through its temples and Durbar Square. But if you only look at its monuments, you miss what makes the city special: Patan is a city of makers. For generations, artisans here have worked with metal, wood, stone, and clay. Walk through the older neighbourhoods and you hear the unmistakable rhythm of a hammer striking metal. The techniques are ancient, but the work is not preserved behind glass: it is still being done.\n\nPatan Durbar Square was once the royal centre of the Malla kingdom, but standing there today, it is difficult to think of it simply as a palace complex. The square feels more like an open museum of Newar civilization—except that the museum is still alive. The Krishna Mandir, with its distinctive stone architecture, stands at the heart of the square. The courtyards lead deeper into the old palace complex, where carved windows, bronze details, and traditional architectural forms reveal extraordinary mastery. Places such as Sundari Chowk and Tusha Hiti bring water, stone, and sacred sculpture together.\n\nPerhaps nowhere is Patan’s character clearer than in its religious architecture. You do not have to travel far to move between Hindu temples and Buddhist monasteries; a few steps take you from one tradition into another. The Golden Temple (Hiranya Varna Mahavihar) leads into historic Buddhist courtyards. For centuries, these traditions have influenced one another, shared artistic schools, and become part of the same community life.\n\nLeave the main square: you may find Mahaboudha, an extraordinary terracotta Buddhist monument covered with countless Buddha images; or Rudra Varna Mahavihar; or old sunken water conduits like Manga Hiti and Kumbheshwar. The old city was not merely a collection of beautiful buildings—it was an intelligent urban water and social system.\n\nEventually, you understand: Patan’s greatest museum is the workshop of an artisan. A piece of metal slowly becomes a deity. A block of wood becomes a window. A traditional technique passes quietly from one generation to another. Patan is not simply a city where ancient things remain: it is a city where ancient knowledge still has work to do.",
-      "highlights": [
+      "fullDescription": [
+        "There is something different about Patan. Kathmandu can feel restless. Bhaktapur feels as though it has paused to remember another time. But Patan feels busy creating—quietly, patiently, almost unnoticed. Walk away from the main road and the city begins to reveal itself: a small doorway opens into a courtyard; a shrine appears between two old houses; somewhere nearby, metal is being hammered into shape. A craftsman sits with the concentration of someone who has done the same work for decades.",
+        "Patan is often introduced through its temples and Durbar Square. But if you only look at its monuments, you miss what makes the city special: Patan is a city of makers. For generations, artisans here have worked with metal, wood, stone, and clay. Walk through the older neighbourhoods and you hear the unmistakable rhythm of a hammer striking metal. The techniques are ancient, but the work is not preserved behind glass: it is still being done.",
+        "Patan Durbar Square was once the royal centre of the Malla kingdom, but standing there today, it is difficult to think of it simply as a palace complex. The square feels more like an open museum of Newar civilization—except that the museum is still alive. The Krishna Mandir, with its distinctive stone architecture, stands at the heart of the square. The courtyards lead deeper into the old palace complex, where carved windows, bronze details, and traditional architectural forms reveal extraordinary mastery. Places such as Sundari Chowk and Tusha Hiti bring water, stone, and sacred sculpture together.",
+        "Perhaps nowhere is Patan’s character clearer than in its religious architecture. You do not have to travel far to move between Hindu temples and Buddhist monasteries; a few steps take you from one tradition into another. The Golden Temple (Hiranya Varna Mahavihar) leads into historic Buddhist courtyards. For centuries, these traditions have influenced one another, shared artistic schools, and become part of the same community life.",
+        "Leave the main square: you may find Mahaboudha, an extraordinary terracotta Buddhist monument covered with countless Buddha images; or Rudra Varna Mahavihar; or old sunken water conduits like Manga Hiti and Kumbheshwar. The old city was not merely a collection of beautiful buildings—it was an intelligent urban water and social system.",
+        "Eventually, you understand: Patan’s greatest museum is the workshop of an artisan. A piece of metal slowly becomes a deity. A block of wood becomes a window. A traditional technique passes quietly from one generation to another. Patan is not simply a city where ancient things remain: it is a city where ancient knowledge still has work to do."
+      ],
+      "culturalHighlights": [
         "Stepping into behind-the-scenes family workshops where deities are forged in bronze and carved in timber",
         "Admiring the stone mastery of Krishna Mandir and the royal sunken bath of Tusha Hiti",
         "Witnessing the seamless coexistence of Hinduism and Buddhism at the Golden Temple (Hiranya Varna Mahavihar)",
         "Discovering the terracotta thousand-Buddha temple of Mahaboudha and ancient sunken water spouts",
         "Learning why Patan’s true museum is not behind velvet ropes, but in the hands of its living makers"
       ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
+      "sakarNote": "When we sit with a 4th-generation bronze caster in Patan and hear his hammer tap the metal in measured beats, you realize you are watching the exact same gesture that built these temples 700 years ago.",
+      "itineraryOutline": [
         {
           "day": "Morning",
           "title": "The City of Makers & Chime of Metal",
@@ -5169,24 +4853,16 @@
           "description": "Decode ancient water engineering systems that sustained communities for over a millennium."
         }
       ],
-      "sakarNote": "When we sit with a 4th-generation bronze caster in Patan and hear his hammer tap the metal in measured beats, you realize you are watching the exact same gesture that built these temples 700 years ago.",
-      "impactFootprint": "Direct artist honorariums paid to traditional metalworking guilds, bronze sculptors, and heritage restoration woodcarvers.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "The true museum of Patan has no ticket counter. It is the sound of the hammer meeting bronze in a quiet back courtyard.",
-        "attribution": "Master Repoussé Metalsmith"
-      }
+      "impactFootprint": "Direct artist honorariums paid to traditional metalworking guilds, bronze sculptors, and heritage restoration woodcarvers."
     },
     {
       "id": "exp-beyond-pkr",
-      "title": "Pokhara: The Laid-Back City That Makes You Want to Stay",
       "slug": "pokhara-laid-back-city",
+      "title": "Pokhara: The Laid-Back City That Makes You Want to Stay",
+      "subtitle": "Phewa Lake wooden boat reflections, Machhapuchhre vistas, Tal Barahi, and Gurung & Thakali heritage.",
       "category": "beyond-the-map",
-      "categoryLabel": "Beyond the Map",
+      "categoryLabel": "Go Beyond the Map",
       "duration": "2 - 3 Days",
-      "difficulty": "Easy to Moderate",
       "location": "Pokhara Valley, Phewa Lake & Old Bazaar",
       "elevation": "820 m - 1,400 m",
       "groupSize": "Private / 1–6 Travelers",
@@ -5197,7 +4873,7 @@
         "alt": "Morning mist and wooden boats on Phewa Lake reflecting Annapurna peaks in Pokhara",
         "caption": "Pokhara teaches you to slow down: morning light, wooden paddles, and sacred mountain reflections."
       },
-      "gallery": [
+      "galleryImages": [
         {
           "src": "/explore-with-sakar/images/mountains/mountain-ridge.jpg",
           "alt": "Phewa Lake and Annapurna foothills"
@@ -5212,21 +4888,22 @@
         }
       ],
       "shortDescription": "Some places make you want to see everything. Pokhara makes you want to stay. It teaches you to stop rushing and embrace true laid-back peace.",
-      "fullDescription": "Some places make you want to see everything. Pokhara makes you want to stay. I think that is the first thing you should know about Pokhara. You may arrive thinking you are here to see the Himalayas. You may have seen the photographs already of Phewa Lake, a wooden boat, Machhapuchhre rising behind the water. But photographs cannot really explain Pokhara: because Pokhara is not only about what you see. It is about how the place makes you feel.\n\nThe morning light on the lake. The sound of paddles touching the water. A distant temple bell. The mountains appear between buildings. A small café opens its doors. The smell of rain on the hills. And suddenly, without realizing it, you stop rushing. Pokhara teaches you to slow down. Gives you those laid-back vibes.\n\nI would not begin by taking you from one attraction to another. I would begin at Phewa Lake. Early in the morning, before Lakeside becomes busy, the lake has a completely different personality. Take a boat. Don’t rush to the other side. Just sit. Watch the hills reflected in the water. Look towards the mountains. If the sky is clear, Machhapuchhre appears almost impossibly close. And somewhere in the middle of the lake is Tal Barahi Temple, connecting the landscape with the spiritual life of the city. Nature and spirituality don’t feel separated here: they are part of the same landscape.\n\nMost visitors stay around Lakeside. And I understand why. But if you want to know Pokhara, I would ask you to leave it. Go towards the older parts of the city. Walk through local neighbourhoods. Find the places where tourism becomes less visible and everyday life becomes more visible.\n\nPokhara has been shaped by movement for generations. It was historically connected to trade routes between India and Tibet, and the wider area carries the traditions of communities including Gurung, Magar, and Thakali people. This is the Pokhara I want you to notice: not just the hotels, not just the adventure activities, but the people who make the place what it is.",
-      "highlights": [
+      "fullDescription": [
+        "Some places make you want to see everything. Pokhara makes you want to stay. I think that is the first thing you should know about Pokhara. You may arrive thinking you are here to see the Himalayas. You may have seen the photographs already of Phewa Lake, a wooden boat, Machhapuchhre rising behind the water. But photographs cannot really explain Pokhara: because Pokhara is not only about what you see. It is about how the place makes you feel.",
+        "The morning light on the lake. The sound of paddles touching the water. A distant temple bell. The mountains appear between buildings. A small café opens its doors. The smell of rain on the hills. And suddenly, without realizing it, you stop rushing. Pokhara teaches you to slow down. Gives you those laid-back vibes.",
+        "I would not begin by taking you from one attraction to another. I would begin at Phewa Lake. Early in the morning, before Lakeside becomes busy, the lake has a completely different personality. Take a boat. Don’t rush to the other side. Just sit. Watch the hills reflected in the water. Look towards the mountains. If the sky is clear, Machhapuchhre appears almost impossibly close. And somewhere in the middle of the lake is Tal Barahi Temple, connecting the landscape with the spiritual life of the city. Nature and spirituality don’t feel separated here: they are part of the same landscape.",
+        "Most visitors stay around Lakeside. And I understand why. But if you want to know Pokhara, I would ask you to leave it. Go towards the older parts of the city. Walk through local neighbourhoods. Find the places where tourism becomes less visible and everyday life becomes more visible.",
+        "Pokhara has been shaped by movement for generations. It was historically connected to trade routes between India and Tibet, and the wider area carries the traditions of communities including Gurung, Magar, and Thakali people. This is the Pokhara I want you to notice: not just the hotels, not just the adventure activities, but the people who make the place what it is."
+      ],
+      "culturalHighlights": [
         "Early morning silent wooden boat ride across calm Phewa Lake before Lakeside stirs",
         "Watching the reflection of Machhapuchhre (Fishtail) touch the morning waters in serene clarity",
         "Visiting island sanctuary Tal Barahi Temple where landscape and worship merge in stillness",
         "Leaving Lakeside to explore the historic Old Bazaar and living Gurung, Magar, and Thakali neighbourhoods",
         "Embracing the true laid-back pace of slow Himalayan travel with time to sit, breathe, and connect"
       ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
+      "sakarNote": "Everyone rushes to tick off sights in Pokhara. My favorite thing to do with guests is take a wooden boat out into the center of Phewa Lake at 7:00 AM and just let the oars rest. You feel the mountain silence deep in your chest.",
+      "itineraryOutline": [
         {
           "day": "Day 1",
           "title": "Phewa Lake Dawn & Tal Barahi Island",
@@ -5243,632 +4920,7 @@
           "description": "Unhurried village walk through terraced foothills, sharing freshly brewed tea with local mountain families."
         }
       ],
-      "sakarNote": "Everyone rushes to tick off sights in Pokhara. My favorite thing to do with guests is take a wooden boat out into the center of Phewa Lake at 7:00 AM and just let the oars rest. You feel the mountain silence deep in your chest.",
-      "impactFootprint": "Direct fair-wage compensation to local boatmen cooperatives, Old Bazaar family shopkeepers, and foothill agricultural families.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "Pokhara is where the mountains don’t just watch over you; they invite you to breathe slower and remember what stillness feels like.",
-        "attribution": "Sakar • Responsible Tour Director"
-      }
-    },
-    {
-      "id": "exp-beyond-5",
-      "title": "The Living Courtyards: Beyond the Temples of Kathmandu",
-      "slug": "living-courtyards-kathmandu",
-      "category": "go-deeper",
-      "categoryLabel": "Go Deeper",
-      "duration": "1 - 2 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Old Kathmandu (Ason & Indra Chowk)",
-      "elevation": "1,400 m",
-      "groupSize": "Private / 1 - 6 Travelers",
-      "season": "Year Round",
-      "featured": true,
-      "heroImage": {
-        "src": "/images/beyond-the-map/living-courtyards.jpg",
-        "alt": "Hidden Newari residential courtyard with ancient stupa and morning tea in Kathmandu",
-        "caption": "The quiet residential bahals of old Kathmandu where centuries of daily rituals unfold."
-      },
-      "gallery": [
-        {
-          "src": "/images/beyond-the-map/living-courtyards.jpg",
-          "alt": "Living Courtyards"
-        },
-        {
-          "src": "/explore-with-sakar/images/heritage/ancient-alleyways.jpg",
-          "alt": "Ancient alleyways of Ason"
-        },
-        {
-          "src": "/explore-with-sakar/images/heritage/temple-courtyard.jpg",
-          "alt": "Sunlit temple courtyard"
-        }
-      ],
-      "shortDescription": "Most visitors stop at the grand facades of Kathmandu Durbar Square. We walk past them, slipping into the hidden bahals where the true pulse of the city has beaten for centuries.",
-      "fullDescription": "The \"Beyond the Map\" Promise: Most visitors stop at the grand facades of Kathmandu Durbar Square. We walk past them, slipping into the hidden bahals (residential courtyards) where the true pulse of the city has beaten for centuries.\n\nThis is a sensory journey through the labyrinth of old Kathmandu. We navigate the spice-scented alleys of Ason and Indra Chowk, stepping into secret courtyards to discover hidden stupas built by Silk Road merchants.\n\nYou will sit with locals over a glass of strong, sweet chiya, observe morning community rituals, and witness how ancient heritage is not just preserved in museums, but actively lived in every day by the Kathmandu Valley’s original inhabitants.",
-      "highlights": [
-        "Slipping into hidden residential bahals beyond commercial tourist routes",
-        "Navigating spice-scented alleys of Ason & Indra Chowk with Sakar",
-        "Morning community rituals and butter lamp offerings around ancient merchant stupas",
-        "Savoring sweet, spiced chiya with Newari elders in centuries-old courtyards",
-        "Witnessing heritage actively lived rather than curated behind museum glass"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Morning",
-          "title": "Ason Alleys & Merchant Courtyards",
-          "description": "Early morning walk through spice bazaars, entering medieval residential bahals and hidden stupas."
-        },
-        {
-          "day": "Midday",
-          "title": "Chiya with Elders & Guthi Rituals",
-          "description": "Sit over steaming tea with courtyard locals, observing age-old community water and shrine rituals."
-        },
-        {
-          "day": "Afternoon",
-          "title": "Indra Chowk Silk Routes",
-          "description": "Discover hidden monastic chaityas established by ancient trans-Himalayan trade caravans."
-        }
-      ],
-      "sakarNote": "These courtyards are where I grew up exploring. When we leave the crowded market streets through a tiny low-ceilinged doorway, the noise completely vanishes.",
-      "impactFootprint": "Direct patronization of historic courtyard teahouses, Guthi community preservation trusts, and local neighborhood vendors.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "The courtyards of Kathmandu are outdoor living rooms where five generations dry grain, carve deities, and tell the story of their ancestors.",
-        "attribution": "Newari Cultural Elder"
-      }
-    },
-    {
-      "id": "exp-beyond-6",
-      "title": "Echoes in Stone: The Untold Histories of Patan and Bhaktapur",
-      "slug": "echoes-in-stone-patan-bhaktapur",
-      "category": "go-deeper",
-      "categoryLabel": "Go Deeper",
-      "duration": "1 - 2 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Patan (Lalitpur) & Bhaktapur",
-      "elevation": "1,400 m",
-      "groupSize": "Private / 1 - 6 Travelers",
-      "season": "Year Round",
-      "featured": true,
-      "heroImage": {
-        "src": "/images/beyond-the-map/echoes-in-stone.jpg",
-        "alt": "Ancient stone makara water spout and medieval pagoda temples in Patan and Bhaktapur",
-        "caption": "Sublime stone architecture, royal rivalries, and sacred water conduits of the medieval kingdoms."
-      },
-      "gallery": [
-        {
-          "src": "/images/beyond-the-map/echoes-in-stone.jpg",
-          "alt": "Echoes in Stone"
-        },
-        {
-          "src": "/explore-with-sakar/images/heritage/durbar-square.jpg",
-          "alt": "Durbar Square pagodas"
-        },
-        {
-          "src": "/images/beyond-the-map/sacred-geometry.jpg",
-          "alt": "Sacred pagoda architecture"
-        }
-      ],
-      "shortDescription": "History isn't just dates and dynasties; it is the rivalry, romance, and tragedy carved into the brick and timber of the Valley's greatest medieval kingdoms.",
-      "fullDescription": "The \"Beyond the Map\" Promise: History isn't just dates and dynasties; it is the rivalry, romance, and tragedy carved into the brick and timber of the Valley's greatest medieval kingdoms.\n\nWe bypass the standard historical summaries to explore the deep narratives of Patan (The City of Fine Arts) and Bhaktapur (The City of Devotees). You will trace the legendary rivalries between the Malla kings that fueled an architectural arms race.\n\nWe will walk the intricate networks of ancient stone water conduits (hitis), explore the shadowed corners where royal secrets were kept, and decode the subtle mythologies carved into the wooden struts of towering pagoda temples.",
-      "highlights": [
-        "Tracing the legendary Malla king rivalries that fueled the architectural arms race",
-        "Walking the subterranean hydraulic marvels of ancient stone water conduits (hitis)",
-        "Uncovering royal intrigue, forgotten romance, and palace tragedies in shadowed corners",
-        "Decoding the hidden esoteric mythologies carved into pagoda wooden roof struts"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Morning",
-          "title": "Patan Fine Arts & Royal Conduits",
-          "description": "Explore ancient sunken stone hitis and secret courtyards of the royal Patan Palace."
-        },
-        {
-          "day": "Afternoon",
-          "title": "Bhaktapur Medieval Arms Race",
-          "description": "Trace the architectural duel between Malla rulers in Nyatapola and 55-Window Palace."
-        },
-        {
-          "day": "Sunset",
-          "title": "Decoding Mythological Struts",
-          "description": "Interpret the deity wood carvings as the golden dusk illuminates ancient terracotta."
-        }
-      ],
-      "sakarNote": "Patan and Bhaktapur are twin masterpieces born from fierce competition. When you understand why a king built a pagoda three feet taller than his brother's, the stones begin to speak.",
-      "impactFootprint": "Support for heritage masonry preservation funds and local indigenous architectural conservancy programs.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "Every carving in Patan was placed there not as ornament, but as a protective prayer etched in grey stone.",
-        "attribution": "Patan Guild Master"
-      }
-    },
-    {
-      "id": "exp-beyond-7",
-      "title": "The Artisan’s Path: A Heritage Deep-Dive",
-      "slug": "artisans-path-heritage-deep-dive",
-      "category": "go-deeper",
-      "categoryLabel": "Go Deeper",
-      "duration": "1 - 2 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Patan & Bhaktapur Guild Quarters",
-      "elevation": "1,400 m",
-      "groupSize": "Private / 1 - 4 Travelers",
-      "season": "Year Round",
-      "featured": true,
-      "heroImage": {
-        "src": "/images/beyond-the-map/artisan-path.jpg",
-        "alt": "Master Newari woodcarver crafting sacred deity statue in traditional workshop",
-        "caption": "Sacred craftsmanship passed uninterrupted down multi-generational artisan family lineages."
-      },
-      "gallery": [
-        {
-          "src": "/images/beyond-the-map/artisan-path.jpg",
-          "alt": "Master woodcarver atelier"
-        },
-        {
-          "src": "/explore-with-sakar/images/heritage/newari-architecture.jpg",
-          "alt": "Intricate Newari woodcarving"
-        },
-        {
-          "src": "/images/beyond-the-map/living-courtyards.jpg",
-          "alt": "Living artisan courtyard"
-        }
-      ],
-      "shortDescription": "We don't just look at the art; we sit with the masters whose families have been creating it for generations.",
-      "fullDescription": "The \"Beyond the Map\" Promise: We don't just look at the art; we sit with the masters whose families have been creating it for generations.\n\nThis tour goes behind closed doors into the workshops of Patan and Bhaktapur. You will witness the hypnotic, meticulous process of Thangka painting, the intense heat of traditional lost-wax bronze casting, and the precise chiseling of Newari woodcarvers.\n\nYou will learn how these crafts are not merely decorative, but deeply spiritual acts of meditation. By the end of the day, a statue or a painting will no longer be a souvenir, but a sacred text you know how to read.",
-      "highlights": [
-        "Exclusive behind-closed-doors access to multi-generational family workshops",
-        "Observing the hypnotic sacred geometry and natural mineral grinding of Thangka painting",
-        "Witnessing the searing glow and precision of ancient lost-wax bronze foundry casting",
-        "Sitting beside master Newari woodcarvers transforming raw timber into deities"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Morning",
-          "title": "Lost-Wax Bronze Foundry",
-          "description": "Feel the heat of the kiln and watch ancient wax-sculpting techniques unchanged since the 10th century."
-        },
-        {
-          "day": "Midday",
-          "title": "Sacred Thangka Studio Session",
-          "description": "Observe master painters apply crushed gold leaf and lapis lazuli to meditative Buddhist mandalas."
-        },
-        {
-          "day": "Afternoon",
-          "title": "Master Woodcarvers of Lalitpur",
-          "description": "Hands-on chisel demonstration and dialogue with elder masters crafting temple struts."
-        }
-      ],
-      "sakarNote": "For these masters, chiseling wood or grinding mineral lapis lazuli is a sacred meditation practiced uninterrupted across seven generations.",
-      "impactFootprint": "Guaranteed ethical honorariums paid directly to master artisan families, keeping endangered traditional guilds economically viable.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "A statue made with machine has no soul. When you hammer copper for three months, your breath enters the bronze.",
-        "attribution": "Master Lost-Wax Caster"
-      }
-    },
-    {
-      "id": "exp-beyond-8",
-      "title": "Sacred Geometry: The Architecture and Spirit of the Valley",
-      "slug": "sacred-geometry-architecture-valley",
-      "category": "go-deeper",
-      "categoryLabel": "Go Deeper",
-      "duration": "1 - 2 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Kathmandu, Patan, Bhaktapur & Changu Narayan",
-      "elevation": "1,400 m",
-      "groupSize": "Private / 1 - 6 Travelers",
-      "season": "Year Round",
-      "featured": true,
-      "heroImage": {
-        "src": "/images/beyond-the-map/sacred-geometry.jpg",
-        "alt": "Symmetrical sacred pagoda temple complex aligned with cosmic mandala geometry",
-        "caption": "The Kathmandu Valley conceived and built as a cosmic, living three-dimensional mandala."
-      },
-      "gallery": [
-        {
-          "src": "/images/beyond-the-map/sacred-geometry.jpg",
-          "alt": "Sacred pagoda geometry"
-        },
-        {
-          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
-          "alt": "Buddhist stupa mandala"
-        },
-        {
-          "src": "/explore-with-sakar/images/heritage/sacred-shrine.jpg",
-          "alt": "Sacred stone shrine"
-        }
-      ],
-      "shortDescription": "The Kathmandu Valley was not built by accident. It was designed as a living, breathing mandala.",
-      "fullDescription": "The \"Beyond the Map\" Promise: The Kathmandu Valley was not built by accident. It was designed as a living, breathing mandala.\n\nFor the analytically and spiritually curious, this tour decodes the blueprint of the Valley. We explore how Hindu and Buddhist cosmologies dictated the placement of every temple, courtyard, and city gate.\n\nYou will learn the mathematics behind the multi-tiered pagodas, the spiritual engineering required to build shrines that withstand centuries of earthquakes, and how the physical layout of the cities was designed to guide the soul toward enlightenment.",
-      "highlights": [
-        "Decoding the ancient cosmic mandala grid underlying the three valley kingdoms",
-        "Unlocking the mathematics and proportions of multi-tiered pagoda architecture",
-        "Discovering the spiritual engineering and interlocking joints that survive major earthquakes",
-        "Understanding how urban gates, water springs, and shrines were mapped to celestial bodies"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Morning",
-          "title": "The Mandala Blueprint",
-          "description": "Analyze the cosmological orientation of valley city gates and cardinal guardian shrines."
-        },
-        {
-          "day": "Midday",
-          "title": "Mathematics of the Multi-Tier Pagoda",
-          "description": "Decode proportional geometry and the physics of interlocking seismic wood joints."
-        },
-        {
-          "day": "Afternoon",
-          "title": "Changu Narayan Ancient Axis",
-          "description": "Visit Nepal’s oldest hilltop shrine and observe solar alignment with solstice sunrise."
-        }
-      ],
-      "sakarNote": "When you stand at the center of the temple axis and see how the pagoda roof lines harmonize with the surrounding mountain ridges, you realize the ancient builders were cosmic architects.",
-      "impactFootprint": "Supports indigenous architectural preservation archives and youth apprenticeship in classical sacred engineering.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-22T04:55:57.333Z",
-      "keyQuote": {
-        "quote": "The three royal cities were laid out as a giant cosmic yantra. Walking here is an unhurried pilgrimage through sacred mathematics.",
-        "attribution": "Himalayan Architectural Scholar"
-      }
-    },
-    {
-      "id": "exp-home-1",
-      "title": "Panauti & Balthali Living Hearth Village Homestay",
-      "slug": "village-homestay-panauti-balalthali",
-      "category": "homestays",
-      "categoryLabel": "Feel Closer",
-      "duration": "3 - 4 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Panauti Ancient Town & Balthali Plateau",
-      "elevation": "1,450 m",
-      "groupSize": "Private / 1 - 6 Travelers",
-      "season": "Year Round",
-      "featured": true,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
-        "alt": "Steaming organic dal bhat served on brass plates in village homestay",
-        "caption": "Warm hearthside hospitality: home-cooked meals straight from the family garden."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
-          "alt": "Fresh organic meal"
-        },
-        {
-          "src": "/explore-with-sakar/images/homestays/stone-village-house.jpg",
-          "alt": "Traditional stone home"
-        },
-        {
-          "src": "/explore-with-sakar/images/homestays/organic-farming.jpg",
-          "alt": "Terraced organic farming"
-        }
-      ],
-      "shortDescription": "Move from being an observer to becoming an welcomed guest. Sleep in verified family homestays, harvest garden vegetables, and listen to fireside stories.",
-      "fullDescription": "Panauti is a medieval Newari town that feels frozen in a gentler century. We base ourselves in authentic family-run homestays where you will have your own clean, private lockable room while sharing daily life with your host family.\n\nHelp pick fresh mustard greens and potatoes from the backyard garden, watch bread bake over wood embers, and sit around the hearth as elders share community folklore.",
-      "highlights": [
-        "Living as an honored family guest in verified, spotlessly clean heritage homestays",
-        "Harvesting organic vegetables and learning to cook authentic dal bhat and spiced pickles",
-        "Walks across the gentle Balthali plateau with panoramic views of snowcapped peaks"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Day 1",
-          "title": "Welcome to Panauti Hearth",
-          "description": "Arrive in the medieval river town, traditional tika welcome, settling into your host home."
-        },
-        {
-          "day": "Day 2",
-          "title": "Farm Harvest & Cooking Session",
-          "description": "Pick vegetables with your host mother, cook lunch together, afternoon walk along stone lanes."
-        },
-        {
-          "day": "Day 3",
-          "title": "Balthali Terraced Ridge Hike",
-          "description": "Gentle walk through pine forests and orange orchards to the tranquil Balthali plateau."
-        }
-      ],
-      "sakarNote": "When you sit in a family kitchen and the grandmother hands you a steaming brass cup of ginger tea without asking, you realize you are no longer a tourist.",
-      "impactFootprint": "100% of accommodation and meal payments go directly to local women-led village homestay cooperatives.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
-    },
-    {
-      "id": "exp-home-2",
-      "title": "Ghandruk & Annapurna Gurung Heritage Homestay",
-      "slug": "ghandruk-gurung-heritage-homestay",
-      "category": "homestays",
-      "categoryLabel": "Feel Closer",
-      "duration": "3 - 4 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Ghandruk & Modi River Valley",
-      "elevation": "1,940 m",
-      "groupSize": "Private / 1 - 6 Travelers",
-      "season": "Sep - May",
-      "featured": false,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/homestays/stone-village-house.jpg",
-        "alt": "Traditional slate-roofed Gurung stone houses in Ghandruk village",
-        "caption": "Ghandruk village with towering Annapurna South and Machhapuchhre in the backdrop."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/homestays/stone-village-house.jpg",
-          "alt": "Gurung stone houses"
-        },
-        {
-          "src": "/explore-with-sakar/images/mountains/mountain-ridge.jpg",
-          "alt": "Annapurna mountain ridge"
-        }
-      ],
-      "shortDescription": "Perched under the sheer south face of Annapurna, Ghandruk is a living Gurung citadel of dry-stone alleys, hand-woven nettle fabrics, and warm wood fires.",
-      "fullDescription": "Ghandruk is one of the most famous ethnic settlements in the Himalayas, yet staying in an authentic family homestay takes you far beyond the standard trekking lodge trail.\n\nWake up to Machhapuchhre glowing gold outside your bedroom window, walk through stone corridors where sheep wool is spun by hand, and learn about Gurung history from village elders.",
-      "highlights": [
-        "Direct stay in traditional Gurung stone homes with spectacular mountain panoramas",
-        "Visiting the community Gurung museum and historic village textile weaving centers",
-        "Fireside dining featuring locally grown millet rotis, mountain lentils, and ghee"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Day 1",
-          "title": "Scenic Drive & Ascent to Ghandruk",
-          "description": "Travel from Pokhara into the Modi Khola valley, gentle walk up stone staircases to village."
-        },
-        {
-          "day": "Day 2",
-          "title": "Village Life & Indigenous Crafts",
-          "description": "Explore ancient stone corridors, visit traditional weavers, fireside dinner with hosts."
-        },
-        {
-          "day": "Day 3",
-          "title": "Sunrise Over Machhapuchhre",
-          "description": "Golden dawn viewing, farewell village tea ceremony, gentle descent back to valley."
-        }
-      ],
-      "sakarNote": "Waking up in Ghandruk and stepping out onto the stone slate terrace with a hot cup of black tea while Annapurna turns pink is unforgettable.",
-      "impactFootprint": "Supports village mothers’ groups (Aama Samuha) who maintain village stone paths, solar lights, and community hygiene.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
-    },
-    {
-      "id": "exp-home-3",
-      "title": "Helambu Hyolmo Mountain Hearth Living",
-      "slug": "helambu-hyolmo-hearth-living",
-      "category": "homestays",
-      "categoryLabel": "Feel Closer",
-      "duration": "3 - 5 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Helambu Valley & Tarkeghyang",
-      "elevation": "2,200 m - 2,600 m",
-      "groupSize": "Private / 1 - 4 Travelers",
-      "season": "Oct - May",
-      "featured": false,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/homestays/morning-tea-homestay.jpg",
-        "alt": "Balcony morning tea overlooking green mountain slopes and apple orchards",
-        "caption": "Peaceful Helambu morning tea on a traditional wooden village veranda."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/homestays/morning-tea-homestay.jpg",
-          "alt": "Veranda tea"
-        },
-        {
-          "src": "/explore-with-sakar/images/mountains/alpine-valley.jpg",
-          "alt": "Helambu valley"
-        }
-      ],
-      "shortDescription": "Tucked away just north of Kathmandu, Helambu is the homeland of the Hyolmo people. Experience peaceful stone villages, ancient gompas, and orchard hospitality.",
-      "fullDescription": "Helambu offers a completely unhurried escape into Buddhist mountain life. The Hyolmo people are renowned for their warmth, artistic woodwork, and peaceful Buddhist lifestyle.\n\nWe stay in cozy family homes with wooden interiors, walk through rhododendron and bamboo groves, and visit ancient village shrines that have stood for four hundred years.",
-      "highlights": [
-        "Authentic immersion into unique Hyolmo Tibetan-Buddhist culture and language",
-        "Walking uncrowded trails through apple orchards and pine-scented mountain air",
-        "Evenings around family cast-iron woodstoves sharing mountain stories"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Day 1",
-          "title": "Journey into Helambu Foothills",
-          "description": "Drive north from Kathmandu, winding up forested ridges to historic Hyolmo settlements."
-        },
-        {
-          "day": "Day 2",
-          "title": "Gompa Visit & Orchard Walks",
-          "description": "Visit village monasteries, walk through terraced apple orchards, hearthside dinner."
-        },
-        {
-          "day": "Day 3",
-          "title": "Ridge Panoramas & Mountain Tea",
-          "description": "Panoramic morning views of Langtang peaks, community farewell, return to valley."
-        }
-      ],
-      "sakarNote": "Helambu feels like a sanctuary hidden behind the clouds. The pacing here is so gentle you can hear the wind through the cedar trees.",
-      "impactFootprint": "Direct economic benefit to indigenous Hyolmo households rebuilding sustainable eco-tourism post-earthquake.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
-    },
-    {
-      "id": "exp-home-4",
-      "title": "Bungamati & Khokana Traditional Artisan Village Stay",
-      "slug": "bungamati-khokana-artisan-village",
-      "category": "homestays",
-      "categoryLabel": "Feel Closer",
-      "duration": "2 - 3 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Bungamati & Khokana (Southern Valley)",
-      "elevation": "1,380 m",
-      "groupSize": "Private / 1 - 6 Travelers",
-      "season": "Year Round",
-      "featured": false,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/homestays/artisan-craftsman.jpg",
-        "alt": "Newari artisan carving wooden beam on village doorstep in Khokana",
-        "caption": "Living village workshops where woodcarving and oil pressing continue outdoors."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/homestays/artisan-craftsman.jpg",
-          "alt": "Khokana artisan"
-        },
-        {
-          "src": "/explore-with-sakar/images/heritage/temple-courtyard.jpg",
-          "alt": "Bungamati courtyard"
-        }
-      ],
-      "shortDescription": "Just a short drive from Kathmandu, Bungamati and Khokana preserve centuries of agricultural and artisan traditions. Experience open courtyards where craftsmen chisel timber in the sun.",
-      "fullDescription": "Bungamati is the winter home of the revered rain deity Rato Machhindranath. Here, every street corner is an open-air workshop where master woodcarvers work on temple beams.\n\nNeighbouring Khokana is legendary for its ancient heavy timber mustard-oil presses. Staying with local families allows you to witness the authentic pace of daily village life.",
-      "highlights": [
-        "Walking through open-air carving workshops along stone village lanes",
-        "Observing ancient traditional stone-weighted mustard oil extraction processes",
-        "Homestay with traditional Newari farming and carving families"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Morning",
-          "title": "Bungamati Woodcarvers",
-          "description": "Walk through open courtyards watching masters carve delicate peacock windows."
-        },
-        {
-          "day": "Midday",
-          "title": "Khokana Mustard Oil & Heritage Feast",
-          "description": "Visit historic oil pressing facilities, traditional Newari lunch with local hosts."
-        },
-        {
-          "day": "Afternoon",
-          "title": "Rato Machhindranath Temple Grounds",
-          "description": "Explore the sacred courtyard where the rain deity spends six months of the year."
-        }
-      ],
-      "sakarNote": "In Khokana, the aroma of roasting mustard seeds fills the entire village. It is one of the most authentic sensory experiences in the entire valley.",
-      "impactFootprint": "Direct income to traditional woodcarvers and village farming families working to keep ancestral trades alive.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
-    },
-    {
-      "id": "exp-resp-4",
-      "title": "Muktinath Spiritual Circuit & Lower Mustang Passage",
-      "slug": "mustang-muktinath-pilgrimage-passage",
-      "category": "adventure",
-      "categoryLabel": "Go Beyond the Map",
-      "duration": "5 - 7 Days",
-      "difficulty": "Easy to Moderate",
-      "location": "Lower Mustang, Kagbeni & Muktinath",
-      "elevation": "2,800 m - 3,800 m",
-      "groupSize": "Private / 1 - 6 Travelers",
-      "season": "Mar - Nov",
-      "featured": true,
-      "heroImage": {
-        "src": "/explore-with-sakar/images/trails/sacred-mountain-lake.jpg",
-        "alt": "Dramatic arid landscape of Lower Mustang with sacred snow peaks in the distance",
-        "caption": "The windswept rainshadow canyon of Lower Mustang leading to sacred Muktinath."
-      },
-      "gallery": [
-        {
-          "src": "/explore-with-sakar/images/trails/sacred-mountain-lake.jpg",
-          "alt": "Mustang landscape"
-        },
-        {
-          "src": "/explore-with-sakar/images/mountains/himalayan-peaks.jpg",
-          "alt": "Dhaulagiri and Annapurna"
-        }
-      ],
-      "shortDescription": "Journey through the world’s deepest river gorge into the wind-carved rainshadow desert of Lower Mustang, sacred to both Hindus and Buddhists.",
-      "fullDescription": "Lower Mustang is a stark, otherworldly desert canyon framed by the towering 8,000-meter bulk of Dhaulagiri and Annapurna. At 3,710 meters sits Muktinath, the place of liberation.\n\nWe wander the medieval mud citadel of Kagbeni, walk stone-flagged lanes lined with Marpha apple orchards, and experience 108 sacred water spouts that flow with glacial waters.",
-      "highlights": [
-        "Visiting the sacred 108 water spouts and eternal flame of Muktinath temple",
-        "Exploring Kagbeni’s 15th-century mud citadel and Tibetan Buddhist monastery",
-        "Walking through Marpha’s stone alleyways and tasting local organic apple cider"
-      ],
-      "inclusions": [
-        "Private cultural tour directing & guiding by Sakar throughout",
-        "All local permits, temple admissions, and conservation fees",
-        "Curated authentic meals, tea ceremonies, and local tastings",
-        "Private air-conditioned vehicle transfers where applicable"
-      ],
-      "days": [
-        {
-          "day": "Days 1-2",
-          "title": "Pokhara to Jomsom & Marpha",
-          "description": "Scenic mountain flight or drive, settling into stone cobblestone village of Marpha."
-        },
-        {
-          "day": "Day 3",
-          "title": "Kagbeni Medieval Citadel",
-          "description": "Explore ancient alleys, mani stone walls, and 500-year-old Buddhist monasteries."
-        },
-        {
-          "day": "Days 4-5",
-          "title": "Muktinath Sacred Pilgrimage",
-          "description": "Ascend to the high sacred shrine of 108 spouts, contemplative walking, gentle return."
-        }
-      ],
-      "sakarNote": "When you stand at Kagbeni looking north into Upper Mustang where the Kali Gandaki winds through red cliffs, the sense of ancient pilgrimage is overwhelming.",
-      "impactFootprint": "Supports indigenous Thakali hospitality cooperatives and high-altitude heritage conservation in Lower Mustang.",
-      "status": "published",
-      "createdAt": "2026-09-19T18:32:01.956Z",
-      "updatedAt": "2026-09-19T18:32:01.956Z"
+      "impactFootprint": "Direct fair-wage compensation to local boatmen cooperatives, Old Bazaar family shopkeepers, and foothill agricultural families."
     },
     {
       "id": "exp-beyond-ctw",
@@ -5936,12 +4988,786 @@
           "description": "Learn about community buffer zone initiatives, meet local conservation leaders, and experience authentic Tharu hearthside cuisine."
         }
       ],
-      "impactFootprint": "Direct fair-wage compensation to indigenous Tharu naturalist guides, canoe operators, and community buffer zone conservation funds.",
-      "order": 4,
-      "status": "published",
-      "isVisible": true,
-      "createdAt": "2026-09-26T11:52:37.624Z",
-      "updatedAt": "2026-09-26T11:52:37.625Z"
+      "impactFootprint": "Direct fair-wage compensation to indigenous Tharu naturalist guides, canoe operators, and community buffer zone conservation funds."
+    },
+    {
+      "id": "exp-beyond-5",
+      "slug": "living-courtyards-kathmandu",
+      "title": "The Living Courtyards: Beyond the Temples of Kathmandu",
+      "subtitle": "Hidden Newari residential bahals, Silk Road merchant chaityas, and morning community tea.",
+      "category": "beyond-the-map",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "1 - 2 Days",
+      "location": "Old Kathmandu (Ason & Indra Chowk)",
+      "elevation": "1,400 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/images/beyond-the-map/living-courtyards.jpg",
+        "alt": "Hidden Newari residential courtyard with ancient stupa and morning tea in Kathmandu",
+        "caption": "The quiet residential bahals of old Kathmandu where centuries of daily rituals unfold."
+      },
+      "galleryImages": [
+        {
+          "src": "/images/beyond-the-map/living-courtyards.jpg",
+          "alt": "Living Courtyards"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/ancient-alleyways.jpg",
+          "alt": "Ancient alleyways of Ason"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/temple-courtyard.jpg",
+          "alt": "Sunlit temple courtyard"
+        }
+      ],
+      "shortDescription": "Most visitors stop at the grand facades of Kathmandu Durbar Square. We walk past them, slipping into the hidden bahals where the true pulse of the city has beaten for centuries.",
+      "fullDescription": [
+        "The \"Beyond the Map\" Promise: Most visitors stop at the grand facades of Kathmandu Durbar Square. We walk past them, slipping into the hidden bahals (residential courtyards) where the true pulse of the city has beaten for centuries.",
+        "This is a sensory journey through the labyrinth of old Kathmandu. We navigate the spice-scented alleys of Ason and Indra Chowk, stepping into secret courtyards to discover hidden stupas built by Silk Road merchants.",
+        "You will sit with locals over a glass of strong, sweet chiya, observe morning community rituals, and witness how ancient heritage is not just preserved in museums, but actively lived in every day by the Kathmandu Valley’s original inhabitants."
+      ],
+      "culturalHighlights": [
+        "Slipping into hidden residential bahals beyond commercial tourist routes",
+        "Navigating spice-scented alleys of Ason & Indra Chowk with Sakar",
+        "Morning community rituals and butter lamp offerings around ancient merchant stupas",
+        "Savoring sweet, spiced chiya with Newari elders in centuries-old courtyards",
+        "Witnessing heritage actively lived rather than curated behind museum glass"
+      ],
+      "sakarNote": "These courtyards are where I grew up exploring. When we leave the crowded market streets through a tiny low-ceilinged doorway, the noise completely vanishes.",
+      "itineraryOutline": [
+        {
+          "day": "Morning",
+          "title": "Ason Alleys & Merchant Courtyards",
+          "description": "Early morning walk through spice bazaars, entering medieval residential bahals and hidden stupas."
+        },
+        {
+          "day": "Midday",
+          "title": "Chiya with Elders & Guthi Rituals",
+          "description": "Sit over steaming tea with courtyard locals, observing age-old community water and shrine rituals."
+        },
+        {
+          "day": "Afternoon",
+          "title": "Indra Chowk Silk Routes",
+          "description": "Discover hidden monastic chaityas established by ancient trans-Himalayan trade caravans."
+        }
+      ],
+      "impactFootprint": "Direct patronization of historic courtyard teahouses, Guthi community preservation trusts, and local neighborhood vendors."
+    },
+    {
+      "id": "exp-beyond-6",
+      "slug": "echoes-in-stone-patan-bhaktapur",
+      "title": "Echoes in Stone: The Untold Histories of Patan and Bhaktapur",
+      "subtitle": "Tracing medieval royal rivalries, intricate stone hitis, and mythologies carved into towering pagodas.",
+      "category": "beyond-the-map",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "1 - 2 Days",
+      "location": "Patan (Lalitpur) & Bhaktapur",
+      "elevation": "1,400 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/images/beyond-the-map/echoes-in-stone.jpg",
+        "alt": "Ancient stone makara water spout and medieval pagoda temples in Patan and Bhaktapur",
+        "caption": "Sublime stone architecture, royal rivalries, and sacred water conduits of the medieval kingdoms."
+      },
+      "galleryImages": [
+        {
+          "src": "/images/beyond-the-map/echoes-in-stone.jpg",
+          "alt": "Echoes in Stone"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/durbar-square.jpg",
+          "alt": "Durbar Square pagodas"
+        },
+        {
+          "src": "/images/beyond-the-map/sacred-geometry.jpg",
+          "alt": "Sacred pagoda architecture"
+        }
+      ],
+      "shortDescription": "History isn't just dates and dynasties; it is the rivalry, romance, and tragedy carved into the brick and timber of the Valley's greatest medieval kingdoms.",
+      "fullDescription": [
+        "The \"Beyond the Map\" Promise: History isn't just dates and dynasties; it is the rivalry, romance, and tragedy carved into the brick and timber of the Valley's greatest medieval kingdoms.",
+        "We bypass the standard historical summaries to explore the deep narratives of Patan (The City of Fine Arts) and Bhaktapur (The City of Devotees). You will trace the legendary rivalries between the Malla kings that fueled an architectural arms race.",
+        "We will walk the intricate networks of ancient stone water conduits (hitis), explore the shadowed corners where royal secrets were kept, and decode the subtle mythologies carved into the wooden struts of towering pagoda temples."
+      ],
+      "culturalHighlights": [
+        "Tracing the legendary Malla king rivalries that fueled the architectural arms race",
+        "Walking the subterranean hydraulic marvels of ancient stone water conduits (hitis)",
+        "Uncovering royal intrigue, forgotten romance, and palace tragedies in shadowed corners",
+        "Decoding the hidden esoteric mythologies carved into pagoda wooden roof struts"
+      ],
+      "sakarNote": "Patan and Bhaktapur are twin masterpieces born from fierce competition. When you understand why a king built a pagoda three feet taller than his brother's, the stones begin to speak.",
+      "itineraryOutline": [
+        {
+          "day": "Morning",
+          "title": "Patan Fine Arts & Royal Conduits",
+          "description": "Explore ancient sunken stone hitis and secret courtyards of the royal Patan Palace."
+        },
+        {
+          "day": "Afternoon",
+          "title": "Bhaktapur Medieval Arms Race",
+          "description": "Trace the architectural duel between Malla rulers in Nyatapola and 55-Window Palace."
+        },
+        {
+          "day": "Sunset",
+          "title": "Decoding Mythological Struts",
+          "description": "Interpret the deity wood carvings as the golden dusk illuminates ancient terracotta."
+        }
+      ],
+      "impactFootprint": "Support for heritage masonry preservation funds and local indigenous architectural conservancy programs."
+    },
+    {
+      "id": "exp-beyond-7",
+      "slug": "artisans-path-heritage-deep-dive",
+      "title": "The Artisan’s Path: A Heritage Deep-Dive",
+      "subtitle": "Behind closed doors with master woodcarvers, lost-wax bronze casters, and sacred Thangka artists.",
+      "category": "beyond-the-map",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "1 - 2 Days",
+      "location": "Patan & Bhaktapur Guild Quarters",
+      "elevation": "1,400 m",
+      "groupSize": "Private / 1 - 4 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/images/beyond-the-map/artisan-path.jpg",
+        "alt": "Master Newari woodcarver crafting sacred deity statue in traditional workshop",
+        "caption": "Sacred craftsmanship passed uninterrupted down multi-generational artisan family lineages."
+      },
+      "galleryImages": [
+        {
+          "src": "/images/beyond-the-map/artisan-path.jpg",
+          "alt": "Master woodcarver atelier"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/newari-architecture.jpg",
+          "alt": "Intricate Newari woodcarving"
+        },
+        {
+          "src": "/images/beyond-the-map/living-courtyards.jpg",
+          "alt": "Living artisan courtyard"
+        }
+      ],
+      "shortDescription": "We don't just look at the art; we sit with the masters whose families have been creating it for generations.",
+      "fullDescription": [
+        "The \"Beyond the Map\" Promise: We don't just look at the art; we sit with the masters whose families have been creating it for generations.",
+        "This tour goes behind closed doors into the workshops of Patan and Bhaktapur. You will witness the hypnotic, meticulous process of Thangka painting, the intense heat of traditional lost-wax bronze casting, and the precise chiseling of Newari woodcarvers.",
+        "You will learn how these crafts are not merely decorative, but deeply spiritual acts of meditation. By the end of the day, a statue or a painting will no longer be a souvenir, but a sacred text you know how to read."
+      ],
+      "culturalHighlights": [
+        "Exclusive behind-closed-doors access to multi-generational family workshops",
+        "Observing the hypnotic sacred geometry and natural mineral grinding of Thangka painting",
+        "Witnessing the searing glow and precision of ancient lost-wax bronze foundry casting",
+        "Sitting beside master Newari woodcarvers transforming raw timber into deities"
+      ],
+      "sakarNote": "For these masters, chiseling wood or grinding mineral lapis lazuli is a sacred meditation practiced uninterrupted across seven generations.",
+      "itineraryOutline": [
+        {
+          "day": "Morning",
+          "title": "Lost-Wax Bronze Foundry",
+          "description": "Feel the heat of the kiln and watch ancient wax-sculpting techniques unchanged since the 10th century."
+        },
+        {
+          "day": "Midday",
+          "title": "Sacred Thangka Studio Session",
+          "description": "Observe master painters apply crushed gold leaf and lapis lazuli to meditative Buddhist mandalas."
+        },
+        {
+          "day": "Afternoon",
+          "title": "Master Woodcarvers of Lalitpur",
+          "description": "Hands-on chisel demonstration and dialogue with elder masters crafting temple struts."
+        }
+      ],
+      "impactFootprint": "Guaranteed ethical honorariums paid directly to master artisan families, keeping endangered traditional guilds economically viable."
+    },
+    {
+      "id": "exp-beyond-8",
+      "slug": "sacred-geometry-architecture-valley",
+      "title": "Sacred Geometry: The Architecture and Spirit of the Valley",
+      "subtitle": "Decoding the living mandala blueprint, pagoda mathematics, and earthquake-resilient engineering.",
+      "category": "beyond-the-map",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "1 - 2 Days",
+      "location": "Kathmandu, Patan, Bhaktapur & Changu Narayan",
+      "elevation": "1,400 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/images/beyond-the-map/sacred-geometry.jpg",
+        "alt": "Symmetrical sacred pagoda temple complex aligned with cosmic mandala geometry",
+        "caption": "The Kathmandu Valley conceived and built as a cosmic, living three-dimensional mandala."
+      },
+      "galleryImages": [
+        {
+          "src": "/images/beyond-the-map/sacred-geometry.jpg",
+          "alt": "Sacred pagoda geometry"
+        },
+        {
+          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
+          "alt": "Buddhist stupa mandala"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/sacred-shrine.jpg",
+          "alt": "Sacred stone shrine"
+        }
+      ],
+      "shortDescription": "The Kathmandu Valley was not built by accident. It was designed as a living, breathing mandala.",
+      "fullDescription": [
+        "The \"Beyond the Map\" Promise: The Kathmandu Valley was not built by accident. It was designed as a living, breathing mandala.",
+        "For the analytically and spiritually curious, this tour decodes the blueprint of the Valley. We explore how Hindu and Buddhist cosmologies dictated the placement of every temple, courtyard, and city gate.",
+        "You will learn the mathematics behind the multi-tiered pagodas, the spiritual engineering required to build shrines that withstand centuries of earthquakes, and how the physical layout of the cities was designed to guide the soul toward enlightenment."
+      ],
+      "culturalHighlights": [
+        "Decoding the ancient cosmic mandala grid underlying the three valley kingdoms",
+        "Unlocking the mathematics and proportions of multi-tiered pagoda architecture",
+        "Discovering the spiritual engineering and interlocking joints that survive major earthquakes",
+        "Understanding how urban gates, water springs, and shrines were mapped to celestial bodies"
+      ],
+      "sakarNote": "When you stand at the center of the temple axis and see how the pagoda roof lines harmonize with the surrounding mountain ridges, you realize the ancient builders were cosmic architects.",
+      "itineraryOutline": [
+        {
+          "day": "Morning",
+          "title": "The Mandala Blueprint",
+          "description": "Analyze the cosmological orientation of valley city gates and cardinal guardian shrines."
+        },
+        {
+          "day": "Midday",
+          "title": "Mathematics of the Multi-Tier Pagoda",
+          "description": "Decode proportional geometry and the physics of interlocking seismic wood joints."
+        },
+        {
+          "day": "Afternoon",
+          "title": "Changu Narayan Ancient Axis",
+          "description": "Visit Nepal’s oldest hilltop shrine and observe solar alignment with solstice sunrise."
+        }
+      ],
+      "impactFootprint": "Supports indigenous architectural preservation archives and youth apprenticeship in classical sacred engineering."
+    },
+    {
+      "id": "exp-beyond-9",
+      "slug": "muktinath-sacred-pilgrimage-passage",
+      "title": "Muktinath Sacred Pilgrimage Circuit & High Valley Passage",
+      "subtitle": "108 holy spouts, sacred Kali Gandaki river canyon, medieval Kagbeni, and Apple orchards.",
+      "category": "beyond-the-map",
+      "categoryLabel": "Go Beyond the Map",
+      "duration": "5 - 7 Days",
+      "location": "Kagbeni & Sacred Muktinath Valley",
+      "elevation": "2,800 m - 3,800 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Mar - Nov",
+      "featured": true,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/trails/sacred-mountain-lake.jpg",
+        "alt": "Dramatic arid landscape of Lower Mustang with sacred snow peaks in the distance",
+        "caption": "The windswept rainshadow canyon of Lower Mustang leading to sacred Muktinath."
+      },
+      "galleryImages": [
+        {
+          "src": "/explore-with-sakar/images/trails/sacred-mountain-lake.jpg",
+          "alt": "Mustang landscape"
+        },
+        {
+          "src": "/explore-with-sakar/images/mountains/himalayan-peaks.jpg",
+          "alt": "Dhaulagiri and Annapurna"
+        }
+      ],
+      "shortDescription": "Journey through the world’s deepest river gorge into the wind-carved rainshadow desert of Lower Mustang, sacred to both Hindus and Buddhists.",
+      "fullDescription": [
+        "Lower Mustang is a stark, otherworldly desert canyon framed by the towering 8,000-meter bulk of Dhaulagiri and Annapurna. At 3,710 meters sits Muktinath, the place of liberation.",
+        "We wander the medieval mud citadel of Kagbeni, walk stone-flagged lanes lined with Marpha apple orchards, and experience 108 sacred water spouts that flow with glacial waters."
+      ],
+      "culturalHighlights": [
+        "Visiting the sacred 108 water spouts and eternal flame of Muktinath temple",
+        "Exploring Kagbeni’s 15th-century mud citadel and Tibetan Buddhist monastery",
+        "Walking through Marpha’s stone alleyways and tasting local organic apple cider"
+      ],
+      "sakarNote": "When you stand at Kagbeni looking north into Upper Mustang where the Kali Gandaki winds through red cliffs, the sense of ancient pilgrimage is overwhelming.",
+      "itineraryOutline": [
+        {
+          "day": "Days 1-2",
+          "title": "Pokhara to Jomsom & Marpha",
+          "description": "Scenic mountain flight or drive, settling into stone cobblestone village of Marpha."
+        },
+        {
+          "day": "Day 3",
+          "title": "Kagbeni Medieval Citadel",
+          "description": "Explore ancient alleys, mani stone walls, and 500-year-old Buddhist monasteries."
+        },
+        {
+          "day": "Days 4-5",
+          "title": "Muktinath Sacred Pilgrimage",
+          "description": "Ascend to the high sacred shrine of 108 spouts, contemplative walking, gentle return."
+        }
+      ],
+      "impactFootprint": "Supports indigenous Thakali hospitality cooperatives and high-altitude heritage conservation in Lower Mustang."
+    },
+    {
+      "id": "exp-spirit-1",
+      "slug": "spiritual-immersion-singing-bowls",
+      "title": "7-Metal Tibetan Singing Bowls & Sound Therapy",
+      "subtitle": "Private acoustic sound therapy with master healers using planetary acoustic frequencies.",
+      "category": "go-spiritual",
+      "categoryLabel": "Go Spiritual",
+      "duration": "Full Day / Half Day",
+      "location": "Kathmandu Valley Sound Sanctuary",
+      "elevation": "1,400 m",
+      "groupSize": "Private / 1 - 4 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/spiritual/meditation-session.jpg",
+        "alt": "Master sound healer playing 7-metal Tibetan singing bowls in quiet sanctuary",
+        "caption": "Harmonic sound resonance therapy with hand-hammered planetary singing bowls."
+      },
+      "galleryImages": [
+        {
+          "src": "/explore-with-sakar/images/spiritual/meditation-session.jpg",
+          "alt": "Singing bowl therapy"
+        },
+        {
+          "src": "/explore-with-sakar/images/spiritual/monastery-interior.jpg",
+          "alt": "Meditation hall"
+        }
+      ],
+      "shortDescription": "Experience the restorative acoustic frequencies of hand-hammered 7-metal Himalayan singing bowls tuned to planetary harmonics.",
+      "fullDescription": [
+        "For centuries, Himalayan singing bowls crafted from an ancient seven-metal alloy have been used for acoustic healing, somatic relaxation, and meditative focus.",
+        "In this private sound immersion, you will sit and recline with master sound healers in a peaceful sanctuary. The pure harmonic vibrations gently quiet mental chatter, balance energy centers, and induce deep restful presence."
+      ],
+      "culturalHighlights": [
+        "Private 1-on-1 sound therapy session with certified master Himalayan sound healers",
+        "Experiencing acoustic harmonics of hand-hammered planetary 7-metal bowls",
+        "Learning the history, craftsmanship, and vibrational science of singing bowls"
+      ],
+      "sakarNote": "The singing bowl does not force quiet upon the mind; its pure vibration gently invites the mind home.",
+      "itineraryOutline": [
+        {
+          "day": "Session 1",
+          "title": "Acoustic Alignment & Intro",
+          "description": "Introduction to bowl frequencies, breath settling, and gentle acoustic introduction."
+        },
+        {
+          "day": "Session 2",
+          "title": "Full Somatic Sound Bath",
+          "description": "Deep vibrational sound bath with bowls placed around and on energy points for cellular relaxation."
+        },
+        {
+          "day": "Closing",
+          "title": "Herbal Tea & Integration",
+          "description": "Quiet reflection, herbal tea ceremony, and integration dialogue with the sound master."
+        }
+      ],
+      "impactFootprint": "Direct patronage of traditional Newar and Tibetan artisan bowl-smith families and certified sound therapy practitioners."
+    },
+    {
+      "id": "exp-spirit-2",
+      "slug": "pharping-sacred-cave-meditation",
+      "title": "Pharping Guru Padmasambhava Asura & Yangleshö Sacred Caves",
+      "subtitle": "Stillness inside 8th-century meditation caves, sacred pine ridge trails, and butter lamp rituals.",
+      "category": "go-spiritual",
+      "categoryLabel": "Go Spiritual",
+      "duration": "2 - 3 Days",
+      "location": "Pharping & Southern Valley Ridge",
+      "elevation": "1,550 m",
+      "groupSize": "Private / 1 - 4 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/spiritual/meditation-session.jpg",
+        "alt": "Ancient cliff meditation cave in Pharping with butter lamps",
+        "caption": "The sacred Asura Cave where ancient meditation masters achieved inner illumination."
+      },
+      "galleryImages": [
+        {
+          "src": "/explore-with-sakar/images/spiritual/meditation-session.jpg",
+          "alt": "Pharping cave"
+        },
+        {
+          "src": "/explore-with-sakar/images/spiritual/monastery-interior.jpg",
+          "alt": "Meditation bells"
+        }
+      ],
+      "shortDescription": "Sit in the deep silence of Asura Cave where Padmasambhava meditated in the 8th century, surrounded by whispering pine forests and prayer flags.",
+      "fullDescription": [
+        "Pharping is one of the most powerful spiritual sanctuaries in the Himalayan region. Here, holy caves cut into rocky limestone hillsides hold centuries of continuous meditation practice.",
+        "With Sakar, you will step away from commercial tourism and spend unhurried hours sitting inside the rock chambers, learning the history of Vajrayana Buddhism, and sharing quiet moments with resident hermits."
+      ],
+      "culturalHighlights": [
+        "Unhurried sitting meditation inside Asura Cave and Yanglesho sacred cliffs",
+        "Lighting 108 butter lamps with Tibetan practitioners for world peace and clarity",
+        "Walking through sacred pine forests draped in thousands of wind-fluttered prayer flags"
+      ],
+      "sakarNote": "The air in Pharping is visibly different. Inside the rock cave, the coolness and silence immediately calm a busy mind.",
+      "itineraryOutline": [
+        {
+          "day": "Morning",
+          "title": "Ridge Trail to Sacred Caves",
+          "description": "Walk through pine groves up to the holy cave complex, meeting resident caretakers."
+        },
+        {
+          "day": "Midday",
+          "title": "Sitting Meditation & Lamp Offering",
+          "description": "Silent contemplation inside the cave followed by ceremonial butter lamp illumination."
+        },
+        {
+          "day": "Afternoon",
+          "title": "Monastery Tea & Monastic Dialogue",
+          "description": "Sit with a resident scholar monk over herbal tea discussing mindfulness and compassionate action."
+        }
+      ],
+      "impactFootprint": "Support for monastic cave preservation and local monastery educational funds."
+    },
+    {
+      "id": "exp-spirit-3",
+      "slug": "namo-buddha-sacred-ridge-walk",
+      "title": "Namo Buddha Sacred Stupa & Contemplative Ridge Walk",
+      "subtitle": "Panoramic mountain vistas, stories of great compassion, and monastery tranquility on high ridges.",
+      "category": "go-spiritual",
+      "categoryLabel": "Go Spiritual",
+      "duration": "2 - 3 Days",
+      "location": "Namo Buddha & Kavre Ridge",
+      "elevation": "1,750 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Year Round (Best Sep - May)",
+      "featured": true,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
+        "alt": "White stupa with colorful Buddhist prayer flags overlooking Himalayan snow peaks",
+        "caption": "Namo Buddha sacred sanctuary perched high on an emerald mountain ridge."
+      },
+      "galleryImages": [
+        {
+          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
+          "alt": "Namo Buddha Stupa"
+        },
+        {
+          "src": "/explore-with-sakar/images/mountains/sunrise-himalayas.jpg",
+          "alt": "Dawn Himalayan views"
+        }
+      ],
+      "shortDescription": "Perched on a tranquil mountain ridge, Namo Buddha is revered for an ancient story of radical compassion. Experience panoramic Himalayan views and peaceful monastery grounds.",
+      "fullDescription": [
+        "Namo Buddha is one of the three most sacred Buddhist pilgrimage sites in Nepal. According to ancient lore, this is where the Buddha in a previous life sacrificed his body to feed a starving tigress and her cubs.",
+        "We walk the quiet village paths leading up to Thrangu Tashi Yangtse Monastery, attend evening chanting ceremonies, and wake at dawn to watch sunrise golden light wash over the high Himalayan crests."
+      ],
+      "culturalHighlights": [
+        "Contemplative ridge trail walk through terraced farmland and Tamang villages",
+        "Attending evening drum and horn puja inside Thrangu Tashi Yangtse Monastery",
+        "Dawn sunrise panorama sweeping from Langtang to the Everest region"
+      ],
+      "sakarNote": "The story of Namo Buddha is about compassion without conditions. Walking these quiet ridges helps us reflect on what we give to the world.",
+      "itineraryOutline": [
+        {
+          "day": "Day 1",
+          "title": "Panauti to Namo Buddha Trail Walk",
+          "description": "Unhurried hike through organic fields and forested hills to the monastery ridge."
+        },
+        {
+          "day": "Day 2",
+          "title": "Monastery Puja & Sacred Stupa Kora",
+          "description": "Early morning meditation, visiting the sacred tigress cliff, and peaceful contemplation."
+        }
+      ],
+      "impactFootprint": "Direct donations to monastic schools providing free education to young monks from remote mountain valleys."
+    },
+    {
+      "id": "exp-spirit-4",
+      "slug": "monastery-chanting-inner-silence",
+      "title": "Monastery Dawn Chanting & Inner Silence Retreat",
+      "subtitle": "Deep contemplation with Tibetan monks, resonant gong rhythms, and mindful mountain walking.",
+      "category": "go-spiritual",
+      "categoryLabel": "Go Spiritual",
+      "duration": "3 - 5 Days",
+      "location": "Kathmandu Foothill Sanctuaries",
+      "elevation": "1,600 m",
+      "groupSize": "Private / 1 - 4 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/spiritual/monastery-interior.jpg",
+        "alt": "Monastery sound bowls and sacred meditation cushions in quiet hall",
+        "caption": "Quiet monastery sanctuary tuned to contemplation and inner renewal."
+      },
+      "galleryImages": [
+        {
+          "src": "/explore-with-sakar/images/spiritual/monastery-interior.jpg",
+          "alt": "Monastery chanting cushions"
+        },
+        {
+          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
+          "alt": "Peaceful stupa"
+        }
+      ],
+      "shortDescription": "Step out of constant digital connection into the restorative rhythm of living monastic life, resonant deep-throat chanting, and silent morning walks.",
+      "fullDescription": [
+        "This retreat is designed for those seeking deep mental clarity. Hosted in a quiet monastery guesthouse in the peaceful valley foothills, you will follow the daily contemplative schedule of resident monks.",
+        "Each day begins with 5:30 AM deep horn calls and resonant chanting, followed by guided mindful walking through mountain oak forests and reflective evening tea sessions with resident teachers."
+      ],
+      "culturalHighlights": [
+        "Participation in authentic dawn and dusk monastic chanting sessions",
+        "Daily periods of noble silence for mindfulness, journaling, and contemplation",
+        "Private dialogues with English-speaking Buddhist meditation masters"
+      ],
+      "sakarNote": "After two days of noble silence here, guests always tell me their senses have completely reopened. You notice the birds, the wind, and your own breath.",
+      "itineraryOutline": [
+        {
+          "day": "Day 1",
+          "title": "Entering the Sanctuary",
+          "description": "Welcome herbal tea, monastery orientation, settling into peaceful retreat rooms."
+        },
+        {
+          "day": "Day 2",
+          "title": "Dawn Puja & Silent Forest Walk",
+          "description": "Morning chanting ceremony, mindful forest walking, and afternoon reading."
+        },
+        {
+          "day": "Day 3",
+          "title": "Closing Reflection & Blessing",
+          "description": "Personal reflection session, master blessing, and gentle re-entry into daily life."
+        }
+      ],
+      "impactFootprint": "Funds directly sponsor monastery medical dispensaries and traditional monastic manuscript preservation."
+    },
+    {
+      "id": "exp-home-1",
+      "slug": "village-homestay-panauti-balalthali",
+      "title": "Panauti & Balthali Living Hearth Village Homestay",
+      "subtitle": "Stay inside multi-generational family homes, cook over wood fires, and walk peaceful terraced fields.",
+      "category": "homestays",
+      "categoryLabel": "Feel Closer",
+      "duration": "3 - 4 Days",
+      "location": "Panauti Ancient Town & Balthali Plateau",
+      "elevation": "1,450 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Year Round",
+      "featured": true,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
+        "alt": "Steaming organic dal bhat served on brass plates in village homestay",
+        "caption": "Warm hearthside hospitality: home-cooked meals straight from the family garden."
+      },
+      "galleryImages": [
+        {
+          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
+          "alt": "Fresh organic meal"
+        },
+        {
+          "src": "/explore-with-sakar/images/homestays/stone-village-house.jpg",
+          "alt": "Traditional stone home"
+        },
+        {
+          "src": "/explore-with-sakar/images/homestays/organic-farming.jpg",
+          "alt": "Terraced organic farming"
+        }
+      ],
+      "shortDescription": "Move from being an observer to becoming an welcomed guest. Sleep in verified family homestays, harvest garden vegetables, and listen to fireside stories.",
+      "fullDescription": [
+        "Panauti is a medieval Newari town that feels frozen in a gentler century. We base ourselves in authentic family-run homestays where you will have your own clean, private lockable room while sharing daily life with your host family.",
+        "Help pick fresh mustard greens and potatoes from the backyard garden, watch bread bake over wood embers, and sit around the hearth as elders share community folklore."
+      ],
+      "culturalHighlights": [
+        "Living as an honored family guest in verified, spotlessly clean private homestay rooms",
+        "Harvesting fresh organic vegetables directly from terraced family kitchen gardens",
+        "Learning to cook traditional Dal Bhat, local pickles, and fresh chapati over clay hearths",
+        "Unhurried walks through ancient stone lanes, mustard fields, and orange groves"
+      ],
+      "sakarNote": "When you sit around a clay stove in Panauti eating rice harvested by the family sitting next to you, the distance between visitor and host completely dissolves.",
+      "itineraryOutline": [
+        {
+          "day": "Day 1",
+          "title": "Welcome to Panauti Hearth",
+          "description": "Arrive in ancient Panauti, meet your host family, welcome tea, evening hearthside cooking."
+        },
+        {
+          "day": "Day 2",
+          "title": "Organic Garden Harvest & Temple Walk",
+          "description": "Morning field walk, harvesting vegetables, exploring medieval Indreshwar Mahadev temple."
+        },
+        {
+          "day": "Day 3",
+          "title": "Balthali Plateau Ridge Hike",
+          "description": "Gentle walk through pine woods up to Balthali village, panoramic sunset views."
+        },
+        {
+          "day": "Day 4",
+          "title": "Farewell Blessing & Departure",
+          "description": "Traditional tika blessing from your host mother, farewell breakfast, slow return."
+        }
+      ],
+      "impactFootprint": "100% of accommodation and food payments go directly into family hands, empowering rural women hosts."
+    },
+    {
+      "id": "exp-home-2",
+      "slug": "ghandruk-gurung-heritage-homestay",
+      "title": "Ghandruk Gurung Heritage & Mountain Hearth Homestay",
+      "subtitle": "Stone slate roofs beneath Annapurna peaks, honey harvesting tales, and traditional hearth hospitality.",
+      "category": "homestays",
+      "categoryLabel": "Feel Closer",
+      "duration": "3 - 5 Days",
+      "location": "Ghandruk Village, Annapurna Foothills",
+      "elevation": "1,940 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Sep - May",
+      "featured": true,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/homestays/stone-village-house.jpg",
+        "alt": "Traditional Gurung stone house with slate roof beneath snowy Annapurna South",
+        "caption": "Ancient stone slate Gurung homesteads looking directly onto Annapurna South and Hiunchuli."
+      },
+      "galleryImages": [
+        {
+          "src": "/explore-with-sakar/images/homestays/stone-village-house.jpg",
+          "alt": "Gurung homestay"
+        },
+        {
+          "src": "/explore-with-sakar/images/mountains/himalayan-peaks.jpg",
+          "alt": "Annapurna South peak"
+        }
+      ],
+      "shortDescription": "Nestled on a steep terraced hillside directly facing Annapurna South, Ghandruk is the heartland of Gurung culture. Stay with local families in traditional stone slate homesteads.",
+      "fullDescription": [
+        "Ghandruk is renowned across Nepal for its proud Gurung heritage, stone-paved alleyways, and breathtaking close-up vistas of Annapurna South and Machhapuchhre.",
+        "We stay in traditional stone slate village homestays where local mothers welcome you with warm smiles and hot Himalayan tea. Learn about Gurung culture, traditional weaving, and ancestral honey hunting."
+      ],
+      "culturalHighlights": [
+        "Waking to sunrise golden light turning Annapurna South pink directly from your bedroom window",
+        "Staying with authentic Gurung host families in preserved traditional stone slate architecture",
+        "Visiting the Gurung Cultural Museum and learning about ancient cliff honey harvesting traditions"
+      ],
+      "sakarNote": "Sitting on a carved wooden porch in Ghandruk with a cup of hot sea buckthorn tea while dawn hits the Annapurna ice face is something you never forget.",
+      "itineraryOutline": [
+        {
+          "day": "Day 1",
+          "title": "Pokhara to Ghandruk Stone Trail",
+          "description": "Scenic foothill drive and gentle stone stair walk into Ghandruk village."
+        },
+        {
+          "day": "Day 2",
+          "title": "Village Rhythms & Gurung Museum",
+          "description": "Morning mountain sunrise, visiting village weavers, and sharing hearthside evening meals."
+        },
+        {
+          "day": "Day 3",
+          "title": "Terraced Field Walk & Return",
+          "description": "Paced walking through organic millet terraces, sharing farewell tea before return."
+        }
+      ],
+      "impactFootprint": "Direct fair-wage payment to Gurung women-led homestay management committees."
+    },
+    {
+      "id": "exp-home-3",
+      "slug": "helambu-hyolmo-hearth-living",
+      "title": "Helambu Hyolmo Hearth & Buddhist Village Homestay",
+      "subtitle": "Quiet apple orchards, Tamang & Hyolmo culture, and serene mountain home hospitality.",
+      "category": "homestays",
+      "categoryLabel": "Feel Closer",
+      "duration": "3 - 4 Days",
+      "location": "Helambu Valley, Sindhupalchok",
+      "elevation": "2,200 m",
+      "groupSize": "Private / 1 - 4 Travelers",
+      "season": "Year Round (Best Oct - May)",
+      "featured": false,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/homestays/organic-farming.jpg",
+        "alt": "Quiet mountain village terraces with apple trees in Helambu",
+        "caption": "The tranquil apple orchards and stone homes of Helambu valley."
+      },
+      "galleryImages": [
+        {
+          "src": "/explore-with-sakar/images/homestays/organic-farming.jpg",
+          "alt": "Helambu terraces"
+        },
+        {
+          "src": "/explore-with-sakar/images/spiritual/buddhist-stupa.jpg",
+          "alt": "Village stupa"
+        }
+      ],
+      "shortDescription": "Just north of Kathmandu Valley lies Helambu, a secluded sanctuary famous for sweet apples, Hyolmo Buddhist culture, and peaceful mountain village homestays.",
+      "fullDescription": [
+        "Helambu offers an unhurried, crowd-free glimpse into high mountain village life. Here, Hyolmo and Tamang communities maintain rich Buddhist traditions surrounded by green forests and snow peaks.",
+        "Stay in family homes, taste freshly baked millet bread, walk quiet trails past ancient prayer walls, and experience genuine Himalayan warmth."
+      ],
+      "culturalHighlights": [
+        "Authentic village homestay hospitality with indigenous Hyolmo host families",
+        "Walking quiet village paths lined with carved mani stone prayer walls",
+        "Tasting local organic apples, mountain yak cheese, and hearth-cooked specialties"
+      ],
+      "sakarNote": "Helambu is so close to Kathmandu yet feels a million miles away in peace and quiet.",
+      "itineraryOutline": [
+        {
+          "day": "Day 1",
+          "title": "Drive to Helambu Foothills & Village Walk",
+          "description": "Scenic drive from Kathmandu, walking into peaceful village homestay."
+        },
+        {
+          "day": "Day 2",
+          "title": "Hyolmo Culture & Monastery Walk",
+          "description": "Explore local gompa, walk through apple orchards, evening hearthside dialogue."
+        },
+        {
+          "day": "Day 3",
+          "title": "Quiet Morning & Return",
+          "description": "Dawn mountain views, breakfast with host family, gentle return journey."
+        }
+      ],
+      "impactFootprint": "Supports village homestay cooperatives and rural community apple orchard sustainability."
+    },
+    {
+      "id": "exp-home-4",
+      "slug": "bungamati-khokana-artisan-village",
+      "title": "Bungamati & Khokana Historic Newar Artisan Village Stay",
+      "subtitle": "Mustard oil presses, woodcarvers, living courtyards, and rural valley heritage.",
+      "category": "homestays",
+      "categoryLabel": "Feel Closer",
+      "duration": "2 Days",
+      "location": "Bungamati & Khokana, Southern Kathmandu Valley",
+      "elevation": "1,350 m",
+      "groupSize": "Private / 1 - 6 Travelers",
+      "season": "Year Round",
+      "featured": false,
+      "heroImage": {
+        "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
+        "alt": "Ancient Newari village brick street with women drying mustard seeds in sun",
+        "caption": "Historic Newar agricultural villages where traditional woodcarving and mustard oil pressing thrive."
+      },
+      "galleryImages": [
+        {
+          "src": "/explore-with-sakar/images/homestays/village-meal.jpg",
+          "alt": "Bungamati courtyard"
+        },
+        {
+          "src": "/explore-with-sakar/images/heritage/newari-architecture.jpg",
+          "alt": "Newari window"
+        }
+      ],
+      "shortDescription": "Step into the traditional Newar agricultural villages of Bungamati and Khokana at the southern edge of the valley, famous for Rato Machhindranath and mustard oil pressing.",
+      "fullDescription": [
+        "Bungamati and Khokana preserve an authentic agricultural way of life where mustard seed harvesting, wooden loom spinning, and deity woodcarving are part of daily routine.",
+        "Stay in a restored traditional Newar home, watch master woodcarvers at work, and smell the rich aroma of traditional heavy wooden mustard oil presses."
+      ],
+      "culturalHighlights": [
+        "Overnight heritage homestay experience inside a traditional brick Newar house",
+        "Observing the ancient heavy timber mustard oil pressing process in Khokana",
+        "Visiting Bungamati woodcarvers crafting sacred chariots and temple struts"
+      ],
+      "sakarNote": "Khokana has avoided modern concrete development like few places in the valley. Walking its brick streets at dusk feels like stepping 200 years back in time.",
+      "itineraryOutline": [
+        {
+          "day": "Day 1",
+          "title": "Arrival in Khokana & Oil Press Visit",
+          "description": "Explore Khokana brick lanes, traditional mustard oil mill, home dinner."
+        },
+        {
+          "day": "Day 2",
+          "title": "Bungamati Woodcarvers & Machhindranath Shrine",
+          "description": "Morning walk to Bungamati, visiting Rato Machhindranath temple site and artisan workshops."
+        }
+      ],
+      "impactFootprint": "Direct income for local Newar family hosts and mustard oil artisan cooperatives."
     }
   ],
   "services": [
@@ -6738,5 +6564,250 @@
       "createdAt": "2026-09-25T05:43:27.711Z",
       "updatedAt": "2026-09-25T05:43:27.711Z"
     }
-  ]
+  ],
+  "navigation": {
+    "header": [
+      {
+        "id": "nav-experiences",
+        "label": "EXPERIENCES",
+        "url": "/experiences",
+        "subtitle": "Our Curated Travel Experiences",
+        "columns": 2,
+        "visible": true,
+        "order": 0,
+        "children": [
+          {
+            "id": "nav-beyond",
+            "label": "Beyond the Map",
+            "description": "Living courtyards, medieval stone mysteries & master artisan guilds.",
+            "url": "/experiences/beyond-the-map",
+            "badge": "Exploration",
+            "icon": "compass",
+            "visible": true,
+            "order": 0
+          },
+          {
+            "id": "nav-within",
+            "label": "Go Within",
+            "description": "Himalayan singing bowl resonance, monastery chanting & meditation caves.",
+            "url": "/experiences/spiritual-wellness",
+            "badge": "Spiritual",
+            "icon": "sparkles",
+            "visible": true,
+            "order": 1
+          },
+          {
+            "id": "nav-deeper",
+            "label": "Go Deeper",
+            "description": "Immersive deep-dive journeys into hidden layers, living courtyards & sacred geometry.",
+            "url": "/experiences/go-deeper",
+            "badge": "Immersion",
+            "icon": "layers",
+            "visible": true,
+            "order": 2
+          },
+          {
+            "id": "nav-mark",
+            "label": "Leave a Mark",
+            "description": "Strategic volunteer tourism & administrative empowerment for grassroots communities.",
+            "url": "/experiences/leave-a-mark",
+            "badge": "Strategic",
+            "icon": "heart",
+            "visible": true,
+            "order": 3
+          },
+          {
+            "id": "nav-all-exp",
+            "label": "All Curated Experiences",
+            "description": "View all curated packages, village homestays, and sacred routes.",
+            "url": "/experiences",
+            "icon": "calendar",
+            "visible": true,
+            "order": 4
+          },
+          {
+            "id": "nav-custom-exp",
+            "label": "Custom Private Journeys",
+            "description": "100% tailor-made itineraries for solo travelers, couples & families with Sakar.",
+            "url": "/experiences/custom-journeys",
+            "badge": "Bespoke",
+            "icon": "shield-check",
+            "visible": true,
+            "order": 5
+          }
+        ]
+      },
+      {
+        "id": "nav-events",
+        "label": "EVENTS",
+        "url": "/events",
+        "visible": true,
+        "order": 1
+      },
+      {
+        "id": "nav-stories",
+        "label": "STORIES",
+        "url": "/blog",
+        "subtitle": "Perspectives & Reflections",
+        "columns": 1,
+        "visible": true,
+        "order": 2,
+        "children": [
+          {
+            "id": "nav-journal",
+            "label": "Sakar’s Journal & Blogs",
+            "description": "Field notes, personal essays, and reflections on slow travel and heritage.",
+            "url": "/blog",
+            "badge": "Essays",
+            "icon": "book-open",
+            "visible": true,
+            "order": 0
+          },
+          {
+            "id": "nav-reviews",
+            "label": "Traveler Reviews & Guestbook",
+            "description": "Read guest reflections and flip through Sakar’s handwritten guestbook.",
+            "url": "/reviews",
+            "badge": "Reviews",
+            "icon": "star",
+            "visible": true,
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "nav-about",
+        "label": "ABOUT SAKAR",
+        "url": "/about",
+        "visible": true,
+        "order": 3
+      }
+    ],
+    "footer": [
+      {
+        "id": "col-exp",
+        "title": "Experiences",
+        "links": [
+          {
+            "id": "fl-1",
+            "label": "Go Beyond the Map",
+            "url": "/experiences/beyond-the-map",
+            "visible": true,
+            "order": 0
+          },
+          {
+            "id": "fl-2",
+            "label": "Go Within",
+            "url": "/experiences/spiritual-wellness",
+            "visible": true,
+            "order": 1
+          },
+          {
+            "id": "fl-3",
+            "label": "Go Deeper",
+            "url": "/experiences/go-deeper",
+            "visible": true,
+            "order": 2
+          },
+          {
+            "id": "fl-4",
+            "label": "Leave a Mark",
+            "url": "/experiences/leave-a-mark",
+            "visible": true,
+            "order": 3
+          },
+          {
+            "id": "fl-5",
+            "label": "Custom Private Journeys",
+            "url": "/experiences/custom-journeys",
+            "visible": true,
+            "order": 4
+          },
+          {
+            "id": "fl-6",
+            "label": "All Curated Experiences →",
+            "url": "/experiences",
+            "visible": true,
+            "order": 5
+          }
+        ]
+      },
+      {
+        "id": "col-company",
+        "title": "Navigation",
+        "links": [
+          {
+            "id": "fl-7",
+            "label": "Upcoming Cultural Events",
+            "url": "/events",
+            "visible": true,
+            "order": 0
+          },
+          {
+            "id": "fl-8",
+            "label": "Sakar’s Journal & Essays",
+            "url": "/blog",
+            "visible": true,
+            "order": 1
+          },
+          {
+            "id": "fl-9",
+            "label": "Traveler Reviews",
+            "url": "/reviews",
+            "visible": true,
+            "order": 2
+          },
+          {
+            "id": "fl-10",
+            "label": "About Sakar",
+            "url": "/about",
+            "visible": true,
+            "order": 3
+          },
+          {
+            "id": "fl-11",
+            "label": "Plan Your Journey",
+            "url": "/contact",
+            "visible": true,
+            "order": 4
+          }
+        ]
+      },
+      {
+        "id": "col-resources",
+        "title": "Slow Travel & Values",
+        "links": [
+          {
+            "id": "fl-12",
+            "label": "Slow Travel Philosophy",
+            "url": "/blog/slow-travel-philosophy",
+            "visible": true,
+            "order": 0
+          },
+          {
+            "id": "fl-13",
+            "label": "Kathmandu Valley Heritage Guide",
+            "url": "/blog/kathmandu-valley-heritage-guide",
+            "visible": true,
+            "order": 1
+          },
+          {
+            "id": "fl-14",
+            "label": "Ethical Travel Practices",
+            "url": "/blog/ethical-travel-practices",
+            "visible": true,
+            "order": 2
+          },
+          {
+            "id": "fl-15",
+            "label": "Village Homestay Guide",
+            "url": "/blog/village-homestay-guide",
+            "visible": true,
+            "order": 3
+          }
+        ]
+      }
+    ]
+  },
+  "updatedAt": "2026-09-26T14:09:59.829Z"
 }

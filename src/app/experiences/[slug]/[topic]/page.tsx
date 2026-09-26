@@ -21,8 +21,7 @@ import { EXPERIENCE_PILLARS } from '@/lib/experiencePillars';
 import { EXPERIENCES } from '@/data/experiences';
 import { getCanonicalUrl } from '@/lib/config';
 
-// Force dynamic so individual topic pages always pull fresh data from
-// the database — prevents stale static builds from masking CMS edits.
+// Force dynamic so individual topic pages always pull fresh data from the database
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
@@ -44,7 +43,6 @@ const TOPIC_ALIASES: Record<string, string> = {
   'artisans-path': 'artisans-path-heritage-deep-dive',
   'sacred-geometry': 'sacred-geometry-architecture-valley',
   'langtang': 'langtang-tamang-heritage-trail',
-  'chitwan': 'chitwan-indigenous-tharu-guardians',
   'community-reforestation': 'community-sacred-forest-reforestation',
   'strategic-capacity-building': 'strategic-community-capacity-building',
 };
@@ -114,6 +112,9 @@ export async function generateStaticParams() {
     'beyond-the-map': 'beyond-the-map',
     'go-beyond': 'beyond-the-map',
     'heritage': 'beyond-the-map',
+    'go-spiritual': 'go-spiritual',
+    'spiritual-wellness': 'go-spiritual',
+    'spiritual': 'go-spiritual',
     'go-deeper': 'go-deeper',
     'homestays': 'homestays',
     'feel-closer': 'homestays',
@@ -127,9 +128,6 @@ export async function generateStaticParams() {
     }
   }
 
-  // Also include alias params for common test routes
-  paramsList.push({ slug: 'beyond-the-map', topic: 'kathmandu-square' });
-
   return paramsList;
 }
 
@@ -138,20 +136,14 @@ export default async function IndividualTopicPage({ params }: Props) {
 
   const oldPillars = ['go-within', 'leave-a-mark', 'responsible'];
   const oldTopics = [
-    'spiritual-immersion-singing-bowls',
-    'pharping-sacred-cave-meditation',
-    'namo-buddha-sacred-ridge-walk',
-    'monastery-chanting-inner-silence',
     'langtang-tamang-heritage-trail',
     'chitwan-indigenous-tharu-guardians',
     'community-sacred-forest-reforestation',
-    'singing-bowls',
-    'pharping',
-    'namo-buddha',
-    'monastery-chanting',
+    'strategic-community-capacity-building',
     'langtang',
-    'chitwan',
+    'chitwan-old',
     'community-reforestation',
+    'strategic-capacity-building',
   ];
 
   if (oldPillars.includes(slug) || oldTopics.includes(topic)) {

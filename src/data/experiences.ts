@@ -2,7 +2,7 @@ import { Experience } from '@/types';
 
 export const EXPERIENCES: Experience[] = [
   // =========================================================================
-  // 1–4: GO BEYOND THE MAP (FEATURED EDITORIAL NARRATIVES)
+  // 1–9: GO BEYOND THE MAP (FEATURED EDITORIAL NARRATIVES)
   // =========================================================================
   {
     id: 'exp-beyond-ktm',
@@ -195,10 +195,53 @@ export const EXPERIENCES: Experience[] = [
     ],
     impactFootprint: 'Direct fair-wage compensation to local boatmen cooperatives, Old Bazaar family shopkeepers, and foothill agricultural families.',
   },
-
-  // =========================================================================
-  // 5–8: EXTENDED GO BEYOND THE MAP CHAPTERS
-  // =========================================================================
+  {
+    id: 'exp-beyond-ctw',
+    slug: 'chitwan-national-park',
+    title: 'Chitwan National Park – Sauraha: Where the Jungle Listens',
+    subtitle: 'Rapti River dugout canoes, wild one-horned rhinos, Tharu village hearths, and sub-tropical forest silence.',
+    category: 'beyond-the-map',
+    categoryLabel: 'Go Beyond the Map',
+    duration: '2 - 3 Days',
+    location: 'Chitwan National Park & Sauraha',
+    elevation: '150 m',
+    groupSize: 'Private / 1–6 Travelers',
+    season: 'Oct - Apr',
+    featured: true,
+    heroImage: {
+      src: '/explore-with-sakar/images/trails/river-gorge.jpg',
+      alt: 'Silent dugout canoe on Rapti River with sub-tropical Chitwan forest on the bank',
+      caption: 'Where the jungle listens: silent wooden canoes, morning river mist, and indigenous Tharu heritage.',
+    },
+    galleryImages: [
+      { src: '/explore-with-sakar/images/trails/river-gorge.jpg', alt: 'Rapti River dugout canoe' },
+      { src: '/explore-with-sakar/images/homestays/village-meal.jpg', alt: 'Tharu traditional village hospitality' },
+      { src: '/explore-with-sakar/images/mountains/alpine-valley.jpg', alt: 'Chitwan forest canopy' },
+    ],
+    shortDescription: 'If you want to understand Chitwan, do not begin by chasing animals. Begin by listening to the river. The morning mist rises from the Rapti, and the jungle awakes.',
+    fullDescription: [
+      'If you want to understand Chitwan, do not begin by chasing animals. Begin by listening to the river.',
+      'Early in the morning, before the sun warms the plains, the Rapti River moves in quiet reflection. A narrow wooden canoe glides across the water without a motor, guided only by the steady dip of a paddle. The mist rises from the surface, revealing long grass along the riverbanks. Somewhere in the distance, a bird calls, another answers, and the forest slowly comes alive. This is Chitwan—a place where nature is not a background for human activity, but a living world that demands your attention.',
+      'Located in the southern Terai plains of Nepal, Chitwan National Park represents a remarkable story of conservation and balance. Long before it became a protected national park, this region was covered by dense subtropical forests and grasslands, home to the indigenous Tharu people who lived alongside wild animals for generations.',
+      'Today, Chitwan is recognized globally as a sanctuary for endangered wildlife, including the greater one-horned rhinoceros, the Royal Bengal tiger, Asian elephants, gharial crocodiles, and hundreds of bird species. But unlike many wildlife destinations where animals are viewed from a distance, Chitwan brings you into the landscape. Here, you walk on the same paths where rhinos passed a few hours earlier. You listen for the alarm calls of deer that signal a predator nearby. You learn to read the forest.',
+      'Sauraha, a small settlement near the park entrance, serves as a gateway to this natural sanctuary. But beyond the hotels and riverfront restaurants lies a community with deep roots in the soil. The Tharu people have lived in the Terai for centuries, developing a unique culture, architecture, and relationship with the forest. Their traditional houses, built with mud, bamboo, and thatch, are designed to remain cool during hot summers and warm during winter nights. Their art, music, and food reflect a deep connection with the natural environment.',
+      'Visiting Chitwan with an unhurried perspective allows you to move beyond typical safari itineraries. Instead of rushing from one activity to another, you take time to understand how wildlife conservation, local communities, and eco-tourism connect. A morning canoe ride becomes a lesson in patience. A walk through Tharu villages becomes an opportunity to understand how people have adapted to life beside a wilderness.',
+    ],
+    culturalHighlights: [
+      'Gliding down the Rapti River at dawn in a silent wooden dugout canoe without motor noise',
+      'Walking footpaths alongside indigenous Tharu naturalists who read fresh rhino tracks in the sand',
+      'Discovering traditional Tharu mud-and-bamboo architecture designed for seasonal plain weather',
+      'Understanding the living story of community-led buffer zone forestry and human-wildlife balance',
+      'Experiencing authentic Terai hospitality and traditional Tharu hearthside cuisine',
+    ],
+    sakarNote: 'In Chitwan, I always ask guests to step into the dugout canoe before sunrise in total silence. Watching a one-horned rhino emerge from the river mist while the paddle dips quietly is pure magic.',
+    itineraryOutline: [
+      { day: 'Day 1', title: 'Arrival in Terai Plains & Tharu Village Walk', description: 'Arrive in Sauraha, explore traditional mud-and-thatch Tharu courtyards, and watch sunset over the Rapti River.' },
+      { day: 'Day 2', title: 'Silent Canoe Safari & Guided Nature Walk', description: 'Dawn dugout canoe ride on the Rapti River, observing gharial crocodiles and birds, followed by an unhurried nature tracking walk.' },
+      { day: 'Day 3', title: 'Buffer Zone Forest & Conservation Journey', description: 'Learn about community buffer zone initiatives, meet local conservation leaders, and experience authentic Tharu hearthside cuisine.' },
+    ],
+    impactFootprint: 'Direct fair-wage compensation to indigenous Tharu naturalist guides, canoe operators, and community buffer zone conservation funds.',
+  },
   {
     id: 'exp-beyond-5',
     slug: 'living-courtyards-kathmandu',
@@ -372,228 +415,8 @@ export const EXPERIENCES: Experience[] = [
     ],
     impactFootprint: 'Supports indigenous architectural preservation archives and youth apprenticeship in classical sacred engineering.',
   },
-
-  // =========================================================================
-  // 5: CHITWAN NATIONAL PARK (NEW GO BEYOND EXPERIENCE FROM SAKAR DAI BLOG)
-  // =========================================================================
   {
-    id: 'exp-beyond-ctw',
-    slug: 'chitwan-national-park',
-    title: 'Chitwan National Park – Sauraha: Where the Jungle Listens',
-    subtitle: 'Rapti River dugout canoes, wild one-horned rhinos, Tharu village hearths, and sub-tropical forest silence.',
-    category: 'beyond-the-map',
-    categoryLabel: 'Go Beyond the Map',
-    duration: '2 - 3 Days',
-    location: 'Chitwan National Park & Sauraha',
-    elevation: '150 m',
-    groupSize: 'Private / 1–6 Travelers',
-    season: 'Oct - Apr',
-    featured: true,
-    heroImage: {
-      src: '/explore-with-sakar/images/trails/river-gorge.jpg',
-      alt: 'Silent dugout canoe on Rapti River with sub-tropical Chitwan forest on the bank',
-      caption: 'Where the jungle listens: silent wooden canoes, morning river mist, and indigenous Tharu heritage.',
-    },
-    galleryImages: [
-      { src: '/explore-with-sakar/images/trails/river-gorge.jpg', alt: 'Rapti River dugout canoe' },
-      { src: '/explore-with-sakar/images/homestays/village-meal.jpg', alt: 'Tharu traditional village hospitality' },
-      { src: '/explore-with-sakar/images/mountains/alpine-valley.jpg', alt: 'Chitwan forest canopy' },
-    ],
-    shortDescription: 'If you want to understand Chitwan, do not begin by chasing animals. Begin by listening to the river. The morning mist rises from the Rapti, and the jungle awakes.',
-    fullDescription: [
-      'If you want to understand Chitwan, do not begin by chasing animals. Begin by listening to the river.',
-      'Early in the morning, before the sun warms the plains, the Rapti River moves in quiet reflection. A narrow wooden canoe glides across the water without a motor, guided only by the steady dip of a paddle. The mist rises from the surface, revealing long grass along the riverbanks. Somewhere in the distance, a bird calls, another answers, and the forest slowly comes alive. This is Chitwan—a place where nature is not a background for human activity, but a living world that demands your attention.',
-      'Located in the southern Terai plains of Nepal, Chitwan National Park represents a remarkable story of conservation and balance. Long before it became a protected national park, this region was covered by dense subtropical forests and grasslands, home to the indigenous Tharu people who lived alongside wild animals for generations.',
-      'Today, Chitwan is recognized globally as a sanctuary for endangered wildlife, including the greater one-horned rhinoceros, the Royal Bengal tiger, Asian elephants, gharial crocodiles, and hundreds of bird species. But unlike many wildlife destinations where animals are viewed from a distance, Chitwan brings you into the landscape. Here, you walk on the same paths where rhinos passed a few hours earlier. You listen for the alarm calls of deer that signal a predator nearby. You learn to read the forest.',
-      'Sauraha, a small settlement near the park entrance, serves as a gateway to this natural sanctuary. But beyond the hotels and riverfront restaurants lies a community with deep roots in the soil. The Tharu people have lived in the Terai for centuries, developing a unique culture, architecture, and relationship with the forest. Their traditional houses, built with mud, bamboo, and thatch, are designed to remain cool during hot summers and warm during winter nights. Their art, music, and food reflect a deep connection with the natural environment.',
-      'Visiting Chitwan with an unhurried perspective allows you to move beyond typical safari itineraries. Instead of rushing from one activity to another, you take time to understand how wildlife conservation, local communities, and eco-tourism connect. A morning canoe ride becomes a lesson in patience. A walk through Tharu villages becomes an opportunity to understand how people have adapted to life beside a wilderness.',
-    ],
-    culturalHighlights: [
-      'Gliding down the Rapti River at dawn in a silent wooden dugout canoe without motor noise',
-      'Walking footpaths alongside indigenous Tharu naturalists who read fresh rhino tracks in the sand',
-      'Discovering traditional Tharu mud-and-bamboo architecture designed for seasonal plain weather',
-      'Understanding the living story of community-led buffer zone forestry and human-wildlife balance',
-      'Experiencing authentic Terai hospitality and traditional Tharu hearthside cuisine',
-    ],
-    sakarNote: 'In Chitwan, I always ask guests to step into the dugout canoe before sunrise in total silence. Watching a one-horned rhino emerge from the river mist while the paddle dips quietly is pure magic.',
-    itineraryOutline: [
-      { day: 'Day 1', title: 'Arrival in Terai Plains & Tharu Village Walk', description: 'Arrive in Sauraha, explore traditional mud-and-thatch Tharu courtyards, and watch sunset over the Rapti River.' },
-      { day: 'Day 2', title: 'Silent Canoe Safari & Guided Nature Walk', description: 'Dawn dugout canoe ride on the Rapti River, observing gharial crocodiles and birds, followed by an unhurried nature tracking walk.' },
-      { day: 'Day 3', title: 'Buffer Zone Forest & Conservation Journey', description: 'Learn about community buffer zone initiatives, meet local conservation leaders, and experience authentic Tharu hearthside cuisine.' },
-    ],
-    impactFootprint: 'Direct fair-wage compensation to indigenous Tharu naturalist guides, canoe operators, and community buffer zone conservation funds.',
-  },
-
-  // =========================================================================
-  // FEEL CLOSER (VILLAGE HOMESTAYS & LIVING HEARTHS)
-  // =========================================================================
-  {
-    id: 'exp-home-1',
-    slug: 'village-homestay-panauti-balalthali',
-    title: 'Panauti & Balthali Living Hearth Village Homestay',
-    subtitle: 'Stay inside multi-generational family homes, cook over wood fires, and walk peaceful terraced fields.',
-    category: 'homestays',
-    categoryLabel: 'Feel Closer',
-    duration: '3 - 4 Days',
-    location: 'Panauti Ancient Town & Balthali Plateau',
-    elevation: '1,450 m',
-    groupSize: 'Private / 1 - 6 Travelers',
-    season: 'Year Round',
-    featured: true,
-    heroImage: {
-      src: '/explore-with-sakar/images/homestays/village-meal.jpg',
-      alt: 'Steaming organic dal bhat served on brass plates in village homestay',
-      caption: 'Warm hearthside hospitality: home-cooked meals straight from the family garden.',
-    },
-    galleryImages: [
-      { src: '/explore-with-sakar/images/homestays/village-meal.jpg', alt: 'Fresh organic meal' },
-      { src: '/explore-with-sakar/images/homestays/stone-village-house.jpg', alt: 'Traditional stone home' },
-      { src: '/explore-with-sakar/images/homestays/organic-farming.jpg', alt: 'Terraced organic farming' },
-    ],
-    shortDescription: 'Move from being an observer to becoming an welcomed guest. Sleep in verified family homestays, harvest garden vegetables, and listen to fireside stories.',
-    fullDescription: [
-      'Panauti is a medieval Newari town that feels frozen in a gentler century. We base ourselves in authentic family-run homestays where you will have your own clean, private lockable room while sharing daily life with your host family.',
-      'Help pick fresh mustard greens and potatoes from the backyard garden, watch bread bake over wood embers, and sit around the hearth as elders share community folklore.',
-    ],
-    culturalHighlights: [
-      'Living as an honored family guest in verified, spotlessly clean heritage homestays',
-      'Harvesting organic vegetables and learning to cook authentic dal bhat and spiced pickles',
-      'Walks across the gentle Balthali plateau with panoramic views of snowcapped peaks',
-    ],
-    sakarNote: 'When you sit in a family kitchen and the grandmother hands you a steaming brass cup of ginger tea without asking, you realize you are no longer a tourist.',
-    itineraryOutline: [
-      { day: 'Day 1', title: 'Welcome to Panauti Hearth', description: 'Arrive in the medieval river town, traditional tika welcome, settling into your host home.' },
-      { day: 'Day 2', title: 'Farm Harvest & Cooking Session', description: 'Pick vegetables with your host mother, cook lunch together, afternoon walk along stone lanes.' },
-      { day: 'Day 3', title: 'Balthali Terraced Ridge Hike', description: 'Gentle walk through pine forests and orange orchards to the tranquil Balthali plateau.' },
-    ],
-    impactFootprint: '100% of accommodation and meal payments go directly to local women-led village homestay cooperatives.',
-  },
-  {
-    id: 'exp-home-2',
-    slug: 'ghandruk-gurung-heritage-homestay',
-    title: 'Ghandruk & Annapurna Gurung Heritage Homestay',
-    subtitle: 'Stone slate houses, rhododendron mountain vistas, and warm mountain Gurung hospitality.',
-    category: 'homestays',
-    categoryLabel: 'Feel Closer',
-    duration: '3 - 4 Days',
-    location: 'Ghandruk & Modi River Valley',
-    elevation: '1,940 m',
-    groupSize: 'Private / 1 - 6 Travelers',
-    season: 'Sep - May',
-    featured: false,
-    heroImage: {
-      src: '/explore-with-sakar/images/homestays/stone-village-house.jpg',
-      alt: 'Traditional slate-roofed Gurung stone houses in Ghandruk village',
-      caption: 'Ghandruk village with towering Annapurna South and Machhapuchhre in the backdrop.',
-    },
-    galleryImages: [
-      { src: '/explore-with-sakar/images/homestays/stone-village-house.jpg', alt: 'Gurung stone houses' },
-      { src: '/explore-with-sakar/images/mountains/mountain-ridge.jpg', alt: 'Annapurna mountain ridge' },
-    ],
-    shortDescription: 'Perched under the sheer south face of Annapurna, Ghandruk is a living Gurung citadel of dry-stone alleys, hand-woven nettle fabrics, and warm wood fires.',
-    fullDescription: [
-      'Ghandruk is one of the most famous ethnic settlements in the Himalayas, yet staying in an authentic family homestay takes you far beyond the standard trekking lodge trail.',
-      'Wake up to Machhapuchhre glowing gold outside your bedroom window, walk through stone corridors where sheep wool is spun by hand, and learn about Gurung history from village elders.',
-    ],
-    culturalHighlights: [
-      'Direct stay in traditional Gurung stone homes with spectacular mountain panoramas',
-      'Visiting the community Gurung museum and historic village textile weaving centers',
-      'Fireside dining featuring locally grown millet rotis, mountain lentils, and ghee',
-    ],
-    sakarNote: 'Waking up in Ghandruk and stepping out onto the stone slate terrace with a hot cup of black tea while Annapurna turns pink is unforgettable.',
-    itineraryOutline: [
-      { day: 'Day 1', title: 'Scenic Drive & Ascent to Ghandruk', description: 'Travel from Pokhara into the Modi Khola valley, gentle walk up stone staircases to village.' },
-      { day: 'Day 2', title: 'Village Life & Indigenous Crafts', description: 'Explore ancient stone corridors, visit traditional weavers, fireside dinner with hosts.' },
-      { day: 'Day 3', title: 'Sunrise Over Machhapuchhre', description: 'Golden dawn viewing, farewell village tea ceremony, gentle descent back to valley.' },
-    ],
-    impactFootprint: 'Supports village mothers’ groups (Aama Samuha) who maintain village stone paths, solar lights, and community hygiene.',
-  },
-  {
-    id: 'exp-home-3',
-    slug: 'helambu-hyolmo-hearth-living',
-    title: 'Helambu Hyolmo Mountain Hearth Living',
-    subtitle: 'Indigenous Hyolmo Buddhist culture, sweet organic apples, and pristine alpine quietude.',
-    category: 'homestays',
-    categoryLabel: 'Feel Closer',
-    duration: '3 - 5 Days',
-    location: 'Helambu Valley & Tarkeghyang',
-    elevation: '2,200 m - 2,600 m',
-    groupSize: 'Private / 1 - 4 Travelers',
-    season: 'Oct - May',
-    featured: false,
-    heroImage: {
-      src: '/explore-with-sakar/images/homestays/morning-tea-homestay.jpg',
-      alt: 'Balcony morning tea overlooking green mountain slopes and apple orchards',
-      caption: 'Peaceful Helambu morning tea on a traditional wooden village veranda.',
-    },
-    galleryImages: [
-      { src: '/explore-with-sakar/images/homestays/morning-tea-homestay.jpg', alt: 'Veranda tea' },
-      { src: '/explore-with-sakar/images/mountains/alpine-valley.jpg', alt: 'Helambu valley' },
-    ],
-    shortDescription: 'Tucked away just north of Kathmandu, Helambu is the homeland of the Hyolmo people. Experience peaceful stone villages, ancient gompas, and orchard hospitality.',
-    fullDescription: [
-      'Helambu offers a completely unhurried escape into Buddhist mountain life. The Hyolmo people are renowned for their warmth, artistic woodwork, and peaceful Buddhist lifestyle.',
-      'We stay in cozy family homes with wooden interiors, walk through rhododendron and bamboo groves, and visit ancient village shrines that have stood for four hundred years.',
-    ],
-    culturalHighlights: [
-      'Authentic immersion into unique Hyolmo Tibetan-Buddhist culture and language',
-      'Walking uncrowded trails through apple orchards and pine-scented mountain air',
-      'Evenings around family cast-iron woodstoves sharing mountain stories',
-    ],
-    sakarNote: 'Helambu feels like a sanctuary hidden behind the clouds. The pacing here is so gentle you can hear the wind through the cedar trees.',
-    itineraryOutline: [
-      { day: 'Day 1', title: 'Journey into Helambu Foothills', description: 'Drive north from Kathmandu, winding up forested ridges to historic Hyolmo settlements.' },
-      { day: 'Day 2', title: 'Gompa Visit & Orchard Walks', description: 'Visit village monasteries, walk through terraced apple orchards, hearthside dinner.' },
-      { day: 'Day 3', title: 'Ridge Panoramas & Mountain Tea', description: 'Panoramic morning views of Langtang peaks, community farewell, return to valley.' },
-    ],
-    impactFootprint: 'Direct economic benefit to indigenous Hyolmo households rebuilding sustainable eco-tourism post-earthquake.',
-  },
-  {
-    id: 'exp-home-4',
-    slug: 'bungamati-khokana-artisan-village',
-    title: 'Bungamati & Khokana Traditional Artisan Village Stay',
-    subtitle: 'Centuries of master woodcarvers, mustard-oil stone presses, and living Newar street life.',
-    category: 'homestays',
-    categoryLabel: 'Feel Closer',
-    duration: '2 - 3 Days',
-    location: 'Bungamati & Khokana (Southern Valley)',
-    elevation: '1,380 m',
-    groupSize: 'Private / 1 - 6 Travelers',
-    season: 'Year Round',
-    featured: false,
-    heroImage: {
-      src: '/explore-with-sakar/images/homestays/artisan-craftsman.jpg',
-      alt: 'Newari artisan carving wooden beam on village doorstep in Khokana',
-      caption: 'Living village workshops where woodcarving and oil pressing continue outdoors.',
-    },
-    galleryImages: [
-      { src: '/explore-with-sakar/images/homestays/artisan-craftsman.jpg', alt: 'Khokana artisan' },
-      { src: '/explore-with-sakar/images/heritage/temple-courtyard.jpg', alt: 'Bungamati courtyard' },
-    ],
-    shortDescription: 'Just a short drive from Kathmandu, Bungamati and Khokana preserve centuries of agricultural and artisan traditions. Experience open courtyards where craftsmen chisel timber in the sun.',
-    fullDescription: [
-      'Bungamati is the winter home of the revered rain deity Rato Machhindranath. Here, every street corner is an open-air workshop where master woodcarvers work on temple beams.',
-      'Neighbouring Khokana is legendary for its ancient heavy timber mustard-oil presses. Staying with local families allows you to witness the authentic pace of daily village life.',
-    ],
-    culturalHighlights: [
-      'Walking through open-air carving workshops along stone village lanes',
-      'Observing ancient traditional stone-weighted mustard oil extraction processes',
-      'Homestay with traditional Newari farming and carving families',
-    ],
-    sakarNote: 'In Khokana, the aroma of roasting mustard seeds fills the entire village. It is one of the most authentic sensory experiences in the entire valley.',
-    itineraryOutline: [
-      { day: 'Morning', title: 'Bungamati Woodcarvers', description: 'Walk through open courtyards watching masters carve delicate peacock windows.' },
-      { day: 'Midday', title: 'Khokana Mustard Oil & Heritage Feast', description: 'Visit historic oil pressing facilities, traditional Newari lunch with local hosts.' },
-      { day: 'Afternoon', title: 'Rato Machhindranath Temple Grounds', description: 'Explore the sacred courtyard where the rain deity spends six months of the year.' },
-    ],
-    impactFootprint: 'Direct income to traditional woodcarvers and village farming families working to keep ancestral trades alive.',
-  },
-
-  // =========================================================================
-  // ADDITIONAL GO BEYOND THE MAP EXPERIENCES
-  // =========================================================================
-  {
-    id: 'exp-resp-4',
+    id: 'exp-beyond-9',
     slug: 'muktinath-sacred-pilgrimage-passage',
     title: 'Muktinath Sacred Pilgrimage Circuit & High Valley Passage',
     subtitle: '108 holy spouts, sacred Kali Gandaki river canyon, medieval Kagbeni, and Apple orchards.',
@@ -632,9 +455,337 @@ export const EXPERIENCES: Experience[] = [
     ],
     impactFootprint: 'Supports indigenous Thakali hospitality cooperatives and high-altitude heritage conservation in Lower Mustang.',
   },
+
+  // =========================================================================
+  // GO SPIRITUAL (SACRED SOUND, MEDITATION CAVES & MONASTERY RETREATS)
+  // =========================================================================
+  {
+    id: 'exp-spirit-1',
+    slug: 'spiritual-immersion-singing-bowls',
+    title: '7-Metal Tibetan Singing Bowls & Sound Therapy',
+    subtitle: 'Private acoustic sound therapy with master healers using planetary acoustic frequencies.',
+    category: 'go-spiritual',
+    categoryLabel: 'Go Spiritual',
+    duration: 'Full Day / Half Day',
+    location: 'Kathmandu Valley Sound Sanctuary',
+    elevation: '1,400 m',
+    groupSize: 'Private / 1 - 4 Travelers',
+    season: 'Year Round',
+    featured: true,
+    heroImage: {
+      src: '/explore-with-sakar/images/spiritual/meditation-session.jpg',
+      alt: 'Master sound healer playing 7-metal Tibetan singing bowls in quiet sanctuary',
+      caption: 'Harmonic sound resonance therapy with hand-hammered planetary singing bowls.',
+    },
+    galleryImages: [
+      { src: '/explore-with-sakar/images/spiritual/meditation-session.jpg', alt: 'Singing bowl therapy' },
+      { src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg', alt: 'Meditation hall' },
+    ],
+    shortDescription: 'Experience the restorative acoustic frequencies of hand-hammered 7-metal Himalayan singing bowls tuned to planetary harmonics.',
+    fullDescription: [
+      'For centuries, Himalayan singing bowls crafted from an ancient seven-metal alloy have been used for acoustic healing, somatic relaxation, and meditative focus.',
+      'In this private sound immersion, you will sit and recline with master sound healers in a peaceful sanctuary. The pure harmonic vibrations gently quiet mental chatter, balance energy centers, and induce deep restful presence.',
+    ],
+    culturalHighlights: [
+      'Private 1-on-1 sound therapy session with certified master Himalayan sound healers',
+      'Experiencing acoustic harmonics of hand-hammered planetary 7-metal bowls',
+      'Learning the history, craftsmanship, and vibrational science of singing bowls',
+    ],
+    sakarNote: 'The singing bowl does not force quiet upon the mind; its pure vibration gently invites the mind home.',
+    itineraryOutline: [
+      { day: 'Session 1', title: 'Acoustic Alignment & Intro', description: 'Introduction to bowl frequencies, breath settling, and gentle acoustic introduction.' },
+      { day: 'Session 2', title: 'Full Somatic Sound Bath', description: 'Deep vibrational sound bath with bowls placed around and on energy points for cellular relaxation.' },
+      { day: 'Closing', title: 'Herbal Tea & Integration', description: 'Quiet reflection, herbal tea ceremony, and integration dialogue with the sound master.' },
+    ],
+    impactFootprint: 'Direct patronage of traditional Newar and Tibetan artisan bowl-smith families and certified sound therapy practitioners.',
+  },
+  {
+    id: 'exp-spirit-2',
+    slug: 'pharping-sacred-cave-meditation',
+    title: 'Pharping Guru Padmasambhava Asura & Yangleshö Sacred Caves',
+    subtitle: 'Stillness inside 8th-century meditation caves, sacred pine ridge trails, and butter lamp rituals.',
+    category: 'go-spiritual',
+    categoryLabel: 'Go Spiritual',
+    duration: '2 - 3 Days',
+    location: 'Pharping & Southern Valley Ridge',
+    elevation: '1,550 m',
+    groupSize: 'Private / 1 - 4 Travelers',
+    season: 'Year Round',
+    featured: true,
+    heroImage: {
+      src: '/explore-with-sakar/images/spiritual/meditation-session.jpg',
+      alt: 'Ancient cliff meditation cave in Pharping with butter lamps',
+      caption: 'The sacred Asura Cave where ancient meditation masters achieved inner illumination.',
+    },
+    galleryImages: [
+      { src: '/explore-with-sakar/images/spiritual/meditation-session.jpg', alt: 'Pharping cave' },
+      { src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg', alt: 'Meditation bells' },
+    ],
+    shortDescription: 'Sit in the deep silence of Asura Cave where Padmasambhava meditated in the 8th century, surrounded by whispering pine forests and prayer flags.',
+    fullDescription: [
+      'Pharping is one of the most powerful spiritual sanctuaries in the Himalayan region. Here, holy caves cut into rocky limestone hillsides hold centuries of continuous meditation practice.',
+      'With Sakar, you will step away from commercial tourism and spend unhurried hours sitting inside the rock chambers, learning the history of Vajrayana Buddhism, and sharing quiet moments with resident hermits.',
+    ],
+    culturalHighlights: [
+      'Unhurried sitting meditation inside Asura Cave and Yanglesho sacred cliffs',
+      'Lighting 108 butter lamps with Tibetan practitioners for world peace and clarity',
+      'Walking through sacred pine forests draped in thousands of wind-fluttered prayer flags',
+    ],
+    sakarNote: 'The air in Pharping is visibly different. Inside the rock cave, the coolness and silence immediately calm a busy mind.',
+    itineraryOutline: [
+      { day: 'Morning', title: 'Ridge Trail to Sacred Caves', description: 'Walk through pine groves up to the holy cave complex, meeting resident caretakers.' },
+      { day: 'Midday', title: 'Sitting Meditation & Lamp Offering', description: 'Silent contemplation inside the cave followed by ceremonial butter lamp illumination.' },
+      { day: 'Afternoon', title: 'Monastery Tea & Monastic Dialogue', description: 'Sit with a resident scholar monk over herbal tea discussing mindfulness and compassionate action.' },
+    ],
+    impactFootprint: 'Support for monastic cave preservation and local monastery educational funds.',
+  },
+  {
+    id: 'exp-spirit-3',
+    slug: 'namo-buddha-sacred-ridge-walk',
+    title: 'Namo Buddha Sacred Stupa & Contemplative Ridge Walk',
+    subtitle: 'Panoramic mountain vistas, stories of great compassion, and monastery tranquility on high ridges.',
+    category: 'go-spiritual',
+    categoryLabel: 'Go Spiritual',
+    duration: '2 - 3 Days',
+    location: 'Namo Buddha & Kavre Ridge',
+    elevation: '1,750 m',
+    groupSize: 'Private / 1 - 6 Travelers',
+    season: 'Year Round (Best Sep - May)',
+    featured: true,
+    heroImage: {
+      src: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
+      alt: 'White stupa with colorful Buddhist prayer flags overlooking Himalayan snow peaks',
+      caption: 'Namo Buddha sacred sanctuary perched high on an emerald mountain ridge.',
+    },
+    galleryImages: [
+      { src: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg', alt: 'Namo Buddha Stupa' },
+      { src: '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg', alt: 'Dawn Himalayan views' },
+    ],
+    shortDescription: 'Perched on a tranquil mountain ridge, Namo Buddha is revered for an ancient story of radical compassion. Experience panoramic Himalayan views and peaceful monastery grounds.',
+    fullDescription: [
+      'Namo Buddha is one of the three most sacred Buddhist pilgrimage sites in Nepal. According to ancient lore, this is where the Buddha in a previous life sacrificed his body to feed a starving tigress and her cubs.',
+      'We walk the quiet village paths leading up to Thrangu Tashi Yangtse Monastery, attend evening chanting ceremonies, and wake at dawn to watch sunrise golden light wash over the high Himalayan crests.',
+    ],
+    culturalHighlights: [
+      'Contemplative ridge trail walk through terraced farmland and Tamang villages',
+      'Attending evening drum and horn puja inside Thrangu Tashi Yangtse Monastery',
+      'Dawn sunrise panorama sweeping from Langtang to the Everest region',
+    ],
+    sakarNote: 'The story of Namo Buddha is about compassion without conditions. Walking these quiet ridges helps us reflect on what we give to the world.',
+    itineraryOutline: [
+      { day: 'Day 1', title: 'Panauti to Namo Buddha Trail Walk', description: 'Unhurried hike through organic fields and forested hills to the monastery ridge.' },
+      { day: 'Day 2', title: 'Monastery Puja & Sacred Stupa Kora', description: 'Early morning meditation, visiting the sacred tigress cliff, and peaceful contemplation.' },
+    ],
+    impactFootprint: 'Direct donations to monastic schools providing free education to young monks from remote mountain valleys.',
+  },
+  {
+    id: 'exp-spirit-4',
+    slug: 'monastery-chanting-inner-silence',
+    title: 'Monastery Dawn Chanting & Inner Silence Retreat',
+    subtitle: 'Deep contemplation with Tibetan monks, resonant gong rhythms, and mindful mountain walking.',
+    category: 'go-spiritual',
+    categoryLabel: 'Go Spiritual',
+    duration: '3 - 5 Days',
+    location: 'Kathmandu Foothill Sanctuaries',
+    elevation: '1,600 m',
+    groupSize: 'Private / 1 - 4 Travelers',
+    season: 'Year Round',
+    featured: true,
+    heroImage: {
+      src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg',
+      alt: 'Monastery sound bowls and sacred meditation cushions in quiet hall',
+      caption: 'Quiet monastery sanctuary tuned to contemplation and inner renewal.',
+    },
+    galleryImages: [
+      { src: '/explore-with-sakar/images/spiritual/monastery-interior.jpg', alt: 'Monastery chanting cushions' },
+      { src: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg', alt: 'Peaceful stupa' },
+    ],
+    shortDescription: 'Step out of constant digital connection into the restorative rhythm of living monastic life, resonant deep-throat chanting, and silent morning walks.',
+    fullDescription: [
+      'This retreat is designed for those seeking deep mental clarity. Hosted in a quiet monastery guesthouse in the peaceful valley foothills, you will follow the daily contemplative schedule of resident monks.',
+      'Each day begins with 5:30 AM deep horn calls and resonant chanting, followed by guided mindful walking through mountain oak forests and reflective evening tea sessions with resident teachers.',
+    ],
+    culturalHighlights: [
+      'Participation in authentic dawn and dusk monastic chanting sessions',
+      'Daily periods of noble silence for mindfulness, journaling, and contemplation',
+      'Private dialogues with English-speaking Buddhist meditation masters',
+    ],
+    sakarNote: 'After two days of noble silence here, guests always tell me their senses have completely reopened. You notice the birds, the wind, and your own breath.',
+    itineraryOutline: [
+      { day: 'Day 1', title: 'Entering the Sanctuary', description: 'Welcome herbal tea, monastery orientation, settling into peaceful retreat rooms.' },
+      { day: 'Day 2', title: 'Dawn Puja & Silent Forest Walk', description: 'Morning chanting ceremony, mindful forest walking, and afternoon reading.' },
+      { day: 'Day 3', title: 'Closing Reflection & Blessing', description: 'Personal reflection session, master blessing, and gentle re-entry into daily life.' },
+    ],
+    impactFootprint: 'Funds directly sponsor monastery medical dispensaries and traditional monastic manuscript preservation.',
+  },
+
+  // =========================================================================
+  // FEEL CLOSER (VILLAGE HOMESTAYS & LIVING HEARTHS)
+  // =========================================================================
+  {
+    id: 'exp-home-1',
+    slug: 'village-homestay-panauti-balalthali',
+    title: 'Panauti & Balthali Living Hearth Village Homestay',
+    subtitle: 'Stay inside multi-generational family homes, cook over wood fires, and walk peaceful terraced fields.',
+    category: 'homestays',
+    categoryLabel: 'Feel Closer',
+    duration: '3 - 4 Days',
+    location: 'Panauti Ancient Town & Balthali Plateau',
+    elevation: '1,450 m',
+    groupSize: 'Private / 1 - 6 Travelers',
+    season: 'Year Round',
+    featured: true,
+    heroImage: {
+      src: '/explore-with-sakar/images/homestays/village-meal.jpg',
+      alt: 'Steaming organic dal bhat served on brass plates in village homestay',
+      caption: 'Warm hearthside hospitality: home-cooked meals straight from the family garden.',
+    },
+    galleryImages: [
+      { src: '/explore-with-sakar/images/homestays/village-meal.jpg', alt: 'Fresh organic meal' },
+      { src: '/explore-with-sakar/images/homestays/stone-village-house.jpg', alt: 'Traditional stone home' },
+      { src: '/explore-with-sakar/images/homestays/organic-farming.jpg', alt: 'Terraced organic farming' },
+    ],
+    shortDescription: 'Move from being an observer to becoming an welcomed guest. Sleep in verified family homestays, harvest garden vegetables, and listen to fireside stories.',
+    fullDescription: [
+      'Panauti is a medieval Newari town that feels frozen in a gentler century. We base ourselves in authentic family-run homestays where you will have your own clean, private lockable room while sharing daily life with your host family.',
+      'Help pick fresh mustard greens and potatoes from the backyard garden, watch bread bake over wood embers, and sit around the hearth as elders share community folklore.',
+    ],
+    culturalHighlights: [
+      'Living as an honored family guest in verified, spotlessly clean private homestay rooms',
+      'Harvesting fresh organic vegetables directly from terraced family kitchen gardens',
+      'Learning to cook traditional Dal Bhat, local pickles, and fresh chapati over clay hearths',
+      'Unhurried walks through ancient stone lanes, mustard fields, and orange groves',
+    ],
+    sakarNote: 'When you sit around a clay stove in Panauti eating rice harvested by the family sitting next to you, the distance between visitor and host completely dissolves.',
+    itineraryOutline: [
+      { day: 'Day 1', title: 'Welcome to Panauti Hearth', description: 'Arrive in ancient Panauti, meet your host family, welcome tea, evening hearthside cooking.' },
+      { day: 'Day 2', title: 'Organic Garden Harvest & Temple Walk', description: 'Morning field walk, harvesting vegetables, exploring medieval Indreshwar Mahadev temple.' },
+      { day: 'Day 3', title: 'Balthali Plateau Ridge Hike', description: 'Gentle walk through pine woods up to Balthali village, panoramic sunset views.' },
+      { day: 'Day 4', title: 'Farewell Blessing & Departure', description: 'Traditional tika blessing from your host mother, farewell breakfast, slow return.' },
+    ],
+    impactFootprint: '100% of accommodation and food payments go directly into family hands, empowering rural women hosts.',
+  },
+  {
+    id: 'exp-home-2',
+    slug: 'ghandruk-gurung-heritage-homestay',
+    title: 'Ghandruk Gurung Heritage & Mountain Hearth Homestay',
+    subtitle: 'Stone slate roofs beneath Annapurna peaks, honey harvesting tales, and traditional hearth hospitality.',
+    category: 'homestays',
+    categoryLabel: 'Feel Closer',
+    duration: '3 - 5 Days',
+    location: 'Ghandruk Village, Annapurna Foothills',
+    elevation: '1,940 m',
+    groupSize: 'Private / 1 - 6 Travelers',
+    season: 'Sep - May',
+    featured: true,
+    heroImage: {
+      src: '/explore-with-sakar/images/homestays/stone-village-house.jpg',
+      alt: 'Traditional Gurung stone house with slate roof beneath snowy Annapurna South',
+      caption: 'Ancient stone slate Gurung homesteads looking directly onto Annapurna South and Hiunchuli.',
+    },
+    galleryImages: [
+      { src: '/explore-with-sakar/images/homestays/stone-village-house.jpg', alt: 'Gurung homestay' },
+      { src: '/explore-with-sakar/images/mountains/himalayan-peaks.jpg', alt: 'Annapurna South peak' },
+    ],
+    shortDescription: 'Nestled on a steep terraced hillside directly facing Annapurna South, Ghandruk is the heartland of Gurung culture. Stay with local families in traditional stone slate homesteads.',
+    fullDescription: [
+      'Ghandruk is renowned across Nepal for its proud Gurung heritage, stone-paved alleyways, and breathtaking close-up vistas of Annapurna South and Machhapuchhre.',
+      'We stay in traditional stone slate village homestays where local mothers welcome you with warm smiles and hot Himalayan tea. Learn about Gurung culture, traditional weaving, and ancestral honey hunting.',
+    ],
+    culturalHighlights: [
+      'Waking to sunrise golden light turning Annapurna South pink directly from your bedroom window',
+      'Staying with authentic Gurung host families in preserved traditional stone slate architecture',
+      'Visiting the Gurung Cultural Museum and learning about ancient cliff honey harvesting traditions',
+    ],
+    sakarNote: 'Sitting on a carved wooden porch in Ghandruk with a cup of hot sea buckthorn tea while dawn hits the Annapurna ice face is something you never forget.',
+    itineraryOutline: [
+      { day: 'Day 1', title: 'Pokhara to Ghandruk Stone Trail', description: 'Scenic foothill drive and gentle stone stair walk into Ghandruk village.' },
+      { day: 'Day 2', title: 'Village Rhythms & Gurung Museum', description: 'Morning mountain sunrise, visiting village weavers, and sharing hearthside evening meals.' },
+      { day: 'Day 3', title: 'Terraced Field Walk & Return', description: 'Paced walking through organic millet terraces, sharing farewell tea before return.' },
+    ],
+    impactFootprint: 'Direct fair-wage payment to Gurung women-led homestay management committees.',
+  },
+  {
+    id: 'exp-home-3',
+    slug: 'helambu-hyolmo-hearth-living',
+    title: 'Helambu Hyolmo Hearth & Buddhist Village Homestay',
+    subtitle: 'Quiet apple orchards, Tamang & Hyolmo culture, and serene mountain home hospitality.',
+    category: 'homestays',
+    categoryLabel: 'Feel Closer',
+    duration: '3 - 4 Days',
+    location: 'Helambu Valley, Sindhupalchok',
+    elevation: '2,200 m',
+    groupSize: 'Private / 1 - 4 Travelers',
+    season: 'Year Round (Best Oct - May)',
+    featured: false,
+    heroImage: {
+      src: '/explore-with-sakar/images/homestays/organic-farming.jpg',
+      alt: 'Quiet mountain village terraces with apple trees in Helambu',
+      caption: 'The tranquil apple orchards and stone homes of Helambu valley.',
+    },
+    galleryImages: [
+      { src: '/explore-with-sakar/images/homestays/organic-farming.jpg', alt: 'Helambu terraces' },
+      { src: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg', alt: 'Village stupa' },
+    ],
+    shortDescription: 'Just north of Kathmandu Valley lies Helambu, a secluded sanctuary famous for sweet apples, Hyolmo Buddhist culture, and peaceful mountain village homestays.',
+    fullDescription: [
+      'Helambu offers an unhurried, crowd-free glimpse into high mountain village life. Here, Hyolmo and Tamang communities maintain rich Buddhist traditions surrounded by green forests and snow peaks.',
+      'Stay in family homes, taste freshly baked millet bread, walk quiet trails past ancient prayer walls, and experience genuine Himalayan warmth.',
+    ],
+    culturalHighlights: [
+      'Authentic village homestay hospitality with indigenous Hyolmo host families',
+      'Walking quiet village paths lined with carved mani stone prayer walls',
+      'Tasting local organic apples, mountain yak cheese, and hearth-cooked specialties',
+    ],
+    sakarNote: 'Helambu is so close to Kathmandu yet feels a million miles away in peace and quiet.',
+    itineraryOutline: [
+      { day: 'Day 1', title: 'Drive to Helambu Foothills & Village Walk', description: 'Scenic drive from Kathmandu, walking into peaceful village homestay.' },
+      { day: 'Day 2', title: 'Hyolmo Culture & Monastery Walk', description: 'Explore local gompa, walk through apple orchards, evening hearthside dialogue.' },
+      { day: 'Day 3', title: 'Quiet Morning & Return', description: 'Dawn mountain views, breakfast with host family, gentle return journey.' },
+    ],
+    impactFootprint: 'Supports village homestay cooperatives and rural community apple orchard sustainability.',
+  },
+  {
+    id: 'exp-home-4',
+    slug: 'bungamati-khokana-artisan-village',
+    title: 'Bungamati & Khokana Historic Newar Artisan Village Stay',
+    subtitle: 'Mustard oil presses, woodcarvers, living courtyards, and rural valley heritage.',
+    category: 'homestays',
+    categoryLabel: 'Feel Closer',
+    duration: '2 Days',
+    location: 'Bungamati & Khokana, Southern Kathmandu Valley',
+    elevation: '1,350 m',
+    groupSize: 'Private / 1 - 6 Travelers',
+    season: 'Year Round',
+    featured: false,
+    heroImage: {
+      src: '/explore-with-sakar/images/homestays/village-meal.jpg',
+      alt: 'Ancient Newari village brick street with women drying mustard seeds in sun',
+      caption: 'Historic Newar agricultural villages where traditional woodcarving and mustard oil pressing thrive.',
+    },
+    galleryImages: [
+      { src: '/explore-with-sakar/images/homestays/village-meal.jpg', alt: 'Bungamati courtyard' },
+      { src: '/explore-with-sakar/images/heritage/newari-architecture.jpg', alt: 'Newari window' },
+    ],
+    shortDescription: 'Step into the traditional Newar agricultural villages of Bungamati and Khokana at the southern edge of the valley, famous for Rato Machhindranath and mustard oil pressing.',
+    fullDescription: [
+      'Bungamati and Khokana preserve an authentic agricultural way of life where mustard seed harvesting, wooden loom spinning, and deity woodcarving are part of daily routine.',
+      'Stay in a restored traditional Newar home, watch master woodcarvers at work, and smell the rich aroma of traditional heavy wooden mustard oil presses.',
+    ],
+    culturalHighlights: [
+      'Overnight heritage homestay experience inside a traditional brick Newar house',
+      'Observing the ancient heavy timber mustard oil pressing process in Khokana',
+      'Visiting Bungamati woodcarvers crafting sacred chariots and temple struts',
+    ],
+    sakarNote: 'Khokana has avoided modern concrete development like few places in the valley. Walking its brick streets at dusk feels like stepping 200 years back in time.',
+    itineraryOutline: [
+      { day: 'Day 1', title: 'Arrival in Khokana & Oil Press Visit', description: 'Explore Khokana brick lanes, traditional mustard oil mill, home dinner.' },
+      { day: 'Day 2', title: 'Bungamati Woodcarvers & Machhindranath Shrine', description: 'Morning walk to Bungamati, visiting Rato Machhindranath temple site and artisan workshops.' },
+    ],
+    impactFootprint: 'Direct income for local Newar family hosts and mustard oil artisan cooperatives.',
+  },
 ];
 
 export function getExperienceBySlug(slug: string): Experience | undefined {
   return EXPERIENCES.find((e) => e.slug === slug);
 }
-

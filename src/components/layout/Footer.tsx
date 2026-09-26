@@ -141,18 +141,23 @@ export default function Footer() {
                 </h4>
                 <ul className="space-y-2.5 text-xs text-himalaya-800 font-medium">
                   <li>
-                    <Link href="/experiences/beyond-the-map" className="hover:text-terracotta transition-colors font-medium text-himalaya-950">
+                    <Link href="/experiences/beyond-the-map" className="hover:text-terracotta transition-colors">
                       Go Beyond the Map
                     </Link>
                   </li>
                   <li>
-                    <Link href="/experiences/go-spiritual" className="hover:text-terracotta transition-colors">
-                      Go Spiritual
+                    <Link href="/experiences/spiritual-wellness" className="hover:text-terracotta transition-colors">
+                      Go Within
                     </Link>
                   </li>
                   <li>
                     <Link href="/experiences/homestays" className="hover:text-terracotta transition-colors">
-                      Feel Closer (Homestays)
+                      Feel Closer
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/experiences/leave-a-mark" className="hover:text-terracotta transition-colors">
+                      Leave a Mark
                     </Link>
                   </li>
                   <li>

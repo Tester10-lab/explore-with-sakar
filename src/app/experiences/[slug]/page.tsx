@@ -9,12 +9,11 @@ import {
 import { buildPageMetadata } from '@/lib/seo';
 import ExperiencePackageDiscovery, { PackageCard } from '@/components/experience/ExperiencePackageDiscovery';
 import CustomJourneysExperience from '@/components/experience/CustomJourneysExperience';
+import GoSpiritualExperience from '@/components/experience/GoSpiritualExperience';
 import { getPublicEvents } from '@/lib/content';
 import { SITE_ORIGIN } from '@/lib/config';
 
-// Force dynamic rendering so Vercel never serves a stale statically-cached
-// version of a pillar page (beyond-the-map, go-within, etc.).
-// Topic cards come from the database and must reflect live CMS data.
+// Force dynamic rendering so Vercel never serves a stale statically-cached version
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
@@ -35,18 +34,16 @@ const TOPIC_TO_PARENT_MAP: Record<string, string> = {
   'patan-square': 'beyond-the-map',
   'pokhara-laid-back-city': 'beyond-the-map',
   'pokhara': 'beyond-the-map',
-  'spiritual-immersion-singing-bowls': 'go-within',
-  'pharping-sacred-cave-meditation': 'go-within',
-  'namo-buddha-sacred-ridge-walk': 'go-within',
-  'monastery-chanting-inner-silence': 'go-within',
-  'living-courtyards-kathmandu': 'go-deeper',
-  'echoes-in-stone-patan-bhaktapur': 'go-deeper',
-  'artisans-path-heritage-deep-dive': 'go-deeper',
-  'sacred-geometry-architecture-valley': 'go-deeper',
-  'langtang-tamang-heritage-trail': 'leave-a-mark',
-  'chitwan-indigenous-tharu-guardians': 'leave-a-mark',
-  'community-sacred-forest-reforestation': 'leave-a-mark',
-  'strategic-community-capacity-building': 'leave-a-mark',
+  'living-courtyards-kathmandu': 'beyond-the-map',
+  'echoes-in-stone-patan-bhaktapur': 'beyond-the-map',
+  'artisans-path-heritage-deep-dive': 'beyond-the-map',
+  'sacred-geometry-architecture-valley': 'beyond-the-map',
+  'chitwan-national-park': 'beyond-the-map',
+  'muktinath-sacred-pilgrimage-passage': 'beyond-the-map',
+  'spiritual-immersion-singing-bowls': 'go-spiritual',
+  'pharping-sacred-cave-meditation': 'go-spiritual',
+  'namo-buddha-sacred-ridge-walk': 'go-spiritual',
+  'monastery-chanting-inner-silence': 'go-spiritual',
   'village-homestay-panauti-balalthali': 'homestays',
   'ghandruk-gurung-heritage-homestay': 'homestays',
   'helambu-hyolmo-hearth-living': 'homestays',
@@ -133,6 +130,7 @@ export async function generateStaticParams() {
   const canonicalPillars = [
     'beyond-the-map',
     'go-spiritual',
+    'spiritual-wellness',
     'go-deeper',
     'homestays',
     'custom-journeys',
@@ -169,32 +167,16 @@ export default async function ExperienceDetailPage({ params }: Props) {
     permanentRedirect(`/experiences/${parentSlug}/${slug}`);
   }
 
-  // 3. Core experience pillars → Package Discovery pages (showing Overview, Highlights, and 4 Topic cards)
-  const pillar = EXPERIENCE_PILLARS[slug];
-  if (pillar) {
+  // 3. Special Go Spiritual Page Renderer if requested
+  if (slug === 'go-spiritual' || slug === 'spiritual-wellness') {
+    const pageContent = await getPageContent(slug);
+    const pillar = EXPERIENCE_PILLARS[slug] || EXPERIENCE_PILLARS['go-spiritual'];
     const allExperiences = await getPublicExperiences();
 
-    // All experience-level (parent) slugs and their legacy aliases.
-    // These must NEVER appear as topic cards inside a pillar discovery page.
     const PARENT_SLUGS_TO_EXCLUDE = new Set([
-      // beyond-the-map pillar + aliases
-      'beyond-the-map',
-      'go-beyond',
-      // go-within pillar + aliases
-      'go-within',
-      'go-spiritual',
-      'spiritual-wellness',
-      // go-deeper pillar
-      'go-deeper',
-      // leave-a-mark pillar
-      'leave-a-mark',
-      // homestays / feel-closer pillar
-      'homestays',
-      'feel-closer',
-      // other parent-level slugs
-      'all-curated-experiences',
-      'custom-journeys',
-      'custom-private-journeys',
+      'beyond-the-map', 'go-beyond', 'go-within', 'go-spiritual',
+      'spiritual-wellness', 'go-deeper', 'leave-a-mark', 'homestays',
+      'feel-closer', 'all-curated-experiences', 'custom-journeys', 'custom-private-journeys',
     ]);
 
     const pillarPackages: PackageCard[] = allExperiences
@@ -210,7 +192,6 @@ export default async function ExperienceDetailPage({ params }: Props) {
         heroImage: exp.heroImage ? { src: exp.heroImage.src, alt: exp.heroImage.alt } : undefined,
       }));
 
-    // Guarantee that all curated canonical topics are visible to the client
     const seenSlugs = new Set(pillarPackages.map((p) => p.slug));
     const fallbackTopics: PackageCard[] = EXPERIENCES
       .filter(
@@ -228,7 +209,61 @@ export default async function ExperienceDetailPage({ params }: Props) {
 
     const finalPackages = [...pillarPackages, ...fallbackTopics];
 
-    // If CMS has a parent experience record, allow its customized title/intro/overview/highlights to be used
+    return (
+      <ExperiencePackageDiscovery
+        experienceName={pillar.name}
+        nepaliTitle={pillar.nepaliTitle}
+        introText={pillar.introText}
+        overviewText={pillar.overviewText}
+        highlights={pillar.highlights}
+        heroImage={pillar.heroImage}
+        packages={finalPackages}
+        experienceSlug={pillar.canonicalSlug}
+      />
+    );
+  }
+
+  // 4. Core experience pillars → Package Discovery pages
+  const pillar = EXPERIENCE_PILLARS[slug];
+  if (pillar) {
+    const allExperiences = await getPublicExperiences();
+
+    const PARENT_SLUGS_TO_EXCLUDE = new Set([
+      'beyond-the-map', 'go-beyond', 'go-within', 'go-spiritual',
+      'spiritual-wellness', 'go-deeper', 'leave-a-mark', 'homestays',
+      'feel-closer', 'all-curated-experiences', 'custom-journeys', 'custom-private-journeys',
+    ]);
+
+    const pillarPackages: PackageCard[] = allExperiences
+      .filter(
+        (exp) =>
+          pillar.categoryFilter.includes(exp.category) &&
+          !PARENT_SLUGS_TO_EXCLUDE.has(exp.slug)
+      )
+      .map((exp) => ({
+        slug: exp.slug,
+        title: exp.title,
+        shortDescription: exp.shortDescription,
+        heroImage: exp.heroImage ? { src: exp.heroImage.src, alt: exp.heroImage.alt } : undefined,
+      }));
+
+    const seenSlugs = new Set(pillarPackages.map((p) => p.slug));
+    const fallbackTopics: PackageCard[] = EXPERIENCES
+      .filter(
+        (exp) =>
+          pillar.categoryFilter.includes(exp.category) &&
+          !PARENT_SLUGS_TO_EXCLUDE.has(exp.slug) &&
+          !seenSlugs.has(exp.slug)
+      )
+      .map((exp) => ({
+        slug: exp.slug,
+        title: exp.title,
+        shortDescription: exp.shortDescription,
+        heroImage: exp.heroImage ? { src: exp.heroImage.src, alt: exp.heroImage.alt } : undefined,
+      }));
+
+    const finalPackages = [...pillarPackages, ...fallbackTopics];
+
     const cmsParent = allExperiences.find((e) => e.slug === slug);
     const expName = cmsParent?.title || pillar.name;
     const expIntro = cmsParent?.shortDescription || pillar.introText;
@@ -254,7 +289,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
     );
   }
 
-  // 4. Custom Journeys (special handler, preserved)
+  // 5. Custom Journeys
   if (slug === 'custom-journeys') {
     const [pageContent, events] = await Promise.all([
       getPageContent('custom-journeys').then((res) => res || getPageContent('custom-private-journeys')),
@@ -268,21 +303,19 @@ export default async function ExperienceDetailPage({ params }: Props) {
     return <CustomJourneysExperience pageContent={pageContent} availableEvents={availableEvents} />;
   }
 
-  // 5. Fallback for any single-topic experience not mapped above
+  // 6. Fallback for any single-topic experience
   const experience = await getPublicExperienceBySlug(slug);
   if (!experience) {
     notFound();
   }
 
-  // If experience has a known parent category, redirect to canonical nested route
   const categoryToParent: Record<string, string> = {
     'beyond-the-map': 'beyond-the-map',
     'go-beyond': 'beyond-the-map',
-    'go-within': 'go-within',
-    'go-spiritual': 'go-within',
-    'spiritual-wellness': 'go-within',
+    'go-spiritual': 'go-spiritual',
+    'spiritual-wellness': 'go-spiritual',
+    'spiritual': 'go-spiritual',
     'go-deeper': 'go-deeper',
-    'leave-a-mark': 'leave-a-mark',
     'homestays': 'homestays',
     'feel-closer': 'homestays',
   };
@@ -294,4 +327,3 @@ export default async function ExperienceDetailPage({ params }: Props) {
 
   notFound();
 }
-

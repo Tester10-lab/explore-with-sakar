@@ -243,21 +243,59 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                         </Link>
 
                         <Link
-                          href="/experiences/go-spiritual"
+                          href="/experiences/go-within"
                           onClick={onClose}
                           className="block group pt-2.5 pb-1"
                         >
                           <div className="flex items-center justify-between">
                             <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
-                              <Heart className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
-                              Go Spiritual
+                              <Sparkles className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Go Within
                             </span>
                             <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
                               Spiritual
                             </span>
                           </div>
                           <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                            Sound therapy, dawn monastery chant pujas & sacred meditation retreats.
+                            Himalayan singing bowl resonance, monastery chanting & meditation caves.
+                          </p>
+                        </Link>
+
+                        <Link
+                          href="/experiences/go-deeper"
+                          onClick={onClose}
+                          className="block group pt-2.5 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <Compass className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Go Deeper
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Immersion
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Living courtyards, sacred geometry & generational artisan traditions.
+                          </p>
+                        </Link>
+
+                        <Link
+                          href="/experiences/leave-a-mark"
+                          onClick={onClose}
+                          className="block group pt-2.5 pb-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-editorial-serif text-xs font-bold text-himalaya-900 group-hover:text-terracotta transition-colors flex items-center">
+                              <Heart className="w-3.5 h-3.5 mr-1.5 text-terracotta" />
+                              Leave a Mark
+                            </span>
+                            <span className="text-[9px] font-semibold text-terracotta bg-terracotta/10 px-1.5 py-0.5 rounded">
+                              Strategic
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
+                            Strategic volunteer tourism & administrative empowerment.
                           </p>
                         </Link>
 
@@ -276,7 +314,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                             </span>
                           </div>
                           <p className="text-[11px] text-himalaya-600 font-light leading-snug pl-5 mt-0.5">
-                            Authentic family village homestays, hearthside cooking & mountain warmth.
+                            Traditional village homestays, hearthside cooking & warm family bonds.
                           </p>
                         </Link>
 
