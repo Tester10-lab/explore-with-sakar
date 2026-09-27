@@ -35,13 +35,11 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
   const allExperiences = await getPublicExperiences();
   const spiritualItineraries = allExperiences.filter(
     (e) =>
-      e.category === 'spiritual' ||
       e.category === 'go-within' ||
-      e.slug.includes('spiritual') ||
-      e.slug.includes('meditation') ||
-      e.slug.includes('monastery') ||
-      e.slug.includes('cave')
-  ).slice(0, 3);
+      e.category === 'spiritual' ||
+      e.category === 'spiritual-wellness' ||
+      e.category === 'go-spiritual'
+  );
 
   const hero = getPageHeroOverrides(pageContent, {
     badge: 'Spiritual Sanctuary & Sacred Geometry',
@@ -226,6 +224,23 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
                         ))}
                       </div>
                     </div>
+
+                    {/* Chapter Package Link & Quick Inquiry */}
+                    <div className="pt-6 border-t border-parchment-200 flex flex-wrap items-center gap-3">
+                      <Link
+                        href={`/experiences/go-within/${chap.id}`}
+                        className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-full bg-himalaya-950 text-white hover:bg-terracotta text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-sm"
+                      >
+                        <span>View Dedicated Itinerary & Book</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                      <Link
+                        href={`/contact?subject=${encodeURIComponent(`Inquiry: Go Within - ${chap.title}`)}`}
+                        className="inline-flex items-center space-x-1.5 px-4 py-2.5 rounded-full border border-parchment-300 bg-white hover:bg-parchment-200 text-himalaya-800 text-xs font-semibold tracking-wider transition-colors"
+                      >
+                        <span>Inquire About Package</span>
+                      </Link>
+                    </div>
                   </div>
 
                   <div className="lg:col-span-5 space-y-6">
@@ -315,10 +330,10 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
         <section className="py-20 sm:py-28 bg-white border-y border-parchment-300">
           <div className="editorial-container">
             <SectionHeading
-              tag="Curated Departures"
-              nepaliTag="विशेष आध्यात्मिक यात्राहरू"
-              title="Individual Spiritual Journeys"
-              description="Explore single day and multi-day packages under the Go Within pillar."
+              tag="Curated Packages"
+              nepaliTag="८ विशेष अन्तर्यात्रा प्याकेजहरू"
+              title="8 Dedicated Go Within Packages"
+              description="Explore each of our 8 sacred and contemplative journeys across Kathmandu Valley and Himalayan sanctuaries."
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">

@@ -6,6 +6,7 @@ export type ExperienceCategory =
   | 'heritage'
   | 'responsible'
   | 'beyond-the-map'
+  | 'go-within'
   | 'go-spiritual'
   | 'spiritual-wellness'
   | 'go-deeper'

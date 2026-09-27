@@ -1,7 +1,7 @@
 import 'server-only';
 import { unstable_cache } from 'next/cache';
 import { readKey } from './store';
-import { getSeedForKey } from './seed';
+import { getSeedForKey, getDefaultExperiences } from './seed';
 import {
   WebsiteSettings,
   NavigationConfig,
@@ -146,7 +146,16 @@ const fetchCachedExperiences = unstable_cache(
 
 export async function getPublicExperiences(): Promise<ExtendedExperience[]> {
   try {
-    return await fetchCachedExperiences();
+    const list = await fetchCachedExperiences();
+    const cmsMap = new Map((list || []).map((e) => [e.slug, e]));
+    const defaults = getDefaultExperiences();
+    const merged: ExtendedExperience[] = [...list];
+    for (const def of defaults) {
+      if (!cmsMap.has(def.slug)) {
+        merged.push(def);
+      }
+    }
+    return merged.filter((exp) => exp.status === 'published');
   } catch (err) {
     console.warn('[content] Mongo unreachable, returning static fallback for experiences:', err);
     const seed = getSeedForKey('experiences') as ExtendedExperience[];
@@ -160,14 +169,8 @@ export async function getPublicExperiences(): Promise<ExtendedExperience[]> {
  * Falls back to seed data if MongoDB is unreachable.
  */
 export async function getPublicExperienceBySlug(slug: string): Promise<ExtendedExperience | null> {
-  try {
-    const all = await fetchCachedExperiences();
-    return all.find((e) => e.slug === slug || e.id === slug) || null;
-  } catch (err) {
-    console.warn(`[content] Mongo unreachable, returning static fallback for experience ${slug}:`, err);
-    const seed = getSeedForKey('experiences') as ExtendedExperience[];
-    return (seed || []).find((e) => (e.slug === slug || e.id === slug) && e.status === 'published') || null;
-  }
+  const all = await getPublicExperiences();
+  return all.find((e) => e.slug === slug || e.id === slug) || null;
 }
 
 export async function getPublicTopFeaturedExperiences(limit = 3): Promise<ExtendedExperience[]> {

@@ -46,7 +46,7 @@ const CORE_PILLARS = [
     title: 'Go Within',
     subtitle: 'Himalayan Sound & Mountain Silence',
     description: '7-metal singing bowl resonance, dawn monastery chanting, and sacred Padmasambhava meditation caves.',
-    href: '/experiences/spiritual-wellness',
+    href: '/experiences/go-within',
     badge: 'Spiritual',
     icon: Sparkles,
     image: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
@@ -98,6 +98,15 @@ const CATEGORY_META: Record<
     breadcrumbLabel: 'Go Beyond the Map',
     categoryFilter: ['beyond-the-map', 'go-beyond', 'adventure', 'heritage'],
   },
+  'go-within': {
+    title: 'Go Within — All Curated Topics',
+    nepaliTitle: 'आध्यात्मिक शान्ति र अन्तर्यात्रा',
+    badge: 'Himalayan Sound & Mountain Silence',
+    subtitle: '7-metal singing bowl resonance, dawn monastery chanting, sacred caves, and contemplative journeys.',
+    image: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
+    breadcrumbLabel: 'Go Within',
+    categoryFilter: ['go-within', 'spiritual-wellness', 'spiritual', 'go-spiritual'],
+  },
   'spiritual-wellness': {
     title: 'Go Within — All Curated Topics',
     nepaliTitle: 'आध्यात्मिक शान्ति र अन्तर्यात्रा',
@@ -105,7 +114,7 @@ const CATEGORY_META: Record<
     subtitle: '7-metal singing bowl resonance, dawn monastery chanting, sacred caves, and contemplative journeys.',
     image: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
     breadcrumbLabel: 'Go Within',
-    categoryFilter: ['spiritual-wellness', 'spiritual', 'go-within', 'go-spiritual'],
+    categoryFilter: ['go-within', 'spiritual-wellness', 'spiritual', 'go-spiritual'],
   },
   'go-deeper': {
     title: 'Go Deeper — All Curated Topics',
@@ -141,7 +150,7 @@ const normalizeCategoryKey = (cat?: string | null): string | null => {
   const lower = cat.toLowerCase().trim();
   if (lower === 'all') return null;
   if (lower === 'beyond-the-map' || lower === 'go-beyond') return 'beyond-the-map';
-  if (lower === 'spiritual-wellness' || lower === 'go-within' || lower === 'go-spiritual') return 'spiritual-wellness';
+  if (lower === 'spiritual-wellness' || lower === 'go-within' || lower === 'go-spiritual') return 'go-within';
   if (lower === 'go-deeper') return 'go-deeper';
   if (lower === 'homestays' || lower === 'feel-closer' || lower === 'homestay') return 'homestays';
   if (lower === 'leave-a-mark' || lower === 'responsible') return 'leave-a-mark';

@@ -10,7 +10,7 @@ export default function GoWithinHubPage() {
       experienceName="Go Within"
       experienceDescription="Sound vibration therapy, dawn monastery pujas, and cave meditation. Manage packages and content for this experience."
       experienceSlug="go-within"
-      publicUrl="/experiences/spiritual-wellness"
+      publicUrl="/experiences/go-within"
       pillarFilterValue="go-within"
       icon={Sparkles}
       colorFrom="from-slate-50"

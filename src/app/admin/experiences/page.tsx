@@ -28,10 +28,10 @@ import ToastContainer, { ToastMessage } from '@/components/admin/Toast';
 import { ExtendedExperience, ItineraryDay } from '@/types/cms';
 
 const CATEGORY_OPTIONS = [
-  { value: 'go-beyond', label: 'Go Beyond the Map' },
-  { value: 'go-spiritual', label: 'Go Within' },
+  { value: 'beyond-the-map', label: 'Go Beyond the Map' },
+  { value: 'go-within', label: 'Go Within' },
   { value: 'go-deeper', label: 'Go Deeper' },
-  { value: 'feel-closer', label: 'Feel Closer' },
+  { value: 'homestays', label: 'Feel Closer' },
   { value: 'leave-a-mark', label: 'Leave a Mark' },
   { value: 'all-curated', label: 'All Curated Experiences' },
   { value: 'custom-journeys', label: 'Custom Private Journeys' },
@@ -54,7 +54,7 @@ function getPillarLabel(category?: string, categoryLabel?: string): string {
   }
   if (!category) return 'Go Beyond the Map';
   if (category === 'go-beyond' || category === 'beyond-the-map' || category === 'heritage') return 'Go Beyond the Map';
-  if (category === 'go-spiritual' || category === 'spiritual-wellness' || category === 'spiritual') return 'Go Within';
+  if (category === 'go-within' || category === 'go-spiritual' || category === 'spiritual-wellness' || category === 'spiritual') return 'Go Within';
   if (category === 'go-deeper') return 'Go Deeper';
   if (category === 'feel-closer' || category === 'homestays' || category === 'homestay') return 'Feel Closer';
   if (category === 'leave-a-mark' || category === 'responsible') return 'Leave a Mark';

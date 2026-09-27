@@ -164,70 +164,79 @@ export default function ExperienceCatalogClient({
 
         {/* 4 Cards Grid */}
         <div id="catalog-grid" className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {paginatedExperiences.map((exp) => (
-            <div
-              key={exp.id}
-              className="group bg-white rounded-3xl overflow-hidden border border-parchment-300 shadow-subtle hover:shadow-editorial transition-all duration-300 flex flex-col justify-between"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden bg-himalaya-900">
-                <Image
-                  src={exp.heroImage?.src || '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'}
-                  alt={exp.heroImage?.alt || exp.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/80 via-transparent to-transparent" />
+          {paginatedExperiences.map((exp) => {
+            const targetHref =
+              exp.category === 'go-within'
+                ? `/experiences/go-within/${exp.slug}`
+                : exp.category === 'beyond-the-map'
+                ? `/experiences/beyond-the-map/${exp.slug}`
+                : `/experiences/${exp.slug}`;
 
-                <div className="absolute top-4 left-4 flex gap-2">
-                  <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-himalaya-950 text-[10px] font-bold uppercase tracking-wider">
-                    {exp.categoryLabel || 'Curated'}
-                  </span>
-                  {exp.featured && (
-                    <span className="px-2.5 py-1 rounded-full bg-terracotta text-white text-[10px] font-bold uppercase tracking-wider shadow-subtle flex items-center gap-1">
-                      <Sparkles className="w-3 h-3" />
-                      <span>Featured</span>
+            return (
+              <div
+                key={exp.id}
+                className="group bg-white rounded-3xl overflow-hidden border border-parchment-300 shadow-subtle hover:shadow-editorial transition-all duration-300 flex flex-col justify-between"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-himalaya-900">
+                  <Image
+                    src={exp.heroImage?.src || '/explore-with-sakar/images/mountains/sunrise-himalayas.jpg'}
+                    alt={exp.heroImage?.alt || exp.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/80 via-transparent to-transparent" />
+
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-himalaya-950 text-[10px] font-bold uppercase tracking-wider">
+                      {exp.categoryLabel || 'Curated'}
                     </span>
-                  )}
+                    {exp.featured && (
+                      <span className="px-2.5 py-1 rounded-full bg-terracotta text-white text-[10px] font-bold uppercase tracking-wider shadow-subtle flex items-center gap-1">
+                        <Sparkles className="w-3 h-3" />
+                        <span>Featured</span>
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-mono">
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 text-terracotta" />
+                      <span>{exp.duration}</span>
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5 text-terracotta" />
+                      <span>{exp.location}</span>
+                    </span>
+                  </div>
                 </div>
 
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-mono">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-terracotta" />
-                    <span>{exp.duration}</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-terracotta" />
-                    <span>{exp.location}</span>
-                  </span>
+                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-4">
+                  <div>
+                    <h3 className="font-editorial-serif text-2xl font-bold text-himalaya-950 group-hover:text-terracotta transition-colors leading-tight">
+                      <Link href={targetHref}>{exp.title}</Link>
+                    </h3>
+                    <p className="text-xs sm:text-sm text-himalaya-600 font-light mt-2 line-clamp-3 leading-relaxed">
+                      {exp.shortDescription}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-parchment-200 flex items-center justify-between">
+                    <span className="text-[11px] text-himalaya-500 font-mono">
+                      {exp.groupSize || 'Private party'}
+                    </span>
+                    <Link
+                      href={targetHref}
+                      className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-terracotta hover:text-terracotta-light transition-colors"
+                    >
+                      <span>View Journey</span>
+                      <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
                 </div>
               </div>
-
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-4">
-                <div>
-                  <h3 className="font-editorial-serif text-2xl font-bold text-himalaya-950 group-hover:text-terracotta transition-colors leading-tight">
-                    <Link href={`/experiences/${exp.slug}`}>{exp.title}</Link>
-                  </h3>
-                  <p className="text-xs sm:text-sm text-himalaya-600 font-light mt-2 line-clamp-3 leading-relaxed">
-                    {exp.shortDescription}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-parchment-200 flex items-center justify-between">
-                  <span className="text-[11px] text-himalaya-500 font-mono">
-                    {exp.groupSize || 'Private party'}
-                  </span>
-                  <Link
-                    href={`/experiences/${exp.slug}`}
-                    className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-terracotta hover:text-terracotta-light transition-colors"
-                  >
-                    <span>View Journey</span>
-                    <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Pagination Controls */}

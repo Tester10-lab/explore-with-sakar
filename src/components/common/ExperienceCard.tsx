@@ -13,11 +13,18 @@ interface ExperienceCardProps {
 }
 
 export default function ExperienceCard({ experience, compact = false }: ExperienceCardProps) {
+  const targetHref =
+    experience.category === 'go-within'
+      ? `/experiences/go-within/${experience.slug}`
+      : experience.category === 'beyond-the-map'
+      ? `/experiences/beyond-the-map/${experience.slug}`
+      : `/experiences/${experience.slug}`;
+
   return (
     <div className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-parchment-300 shadow-subtle hover:shadow-editorial transition-all duration-300 hover:-translate-y-1 active:scale-[0.99] touch-manipulation">
       {/* Hero Image */}
       <Link
-        href={`/experiences/${experience.slug}`}
+        href={targetHref}
         className="block relative aspect-[16/10] overflow-hidden bg-himalaya-900"
       >
         <Image
@@ -48,7 +55,7 @@ export default function ExperienceCard({ experience, compact = false }: Experien
       <div className="flex-1 p-6 sm:p-7 flex flex-col justify-between">
         <div>
           <h3 className="font-editorial-serif text-xl sm:text-2xl font-bold text-himalaya-950 mb-2 group-hover:text-terracotta transition-colors leading-snug">
-            <Link href={`/experiences/${experience.slug}`}>
+            <Link href={targetHref}>
               {experience.title}
             </Link>
           </h3>
@@ -72,7 +79,7 @@ export default function ExperienceCard({ experience, compact = false }: Experien
           </div>
 
           <Link
-            href={`/experiences/${experience.slug}`}
+            href={targetHref}
             className="flex items-center justify-center w-full py-3 rounded-xl bg-parchment-100 hover:bg-himalaya-950 text-himalaya-950 hover:text-white font-bold text-xs tracking-wider uppercase transition-all duration-300 border border-parchment-300 hover:border-himalaya-950"
           >
             <span>Explore Experience</span>

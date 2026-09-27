@@ -118,7 +118,7 @@ export function getDefaultNavigation(): NavigationConfig {
             id: 'nav-within',
             label: 'Go Within',
             description: 'Himalayan singing bowl resonance, monastery chanting & meditation caves.',
-            url: '/experiences/spiritual-wellness',
+            url: '/experiences/go-within',
             badge: 'Spiritual',
             icon: 'sparkles',
             visible: true,
@@ -218,7 +218,7 @@ export function getDefaultNavigation(): NavigationConfig {
           title: 'Experiences',
           links: [
             { id: 'fl-1', label: 'Go Beyond the Map', url: '/experiences/beyond-the-map', visible: true, order: 0 },
-            { id: 'fl-2', label: 'Go Within', url: '/experiences/spiritual-wellness', visible: true, order: 1 },
+            { id: 'fl-2', label: 'Go Within', url: '/experiences/go-within', visible: true, order: 1 },
             { id: 'fl-3', label: 'Go Deeper', url: '/experiences/go-deeper', visible: true, order: 2 },
             { id: 'fl-4', label: 'Leave a Mark', url: '/experiences/leave-a-mark', visible: true, order: 3 },
             { id: 'fl-5', label: 'Custom Private Journeys', url: '/experiences/custom-journeys', visible: true, order: 4 },

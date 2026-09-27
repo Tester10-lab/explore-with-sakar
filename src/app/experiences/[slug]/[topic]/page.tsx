@@ -112,9 +112,10 @@ export async function generateStaticParams() {
     'beyond-the-map': 'beyond-the-map',
     'go-beyond': 'beyond-the-map',
     'heritage': 'beyond-the-map',
-    'go-spiritual': 'go-spiritual',
-    'spiritual-wellness': 'go-spiritual',
-    'spiritual': 'go-spiritual',
+    'go-within': 'go-within',
+    'go-spiritual': 'go-within',
+    'spiritual-wellness': 'go-within',
+    'spiritual': 'go-within',
     'go-deeper': 'go-deeper',
     'homestays': 'homestays',
     'feel-closer': 'homestays',
@@ -134,7 +135,13 @@ export async function generateStaticParams() {
 export default async function IndividualTopicPage({ params }: Props) {
   const { slug, topic } = params;
 
-  const oldPillars = ['go-within', 'leave-a-mark', 'responsible'];
+  // Canonicalize legacy spiritual slugs to go-within
+  if (slug === 'go-spiritual' || slug === 'spiritual-wellness') {
+    const { permanentRedirect } = await import('next/navigation');
+    permanentRedirect(`/experiences/go-within/${topic}`);
+  }
+
+  const oldPillars = ['leave-a-mark', 'responsible'];
   const oldTopics = [
     'langtang-tamang-heritage-trail',
     'chitwan-indigenous-tharu-guardians',
