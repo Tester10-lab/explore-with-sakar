@@ -268,6 +268,26 @@ const nextConfig = {
       },
       // 5. Legacy admin experience routes → canonical admin paths
       {
+        source: '/admin/experiences/go%20within',
+        destination: '/admin/experiences/go-within',
+        permanent: true,
+      },
+      {
+        source: '/admin/experiences/go-spiritual',
+        destination: '/admin/experiences/go-within',
+        permanent: true,
+      },
+      {
+        source: '/admin/experiences/spiritual-wellness',
+        destination: '/admin/experiences/go-within',
+        permanent: true,
+      },
+      {
+        source: '/admin/experiences/leave%20a%20mark',
+        destination: '/admin/experiences/leave-a-mark',
+        permanent: true,
+      },
+      {
         source: '/admin/leave-a-mark',
         destination: '/admin/experiences/leave-a-mark',
         permanent: true,

@@ -103,5 +103,42 @@ export const EXPERIENCE_PILLARS: Record<string, ExperiencePillar> = {
     categoryFilter: ['feel-closer', 'homestays', 'homestay'],
     canonicalSlug: 'homestays',
   },
+  'go-within': {
+    name: 'Go Within',
+    nepaliTitle: 'अन्तर्यात्रा',
+    introText: 'Immerse in ancient Tibetan singing bowl sound therapy, dawn monastery chant pujas, and the tranquil stillness of sacred Himalayan power places.',
+    overviewText: [
+      'For thousands of years, the high ridges, pine valleys, and sacred caves of Nepal have served as the world’s most potent sanctuary for yogis, meditators, and those seeking mental clarity.',
+      'We craft gentle, contemplative journeys focused on acoustic sound resonance, dawn monastery prayers, mindful walking, and pure presence. Rather than dogmatic practice, our approach is experiential, peaceful, and restorative.',
+    ],
+    highlights: [
+      'Private 7-metal Tibetan singing bowl sound sessions tuned to planetary frequencies',
+      'Dawn monastery pujas and butter lamp offerings with monastic communities',
+      'Pilgrimages to Guru Padmasambhava sacred meditation caves in Pharping',
+      'Mindful ridge walks and gentle restorative breathwork in mountain air',
+    ],
+    heroImage: '/explore-with-sakar/images/spiritual/buddhist-stupa.jpg',
+    categoryFilter: ['go-within', 'go-spiritual', 'spiritual-wellness', 'spiritual'],
+    canonicalSlug: 'go-within',
+  },
+  'leave-a-mark': {
+    name: 'Leave a Mark',
+    nepaliTitle: 'सकारात्मक प्रभाव',
+    introText: 'Strategic community collaboration, indigenous forest guardians, and grassroots empowerment through meaningful volunteer tourism.',
+    overviewText: [
+      'Leave a Mark is a specialized branch of our journeys designed for professionals, creative thinkers, and conscious travelers who want to dedicate a portion of their travel to high-level community development.',
+      'Rather than transactional voluntourism, we partner directly with indigenous forest guardians, mountain schools, and community leaders. Your skills, passion, and presence directly contribute to long-term sustainable projects.',
+    ],
+    highlights: [
+      'Collaborative skill sharing and workshops with local community initiatives',
+      'Indigenous reforestation, community seed banking, and ecological stewardship',
+      'Supporting rural village education, digital literacy, and youth mentorship',
+      'Direct, transparent economic impact empowering local women artisans and cooperatives',
+    ],
+    heroImage: '/explore-with-sakar/images/beyond-the-map/living-courtyards.jpg',
+    categoryFilter: ['leave-a-mark', 'responsible'],
+    canonicalSlug: 'leave-a-mark',
+  },
 };
+
 
