@@ -8,8 +8,15 @@ import {
   ArrowRight,
   Flame,
   Wind,
-  Sun,
   ShieldCheck,
+  Compass,
+  Music,
+  BookOpen,
+  Feather,
+  Mountain,
+  MapPin,
+  CircleDot,
+  Radio,
 } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -18,6 +25,7 @@ import ExperienceCard from '@/components/common/ExperienceCard';
 import { getPublicExperiences } from '@/lib/content';
 import { PageContent } from '@/types/cms';
 import { getPageHeroOverrides, isSectionVisible } from '@/lib/pageContentHelper';
+import { GO_WITHIN_CONTENT, GoWithinChapter } from '@/data/go-within';
 
 interface GoSpiritualExperienceProps {
   pageContent?: PageContent | null;
@@ -28,6 +36,7 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
   const spiritualItineraries = allExperiences.filter(
     (e) =>
       e.category === 'spiritual' ||
+      e.category === 'go-within' ||
       e.slug.includes('spiritual') ||
       e.slug.includes('meditation') ||
       e.slug.includes('monastery') ||
@@ -35,9 +44,9 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
   ).slice(0, 3);
 
   const hero = getPageHeroOverrides(pageContent, {
-    badge: 'Independent Experience Package',
-    title: 'Go Spiritual',
-    subtitle: 'Immerse in ancient Tibetan singing bowl sound therapy, dawn monastery chant pujas, and the tranquil stillness of sacred Himalayan power places.',
+    badge: 'Spiritual Sanctuary & Sacred Geometry',
+    title: GO_WITHIN_CONTENT.title,
+    subtitle: GO_WITHIN_CONTENT.subtitle,
   });
 
   return (
@@ -46,7 +55,7 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
       {hero.visible && (
         <PageHero
           badge={hero.badge}
-          nepaliTitle="आध्यात्मिक शान्ति र ध्वनि ध्यान"
+          nepaliTitle={GO_WITHIN_CONTENT.nepaliTitle}
           title={hero.title}
           subtitle={hero.subtitle}
           backgroundImage="/explore-with-sakar/images/spiritual/buddhist-stupa.jpg"
@@ -57,9 +66,9 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
         />
       )}
 
-      {/* 2. Philosophy & Sanctuary Overview */}
+      {/* 2. Overview & Sanctuary Philosophy */}
       {isSectionVisible(pageContent, 'sec-sw-philosophy', 'philosophy') && (
-        <section className="py-20 sm:py-28 bg-white border-b border-parchment-300">
+        <section className="py-16 sm:py-24 bg-white border-b border-parchment-300">
           <div className="editorial-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
               <div className="lg:col-span-7 space-y-6">
@@ -69,23 +78,23 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
                 </span>
 
                 <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
-                  Reconnecting with Stillness in the Sacred Himalayas
+                  {GO_WITHIN_CONTENT.intro.heading}
                 </h2>
 
-                <p className="text-base sm:text-lg text-himalaya-800 font-normal leading-relaxed">
-                  For thousands of years, the high ridges, pine valleys, and sacred caves of Nepal have served as the world’s most potent sanctuary for yogis, meditators, and those seeking mental clarity.
-                </p>
-
-                <p className="text-sm sm:text-base text-himalaya-800 font-normal leading-relaxed">
-                  We craft gentle, contemplative journeys focused on acoustic sound resonance, dawn monastery prayers, mindful walking, and pure presence. Rather than dogmatic practice, our approach is experiential, peaceful, and restorative.
-                </p>
+                {GO_WITHIN_CONTENT.intro.paragraphs.map((para, i) => (
+                  <p key={i} className="text-base sm:text-lg text-himalaya-800 font-normal leading-relaxed">
+                    {para}
+                  </p>
+                ))}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-parchment-200">
                   {[
-                    'Private 7-metal Tibetan singing bowl sound sessions',
-                    'Dawn monastery pujas and butter lamp offerings',
-                    'Pilgrimages to Guru Padmasambhava sacred caves in Pharping',
-                    'Mindful ridge walks and gentle restorative breathwork',
+                    'Sacred Geometry of Kathmandu, Patan & Bhaktapur',
+                    'Pashupati ghats & the wisdom of impermanence',
+                    'Himalayan Shamanism (Dhami-Jhankri) & nature spirits',
+                    'Nada Yoga 7-Metal singing bowls & 7 Chakras Bija Mantras',
+                    'Mindful cave meditation in Pharping & Taudaha serpent lake',
+                    'Vedic astrology & traditional Janma Kundali birth charts',
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-center space-x-2.5 text-xs sm:text-sm text-himalaya-900 font-medium">
                       <div className="w-5 h-5 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
@@ -106,13 +115,13 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
                     sizes="(max-width: 1024px) 100vw, 450px"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-himalaya-950/85 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 text-white text-center">
-                    <p className="font-display-serif italic text-lg">
-                      &ldquo;The singing bowl does not force silence; its pure harmonic vibration gently invites the mind home.&rdquo;
+                    <p className="font-editorial-serif italic text-lg sm:text-xl">
+                      &ldquo;What if Kathmandu, Patan, and Bhaktapur were not simply built, but sacredly imagined?&rdquo;
                     </p>
-                    <p className="text-xs text-saffron-light mt-1 font-semibold uppercase tracking-wider">
-                      — Himalayan Sound Master
+                    <p className="text-xs text-saffron-light mt-2 font-semibold uppercase tracking-wider">
+                      — Sacred Himalayan Heritage
                     </p>
                   </div>
                 </div>
@@ -122,67 +131,194 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
         </section>
       )}
 
-      {/* 3. Core Elements of the Sanctuary */}
-      {isSectionVisible(pageContent, 'sec-sw-features', 'features-grid') && (
-        <section className="py-20 sm:py-32 bg-sand border-b border-parchment-300">
-          <div className="editorial-container">
-            <SectionHeading
-              tag="Core Experiences"
-              nepaliTag="आध्यात्मिक अनुभवहरू"
-              title="Practices for Inner Renewal"
-              description="Explore the sacred elements woven into our spiritual and wellness journeys."
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-3xl p-8 border border-parchment-300 shadow-subtle space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-terracotta/10 text-terracotta flex items-center justify-center">
-                  <Sparkles className="w-6 h-6" />
-                </div>
-                <h3 className="font-editorial-serif text-xl font-bold text-himalaya-950">
-                  7-Metal Singing Bowl Sound Therapy
-                </h3>
-                <p className="text-xs sm:text-sm text-himalaya-800 font-normal leading-relaxed">
-                  Hand-hammered using an ancient alloy of seven cosmic metals. The acoustic harmonics and gentle physical vibrations encourage deep somatic relaxation and mental quietude.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-3xl p-8 border border-parchment-300 shadow-subtle space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-saffron/15 text-saffron-dark flex items-center justify-center">
-                  <Flame className="w-6 h-6" />
-                </div>
-                <h3 className="font-editorial-serif text-xl font-bold text-himalaya-950">
-                  Dawn Monastery Pujas & Butter Lamps
-                </h3>
-                <p className="text-xs sm:text-sm text-himalaya-800 font-normal leading-relaxed">
-                  Sit quietly at dawn inside mountain gompas while monks chant sacred Buddhist sutras, blow deep copper horns, and light lamps dedicated to universal compassion.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-3xl p-8 border border-parchment-300 shadow-subtle space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-moss/10 text-moss-light flex items-center justify-center">
-                  <Wind className="w-6 h-6" />
-                </div>
-                <h3 className="font-editorial-serif text-xl font-bold text-himalaya-950">
-                  Sacred Caves & Silent Ridge Walks
-                </h3>
-                <p className="text-xs sm:text-sm text-himalaya-800 font-normal leading-relaxed">
-                  Walk peaceful forest trails to ancient meditation caves in Pharping and high ridges above the clouds, practicing quiet walking meditation and gentle breathwork.
-                </p>
-              </div>
-            </div>
+      {/* 3. Navigation Bar for the 8 Chapters */}
+      <section className="sticky top-16 z-30 bg-parchment-100/95 backdrop-blur border-b border-parchment-300 py-4">
+        <div className="editorial-container">
+          <div className="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar py-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-himalaya-900 whitespace-nowrap shrink-0 mr-2 flex items-center gap-1.5">
+              <Compass className="w-4 h-4 text-terracotta" />
+              <span>Chapters:</span>
+            </span>
+            {GO_WITHIN_CONTENT.chapters.map((chap, idx) => (
+              <a
+                key={chap.id}
+                href={`#${chap.id}`}
+                className="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all bg-white hover:bg-terracotta hover:text-white text-himalaya-800 border border-parchment-300 shadow-sm shrink-0"
+              >
+                {chap.chapterNumber.replace('Chapter ', 'Ch ')}: {chap.title.split(':')[0]}
+              </a>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {/* 4. Curated Spiritual Itineraries */}
+      {/* 4. Detailed 8 Chapters Presentation */}
+      <section className="py-16 sm:py-24 space-y-20">
+        <div className="editorial-container space-y-24">
+          {GO_WITHIN_CONTENT.chapters.map((chap: GoWithinChapter, index: number) => {
+            const isEven = index % 2 === 0;
+            return (
+              <div
+                key={chap.id}
+                id={chap.id}
+                className="scroll-mt-32 bg-white rounded-3xl border border-parchment-300 shadow-subtle overflow-hidden p-6 sm:p-10 lg:p-12 space-y-8"
+              >
+                {/* Chapter Header */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-parchment-200 pb-6">
+                  <div className="space-y-1">
+                    <div className="flex items-center space-x-3">
+                      <span className="px-3 py-1 rounded-full bg-saffron/15 text-saffron-dark text-xs font-bold tracking-wider uppercase">
+                        {chap.chapterNumber}
+                      </span>
+                      {chap.nepaliTitle && (
+                        <span className="text-xs font-medium text-himalaya-800 font-serif">
+                          {chap.nepaliTitle}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-editorial-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-himalaya-950 tracking-tight pt-1">
+                      {chap.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-terracotta font-semibold">
+                      {chap.subtitle}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-himalaya-800 shrink-0">
+                    <span className="inline-flex items-center space-x-1.5 bg-parchment-200/60 px-3 py-1.5 rounded-full font-medium">
+                      <MapPin className="w-3.5 h-3.5 text-terracotta" />
+                      <span>{chap.location}</span>
+                    </span>
+                    <span className="inline-flex items-center space-x-1.5 bg-parchment-200/60 px-3 py-1.5 rounded-full font-medium">
+                      <Compass className="w-3.5 h-3.5 text-moss-dark" />
+                      <span>{chap.duration}</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Main Content Layout */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                  <div className="lg:col-span-7 space-y-4">
+                    <p className="text-base sm:text-lg text-himalaya-950 font-medium leading-relaxed italic border-l-4 border-terracotta pl-4 bg-terracotta/5 py-2 rounded-r-lg">
+                      {chap.summary}
+                    </p>
+
+                    <div className="space-y-4 pt-2">
+                      {chap.paragraphs.map((p, idx) => (
+                        <p key={idx} className="text-sm sm:text-base text-himalaya-800 leading-relaxed font-normal">
+                          {p}
+                        </p>
+                      ))}
+                    </div>
+
+                    {/* Highlights List */}
+                    <div className="pt-4 border-t border-parchment-200 space-y-3">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-himalaya-900 flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-saffron-dark" />
+                        <span>Key Spiritual Insights & Experiences</span>
+                      </h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        {chap.highlights.map((h, hIdx) => (
+                          <div key={hIdx} className="flex items-start space-x-2 text-xs sm:text-sm text-himalaya-900">
+                            <span className="w-1.5 h-1.5 rounded-full bg-terracotta shrink-0 mt-2" />
+                            <span>{h}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-5 space-y-6">
+                    <div className="relative rounded-2xl overflow-hidden shadow-subtle border border-parchment-300 aspect-[4/3] bg-himalaya-900">
+                      <Image
+                        src={chap.image}
+                        alt={chap.imageAlt}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 400px"
+                        className="object-cover"
+                      />
+                    </div>
+
+                    {/* Key Quote Callout */}
+                    {chap.keyQuote && (
+                      <div className="bg-sand p-6 rounded-2xl border border-parchment-300 space-y-3 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-3 opacity-10 text-himalaya-900">
+                          <Feather className="w-16 h-16" />
+                        </div>
+                        <p className="font-editorial-serif text-sm sm:text-base italic text-himalaya-950 leading-relaxed relative z-10">
+                          &ldquo;{chap.keyQuote.quote}&rdquo;
+                        </p>
+                        <p className="text-xs font-bold uppercase tracking-wider text-terracotta relative z-10">
+                          — {chap.keyQuote.attribution}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Special Render: 7 Chakras Bija Mantra Table for Chapter 05 */}
+                {chap.chakras && chap.chakras.length > 0 && (
+                  <div className="mt-8 pt-8 border-t border-parchment-300 space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-xs font-bold uppercase tracking-widest text-terracotta">
+                          Nada Yoga Sound Frequencies
+                        </span>
+                        <h4 className="font-editorial-serif text-xl sm:text-2xl font-bold text-himalaya-950">
+                          The 7 Chakras & Bija Mantras
+                        </h4>
+                      </div>
+                      <span className="px-3 py-1 rounded-full bg-saffron/10 text-saffron-dark text-xs font-semibold hidden sm:inline-block">
+                        Sa Re Ga Ma Pa Dha Ni
+                      </span>
+                    </div>
+
+                    <div className="overflow-x-auto rounded-2xl border border-parchment-300 bg-sand">
+                      <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                        <thead>
+                          <tr className="bg-parchment-200/70 border-b border-parchment-300 text-himalaya-950 font-bold uppercase tracking-wider">
+                            <th className="p-3.5">Chakra (Sanskrit)</th>
+                            <th className="p-3.5">English Name</th>
+                            <th className="p-3.5">Bija Mantra</th>
+                            <th className="p-3.5">Cosmic Attribute & Resonance</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-parchment-300 text-himalaya-900 font-medium">
+                          {chap.chakras.map((c, cIdx) => (
+                            <tr key={cIdx} className="hover:bg-white/60 transition-colors">
+                              <td className="p-3.5 font-semibold text-himalaya-950 flex items-center gap-2">
+                                <CircleDot className="w-3.5 h-3.5 text-terracotta shrink-0" />
+                                <span>{c.chakra}</span>
+                              </td>
+                              <td className="p-3.5 text-himalaya-800">{c.english}</td>
+                              <td className="p-3.5">
+                                <span className="px-2.5 py-1 rounded-md bg-terracotta/10 text-terracotta font-mono font-bold">
+                                  {c.mantra}
+                                </span>
+                              </td>
+                              <td className="p-3.5 text-himalaya-800">{c.attribute}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 5. Curated Departures Teaser */}
       {isSectionVisible(pageContent, 'sec-sw-moments', 'itinerary-teaser') && spiritualItineraries.length > 0 && (
-        <section className="py-20 sm:py-28 bg-white border-b border-parchment-300">
+        <section className="py-20 sm:py-28 bg-white border-y border-parchment-300">
           <div className="editorial-container">
             <SectionHeading
               tag="Curated Departures"
               nepaliTag="विशेष आध्यात्मिक यात्राहरू"
-              title="Specific Spiritual Journeys You Can Take"
-              description="Explore individual day-by-day itineraries under the Go Spiritual pillar."
+              title="Individual Spiritual Journeys"
+              description="Explore single day and multi-day packages under the Go Within pillar."
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
@@ -204,13 +340,13 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
         </section>
       )}
 
-      {/* 5. CTA Section */}
+      {/* 6. CTA Section */}
       {isSectionVisible(pageContent, 'sec-sw-cta', 'cta') && (
         <CTASection
-          title="Begin Your Himalayan Spiritual Journey"
-          subtitle="Connect with Sakar to discuss personal wellness preferences, dates, and quiet mountain retreat options."
+          title="Begin Your Himalayan Go Within Journey"
+          subtitle="Connect with Sakar to discuss personal wellness preferences, private sound healing sessions, or silent mountain retreat options."
           primaryButtonText="Inquire About Go Within"
-          primaryButtonHref="/contact?subject=Go%20Within%20Journey%20Inquiry"
+          primaryButtonHref="/contact?subject=Go%20Within%20Spiritual%20Journey%20Inquiry"
           secondaryButtonText="Explore All Experiences"
           secondaryButtonHref="/experiences"
         />
@@ -218,3 +354,4 @@ export default async function GoSpiritualExperience({ pageContent }: GoSpiritual
     </div>
   );
 }
+

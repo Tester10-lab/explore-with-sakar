@@ -130,6 +130,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
   const canonicalPillars = [
     'beyond-the-map',
+    'go-within',
     'go-spiritual',
     'spiritual-wellness',
     'go-deeper',
@@ -150,9 +151,6 @@ export default async function ExperienceDetailPage({ params }: Props) {
   if (slug === 'go-beyond') {
     permanentRedirect('/experiences/beyond-the-map');
   }
-  if (slug === 'go-within') {
-    permanentRedirect('/experiences/spiritual-wellness');
-  }
   if (slug === 'responsible') {
     permanentRedirect('/experiences/leave-a-mark');
   }
@@ -169,66 +167,16 @@ export default async function ExperienceDetailPage({ params }: Props) {
     return <LeaveAMarkExperience pageContent={pageContent} />;
   }
 
+  // Go Within / Go Spiritual Experience Renderer
+  if (slug === 'go-within' || slug === 'go-spiritual' || slug === 'spiritual-wellness') {
+    const pageContent = await getPageContent(slug);
+    return <GoSpiritualExperience pageContent={pageContent} />;
+  }
+
   // 2. If slug is an individual topic slug, redirect to its parent canonical route: /experiences/[parent]/[topic]
   if (TOPIC_TO_PARENT_MAP[slug]) {
     const parentSlug = TOPIC_TO_PARENT_MAP[slug];
     permanentRedirect(`/experiences/${parentSlug}/${slug}`);
-  }
-
-  // 3. Special Go Spiritual Page Renderer if requested
-  if (slug === 'go-spiritual' || slug === 'spiritual-wellness') {
-    const pageContent = await getPageContent(slug);
-    const pillar = EXPERIENCE_PILLARS[slug] || EXPERIENCE_PILLARS['go-spiritual'];
-    const allExperiences = await getPublicExperiences();
-
-    const PARENT_SLUGS_TO_EXCLUDE = new Set([
-      'beyond-the-map', 'go-beyond', 'go-within', 'go-spiritual',
-      'spiritual-wellness', 'go-deeper', 'leave-a-mark', 'homestays',
-      'feel-closer', 'all-curated-experiences', 'custom-journeys', 'custom-private-journeys',
-    ]);
-
-    const pillarPackages: PackageCard[] = allExperiences
-      .filter(
-        (exp) =>
-          pillar.categoryFilter.includes(exp.category) &&
-          !PARENT_SLUGS_TO_EXCLUDE.has(exp.slug)
-      )
-      .map((exp) => ({
-        slug: exp.slug,
-        title: exp.title,
-        shortDescription: exp.shortDescription,
-        heroImage: exp.heroImage ? { src: exp.heroImage.src, alt: exp.heroImage.alt } : undefined,
-      }));
-
-    const seenSlugs = new Set(pillarPackages.map((p) => p.slug));
-    const fallbackTopics: PackageCard[] = EXPERIENCES
-      .filter(
-        (exp) =>
-          pillar.categoryFilter.includes(exp.category) &&
-          !PARENT_SLUGS_TO_EXCLUDE.has(exp.slug) &&
-          !seenSlugs.has(exp.slug)
-      )
-      .map((exp) => ({
-        slug: exp.slug,
-        title: exp.title,
-        shortDescription: exp.shortDescription,
-        heroImage: exp.heroImage ? { src: exp.heroImage.src, alt: exp.heroImage.alt } : undefined,
-      }));
-
-    const finalPackages = [...pillarPackages, ...fallbackTopics];
-
-    return (
-      <ExperiencePackageDiscovery
-        experienceName={pillar.name}
-        nepaliTitle={pillar.nepaliTitle}
-        introText={pillar.introText}
-        overviewText={pillar.overviewText}
-        highlights={pillar.highlights}
-        heroImage={pillar.heroImage}
-        packages={finalPackages}
-        experienceSlug={pillar.canonicalSlug}
-      />
-    );
   }
 
   // 4. Core experience pillars → Package Discovery pages
