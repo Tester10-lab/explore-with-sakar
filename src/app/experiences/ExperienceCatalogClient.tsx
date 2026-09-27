@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { ArrowRight, MapPin, Clock, Sparkles } from 'lucide-react';
 import { ExtendedExperience } from '@/types/cms';
 
@@ -27,7 +28,7 @@ interface ExperienceCatalogClientProps {
   initialExperiences: (CatalogExperience | ExtendedExperience)[];
 }
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 12;
 
 const CATEGORIES = [
   { key: 'all', label: 'All Curated Departures' },
@@ -38,19 +39,63 @@ const CATEGORIES = [
   { key: 'leave-a-mark', label: 'Leave a Mark' },
 ];
 
+const normalizeCategory = (catKey?: string | null): string => {
+  if (!catKey) return 'all';
+  const lower = catKey.toLowerCase().trim();
+  if (lower === 'beyond-the-map' || lower === 'go-beyond') return 'beyond-the-map';
+  if (lower === 'spiritual-wellness' || lower === 'go-within' || lower === 'go-spiritual') return 'spiritual-wellness';
+  if (lower === 'go-deeper') return 'go-deeper';
+  if (lower === 'homestays' || lower === 'feel-closer' || lower === 'homestay') return 'homestays';
+  if (lower === 'leave-a-mark' || lower === 'responsible') return 'leave-a-mark';
+  return lower;
+};
+
 export default function ExperienceCatalogClient({
   initialExperiences,
 }: ExperienceCatalogClientProps) {
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const searchParams = useSearchParams();
+  const urlCategory = searchParams.get('category');
+
+  const [activeCategory, setActiveCategory] = useState<string>(() => normalizeCategory(urlCategory));
   const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    if (urlCategory) {
+      const normalized = normalizeCategory(urlCategory);
+      setActiveCategory(normalized);
+      setCurrentPage(1);
+    }
+  }, [urlCategory]);
 
   const matchesCategory = (category: string, targetKey: string) => {
     if (targetKey === 'all') return true;
-    if (targetKey === 'beyond-the-map') return category === 'beyond-the-map' || category === 'adventure' || category === 'heritage';
-    if (targetKey === 'spiritual-wellness') return category === 'spiritual-wellness' || category === 'spiritual';
+    if (targetKey === 'beyond-the-map' || targetKey === 'go-beyond') {
+      return (
+        category === 'beyond-the-map' ||
+        category === 'go-beyond' ||
+        category === 'adventure' ||
+        category === 'heritage'
+      );
+    }
+    if (
+      targetKey === 'spiritual-wellness' ||
+      targetKey === 'go-within' ||
+      targetKey === 'go-spiritual'
+    ) {
+      return (
+        category === 'spiritual-wellness' ||
+        category === 'spiritual' ||
+        category === 'go-within' ||
+        category === 'go-spiritual'
+      );
+    }
     if (targetKey === 'go-deeper') return category === 'go-deeper';
-    if (targetKey === 'homestays') return category === 'homestays' || category === 'homestay';
-    if (targetKey === 'leave-a-mark') return category === 'leave-a-mark' || category === 'responsible';
+    if (targetKey === 'homestays' || targetKey === 'feel-closer') {
+      return category === 'homestays' || category === 'homestay' || category === 'feel-closer';
+    }
+    if (targetKey === 'leave-a-mark' || targetKey === 'responsible') {
+      return category === 'leave-a-mark' || category === 'responsible';
+    }
     return category === targetKey;
   };
 
