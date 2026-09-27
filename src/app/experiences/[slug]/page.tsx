@@ -10,6 +10,7 @@ import { buildPageMetadata } from '@/lib/seo';
 import ExperiencePackageDiscovery, { PackageCard } from '@/components/experience/ExperiencePackageDiscovery';
 import CustomJourneysExperience from '@/components/experience/CustomJourneysExperience';
 import GoSpiritualExperience from '@/components/experience/GoSpiritualExperience';
+import LeaveAMarkExperience from '@/components/experience/LeaveAMarkExperience';
 import { getPublicEvents } from '@/lib/content';
 import { SITE_ORIGIN } from '@/lib/config';
 
@@ -134,6 +135,7 @@ export async function generateStaticParams() {
     'go-deeper',
     'homestays',
     'custom-journeys',
+    'leave-a-mark',
   ];
   return canonicalPillars.map((slug) => ({ slug }));
 }
@@ -149,16 +151,22 @@ export default async function ExperienceDetailPage({ params }: Props) {
     permanentRedirect('/experiences/beyond-the-map');
   }
   if (slug === 'go-within') {
-    permanentRedirect('/experiences/beyond-the-map');
+    permanentRedirect('/experiences/spiritual-wellness');
   }
-  if (slug === 'leave-a-mark' || slug === 'responsible') {
-    permanentRedirect('/experiences/beyond-the-map');
+  if (slug === 'responsible') {
+    permanentRedirect('/experiences/leave-a-mark');
   }
   if (slug === 'feel-closer') {
     permanentRedirect('/experiences/homestays');
   }
   if (slug === 'custom-private-journeys') {
     permanentRedirect('/experiences/custom-journeys');
+  }
+
+  // Leave a Mark Experience Renderer
+  if (slug === 'leave-a-mark') {
+    const pageContent = await getPageContent('leave-a-mark');
+    return <LeaveAMarkExperience pageContent={pageContent} />;
   }
 
   // 2. If slug is an individual topic slug, redirect to its parent canonical route: /experiences/[parent]/[topic]

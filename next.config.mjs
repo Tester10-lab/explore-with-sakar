@@ -212,12 +212,12 @@ const nextConfig = {
       },
       {
         source: '/experience/go-within',
-        destination: '/experiences/beyond-the-map',
+        destination: '/experiences/spiritual-wellness',
         permanent: true,
       },
       {
         source: '/experiences/go-within',
-        destination: '/experiences/beyond-the-map',
+        destination: '/experiences/spiritual-wellness',
         permanent: true,
       },
       {
@@ -232,12 +232,7 @@ const nextConfig = {
       },
       {
         source: '/experience/leave-a-mark',
-        destination: '/experiences/beyond-the-map',
-        permanent: true,
-      },
-      {
-        source: '/experiences/leave-a-mark',
-        destination: '/experiences/beyond-the-map',
+        destination: '/experiences/leave-a-mark',
         permanent: true,
       },
       {
