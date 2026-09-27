@@ -39,8 +39,8 @@ export default function ExperiencePackageDiscovery({
   featuredCount = 4,
   experienceSlug,
 }: ExperiencePackageDiscoveryProps) {
-  const featuredPackages = packages.slice(0, featuredCount);
-  const hasMore = packages.length > featuredCount;
+  const featuredPackages = packages;
+  const hasMore = false;
 
   const canonicalUrl = `${SITE_ORIGIN}/experiences/${experienceSlug}`;
 
@@ -181,13 +181,13 @@ export default function ExperiencePackageDiscovery({
         <div className="editorial-container">
           <div className="max-w-3xl mb-12">
             <span className="text-xs font-mono uppercase tracking-widest font-bold text-terracotta">
-              Featured Topics
+              All Curated Topics ({packages.length})
             </span>
             <h2 className="font-editorial-serif text-3xl sm:text-4xl font-bold text-himalaya-950 mt-1">
               Curated Topics in {experienceName}
             </h2>
             <p className="text-sm sm:text-base text-himalaya-700 font-normal mt-2 leading-relaxed">
-              Each topic below is an unhurried, standalone itinerary. Select any topic to view its detailed schedule, host notes, and reservation details.
+              Explore all {packages.length} standalone itineraries in this collection. Each topic below is an unhurried, standalone journey with its own detailed schedule, host notes, and reservation details.
             </p>
           </div>
 
