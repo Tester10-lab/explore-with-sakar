@@ -6,7 +6,11 @@
 
 export const SITE_ORIGIN = (
   process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://explorewithsakar.com')
+  (process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'https://explorewithsakar.com')
 ).replace(/\/$/, '');
 
 export const SITE_NAME = 'Explore With Sakar';
