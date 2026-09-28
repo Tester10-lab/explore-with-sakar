@@ -89,6 +89,9 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
+  verification: {
+    google: 'googlec348e6a884c4fc9e',
+  },
 };
 
 export default async function RootLayout({
