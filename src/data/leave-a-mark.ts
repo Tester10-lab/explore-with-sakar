@@ -57,6 +57,22 @@ export interface PrecanHealthProject {
   contributionTypes: string[];
 }
 
+export interface ImpactVideoTakeaway {
+  title: string;
+  description: string;
+}
+
+export interface ImpactVideoHighlight {
+  title: string;
+  subtitle: string;
+  youtubeId: string;
+  youtubeUrl: string;
+  author: string;
+  badge: string;
+  description: string;
+  takeaways: ImpactVideoTakeaway[];
+}
+
 export interface LeaveAMarkData {
   title: string;
   subtitle: string;
@@ -102,6 +118,7 @@ export interface LeaveAMarkData {
     pillars: string[];
   };
   precanHighlight: PrecanHealthProject;
+  featuredVideo?: ImpactVideoHighlight;
   framework: {
     heading: string;
     intro: string;
@@ -352,6 +369,34 @@ export const LEAVE_A_MARK_CONTENT: LeaveAMarkData = {
       'Assisting with medical research support & data collection',
       'Documenting community health outcomes & patient stories',
       'Skill-sharing with local healthcare volunteers & staff',
+    ],
+  },
+  featuredVideo: {
+    title: 'Reusable Pad Making Program',
+    subtitle: 'Empowering with Dignity',
+    youtubeId: 'Bjf7Q75cm38',
+    youtubeUrl: 'https://www.youtube.com/watch?v=Bjf7Q75cm38',
+    author: 'Himshikhara Socio-Cultural',
+    badge: 'Grassroots Action in the Field',
+    description:
+      'A hands-on grassroots initiative empowering rural women and adolescent girls in Nepal through reusable sanitary pad production, hygiene awareness, and sustainable livelihood generation.',
+    takeaways: [
+      {
+        title: 'Sustainable Health & Hygiene',
+        description: 'Providing washable, eco-friendly menstrual solutions that protect rural women from infections and reduce waste.',
+      },
+      {
+        title: 'Breaking Social Taboos with Dignity',
+        description: 'Creating safe community spaces to openly discuss menstrual hygiene, overcoming stigma and isolation.',
+      },
+      {
+        title: 'Women-Led Micro-Enterprise',
+        description: 'Training local women in tailoring, quality craftsmanship, and cooperative management for economic independence.',
+      },
+      {
+        title: 'Education & Community Resilience',
+        description: 'Helping girls stay consistently enrolled in school while educating entire households on preventive reproductive health.',
+      },
     ],
   },
   framework: {

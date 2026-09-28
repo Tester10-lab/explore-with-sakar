@@ -24,8 +24,10 @@ import {
   Users,
   Compass,
   Check,
+  Video,
 } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
+import YouTubeEmbed from '@/components/common/YouTubeEmbed';
 import { LEAVE_A_MARK_CONTENT, LeaveAMarkData } from '@/data/leave-a-mark';
 import { PageContent } from '@/types/cms';
 import { getPageHeroOverrides, isSectionVisible } from '@/lib/pageContentHelper';
@@ -50,6 +52,7 @@ export default function LeaveAMarkExperience({ pageContent, initialContent }: Le
     participantExperience,
     sustainability,
     precanHighlight,
+    featuredVideo,
     framework,
     whoShouldApply,
     ultimateImpact,
@@ -182,6 +185,71 @@ export default function LeaveAMarkExperience({ pageContent, initialContent }: Le
                   ))}
                 </ul>
               </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 3.5. Grassroots Action: Reusable Pad Making Program (Field Documentary & Video) */}
+      {featuredVideo && (
+        <section className="py-20 sm:py-24 bg-white border-b border-parchment-300 relative overflow-hidden">
+          <div className="editorial-container max-w-6xl mx-auto space-y-12">
+            <div className="max-w-3xl mx-auto text-center space-y-4">
+              <span className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-terracotta/10 text-terracotta text-xs font-bold uppercase tracking-widest border border-terracotta/20">
+                <Video className="w-3.5 h-3.5 text-terracotta" />
+                <span>{featuredVideo.badge}</span>
+              </span>
+              <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
+                {featuredVideo.title}
+              </h2>
+              <p className="text-base sm:text-lg text-terracotta font-serif italic">
+                {featuredVideo.subtitle} — In collaboration with {featuredVideo.author}
+              </p>
+              <p className="text-sm sm:text-base text-himalaya-700 font-light leading-relaxed max-w-2xl mx-auto">
+                {featuredVideo.description}
+              </p>
+            </div>
+
+            {/* Video Player Container */}
+            <div className="max-w-4xl mx-auto">
+              <YouTubeEmbed
+                videoId={featuredVideo.youtubeId}
+                title={`${featuredVideo.title} | ${featuredVideo.subtitle}`}
+              />
+              <div className="mt-3 flex items-center justify-between text-xs text-himalaya-500 font-light px-2">
+                <span>Video Source: {featuredVideo.author}</span>
+                <a
+                  href={featuredVideo.youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1 text-terracotta hover:text-terracotta-light font-medium transition-colors"
+                >
+                  <span>Watch on YouTube</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Key Takeaways & Impact Dimensions */}
+            <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
+              {featuredVideo.takeaways.map((takeaway, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 rounded-2xl bg-parchment-100 border border-parchment-300 shadow-subtle flex flex-col justify-between space-y-3 hover:shadow-warm transition-all duration-300"
+                >
+                  <div className="space-y-2">
+                    <span className="w-7 h-7 rounded-lg bg-terracotta/10 text-terracotta font-mono font-bold text-xs flex items-center justify-center">
+                      0{idx + 1}
+                    </span>
+                    <h3 className="font-editorial-serif text-base font-bold text-himalaya-950 leading-snug">
+                      {takeaway.title}
+                    </h3>
+                    <p className="text-xs text-himalaya-700 font-light leading-relaxed">
+                      {takeaway.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
