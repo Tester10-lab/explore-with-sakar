@@ -27,6 +27,20 @@ const FALLBACK_METADATA: Metadata = {
   title: 'Explore With Sakar — Authentic Nepal Travel & Cultural Experiences',
   description: 'Meaningful Nepal travel experiences beyond ordinary tourism. Guided by local host Sakar through living culture, village homestays, Himalayan spirituality, and responsible slow travel.',
   alternates: { canonical: `${SITE_ORIGIN}/` },
+  openGraph: {
+    title: 'Explore With Sakar | Authentic Nepal Travel & Cultural Journeys',
+    description: 'Curated and guided personally by local Himalayan host Sakar with over a decade of authentic Nepal slow-travel relationships.',
+    url: `${SITE_ORIGIN}/`,
+    siteName: 'Explore With Sakar',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200',
+        width: 1200,
+        height: 630,
+        alt: 'Explore With Sakar — Himalayan Landscapes & Cultural Journeys',
+      },
+    ],
+  },
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -239,6 +253,15 @@ export default async function HomePage() {
                     <span>{item}</span>
                   </div>
                 ))}
+              </div>
+
+              <div className="pt-4 border-t border-parchment-300/80 space-y-2">
+                <h3 className="font-editorial-serif text-lg sm:text-xl font-bold text-himalaya-950">
+                  Why Choose Explore With Sakar for Your Nepal Journey?
+                </h3>
+                <p className="text-xs sm:text-sm text-himalaya-700 font-light leading-relaxed">
+                  Explore With Sakar provides private, slow-paced Nepal cultural tours guided personally by local host Sakar. Experiences focus on living Newar heritage across Kathmandu, Patan, and Bhaktapur, Himalayan spiritual meditation, and village homestays designed to foster genuine human connections away from commercial tourist crowds.
+                </p>
               </div>
 
               <div className="pt-4 flex flex-col sm:flex-row gap-4">

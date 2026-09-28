@@ -28,6 +28,7 @@ import { getSeedForKey } from './seed';
 
 import { DEFAULT_PUBLIC_PAGES } from '@/data/pages';
 export { DEFAULT_PUBLIC_PAGES };
+import { normalizeCanonicalUrl } from './config';
 import { BlogPost, GalleryPhoto, Testimonial } from '@/types';
 import {
   ExtendedBlogPost,
@@ -450,12 +451,35 @@ export async function getLiveAllPages(): Promise<PageContent[]> {
       // and any page edited/saved in DB takes precedence.
       const dbSlugMap = new Map(dbPages.map((p) => [p.slug, p]));
       const merged = DEFAULT_PUBLIC_PAGES.map((defPage) => {
-        return dbSlugMap.get(defPage.slug) || defPage;
+        const stored = dbSlugMap.get(defPage.slug);
+        if (!stored) return defPage;
+        return {
+          ...defPage,
+          ...stored,
+          seo: {
+            ...defPage.seo,
+            ...(stored.seo || {}),
+            canonicalUrl: normalizeCanonicalUrl(stored.seo?.canonicalUrl || defPage.seo?.canonicalUrl, defPage.url),
+            ogImage: stored.seo?.ogImage || defPage.seo?.ogImage || 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200',
+            ogTitle: stored.seo?.ogTitle || stored.seo?.title || defPage.seo?.ogTitle || defPage.seo?.title,
+            ogDescription: stored.seo?.ogDescription || stored.seo?.metaDescription || defPage.seo?.ogDescription || defPage.seo?.metaDescription,
+          },
+          sections: (stored.sections && stored.sections.length > 0 && stored.sections.some(s => s.content && Object.keys(s.content).length > 2))
+            ? stored.sections
+            : defPage.sections,
+        };
       });
       // Also include any custom pages created in DB that aren't in DEFAULT_PUBLIC_PAGES
       dbPages.forEach((p) => {
         if (!DEFAULT_PUBLIC_PAGES.some((dp) => dp.slug === p.slug)) {
-          merged.push(p);
+          merged.push({
+            ...p,
+            seo: {
+              ...p.seo,
+              canonicalUrl: normalizeCanonicalUrl(p.seo?.canonicalUrl, p.url),
+              ogImage: p.seo?.ogImage || 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200',
+            },
+          });
         }
       });
       return merged;
@@ -484,7 +508,24 @@ export async function getLivePageContent(slug: string): Promise<PageContent> {
 
   try {
     const page = await getPageBySlug(normalizedSlug) || await getPageBySlug(slug);
-    if (page) return page;
+    if (page) {
+      const def = DEFAULT_PUBLIC_PAGES.find((p) => p.slug === normalizedSlug || p.slug === slug);
+      return {
+        ...(def || {}),
+        ...page,
+        seo: {
+          ...(def?.seo || {}),
+          ...(page.seo || {}),
+          canonicalUrl: normalizeCanonicalUrl(page.seo?.canonicalUrl || def?.seo?.canonicalUrl, page.url),
+          ogImage: page.seo?.ogImage || def?.seo?.ogImage || 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200',
+          ogTitle: page.seo?.ogTitle || page.seo?.title || def?.seo?.ogTitle || def?.seo?.title,
+          ogDescription: page.seo?.ogDescription || page.seo?.metaDescription || def?.seo?.ogDescription || def?.seo?.metaDescription,
+        },
+        sections: (page.sections && page.sections.length > 0 && page.sections.some(s => s.content && Object.keys(s.content).length > 2))
+          ? page.sections
+          : (def?.sections || page.sections),
+      };
+    }
   } catch (err) {
     console.warn(`Fallback to static page content for slug: ${slug}`, err);
   }
@@ -501,6 +542,8 @@ export async function getLivePageContent(slug: string): Promise<PageContent> {
     seo: {
       title: `${slug.replace(/-/g, ' ')} | Explore With Sakar`,
       metaDescription: 'Explore Nepal with Sakar.',
+      canonicalUrl: normalizeCanonicalUrl(`/${slug}`),
+      ogImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200',
     },
     lastEditedBy: 'System',
     createdAt: new Date().toISOString(),

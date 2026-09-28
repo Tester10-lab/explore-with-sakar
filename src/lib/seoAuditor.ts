@@ -1,5 +1,5 @@
 import { PageContent } from '@/types/cms';
-import { SITE_ORIGIN } from '@/lib/config';
+import { SITE_ORIGIN, normalizeCanonicalUrl } from '@/lib/config';
 
 export interface AuditCheck {
   id: string;
@@ -215,14 +215,19 @@ export function auditPageContent(page: PageContent, domain = SITE_ORIGIN): Audit
 
   // Check 3: Canonical URL Integrity
   const expectedCanonical = `${domain}${page.url === '/' ? '' : page.url}`;
-  if (canonical && (canonical === expectedCanonical || canonical === `${expectedCanonical}/`)) {
+  const normalizedCanonical = canonical ? normalizeCanonicalUrl(canonical, page.url) : '';
+  const isCanonicalValid =
+    (canonical && (canonical === expectedCanonical || canonical === `${expectedCanonical}/`)) ||
+    (normalizedCanonical && (normalizedCanonical === expectedCanonical || normalizedCanonical === `${expectedCanonical}/`));
+
+  if (isCanonicalValid) {
     checks.push({
       id: 'seo-canonical',
       category: 'seo',
       title: 'Canonical URL Self-Reference',
       status: 'pass',
       score: 100,
-      detail: `Valid canonical URL set: "${canonical}". Prevents duplicate content penalties.`,
+      detail: `Valid canonical URL set: "${expectedCanonical}". Prevents duplicate content penalties.`,
     });
   } else if (canonical) {
     checks.push({
