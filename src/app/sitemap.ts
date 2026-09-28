@@ -28,10 +28,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const CANONICAL_EXPERIENCE_MAP: Record<string, string> = {
       'go-beyond': '/experiences/beyond-the-map',
       'beyond-the-map': '/experiences/beyond-the-map',
-      'go-spiritual': '/experiences/go-spiritual',
-      'spiritual-wellness': '/experiences/go-spiritual',
+      'go-within': '/experiences/go-within',
+      'go-spiritual': '/experiences/go-within',
+      'spiritual-wellness': '/experiences/go-within',
+      'go-deeper': '/experiences/go-deeper',
       'feel-closer': '/experiences/homestays',
       'homestays': '/experiences/homestays',
+      'leave-a-mark': '/experiences/leave-a-mark',
+      'responsible': '/experiences/leave-a-mark',
       'all-curated-experiences': '/experiences',
       'experiences': '/experiences',
       'custom-private-journeys': '/experiences/custom-journeys',
@@ -66,8 +70,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const coreExperienceRoutes: MetadataRoute.Sitemap = [
       { url: `${baseUrl}/experiences`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
       { url: `${baseUrl}/experiences/beyond-the-map`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-      { url: `${baseUrl}/experiences/go-spiritual`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+      { url: `${baseUrl}/experiences/go-within`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+      { url: `${baseUrl}/experiences/go-deeper`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
       { url: `${baseUrl}/experiences/homestays`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+      { url: `${baseUrl}/experiences/leave-a-mark`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
       { url: `${baseUrl}/experiences/custom-journeys`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     ];
 
@@ -75,12 +81,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const experiences = await getPublicExperiences();
     const experienceRoutes: MetadataRoute.Sitemap = (experiences || [])
       .filter((exp) => exp.status === 'published' && !CANONICAL_EXPERIENCE_MAP[exp.slug])
-      .map((exp) => ({
-        url: `${baseUrl}/experiences/${exp.slug}`,
-        lastModified: exp.updatedAt ? new Date(exp.updatedAt) : new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.85,
-      }));
+      .map((exp) => {
+        const path =
+          exp.category === 'go-within'
+            ? `/experiences/go-within/${exp.slug}`
+            : exp.category === 'beyond-the-map'
+            ? `/experiences/beyond-the-map/${exp.slug}`
+            : `/experiences/${exp.slug}`;
+        return {
+          url: `${baseUrl}${path}`,
+          lastModified: exp.updatedAt ? new Date(exp.updatedAt) : new Date(),
+          changeFrequency: 'weekly',
+          priority: 0.85,
+        };
+      });
 
     // 3. Blogs
     const blogs = await getPublicBlogs();
