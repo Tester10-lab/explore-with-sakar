@@ -30,18 +30,53 @@ interface Props {
 }
 
 const TOPIC_ALIASES: Record<string, string> = {
+  // Go Beyond the Map
   'kathmandu-square': 'kathmandu-durbar-square',
   'bhaktapur-square': 'bhaktapur-durbar-square',
   'patan-square': 'patan-durbar-square',
   'pokhara': 'pokhara-laid-back-city',
-  'singing-bowls': 'spiritual-immersion-singing-bowls',
-  'pharping': 'pharping-sacred-cave-meditation',
-  'namo-buddha': 'namo-buddha-sacred-ridge-walk',
-  'monastery-chanting': 'monastery-chanting-inner-silence',
-  'living-courtyards': 'living-courtyards-kathmandu',
-  'echoes-in-stone': 'echoes-in-stone-patan-bhaktapur',
-  'artisans-path': 'artisans-path-heritage-deep-dive',
-  'sacred-geometry': 'sacred-geometry-architecture-valley',
+  'living-courtyards': 'kathmandu-durbar-square',
+  'living-courtyards-kathmandu': 'kathmandu-durbar-square',
+  'echoes-in-stone': 'patan-durbar-square',
+  'echoes-in-stone-patan-bhaktapur': 'patan-durbar-square',
+  'artisans-path': 'bhaktapur-durbar-square',
+  'artisans-path-heritage-deep-dive': 'bhaktapur-durbar-square',
+  'sacred-geometry-architecture-valley': 'sacred-geometry-valley',
+  'chitwan-national-park': 'beyond-the-map',
+  'muktinath-sacred-pilgrimage-passage': 'beyond-the-map',
+
+  // Go Within (Spiritual & Sound Sanctuary)
+  'singing-bowls': 'cosmic-language-of-sound',
+  'spiritual-immersion-singing-bowls': 'cosmic-language-of-sound',
+  'cosmic-sound': 'cosmic-language-of-sound',
+  'nada-yoga': 'cosmic-language-of-sound',
+  'pharping': 'taudaha-and-pharping',
+  'pharping-sacred-cave-meditation': 'taudaha-and-pharping',
+  'taudaha': 'taudaha-and-pharping',
+  'namo-buddha': 'essence-of-buddhism',
+  'namo-buddha-sacred-ridge-walk': 'essence-of-buddhism',
+  'monastery-chanting': 'essence-of-buddhism',
+  'monastery-chanting-inner-silence': 'essence-of-buddhism',
+  'buddhism': 'essence-of-buddhism',
+  'pashupati': 'pashupati-life-and-eternity',
+  'pashupatinath': 'pashupati-life-and-eternity',
+  'shamanism': 'himalayan-shamanism',
+  'dhami-jhankri': 'himalayan-shamanism',
+  'ashram': 'beyond-names-ashram',
+  'beyond-names': 'beyond-names-ashram',
+  'sacred-geometry': 'sacred-geometry-valley',
+  'astrology': 'nepali-birth-chart-janma-kundali',
+  'birth-chart': 'nepali-birth-chart-janma-kundali',
+  'janma-kundali': 'nepali-birth-chart-janma-kundali',
+
+  // Feel Closer (Village Homestays)
+  'panauti': 'village-homestay-panauti-balalthali',
+  'village-homestay-community-immersion': 'village-homestay-panauti-balalthali',
+  'ghandruk': 'ghandruk-gurung-heritage-homestay',
+  'helambu': 'helambu-hyolmo-hearth-living',
+  'bungamati': 'bungamati-khokana-artisan-village',
+
+  // Legacy mappings
   'langtang': 'langtang-tamang-heritage-trail',
   'community-reforestation': 'community-sacred-forest-reforestation',
   'strategic-capacity-building': 'strategic-community-capacity-building',
@@ -83,7 +118,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Topic Not Found | Explore With Sakar' };
   }
 
-  const canonicalUrl = getCanonicalUrl(`/experiences/${slug}/${topic}`);
+  const canonicalUrl = getCanonicalUrl(`/experiences/${slug}/${experience.slug}`);
   const seoTitle = experience.seoTitle || `${experience.title} | Explore With Sakar`;
   const seoDesc = experience.seoDescription || experience.shortDescription;
   const ogImg =
@@ -162,6 +197,12 @@ export default async function IndividualTopicPage({ params }: Props) {
 
   if (!experience) {
     notFound();
+  }
+
+  // 308 Permanent Redirect aliased topic slugs to their canonical experience route
+  if (experience.slug !== topic) {
+    const { permanentRedirect } = await import('next/navigation');
+    permanentRedirect(`/experiences/${slug}/${experience.slug}`);
   }
 
   const pillar = EXPERIENCE_PILLARS[slug] || {

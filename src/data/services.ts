@@ -136,7 +136,7 @@ export const SERVICE_PILLARS: ServicePillar[] = [
     quote: 'The singing bowl does not force silence upon the mind; its pure harmonic vibration gently invites the mind home.',
     quoteAuthor: 'Singing Bowl Sound Master',
     badge: 'Restorative Wellness',
-    relatedSlug: 'spiritual-immersion-singing-bowls',
+    relatedSlug: 'cosmic-language-of-sound',
   },
   {
     id: 'trekking',

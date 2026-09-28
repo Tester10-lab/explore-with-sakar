@@ -50,13 +50,32 @@ const TOPIC_TO_PARENT_MAP: Record<string, string> = {
   'taudaha-and-pharping': 'go-within',
   'nepali-birth-chart-janma-kundali': 'go-within',
   'spiritual-immersion-singing-bowls': 'go-within',
+  'singing-bowls': 'go-within',
   'pharping-sacred-cave-meditation': 'go-within',
   'namo-buddha-sacred-ridge-walk': 'go-within',
   'monastery-chanting-inner-silence': 'go-within',
   'village-homestay-panauti-balalthali': 'homestays',
+  'village-homestay-community-immersion': 'homestays',
   'ghandruk-gurung-heritage-homestay': 'homestays',
   'helambu-hyolmo-hearth-living': 'homestays',
   'bungamati-khokana-artisan-village': 'homestays',
+};
+
+const TOPIC_CANONICAL_TARGETS: Record<string, string> = {
+  'spiritual-immersion-singing-bowls': 'cosmic-language-of-sound',
+  'singing-bowls': 'cosmic-language-of-sound',
+  'pharping-sacred-cave-meditation': 'taudaha-and-pharping',
+  'namo-buddha-sacred-ridge-walk': 'essence-of-buddhism',
+  'monastery-chanting-inner-silence': 'essence-of-buddhism',
+  'kathmandu-square': 'kathmandu-durbar-square',
+  'bhaktapur-square': 'bhaktapur-durbar-square',
+  'patan-square': 'patan-durbar-square',
+  'pokhara': 'pokhara-laid-back-city',
+  'living-courtyards-kathmandu': 'kathmandu-durbar-square',
+  'echoes-in-stone-patan-bhaktapur': 'patan-durbar-square',
+  'artisans-path-heritage-deep-dive': 'bhaktapur-durbar-square',
+  'sacred-geometry-architecture-valley': 'sacred-geometry-valley',
+  'village-homestay-community-immersion': 'village-homestay-panauti-balalthali',
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -184,7 +203,8 @@ export default async function ExperienceDetailPage({ params }: Props) {
   // 2. If slug is an individual topic slug, redirect to its parent canonical route: /experiences/[parent]/[topic]
   if (TOPIC_TO_PARENT_MAP[slug]) {
     const parentSlug = TOPIC_TO_PARENT_MAP[slug];
-    permanentRedirect(`/experiences/${parentSlug}/${slug}`);
+    const canonicalTopic = TOPIC_CANONICAL_TARGETS[slug] || slug;
+    permanentRedirect(`/experiences/${parentSlug}/${canonicalTopic}`);
   }
 
   // 4. Core experience pillars → Package Discovery pages
