@@ -38,6 +38,11 @@ const nextConfig = {
         destination: '/blog/bound-by-a-thread-eliza-and-sakar',
         permanent: true,
       },
+      {
+        source: '/blog/hiring-best-city-tour-guide-in-nepal-what-truly-makes-the-difference-beyond-the-sightseeing',
+        destination: '/blog/best-city-tour-guide-nepal',
+        permanent: true,
+      },
       // 3. Old /services/... Experience redirects
       {
         source: '/services/beyond-the-map',

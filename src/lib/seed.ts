@@ -354,7 +354,7 @@ export function getSeedStoreFromDisk(): CMSDataStore {
 export function getSeedForKey(key: string): any {
   const fileStore = getSeedStoreFromDisk();
 
-  // For blogs: if fileStore has a populated array, use it; otherwise guarantee BLOG_POSTS (37 blogs)
+  // For blogs: if fileStore has a populated array, use it; otherwise guarantee canonical BLOG_POSTS
   if (key === 'blogs') {
     if (fileStore && Array.isArray(fileStore.blogs) && fileStore.blogs.length > 0) {
       return fileStore.blogs;

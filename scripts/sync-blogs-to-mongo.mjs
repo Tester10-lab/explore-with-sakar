@@ -185,10 +185,10 @@ function printSummary(result) {
   console.log(`Duplicate slugs: ${result.duplicateSlugs}`);
   console.log(`Final MongoDB blog count: ${result.finalCount}`);
 
-  if (result.finalCount === 37 && result.duplicateIds === 0 && result.duplicateSlugs === 0) {
+  if (result.finalCount === result.canonicalCount && result.duplicateIds === 0 && result.duplicateSlugs === 0) {
     console.log('BLOG SYNC: SUCCESS');
   } else {
-    console.error(`BLOG SYNC: FAILED (Expected 37, got ${result.finalCount})`);
+    console.error(`BLOG SYNC: FAILED (Expected ${result.canonicalCount}, got ${result.finalCount})`);
     process.exit(1);
   }
 }
