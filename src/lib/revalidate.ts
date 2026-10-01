@@ -58,6 +58,9 @@ export function revalidateContent(collection: string, extraPathOrSlug?: string):
       case 'faq':
         revalidatePath('/faq');
         break;
+      case 'brandPartners':
+        revalidatePath('/');
+        break;
       case 'pages':
         if (extraPathOrSlug) {
           const url = extraPathOrSlug.startsWith('/') ? extraPathOrSlug : `/${extraPathOrSlug}`;

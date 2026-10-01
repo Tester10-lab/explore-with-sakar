@@ -407,6 +407,30 @@ export interface CmsBeyondChapter extends BeyondExperience {
   updatedAt: string;
 }
 
+// ==================== BRAND PARTNERS ====================
+
+export type BrandPartnerCategory =
+  | 'travel-agency'
+  | 'ngo'
+  | 'tourism-board'
+  | 'adventure-gear'
+  | 'media';
+
+export interface CmsBrandPartner {
+  id: string;
+  name: string;
+  slug: string;
+  logoUrl: string;
+  websiteUrl?: string;
+  category: BrandPartnerCategory;
+  categoryLabel: string;
+  description?: string;
+  isVisible: boolean;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // ==================== EXTENDED DATA STORE ====================
 
 export interface CMSDataStore {
@@ -427,6 +451,7 @@ export interface CMSDataStore {
   navigation?: NavigationConfig;
   beyondChapters?: CmsBeyondChapter[];
   leaveAMark?: LeaveAMarkData;
+  brandPartners?: CmsBrandPartner[];
   settings: WebsiteSettings;
   migrations?: string[];
   version: number;

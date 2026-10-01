@@ -17,6 +17,7 @@ import {
   ExtendedBlogPost,
   PageContent,
   CmsBeyondChapter,
+  CmsBrandPartner,
 } from '@/types/cms';
 import { LeaveAMarkData } from '@/data/leave-a-mark';
 
@@ -556,5 +557,28 @@ export async function getPublicLeaveAMark(): Promise<LeaveAMarkData> {
   } catch (err) {
     console.warn('[content] Mongo unreachable, returning static fallback for leaveAMark:', err);
     return getSeedForKey('leaveAMark') as LeaveAMarkData;
+  }
+}
+
+// ==========================================
+// 15. Brand Partners
+// ==========================================
+const fetchCachedBrandPartners = unstable_cache(
+  async (): Promise<CmsBrandPartner[]> => {
+    const list = await readKey<CmsBrandPartner[]>('brandPartners', { throwOnError: true });
+    return (list || [])
+      .filter((p) => p.isVisible !== false)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  },
+  ['cms', 'brandPartners'],
+  { tags: ['cms:brandPartners'], revalidate: 3600 }
+);
+
+export async function getPublicBrandPartners(): Promise<CmsBrandPartner[]> {
+  try {
+    return await fetchCachedBrandPartners();
+  } catch (err) {
+    console.warn('[content] Mongo unreachable, returning empty fallback for brandPartners:', err);
+    return [];
   }
 }

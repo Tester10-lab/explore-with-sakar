@@ -25,6 +25,7 @@ import {
   BookOpen,
   Heart,
   Search,
+  Handshake,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -148,6 +149,11 @@ export default function AdminSidebar({ isOpen, onClose }: SidebarProps) {
           label: 'Digital Reviews',
           href: '/admin/reviews?tab=testimonials',
           icon: BookOpen,
+        },
+        {
+          label: 'Brand Partners',
+          href: '/admin/brand-partners',
+          icon: Handshake,
         },
       ],
     },

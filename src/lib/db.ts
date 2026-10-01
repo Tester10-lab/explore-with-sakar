@@ -17,6 +17,7 @@ import {
   PageRevision,
   NavigationConfig,
   CmsBeyondChapter,
+  CmsBrandPartner,
 } from '@/types/cms';
 import { LeaveAMarkData } from '@/data/leave-a-mark';
 import { readKey, writeKey, pushInquiry, updateInquiryById, deleteInquiryById } from './store';
@@ -1003,4 +1004,82 @@ export async function updateLeaveAMark(data: Partial<LeaveAMarkData>): Promise<L
   };
   await writeKey('leaveAMark', updated);
   return updated;
+}
+
+// ==================== BRAND PARTNERS OPERATIONS ====================
+
+export async function getAllBrandPartners(includeHidden = true): Promise<CmsBrandPartner[]> {
+  const list = (await readKey<CmsBrandPartner[]>('brandPartners')) || [];
+  const sorted = [...list].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  return includeHidden ? sorted : sorted.filter((p) => p.isVisible !== false);
+}
+
+export async function getBrandPartnerById(id: string): Promise<CmsBrandPartner | null> {
+  const list = await getAllBrandPartners(true);
+  return list.find((p) => p.id === id) || null;
+}
+
+export async function createBrandPartner(
+  data: Omit<CmsBrandPartner, 'id' | 'slug' | 'createdAt' | 'updatedAt' | 'order'>
+): Promise<CmsBrandPartner> {
+  const list = (await readKey<CmsBrandPartner[]>('brandPartners')) || [];
+  const now = new Date().toISOString();
+  const slug = (data.name || 'partner').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const newPartner: CmsBrandPartner = {
+    ...data,
+    id: `partner-${Date.now()}-${slug}`,
+    slug,
+    order: list.length,
+    createdAt: now,
+    updatedAt: now,
+  };
+  list.push(newPartner);
+  await writeKey('brandPartners', list);
+  return newPartner;
+}
+
+export async function updateBrandPartner(
+  id: string,
+  updates: Partial<CmsBrandPartner>
+): Promise<CmsBrandPartner | null> {
+  const list = (await readKey<CmsBrandPartner[]>('brandPartners')) || [];
+  const index = list.findIndex((p) => p.id === id);
+  if (index === -1) return null;
+
+  list[index] = {
+    ...list[index],
+    ...updates,
+    updatedAt: new Date().toISOString(),
+  };
+  await writeKey('brandPartners', list);
+  return list[index];
+}
+
+export async function deleteBrandPartner(id: string): Promise<boolean> {
+  const list = (await readKey<CmsBrandPartner[]>('brandPartners')) || [];
+  const filtered = list.filter((p) => p.id !== id);
+  if (filtered.length === list.length) return false;
+  await writeKey('brandPartners', filtered);
+  return true;
+}
+
+export async function reorderBrandPartners(orderedIds: string[]): Promise<boolean> {
+  const list = (await readKey<CmsBrandPartner[]>('brandPartners')) || [];
+  const map = new Map(list.map((p) => [p.id, p]));
+  const reordered: CmsBrandPartner[] = [];
+
+  orderedIds.forEach((id, index) => {
+    const item = map.get(id);
+    if (item) {
+      reordered.push({ ...item, order: index, updatedAt: new Date().toISOString() });
+      map.delete(id);
+    }
+  });
+
+  map.forEach((item) => {
+    reordered.push({ ...item, order: reordered.length });
+  });
+
+  await writeKey('brandPartners', reordered);
+  return true;
 }

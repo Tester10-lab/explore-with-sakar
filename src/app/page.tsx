@@ -10,12 +10,14 @@ import {
   BookOpen,
 } from 'lucide-react';
 import Hero from '@/components/home/Hero';
+import BrandPartners from '@/components/home/BrandPartners';
 import {
   getPublicBlogs,
   getPublicTopFeaturedExperiences,
   getPublicSettings,
   getPublicEvents,
   getPublicPillarStories,
+  getPublicBrandPartners,
   type PillarStory,
 } from '@/lib/content';
 import { SITE_ORIGIN } from '@/lib/config';
@@ -48,12 +50,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [settings, featuredExperiences, blogs, events, pillarStories] = await Promise.all([
+  const [settings, featuredExperiences, blogs, events, pillarStories, brandPartners] = await Promise.all([
     getPublicSettings(),
     getPublicTopFeaturedExperiences(3),
     getPublicBlogs(),
     getPublicEvents(),
     getPublicPillarStories(),
+    getPublicBrandPartners(),
   ]);
   const stats = settings.stats || [];
   const latestBlogs = blogs.slice(0, 3);
@@ -402,6 +405,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Brand Partners */}
+      <BrandPartners partners={brandPartners} />
 
       {/* 5. Final Consultation & Inquiry Form */}
       <section id="inquiry" className="border-t border-parchment-300">
