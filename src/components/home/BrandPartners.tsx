@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { ExternalLink } from 'lucide-react';
 import { CmsBrandPartner } from '@/types/cms';
 
 interface BrandPartnersProps {
@@ -45,7 +44,7 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
     return null;
   }
 
-  // Clean URL helper so external websites open properly (prevent relative URL bugs)
+  // Clean URL helper so external websites open properly
   const cleanWebsiteUrl = (url?: string) => {
     if (!url) return undefined;
     const trimmed = url.trim();
@@ -65,43 +64,28 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
           href: url,
           target: '_blank' as const,
           rel: 'noopener noreferrer',
-          title: `Visit ${partner.name}`,
+          title: partner.name,
         }
-      : {};
+      : {
+          title: partner.name,
+        };
 
     return (
       <CardTag
         key={key}
         {...cardProps}
-        className="group relative flex items-center gap-3.5 h-16 sm:h-20 px-5 sm:px-6 bg-white/95 hover:bg-white rounded-xl border border-parchment-300/80 hover:border-terracotta/40 shadow-subtle hover:shadow-warm hover:-translate-y-0.5 transition-all duration-300 cursor-pointer shrink-0"
+        className="group relative flex items-center justify-center h-20 sm:h-24 w-36 sm:w-44 px-4 py-3 bg-white/95 hover:bg-white rounded-2xl border border-parchment-300/80 hover:border-terracotta/40 shadow-subtle hover:shadow-warm hover:-translate-y-1 transition-all duration-300 cursor-pointer shrink-0"
       >
-        {/* Partner Logo */}
-        <div className="relative w-16 sm:w-20 h-10 sm:h-12 flex items-center justify-center shrink-0">
+        {/* Full-color Logo Only */}
+        <div className="relative w-full h-full flex items-center justify-center p-1">
           <Image
             src={partner.logoUrl}
             alt={partner.name}
             fill
-            sizes="120px"
-            className="object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+            sizes="(max-width: 640px) 140px, 180px"
+            className="object-contain transition-transform duration-300 group-hover:scale-105"
           />
         </div>
-
-        {/* Partner Name & Category */}
-        <div className="flex flex-col justify-center min-w-0 pr-1">
-          <span className="text-xs sm:text-sm font-semibold text-himalaya-900 group-hover:text-terracotta transition-colors truncate max-w-[140px] sm:max-w-[180px]">
-            {partner.name}
-          </span>
-          {partner.categoryLabel && (
-            <span className="text-[10px] text-himalaya-500 font-medium tracking-wide truncate">
-              {partner.categoryLabel}
-            </span>
-          )}
-        </div>
-
-        {/* Link indicator on hover */}
-        {url && (
-          <ExternalLink className="w-3.5 h-3.5 text-himalaya-400 group-hover:text-terracotta opacity-0 group-hover:opacity-100 transition-all shrink-0 ml-0.5" />
-        )}
       </CardTag>
     );
   };
