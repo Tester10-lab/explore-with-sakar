@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import {
   ArrowRight,
   Compass,
@@ -58,7 +56,6 @@ const SUPPORT_SERVICES = [
 
 export default function BrandPartners({ partners: initialPartners = [] }: BrandPartnersProps) {
   const [partnerList, setPartnerList] = useState<CmsBrandPartner[]>(initialPartners);
-  const [hasCheckedLive, setHasCheckedLive] = useState(initialPartners.length > 0);
 
   // Fetch live partners from public API on mount to guarantee up-to-date data
   useEffect(() => {
@@ -69,15 +66,9 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
         if (active && Array.isArray(data.partners) && data.partners.length > 0) {
           setPartnerList(data.partners);
         }
-        if (active) {
-          setHasCheckedLive(true);
-        }
       })
       .catch((err) => {
         console.warn('Failed to load live brand partners:', err);
-        if (active) {
-          setHasCheckedLive(true);
-        }
       });
 
     return () => {
@@ -96,7 +87,7 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
     return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
   };
 
-  // Repeat partners so marquee flows seamlessly across wide screens
+  // Repeat partners so marquee flows seamlessly across all screen sizes
   const repeatCount = Math.max(4, Math.ceil(16 / Math.max(activePartners.length, 1)));
   const repeatedPartners = Array.from({ length: repeatCount }, () => activePartners).flat();
 
@@ -118,24 +109,22 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
       <CardTag
         key={key}
         {...cardProps}
-        className="group relative flex items-center justify-center h-16 sm:h-20 w-32 sm:w-44 px-2 cursor-pointer shrink-0 transition-transform duration-300 hover:scale-110"
+        className="group relative flex items-center justify-center h-16 sm:h-20 w-36 sm:w-48 px-3 cursor-pointer shrink-0 transition-transform duration-300 hover:scale-110"
       >
-        {/* Full-color Logo Only — No Card Background, No Border */}
-        <div className="relative w-full h-full flex items-center justify-center">
-          <Image
-            src={partner.logoUrl}
-            alt={partner.name}
-            fill
-            sizes="(max-width: 640px) 130px, 180px"
-            className="object-contain transition-transform duration-300 drop-shadow-sm"
-          />
-        </div>
+        {/* Full-color Transparent Logo — No Card Background, No Border */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={partner.logoUrl}
+          alt={partner.name}
+          className="max-h-12 sm:max-h-16 max-w-[130px] sm:max-w-[170px] w-auto h-auto object-contain transition-transform duration-300 drop-shadow-sm"
+          loading="eager"
+        />
       </CardTag>
     );
   };
 
   return (
-    <section className="relative py-16 sm:py-24 bg-parchment-100 border-t border-parchment-300/80 overflow-hidden">
+    <section className="relative py-12 sm:py-16 bg-parchment-100 border-t border-parchment-300/80 overflow-hidden">
       <style jsx>{`
         @keyframes logoMarqueeLoop {
           0% {
@@ -158,22 +147,56 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Partnership Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase bg-terracotta/10 text-terracotta border border-terracotta/20 mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase bg-terracotta/10 text-terracotta border border-terracotta/20 mb-3">
             <span>🤝</span>
             <span>B2B & Organizational Collaborations</span>
           </span>
           <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-himalaya-950 tracking-tight leading-tight">
             Planning to work in Nepal? Let&apos;s connect.
           </h2>
-          <p className="text-base sm:text-lg text-himalaya-700 font-light mt-4 leading-relaxed">
+          <p className="text-base sm:text-lg text-himalaya-700 font-light mt-3 leading-relaxed">
             I collaborate with international travel companies, destination managers, content creators, NGOs, educational groups, and responsible-tourism organizations seeking a reliable Nepal-based partner.
           </p>
         </div>
 
+        {/* Moving Logos Infinite Marquee — Transparent & Floating directly under header */}
+        {activePartners.length > 0 && (
+          <div className="mb-12 sm:mb-14">
+            <div className="text-center mb-3">
+              <span className="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-himalaya-500">
+                Trusted Network & Collaborations
+              </span>
+            </div>
+
+            <div className="relative w-full overflow-hidden py-3">
+              {/* Subtle edge fade masks */}
+              <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-36 z-10 bg-gradient-to-r from-parchment-100 via-parchment-100/80 to-transparent" />
+              <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-36 z-10 bg-gradient-to-l from-parchment-100 via-parchment-100/80 to-transparent" />
+
+              {/* Seamless Infinite scrolling ticker */}
+              <div className="marquee-infinite-track flex items-center gap-8 sm:gap-14">
+                {/* Primary loop track */}
+                <div className="flex items-center gap-8 sm:gap-14 shrink-0">
+                  {repeatedPartners.map((partner, index) =>
+                    renderPartnerLogo(partner, `track-a-${index}`)
+                  )}
+                </div>
+
+                {/* Secondary loop track for mathematically seamless infinite repetition */}
+                <div className="flex items-center gap-8 sm:gap-14 shrink-0" aria-hidden="true">
+                  {repeatedPartners.map((partner, index) =>
+                    renderPartnerLogo(partner, `track-b-${index}`)
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Capabilities Grid: "I can support with" */}
-        <div className="max-w-5xl mx-auto mb-12 sm:mb-14">
-          <div className="text-center mb-6">
+        <div className="max-w-5xl mx-auto mb-10 sm:mb-12">
+          <div className="text-center mb-5">
             <span className="text-xs uppercase tracking-widest font-semibold text-himalaya-500">
               Areas of Collaboration & Support
             </span>
@@ -199,7 +222,7 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
         </div>
 
         {/* Call to Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mb-16 sm:mb-20">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <a
             href="#inquiry"
             className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-himalaya-950 hover:bg-terracotta text-white font-semibold text-xs tracking-wider uppercase transition-all duration-300 shadow-subtle hover:shadow-warm"
@@ -218,40 +241,6 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
           </a>
         </div>
       </div>
-
-      {/* Moving Logos Infinite Marquee (Only shown if partners exist) */}
-      {activePartners.length > 0 && (
-        <div className="pt-4 border-t border-parchment-300/50">
-          <div className="text-center mb-5">
-            <span className="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-himalaya-400">
-              Trusted Network & Collaborations
-            </span>
-          </div>
-
-          <div className="relative w-full overflow-hidden py-3">
-            {/* Subtle gradient masks on left and right for seamless edge fade */}
-            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-36 z-10 bg-gradient-to-r from-parchment-100 via-parchment-100/80 to-transparent" />
-            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-36 z-10 bg-gradient-to-l from-parchment-100 via-parchment-100/80 to-transparent" />
-
-            {/* Seamless Infinite scrolling ticker — No borders, no card backgrounds */}
-            <div className="marquee-infinite-track flex items-center gap-8 sm:gap-14">
-              {/* Primary loop track */}
-              <div className="flex items-center gap-8 sm:gap-14 shrink-0">
-                {repeatedPartners.map((partner, index) =>
-                  renderPartnerLogo(partner, `track-a-${index}`)
-                )}
-              </div>
-
-              {/* Secondary loop track for mathematically seamless infinite repetition */}
-              <div className="flex items-center gap-8 sm:gap-14 shrink-0" aria-hidden="true">
-                {repeatedPartners.map((partner, index) =>
-                  renderPartnerLogo(partner, `track-b-${index}`)
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
