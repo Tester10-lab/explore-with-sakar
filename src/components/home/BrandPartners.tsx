@@ -52,11 +52,11 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
     return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
   };
 
-  // Repeat partners so marquee flows seamlessly across wide screens
-  const repeatCount = Math.max(3, Math.ceil(12 / activePartners.length));
+  // Repeat partners so marquee flows seamlessly and infinitely across all screen sizes
+  const repeatCount = Math.max(4, Math.ceil(16 / activePartners.length));
   const repeatedPartners = Array.from({ length: repeatCount }, () => activePartners).flat();
 
-  const renderPartnerCard = (partner: CmsBrandPartner, key: string) => {
+  const renderPartnerLogo = (partner: CmsBrandPartner, key: string) => {
     const url = cleanWebsiteUrl(partner.websiteUrl);
     const CardTag = url ? 'a' : 'div';
     const cardProps = url
@@ -74,16 +74,16 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
       <CardTag
         key={key}
         {...cardProps}
-        className="group relative flex items-center justify-center h-20 sm:h-24 w-36 sm:w-44 px-4 py-3 bg-white/95 hover:bg-white rounded-2xl border border-parchment-300/80 hover:border-terracotta/40 shadow-subtle hover:shadow-warm hover:-translate-y-1 transition-all duration-300 cursor-pointer shrink-0"
+        className="group relative flex items-center justify-center h-16 sm:h-20 w-32 sm:w-44 px-2 cursor-pointer shrink-0 transition-transform duration-300 hover:scale-110"
       >
-        {/* Full-color Logo Only */}
-        <div className="relative w-full h-full flex items-center justify-center p-1">
+        {/* Full-color Logo Only — No Card Background, No Border */}
+        <div className="relative w-full h-full flex items-center justify-center">
           <Image
             src={partner.logoUrl}
             alt={partner.name}
             fill
-            sizes="(max-width: 640px) 140px, 180px"
-            className="object-contain transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 640px) 130px, 180px"
+            className="object-contain transition-transform duration-300 drop-shadow-sm"
           />
         </div>
       </CardTag>
@@ -91,7 +91,7 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
   };
 
   return (
-    <section className="relative py-10 sm:py-14 bg-gradient-to-b from-parchment-100 to-parchment-200/70 border-y border-parchment-300/80 overflow-hidden">
+    <section className="relative py-10 sm:py-14 bg-parchment-100 overflow-hidden">
       <style jsx>{`
         @keyframes logoMarqueeLoop {
           0% {
@@ -104,7 +104,7 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
         .marquee-infinite-track {
           display: flex;
           width: max-content;
-          animation: logoMarqueeLoop 32s linear infinite;
+          animation: logoMarqueeLoop 30s linear infinite;
           will-change: transform;
         }
         .marquee-infinite-track:hover {
@@ -126,25 +126,25 @@ export default function BrandPartners({ partners: initialPartners = [] }: BrandP
         </p>
       </div>
 
-      {/* Moving Logos Marquee */}
-      <div className="relative w-full overflow-hidden py-2">
+      {/* Moving Logos Infinite Marquee */}
+      <div className="relative w-full overflow-hidden py-3">
         {/* Subtle gradient masks on left and right for seamless edge fade */}
         <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-36 z-10 bg-gradient-to-r from-parchment-100 via-parchment-100/80 to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-36 z-10 bg-gradient-to-l from-parchment-100 via-parchment-100/80 to-transparent" />
 
-        {/* Infinite scrolling ticker */}
-        <div className="marquee-infinite-track flex items-center gap-5 sm:gap-7">
+        {/* Seamless Infinite scrolling ticker — No borders, no card backgrounds */}
+        <div className="marquee-infinite-track flex items-center gap-8 sm:gap-14">
           {/* Primary loop track */}
-          <div className="flex items-center gap-5 sm:gap-7 shrink-0">
+          <div className="flex items-center gap-8 sm:gap-14 shrink-0">
             {repeatedPartners.map((partner, index) =>
-              renderPartnerCard(partner, `track-a-${index}`)
+              renderPartnerLogo(partner, `track-a-${index}`)
             )}
           </div>
 
-          {/* Secondary loop track for infinite seamless repetition */}
-          <div className="flex items-center gap-5 sm:gap-7 shrink-0" aria-hidden="true">
+          {/* Secondary loop track for mathematically seamless infinite repetition */}
+          <div className="flex items-center gap-8 sm:gap-14 shrink-0" aria-hidden="true">
             {repeatedPartners.map((partner, index) =>
-              renderPartnerCard(partner, `track-b-${index}`)
+              renderPartnerLogo(partner, `track-b-${index}`)
             )}
           </div>
         </div>
