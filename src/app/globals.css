@@ -402,4 +402,27 @@
   border: 1px solid #e2e8f0 !important;
 }
 
+/* ==========================================================================
+   Continuous Logo Marquee Ticker
+   ========================================================================== */
+@keyframes logoMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: logoMarquee 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-infinite:hover {
+  animation-play-state: paused;
+}
+
 

@@ -149,6 +149,17 @@ export default function AdminBrandPartnersPage() {
 
     setIsSaving(true);
     try {
+      const sanitizedWebsiteUrl = form.websiteUrl?.trim()
+        ? /^https?:\/\//i.test(form.websiteUrl.trim())
+          ? form.websiteUrl.trim()
+          : `https://${form.websiteUrl.trim()}`
+        : '';
+
+      const payload = {
+        ...form,
+        websiteUrl: sanitizedWebsiteUrl,
+      };
+
       const url = editingPartner
         ? `/api/admin/brand-partners/${editingPartner.id}`
         : '/api/admin/brand-partners';
@@ -157,7 +168,7 @@ export default function AdminBrandPartnersPage() {
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
 
       if (res.ok) {
