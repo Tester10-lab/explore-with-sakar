@@ -49,6 +49,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return await buildPageMetadata('home', FALLBACK_METADATA);
 }
 
+export const revalidate = 60;
+
 export default async function HomePage() {
   const [settings, featuredExperiences, blogs, events, pillarStories, brandPartners] = await Promise.all([
     getPublicSettings(),

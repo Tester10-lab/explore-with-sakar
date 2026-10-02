@@ -403,6 +403,8 @@ export function getSeedForKey(key: string): any {
       return fileStore?.reviews || [];
     case 'handwrittenReviews':
       return fileStore?.handwrittenReviews || [];
+    case 'brandPartners':
+      return fileStore?.brandPartners || [];
     case 'gsc_auth':
       return null;
     case 'inquiries':

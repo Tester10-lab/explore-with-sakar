@@ -1,16 +1,51 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ExternalLink } from 'lucide-react';
 import { CmsBrandPartner } from '@/types/cms';
 
 interface BrandPartnersProps {
-  partners: CmsBrandPartner[];
+  partners?: CmsBrandPartner[];
 }
 
-export default function BrandPartners({ partners }: BrandPartnersProps) {
-  if (!partners || partners.length === 0) return null;
+export default function BrandPartners({ partners: initialPartners = [] }: BrandPartnersProps) {
+  const [partnerList, setPartnerList] = useState<CmsBrandPartner[]>(initialPartners);
+  const [hasCheckedLive, setHasCheckedLive] = useState(initialPartners.length > 0);
 
-  // Clean URL helper to prevent relative URL bugs (e.g. www.example.com -> https://www.example.com)
+  // Fetch live partners from public API on mount to guarantee up-to-date data
+  useEffect(() => {
+    let active = true;
+    fetch('/api/public/brand-partners')
+      .then((res) => res.json())
+      .then((data) => {
+        if (active && Array.isArray(data.partners) && data.partners.length > 0) {
+          setPartnerList(data.partners);
+        }
+        if (active) {
+          setHasCheckedLive(true);
+        }
+      })
+      .catch((err) => {
+        console.warn('Failed to load live brand partners:', err);
+        if (active) {
+          setHasCheckedLive(true);
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  // Filter to visible partners
+  const activePartners = partnerList.filter((p) => p.isVisible !== false);
+
+  if (activePartners.length === 0) {
+    return null;
+  }
+
+  // Clean URL helper so external websites open properly (prevent relative URL bugs)
   const cleanWebsiteUrl = (url?: string) => {
     if (!url) return undefined;
     const trimmed = url.trim();
@@ -18,9 +53,9 @@ export default function BrandPartners({ partners }: BrandPartnersProps) {
     return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
   };
 
-  // Ensure enough items in the marquee loop so it moves seamlessly across wide screens
-  const repeatCount = Math.max(3, Math.ceil(10 / partners.length));
-  const repeatedPartners = Array.from({ length: repeatCount }, () => partners).flat();
+  // Repeat partners so marquee flows seamlessly across wide screens
+  const repeatCount = Math.max(3, Math.ceil(12 / activePartners.length));
+  const repeatedPartners = Array.from({ length: repeatCount }, () => activePartners).flat();
 
   const renderPartnerCard = (partner: CmsBrandPartner, key: string) => {
     const url = cleanWebsiteUrl(partner.websiteUrl);
@@ -63,7 +98,7 @@ export default function BrandPartners({ partners }: BrandPartnersProps) {
           )}
         </div>
 
-        {/* Link icon on hover */}
+        {/* Link indicator on hover */}
         {url && (
           <ExternalLink className="w-3.5 h-3.5 text-himalaya-400 group-hover:text-terracotta opacity-0 group-hover:opacity-100 transition-all shrink-0 ml-0.5" />
         )}
@@ -73,6 +108,26 @@ export default function BrandPartners({ partners }: BrandPartnersProps) {
 
   return (
     <section className="relative py-10 sm:py-14 bg-gradient-to-b from-parchment-100 to-parchment-200/70 border-y border-parchment-300/80 overflow-hidden">
+      <style jsx>{`
+        @keyframes logoMarqueeLoop {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(-50%, 0, 0);
+          }
+        }
+        .marquee-infinite-track {
+          display: flex;
+          width: max-content;
+          animation: logoMarqueeLoop 32s linear infinite;
+          will-change: transform;
+        }
+        .marquee-infinite-track:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
       {/* Static Banner Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6 sm:mb-8">
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-terracotta/10 text-terracotta border border-terracotta/20 mb-2">
@@ -94,7 +149,7 @@ export default function BrandPartners({ partners }: BrandPartnersProps) {
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-36 z-10 bg-gradient-to-l from-parchment-100 via-parchment-100/80 to-transparent" />
 
         {/* Infinite scrolling ticker */}
-        <div className="animate-marquee-infinite flex items-center gap-5 sm:gap-7">
+        <div className="marquee-infinite-track flex items-center gap-5 sm:gap-7">
           {/* Primary loop track */}
           <div className="flex items-center gap-5 sm:gap-7 shrink-0">
             {repeatedPartners.map((partner, index) =>
